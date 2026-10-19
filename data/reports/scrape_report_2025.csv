@@ -25,7 +25,7 @@ season,school,division,current_conference,status,season_check,strategy,players,w
 2025,Minnesota,FBS,Big Ten,ok,verified,nuxt_data,108,108,https://gophersports.com/sports/football/roster/2025,
 2025,Nebraska,FBS,Big Ten,ok,verified,nuxt_data,125,125,https://huskers.com/sports/football/roster/season/2025,https://huskers.com/sports/football/roster/2025: HTTP 404
 2025,Northwestern,FBS,Big Ten,ok,verified,nuxt_data,111,111,https://nusports.com/sports/football/roster/season/2025,https://nusports.com/sports/football/roster/2025: HTTP 404
-2025,Ohio State,FBS,Big Ten,ok,verified,nuxt_data,119,118,https://ohiostatebuckeyes.com/sports/football/roster/2025,
+2025,Ohio State,FBS,Big Ten,ok,verified,nuxt_data,119,119,https://ohiostatebuckeyes.com/sports/football/roster/2025,
 2025,Oregon,FBS,Big Ten,ok,verified,nuxt_data,83,83,https://goducks.com/sports/football/roster/2025,
 2025,Penn State,FBS,Big Ten,ok,verified,nuxt_data,120,120,https://gopsusports.com/sports/football/roster/season/2025,https://gopsusports.com/sports/football/roster/2025: HTTP 404
 2025,Purdue,FBS,Big Ten,ok,verified,nuxt_data,117,117,https://purduesports.com/sports/football/roster/season/2025,
@@ -79,7 +79,7 @@ season,school,division,current_conference,status,season_check,strategy,players,w
 2025,Nevada,FBS,Mountain West,ok,verified,sidearm_classic,108,108,https://nevadawolfpack.com/sports/football/roster/2025,
 2025,New Mexico,FBS,Mountain West,ok,verified,nuxt_data,106,105,https://golobos.com/sports/football/roster/season/2025-26,https://golobos.com/sports/football/roster/2025: HTTP 404; https://golobos.com/sports/football/roster/season/2025/: HTTP 404; https://golobos.com/sports/football/roster/2025-26: HTTP 404
 2025,San Jose State,FBS,Mountain West,ok,verified,nuxt_data,102,102,https://sjsuspartans.com/sports/football/roster/season/2025,https://sjsuspartans.com/sports/football/roster/2025: HTTP 404
-2025,UNLV,FBS,Mountain West,ok,verified,sidearm_classic,104,104,https://unlvrebels.com/sports/football/roster/2025,
+2025,UNLV,FBS,Mountain West,ok,verified,nuxt_data,104,104,https://unlvrebels.com/sports/football/roster/2025,
 2025,Wyoming,FBS,Mountain West,ok,verified,embedded_json,115,115,https://gowyo.com/sports/football/roster/2025,
 2025,UTEP,FBS,Mountain West,ok,verified,sidearm_classic,113,113,https://utepminers.com/sports/football/roster/2025,
 2025,Northern Illinois,FBS,Mountain West,ok,verified,sidearm_classic,110,110,https://niuhuskies.com/sports/football/roster/2025,
@@ -94,7 +94,7 @@ season,school,division,current_conference,status,season_check,strategy,players,w
 2025,South Florida,FBS,American,ok,verified,nuxt_data,113,113,https://gousfbulls.com/sports/football/roster/2025,
 2025,Temple,FBS,American,ok,verified,nuxt_data,114,114,https://owlsports.com/sports/football/roster/2025,
 2025,Tulane,FBS,American,ok,verified,nuxt_data,115,115,https://tulanegreenwave.com/sports/football/roster/2025,
-2025,Tulsa,FBS,American,ok,verified,nuxt_data,105,105,https://tulsahurricane.com:443/sports/football/roster/2025,https://tulsahurricane.com/sports/football/roster/season/2025-26/: HTTP 404; https://tulsahurricane.com/sports/m-footbl/roster/season/2025-26/: HTTP 404; https://tulsahurricane.com/sports/fball/roster/season/2025-26/: HTTP 404; https://tulsahurricane.com/sports/fb/roster/season/2025-26/: HTTP 404
+2025,Tulsa,FBS,American,ok,verified,nuxt_data,105,105,https://tulsahurricane.com/sports/football/roster/2025,
 2025,UAB,FBS,American,ok,verified,nuxt_data,106,106,https://uabsports.com/sports/football/roster/2025,
 2025,UTSA,FBS,American,ok,verified,nuxt_data,120,120,https://goutsa.com/sports/football/roster/season/2025,https://goutsa.com/sports/football/roster/2025: HTTP 404
 2025,FIU,FBS,Conference USA,ok,verified,sidearm_classic,106,106,https://fiusports.com/sports/football/roster/2025,
@@ -122,13 +122,13 @@ season,school,division,current_conference,status,season_check,strategy,players,w
 2025,Sacramento State,FCS,MAC,ok,verified,sidearm_classic,112,111,https://hornetsports.com/sports/football/roster/2025,
 2025,Appalachian State,FBS,Sun Belt,ok,verified,sidearm_classic,112,112,https://appstatesports.com/sports/football/roster/2025,
 2025,Arkansas State,FBS,Sun Belt,ok,verified,sidearm_classic,113,113,https://astateredwolves.com/sports/football/roster/2025,
-2025,Coastal Carolina,FBS,Sun Belt,ok,verified,nuxt_data,107,107,https://goccusports.com:443/sports/football/roster/2025,https://goccusports.com/sports/football/roster/season/2025-26/: HTTP 404; https://goccusports.com/sports/m-footbl/roster/season/2025-26/: HTTP 404; https://goccusports.com/sports/fball/roster/season/2025-26/: HTTP 404; https://goccusports.com/sports/fb/roster/season/2025-26/: HTTP 404
+2025,Coastal Carolina,FBS,Sun Belt,ok,verified,nuxt_data,107,107,https://goccusports.com/sports/football/roster/2025,
 2025,Georgia Southern,FBS,Sun Belt,ok,verified,nuxt_data,116,116,https://gseagles.com/sports/football/roster/2025,
 2025,Georgia State,FBS,Sun Belt,ok,verified,sidearm_classic,118,118,https://georgiastatesports.com/sports/football/roster/2025,
 2025,James Madison,FBS,Sun Belt,ok,verified,nuxt_data,112,112,https://jmusports.com/sports/football/roster/2025,
 2025,Louisiana,FBS,Sun Belt,ok,verified,nuxt_data,106,106,https://ragincajuns.com/sports/football/roster/2025,
 2025,Louisiana-Monroe,FBS,Sun Belt,ok,verified,sidearm_classic,102,102,https://ulmwarhawks.com/sports/football/roster/2025,
-2025,Louisiana Tech,FBS,Sun Belt,ok,verified,nuxt_data,103,103,https://latechsports.com/sports/football/roster/2025,
+2025,Louisiana Tech,FBS,Sun Belt,ok,unverified,nuxt_data,103,103,https://latechsports.com/sports/football/roster/2025,https://latechsports.com/sports/football/roster/season/2025/: redirected to https://latechsports.com/sports/womens-bowling/roster/season/2018; https://latechsports.com/sports/football/roster/season/2025-26/: HTTP 404; https://latechsports.com/sports/m-footbl/roster/season/2025/: redirected to https://latechsports.com/sports/womens-bowling/roster/season/2018; https://latechsports.com/sports/m-footbl/roster/season/2025-26/: HTTP 404; https://latechsports.com/sports/fball/roster/season/2025/: redirected to https://latechsports.com/sports/womens-bowling/roster/season/2018; https://latechsports.com/sports/fball/roster/season/2025-26/: HTTP 404; https://latechsports.com/sports/fb/roster/season/2025/: redirected to https://latechsports.com/sports/womens-bowling/roster/season/2018; https://latechsports.com/sports/fb/roster/season/2025-26/: HTTP 404
 2025,Marshall,FBS,Sun Belt,ok,verified,nuxt_data,103,103,https://herdzone.com/sports/football/roster/2025,
 2025,Old Dominion,FBS,Sun Belt,ok,verified,nuxt_data,111,111,https://odusports.com/sports/football/roster/season/2025,https://odusports.com/sports/football/roster/2025: HTTP 404
 2025,South Alabama,FBS,Sun Belt,ok,verified,sidearm_classic,117,117,https://usajaguars.com/sports/football/roster/2025,
@@ -136,7 +136,7 @@ season,school,division,current_conference,status,season_check,strategy,players,w
 2025,Troy,FBS,Sun Belt,ok,verified,nuxt_data,106,106,https://troytrojans.com/sports/football/roster/2025,
 2025,Notre Dame,FBS,Independent,ok,verified,nuxt_data,113,113,https://fightingirish.com/sports/football/roster/season/2025-26,https://fightingirish.com/sports/football/roster/2025: HTTP 404; https://fightingirish.com/sports/football/roster/season/2025/: HTTP 404; https://fightingirish.com/sports/football/roster/2025-26: HTTP 404
 2025,UConn,FBS,Independent,ok,verified,nuxt_data,113,113,https://uconnhuskies.com/sports/football/roster/2025,
-2025,Cal Poly,FCS,Big Sky,ok,verified,nuxt_data,112,112,https://gopoly.com:443/sports/football/roster/2025,https://gopoly.com/sports/football/roster/season/2025/: page shows 2015; https://gopoly.com/sports/football/roster/season/2025-26/: HTTP 404; https://gopoly.com/sports/m-footbl/roster/season/2025/: page shows 2015; https://gopoly.com/sports/m-footbl/roster/season/2025-26/: HTTP 404; https://gopoly.com/sports/fball/roster/season/2025/: page shows 2015; https://gopoly.com/sports/fball/roster/season/2025-26/: HTTP 404; https://gopoly.com/sports/fb/roster/season/2025/: page shows 2015; https://gopoly.com/sports/fb/roster/season/2025-26/: HTTP 404
+2025,Cal Poly,FCS,Big Sky,ok,verified,nuxt_data,112,112,https://gopoly.com/sports/football/roster/2025,
 2025,Eastern Washington,FCS,Big Sky,ok,verified,sidearm_classic,104,102,https://goeags.com/sports/football/roster/2025,
 2025,Idaho,FCS,Big Sky,ok,verified,sidearm_classic,117,117,https://govandals.com/sports/football/roster/2025,
 2025,Idaho State,FCS,Big Sky,ok,verified,sidearm_classic,112,111,https://isubengals.com/sports/football/roster/2025,
@@ -172,7 +172,7 @@ season,school,division,current_conference,status,season_check,strategy,players,w
 2025,William & Mary,FCS,CAA,ok,verified,sidearm_classic,100,100,https://tribeathletics.com/sports/football/roster/2025,
 2025,Brown,FCS,Ivy,ok,verified,nuxt_data,106,106,https://brownbears.com/sports/football/roster/2025,
 2025,Columbia,FCS,Ivy,ok,verified,nuxt_data,107,107,https://gocolumbialions.com/sports/football/roster/2025,
-2025,Cornell,FCS,Ivy,ok,verified,sidearm_classic,122,122,https://cornellbigred.com/sports/football/roster/2025-26,https://cornellbigred.com/sports/football/roster/2025: page shows 2026; https://cornellbigred.com/sports/football/roster/season/2025/: HTTP 404
+2025,Cornell,FCS,Ivy,ok,verified,sidearm_classic,122,122,https://cornellbigred.com/sports/football/roster/2025-26,https://cornellbigred.com/sports/football/roster/2025: redirected to https://cornellbigred.com/sports/football/roster; https://cornellbigred.com/sports/football/roster/season/2025/: HTTP 404
 2025,Dartmouth,FCS,Ivy,ok,verified,nuxt_data,104,104,https://dartmouthsports.com/sports/football/roster/2025,
 2025,Harvard,FCS,Ivy,ok,verified,sidearm_classic,105,105,https://gocrimson.com/sports/football/roster/2025,
 2025,Penn,FCS,Ivy,ok,verified,sidearm_classic,101,100,https://pennathletics.com/sports/football/roster/2025,
@@ -193,14 +193,14 @@ season,school,division,current_conference,status,season_check,strategy,players,w
 2025,South Dakota,FCS,Missouri Valley,ok,verified,sidearm_classic,99,99,https://goyotes.com/sports/football/roster/2025,
 2025,South Dakota State,FCS,Missouri Valley,ok,verified,nuxt_data,115,115,https://gojacks.com/sports/football/roster/2025,
 2025,Southern Illinois,FCS,Missouri Valley,ok,verified,nuxt_data,109,109,https://siusalukis.com/sports/football/roster/2025,
-2025,Youngstown State,FCS,Missouri Valley,ok,verified,nuxt_data,113,113,https://ysusports.com/sports/football/roster/2025,
+2025,Youngstown State,FCS,Missouri Valley,ok,unverified,nuxt_data,113,113,https://ysusports.com/sports/football/roster/2025,https://ysusports.com/sports/football/roster/season/2025/: redirected to https://ysusports.com/sports/mens-golf/roster/season/2056; https://ysusports.com/sports/football/roster/season/2025-26/: HTTP 404; https://ysusports.com/sports/m-footbl/roster/season/2025/: redirected to https://ysusports.com/sports/mens-golf/roster/season/2056; https://ysusports.com/sports/m-footbl/roster/season/2025-26/: HTTP 404; https://ysusports.com/sports/fball/roster/season/2025/: redirected to https://ysusports.com/sports/mens-golf/roster/season/2056; https://ysusports.com/sports/fball/roster/season/2025-26/: HTTP 404; https://ysusports.com/sports/fb/roster/season/2025/: redirected to https://ysusports.com/sports/mens-golf/roster/season/2056; https://ysusports.com/sports/fb/roster/season/2025-26/: HTTP 404
 2025,Central Connecticut,FCS,NEC,ok,verified,html_table,101,101,https://ccsubluedevils.com/sports/fball/2025-26/roster,
 2025,Duquesne,FCS,NEC,ok,verified,sidearm_classic,109,109,https://goduquesne.com/sports/football/roster/2025,
 2025,LIU,FCS,NEC,ok,unverified,sidearm_classic,113,113,https://www.liuathletics.com/sports/football/roster/2025,https://liuathletics.com/sports/football/roster/season/2025/: page shows 2021; https://liuathletics.com/sports/football/roster/2025-26: redirected to https://www.liuathletics.com/sports/football/roster; https://liuathletics.com/sports/football/roster/season/2025-26/: HTTP 404; https://liuathletics.com/sports/m-footbl/roster/2025: HTTP 404; https://liuathletics.com/sports/m-footbl/roster/season/2025/: page shows 2021; https://liuathletics.com/sports/m-footbl/roster/2025-26: HTTP 404; https://liuathletics.com/sports/m-footbl/roster/season/2025-26/: HTTP 404; https://liuathletics.com/sports/fball/roster/2025: HTTP 404
 2025,Mercyhurst,FCS,NEC,ok,verified,sidearm_classic,117,116,https://hurstathletics.com/sports/football/roster/2025,
 2025,New Haven,FCS,NEC,ok,verified,sidearm_classic,167,166,https://newhavenchargers.com/sports/football/roster/2025,
 2025,Robert Morris,FCS,NEC,ok,verified,sidearm_classic,101,101,https://rmucolonials.com/sports/football/roster/2025,
-2025,Saint Francis (PA),FCS,NEC,ok,verified,sidearm_classic,105,102,https://sfuathletics.com/sports/football/roster/2025,
+2025,Saint Francis (PA),FCS,NEC,ok,verified,sidearm_classic,104,102,https://sfuathletics.com/sports/football/roster/2025,
 2025,Stonehill,FCS,NEC,ok,verified,sidearm_classic,110,110,https://stonehillskyhawks.com/sports/football/roster/2025,
 2025,Wagner,FCS,NEC,ok,verified,sidearm_classic,141,141,https://wagnerathletics.com/sports/football/roster/2025,
 2025,Bucknell,FCS,Patriot,ok,verified,nuxt_data,97,97,https://bucknellbison.com/sports/football/roster/2025,

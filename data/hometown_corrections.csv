@@ -281,7 +281,7 @@ Douglas Wyo.,Douglas,,,Douglas,review,unknown state/country 'Wyo.',1
 "Brisbane, Queensland",Brisbane,,,Brisbane,review,unknown state/country 'Queensland',1
 "Parkersburg, W. Va.",Parkersburg,,,Parkersburg,review,unknown state/country 'W. Va.',1
 "Clarksburg, W. Va.",Clarksburg,,,Clarksburg,review,unknown state/country 'W. Va.',1
-,,,,,unfixable,blank hometown,926
+,,,,,unfixable,blank hometown,925
 Hometown,,,,,unfixable,column header scraped as data,524
 Ozwitt,,,,,unfixable,unrecognisable,1
 Josh Shaw,,,,,unfixable,"a person's name, not a place",1
@@ -397,6 +397,7 @@ Baltimore Md.,Baltimore,MD,USA,"Baltimore, MD, USA",fixed,state 'Md.' -> MD,3
 "Kings Mill, Ohio",Kings Mill,OH,USA,"Kings Mill, OH, USA",fixed,state 'Ohio' -> OH,3
 "Valley Glen, Calif.",Valley Glen,CA,USA,"Valley Glen, CA, USA",fixed,state 'Calif.' -> CA,3
 "Tampa Bay, Fla.",Tampa Bay,FL,USA,"Tampa Bay, FL, USA",fixed,state 'Fla.' -> FL,3
+"PG County, MD",Prince George's County,MD,USA,"Prince George's County, MD, USA",fixed,spelling PG County -> Prince George's County,3
 "Lundhurst, OH",Lyndhurst,OH,USA,"Lyndhurst, OH, USA",fixed,spelling Lundhurst -> Lyndhurst,2
 "Dearfield Beach, Fla.",Deerfield Beach,FL,USA,"Deerfield Beach, FL, USA",fixed,spelling Dearfield Beach -> Deerfield Beach; state 'Fla.' -> FL,2
 "Guyana, South America",,,Guyana,Guyana,fixed,country only,2
@@ -484,7 +485,6 @@ Kailua,Kailua,,,Kailua,fixed,,2
 "Wycoff, N.J.",Wycoff,NJ,USA,"Wycoff, NJ, USA",fixed,state 'N.J.' -> NJ,2
 "Newman, Ga.",Newman,GA,USA,"Newman, GA, USA",fixed,state 'Ga.' -> GA,2
 "Downington, Pa.",Downington,PA,USA,"Downington, PA, USA",fixed,state 'Pa.' -> PA,2
-"PG County, MD",Prince George's County,MD,USA,"Prince George's County, MD, USA",fixed,spelling PG County -> Prince George's County,2
 "Dania, Fla.",Dania,FL,USA,"Dania, FL, USA",fixed,state 'Fla.' -> FL,2
 "Tallahasse, Fla.",Tallahasse,FL,USA,"Tallahasse, FL, USA",fixed,state 'Fla.' -> FL,2
 "Kingwood Park, Texas",Kingwood Park,TX,USA,"Kingwood Park, TX, USA",fixed,state 'Texas' -> TX,2
@@ -558,6 +558,7 @@ Plainfield. NJ,Plainfield.,NJ,USA,"Plainfield., NJ, USA",fixed,,2
 "San Bernadino, CA",San Bernadino,CA,USA,"San Bernadino, CA, USA",fixed,,2
 "Norwin, Pa.",Norwin,PA,USA,"Norwin, PA, USA",fixed,state 'Pa.' -> PA,2
 "Gainsville, Fla.",Gainsville,FL,USA,"Gainsville, FL, USA",fixed,state 'Fla.' -> FL,2
+"Cortlandt Manor, NY",Cortlandt Manor,NY,USA,"Cortlandt Manor, NY, USA",fixed,,2
 "Hometown/Last School: Milford, CT",Milford,CT,USA,"Milford, CT, USA",fixed,stripped 'Hometown/Last School:' prefix,1
 "Cedar Park, Tesxas",Cedar Park,TX,USA,"Cedar Park, TX, USA",fixed,state 'Tesxas' -> TX,1
 "Brookesville, Fla.",Brooksville,FL,USA,"Brooksville, FL, USA",fixed,spelling Brookesville -> Brooksville; state 'Fla.' -> FL,1
@@ -1473,7 +1474,6 @@ Bronx N.Y.,Bronx,NY,USA,"Bronx, NY, USA",fixed,state 'N.Y.' -> NY,1
 Ukraine,Ukraine,,,Ukraine,fixed,,1
 "Lexington, Maryland",Lexington,MD,USA,"Lexington, MD, USA",fixed,state 'Maryland' -> MD,1
 "West Philadelphia, PA",West Philadelphia,PA,USA,"West Philadelphia, PA, USA",fixed,,1
-"Cortlandt Manor, NY",Cortlandt Manor,NY,USA,"Cortlandt Manor, NY, USA",fixed,,1
 "Clifton Park, NJ",Clifton Park,NJ,USA,"Clifton Park, NJ, USA",fixed,,1
 Maryland,Maryland,,,Maryland,fixed,,1
 "Chichester, PA",Chichester,PA,USA,"Chichester, PA, USA",fixed,,1
@@ -1878,3 +1878,6 @@ Middletown N.J.,Middletown,NJ,USA,"Middletown, NJ, USA",fixed,state 'N.J.' -> NJ
 "Altamonte, Fla.",Altamonte,FL,USA,"Altamonte, FL, USA",fixed,state 'Fla.' -> FL,1
 "Columbiana, Tenn.",Columbiana,TN,USA,"Columbiana, TN, USA",fixed,state 'Tenn.' -> TN,1
 "Leonardtown, Mo.",Leonardtown,MD,USA,"Leonardtown, MD, USA",fixed,corrected by hand,1
+"Belle Meade, NJ",Belle Mead,NJ,USA,"Belle Mead, NJ, USA",fixed,spelling Belle Meade -> Belle Mead (by hand),1
+"Hillsdide, NJ",Hillside,NJ,USA,"Hillside, NJ, USA",fixed,spelling Hillsdide -> Hillside,1
+"Elizabeh, NJ",Elizabeth,NJ,USA,"Elizabeth, NJ, USA",fixed,spelling Elizabeh -> Elizabeth,1

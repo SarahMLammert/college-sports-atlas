@@ -3,121 +3,220 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Gridiron Pipelines</title>
-<meta name="description" content="Hometowns of every FBS and FCS football player since 2016, mapped.">
+<title>D1 College Football Recruiting Map</title>
+<meta name="description" content="Where every D1 (FBS and FCS) college football player since 2016 comes from, mapped.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Barlow:wght@400;500;600&display=swap">
 <style>
-/* Layout: scouting-desk split — filter rail on the left, the map as the playing field, findings under the filters */
+/* Layout: the map is the page. Title, search and buttons float over it; filters and details open as side panels. */
 :root {
-  --bg: #eef1ee;        /* turf-tinted paper */
+  --sea: #d3dee2;
+  --land: #f1f3ef;
+  --border: #c3cdc6;
   --panel: #fbfcfb;
-  --land: #dde4df;
-  --line: #b9c5bd;
+  --line: #c9d3cc;
   --fg: #16201b;
   --muted: #56645c;
   --accent: #e2560e;    /* pylon orange */
-  --accent-soft: rgba(226, 86, 14, .14);
+  --accent-soft: rgba(226, 86, 14, .16);
   --focus: #1f6feb;
+  --shadow: 0 6px 24px rgba(20, 32, 27, .16), 0 1px 3px rgba(20, 32, 27, .12);
   --display: "Big Shoulders Display", "Arial Narrow", "Helvetica Neue", sans-serif;
   --body: "Barlow", "Segoe UI", system-ui, sans-serif;
+  --gap: 12px;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0e1412; --panel: #151d1a; --land: #1d2824; --line: #364640; --fg: #e5ece8;
-    --muted: #94a39b; --accent: #ff7b30; --accent-soft: rgba(255, 123, 48, .18); --focus: #6aa7ff; color-scheme: dark;
+    --sea: #0a1012; --land: #1b2521; --border: #34443d; --panel: #151d1a; --line: #33433c; --fg: #e5ece8;
+    --muted: #94a39b; --accent: #ff7b30; --accent-soft: rgba(255, 123, 48, .2); --focus: #6aa7ff;
+    --shadow: 0 6px 24px rgba(0, 0, 0, .5), 0 1px 3px rgba(0, 0, 0, .4); color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #0e1412; --panel: #151d1a; --land: #1d2824; --line: #364640; --fg: #e5ece8;
-  --muted: #94a39b; --accent: #ff7b30; --accent-soft: rgba(255, 123, 48, .18); --focus: #6aa7ff; color-scheme: dark;
-}
-html, body { height: 100%; }
-body {
-  background: var(--bg); color: var(--fg); font: 15px/1.45 var(--body);
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
-  padding-block: 14px 20px;
-  box-sizing: border-box;
+  --sea: #0a1012; --land: #1b2521; --border: #34443d; --panel: #151d1a; --line: #33433c; --fg: #e5ece8;
+  --muted: #94a39b; --accent: #ff7b30; --accent-soft: rgba(255, 123, 48, .2); --focus: #6aa7ff;
+  --shadow: 0 6px 24px rgba(0, 0, 0, .5), 0 1px 3px rgba(0, 0, 0, .4); color-scheme: dark;
 }
 * { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; overflow: hidden; }
+body { background: var(--sea); color: var(--fg); font: 15px/1.45 var(--body); }
 button, select, input { font: inherit; color: inherit; }
 :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+[hidden] { display: none !important; }
 
-.app { display: grid; grid-template-columns: 330px minmax(0, 1fr); gap: 18px; max-width: 1500px; margin: 0 auto; }
-header.top { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px; }
-h1 { font: 800 clamp(30px, 4vw, 44px)/1 var(--display); letter-spacing: .01em; margin: 0; text-transform: uppercase; }
+/* ---------- map ---------- */
+.map { position: fixed; inset: 0; touch-action: none; background: var(--sea); }
+.map svg, .map canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.map svg path { vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+.map svg path.country { fill: var(--land); stroke: var(--border); stroke-width: .7; }
+.map svg path.state { fill: var(--land); stroke: var(--border); stroke-width: .6; }
+.map svg path.state.focus { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.6; }
+.map canvas { cursor: crosshair; }
+.tip { position: absolute; pointer-events: none; background: var(--fg); color: var(--panel); padding: 5px 8px; border-radius: 5px; font-size: 13px; white-space: nowrap; transform: translate(-50%, calc(-100% - 10px)); z-index: 5; }
+.loading { position: fixed; inset: 0; display: grid; place-items: center; color: var(--muted); font-weight: 600; padding: 24px; text-align: center; }
+
+/* ---------- floating chrome ---------- */
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; box-shadow: var(--shadow); }
+.bar {
+  position: fixed; z-index: 10; top: 0; left: 0; right: 0; pointer-events: none;
+  display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: var(--gap);
+  padding: max(var(--gap), env(safe-area-inset-top)) max(var(--gap), env(safe-area-inset-right)) 0 max(var(--gap), env(safe-area-inset-left));
+}
+.bar > * { pointer-events: auto; }
+.brand { padding: 10px 16px 11px; max-width: 470px; }
+h1 { font: 800 clamp(22px, 2.4vw, 32px)/.98 var(--display); letter-spacing: .01em; margin: 0; text-transform: uppercase; text-wrap: balance; }
 h1 span { color: var(--accent); }
-.sub { color: var(--muted); margin: 0; max-width: 62ch; text-wrap: balance; }
+.sub { color: var(--muted); margin: 4px 0 0; font-size: 13px; font-variant-numeric: tabular-nums; }
+.tools { display: flex; gap: 8px; align-items: center; flex: 0 1 560px; min-width: 0; }
+.searchbox { position: relative; flex: 1; min-width: 0; }
+.searchbox svg { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; color: var(--muted); pointer-events: none; }
+.searchbox .field { padding-left: 33px; height: 42px; box-shadow: var(--shadow); }
+.btn {
+  height: 42px; border: 1px solid var(--line); background: var(--panel); border-radius: 8px; padding: 0 14px; cursor: pointer;
+  font-weight: 600; white-space: nowrap; box-shadow: var(--shadow); display: inline-flex; align-items: center; gap: 7px;
+}
+.btn:hover { border-color: var(--muted); }
+.btn[aria-expanded="true"] { background: var(--fg); color: var(--panel); border-color: var(--fg); }
+.btn.icon { width: 42px; padding: 0; justify-content: center; }
+.btn svg { width: 17px; height: 17px; flex: none; }
+.badge { background: var(--accent); color: #fff; border-radius: 999px; font-size: 12px; line-height: 1; padding: 3px 7px; font-variant-numeric: tabular-nums; }
+.toast { position: absolute; right: 0; top: calc(100% + 6px); background: var(--fg); color: var(--panel); padding: 6px 10px; border-radius: 6px; font-size: 13px; white-space: nowrap; }
 
-.rail { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.results { position: absolute; z-index: 20; left: 0; right: 0; top: calc(100% + 4px); background: var(--panel); border: 1px solid var(--line); border-radius: 8px; box-shadow: var(--shadow); max-height: min(70vh, 460px); overflow: auto; padding: 4px 0; margin: 0; list-style: none; }
+.results .grp { font: 600 11px/1 var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); padding: 10px 12px 4px; }
+.results [role="option"] { padding: 6px 12px; cursor: pointer; display: flex; flex-direction: column; gap: 1px; }
+.results [role="option"][aria-selected="true"] { background: var(--accent-soft); }
+.results .meta { color: var(--muted); font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.results mark { background: none; color: inherit; font-weight: 700; }
+.results .empty { padding: 10px 12px; color: var(--muted); }
+
+/* side panels */
+.panel {
+  position: fixed; z-index: 9; top: calc(var(--bar-h, 76px) + var(--gap)); bottom: var(--gap); width: 350px;
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.panel.left { left: max(var(--gap), env(safe-area-inset-left)); }
+.panel.right { right: max(var(--gap), env(safe-area-inset-right)); }
+.panel-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+.panel-head h2 { font-size: 20px; }
+.panel-body { overflow: auto; padding: 14px 16px 18px; display: flex; flex-direction: column; gap: 16px; overscroll-behavior: contain; }
+.x { width: 32px; height: 32px; border: 0; background: none; border-radius: 6px; cursor: pointer; font-size: 20px; line-height: 1; color: var(--muted); }
+.x:hover { background: var(--accent-soft); color: var(--fg); }
+
 .group { display: flex; flex-direction: column; gap: 6px; }
 .label { font: 600 11px/1 var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
 .row { display: flex; gap: 8px; align-items: center; }
 .field { width: 100%; padding: 8px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); }
-.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: var(--panel); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: var(--panel); align-self: flex-start; }
 .seg button { border: 0; background: none; padding: 7px 11px; cursor: pointer; }
 .seg button + button { border-left: 1px solid var(--line); }
-.seg button[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
+.seg button[aria-pressed="true"] { background: var(--fg); color: var(--panel); }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .chip { border: 1px solid var(--line); background: var(--panel); border-radius: 999px; padding: 4px 10px; cursor: pointer; font-weight: 600; font-size: 13px; }
 .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
 .link { background: none; border: 0; padding: 0; color: var(--accent); cursor: pointer; font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
 
-.stage { position: relative; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; min-width: 0; align-self: start; }
-.map { position: relative; width: 100%; aspect-ratio: 975 / 610; max-width: 100%; touch-action: none; }
-.map svg, .map canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-.map svg path.state { fill: var(--land); stroke: var(--panel); stroke-width: .8; vector-effect: non-scaling-stroke; }
-.map svg path.state.focus { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.5; }
-.map canvas { cursor: crosshair; }
-.mapbar { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 16px; align-items: center; padding: 10px 14px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
-.legend { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-.legend i { display: inline-block; border-radius: 50%; background: var(--muted); opacity: .7; vertical-align: middle; margin-right: 5px; }
+/* legend + zoom */
+.legend {
+  position: fixed; z-index: 8; left: max(var(--gap), env(safe-area-inset-left)); bottom: max(var(--gap), env(safe-area-inset-bottom));
+  padding: 8px 12px; font-size: 12px; color: var(--muted); display: flex; flex-direction: column; gap: 4px; max-width: min(560px, calc(100vw - 90px));
+}
+.legend .keys { display: flex; align-items: center; gap: 4px 12px; flex-wrap: wrap; }
+.legend i { display: inline-block; border-radius: 50%; background: var(--muted); opacity: .7; vertical-align: middle; margin-right: 4px; }
 .legend i.ring { background: none; border: 1.5px solid var(--muted); opacity: 1; }
 .legend .ck { color: var(--fg); }
+.zoomctl { position: fixed; z-index: 8; right: max(var(--gap), env(safe-area-inset-right)); bottom: max(var(--gap), env(safe-area-inset-bottom)); display: flex; flex-direction: column; overflow: hidden; }
+.zoomctl button { width: 38px; height: 38px; border: 0; background: none; cursor: pointer; font-weight: 600; font-size: 17px; }
+.zoomctl button + button { border-top: 1px solid var(--line); }
+.zoomctl button:hover { background: var(--accent-soft); }
+.panel.right:not([hidden]) ~ .zoomctl { right: calc(350px + 2 * var(--gap)); }
+.panel.left:not([hidden]) ~ .legend { left: calc(350px + 2 * var(--gap)); max-width: calc(100vw - 350px - 3 * var(--gap) - 50px); }
 .sw { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; box-shadow: 0 0 0 1.5px var(--sw2, transparent); }
-.tip { position: absolute; pointer-events: none; background: var(--fg); color: var(--bg); padding: 5px 8px; border-radius: 5px; font-size: 13px; white-space: nowrap; transform: translate(-50%, calc(-100% - 10px)); }
-.zoomctl { position: absolute; right: 10px; top: 10px; display: flex; flex-direction: column; gap: 4px; }
-.zoomctl button { width: 30px; height: 30px; border: 1px solid var(--line); background: var(--panel); border-radius: 6px; cursor: pointer; font-weight: 600; }
-.loading { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font-weight: 600; }
 
-.findings { display: flex; flex-direction: column; gap: 18px; border-top: 2px solid var(--fg); padding-top: 14px; min-width: 0; }
-.big { display: flex; gap: 22px; flex-wrap: wrap; }
+/* findings */
+.big { display: flex; gap: 20px; flex-wrap: wrap; }
 .big div { display: flex; flex-direction: column; }
-.big b { font: 800 30px/1 var(--display); font-variant-numeric: tabular-nums; }
+.big b { font: 800 28px/1 var(--display); font-variant-numeric: tabular-nums; }
 .big small { color: var(--muted); font-size: 12px; }
-h2 { font: 800 20px/1.1 var(--display); text-transform: uppercase; letter-spacing: .02em; margin: 0; text-wrap: balance; }
+h2 { font: 800 19px/1.1 var(--display); text-transform: uppercase; letter-spacing: .02em; margin: 0; text-wrap: balance; }
+.findings { display: flex; flex-direction: column; gap: 18px; }
 .bars { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
 .bars li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; font-size: 14px; }
 .bars li .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .bars li .nm button { all: unset; cursor: pointer; border-bottom: 1px dotted var(--muted); }
 .bars li .nm button:focus-visible { outline: 2px solid var(--focus); }
 .bars li .v { font-variant-numeric: tabular-nums; color: var(--muted); }
-.bars li .b { grid-column: 1 / -1; height: 4px; background: var(--land); border-radius: 2px; overflow: hidden; }
+.bars li .b { grid-column: 1 / -1; height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
 .bars li .b span { display: block; height: 100%; background: var(--accent); }
-.people { list-style: none; margin: 0; padding: 0; font-size: 14px; display: flex; flex-direction: column; gap: 6px; max-height: 340px; overflow: auto; }
+.people { list-style: none; margin: 0; padding: 0; font-size: 14px; display: flex; flex-direction: column; gap: 6px; }
 .people li { display: grid; grid-template-columns: 2.6em minmax(0, 1fr); gap: 8px; }
-.people .pos { font-weight: 600; color: var(--accent); }
+.people li.me { background: var(--accent-soft); border-radius: 4px; box-shadow: 0 0 0 4px var(--accent-soft); }
+.pos { font-weight: 600; color: var(--accent); }
 .people .meta { color: var(--muted); font-size: 13px; }
 .note { color: var(--muted); font-size: 13px; }
+.sel h2 { font-size: 24px; }
+.divider { border-top: 2px solid var(--fg); padding-top: 14px; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-@media (max-width: 860px) {
-  .app { grid-template-columns: minmax(0, 1fr); }
-  .stage { order: -1; }
-  header.top { order: -2; }
+/* phones: title on its own row, panels become bottom sheets so the map stays visible above them */
+@media (max-width: 760px) {
+  :root { --gap: 8px; }
+  .brand { padding: 8px 12px; flex: 1 1 100%; max-width: none; }
+  .sub { font-size: 12px; }
+  .tools { flex: 1 1 100%; }
+  .btn .txt { display: none; }
+  .btn.filters { padding: 0 11px; }
+  .panel, .panel.left, .panel.right { left: var(--gap); right: var(--gap); width: auto; top: auto; max-height: 58dvh; bottom: max(var(--gap), env(safe-area-inset-bottom)); }
+  .panel.right:not([hidden]) ~ .zoomctl, .panel:not([hidden]) ~ .zoomctl, .panel:not([hidden]) ~ .legend { display: none; }
+  .legend .sizes, .legend .hint { display: none; }
 }
-@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
 </style>
 </head>
 <body>
 
-<div class="app">
-  <header class="top">
-    <h1>Gridiron <span>Pipelines</span></h1>
-    <p class="sub">Hometowns of every FBS and FCS player on a roster since 2016 (no 2020 season), one dot per hometown, sized by players.</p>
-  </header>
+<div class="map" id="map">
+  <svg id="svg" aria-hidden="true"><g id="vp"><g id="land"></g><g id="states"></g></g></svg>
+  <canvas id="canvas" aria-label="World map of player hometowns. Click a dot for its players, or a U.S. state for the schools that recruit it."></canvas>
+  <div class="tip" id="tip" hidden></div>
+</div>
+<div class="loading" id="loading">Loading players…</div>
 
-  <aside class="rail">
+<header class="bar" id="bar">
+  <div class="brand card">
+    <h1>D1 College Football <span>Recruiting Map</span></h1>
+    <p class="sub" id="sub">Hometowns of every FBS and FCS player since 2016</p>
+  </div>
+  <div class="tools">
+    <div class="searchbox">
+      <label class="vh" for="q">Find a player, hometown or high school</label>
+      <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="6.8" cy="6.8" r="5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10.6 10.6 15 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <input class="field" id="q" type="search" placeholder="Find a player, hometown or high school" autocomplete="off" spellcheck="false"
+        role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="results">
+      <ul class="results" id="results" role="listbox" aria-label="Search results" hidden></ul>
+    </div>
+    <button type="button" class="btn filters" id="filtersBtn" aria-expanded="false" aria-controls="filters">
+      <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M2 4h14M5 9h8M7.5 14h3" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+      <span class="txt">Filters</span><span class="badge" id="fcount" hidden></span>
+    </button>
+    <button type="button" class="btn icon" id="detailsBtn" aria-expanded="false" aria-controls="details" aria-label="Details and top lists" title="Details and top lists">
+      <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 4.5h12M3 9h12M3 13.5h7" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+    </button>
+    <div style="position:relative">
+      <button type="button" class="btn icon" id="share" aria-label="Copy a link to this view" title="Copy a link to this view">
+        <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M7.5 10.5a3 3 0 0 0 4.2 0l2.6-2.6a3 3 0 0 0-4.2-4.2l-.9.9M10.5 7.5a3 3 0 0 0-4.2 0L3.7 10.1a3 3 0 0 0 4.2 4.2l.9-.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+      </button>
+      <div class="toast" id="toast" role="status" hidden></div>
+    </div>
+  </div>
+</header>
+
+<aside class="panel left card" id="filters" aria-labelledby="filtersTitle" hidden>
+  <div class="panel-head">
+    <h2 id="filtersTitle">Filters</h2>
+    <div class="row"><button type="button" class="link" id="resetAll">Reset</button><button type="button" class="x" data-closepanel="filters" aria-label="Close filters">×</button></div>
+  </div>
+  <div class="panel-body">
     <div class="group">
       <label class="label" for="school">School</label>
       <input class="field" id="school" list="schoolList" placeholder="All schools — type to search" autocomplete="off">
@@ -162,29 +261,31 @@ h2 { font: 800 20px/1.1 var(--display); text-transform: uppercase; letter-spacin
         <button type="button" data-v="heat" aria-pressed="false">Heat</button>
       </div>
     </div>
+  </div>
+</aside>
 
-    <section class="findings" id="findings" aria-live="polite"></section>
-  </aside>
+<aside class="panel right card" id="details" aria-labelledby="detailsTitle" hidden>
+  <div class="panel-head">
+    <h2 id="detailsTitle">Details</h2>
+    <button type="button" class="x" data-closepanel="details" aria-label="Close details">×</button>
+  </div>
+  <div class="panel-body"><section class="findings" id="findings" aria-live="polite"></section></div>
+</aside>
 
-  <main class="stage">
-    <div class="map" id="map">
-      <svg id="svg" viewBox="0 0 975 610" aria-hidden="true"><g id="states"></g></svg>
-      <canvas id="canvas" aria-label="Map of player hometowns. Click a dot for players, or a state for the schools that recruit it."></canvas>
-      <div class="tip" id="tip" hidden></div>
-      <div class="zoomctl"><button type="button" id="zin" aria-label="Zoom in">+</button><button type="button" id="zout" aria-label="Zoom out">−</button><button type="button" id="zreset" aria-label="Reset zoom">⟲</button></div>
-      <div class="loading" id="loading">Loading players…</div>
-    </div>
-    <div class="mapbar">
-      <div class="legend" id="legend">
-        <span><i style="width:6px;height:6px"></i>1 player</span>
-        <span><i style="width:12px;height:12px"></i>10</span>
-        <span><i style="width:20px;height:20px"></i>40+</span>
-        <span><i class="ring" style="width:10px;height:10px"></i>approximate (county or name-only match)</span>
-        <span class="ck" id="colorKey"></span>
-      </div>
-      <span id="mapnote">Scroll or pinch to zoom · click a dot or a state</span>
-    </div>
-  </main>
+<div class="legend card" id="legend">
+  <div class="keys">
+    <span class="sizes"><i style="width:5px;height:5px"></i>1 player</span>
+    <span class="sizes"><i style="width:10px;height:10px"></i>10</span>
+    <span class="sizes"><i style="width:16px;height:16px"></i>40+</span>
+    <span><i class="ring" style="width:9px;height:9px"></i>approximate location</span>
+  </div>
+  <div class="keys"><span class="ck" id="colorKey"></span></div>
+  <div class="hint" id="mapnote">Scroll or pinch to zoom · click a dot or a state</div>
+</div>
+<div class="zoomctl card">
+  <button type="button" id="zin" aria-label="Zoom in">+</button>
+  <button type="button" id="zout" aria-label="Zoom out">−</button>
+  <button type="button" id="zreset" aria-label="Back to the U.S." title="Back to the U.S.">⟲</button>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
@@ -193,10 +294,20 @@ h2 { font: 800 20px/1.1 var(--display); text-transform: uppercase; letter-spacin
 (async function () {
   const $ = (id) => document.getElementById(id);
   const fmt = d3.format(",");
-  const W = 975, H = 610;
   const POS_LABEL = { DEF: "Def (unlisted)", ST: "K/P/LS", ATH: "ATH/other" };
   const STATE_ABBR = {"Alabama":"AL","Alaska":"AK","Arizona":"AZ","Arkansas":"AR","California":"CA","Colorado":"CO","Connecticut":"CT","Delaware":"DE","District of Columbia":"DC","Florida":"FL","Georgia":"GA","Hawaii":"HI","Idaho":"ID","Illinois":"IL","Indiana":"IN","Iowa":"IA","Kansas":"KS","Kentucky":"KY","Louisiana":"LA","Maine":"ME","Maryland":"MD","Massachusetts":"MA","Michigan":"MI","Minnesota":"MN","Mississippi":"MS","Missouri":"MO","Montana":"MT","Nebraska":"NE","Nevada":"NV","New Hampshire":"NH","New Jersey":"NJ","New Mexico":"NM","New York":"NY","North Carolina":"NC","North Dakota":"ND","Ohio":"OH","Oklahoma":"OK","Oregon":"OR","Pennsylvania":"PA","Rhode Island":"RI","South Carolina":"SC","South Dakota":"SD","Tennessee":"TN","Texas":"TX","Utah":"UT","Vermont":"VT","Virginia":"VA","Washington":"WA","West Virginia":"WV","Wisconsin":"WI","Wyoming":"WY","Puerto Rico":"PR"};
   const ABBR_STATE = Object.fromEntries(Object.entries(STATE_ABBR).map(([k, v]) => [v, k]));
+  const narrow = () => matchMedia("(max-width: 760px)").matches;
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // ---------- world projection ----------
+  // Map units: Mercator, 1000 wide for 360° of longitude, cropped to 58°S–84°N.
+  const W = 1000;
+  const proj = d3.geoMercator().scale(W / (2 * Math.PI)).translate([W / 2, 0]);
+  proj.translate([W / 2, -proj([0, 84])[1]]);
+  const H = proj([0, -58])[1];
+  const K_US = 5.6;   // px per map unit at which the lower 48 fill ~900px; dot sizes are tuned to this zoom
+  const US_BOX = [proj([-125, 49.5]), proj([-66.5, 24.5])];
 
   // ---------- data ----------
   let data;
@@ -213,11 +324,11 @@ h2 { font: 800 20px/1.1 var(--display); text-transform: uppercase; letter-spacin
   const names = data.names.split("\n");
   const towns = data.towns;
   const T = towns.length;
-  const proj = d3.geoAlbersUsa().scale(1300).translate([W / 2, H / 2]);
   const tx = new Float32Array(T), ty = new Float32Array(T), tState = new Array(T);
-  let outside = new Uint8Array(T);
+  const outside = new Uint8Array(T);
   towns.forEach((t, i) => {
-    const p = proj([t[1], t[0]]);
+    const ok = Number.isFinite(t[0]) && Number.isFinite(t[1]) && t[0] > -58 && t[0] < 84;
+    const p = ok ? proj([t[1], t[0]]) : null;
     if (p) { tx[i] = p[0]; ty[i] = p[1]; } else { tx[i] = NaN; ty[i] = NaN; outside[i] = 1; }
     const parts = t[2].split(", ");
     tState[i] = parts[parts.length - 1];
@@ -225,6 +336,7 @@ h2 { font: 800 20px/1.1 var(--display); text-transform: uppercase; letter-spacin
 
   // ---------- school colors ----------
   const S = data.schools.length;
+  const css = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
   const lum = (hex) => { const c = d3.color(hex).rgb(); const f = (v) => { v /= 255; return v <= .03928 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; }; return .2126 * f(c.r) + .7152 * f(c.g) + .0722 * f(c.b); };
   const contrast = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + .05) / (Math.min(x, y) + .05); };
   let palette = null, paletteKey = "";
@@ -244,13 +356,29 @@ h2 { font: 800 20px/1.1 var(--display); text-transform: uppercase; letter-spacin
   }
   const swatch = (i) => { const c = schoolPalette()[i]; return `<span class="sw" style="background:${c.fill};--sw2:${c.edge}" aria-hidden="true"></span>`; };
 
+  // ---------- panels ----------
+  function setPanel(id, open) {
+    const p = $(id), b = $(id === "filters" ? "filtersBtn" : "detailsBtn");
+    if (open && narrow()) { const other = id === "filters" ? "details" : "filters"; $(other).hidden = true; $(other === "filters" ? "filtersBtn" : "detailsBtn").setAttribute("aria-expanded", "false"); }
+    p.hidden = !open; b.setAttribute("aria-expanded", open);
+  }
+  $("filtersBtn").addEventListener("click", () => setPanel("filters", $("filters").hidden));
+  $("detailsBtn").addEventListener("click", () => setPanel("details", $("details").hidden));
+  document.addEventListener("click", (e) => { const b = e.target.closest("[data-closepanel]"); if (b) setPanel(b.dataset.closepanel, false); });
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape" || e.target === $("q")) return;
+    if (!$("filters").hidden || !$("details").hidden) { setPanel("filters", false); setPanel("details", false); }
+  });
+  // panels start just under the floating title bar, whatever height it wraps to
+  new ResizeObserver(() => document.documentElement.style.setProperty("--bar-h", $("bar").getBoundingClientRect().height + "px")).observe($("bar"));
+
   // ---------- controls ----------
-  const state = { school: -1, conf: "", div: "", from: FIRST, to: LAST, entry: "", pos: new Set(data.pos.map((_, i) => i)), view: "dots", focusState: null, town: -1 };
+  const state = { school: -1, conf: "", div: "", from: FIRST, to: LAST, entry: "", pos: new Set(data.pos.map((_, i) => i)), view: "dots", focusState: null, town: -1, player: -1, hs: null };
+  // hs: { h: index into data.hs, st: hometown state abbr, or null for every state }
   const schoolIndex = new Map(data.schools.map((s, i) => [s[0].toLowerCase(), i]));
   $("schoolList").innerHTML = data.schools.map((s) => `<option value="${s[0].replace(/"/g, "&quot;")}">`).join("");
   data.confs.forEach((c, i) => { const o = document.createElement("option"); o.value = i; o.textContent = c; $("conf").appendChild(o); });
   for (const sel of ["from", "to"]) SEASONS.forEach((y) => { const o = document.createElement("option"); o.value = y; o.textContent = y; $(sel).appendChild(o); });
-  $("from").value = FIRST; $("to").value = LAST;
   data.pos.forEach((p, i) => {
     const b = document.createElement("button");
     b.type = "button"; b.className = "chip"; b.textContent = POS_LABEL[p] || p; b.dataset.i = i; b.setAttribute("aria-pressed", "true");
@@ -264,11 +392,10 @@ h2 { font: 800 20px/1.1 var(--display); text-transform: uppercase; letter-spacin
   });
   function syncChips() { $("pos").querySelectorAll(".chip").forEach((b) => b.setAttribute("aria-pressed", state.pos.has(+b.dataset.i))); }
   $("posAll").addEventListener("click", () => { state.pos = new Set(data.pos.map((_, j) => j)); syncChips(); update(); });
-  function seg(id, key, conv = (v) => v) {
+  function seg(id, key) {
     $(id).addEventListener("click", (e) => {
       const b = e.target.closest("button"); if (!b) return;
-      $(id).querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", x === b));
-      state[key] = conv(b.dataset.v); update();
+      setSeg(id, b.dataset.v); state[key] = b.dataset.v; update();
     });
   }
   seg("div", "div"); seg("entry", "entry"); seg("view", "view");
@@ -280,14 +407,27 @@ h2 { font: 800 20px/1.1 var(--display); text-transform: uppercase; letter-spacin
     if (!v) { setSchool(-1); return; }
     if (schoolIndex.has(v)) setSchool(schoolIndex.get(v));
   });
+  $("resetAll").addEventListener("click", () => { resetFilters(); syncControls(); update(); });
   function setSchool(i) {
-    state.school = i; state.town = -1;
+    state.school = i; state.town = -1; state.player = -1;
     $("school").value = i >= 0 ? data.schools[i][0] : "";
     update();
   }
+  function setSeg(id, v) { $(id).querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", x.dataset.v === v)); }
+  function syncControls() {
+    $("school").value = state.school >= 0 ? data.schools[state.school][0] : "";
+    $("conf").value = state.conf; $("from").value = state.from; $("to").value = state.to;
+    setSeg("div", state.div); setSeg("entry", state.entry); setSeg("view", state.view); syncChips();
+  }
+  function resetFilters() {
+    Object.assign(state, { school: -1, conf: "", div: "", from: FIRST, to: LAST, entry: "", pos: new Set(data.pos.map((_, i) => i)) });
+  }
+  function activeFilters() {
+    return (state.school >= 0) + (state.conf !== "") + (state.div !== "") + (state.from !== FIRST || state.to !== LAST) + (state.entry !== "") + (state.pos.size !== data.pos.length);
+  }
 
   // ---------- filtering ----------
-  let counts = new Int32Array(T), approxOnly = new Uint8Array(T), sel = [], maxCount = 1;
+  let counts = new Int32Array(T), sel = [], maxCount = 1;
   let dom = new Int16Array(T), domN = new Int32Array(T);
   const tally = new Uint16Array(T * S);
   function passes(k) {
@@ -312,68 +452,143 @@ h2 { font: 800 20px/1.1 var(--display); text-transform: uppercase; letter-spacin
     maxCount = 1; for (let i = 0; i < T; i++) if (counts[i] > maxCount) maxCount = counts[i];
   }
 
-  // ---------- map drawing ----------
+  // ---------- map: view math ----------
+  // Zoom "base" coordinates are map units × k0, offset so the whole world is centred at zoom 1.
+  // Screen position of a map point = map × view().k + view().ox
   const mapEl = $("map"), canvas = $("canvas"), ctx = canvas.getContext("2d");
-  const svg = d3.select("#svg"), gStates = d3.select("#states");
-  let transform = d3.zoomIdentity, statePaths = [];
-  try {
-    const mod = await import("https://cdn.jsdelivr.net/npm/us-atlas@3.0.1/states-albers-10m.json/+esm");
-    const us = mod.default;
-    const feats = topojson.feature(us, us.objects.states).features;
-    const path = d3.geoPath();
-    gStates.selectAll("path").data(feats).join("path").attr("class", "state").attr("d", path)
-      .attr("data-abbr", (d) => STATE_ABBR[d.properties.name] || "");
-    statePaths = feats.map((f) => ({ abbr: STATE_ABBR[f.properties.name], name: f.properties.name, p: new Path2D(path(f)) }));
-  } catch (e) {
-    $("mapnote").textContent = "State outlines didn't load; dots are still in the right places.";
-  }
-  const css = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-  let size = { w: 0, h: 0, k0: 1 };
-  function resize() {
-    const r = mapEl.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
-    size = { w: r.width, h: r.height, k0: r.width / W, dpr };
-    canvas.width = Math.round(r.width * dpr); canvas.height = Math.round(r.height * dpr);
-    draw();
-  }
+  const vp = d3.select("#vp"), gLand = d3.select("#land"), gStates = d3.select("#states");
+  let transform = d3.zoomIdentity, statePaths = [], userMoved = false;
+  let size = { w: 0, h: 0, k0: 1, cx: 0, cy: 0, dpr: 1 };
+  const view = () => ({ k: size.k0 * transform.k, ox: size.cx * transform.k + transform.x, oy: size.cy * transform.k + transform.y });
   const radius = (c) => Math.max(1.6, Math.sqrt(c) * 1.9);
+  const dotR = (c, zr) => Math.max(1.1, radius(c) * zr);
+
+  // Lon/lat at the centre of the screen, plus a zoom level that means the same thing on any screen size.
+  function currentView() {
+    const v = view();
+    const ll = proj.invert([(size.w / 2 - v.ox) / v.k, (size.h / 2 - v.oy) / v.k]);
+    return [ll[0], ll[1], v.k / K_US];
+  }
+  function transformFor(mx, my, k, sx = size.w / 2, sy = size.h / 2) {
+    const [lo, hi] = zoom.scaleExtent();
+    const tk = Math.max(lo, Math.min(hi, k / size.k0)); k = tk * size.k0;
+    return d3.zoomIdentity.translate(sx - mx * k - size.cx * tk, sy - my * k - size.cy * tk).scale(tk);
+  }
+  function applyView([lon, lat, z], ms = 0) {
+    const p = proj([lon, lat]); if (!p || !size.w) return;
+    const t = transformFor(p[0], p[1], z * K_US);
+    (ms ? d3.select(canvas).transition().duration(ms) : d3.select(canvas)).call(zoom.transform, t);
+  }
+  // The part of the screen not hidden by the title bar or an open side panel (desktop only).
+  function visibleRect() {
+    const r = { x0: 0, y0: 0, x1: size.w, y1: size.h };
+    if (narrow()) { r.y0 = $("bar").getBoundingClientRect().bottom; if (!$("filters").hidden || !$("details").hidden) r.y1 = Math.min($("filters").hidden ? size.h : $("filters").getBoundingClientRect().top, $("details").hidden ? size.h : $("details").getBoundingClientRect().top); return r; }
+    r.y0 = $("bar").getBoundingClientRect().bottom;
+    if (!$("filters").hidden) r.x0 = $("filters").getBoundingClientRect().right;
+    if (!$("details").hidden) r.x1 = $("details").getBoundingClientRect().left;
+    return r;
+  }
+  function fitBox(x0, y0, x1, y1, maxK, ms) {
+    const r = visibleRect(), vw = Math.max(80, r.x1 - r.x0), vh = Math.max(80, r.y1 - r.y0);
+    const span = Math.max((x1 - x0) / vw, (y1 - y0) / vh);
+    const k = Math.min(maxK, span ? .82 / span : maxK);
+    const t = transformFor((x0 + x1) / 2, (y0 + y1) / 2, k, (r.x0 + r.x1) / 2, (r.y0 + r.y1) / 2);
+    (ms ? d3.select(canvas).transition().duration(reduceMotion ? 0 : ms) : d3.select(canvas)).call(zoom.transform, t);
+  }
+  function fitUS(ms = 0) { fitBox(US_BOX[0][0], US_BOX[0][1], US_BOX[1][0], US_BOX[1][1], K_US * 3, ms); userMoved = false; }
+  function flyTo(list) {
+    const pts = list.filter((i) => i >= 0 && !outside[i]);
+    if (!pts.length || !size.w) return;
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+    for (const i of pts) { x0 = Math.min(x0, tx[i]); x1 = Math.max(x1, tx[i]); y0 = Math.min(y0, ty[i]); y1 = Math.max(y1, ty[i]); }
+    fitBox(x0, y0, x1, y1, pts.length > 1 ? K_US * 4 : K_US * (narrow() ? 1.6 : 2.4), 750);
+    userMoved = true;
+  }
+
+  // ---------- map: basemap (loads in the background; dots draw without it) ----------
+  (async () => {
+    try {
+      const get = (u) => fetch(u).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); });
+      const [world, us] = await Promise.all([
+        get("https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-50m.json"),
+        get("https://cdn.jsdelivr.net/npm/us-atlas@3.0.1/states-10m.json"),
+      ]);
+      const path = d3.geoPath(proj);
+      const countries = topojson.feature(world, world.objects.countries).features.filter((f) => f.id !== "010");   // drop Antarctica
+      gLand.selectAll("path").data(countries).join("path").attr("class", "country").attr("d", path);
+      const states = topojson.feature(us, us.objects.states).features;
+      gStates.selectAll("path").data(states).join("path").attr("class", "state").attr("d", path)
+        .attr("data-abbr", (d) => STATE_ABBR[d.properties.name] || "");
+      statePaths = states.map((f) => ({ abbr: STATE_ABBR[f.properties.name], name: f.properties.name, p: new Path2D(path(f)) })).filter((s) => s.abbr);
+      draw();
+    } catch (e) {
+      $("mapnote").textContent = "Map outlines didn't load; dots are still in the right places.";
+    }
+  })();
+
+  function resize() {
+    const keep = size.w ? currentView() : null;
+    const r = mapEl.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const k0 = Math.min(r.width / W, r.height / H);
+    size = { w: r.width, h: r.height, k0, cx: (r.width - W * k0) / 2, cy: (r.height - H * k0) / 2, dpr };
+    canvas.width = Math.round(r.width * dpr); canvas.height = Math.round(r.height * dpr);
+    zoom.extent([[0, 0], [size.w, size.h]])
+      .translateExtent([[size.cx, size.cy], [size.cx + W * k0, size.cy + H * k0]])
+      .scaleExtent([1, (K_US * 16) / k0]);
+    d3.select(canvas).call(zoom);
+    if (keep) applyView(keep); else draw();
+  }
+
   function draw() {
-    const { w, h, k0, dpr } = size; if (!w) return;
-    const k = k0 * transform.k, ox = transform.x, oy = transform.y;
-    gStates.attr("transform", `translate(${ox / k0},${oy / k0}) scale(${transform.k})`);
+    const { w, h, dpr } = size; if (!w) return;
+    const v = view(), zr = Math.sqrt(v.k / K_US);
+    vp.attr("transform", `translate(${v.ox},${v.oy}) scale(${v.k})`);
     gStates.selectAll("path").classed("focus", function () { return this.dataset.abbr === state.focusState; });
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, w, h);
-    const accent = css("--accent"), panel = css("--panel"), fg = css("--fg");
+    const accent = css("--accent"), fg = css("--fg");
     const pal = schoolPalette();
-    const zr = Math.sqrt(transform.k);
-    if (state.view === "heat") return drawHeat(k, ox, oy, zr, state.school >= 0 ? pal[state.school].fill : accent);
+    if (state.view === "heat") drawHeat(v, zr, state.school >= 0 ? pal[state.school].fill : accent);
+    else drawDots(v, zr, pal);
+    drawMarks(v, zr, fg);
+    scheduleUrl();
+  }
+  function drawDots({ k, ox, oy }, zr, pal) {
+    const { w, h } = size;
     const order = [];
     for (let i = 0; i < T; i++) if (counts[i] && !outside[i]) order.push(i);
     order.sort((a, b) => counts[b] - counts[a]);
     for (const i of order) {
       const x = tx[i] * k + ox, y = ty[i] * k + oy;
-      if (x < -30 || y < -30 || x > w + 30 || y > h + 30) continue;
-      const r = radius(counts[i]) * zr * (k0 < .6 ? .7 : 1);
+      if (x < -60 || y < -60 || x > w + 60 || y > h + 60) continue;
+      const r = dotR(counts[i], zr);
       ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
       const c = pal[dom[i]];
-      if (towns[i][3] > 0) { ctx.strokeStyle = c.fill; ctx.lineWidth = 1.6; ctx.stroke(); }
+      if (towns[i][3] > 0) { ctx.strokeStyle = c.fill; ctx.lineWidth = Math.min(1.6, r * .6); ctx.stroke(); }
       else {
         ctx.globalAlpha = .85; ctx.fillStyle = c.fill; ctx.fill();
-        ctx.globalAlpha = 1; ctx.strokeStyle = c.edge; ctx.lineWidth = r > 4 ? 1.2 : .8; ctx.stroke();
+        ctx.globalAlpha = 1; if (r > 2) { ctx.strokeStyle = c.edge; ctx.lineWidth = r > 4 ? 1.2 : .8; ctx.stroke(); }
       }
     }
-    if (state.town >= 0 && !outside[state.town]) {
-      const x = tx[state.town] * k + ox, y = ty[state.town] * k + oy;
-      ctx.beginPath(); ctx.arc(x, y, radius(counts[state.town] || 1) * zr + 4, 0, Math.PI * 2);
-      ctx.strokeStyle = fg; ctx.lineWidth = 2; ctx.stroke();
-    }
+  }
+  // Rings over the dots: every hometown of the selected high school, then the selected town.
+  function drawMarks({ k, ox, oy }, zr, fg) {
+    const halo = css("--panel");
+    const ring = (i, pad, lw) => {
+      if (i < 0 || outside[i]) return;
+      ctx.beginPath(); ctx.arc(tx[i] * k + ox, ty[i] * k + oy, dotR(counts[i] || 1, zr) + pad, 0, Math.PI * 2);
+      ctx.strokeStyle = halo; ctx.lineWidth = lw + 3; ctx.stroke();   // halo keeps the ring visible on any dot color
+      ctx.strokeStyle = fg; ctx.lineWidth = lw; ctx.stroke();
+    };
+    if (state.hs) for (const t of hsTowns(state.hs).keys()) ring(t, 3, 2);
+    ring(state.town, 4, 2.5);
   }
   const heatCanvas = document.createElement("canvas");
-  function drawHeat(k, ox, oy, zr, accent) {
+  function drawHeat({ k, ox, oy }, zr, accent) {
     const { w, h } = size, s = 0.5;
     heatCanvas.width = Math.max(1, Math.round(w * s)); heatCanvas.height = Math.max(1, Math.round(h * s));
     const hc = heatCanvas.getContext("2d");
-    const rad = Math.max(6, 14 * zr * size.k0) * s;
+    const rad = Math.max(5, 14 * zr) * s;
     const unit = Math.min(.35, 4 / Math.max(4, Math.sqrt(maxCount) * 3));
     for (let i = 0; i < T; i++) {
       if (!counts[i] || outside[i]) continue;
@@ -400,128 +615,378 @@ h2 { font: 800 20px/1.1 var(--display); text-transform: uppercase; letter-spacin
   }
 
   // ---------- zoom + picking ----------
-  const zoom = d3.zoom().scaleExtent([1, 14]).clickDistance(5)
-    .on("zoom", (e) => { transform = e.transform; $("tip").hidden = true; draw(); });
-  // d3.zoom works in the canvas's CSS pixels, so extents are reset whenever the map resizes
-  function setupZoom() {
-    zoom.extent([[0, 0], [size.w, size.h]]).translateExtent([[0, 0], [size.w, size.h]]);
-    d3.select(canvas).call(zoom);
-  }
-  $("zin").onclick = () => d3.select(canvas).transition().duration(250).call(zoom.scaleBy, 1.8);
-  $("zout").onclick = () => d3.select(canvas).transition().duration(250).call(zoom.scaleBy, 1 / 1.8);
-  $("zreset").onclick = () => d3.select(canvas).transition().duration(300).call(zoom.transform, d3.zoomIdentity);
+  const zoom = d3.zoom().clickDistance(5)
+    .on("zoom", (e) => { transform = e.transform; if (e.sourceEvent) userMoved = true; $("tip").hidden = true; draw(); });
+  $("zin").onclick = () => { userMoved = true; d3.select(canvas).transition().duration(250).call(zoom.scaleBy, 1.8); };
+  $("zout").onclick = () => { userMoved = true; d3.select(canvas).transition().duration(250).call(zoom.scaleBy, 1 / 1.8); };
+  $("zreset").onclick = () => fitUS(500);
 
-  function toMap(mx, my) { const k = size.k0 * transform.k; return [(mx - transform.x) / k, (my - transform.y) / k]; }
   function nearestTown(mx, my) {
-    const k = size.k0 * transform.k, zr = Math.sqrt(transform.k);
+    const { k, ox, oy } = view(), zr = Math.sqrt(k / K_US);
     let best = -1, bd = Infinity;
     for (let i = 0; i < T; i++) {
       if (!counts[i] || outside[i]) continue;
-      const dx = tx[i] * k + transform.x - mx, dy = ty[i] * k + transform.y - my;
-      const d = Math.hypot(dx, dy), r = Math.max(6, radius(counts[i]) * zr + 2);
+      const dx = tx[i] * k + ox - mx, dy = ty[i] * k + oy - my;
+      if (Math.abs(dx) > 60 || Math.abs(dy) > 60) continue;
+      const d = Math.hypot(dx, dy), r = Math.max(6, dotR(counts[i], zr) + 2);
       if (d <= r && d < bd) { bd = d; best = i; }
     }
     return best;
   }
   function stateAt(mx, my) {
-    const [x, y] = toMap(mx, my);
-    for (const s of statePaths) if (ctx.isPointInPath(s.p, x, y)) return s;
-    return null;
+    const { k, ox, oy } = view(), x = (mx - ox) / k, y = (my - oy) / k;
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    let hit = null;
+    for (const s of statePaths) if (ctx.isPointInPath(s.p, x, y)) { hit = s; break; }
+    ctx.setTransform(size.dpr, 0, 0, size.dpr, 0, 0);
+    return hit;
   }
   canvas.addEventListener("pointermove", (e) => {
     const r = canvas.getBoundingClientRect(), mx = e.clientX - r.left, my = e.clientY - r.top;
     const i = nearestTown(mx, my), tip = $("tip");
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    if (i >= 0) { tip.textContent = `${towns[i][2]} · ${fmt(counts[i])} player${counts[i] === 1 ? "" : "s"}` + (state.school < 0 ? ` · most to ${data.schools[dom[i]][0]} (${fmt(domN[i])})` : ""); }
-    else { const s = stateAt(mx, my); if (!s) { tip.hidden = true; ctx.setTransform(size.dpr, 0, 0, size.dpr, 0, 0); return; } tip.textContent = s.name; }
-    ctx.setTransform(size.dpr, 0, 0, size.dpr, 0, 0);
+    if (i >= 0) tip.textContent = `${towns[i][2]} · ${fmt(counts[i])} player${counts[i] === 1 ? "" : "s"}` + (state.school < 0 ? ` · most to ${data.schools[dom[i]][0]} (${fmt(domN[i])})` : "");
+    else { const s = stateAt(mx, my); if (!s) { tip.hidden = true; return; } tip.textContent = s.name; }
     tip.style.left = mx + "px"; tip.style.top = my + "px"; tip.hidden = false;
   });
   canvas.addEventListener("pointerleave", () => { $("tip").hidden = true; });
   canvas.addEventListener("click", (e) => {
     const r = canvas.getBoundingClientRect(), mx = e.clientX - r.left, my = e.clientY - r.top;
     const i = nearestTown(mx, my);
-    if (i >= 0) { state.town = i; draw(); renderFindings(); return; }
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    if (state.player >= 0 && P.t[state.player] !== i) state.player = -1;
+    state.hs = null;
+    if (i >= 0) { state.town = i; draw(); renderFindings(); setPanel("details", true); return; }
     const s = stateAt(mx, my);
-    ctx.setTransform(size.dpr, 0, 0, size.dpr, 0, 0);
-    state.town = -1;
+    state.town = -1; state.player = -1;
     state.focusState = s && s.abbr !== state.focusState ? s.abbr : null;
     draw(); renderFindings();
+    if (state.focusState) setPanel("details", true);
   });
 
-  // ---------- findings panel ----------
+  // ---------- findings (Details panel) ----------
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   function bars(title, rows, clickable) {
     if (!rows.length) return "";
     const max = rows[0][1];
     return `<div class="group"><h2>${esc(title)}</h2><ol class="bars">${rows.map(([n, v, key]) => `
-      <li><span class="nm">${clickable && key !== undefined ? `${clickable === "school" ? swatch(key) : ""}<button type="button" data-${clickable}="${key}">${esc(n)}</button>` : esc(n)}</span>
+      <li><span class="nm">${clickable && key !== undefined ? `${clickable === "school" ? swatch(key) : ""}<button type="button" data-${clickable}="${esc(key)}">${esc(n)}</button>` : esc(n)}</span>
       <span class="v">${fmt(v)}</span><span class="b"><span style="width:${(v / max * 100).toFixed(1)}%"></span></span></li>`).join("")}</ol></div>`;
   }
   function top(map, n) { return [...map.entries()].sort((a, b) => b[1] - a[1]).slice(0, n); }
   function seasonsText(k) { const f = P.f[k] + 2000, l = P.l[k] + 2000; return f === l ? `${f}` : `${f}–${l}`; }
+  function personLi(k, withTown) {
+    const t = P.t[k];
+    return `<li${k === state.player ? ' class="me"' : ""}><span class="pos">${esc(data.pos[P.p[k]])}</span><span>${esc(names[k])}<br><span class="meta">${esc(data.schools[P.s[k]][0])} · ${seasonsText(k)}${withTown && t >= 0 ? " · " + esc(towns[t][2]) : !withTown && data.hs[P.h[k]] ? " · " + esc(data.hs[P.h[k]]) : ""}${P.x[k] ? " · transfer" : ""}</span></span></li>`;
+  }
+  const head = (label, close) => `<div class="row" style="justify-content:space-between"><span class="label">${label}</span><button type="button" class="link" data-close="${close}">Clear</button></div>`;
   function renderFindings() {
     const out = [];
     const placed = sel.filter((k) => P.t[k] >= 0).length;
-    const townSet = new Set(); let off = 0;
-    for (const k of sel) { const t = P.t[k]; if (t >= 0) { townSet.add(t); if (outside[t]) off++; } }
+    const townSet = new Set();
+    for (const k of sel) { const t = P.t[k]; if (t >= 0) townSet.add(t); }
     const schoolsIn = new Set(sel.map((k) => P.s[k]));
-    const scope = state.school >= 0 ? data.schools[state.school][0] : state.conf !== "" ? data.confs[+state.conf] : "All schools";
-    out.push(`<div class="group"><span class="label">${esc(scope)} · joined ${state.from === state.to ? state.from : state.from + "–" + state.to}</span>
-      <div class="big"><div><b>${fmt(sel.length)}</b><small>players</small></div><div><b>${fmt(townSet.size)}</b><small>hometowns</small></div>
-      ${state.school < 0 ? `<div><b>${fmt(schoolsIn.size)}</b><small>schools</small></div>` : ""}</div>
-      <span class="note">${fmt(sel.length - placed)} without a usable hometown${off ? ` · ${fmt(off)} from abroad or U.S. territories off this map` : ""}.</span></div>`);
+    const scope = state.school >= 0 ? data.schools[state.school][0] : state.conf !== "" ? data.confs[+state.conf] : "All D1 schools";
+    const years = state.from === state.to ? state.from : state.from + "–" + state.to;
+    $("sub").textContent = `${fmt(sel.length)} players from ${fmt(townSet.size)} hometowns · ${scope} · joined ${years}`;
 
-    if (state.town >= 0) {
-      const ks = sel.filter((k) => P.t[k] === state.town).sort((a, b) => P.f[b] - P.f[a]);
-      out.push(`<div class="group"><div class="row" style="justify-content:space-between"><h2>${esc(towns[state.town][2])}</h2><button type="button" class="link" data-close="town">Close</button></div>
-        ${towns[state.town][3] ? `<span class="note">Approximate location: matched to a county or a same-name city.</span>` : ""}
-        <ul class="people">${ks.slice(0, 200).map((k) => `<li><span class="pos">${esc(data.pos[P.p[k]])}</span><span>${esc(names[k])}<br><span class="meta">${esc(data.schools[P.s[k]][0])} · ${seasonsText(k)}${data.hs[P.h[k]] ? " · " + esc(data.hs[P.h[k]]) : ""}${P.x[k] ? " · transfer" : ""}</span></span></li>`).join("")}</ul>
+    const hiddenNote = (what) => `<span class="note">${what} <button type="button" class="link" data-clear="filters">Clear filters</button></span>`;
+    const selection = [];
+    if (state.player >= 0) {
+      const k = state.player, t = P.t[k];
+      selection.push(`<div class="group sel">${head("Player", "player")}
+        <h2>${esc(names[k])}</h2>
+        <span><span class="pos">${esc(data.pos[P.p[k]])}</span> · ${swatch(P.s[k])}${esc(data.schools[P.s[k]][0])} · ${seasonsText(k)}${P.x[k] ? " · transfer" : ""}</span>
+        <span class="note">${t >= 0 ? esc(towns[t][2]) : "Hometown unknown"}${data.hs[P.h[k]] ? " · " + esc(data.hs[P.h[k]]) : ""}</span>
+        ${passes(k) ? "" : hiddenNote("Your current filters hide this player, so his hometown may have no dot.")}</div>`);
+    }
+    if (state.hs) {
+      const { h, st } = state.hs;
+      const inGroup = (k) => P.h[k] === h && (st === null || (P.t[k] >= 0 ? tState[P.t[k]] : "") === st);
+      const ks = sel.filter(inGroup).sort((a, b) => P.f[b] - P.f[a]);
+      let total = 0; for (let k = 0; k < N; k++) if (inGroup(k)) total++;
+      const bySchool = new Map(); for (const k of ks) bySchool.set(P.s[k], (bySchool.get(P.s[k]) || 0) + 1);
+      const stName = st === null ? "" : st ? (ABBR_STATE[st] || st) : "unknown";
+      const others = hsStates(h).length > 1;
+      selection.push(`<div class="group sel">${head("High school", "hs")}
+        <h2>${esc(data.hs[h])}</h2>
+        <span class="note">${fmt(ks.length)} player${ks.length === 1 ? "" : "s"}${st === null ? " from every state" : ` with ${esc(stName)} hometowns`}${ks.length < total ? ` (${fmt(total - ks.length)} more hidden by filters)` : ""}.
+        ${st !== null && others ? `<button type="button" class="link" data-hsall="1">Include other states</button>` : ""}</span>
+        ${others && st === null ? `<span class="note">Schools in different towns can share this name.</span>` : ""}
+        ${!ks.length && total ? hiddenNote("") : ""}</div>`);
+      if (bySchool.size > 1) selection.push(bars("Where they played", top(bySchool, 10).map(([s, v]) => [data.schools[s][0], v, s]), "school"));
+      if (ks.length) selection.push(`<div class="group"><ul class="people">${ks.slice(0, 200).map((k) => personLi(k, true)).join("")}</ul>
         ${ks.length > 200 ? `<span class="note">Showing 200 of ${fmt(ks.length)}.</span>` : ""}</div>`);
     }
-
+    if (state.town >= 0) {
+      const ks = sel.filter((k) => P.t[k] === state.town).sort((a, b) => (b === state.player) - (a === state.player) || P.f[b] - P.f[a]);
+      selection.push(`<div class="group sel">${head("Hometown", "town")}<h2>${esc(towns[state.town][2])}</h2>
+        ${towns[state.town][3] ? `<span class="note">Approximate location: matched to a county or a same-name city.</span>` : ""}
+        <span class="note">${ks.length ? `${fmt(ks.length)} player${ks.length === 1 ? "" : "s"}` : "No players from here match the current filters."}</span>
+        <ul class="people">${ks.slice(0, 200).map((k) => personLi(k)).join("")}</ul>
+        ${ks.length > 200 ? `<span class="note">Showing 200 of ${fmt(ks.length)}.</span>` : ""}</div>`);
+    }
     if (state.focusState) {
       const stName = ABBR_STATE[state.focusState] || state.focusState;
       const bySchool = new Map(), byTown = new Map(); let n = 0;
       for (const k of sel) { const t = P.t[k]; if (t < 0 || tState[t] !== state.focusState) continue; n++;
         bySchool.set(P.s[k], (bySchool.get(P.s[k]) || 0) + 1); byTown.set(t, (byTown.get(t) || 0) + 1); }
-      out.push(`<div class="group"><div class="row" style="justify-content:space-between"><span class="label">${fmt(n)} players from ${esc(stName)}</span><button type="button" class="link" data-close="state">Clear state</button></div></div>`);
-      if (state.school < 0) out.push(bars(`Who recruits ${stName}`, top(bySchool, 15).map(([s, v]) => [data.schools[s][0], v, s]), "school"));
-      out.push(bars(`Top ${stName} hometowns`, top(byTown, 10).map(([t, v]) => [towns[t][2], v, t]), "town"));
+      selection.push(`<div class="group sel">${head("State", "state")}<h2>${esc(stName)}</h2><span class="note">${fmt(n)} players from ${esc(stName)}</span></div>`);
+      if (state.school < 0) selection.push(bars(`Who recruits ${stName}`, top(bySchool, 15).map(([s, v]) => [data.schools[s][0], v, s]), "school"));
+      selection.push(bars(`Top ${stName} hometowns`, top(byTown, 10).map(([t, v]) => [towns[t][2], v, t]), "town"));
     }
+    out.push(...selection);
 
-    const byState = new Map(), byTown = new Map(), byHS = new Map(), bySchool = new Map();
+    out.push(`<div class="group${selection.length ? " divider" : ""}"><span class="label">${esc(scope)} · joined ${years}</span>
+      <div class="big"><div><b>${fmt(sel.length)}</b><small>players</small></div><div><b>${fmt(townSet.size)}</b><small>hometowns</small></div>
+      ${state.school < 0 ? `<div><b>${fmt(schoolsIn.size)}</b><small>schools</small></div>` : ""}</div>
+      <span class="note">${fmt(sel.length - placed)} without a usable hometown.</span></div>`);
+    const byState = new Map(), byTown = new Map(), byHS = new Map(), bySchool = new Map(), byCountry = new Map();
     for (const k of sel) {
       const t = P.t[k];
-      if (t >= 0) { byState.set(tState[t], (byState.get(tState[t]) || 0) + 1); byTown.set(t, (byTown.get(t) || 0) + 1); }
+      if (t >= 0) {
+        byTown.set(t, (byTown.get(t) || 0) + 1);
+        if (ABBR_STATE[tState[t]]) byState.set(tState[t], (byState.get(tState[t]) || 0) + 1);
+        else byCountry.set(tState[t], (byCountry.get(tState[t]) || 0) + 1);
+      }
       if (state.school >= 0 && !P.x[k] && data.hs[P.h[k]]) { const hs = data.hs[P.h[k]] + (t >= 0 ? ` (${tState[t]})` : ""); byHS.set(hs, (byHS.get(hs) || 0) + 1); }
       if (state.school < 0) bySchool.set(P.s[k], (bySchool.get(P.s[k]) || 0) + 1);
     }
-    if (!state.focusState) {
-      out.push(bars("Top states", top(byState, 10).map(([s, v]) => [ABBR_STATE[s] || s, v, s]), "state"));
-      out.push(bars("Top hometowns", top(byTown, 10).map(([t, v]) => [towns[t][2], v, t]), "town"));
-    }
+    out.push(bars("Top states", top(byState, 10).map(([s, v]) => [ABBR_STATE[s] || s, v, s]), "state"));
+    out.push(bars("Top hometowns", top(byTown, 10).map(([t, v]) => [towns[t][2], v, t]), "town"));
     if (state.school >= 0) out.push(bars("High school pipelines", top(byHS, 10).map(([h, v]) => [h, v])));
-    else if (!state.focusState) out.push(bars("Biggest rosters in this view", top(bySchool, 8).map(([s, v]) => [data.schools[s][0], v, s]), "school"));
+    else out.push(bars("Biggest rosters in this view", top(bySchool, 8).map(([s, v]) => [data.schools[s][0], v, s]), "school"));
+    out.push(bars("Outside the 50 states", top(byCountry, 8).map(([c, v]) => [c, v])));
     $("findings").innerHTML = out.join("");
+    scheduleUrl();
   }
   $("findings").addEventListener("click", (e) => {
     const b = e.target.closest("button"); if (!b) return;
     if (b.dataset.school !== undefined) { setSchool(+b.dataset.school); return; }
-    if (b.dataset.state !== undefined) { state.focusState = b.dataset.state; state.town = -1; draw(); renderFindings(); return; }
-    if (b.dataset.town !== undefined) { state.town = +b.dataset.town; draw(); renderFindings(); return; }
-    if (b.dataset.close === "town") { state.town = -1; draw(); renderFindings(); }
-    if (b.dataset.close === "state") { state.focusState = null; draw(); renderFindings(); }
+    if (b.dataset.state !== undefined) { state.focusState = b.dataset.state; state.town = -1; state.player = -1; state.hs = null; draw(); renderFindings(); $("details").querySelector(".panel-body").scrollTop = 0; return; }
+    if (b.dataset.town !== undefined) { state.town = +b.dataset.town; state.player = -1; state.hs = null; flyTo([state.town]); draw(); renderFindings(); $("details").querySelector(".panel-body").scrollTop = 0; return; }
+    if (b.dataset.close === "town") { state.town = -1; state.player = -1; }
+    if (b.dataset.close === "state") state.focusState = null;
+    if (b.dataset.close === "player") state.player = -1;
+    if (b.dataset.close === "hs") state.hs = null;
+    if (b.dataset.hsall) { state.hs = { h: state.hs.h, st: null }; flyTo([...hsTowns(state.hs).keys()]); }
+    if (b.dataset.clear === "filters") { resetFilters(); syncControls(); update(); return; }
+    draw(); renderFindings();
+  });
+
+  // ---------- high-school groups (name + hometown state) ----------
+  // The same high-school name shows up in many towns ("Central"), so search results split a name by hometown state.
+  const hsCache = new Map();
+  function hsTowns({ h, st }) {
+    const key = h + "|" + st;
+    if (hsCache.has(key)) return hsCache.get(key);
+    const m = new Map();
+    for (let k = 0; k < N; k++) {
+      if (P.h[k] !== h) continue;
+      const t = P.t[k]; if (t < 0) continue;
+      if (st !== null && tState[t] !== st) continue;
+      m.set(t, (m.get(t) || 0) + 1);
+    }
+    hsCache.set(key, m); return m;
+  }
+  let hsStateList = null;
+  function hsStates(h) {
+    if (!hsStateList) { hsStateList = new Map(); for (const g of searchIndex().hsg) { if (!hsStateList.has(g.h)) hsStateList.set(g.h, []); hsStateList.get(g.h).push(g.st); } }
+    return hsStateList.get(h) || [];
+  }
+
+  // ---------- search ----------
+  const townTotal = new Int32Array(T);
+  for (let k = 0; k < N; k++) if (P.t[k] >= 0) townTotal[P.t[k]]++;
+  let ix = null;
+  function searchIndex() {
+    if (ix) return ix;
+    const pl = new Array(N);
+    for (let k = 0; k < N; k++) pl[k] = (names[k] + " " + data.schools[P.s[k]][0]).toLowerCase();
+    const tw = towns.map((t) => t[2].toLowerCase().replace(/,/g, ""));
+    const g = new Map();
+    for (let k = 0; k < N; k++) {
+      const h = P.h[k]; if (!data.hs[h]) continue;
+      const t = P.t[k], st = t >= 0 ? tState[t] : "";
+      const key = h + "|" + st;
+      let e = g.get(key); if (!e) g.set(key, e = { h, st, n: 0 });
+      e.n++;
+    }
+    const hsg = [...g.values()];
+    for (const e of hsg) e.s = (data.hs[e.h] + " " + e.st).toLowerCase();
+    return ix = { pl, tw, hsg };
+  }
+  function find(q) {
+    const toks = q.toLowerCase().replace(/,/g, " ").split(/\s+/).filter(Boolean);
+    if (!toks.length || q.trim().length < 2) return null;
+    const { pl, tw, hsg } = searchIndex();
+    const first = toks[0];
+    const hit = (s) => { for (const t of toks) if (!s.includes(t)) return false; return true; };
+    const rank = (s) => s.startsWith(first) ? 0 : s.includes(" " + first) || s.includes("-" + first) ? 1 : 2;
+    const players = [];
+    for (let k = 0; k < N; k++) if (hit(pl[k])) players.push([rank(pl[k]), -P.l[k], k]);
+    players.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+    const tws = [];
+    for (let i = 0; i < T; i++) if (hit(tw[i])) tws.push([rank(tw[i]), -townTotal[i], i]);
+    tws.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+    const hss = hsg.filter((e) => hit(e.s)).map((e) => [rank(e.s), -e.n, e]);
+    hss.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+    return { toks, players: players.slice(0, 6).map((r) => r[2]), playerN: players.length, towns: tws.slice(0, 5).map((r) => r[2]), hs: hss.slice(0, 5).map((r) => r[2]) };
+  }
+  function hl(text, toks) {
+    const re = new RegExp("(" + toks.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|") + ")", "gi");
+    return String(text).split(re).map((p, i) => i % 2 ? `<mark>${esc(p)}</mark>` : esc(p)).join("");
+  }
+  const qEl = $("q"), resEl = $("results");
+  let opts = [], active = -1;
+  function openResults(open) { resEl.hidden = !open; qEl.setAttribute("aria-expanded", open); if (!open) { active = -1; qEl.removeAttribute("aria-activedescendant"); } }
+  function renderResults() {
+    const r = find(qEl.value);
+    if (!r) { openResults(false); return; }
+    opts = []; const html = [];
+    const opt = (kind, id, main, meta) => { const n = opts.length; opts.push({ kind, id }); return `<li role="option" id="opt${n}" data-n="${n}" aria-selected="false"><span>${main}</span><span class="meta">${meta}</span></li>`; };
+    if (r.players.length) {
+      html.push(`<li class="grp" role="presentation">Players${r.playerN > r.players.length ? ` · top ${r.players.length} of ${fmt(r.playerN)}` : ""}</li>`);
+      for (const k of r.players) html.push(opt("p", k, hl(names[k], r.toks),
+        `${esc(data.pos[P.p[k]])} · ${hl(data.schools[P.s[k]][0], r.toks)} · ${seasonsText(k)}${P.t[k] >= 0 ? " · " + esc(towns[P.t[k]][2]) : ""}`));
+    }
+    if (r.towns.length) {
+      html.push(`<li class="grp" role="presentation">Hometowns</li>`);
+      for (const i of r.towns) html.push(opt("t", i, hl(towns[i][2], r.toks), `${fmt(townTotal[i])} player${townTotal[i] === 1 ? "" : "s"}`));
+    }
+    if (r.hs.length) {
+      html.push(`<li class="grp" role="presentation">High schools</li>`);
+      for (const e of r.hs) html.push(opt("h", e, hl(data.hs[e.h], r.toks), `${fmt(e.n)} player${e.n === 1 ? "" : "s"} · ${e.st ? (ABBR_STATE[e.st] || e.st) + " hometowns" : "hometown unknown"}`));
+    }
+    resEl.innerHTML = html.length ? html.join("") : `<li class="empty" role="presentation">No players, towns or high schools match “${esc(qEl.value.trim())}”.</li>`;
+    active = -1; openResults(true);
+  }
+  function setActive(n) {
+    if (!opts.length) return;
+    active = (n + opts.length) % opts.length;
+    resEl.querySelectorAll('[role="option"]').forEach((el) => el.setAttribute("aria-selected", +el.dataset.n === active));
+    const el = $("opt" + active); qEl.setAttribute("aria-activedescendant", el.id); el.scrollIntoView({ block: "nearest" });
+  }
+  function choose(n) {
+    const o = opts[n]; if (!o) return;
+    openResults(false);
+    state.player = -1; state.hs = null; state.focusState = null;
+    if (o.kind === "p") { state.player = o.id; state.town = P.t[o.id]; qEl.value = names[o.id]; }
+    else if (o.kind === "t") { state.town = o.id; qEl.value = towns[o.id][2]; }
+    else { state.hs = { h: o.id.h, st: o.id.st }; state.town = -1; qEl.value = data.hs[o.id.h]; }
+    setPanel("details", true);   // open first so the map centres in the space left beside it
+    $("details").querySelector(".panel-body").scrollTop = 0;
+    flyTo(state.hs ? [...hsTowns(state.hs).keys()] : [state.town]);
+    draw(); renderFindings();
+    if (narrow()) qEl.blur();
+  }
+  let qFrame = 0;
+  qEl.addEventListener("input", () => { cancelAnimationFrame(qFrame); qFrame = requestAnimationFrame(renderResults); });
+  qEl.addEventListener("focus", () => { if (qEl.value.trim().length >= 2) renderResults(); });
+  qEl.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowDown") { e.preventDefault(); if (resEl.hidden) renderResults(); else setActive(active + 1); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); setActive(active - 1); }
+    else if (e.key === "Enter") { e.preventDefault(); if (!resEl.hidden) choose(active >= 0 ? active : 0); }
+    else if (e.key === "Escape") { if (!resEl.hidden) { e.preventDefault(); openResults(false); } }
+  });
+  resEl.addEventListener("pointerdown", (e) => e.preventDefault());   // keep focus in the box
+  resEl.addEventListener("click", (e) => { const li = e.target.closest('[role="option"]'); if (li) choose(+li.dataset.n); });
+  resEl.addEventListener("pointermove", (e) => { const li = e.target.closest('[role="option"]'); if (li && +li.dataset.n !== active) setActive(+li.dataset.n); });
+  qEl.addEventListener("blur", () => openResults(false));
+
+  // ---------- shareable links: the whole view lives in the URL hash ----------
+  const townIndex = new Map(towns.map((t, i) => [t[2], i]));
+  let hsIndex = null;
+  let lastHash = location.hash.slice(1), urlTimer = 0;
+  function scheduleUrl() { clearTimeout(urlTimer); urlTimer = setTimeout(writeUrl, 250); }
+  function hashFor() {
+    const q = new URLSearchParams();
+    if (state.school >= 0) q.set("school", data.schools[state.school][0]);
+    if (state.conf !== "") q.set("conf", data.confs[+state.conf]);
+    if (state.div !== "") q.set("div", data.divs[+state.div]);
+    if (state.from !== FIRST) q.set("from", state.from);
+    if (state.to !== LAST) q.set("to", state.to);
+    if (state.entry !== "") q.set("arrived", state.entry === "1" ? "transfer" : "hs");
+    if (state.pos.size !== data.pos.length) q.set("pos", [...state.pos].sort((a, b) => a - b).map((i) => data.pos[i]).join(","));
+    if (state.view !== "dots") q.set("view", state.view);
+    if (state.focusState) q.set("state", state.focusState);
+    if (state.player >= 0) q.set("player", names[state.player] + "~" + data.schools[P.s[state.player]][0]);
+    else if (state.town >= 0) q.set("town", towns[state.town][2]);
+    if (state.hs) q.set("hs", data.hs[state.hs.h] + (state.hs.st !== null ? "~" + state.hs.st : ""));
+    if (size.w && userMoved) { const [lon, lat, z] = currentView(); q.set("map", `${lon.toFixed(2)},${lat.toFixed(2)},${z.toFixed(2)}`); }
+    return q.toString().replace(/%2C/gi, ",").replace(/%7E/gi, "~");
+  }
+  function writeUrl() {
+    clearTimeout(urlTimer);
+    const h = hashFor();
+    if (h === lastHash) return;
+    lastHash = h;
+    try { history.replaceState(null, "", location.pathname + location.search + (h ? "#" + h : "")); } catch (e) { /* sandboxed previews can refuse */ }
+  }
+  // Reads the hash into `state`; unknown or stale values are skipped. Returns the saved map view [lon, lat, zoom], if any.
+  function readUrl() {
+    const q = new URLSearchParams(location.hash.slice(1));
+    resetFilters(); Object.assign(state, { view: "dots", focusState: null, town: -1, player: -1, hs: null });
+    const v = (key) => (q.get(key) || "").trim();
+    if (v("school") && schoolIndex.has(v("school").toLowerCase())) state.school = schoolIndex.get(v("school").toLowerCase());
+    const ci = data.confs.indexOf(v("conf")); if (ci >= 0) state.conf = String(ci);
+    const di = data.divs.indexOf(v("div").toUpperCase()); if (di === 0 || di === 1) state.div = String(di);
+    if (SEASONS.includes(+v("from"))) state.from = +v("from");
+    if (SEASONS.includes(+v("to"))) state.to = +v("to");
+    if (state.from > state.to) [state.from, state.to] = [state.to, state.from];
+    if (v("arrived") === "transfer") state.entry = "1"; else if (v("arrived") === "hs") state.entry = "0";
+    if (v("pos")) { const s = new Set(v("pos").split(",").map((p) => data.pos.indexOf(p.trim().toUpperCase())).filter((i) => i >= 0)); if (s.size) state.pos = s; }
+    if (v("view") === "heat") state.view = "heat";
+    if (ABBR_STATE[v("state").toUpperCase()]) state.focusState = v("state").toUpperCase();
+    if (townIndex.has(v("town"))) state.town = townIndex.get(v("town"));
+    if (v("player")) {
+      const cut = v("player").lastIndexOf("~"), nm = cut >= 0 ? v("player").slice(0, cut) : v("player"), sc = cut >= 0 ? v("player").slice(cut + 1) : null;
+      const si = sc ? schoolIndex.get(sc.toLowerCase()) : undefined;
+      for (let k = 0; k < N; k++) if (names[k] === nm && (si === undefined || P.s[k] === si)) { state.player = k; state.town = P.t[k]; break; }
+    }
+    if (v("hs")) {
+      if (!hsIndex) { hsIndex = new Map(); data.hs.forEach((n, i) => { if (n && !hsIndex.has(n)) hsIndex.set(n, i); }); }
+      const raw = v("hs"), cut = raw.lastIndexOf("~");
+      const nm = cut >= 0 ? raw.slice(0, cut) : raw, st = cut >= 0 ? raw.slice(cut + 1) : null;
+      if (hsIndex.has(nm)) state.hs = { h: hsIndex.get(nm), st };
+    }
+    const m = v("map").split(",").map(Number);
+    return m.length === 3 && m.every(Number.isFinite) && m[2] > 0 && Math.abs(m[1]) < 85 ? m : null;
+  }
+  const hasSelection = () => state.town >= 0 || state.player >= 0 || state.hs || state.focusState;
+  window.addEventListener("hashchange", () => {
+    if (location.hash.slice(1) === lastHash) return;
+    lastHash = location.hash.slice(1);
+    const m = readUrl(); syncControls(); qEl.value = ""; update();
+    if (m) { userMoved = true; applyView(m, 600); } else fitUS(600);
+    if (hasSelection()) setPanel("details", true);
+  });
+  $("share").addEventListener("click", async () => {
+    writeUrl();
+    const t = $("toast");
+    try { await navigator.clipboard.writeText(location.href); t.textContent = "Link to this view copied"; }
+    catch (e) { t.textContent = "Copy the link from the address bar"; }
+    t.hidden = false; clearTimeout(t._t); t._t = setTimeout(() => { t.hidden = true; }, 2200);
   });
 
   function update() {
     compute(); draw(); renderFindings();
+    const n = activeFilters();
+    $("fcount").hidden = !n; $("fcount").textContent = n;
+    $("filtersBtn").setAttribute("aria-label", n ? `Filters, ${n} active` : "Filters");
     $("colorKey").innerHTML = state.school >= 0
       ? `${swatch(state.school)}${esc(data.schools[state.school][0])} colors`
       : "Dot color: the school with the most players from that town";
   }
-  new ResizeObserver(() => { resize(); setupZoom(); }).observe(mapEl);
+
+  let pendingMap = readUrl();
+  syncControls();
+  if (hasSelection() && !narrow()) setPanel("details", true);
+  new ResizeObserver(() => {
+    resize();
+    if (pendingMap !== undefined && size.w) {      // first layout: restore the shared view, or start on the U.S.
+      if (pendingMap) { userMoved = true; applyView(pendingMap); } else fitUS();
+      pendingMap = undefined;
+    }
+  }).observe(mapEl);
   matchMedia("(prefers-color-scheme: dark)").addEventListener("change", update);
   new MutationObserver(update).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
   $("loading").remove();
