@@ -67,7 +67,10 @@ button, select, input { font: inherit; color: inherit; }
 h1 { font: 800 clamp(22px, 2.4vw, 32px)/.98 var(--display); letter-spacing: .01em; margin: 0; text-transform: uppercase; text-wrap: balance; }
 h1 span { color: var(--accent); }
 .sub { color: var(--muted); margin: 4px 0 0; font-size: 13px; font-variant-numeric: tabular-nums; }
-.tools { display: flex; gap: 8px; align-items: center; flex: 0 1 560px; min-width: 0; }
+.scope { margin-top: 8px; display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); background: var(--accent-soft); border-radius: 999px; padding: 4px 6px 4px 12px; cursor: pointer; font-weight: 600; font-size: 13px; }
+.scope:hover { border-color: var(--accent); }
+.scope-x { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--fg); color: var(--panel); font-size: 14px; line-height: 1; }
+.tools { display: flex; gap: 8px; align-items: center; flex: 0 1 600px; min-width: 0; margin-left: auto; }   /* stays on the right even when it wraps under the title */
 .searchbox { position: relative; flex: 1; min-width: 0; }
 .searchbox svg { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; color: var(--muted); pointer-events: none; }
 .searchbox .field { padding-left: 33px; height: 42px; box-shadow: var(--shadow); }
@@ -200,26 +203,41 @@ h2 { font: 800 19px/1.1 var(--display); text-transform: uppercase; letter-spacin
   padding: calc(var(--bar-h, 76px) + var(--gap)) max(var(--gap), env(safe-area-inset-right)) max(var(--gap), env(safe-area-inset-bottom)) max(var(--gap), env(safe-area-inset-left));
 }
 .compare ~ .legend, .compare ~ .zoomctl { z-index: 8; }
+body.comparing .tools, body.comparing .scope, body.comparing .sub { display: none !important; }
 .back { height: 34px; border: 1px solid var(--line); background: var(--panel); border-radius: 8px; padding: 0 12px; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
 .back:hover { border-color: var(--muted); }
 .compare-head { display: flex; align-items: center; justify-content: space-between; gap: 6px 16px; flex-wrap: wrap; }
 .compare-head .note b { color: var(--fg); }
 .ramp { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
-.ramp i { width: 96px; height: 8px; border-radius: 4px; background: linear-gradient(90deg, var(--ramp0, rgba(226, 86, 14, .25)), var(--accent) 60%, var(--fg)); }
-.cgrid { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 10px; }
-.cell { border: 1px solid var(--line); border-radius: 8px; display: flex; flex-direction: column; min-height: 0; overflow: hidden; background: var(--sea); }
+.ramp i { width: 96px; height: 8px; border-radius: 4px; background: linear-gradient(90deg, color-mix(in srgb, var(--muted) 25%, transparent), var(--muted) 60%, var(--fg)); }
+/* two big maps per row; the grid scrolls under the fixed heading */
+.cgrid { flex: 1; min-height: 0; overflow: auto; overscroll-behavior: contain; display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: max-content; align-content: start; gap: 14px; padding-bottom: 8px; }
+.cell { border: 1px solid var(--line); border-radius: 8px; display: flex; flex-direction: column; overflow: hidden; background: var(--panel); }
 .cell-head { display: flex; gap: 8px; align-items: center; padding: 7px 8px 7px 10px; background: var(--panel); border-bottom: 1px solid var(--line); }
 .cell-head .field { flex: 1; min-width: 0; padding: 6px 8px; }
 .cell-head .n { font-size: 12px; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
-.cell-map { position: relative; flex: 1; min-height: 0; }
+.cell-map { position: relative; aspect-ratio: 1.62; background: var(--sea); }
 .cell-map canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: pointer; touch-action: manipulation; }
 .cell-map .empty { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font-size: 14px; pointer-events: none; }
 .cell-foot { padding: 6px 10px; font-size: 13px; background: var(--panel); border-top: 1px solid var(--line); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-variant-numeric: tabular-nums; min-height: 31px; }
 .cell-foot b { font-weight: 600; }
+/* state rankings under each map */
+.cell-rank { padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 8px; border-top: 1px solid var(--line); }
+.cell-rank .rh { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.rank { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 2px 18px; }
+.rank li { display: grid; grid-template-columns: 1.7em minmax(0, 1fr) auto; column-gap: 6px; align-items: center; font-size: 13px; padding: 3px 4px; border-radius: 4px; cursor: pointer; }
+.rank li .r { color: var(--muted); font-variant-numeric: tabular-nums; text-align: right; }
+.rank li .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rank li .v { color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.rank li .v b { color: var(--fg); font-weight: 600; }
+.rank li .b { grid-column: 2 / -1; height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; margin-top: 2px; }
+.rank li .b span { display: block; height: 100%; }
+.rank li.on { background: var(--accent-soft); }
+.rank-empty { color: var(--muted); font-size: 13px; }
+@media (max-width: 1100px) { .cgrid { grid-template-columns: 1fr; } }
 @media (max-width: 760px) {
   .compare-head .ramp { order: 3; }
-  .cgrid { grid-template-columns: 1fr; grid-template-rows: none; overflow: auto; overscroll-behavior: contain; }
-  .cell { height: 290px; flex: none; }
+  .rank { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
@@ -238,6 +256,7 @@ h2 { font: 800 19px/1.1 var(--display); text-transform: uppercase; letter-spacin
   <div class="brand card">
     <h1>D1 College Football <span>Recruiting Map</span></h1>
     <p class="sub" id="sub">Hometowns of every FBS and FCS player since 2016</p>
+    <button type="button" class="scope" id="scopeChip" hidden><span id="scopeName"></span><span class="scope-x" aria-hidden="true">×</span></button>
   </div>
   <div class="tools">
     <div class="searchbox">
@@ -259,16 +278,12 @@ h2 { font: 800 19px/1.1 var(--display); text-transform: uppercase; letter-spacin
         </div>
         <div class="panel-body">
           <div class="group">
-            <label class="label" for="school">School</label>
+            <div class="row" style="justify-content: space-between"><label class="label" for="school">School</label><button type="button" class="link" id="schoolClear">Clear map</button></div>
             <input class="field" id="school" list="schoolList" placeholder="All schools — type to search" autocomplete="off">
             <datalist id="schoolList"></datalist>
           </div>
           <div class="group">
-            <label class="label" for="conf">Conference (2026)</label>
-            <select class="field" id="conf"><option value="">All conferences</option></select>
-          </div>
-          <div class="group">
-            <span class="label" id="divLabel">Division when he joined</span>
+            <span class="label" id="divLabel">Division</span>
             <div class="seg" id="div" role="group" aria-labelledby="divLabel">
               <button type="button" data-v="" aria-pressed="true">All</button>
               <button type="button" data-v="0" aria-pressed="false">FBS</button>
@@ -276,7 +291,11 @@ h2 { font: 800 19px/1.1 var(--display); text-transform: uppercase; letter-spacin
             </div>
           </div>
           <div class="group">
-            <span class="label">First season on roster</span>
+            <label class="label" for="conf">Conference (2026)</label>
+            <select class="field" id="conf"><option value="">All conferences</option></select>
+          </div>
+          <div class="group">
+            <span class="label">Season on roster</span>
             <div class="row">
               <select class="field" id="from" aria-label="From season"></select>
               <span class="note">to</span>
@@ -284,23 +303,16 @@ h2 { font: 800 19px/1.1 var(--display); text-transform: uppercase; letter-spacin
             </div>
           </div>
           <div class="group">
-            <span class="label" id="entryLabel">How he arrived</span>
+            <span class="label" id="entryLabel">Recruit type</span>
             <div class="seg" id="entry" role="group" aria-labelledby="entryLabel">
               <button type="button" data-v="" aria-pressed="true">All</button>
-              <button type="button" data-v="0" aria-pressed="false">From high school</button>
+              <button type="button" data-v="0" aria-pressed="false">High school</button>
               <button type="button" data-v="1" aria-pressed="false">Transfer</button>
             </div>
           </div>
           <div class="group">
             <div class="row" style="justify-content: space-between"><span class="label">Position group</span><button type="button" class="link" id="posAll">All</button></div>
             <div class="chips" id="pos"></div>
-          </div>
-          <div class="group">
-            <span class="label" id="viewLabel">Map style</span>
-            <div class="seg" id="view" role="group" aria-labelledby="viewLabel">
-              <button type="button" data-v="dots" aria-pressed="true">Hometown dots</button>
-              <button type="button" data-v="heat" aria-pressed="false">Heat</button>
-            </div>
           </div>
         </div>
       </aside>
@@ -341,7 +353,8 @@ h2 { font: 800 19px/1.1 var(--display); text-transform: uppercase; letter-spacin
   <div class="compare-head">
     <h2 id="compareTitle">Compare schools</h2>
     <span class="note" id="cmpHint">Hover or tap a state to compare raw counts</span>
-    <span class="ramp">Share of roster <i aria-hidden="true"></i> more</span>
+    <span class="note" id="cmpFilters"></span>
+    <span class="ramp" title="Each map is shaded in its school's color">Share of roster: less <i aria-hidden="true"></i> more</span>
     <button type="button" class="back" id="cmpClose"><span aria-hidden="true">←</span> Back to map</button>
   </div>
   <div class="cgrid" id="cgrid"></div>
@@ -440,7 +453,11 @@ h2 { font: 800 19px/1.1 var(--display); text-transform: uppercase; letter-spacin
   }
   // Point the dropdown's pointer at the middle of the Filters button and keep the dropdown inside the screen.
   function placeFilters() {
-    const p = $("filters"), b = $("filtersBtn").getBoundingClientRect(), r = p.getBoundingClientRect();
+    const p = $("filters"), b = $("filtersBtn").getBoundingClientRect();
+    p.style.right = "";
+    const edge = 12, r0 = p.getBoundingClientRect();
+    if (r0.left < edge) p.style.right = (r0.left - edge) + "px";   // nudge it back on screen
+    const r = p.getBoundingClientRect();
     p.style.setProperty("--caret-x", Math.round(b.left + b.width / 2 - r.left) + "px");
     p.style.setProperty("--pop-top", Math.round(b.bottom + 12) + "px");
   }
@@ -463,7 +480,7 @@ h2 { font: 800 19px/1.1 var(--display); text-transform: uppercase; letter-spacin
   new ResizeObserver(() => document.documentElement.style.setProperty("--bar-h", $("bar").getBoundingClientRect().height + "px")).observe($("bar"));
 
   // ---------- controls ----------
-  const state = { school: -1, conf: "", div: "", from: FIRST, to: LAST, entry: "", pos: new Set(data.pos.map((_, i) => i)), view: "dots", focusState: null, town: -1, player: -1, hs: null,
+  const state = { school: -1, conf: "", div: "", from: FIRST, to: LAST, entry: "", pos: new Set(data.pos.map((_, i) => i)), focusState: null, town: -1, player: -1, hs: null,
     allSchools: false, cmp: [-1, -1, -1, -1], cmpOpen: false };
   // allSchools: dot map shows every school instead of waiting for one to be picked
   // hs: { h: index into data.hs, st: hometown state abbr, or null for every state }
@@ -490,7 +507,7 @@ h2 { font: 800 19px/1.1 var(--display); text-transform: uppercase; letter-spacin
       setSeg(id, b.dataset.v); state[key] = b.dataset.v; update();
     });
   }
-  seg("div", "div"); seg("entry", "entry"); seg("view", "view");
+  seg("div", "div"); seg("entry", "entry");
   $("conf").addEventListener("change", (e) => { state.conf = e.target.value; update(); });
   $("from").addEventListener("change", (e) => { state.from = +e.target.value; if (state.from > state.to) { state.to = state.from; $("to").value = state.to; } update(); });
   $("to").addEventListener("change", (e) => { state.to = +e.target.value; if (state.to < state.from) { state.from = state.to; $("from").value = state.from; } update(); });
@@ -499,6 +516,7 @@ h2 { font: 800 19px/1.1 var(--display); text-transform: uppercase; letter-spacin
     if (!v) { setSchool(-1); return; }
     if (schoolIndex.has(v)) setSchool(schoolIndex.get(v));
   });
+  $("schoolClear").addEventListener("click", () => { state.allSchools = false; setSchool(-1); });
   $("resetAll").addEventListener("click", () => { resetFilters(); syncControls(); update(); });
   function setSchool(i) {
     state.school = i; state.town = -1; state.player = -1;
@@ -509,7 +527,7 @@ h2 { font: 800 19px/1.1 var(--display); text-transform: uppercase; letter-spacin
   function syncControls() {
     $("school").value = state.school >= 0 ? data.schools[state.school][0] : "";
     $("conf").value = state.conf; $("from").value = state.from; $("to").value = state.to;
-    setSeg("div", state.div); setSeg("entry", state.entry); setSeg("view", state.view); syncChips();
+    setSeg("div", state.div); setSeg("entry", state.entry); syncChips();
   }
   function resetFilters() {
     Object.assign(state, { school: -1, allSchools: false, conf: "", div: "", from: FIRST, to: LAST, entry: "", pos: new Set(data.pos.map((_, i) => i)) });
@@ -524,8 +542,8 @@ h2 { font: 800 19px/1.1 var(--display); text-transform: uppercase; letter-spacin
   const tally = new Uint16Array(T * S);
   function passes(k, forCompare) {
     if (!forCompare && state.school >= 0 && P.s[k] !== state.school) return false;
-    const f = P.f[k] + 2000;
-    if (f < state.from || f > state.to) return false;
+    // on a roster in at least one season of the range
+    if (P.f[k] + 2000 > state.to || P.l[k] + 2000 < state.from) return false;
     if (state.div !== "" && P.d[k] !== +state.div) return false;
     if (state.entry !== "" && P.x[k] !== +state.entry) return false;
     if (!state.pos.has(P.p[k])) return false;
@@ -692,8 +710,7 @@ h2 { font: 800 19px/1.1 var(--display); text-transform: uppercase; letter-spacin
     const pal = schoolPalette();
     visibleTowns(); updatePick();
     drawLabels(v);
-    if (state.view === "heat") drawHeat(v, zr, state.school >= 0 ? pal[state.school].fill : accent);
-    else drawDots(v, zr, pal);
+    drawDots(v, zr, pal);
     drawMarks(v, zr, fg);
     scheduleUrl();
   }
@@ -737,37 +754,6 @@ h2 { font: 800 19px/1.1 var(--display); text-transform: uppercase; letter-spacin
     if (state.hs) for (const t of hsTowns(state.hs).keys()) ring(t, 3, 2);
     ring(state.town, 4, 2.5);
   }
-  const heatCanvas = document.createElement("canvas");
-  function drawHeat({ k, ox, oy }, zr, accent) {
-    const { w, h } = size, s = 0.5;
-    heatCanvas.width = Math.max(1, Math.round(w * s)); heatCanvas.height = Math.max(1, Math.round(h * s));
-    const hc = heatCanvas.getContext("2d");
-    const rad = Math.max(5, 14 * zr) * s;
-    const unit = Math.min(.35, 4 / Math.max(4, Math.sqrt(maxCount) * 3));
-    for (let i = 0; i < T; i++) {
-      if (!counts[i] || outside[i]) continue;
-      const x = (tx[i] * k + ox) * s, y = (ty[i] * k + oy) * s;
-      if (x < -rad || y < -rad || x > heatCanvas.width + rad || y > heatCanvas.height + rad) continue;
-      const g = hc.createRadialGradient(x, y, 0, x, y, rad);
-      const a = Math.min(1, unit * Math.sqrt(counts[i]));
-      g.addColorStop(0, `rgba(0,0,0,${a})`); g.addColorStop(1, "rgba(0,0,0,0)");
-      hc.fillStyle = g; hc.fillRect(x - rad, y - rad, rad * 2, rad * 2);
-    }
-    const img = hc.getImageData(0, 0, heatCanvas.width, heatCanvas.height), d = img.data;
-    const c = d3.color(accent).rgb(), dark = d3.color(css("--fg")).rgb();
-    for (let p = 0; p < d.length; p += 4) {
-      const a = d[p + 3] / 255; if (!a) continue;
-      const t = Math.min(1, a * 1.15);
-      d[p] = c.r + (dark.r - c.r) * Math.max(0, t - .65) * 1.6;
-      d[p + 1] = c.g + (dark.g - c.g) * Math.max(0, t - .65) * 1.6;
-      d[p + 2] = c.b + (dark.b - c.b) * Math.max(0, t - .65) * 1.6;
-      d[p + 3] = Math.min(235, 40 + t * 215);
-    }
-    hc.putImageData(img, 0, 0);
-    ctx.imageSmoothingEnabled = true;
-    ctx.drawImage(heatCanvas, 0, 0, size.w, size.h);
-  }
-
   // ---------- zoom + picking ----------
   const zoom = d3.zoom().clickDistance(5)
     .on("zoom", (e) => { transform = e.transform; if (e.sourceEvent) userMoved = true; $("tip").hidden = true; draw(); });
@@ -779,7 +765,7 @@ h2 { font: 800 19px/1.1 var(--display); text-transform: uppercase; letter-spacin
     const { k, ox, oy } = view(), zr = Math.sqrt(k / K_US);
     let best = -1, bd = Infinity;
     for (let i = 0; i < T; i++) {
-      if (!(state.view === "heat" ? counts[i] && !outside[i] : shown(i))) continue;
+      if (!shown(i)) continue;
       const dx = tx[i] * k + ox - mx, dy = ty[i] * k + oy - my;
       if (Math.abs(dx) > 60 || Math.abs(dy) > 60) continue;
       const d = Math.hypot(dx, dy), r = Math.max(6, dotR(counts[i], zr) + 2);
@@ -840,7 +826,7 @@ h2 { font: 800 19px/1.1 var(--display); text-transform: uppercase; letter-spacin
     const schoolsIn = new Set(sel.map((k) => P.s[k]));
     const scope = state.school >= 0 ? data.schools[state.school][0] : state.conf !== "" ? data.confs[+state.conf] : "All D1 schools";
     const years = state.from === state.to ? state.from : state.from + "–" + state.to;
-    $("sub").textContent = `${fmt(sel.length)} players from ${fmt(townSet.size)} hometowns · ${scope} · joined ${years}`;
+    $("sub").textContent = `${fmt(sel.length)} players from ${fmt(townSet.size)} hometowns · ${scope} · on rosters ${years}`;
 
     const hiddenNote = (what) => `<span class="note">${what} <button type="button" class="link" data-clear="filters">Clear filters</button></span>`;
     const selection = [];
@@ -889,7 +875,7 @@ h2 { font: 800 19px/1.1 var(--display); text-transform: uppercase; letter-spacin
     }
     out.push(...selection);
 
-    out.push(`<div class="group${selection.length ? " divider" : ""}"><span class="label">${esc(scope)} · joined ${years}</span>
+    out.push(`<div class="group${selection.length ? " divider" : ""}"><span class="label">${esc(scope)} · on rosters ${years}</span>
       <div class="big"><div><b>${fmt(sel.length)}</b><small>players</small></div><div><b>${fmt(townSet.size)}</b><small>hometowns</small></div>
       ${state.school < 0 ? `<div><b>${fmt(schoolsIn.size)}</b><small>schools</small></div>` : ""}</div>
       <span class="note">${fmt(sel.length - placed)} without a usable hometown.</span></div>`);
@@ -1063,7 +1049,6 @@ h2 { font: 800 19px/1.1 var(--display); text-transform: uppercase; letter-spacin
     if (state.to !== LAST) q.set("to", state.to);
     if (state.entry !== "") q.set("arrived", state.entry === "1" ? "transfer" : "hs");
     if (state.pos.size !== data.pos.length) q.set("pos", [...state.pos].sort((a, b) => a - b).map((i) => data.pos[i]).join(","));
-    if (state.view !== "dots") q.set("view", state.view);
     if (state.focusState) q.set("state", state.focusState);
     if (state.player >= 0) q.set("player", names[state.player] + "~" + data.schools[P.s[state.player]][0]);
     else if (state.town >= 0) q.set("town", towns[state.town][2]);
@@ -1081,7 +1066,7 @@ h2 { font: 800 19px/1.1 var(--display); text-transform: uppercase; letter-spacin
   // Reads the hash into `state`; unknown or stale values are skipped. Returns the saved map view [lon, lat, zoom], if any.
   function readUrl() {
     const q = new URLSearchParams(location.hash.slice(1));
-    resetFilters(); Object.assign(state, { view: "dots", focusState: null, town: -1, player: -1, hs: null, cmpOpen: false });
+    resetFilters(); Object.assign(state, { focusState: null, town: -1, player: -1, hs: null, cmpOpen: false });
     const v = (key) => (q.get(key) || "").trim();
     if (v("school") && schoolIndex.has(v("school").toLowerCase())) state.school = schoolIndex.get(v("school").toLowerCase());
     else if (v("school").toLowerCase() === "all") state.allSchools = true;
@@ -1096,7 +1081,6 @@ h2 { font: 800 19px/1.1 var(--display); text-transform: uppercase; letter-spacin
     if (state.from > state.to) [state.from, state.to] = [state.to, state.from];
     if (v("arrived") === "transfer") state.entry = "1"; else if (v("arrived") === "hs") state.entry = "0";
     if (v("pos")) { const s = new Set(v("pos").split(",").map((p) => data.pos.indexOf(p.trim().toUpperCase())).filter((i) => i >= 0)); if (s.size) state.pos = s; }
-    if (v("view") === "heat") state.view = "heat";
     if (ABBR_STATE[v("state").toUpperCase()]) state.focusState = v("state").toUpperCase();
     if (townIndex.has(v("town"))) state.town = townIndex.get(v("town"));
     if (v("player")) {
@@ -1131,13 +1115,23 @@ h2 { font: 800 19px/1.1 var(--display); text-transform: uppercase; letter-spacin
 
   // ---------- "pick a school" prompt ----------
   function updatePick() {
-    $("pick").hidden = !(state.view === "dots" && !dotsForAll() && !state.cmpOpen && !hasSelection());
+    $("pick").hidden = !(!dotsForAll() && !state.cmpOpen && !hasSelection());
   }
   $("pickSchool").addEventListener("input", (e) => {
     const v = e.target.value.trim().toLowerCase();
     if (schoolIndex.has(v)) { e.target.value = ""; setSchool(schoolIndex.get(v)); }
   });
   $("showAll").addEventListener("click", () => { state.allSchools = true; update(); });
+  // The chip in the title card says what the dot map is showing; clicking it clears the map back to empty.
+  function updateScope() {
+    const on = state.school >= 0 || state.allSchools;
+    $("scopeChip").hidden = !on;
+    if (!on) return;
+    $("scopeName").innerHTML = state.school >= 0 ? `${swatch(state.school)}${esc(data.schools[state.school][0])}` : "All schools";
+    $("scopeChip").setAttribute("aria-label", `Clear ${state.school >= 0 ? data.schools[state.school][0] : "all schools"} from the map`);
+    $("scopeChip").title = "Clear the map";
+  }
+  $("scopeChip").addEventListener("click", () => { state.allSchools = false; setSchool(-1); });
 
   // ---------- compare: four small U.S. heat maps, shaded by share of each school's roster ----------
   // Every box uses the same scale, so a dark patch means the same share of the roster in all four.
@@ -1151,11 +1145,12 @@ h2 { font: 800 19px/1.1 var(--display); text-transform: uppercase; letter-spacin
     el.innerHTML = `<div class="cell-head"><label class="vh" for="cmp${c}">School ${c + 1}</label><span class="swc"></span>
         <input class="field" id="cmp${c}" list="schoolList" placeholder="Pick school ${c + 1}" autocomplete="off"><span class="n"></span></div>
       <div class="cell-map"><canvas></canvas><div class="empty">No school picked</div></div>
-      <div class="cell-foot">&nbsp;</div>`;
+      <div class="cell-foot">&nbsp;</div>
+      <div class="cell-rank" hidden></div>`;
     $("cgrid").appendChild(el);
     const cv = el.querySelector("canvas");
     const cell = { el, input: el.querySelector("input"), n: el.querySelector(".n"), sw: el.querySelector(".swc"), cv, ctx: cv.getContext("2d"),
-      empty: el.querySelector(".empty"), foot: el.querySelector(".cell-foot"), heat: document.createElement("canvas"), heatKey: "" };
+      empty: el.querySelector(".empty"), foot: el.querySelector(".cell-foot"), rank: el.querySelector(".cell-rank"), all: false, heat: document.createElement("canvas"), heatKey: "" };
     cmpCells.push(cell);
     cell.input.addEventListener("input", () => {
       const v = cell.input.value.trim().toLowerCase();
@@ -1165,6 +1160,14 @@ h2 { font: 800 19px/1.1 var(--display); text-transform: uppercase; letter-spacin
     cv.addEventListener("pointermove", (e) => { if (e.pointerType === "touch") return; const s = cmpStateAt(cell, e); if (s !== cmpHover) { cmpHover = s; drawCompare(); } });
     cv.addEventListener("pointerleave", () => { if (cmpHover) { cmpHover = null; drawCompare(); } });
     cv.addEventListener("click", (e) => { const s = cmpStateAt(cell, e); cmpPin = s && s !== cmpPin ? s : null; drawCompare(); });
+    // the ranking list works like the map: hover a row to light up that state everywhere, click to pin it
+    cell.rank.addEventListener("pointerover", (e) => { const li = e.target.closest("li[data-st]"); if (li && li.dataset.st !== cmpHover) { cmpHover = li.dataset.st; drawCompare(); } });
+    cell.rank.addEventListener("pointerleave", () => { if (cmpHover) { cmpHover = null; drawCompare(); } });
+    cell.rank.addEventListener("click", (e) => {
+      if (e.target.closest("[data-more]")) { cell.all = !cell.all; renderRanks(); drawCompare(); return; }
+      const li = e.target.closest("li[data-st]"); if (!li) return;
+      cmpPin = li.dataset.st !== cmpPin ? li.dataset.st : null; drawCompare();
+    });
   }
   function cmpStateAt(cell, e) {
     const r = cell.cv.getBoundingClientRect(), { dpr } = cmpSize;
@@ -1183,9 +1186,28 @@ h2 { font: 800 19px/1.1 var(--display); text-transform: uppercase; letter-spacin
         if (!ABBR_STATE[tState[t]] || !Number.isFinite(cmpX ? cmpX[t] : 0)) { abroad++; continue; }
         tw.set(t, (tw.get(t) || 0) + 1); byState.set(tState[t], (byState.get(tState[t]) || 0) + 1);
       }
-      return { si, total, towns: tw, byState, abroad };
+      // rank states by players (ties share a rank: 1, 2, 2, 4)
+      const ranked = [...byState.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+      const rankOf = new Map();
+      ranked.forEach(([st, n], i) => rankOf.set(st, i && n === ranked[i - 1][1] ? rankOf.get(ranked[i - 1][0]) : i + 1));
+      return { si, total, towns: tw, byState, abroad, ranked, rankOf };
     });
     for (const c of cmpCells) c.heatKey = "";
+    renderRanks();
+  }
+  function renderRanks() {
+    cmpCells.forEach((cell, i) => {
+      const d = cmpData[i];
+      cell.rank.hidden = !d;
+      if (!d) return;
+      if (!d.ranked.length) { cell.rank.innerHTML = `<span class="rank-empty">No players from U.S. states match the current filters.</span>`; return; }
+      const color = schoolPalette()[d.si].fill, max = d.ranked[0][1];
+      const rows = cell.all ? d.ranked : d.ranked.slice(0, 10);
+      cell.rank.innerHTML = `<div class="rh"><span class="label">State rankings · ${d.ranked.length} state${d.ranked.length === 1 ? "" : "s"}</span>
+        ${d.ranked.length > 10 ? `<button type="button" class="link" data-more="1">${cell.all ? "Top 10" : `All ${d.ranked.length} states`}</button>` : ""}</div>
+        <ol class="rank">${rows.map(([st, n]) => `<li data-st="${st}"><span class="r">${d.rankOf.get(st)}</span><span class="nm">${esc(ABBR_STATE[st])}</span>
+          <span class="v"><b>${fmt(n)}</b> · ${pct(n / d.total)}</span><span class="b"><span style="width:${(n / max * 100).toFixed(1)}%;background:${color}"></span></span></li>`).join("")}</ol>`;
+    });
   }
   // Size the canvases and fit the U.S. (with Alaska and Hawaii insets) into them.
   function layoutCompare() {
@@ -1202,7 +1224,8 @@ h2 { font: 800 19px/1.1 var(--display); text-transform: uppercase; letter-spacin
     computeCompare(); drawCompare();
   }
   function cmpHeat(cell, d) {
-    const key = cmpSize.w + "x" + cmpSize.h + ":" + d.si + ":" + d.total + ":" + css("--accent");
+    const color = schoolPalette()[d.si].fill;   // the school's primary color (secondary if the primary vanishes into the map)
+    const key = cmpSize.w + "x" + cmpSize.h + ":" + d.si + ":" + d.total + ":" + color;
     if (cell.heatKey === key) return cell.heat;
     const s = .5, hw = Math.max(1, Math.round(cmpSize.w * s)), hh = Math.max(1, Math.round(cmpSize.h * s));
     cell.heat.width = hw; cell.heat.height = hh;
@@ -1216,10 +1239,10 @@ h2 { font: 800 19px/1.1 var(--display); text-transform: uppercase; letter-spacin
       hc.fillStyle = g; hc.fillRect(x - rad, y - rad, rad * 2, rad * 2);
     }
     const img = hc.getImageData(0, 0, hw, hh), px = img.data;
-    const c = d3.color(css("--accent")).rgb(), dark = d3.color(css("--fg")).rgb();
+    const c = d3.color(color).rgb(), dark = d3.color(color).darker(1.4).rgb();
     for (let p = 0; p < px.length; p += 4) {
       const a = px[p + 3] / 255; if (!a) continue;
-      const t = Math.min(1, a * 1.15), m = Math.max(0, t - .6) * 1.5;
+      const t = Math.min(1, a * 1.15), m = Math.max(0, t - .65) * 1.7;   // light tint → full color → deeper shade at the biggest share
       px[p] = c.r + (dark.r - c.r) * m; px[p + 1] = c.g + (dark.g - c.g) * m; px[p + 2] = c.b + (dark.b - c.b) * m;
       px[p + 3] = Math.min(240, 30 + t * 225);
     }
@@ -1245,11 +1268,24 @@ h2 { font: 800 19px/1.1 var(--display); text-transform: uppercase; letter-spacin
       cell.n.textContent = d ? `${fmt(d.total)} players` : "";
       let foot = "&nbsp;";
       if (d && !d.total) foot = "No players match the current filters.";
-      else if (d && focus) { const n = d.byState.get(focus) || 0; foot = `<b>${esc(ABBR_STATE[focus])}</b>: ${fmt(n)} player${n === 1 ? "" : "s"} · ${pct(n / d.total)} of roster`; }
-      else if (d) foot = "Top: " + top(d.byState, 3).map(([s, n]) => `<b>${s}</b> ${pct(n / d.total)}`).join(" · ") + (d.abroad ? ` · ${fmt(d.abroad)} not on this map` : "");
+      else if (d && focus) {
+        const n = d.byState.get(focus) || 0;
+        foot = `<b>${esc(ABBR_STATE[focus])}</b> · ` + (n ? `#${d.rankOf.get(focus)} of ${d.ranked.length} states · ${fmt(n)} player${n === 1 ? "" : "s"} · ${pct(n / d.total)} of roster` : "no players");
+      }
+      else if (d) foot = `Players from ${d.ranked.length} state${d.ranked.length === 1 ? "" : "s"}` + (d.abroad ? ` · ${fmt(d.abroad)} not on this map` : "");
       cell.foot.innerHTML = foot;
+      cell.rank.querySelectorAll("li[data-st]").forEach((li) => li.classList.toggle("on", li.dataset.st === focus));
     });
     $("cmpHint").innerHTML = cmpPin ? `<b>${esc(ABBR_STATE[cmpPin])}</b> pinned · tap it again to clear` : "Hover or tap a state to compare raw counts";
+  }
+  // The toolbar is hidden here, so say when map filters are still narrowing the players.
+  function filterSummary() {
+    const parts = [];
+    if (state.div !== "") parts.push(data.divs[+state.div]);
+    if (state.from !== FIRST || state.to !== LAST) parts.push(state.from === state.to ? `${state.from}` : `${state.from}–${state.to}`);
+    if (state.entry !== "") parts.push(state.entry === "1" ? "transfers" : "high school recruits");
+    if (state.pos.size !== data.pos.length) parts.push([...state.pos].sort((a, b) => a - b).map((i) => POS_LABEL[data.pos[i]] || data.pos[i]).join(", "));
+    return parts.length ? `Only ${esc(parts.join(" · "))}, from your map filters` : "";
   }
   function refreshCompare() { if (!state.cmpOpen) return; computeCompare(); drawCompare(); scheduleUrl(); }
   function syncCompareInputs() { cmpCells.forEach((c, i) => { c.input.value = state.cmp[i] >= 0 ? data.schools[state.cmp[i]][0] : ""; }); }
@@ -1257,7 +1293,9 @@ h2 { font: 800 19px/1.1 var(--display); text-transform: uppercase; letter-spacin
     if (open && state.cmp.every((x) => x < 0) && state.school >= 0) state.cmp[0] = state.school;   // start from the school you're looking at
     state.cmpOpen = open;
     $("compare").hidden = !open; $("compareBtn").setAttribute("aria-pressed", open);
-    $("detailsBtn").hidden = open;   // its panel belongs to the main map
+    document.body.classList.toggle("comparing", open);   // the comparison gets the page to itself: no toolbar
+    if (open) setPanel("filters", false);
+    $("cmpFilters").innerHTML = filterSummary();
     if (open) { setPanel("details", false); syncCompareInputs(); requestAnimationFrame(layoutCompare); }
     updatePick(); scheduleUrl();
   }
@@ -1266,14 +1304,14 @@ h2 { font: 800 19px/1.1 var(--display); text-transform: uppercase; letter-spacin
   new ResizeObserver(() => { if (state.cmpOpen) layoutCompare(); }).observe(cmpCells[0].cv.parentElement);
 
   function update() {
-    compute(); draw(); renderFindings();
+    compute(); draw(); renderFindings(); updateScope();
     if (state.cmpOpen) refreshCompare();
     const n = activeFilters();
     $("fcount").hidden = !n; $("fcount").textContent = n;
     $("filtersBtn").setAttribute("aria-label", n ? `Filters, ${n} active` : "Filters");
     $("colorKey").innerHTML = state.school >= 0
       ? `${swatch(state.school)}${esc(data.schools[state.school][0])} colors`
-      : state.view === "dots" && !state.allSchools ? "Pick a school to fill in the map"
+      : !state.allSchools ? "Pick a school to fill in the map"
       : "Dot color: the school with the most players from that town";
   }
 
