@@ -2089,7 +2089,7 @@ Alabama,Lane Whisenhunt,LB,"Vestavia Hills, Ala.",Vestavia Hills,,2023,2026,4,20
 Alabama,Mac Smith,OL,"Birmingham, Ala.",Mountain Brook,,2023,2026,4,2023 2024 2025 2026,FR,FBS,SEC,Birmingham,AL,USA,33.527174,-86.797036,census,city
 Alabama,Malik Benson,WR,"Lansing, Kan.",Lansing,Hutchinson C.C.,2023,2023,1,2023,JR,FBS,SEC,Lansing,KS,USA,39.242934,-94.897884,census,city
 Alabama,Miguel Camboia,WR,"Woodstock, Ontario",Mobile Christian,,2023,2024,2,2023 2024,FR,FBS,SEC,Woodstock,ON,Canada,43.1301111,-80.7562977,nominatim,city
-Alabama,Miles McVay,OL,"East Saint Louis, Ill.",East Saint Louis,,2023,2024,2,2023 2024,FR,FBS,SEC,East Saint Louis,IL,USA,38.6244952,-90.1509428,usgs,city
+Alabama,Miles McVay,OL,"East Saint Louis, Ill.",East Saint Louis,,2023,2024,2,2023 2024,FR,FBS,SEC,East St. Louis,IL,USA,38.616361,-90.130528,spelling_fix,city
 Alabama,Noland Asberry,LB,"Mobile, Ala.",,Davidson,2023,2024,2,2023 2024,SO,FBS,SEC,Mobile,AL,USA,30.668246,-88.107853,census,city
 Alabama,Olaus Alinen,OL,"Pori, Finland",The Loomis Chaffee School (Conn.),,2023,2024,2,2023 2024,FR,FBS,SEC,Pori,,Finland,61.4866126,21.7972071,nominatim,city
 Alabama,Qua Russaw,LB,"Montgomery, Ala.",Carver,,2023,2024,2,2023 2024,FR,FBS,SEC,Montgomery,AL,USA,32.348503,-86.267307,census,city
@@ -2521,7 +2521,7 @@ Alabama A&M,Damian Lopez,OL,"San Pedro, Calif.",,Univ. of Southern California,20
 Alabama A&M,Darin Turner,Wide Receiver WR,"Memphis, Tenn.",,Arkansas,2022,2023,2,2022 2023,SO,FCS,SWAC,Memphis,TN,USA,35.109164,-89.968511,census,city
 Alabama A&M,De'Gabriel Floyd,S,"Los Angeles, Calif.",,Univ. of Texas,2022,2022,1,2022,SO,FCS,SWAC,Los Angeles,CA,USA,34.019394,-118.410825,census,city
 Alabama A&M,Demetrie Morgan,Defensive End DE,"Fort Myers, Fla.",Dunbar HS,,2022,2023,2,2022 2023,FR,FCS,SWAC,Fort Myers,FL,USA,26.61982,-81.831673,census,city
-Alabama A&M,Dennis Fisher,S,"For Pierce, Fla.",,Iowa Western College,2022,2022,1,2022,JR,FCS,SWAC,For Pierce,FL,USA,27.4199299,-80.3587753,nominatim,city
+Alabama A&M,Dennis Fisher,S,"For Pierce, Fla.",,Iowa Western College,2022,2022,1,2022,JR,FCS,SWAC,Fort Pierce,FL,USA,27.426112,-80.342488,spelling_fix,city
 Alabama A&M,Diata Burns,CB,"Columbia, Md.",,Bowling Green State Univ.,2022,2022,1,2022,SR,FCS,SWAC,Columbia,MD,USA,39.201146,-76.85905,census,city
 Alabama A&M,Donivan Wright,Wide Receiver WR,"Indianapolis, Ind.",,Eastern Michigan,2022,2025,4,2022 2023 2024 2025,FR,FCS,SWAC,Indianapolis,IN,USA,39.776664,-86.145935,census,city
 Alabama A&M,Donovan Eaglin,Running Back RB,"Houston, Texas",,Michigan State,2022,2024,3,2022 2023 2024,SO,FCS,SWAC,Houston,TX,USA,29.785743,-95.388806,census,city
@@ -3230,7 +3230,7 @@ Alabama State,Phillip McLean,OL,"Myrtle Beach, S.C.",Carolina Forest HS,,2024,20
 Alabama State,Rashawn Watson,DT,"West Palm Beach, Fla.",Chaminade Madonna College Prep,,2024,2026,3,2024 2025 2026,FR,FCS,SWAC,West Palm Beach,FL,USA,26.745114,-80.127038,census,city
 Alabama State,Rico Dozier,LB,"Abbeville, Ala.",,Arkansas-Pine Bluff,2024,2024,1,2024,SR,FCS,SWAC,Abbeville,AL,USA,31.564706,-85.259121,census,city
 Alabama State,Ta'Shaun Sims,S,"Chipley, Fla.",Chipley HS,,2024,2026,3,2024 2025 2026,FR,FCS,SWAC,Chipley,FL,USA,30.775644,-85.54005,census,city
-Alabama State,Terence Johnson Jr,DB,"Pompano Bch., Fla.",Cardinal Gibbons HS,,2024,2025,2,2024 2025,FR,FCS,SWAC,Pompano Bch.,FL,USA,26.2378597,-80.1247667,nominatim,city
+Alabama State,Terence Johnson Jr,DB,"Pompano Bch., Fla.",Cardinal Gibbons HS,,2024,2025,2,2024 2025,FR,FCS,SWAC,Pompano Beach,FL,USA,26.241622,-80.133851,spelling_fix,city
 Alabama State,Terry Wilson,WR,"Powder Springs, Ga.",McEachern HS,,2024,2024,1,2024,FR,FCS,SWAC,Powder Springs,GA,USA,33.86435,-84.681216,census,city
 Alabama State,Tre Smith,WR,"Iowa Colony, Texas",Manvel HS,,2024,2025,2,2024 2025,FR,FCS,SWAC,Iowa Colony,TX,USA,29.441093,-95.423754,census,city
 Alabama State,Trej Lett,DT,"Tanner, Ala.",Tanner HS,,2024,2026,3,2024 2025 2026,FR,FCS,SWAC,Tanner,AL,USA,34.7314787,-86.9705632,usgs,city
@@ -6871,7 +6871,7 @@ Arkansas State,Noah Smith,OL OL,"Locust Fork, Ala.",Locust Fork HS,,2021,2025,5,
 Arkansas State,Omari Walker,WR WR,"McKinney, Texas",McKinney HS,,2021,2022,2,2021 2022,FR,FBS,Sun Belt,McKinney,TX,USA,33.201125,-96.664161,census,city
 Arkansas State,Perrish Cox III,DB DB,"Lacy Lakeview, Texas",Connally HS,,2021,2021,1,2021,FR,FBS,Sun Belt,Lacy Lakeview,TX,USA,31.631213,-97.105078,census,city
 Arkansas State,Quay Mays,DL DL,"Bradenton, Fla.",,West Virginia,2021,2021,1,2021,R-JR,FBS,Sun Belt,Bradenton,FL,USA,27.489798,-82.576804,census,city
-Arkansas State,Quinton Lee,DE DE,"Lee Summit, Mo.",,Northeastern Oklahoma A&M College,2021,2021,1,2021,R-JR,FBS,Sun Belt,Lee Summit,MO,USA,38.9107156,-94.3821295,nominatim,city
+Arkansas State,Quinton Lee,DE DE,"Lee Summit, Mo.",,Northeastern Oklahoma A&M College,2021,2021,1,2021,R-JR,FBS,Sun Belt,Lee's Summit,MO,USA,38.921601,-94.384763,spelling_fix,city
 Arkansas State,Reagan Ealy,WR WR,"Plant City, Fla.",Plant City HS,,2021,2024,4,2021 2022 2023 2024,FR,FBS,Sun Belt,Plant City,FL,USA,28.015355,-82.117805,census,city
 Arkansas State,Reed Gautreaux,TE TE,"Bauxite, Ark.",Bauxite HS,,2021,2021,1,2021,FR,FBS,Sun Belt,Bauxite,AR,USA,34.554483,-92.505794,census,city
 Arkansas State,Robert Holmes,OL OL,"Jupiter, Fla.",,Austin Peay,2021,2022,2,2021 2022,R-JR,FBS,Sun Belt,Jupiter,FL,USA,26.918551,-80.11694,census,city
@@ -7527,7 +7527,7 @@ Arkansas-Pine Bluff,Jaylen White,LINEBACKER LB,"Torrance, CA / South HS",,,2023,
 Arkansas-Pine Bluff,Jeremy Baker,PUNTER WR,"Oakland, CA / Santa Rosa JC",,,2023,2024,2,2023 2024,JR,FCS,SWAC,Oakland,CA,USA,37.769846,-122.22569,census,city
 Arkansas-Pine Bluff,Kam Bizor,DEFENSIVE END DE,"Houston, TX / C.E. King HS",,,2023,2023,1,2023,FR,FCS,SWAC,Houston,TX,USA,29.785743,-95.388806,census,city
 Arkansas-Pine Bluff,Khalil Arnold,DEFENSIVE END DE,"Lovejoy, GA / Eastern Kentucky University",,,2023,2024,2,2023 2024,R-SO,FCS,SWAC,Lovejoy,GA,USA,33.443681,-84.318863,census,city
-Arkansas-Pine Bluff,Khiry Morrison,LINEBACKER LB,"St. Francesville, LA",,,2023,2023,1,2023,R-JR,FCS,SWAC,St. Francesville,LA,USA,30.7848379,-91.3792424,nominatim,city
+Arkansas-Pine Bluff,Khiry Morrison,LINEBACKER LB,"St. Francesville, LA",,,2023,2023,1,2023,R-JR,FCS,SWAC,St. Francisville,LA,USA,30.784234,-91.376417,spelling_fix,city
 Arkansas-Pine Bluff,Marcus Jones Jr.,LINEBACKER LB,"Sacramento, CA / Sacramento City College",,,2023,2024,2,2023 2024,JR,FCS,SWAC,Sacramento,CA,USA,38.567694,-121.468161,census,city
 Arkansas-Pine Bluff,Marcus Prude,OFFENSIVE LINE OL,"Blytheville, AR / Blytheville HS",,,2023,2023,1,2023,FR,FCS,SWAC,Blytheville,AR,USA,35.934066,-89.905133,census,city
 Arkansas-Pine Bluff,Martavious Miller,DEFENSIVE BACK DB,"Stamps, AR / Lafayette County HS",,,2023,2024,2,2023 2024,SO,FCS,SWAC,Stamps,AR,USA,33.354959,-93.497879,census,city
@@ -8253,7 +8253,7 @@ Army,Brandon Wraalstad,OL,"Oconomowoc, Wis.",Oconomowoc,,2023,2026,3,2023 2024 2
 Army,Brian Dyer,TE,"Plano, Texas",Plano East,,2023,2026,4,2023 2024 2025 2026,FR,FBS,American,Plano,TX,USA,33.050769,-96.747944,census,city
 Army,Broden Sobolewski,OL,"Plantation, Fla.",St Thomas Aquinas,,2023,2023,1,2023,FR,FBS,American,Plantation,FL,USA,26.125573,-80.261818,census,city
 Army,Brody Eaton,TE,"Malvern, Pa.",Conestoga,,2023,2023,1,2023,FR,FBS,American,Malvern,PA,USA,40.033147,-75.515363,census,city
-Army,CJ Bowens,OLB,"Port Saint Lucie, Fla.",The Benjamin School (USMAPS),,2023,2025,2,2023 2025,FR,FBS,American,Port Saint Lucie,FL,USA,27.2939333,-80.3503283,usgs,city
+Army,CJ Bowens,OLB,"Port Saint Lucie, Fla.",The Benjamin School (USMAPS),,2023,2025,2,2023 2025,FR,FBS,American,Port St. Lucie,FL,USA,27.280554,-80.388261,spelling_fix,city
 Army,Caden Brungard,NB,"Scranton, Pa.",Western Wayne (USMAPS),,2023,2026,4,2023 2024 2025 2026,FR,FBS,American,Scranton,PA,USA,41.404178,-75.665908,census,city
 Army,Cale Hellums,QB,"Tomball, Texas",Tomball (USMAPS),,2023,2026,4,2023 2024 2025 2026,FR,FBS,American,Tomball,TX,USA,30.095078,-95.619678,census,city
 Army,Carlos Alvarado,K,"The Woodlands, Texas",Tomball,,2023,2023,1,2023,FR,FBS,American,The Woodlands,TX,USA,30.172562,-95.509813,census,city
@@ -17491,7 +17491,7 @@ Central Arkansas,Manny Smith,Wide Receiver WR,"Conway, Ark.",,,2022,2026,5,2022 
 Central Arkansas,Mark Welch,OL,"Camden, Ark.",Camden Fairview HS,,2022,2022,1,2022,FR,FCS,UAC,Camden,AR,USA,33.567672,-92.849064,census,city
 Central Arkansas,Nick Solieau,OL,"Jessieville, Ark.",Jessieville HS,,2022,2022,1,2022,FR,FCS,UAC,Jessieville,AR,USA,34.7012029,-93.0615688,usgs,city
 Central Arkansas,Nnamdi Adim-Madumere,TE,"Fort Worth, Texas",,Minnesota,2022,2023,2,2022 2023,SO,FCS,UAC,Fort Worth,TX,USA,32.781954,-97.348573,census,city
-Central Arkansas,Noah Mitchell,LB,"Leaksville, Miss.",,Pearl River CC,2022,2022,1,2022,JR,FCS,UAC,Leaksville,MS,USA,31.140182,-88.551688,nominatim,city
+Central Arkansas,Noah Mitchell,LB,"Leaksville, Miss.",,Pearl River CC,2022,2022,1,2022,JR,FCS,UAC,Leakesville,MS,USA,31.149202,-88.555853,spelling_fix,city
 Central Arkansas,Samuel Horton,Defensive End DE,"Gadsden, Ala.",,,2022,2026,5,2022 2023 2024 2025 2026,FR,FCS,UAC,Gadsden,AL,USA,34.006597,-86.016078,census,city
 Central Arkansas,Shuntori Montue,Defensive Back DB,"Ashdown, Ark.",Ashdown HS,,2022,2025,4,2022 2023 2024 2025,R-FR,FCS,UAC,Ashdown,AR,USA,33.674529,-94.126627,census,city
 Central Arkansas,Stephon McGlaun,DL,"Tupelo, Miss.",,Northeast CC,2022,2023,2,2022 2023,SO,FCS,UAC,Tupelo,MS,USA,34.270604,-88.732455,census,city
@@ -17876,7 +17876,7 @@ Central Connecticut,Shayne Manson,DL,"Windsor, CT",Windsor,,2018,2023,4,2018 202
 Central Connecticut,Tri-Marea Charles,RB,"Cocoa, FL",Cocoa,,2018,2018,1,2018,FR,FCS,NEC,Cocoa,FL,USA,28.376643,-80.763306,census,city
 Central Connecticut,Tyler Boatwright,CB,"Hillsborough, NJ",Hillsborough,,2018,2023,5,2018 2019 2021 2022 2023,FR,FCS,NEC,Hillsborough,NJ,USA,40.508074,-74.65288,census,city
 Central Connecticut,Tyler Kopp,LB,"Naples, FL",,Stony Brook,2018,2019,2,2018 2019,JR,FCS,NEC,Naples,FL,USA,26.150485,-81.795299,census,city
-Central Connecticut,Tyler Smith,LB,"Huntington Valley, PA",Archbishop Wood,,2018,2021,3,2018 2019 2021,FR,FCS,NEC,Huntington Valley,PA,USA,40.2307529,-75.1388066,nominatim,city
+Central Connecticut,Tyler Smith,LB,"Huntington Valley, PA",Archbishop Wood,,2018,2021,3,2018 2019 2021,FR,FCS,NEC,Huntingdon Valley,PA,USA,40.1226101,-75.0635049,spelling_fix,city
 Central Connecticut,Vincent Dyer,TE,"Westbrook, CT",Old Saybrook-Westbrook,,2018,2019,2,2018 2019,FR,FCS,NEC,Westbrook,CT,USA,41.303695,-72.478017,census,city
 Central Connecticut,Wesley Midy,DB,"Stamford, CT",The Hill School,,2018,2019,2,2018 2019,FR,FCS,NEC,Stamford,CT,USA,41.079611,-73.54608,census,city
 Central Connecticut,Aaron Winchester,QB,"Lawrenceville, GA",,Georgia State,2019,2019,1,2019,SR,FCS,NEC,Lawrenceville,GA,USA,33.952875,-83.992231,census,city
@@ -18150,7 +18150,7 @@ Central Connecticut,James Mankaka,CB,"Rochester, MN",Rochester Mayo (Western Ill
 Central Connecticut,Jarrett Serate,DL,"Staten Island, NY",Curtis,,2026,2026,1,2026,1,FCS,NEC,Staten Island,NY,USA,40.662712,-73.938677,census,city
 Central Connecticut,Javez Caldwell,DL,"Montgomery, AL",Caisius (Gaskill Prep),,2026,2026,1,2026,1,FCS,NEC,Montgomery,AL,USA,32.348503,-86.267307,census,city
 Central Connecticut,Javon Tyler,OL,"Newark, NJ",East Side,,2026,2026,1,2026,1,FCS,NEC,Newark,NJ,USA,40.72422,-74.172574,census,city
-Central Connecticut,Jaylen Mack,RB,"Lake Saint Louis, MO",Grandview,,2026,2026,1,2026,1,FCS,NEC,Lake Saint Louis,MO,USA,38.797552,-90.7856848,usgs,city
+Central Connecticut,Jaylen Mack,RB,"Lake Saint Louis, MO",Grandview,,2026,2026,1,2026,1,FCS,NEC,Lake St. Louis,MO,USA,38.77989,-90.785586,spelling_fix,city
 Central Connecticut,Jeff Logan,RB,"Rochester, NY",,Aquinas Institute,2026,2026,1,2026,1,FCS,NEC,Rochester,NY,USA,43.169927,-77.616891,census,city
 Central Connecticut,Joey Montalvo,WR,"Hartford, CT",East Catholic,,2026,2026,1,2026,1,FCS,NEC,Hartford,CT,USA,41.765933,-72.681579,census,city
 Central Connecticut,Keith Moko,CB,"Philadelphia, PA",Newton (Western Illinois),,2026,2026,1,2026,5,FCS,NEC,Philadelphia,PA,USA,40.009376,-75.133346,census,city
@@ -26461,7 +26461,7 @@ Delaware State,Avari Marshall,WR,"Miami, Fla.",Barbara Goleman,,2022,2024,3,2022
 Delaware State,"Charles Brown, Jr.",LB,"Edgewood, Md.",,Eastern Michigan University,2022,2024,3,2022 2023 2024,R-SO,FCS,MEAC,Edgewood,MD,USA,39.42029,-76.296846,census,city
 Delaware State,Coleon Williams,DB,"Trenton, N.J.",Notre Dame (N.J.),,2022,2023,2,2022 2023,FR,FCS,MEAC,Trenton,NJ,USA,40.223841,-74.763624,census,city
 Delaware State,Dante Daniel,LB,"Pleasantville, N.J.",,Wesley College,2022,2022,1,2022,R-SR,FCS,MEAC,Pleasantville,NJ,USA,39.388801,-74.514288,census,city
-Delaware State,Derrico Poston,OL,"Oxon HIlls, Md.",,Wesley College,2022,2024,3,2022 2023 2024,R-SO,FCS,MEAC,Oxon HIlls,MD,USA,38.8440018,-76.9616413,nominatim,city
+Delaware State,Derrico Poston,OL,"Oxon HIlls, Md.",,Wesley College,2022,2024,3,2022 2023 2024,R-SO,FCS,MEAC,Oxon Hill,MD,USA,38.788793,-76.971864,spelling_fix,city
 Delaware State,Donovan Mack,DL,"New Castle, Del",,,2022,2022,1,2022,FR,FCS,MEAC,New Castle,DE,USA,39.670017,-75.566519,census,city
 Delaware State,Geovanny Fabian,DB,"Philadelphia, Pa.",Northeast,,2022,2026,4,2022 2023 2024 2026,FR,FCS,MEAC,Philadelphia,PA,USA,40.009376,-75.133346,census,city
 Delaware State,Halim Dixon-King,WR,"New Rochelle, N.Y.",,Monroe College,2022,2022,1,2022,JR,FCS,MEAC,New Rochelle,NY,USA,40.923243,-73.779344,census,city
@@ -27713,7 +27713,7 @@ Duquesne,Mark Weideman,Offensive Line OL,"Gibsonia, Pa.",Pine-Richland,,2017,201
 Duquesne,Mike Pernice,FB,"Pittsburgh, Pa.",Central Catholic,,2017,2017,1,2017,FR,FCS,NEC,Pittsburgh,PA,USA,40.439936,-79.975676,census,city
 Duquesne,Nick Dawes,OL,"Blacklick, Ohio",Bishop Hartley,,2017,2017,1,2017,FR,FCS,NEC,Blacklick,OH,USA,39.9956195,-82.811286,usgs,city
 Duquesne,Nick Scholle,Defensive Back DB,"South Park, Pa.",South Park,Grove City,2017,2018,2,2017 2018,SO,FCS,NEC,South Park,PA,USA,40.298802,-79.99445,census,city
-Duquesne,Nohea Keahi,Linebacker LB,"Wailuka, Hawaii",Baldwin,Chabot,2017,2018,2,2017 2018,JR,FCS,NEC,Wailuka,HI,USA,20.9142964,-156.3236243,nominatim,city
+Duquesne,Nohea Keahi,Linebacker LB,"Wailuka, Hawaii",Baldwin,Chabot,2017,2018,2,2017 2018,JR,FCS,NEC,Wailuku,HI,USA,20.885467,-156.503627,spelling_fix,city
 Duquesne,Roman Macek,Offensive Line OL,"McKees Rocks, Pa.",Montour,,2017,2021,4,2017 2018 2019 2021,FR,FCS,NEC,McKees Rocks,PA,USA,40.469019,-80.063328,census,city
 Duquesne,Sean Edmonds,Defensive Back DB,"Hudson, Ohio",Hudson,,2017,2019,3,2017 2018 2019,FR,FCS,NEC,Hudson,OH,USA,41.239213,-81.441611,census,city
 Duquesne,Shimoore Stern,Wide Receiver WR,"Pembroke Pines, Fla.",Flanagan,,2017,2019,3,2017 2018 2019,FR,FCS,NEC,Pembroke Pines,FL,USA,26.014716,-80.340171,census,city
@@ -31078,7 +31078,7 @@ Eastern Michigan,Michael Smith Jr.,DL,"Lakeland, Fla.",Frostproof,,2016,2021,5,2
 Eastern Michigan,Mike Brown,DL,"Sandusky, Ohio",Sandusky,,2016,2016,1,2016,R-SR,FBS,MAC,Sandusky,OH,USA,41.455885,-82.714436,census,city
 Eastern Michigan,Mike Van Hoeven,OL,"Paw Paw, Mich.",Paw Paw,,2016,2021,5,2016 2017 2018 2019 2021,FR,FBS,MAC,Paw Paw,MI,USA,42.214235,-85.892177,census,city
 Eastern Michigan,Nigel Kilby,TE,"Fort Wayne, Ind.",Northrop,,2016,2016,1,2016,R-FR,FBS,MAC,Fort Wayne,IN,USA,41.088193,-85.142791,census,city
-Eastern Michigan,Oddie Granger III,DL,"East Saint Louis, Ill.",East Saint Louis,Dodge City C.C.,2016,2017,2,2016 2017,JR,FBS,MAC,East Saint Louis,IL,USA,38.6244952,-90.1509428,usgs,city
+Eastern Michigan,Oddie Granger III,DL,"East Saint Louis, Ill.",East Saint Louis,Dodge City C.C.,2016,2017,2,2016 2017,JR,FBS,MAC,East St. Louis,IL,USA,38.616361,-90.130528,spelling_fix,city
 Eastern Michigan,Pat O'Connor,DL,"Chicago, Ill.",Saint Rita,,2016,2016,1,2016,R-SR,FBS,MAC,Chicago,IL,USA,41.837045,-87.684939,census,city
 Eastern Michigan,Paulie Fricano,K,"Rochester, N.Y.",Churchville-Chili,,2016,2018,3,2016 2017 2018,R-FR,FBS,MAC,Rochester,NY,USA,43.169927,-77.616891,census,city
 Eastern Michigan,Pete Bergman,OL,"Casper, Wyo.",Natrona County,,2016,2017,2,2016 2017,R-FR,FBS,MAC,Casper,WY,USA,42.84212,-106.321282,census,city
@@ -31626,7 +31626,7 @@ Eastern Washington,Dylan Ingram,TE,"Camas, Wash.",Camas HS '17,,2017,2022,5,2017
 Eastern Washington,Gunner Talkington,QB,"Battle Ground, Wash.",Battle Ground HS '17,,2017,2022,5,2017 2018 2019 2021 2022,FR,FCS,Big Sky,Battle Ground,WA,USA,45.776834,-122.540966,census,city
 Eastern Washington,Ira Branch,DB,"Tacoma, Wash.",Mount Tahoma HS '17,,2017,2019,3,2017 2018 2019,FR,FCS,Big Sky,Tacoma,WA,USA,47.252199,-122.459832,census,city
 Eastern Washington,Johnny Edwards IV,WR,"Pasadena, Calif.",Bishop Alemany HS '17,,2017,2021,4,2017 2018 2019 2021,FR,FCS,Big Sky,Pasadena,CA,USA,34.160602,-118.137954,census,city
-Eastern Washington,Jordan Laurencio,RB,"Seatlle, Wash.",Kentlake HS '13,,2017,2017,1,2017,R-SR,FCS,Big Sky,Seatlle,WA,USA,47.662791,-122.3916136,nominatim,city
+Eastern Washington,Jordan Laurencio,RB,"Seatlle, Wash.",Kentlake HS '13,,2017,2017,1,2017,R-SR,FCS,Big Sky,Seattle,WA,USA,47.619335,-122.351538,spelling_fix,city
 Eastern Washington,Marques Hampton Jr.,WR,"DuPont, Wash.",Steilacoom HS '17,,2017,2018,2,2017 2018,FR,FCS,Big Sky,DuPont,WA,USA,47.107351,-122.647576,census,city
 Eastern Washington,Matt Shook,OL,"Graham, Wash.",Graham-Kapowsin HS '17,,2017,2021,4,2017 2018 2019 2021,FR,FCS,Big Sky,Graham,WA,USA,47.034315,-122.276854,census,city
 Eastern Washington,Miquel Perez,LB,"Grandview, Wash.",Grandview HS '12,,2017,2017,1,2017,R-SR,FCS,Big Sky,Grandview,WA,USA,46.244335,-119.908998,census,city
@@ -32600,7 +32600,7 @@ FIU,Joe Perkins,Defensive Back DB,"Jackson, Miss.",Madison-Ridgeland Academy,,20
 FIU,Joel Felder,ATH,"Fort Lauderdale, Fla.",Stranahan HS,,2021,2021,1,2021,FR,FBS,Conference USA,Fort Lauderdale,FL,USA,26.141227,-80.146731,census,city
 FIU,Joey Maya,Linebacker LB,"Apex, N.C.",Middle Creek HS,,2021,2021,1,2021,R-FR,FBS,Conference USA,Apex,NC,USA,35.725577,-78.879919,census,city
 FIU,Jordan Guerad,Defensive Line DL,"Valrico, Fla.",Bloomingdale HS,,2021,2023,3,2021 2022 2023,FR,FBS,Conference USA,Valrico,FL,USA,27.919084,-82.231259,census,city
-FIU,Keegan Davis,Defensive Line DL,"Port Saint Lucie, Fla.",Treasure Coast HS,,2021,2025,5,2021 2022 2023 2024 2025,FR,FBS,Conference USA,Port Saint Lucie,FL,USA,27.2939333,-80.3503283,usgs,city
+FIU,Keegan Davis,Defensive Line DL,"Port Saint Lucie, Fla.",Treasure Coast HS,,2021,2025,5,2021 2022 2023 2024 2025,FR,FBS,Conference USA,Port St. Lucie,FL,USA,27.280554,-80.388261,spelling_fix,city
 FIU,Kejon Owens,Running Back RB,"Miami, Fla.",Miami Central HS,,2021,2025,5,2021 2022 2023 2024 2025,FR,FBS,Conference USA,Miami,FL,USA,25.775163,-80.208615,census,city
 FIU,Kristoff Pollas,Running Back RB,"Miramar, Fla.",Chaminade-Madonna HS,,2021,2023,3,2021 2022 2023,FR,FBS,Conference USA,Miramar,FL,USA,25.972529,-80.338582,census,city
 FIU,Lucas Matias,Kicker K,"Pembroke Pines, Fla.",American Heritage,Keiser,2021,2023,3,2021 2022 2023,SO,FBS,Conference USA,Pembroke Pines,FL,USA,26.014716,-80.340171,census,city
@@ -32776,7 +32776,7 @@ FIU,Antonio Tripp Jr.,Offensive Line OL,"Baltimore, Md.",IMG Academy,Miami,2025,
 FIU,Caleb Patterson,Defensive Line DL,"Jamesville, N.Y.",James-Dewitt,Rutgers,2025,2025,1,2025,GR,FBS,Conference USA,Jamesville,NY,USA,42.9920106,-76.0715887,usgs,city
 FIU,Cam Davis,Linebacker LB,"Pompano Beach, Fla.",Blanche Ely,,2025,2026,2,2025 2026,FR,FBS,Conference USA,Pompano Beach,FL,USA,26.241622,-80.133851,census,city
 FIU,Christian Langford,Quarterback QB,"Fairburn, Ga.",Langston Hughes,,2025,2025,1,2025,FR,FBS,Conference USA,Fairburn,GA,USA,33.547798,-84.587265,census,city
-FIU,Dallas Payne,Tight End TE,"Bay Saint Louis, Miss.",St. Stanislaus,UAB,2025,2025,1,2025,R-SR,FBS,Conference USA,Bay Saint Louis,MS,USA,30.3088076,-89.3300461,usgs,city
+FIU,Dallas Payne,Tight End TE,"Bay Saint Louis, Miss.",St. Stanislaus,UAB,2025,2025,1,2025,R-SR,FBS,Conference USA,Bay St. Louis,MS,USA,30.323448,-89.35879,spelling_fix,city
 FIU,Dante Anderson,Defensive Line DL,"Miami, Fla.",Homestead Senior,Florida State,2025,2026,2,2025 2026,R-JR,FBS,Conference USA,Miami,FL,USA,25.775163,-80.208615,census,city
 FIU,Donovan Giles,Wide Receiver WR,"Viera, Fla.",Viera,UA-Pine Bluff,2025,2026,2,2025 2026,R-JR,FBS,Conference USA,Viera,FL,USA,28.2469551,-80.7369994,usgs,city
 FIU,Dylan Herman,Wide Receiver WR,"Las Vegas, Nev.",Bishop Gorman,,2025,2026,2,2025 2026,SO,FBS,Conference USA,Las Vegas,NV,USA,36.233499,-115.264037,census,city
@@ -36182,7 +36182,7 @@ Furman,Joe Graham,TE,"Newtown Square, Pennsylvania",Episcopal Academy,,2021,2024
 Furman,Joshua Harris,WR,"Newnan, Ga.",Newnan,,2021,2023,3,2021 2022 2023,FR,FCS,SoCon,Newnan,GA,USA,33.375833,-84.777324,census,city
 Furman,Julian Ashby,LS,"Lilburn, Ga.",Parkview,,2021,2023,3,2021 2022 2023,R-FR,FCS,SoCon,Lilburn,GA,USA,33.89064,-84.136872,census,city
 Furman,Justin Hartwell,S,"Atlanta, Ga.",,Marist,2021,2025,5,2021 2022 2023 2024 2025,FR,FCS,SoCon,Atlanta,GA,USA,33.762909,-84.422675,census,city
-Furman,Kaden Arnold,NG,"Mrytle Beach, S.C.",Myrtle Beach,,2021,2021,1,2021,FR,FCS,SoCon,Mrytle Beach,SC,USA,33.713488,-78.9028716,nominatim,city
+Furman,Kaden Arnold,NG,"Mrytle Beach, S.C.",Myrtle Beach,,2021,2021,1,2021,FR,FCS,SoCon,Myrtle Beach,SC,USA,33.71039,-78.886024,spelling_fix,city
 Furman,Kelton Gunn,WR,"Knoxville, Tenn.",Hardin Valley Academy,,2021,2023,3,2021 2022 2023,R-FR,FCS,SoCon,Knoxville,TN,USA,35.97068,-83.94927,census,city
 Furman,Kendall Thomas,RB,"Round Rock, Texas",Stony Point,,2021,2023,3,2021 2022 2023,R-FR,FCS,SoCon,Round Rock,TX,USA,30.526146,-97.663532,census,city
 Furman,Landon Whittemore,TE,"Lafayette, Tennessee",Macon County,,2021,2021,1,2021,FR,FCS,SoCon,Lafayette,TN,USA,36.524047,-86.030593,census,city
@@ -37017,7 +37017,7 @@ Georgetown,J'V'on Butler,Defensive Back DB,"Melbourne, Fla.",Holy Trinity Episco
 Georgetown,JJ Meilutis,DL,"Kaunas, Lithuania",South Fort Myers (Fla.,,2016,2016,1,2016,FR,FCS,Patriot,Kaunas,,,54.8982139,23.9044817,nominatim,city
 Georgetown,Jack Graffagnino,TE,"Lynbrook, N.Y.",Chaminade,,2016,2016,1,2016,JR,FCS,Patriot,Lynbrook,NY,USA,40.657883,-73.674199,census,city
 Georgetown,Jacob Sweitzer,TE,"Perryopolis, Pa.",Belle Vernon,,2016,2017,2,2016 2017,JR,FCS,Patriot,Perryopolis,PA,USA,40.086831,-79.752596,census,city
-Georgetown,Jake Johnson,DB,"Corapolis, Pa.",West Allegheny,,2016,2017,2,2016 2017,JR,FCS,Patriot,Corapolis,PA,USA,40.517028,-80.16364,nominatim,city
+Georgetown,Jake Johnson,DB,"Corapolis, Pa.",West Allegheny,,2016,2017,2,2016 2017,JR,FCS,Patriot,Coraopolis,PA,USA,40.514618,-80.161825,spelling_fix,city
 Georgetown,Jalen Goldwire,Defensive Back DB,"Plantation, Fla.",Western,,2016,2019,4,2016 2017 2018 2019,FR,FCS,Patriot,Plantation,FL,USA,26.125573,-80.261818,census,city
 Georgetown,Jared Horne,Offensive Line OL,"Woodbridge, Va.",CD Hylton,,2016,2018,3,2016 2017 2018,SO,FCS,Patriot,Woodbridge,VA,USA,38.640556,-77.255093,census,city
 Georgetown,Jarrod Kelley,DB,"Auburndale, Fla.",Auburndale,,2016,2016,1,2016,FR,FCS,Patriot,Auburndale,FL,USA,28.109997,-81.797322,census,city
@@ -38062,7 +38062,7 @@ Georgia Southern,Mike Okwilagwe,OL,"Sandy Springs, Ga.",Mount Vernon,,2017,2017,
 Georgia Southern,Mitch Matthews Jr.,OL,"Lincolnton, Ga.",Lincoln County,,2017,2018,2,2017 2018,FR,FBS,Sun Belt,Lincolnton,GA,USA,33.792714,-82.478438,census,city
 Georgia Southern,Oliver Davis,DE,"Albany, Ga.",Deerfield-Windsor,,2017,2017,1,2017,FR,FBS,Sun Belt,Albany,GA,USA,31.578117,-84.176224,census,city
 Georgia Southern,Peyton Backer,OL,"Tiger, Ga.",Rabun County,,2017,2019,3,2017 2018 2019,FR,FBS,Sun Belt,Tiger,GA,USA,34.846066,-83.432562,census,city
-Georgia Southern,Quan Griffin,DE,"Glen Saint Mary, Fla.",Baker County,,2017,2019,3,2017 2018 2019,FR,FBS,Sun Belt,Glen Saint Mary,FL,USA,30.2757913,-82.1606689,usgs,city
+Georgia Southern,Quan Griffin,DE,"Glen Saint Mary, Fla.",Baker County,,2017,2019,3,2017 2018 2019,FR,FBS,Sun Belt,Glen St. Mary,FL,USA,30.275166,-82.160296,spelling_fix,city
 Georgia Southern,Raymond Johnson III,DE,"Sumter, S.C.",Sumter,,2017,2019,3,2017 2018 2019,FR,FBS,Sun Belt,Sumter,SC,USA,33.940848,-80.395543,census,city
 Georgia Southern,Ryan Fitzpatrick,QB,"Macon, Ga.",Westfield,Point,2017,2017,1,2017,R-FR,FBS,Sun Belt,Macon,GA,USA,32.80899,-83.69406,census,city
 Georgia Southern,Ryan Langan,LS,"Cedar Rapids, Neb.",Riverside,,2017,2019,3,2017 2018 2019,FR,FBS,Sun Belt,Cedar Rapids,NE,USA,41.558914,-98.149303,census,city
@@ -38156,7 +38156,7 @@ Georgia Southern,Verneal Henshaw Jr.,OL,"Palm Coast, Fla.",Flagler Palm Coast,,2
 Georgia Southern,Will Lovett Jr.,QB,"Kennesaw, Ga.",North Cobb,Troy,2019,2021,2,2019 2021,R-SO,FBS,Sun Belt,Kennesaw,GA,USA,34.027202,-84.61709,census,city
 Georgia Southern,Will McCarty,ILB,"Acworth, Ga.",Harrison,,2019,2019,1,2019,FR,FBS,Sun Belt,Acworth,GA,USA,34.061991,-84.681121,census,city
 Georgia Southern,Aidan Ryan,OL,"Cary, N.C.",Cardinal Gibbons,,2021,2021,1,2021,FR,FBS,Sun Belt,Cary,NC,USA,35.781302,-78.823444,census,city
-Georgia Southern,Alex Bowen,WR,"Glen Saint Mary, Fla.",Baker County,,2021,2023,3,2021 2022 2023,R-FR,FBS,Sun Belt,Glen Saint Mary,FL,USA,30.2757913,-82.1606689,usgs,city
+Georgia Southern,Alex Bowen,WR,"Glen Saint Mary, Fla.",Baker County,,2021,2023,3,2021 2022 2023,R-FR,FBS,Sun Belt,Glen St. Mary,FL,USA,30.275166,-82.160296,spelling_fix,city
 Georgia Southern,Amare Jones,WR,"Frisco, Texas",Frisco Heritage,Tulane,2021,2022,2,2021 2022,SR,FBS,Sun Belt,Frisco,TX,USA,33.155427,-96.822596,census,city
 Georgia Southern,Andrew Douglas,DB,"Decatur, Ga.",Mount Vernon,,2021,2023,3,2021 2022 2023,FR,FBS,Sun Belt,Decatur,GA,USA,33.771067,-84.295784,census,city
 Georgia Southern,Andrew Johnson Jr.,DE,"Ambrose, Ga.",Tift County,Oregon,2021,2021,1,2021,R-JR,FBS,Sun Belt,Ambrose,GA,USA,31.595145,-83.014895,census,city
@@ -39767,7 +39767,7 @@ Grambling State,Mason McSpadden,Longsnapper LS,"Fort Worth, Texas",V.R. Eaton HS
 Grambling State,Micah Torres-Whitmer,Long Snapper LS,"Kyle, Texas",Lehman Lobos,,2021,2021,1,2021,FR,FCS,SWAC,Kyle,TX,USA,29.994118,-97.883322,census,city
 Grambling State,Myron Stewart,Defensive Back DB,"Port Gibson, Miss.",,Mississippi Gulf Coast CC,2021,2022,2,2021 2022,JR,FCS,SWAC,Port Gibson,MS,USA,31.955816,-90.983438,census,city
 Grambling State,Noah Bodden,Quarterback QB,"Valley Stream, N.Y.",Christ The King Regional,,2021,2021,1,2021,FR,FCS,SWAC,Valley Stream,NY,USA,40.664747,-73.704902,census,city
-Grambling State,Rey Estes,Defensive Back DB,"East Saint Louis, Ill.",,Riverside CC,2021,2022,2,2021 2022,JR,FCS,SWAC,East Saint Louis,IL,USA,38.6244952,-90.1509428,usgs,city
+Grambling State,Rey Estes,Defensive Back DB,"East Saint Louis, Ill.",,Riverside CC,2021,2022,2,2021 2022,JR,FCS,SWAC,East St. Louis,IL,USA,38.616361,-90.130528,spelling_fix,city
 Grambling State,Ricky Frazier,Linebacker LB,"Pineville, La.",Pineville HS,,2021,2024,4,2021 2022 2023 2024,SO,FCS,SWAC,Pineville,LA,USA,31.342926,-92.40893,census,city
 Grambling State,Sean-Charles Ned,Defensive Lineman DL,"Maurice, La.",Lafayette HS,,2021,2021,1,2021,FR,FCS,SWAC,Maurice,LA,USA,30.104115,-92.12108,census,city
 Grambling State,Shun'Markus Adams,Offensive Lineman OL,"Jasper, Texas",Jasper HS,,2021,2022,2,2021 2022,FR,FCS,SWAC,Jasper,TX,USA,30.922681,-93.993251,census,city
@@ -40251,7 +40251,7 @@ Hampton,KeyRon Catlett,WR,"Hopkinsville, Ky.",,Purdue University,2019,2021,2,201
 Hampton,Kyle Ray-Canada,WR,"Newton, MA",Newton North HS,,2019,2021,2,2019 2021,FR,FCS,CAA,Newton,MA,USA,42.331768,-71.2084,census,city
 Hampton,Mason King,LB,"Mt. Holly, N.C.",Mountain Island Charter HS,,2019,2023,4,2019 2021 2022 2023,R-FR,FCS,CAA,Mt. Holly,NC,USA,35.314404,-81.006609,census,city
 Hampton,Quinton Ragland,OL,"Mineral, Va.",Louisa County HS,,2019,2023,4,2019 2021 2022 2023,R-FR,FCS,CAA,Mineral,VA,USA,38.007584,-77.906236,census,city
-Hampton,Robinson Davis,DB,"W. Friendship, MD",Marriotts Ridge HS,,2019,2022,3,2019 2021 2022,FR,FCS,CAA,W. Friendship,MD,USA,39.3034518,-76.9537905,nominatim,city
+Hampton,Robinson Davis,DB,"W. Friendship, MD",Marriotts Ridge HS,,2019,2022,3,2019 2021 2022,FR,FCS,CAA,West Friendship,MD,USA,39.302605,-76.9527552,spelling_fix,city
 Hampton,Shane Fordham,LB,"W. Philadelphia, Pa.",Haverford School,,2019,2023,4,2019 2021 2022 2023,FR,FCS,CAA,W. Philadelphia,PA,USA,39.9600023,-75.2248861,nominatim,city
 Hampton,Shug Frazier,DT,"Lawrenceville, GA",,N.C. State,2019,2019,1,2019,R-JR,FCS,CAA,Lawrenceville,GA,USA,33.952875,-83.992231,census,city
 Hampton,Trevor Blow,OL,"Franklin, VA",Southampton HS,,2019,2021,2,2019 2021,FR,FCS,CAA,Franklin,VA,USA,36.684014,-76.941396,census,city
@@ -40306,7 +40306,7 @@ Hampton,Abe Williams,WR,"Midlothian, Va.",Clover Hill High,,2022,2024,3,2022 202
 Hampton,Ademola Owudunni,OL,"Newark, N.J.",Malcolm X Shabazz High,,2022,2024,3,2022 2023 2024,FR,FCS,CAA,Newark,NJ,USA,40.72422,-74.172574,census,city
 Hampton,Ahmad Ross,LB,"Hammonton, N.J.",St. Joseph High,,2022,2024,3,2022 2023 2024,FR,FCS,CAA,Hammonton,NJ,USA,39.66078,-74.767021,census,city
 Hampton,Booker Fraser,OL,"Gainesville, Ga.",Riverside Military Academy,,2022,2023,2,2022 2023,FR,FCS,CAA,Gainesville,GA,USA,34.2901,-83.829106,census,city
-Hampton,Brandon Murphy,DB,"Altamonte Spring, Fla.",Lake Brantley High,Chowan University,2022,2024,3,2022 2023 2024,R-SO,FCS,CAA,Altamonte Spring,FL,USA,28.6563253,-81.3891161,nominatim,city
+Hampton,Brandon Murphy,DB,"Altamonte Spring, Fla.",Lake Brantley High,Chowan University,2022,2024,3,2022 2023 2024,R-SO,FCS,CAA,Altamonte Springs,FL,USA,28.661022,-81.394681,spelling_fix,city
 Hampton,Brian Csehoski,K,"Aldie, Va.",John Champe High,,2022,2024,3,2022 2023 2024,FR,FCS,CAA,Aldie,VA,USA,38.97612,-77.647985,census,city
 Hampton,Brian Roberts,DB,"Jacksonville, FL",Trinity Christian,UMass,2022,2022,1,2022,SR,FCS,CAA,Jacksonville,FL,USA,30.336864,-81.661603,census,city
 Hampton,Bryce Jamison,DB,"Columbia, Md.",Atholton High,University of Dayton,2022,2024,3,2022 2023 2024,SO,FCS,CAA,Columbia,MD,USA,39.201146,-76.85905,census,city
@@ -44173,7 +44173,7 @@ Idaho State,Darrell Gipson,Linebacker LB,"Lacey, Washington",Timberline HS,,2024
 Idaho State,Davian Munoz,Wide Reciever WR,"Harrisville, UT",,,2024,2024,1,2024,FR,FCS,Big Sky,Harrisville,UT,USA,41.285318,-111.98597,census,city
 Idaho State,Davis Harsin,Quarterback QB,"Eagle, Idaho",Eagle HS,,2024,2026,3,2024 2025 2026,FR,FCS,Big Sky,Eagle,ID,USA,43.777612,-116.415964,census,city
 Idaho State,Devin Rodriguez,Linebacker LB,"Pocatello, Idaho",Pocatello HS,,2024,2026,3,2024 2025 2026,FR,FCS,Big Sky,Pocatello,ID,USA,42.872748,-112.463836,census,city
-Idaho State,Donald Austin,Running Back RB,"Harland, Wisconsin",,Southwest Minnesota State University,2024,2024,1,2024,SR,FCS,Big Sky,Harland,WI,USA,42.9621699,-88.1269581,nominatim,city
+Idaho State,Donald Austin,Running Back RB,"Harland, Wisconsin",,Southwest Minnesota State University,2024,2024,1,2024,SR,FCS,Big Sky,Hartland,WI,USA,43.102352,-88.335595,spelling_fix,city
 Idaho State,Eric Johnson,Wide Receiver WR,"Katy, Texas",,Lehigh University,2024,2024,1,2024,GR,FCS,Big Sky,Katy,TX,USA,29.790915,-95.840711,census,city
 Idaho State,Ethan Cutler,Kicker K,"Eagle, Idaho",Eagle HS,Eastern Oregon University,2024,2024,1,2024,SO,FCS,Big Sky,Eagle,ID,USA,43.777612,-116.415964,census,city
 Idaho State,Exander Miller,Offensive Line OL,"Hyrum, Utah",Mountain Crest HS,,2024,2025,2,2024 2025,FR,FCS,Big Sky,Hyrum,UT,USA,41.632797,-111.845514,census,city
@@ -46341,7 +46341,7 @@ Indiana,Josh Hoover,QB,"Heath, Texas",Rockwall-Heath,TCU,2026,2026,1,2026,GR,FBS
 Indiana,Kasmir Hicks,DB,"Indianapolis, Ind.",Decatur Central,,2026,2026,1,2026,FR,FBS,Big Ten,Indianapolis,IN,USA,39.776664,-86.145935,census,city
 Indiana,Kenton Mondeau,OL,"Eau Claire, Wis.",Eau Claire North,,2026,2026,1,2026,FR,FBS,Big Ten,Eau Claire,WI,USA,44.818343,-91.494769,census,city
 Indiana,Kevontay Hugan,DL,"Sarasota, Fla.",Booker,,2026,2026,1,2026,FR,FBS,Big Ten,Sarasota,FL,USA,27.338257,-82.543721,census,city
-Indiana,Kortez Rupert,WR,"East Saint Louis, Ill.",East Saint Louis,,2026,2026,1,2026,FR,FBS,Big Ten,East Saint Louis,IL,USA,38.6244952,-90.1509428,usgs,city
+Indiana,Kortez Rupert,WR,"East Saint Louis, Ill.",East Saint Louis,,2026,2026,1,2026,FR,FBS,Big Ten,East St. Louis,IL,USA,38.616361,-90.130528,spelling_fix,city
 Indiana,Lavar Keys,WR,"Hyattsville, Md.",DeMatha,,2026,2026,1,2026,FR,FBS,Big Ten,Hyattsville,MD,USA,38.961205,-76.954935,census,city
 Indiana,Luke Graham,OL,"Pendleton, Ind.",Pendleton Heights,,2026,2026,1,2026,FR,FBS,Big Ten,Pendleton,IN,USA,40.008509,-85.760809,census,city
 Indiana,Nick Marsh,WR,"Detroit, Mich.",River Rouge,Michigan State,2026,2026,1,2026,JR,FBS,Big Ten,Detroit,MI,USA,42.383037,-83.102237,census,city
@@ -51285,7 +51285,7 @@ Kent State,Joachim Bangda,RB,"Washington, D.C.",St. Frances Academy,,2019,2019,1
 Kent State,John Schmidt,DB,"Sartell, Minn.",Dowling Catholic,Iowa Western C.C.,2019,2019,1,2019,SO,FBS,MAC,Sartell,MN,USA,45.61809,-94.212153,census,city
 Kent State,Justin Hartzell,WR,"Steubenville, Ohio",Steubenville Catholic Central,,2019,2019,1,2019,FR,FBS,MAC,Steubenville,OH,USA,40.36631,-80.657061,census,city
 Kent State,Keshunn Abram,WR,"Southaven, Miss.",DeSoto Central,Northwest Mississippi C.C.,2019,2021,2,2019 2021,JR,FBS,MAC,Southaven,MS,USA,34.951005,-89.977669,census,city
-Kent State,Kris Leach,TE,"Bealton, Va.",Liberty,Western Kentucky,2019,2022,3,2019 2021 2022,R-SO,FBS,MAC,Bealton,VA,USA,38.5811841,-77.7404149,nominatim,city
+Kent State,Kris Leach,TE,"Bealton, Va.",Liberty,Western Kentucky,2019,2022,3,2019 2021 2022,R-SO,FBS,MAC,Bealeton,VA,USA,38.583015,-77.778763,spelling_fix,city
 Kent State,Kwincy Hall,WR,"Washington, D.C.",St. Frances Academy,West Virginia,2019,2019,1,2019,R-FR,FBS,MAC,Washington,DC,USA,38.904247,-77.016517,census,city
 Kent State,Logan Swartz,OL,"Rock Island, Ill.",Rock Island,,2019,2019,1,2019,FR,FBS,MAC,Rock Island,IL,USA,41.469444,-90.585307,census,city
 Kent State,Luke Pawlak,K,"Sylvania, Ohio",Northview,,2019,2019,1,2019,FR,FBS,MAC,Sylvania,OH,USA,41.710362,-83.710212,census,city
@@ -51988,7 +51988,7 @@ Kentucky,Tommy Ziesmer,Defensive Lineman,"Danville, Ky.",Boyle County,,2023,2024
 Kentucky,Ty Bryant,Defensive Back,"Lexington, Ky.",Frederick Douglass,,2023,2026,4,2023 2024 2025 2026,FR,FBS,SEC,Lexington,KY,USA,38.040678,-84.458272,census,city
 Kentucky,Walker Himebauch,Long Snapper,"Monument, Colo.",Palmer Ridge,,2023,2024,2,2023 2024,FR,FBS,SEC,Monument,CO,USA,39.074406,-104.844221,census,city
 Kentucky,Aba Selm,Offensive Lineman,"Independence, Ky.",Simon Kenton,,2024,2026,3,2024 2025 2026,FR,FBS,SEC,Independence,KY,USA,38.957442,-84.547372,census,city
-Kentucky,Aidan Laros,Punter,"Capetown, South Africa",Northwood,UT Martin/Charlotte,2024,2025,2,2024 2025,JR,FBS,SEC,Capetown,,South Africa,-33.9228378,18.426976,nominatim,city
+Kentucky,Aidan Laros,Punter,"Capetown, South Africa",Northwood,UT Martin/Charlotte,2024,2025,2,2024 2025,JR,FBS,SEC,Cape Town,,South Africa,-33.9288301,18.4172197,spelling_fix,city
 Kentucky,Alex McLaughlin,Long Snapper,"Weddington, N.C.",Weddington,Illinois/N.C. State,2024,2025,2,2024 2025,JR,FBS,SEC,Weddington,NC,USA,35.022127,-80.735422,census,city
 Kentucky,Andrew Weber,Defensive Back,"Cincinnati, Ohio",St. Xavier,,2024,2026,3,2024 2025 2026,FR,FBS,SEC,Cincinnati,OH,USA,39.140183,-84.505829,census,city
 Kentucky,Anfernee Crease,Offensive Lineman,"Tomball, Texas",Tomball Memorial,Navarro College,2024,2024,1,2024,SO,FBS,SEC,Tomball,TX,USA,30.095078,-95.619678,census,city
@@ -55114,7 +55114,7 @@ Lindenwood,Tyler Green,Defensive Back DB,"Waldorf, Md.",DeMatha Catholic,Indiana
 Lindenwood,Tyson Collins,Offensive Line OL,"St. Louis, Mo.",Parkway North,,2018,2018,1,2018,FR,D2,Big South-OVC,St. Louis,MO,USA,38.635699,-90.244582,census,city
 Lindenwood,Uchenna Egwuonwu,Defensive Line DL,"Union, N.J.",Union,University of Maine,2018,2019,2,2018 2019,JR,D2,Big South-OVC,Union,NJ,USA,40.696539,-74.269291,census,city
 Lindenwood,Wendall Bronner Jr.,Cornerback CB,"St. Louis, Mo.",Marquette,,2018,2018,1,2018,FR,D2,Big South-OVC,St. Louis,MO,USA,38.635699,-90.244582,census,city
-Lindenwood,Wesley Hines,Defensive Back DB,"Lake Saint Louis, Mo.",,Liberty,2018,2023,5,2018 2019 2021 2022 2023,FR,D2,Big South-OVC,Lake Saint Louis,MO,USA,38.797552,-90.7856848,usgs,city
+Lindenwood,Wesley Hines,Defensive Back DB,"Lake Saint Louis, Mo.",,Liberty,2018,2023,5,2018 2019 2021 2022 2023,FR,D2,Big South-OVC,Lake St. Louis,MO,USA,38.77989,-90.785586,spelling_fix,city
 Lindenwood,Zach Turnure,Linebacker LB,"Lake St. Louis, Mo.",CBC,Ohio State University,2018,2018,1,2018,GR,D2,Big South-OVC,Lake St. Louis,MO,USA,38.77989,-90.785586,census,city
 Lindenwood,Alex Bolden,Defensive Line DL,"San Jose, Calif.",Washington Union,Bakersfield Community College,2019,2021,2,2019 2021,JR,D2,Big South-OVC,San Jose,CA,USA,37.296011,-121.814552,census,city
 Lindenwood,Alex Ojomo,Defensive Line DL,"Elgin, Ill.",South Elgin,,2019,2019,1,2019,FR,D2,Big South-OVC,Elgin,IL,USA,42.038963,-88.325671,census,city
@@ -57162,7 +57162,7 @@ Louisville,Tyler Polston,TE,"Louisville, Ky.",St. Xavier,,2016,2017,2,2016 2017,
 Louisville,Tyler Robinson,DL,"Fort Thomas, Ky.",Highlands High School,,2016,2017,2,2016 2017,FR,FBS,ACC,Fort Thomas,KY,USA,39.082436,-84.457113,census,city
 Louisville,Vince Lococo,FB,"Louisville, Ky.",Trinity High School,,2016,2018,3,2016 2017 2018,FR,FBS,ACC,Louisville,KY,USA,38.165376,-85.647377,census,city
 Louisville,Zykiesis Cannon,DB,"Mauldin, S.C.",Carolina Academy,,2016,2017,2,2016 2017,JR,FBS,ACC,Mauldin,SC,USA,34.781025,-82.304234,census,city
-Louisville,Anthony Johnson,DB,"Cocunut Creek, Fla.",Chaminade-Madonna Prep,,2017,2019,3,2017 2018 2019,FR,FBS,ACC,Cocunut Creek,FL,USA,26.2400516,-80.1666103,nominatim,city
+Louisville,Anthony Johnson,DB,"Cocunut Creek, Fla.",Chaminade-Madonna Prep,,2017,2019,3,2017 2018 2019,FR,FBS,ACC,Coconut Creek,FL,USA,26.280943,-80.184718,spelling_fix,city
 Louisville,Boosie Whitlow,OLB,"Opelika, Ala.",Opelika,South Carolina,2017,2019,3,2017 2018 2019,SO,FBS,ACC,Opelika,AL,USA,32.660739,-85.37889,census,city
 Louisville,C.J. Avery,LB,"Grenada, Miss.",Grenada,,2017,2021,4,2017 2018 2019 2021,FR,FBS,ACC,Grenada,MS,USA,33.781445,-89.811547,census,city
 Louisville,Caleb Chandler,OL,"Jefferson, Ga.",Jefferson,,2017,2022,5,2017 2018 2019 2021 2022,FR,FBS,ACC,Jefferson,GA,USA,34.136239,-83.602157,census,city
@@ -58739,7 +58739,7 @@ Marshall,Jayshaun Coffman,DL,"Lexington, KY",Frederick Douglass,,2021,2022,2,202
 Marshall,JoJo Evans,S,"Palm Beach Gardens, Fla.",Palm Beach Gardens,,2021,2021,1,2021,R-FR,FBS,Sun Belt,Palm Beach Gardens,FL,USA,26.848788,-80.167124,census,city
 Marshall,John McConnell,P,"Morgantown, WV",Morgantown,,2021,2023,3,2021 2022 2023,FR,FBS,Sun Belt,Morgantown,WV,USA,39.637487,-79.946856,census,city
 Marshall,Johran Broadnax,LB,"Columbia, S.C.",U. of Pikeville,,2021,2021,1,2021,R-JR,FBS,Sun Belt,Columbia,SC,USA,34.040519,-80.906099,census,city
-Marshall,Jordan Calomese,DL,"Bay Saint Louis, MS",,Ms. Gulf Coast CC,2021,2022,2,2021 2022,SO,FBS,Sun Belt,Bay Saint Louis,MS,USA,30.3088076,-89.3300461,usgs,city
+Marshall,Jordan Calomese,DL,"Bay Saint Louis, MS",,Ms. Gulf Coast CC,2021,2022,2,2021 2022,SO,FBS,Sun Belt,Bay St. Louis,MS,USA,30.323448,-89.35879,spelling_fix,city
 Marshall,Jordan Williams,LB,"Proctorville, Ohio",Fairland,,2021,2021,1,2021,FR,FBS,Sun Belt,Proctorville,OH,USA,38.437596,-82.382064,census,city
 Marshall,Josh Hardeman,S,"Covington, Ga.",Newton,,2021,2021,1,2021,FR,FBS,Sun Belt,Covington,GA,USA,33.605439,-83.846634,census,city
 Marshall,Joshua Bowers,DB,"Bradenton, FL",,Navarro College,2021,2022,2,2021 2022,JR,FBS,Sun Belt,Bradenton,FL,USA,27.489798,-82.576804,census,city
@@ -62102,7 +62102,7 @@ Merrimack,Tavon McGee,Running Back RB,"Baltimore, Md.",,Baltimore Poly Tech,2023
 Merrimack,Adam Pearlstein,Linebacker LB,"Attleboro, Mass.",St. Thomas More,,2024,2024,1,2024,SO,FCS,Independent,Attleboro,MA,USA,41.931653,-71.294503,census,city
 Merrimack,Ayden Pereira,Quarterback QB,"Auburn, N.H.",Central Catholic,Maine,2024,2025,2,2024 2025,SO,FCS,Independent,Auburn,NH,USA,42.997059,-71.365806,census,city
 Merrimack,Ben Scalzi,Quarterback QB,"Malden, Mass.",Hanover High School,,2024,2024,1,2024,FR,FCS,Independent,Malden,MA,USA,42.42938,-71.058706,census,city
-Merrimack,Bryce Goulet,Wide Receiver WR,"Tyngsboro, Mass.",Tyngsboro,,2024,2026,3,2024 2025 2026,FR,FCS,Independent,Tyngsboro,MA,USA,42.6767568,-71.4245085,usgs,city
+Merrimack,Bryce Goulet,Wide Receiver WR,"Tyngsboro, Mass.",Tyngsboro,,2024,2026,3,2024 2025 2026,FR,FCS,Independent,Tyngsborough,MA,USA,42.667762,-71.42882,spelling_fix,city
 Merrimack,Bryce Hall,Offensive Lineman OL,"Herndon, Va.",The Potomac School,,2024,2025,2,2024 2025,FR,FCS,Independent,Herndon,VA,USA,38.970412,-77.387073,census,city
 Merrimack,Cade Callahan,Tight End TE,"Townsend, Mass.",North Middlesex,,2024,2025,2,2024 2025,FR,FCS,Independent,Townsend,MA,USA,42.676668,-71.70977,census,city
 Merrimack,Cody Hobson,Running Back RB,"Washington, DC",Gonzaga College High School,,2024,2024,1,2024,FR,FCS,Independent,Washington,DC,USA,38.904247,-77.016517,census,city
@@ -62864,7 +62864,7 @@ Miami (OH),Sam McCollum,Offensive Line,"Dublin, Ohio",Coffman,,2016,2018,3,2016 
 Miami (OH),Sam Murrer,Defensive Line,"Park Hills, Ky.",Covington Catholic,,2016,2019,4,2016 2017 2018 2019,R-FR,FBS,MAC,Park Hills,KY,USA,39.06713,-84.532674,census,city
 Miami (OH),Sam Shisso,Wide Receiver,"Charlotte, N.C.",East Mecklenburg,,2016,2016,1,2016,R-SR,FBS,MAC,Charlotte,NC,USA,35.209045,-80.83099,census,city
 Miami (OH),Sam Sloman,Placekicker,"Roswell, Ga.",Pace Academy,,2016,2019,4,2016 2017 2018 2019,FR,FBS,MAC,Roswell,GA,USA,34.039453,-84.350946,census,city
-Miami (OH),Sawyer Dean,Wide Receiver,"Kings Mill, Ohio",Kings,,2016,2016,1,2016,R-SO,FBS,MAC,Kings Mill,OH,USA,39.3579807,-84.2773415,nominatim,city
+Miami (OH),Sawyer Dean,Wide Receiver,"Kings Mill, Ohio",Kings,,2016,2016,1,2016,R-SO,FBS,MAC,Kings Mills,OH,USA,39.358349,-84.243812,spelling_fix,city
 Miami (OH),Spencer McInnis,Running Back,"Commerce Twp., Mich.",St. Mary,,2016,2016,1,2016,R-SR,FBS,MAC,Commerce Twp.,MI,USA,42.57387,-83.495686,census,city
 Miami (OH),Stori Emerson,Wide Receiver,"Indianapolis, Ind.",Ben Davis,,2016,2016,1,2016,FR,FBS,MAC,Indianapolis,IN,USA,39.776664,-86.145935,census,city
 Miami (OH),TJ Williams,Linebacker,"Creve Coeur, Mo.",CBC,,2016,2016,1,2016,SR,FBS,MAC,Creve Coeur,MO,USA,38.662023,-90.443048,census,city
@@ -66194,7 +66194,7 @@ Mississippi Valley State,Dorian Jamison,Offensive Line,"Rock Hill, South Carolin
 Mississippi Valley State,Elijah Rawlins,Defensive Line,"Hopkinsville, Kentucky",Hopkinsville HS,Austin Peay,2021,2022,2,2021 2022,SO,FCS,SWAC,Hopkinsville,KY,USA,36.839284,-87.473544,census,city
 Mississippi Valley State,Eric Gamble,Linebacker,"Indianapolis, Indiana",Pike HS,,2021,2021,1,2021,SO,FCS,SWAC,Indianapolis,IN,USA,39.776664,-86.145935,census,city
 Mississippi Valley State,Ethan Lyons,Defensive Line,"Riverview, Florida",Riverview HS,,2021,2021,1,2021,FR,FCS,SWAC,Riverview,FL,USA,27.824275,-82.304486,census,city
-Mississippi Valley State,Fredrick McGee,Defensive Back,"Leaksville, Mississippi",Greene County HS,,2021,2022,2,2021 2022,JR,FCS,SWAC,Leaksville,MS,USA,31.140182,-88.551688,nominatim,city
+Mississippi Valley State,Fredrick McGee,Defensive Back,"Leaksville, Mississippi",Greene County HS,,2021,2022,2,2021 2022,JR,FCS,SWAC,Leakesville,MS,USA,31.149202,-88.555853,spelling_fix,city
 Mississippi Valley State,Gregory Jean,Wide Receiver,"Broward, Florida",Boyd Anderson HS,,2021,2022,2,2021 2022,JR,FCS,SWAC,Broward,FL,USA,26.193535,-80.476683,census_county,county
 Mississippi Valley State,Jacob Allen,OL,"Atlanta, Georgia",Peachtree Ridge HS,,2021,2023,3,2021 2022 2023,FR,FCS,SWAC,Atlanta,GA,USA,33.762909,-84.422675,census,city
 Mississippi Valley State,Jacory Rankin,Wide Receiver,"Port Gibson, Mississippi",Port Gibson HS,Jones College,2021,2022,2,2021 2022,JR,FCS,SWAC,Port Gibson,MS,USA,31.955816,-90.983438,census,city
@@ -66272,7 +66272,7 @@ Mississippi Valley State,Stefon Smith,DL,"Indianola, Mississippi",Indianola Acad
 Mississippi Valley State,Tommy Curtis,Linebacker,"Vicksburg, Mississippi",Vicksburg HS,Belhaven,2022,2022,1,2022,SO,FCS,SWAC,Vicksburg,MS,USA,32.322004,-90.881557,census,city
 Mississippi Valley State,Tonorris Brookins II,Wide Receiver Wide Receiver,"Macon, Mississippi",Starkville HS,East Mississippi CC,2022,2024,3,2022 2023 2024,JR,FCS,SWAC,Macon,MS,USA,33.122065,-88.556713,census,city
 Mississippi Valley State,Travis Mumphry,Quarterback,"New Orleans, Louisiana",John Ehret HS,Coahoma CC | UNLV,2022,2022,1,2022,JR,FCS,SWAC,New Orleans,LA,USA,30.05342,-89.934502,census,city
-Mississippi Valley State,Vaughn Jennings,Defensive Line,"Chester Spring, Pennsylvania",Downingtown East HS,Duquesne,2022,2022,1,2022,GR,FCS,SWAC,Chester Spring,PA,USA,39.9685107,-75.5734021,nominatim,city
+Mississippi Valley State,Vaughn Jennings,Defensive Line,"Chester Spring, Pennsylvania",Downingtown East HS,Duquesne,2022,2022,1,2022,GR,FCS,SWAC,Chester Springs,PA,USA,40.0951038,-75.6168681,spelling_fix,city
 Mississippi Valley State,Aaron Webb,DB,"St. Louis, Missouri",Pattonville HS,,2023,2023,1,2023,JR,FCS,SWAC,St. Louis,MO,USA,38.635699,-90.244582,census,city
 Mississippi Valley State,Alexander Davis,Kicker Kicker,"Orlando, Florida",Timber Creek HS,,2023,2024,2,2023 2024,FR,FCS,SWAC,Orlando,FL,USA,28.40865,-81.254805,census,city
 Mississippi Valley State,Amir Williams,DB,"Greenwood, Mississippi",Greenwood HS,,2023,2026,4,2023 2024 2025 2026,FR,FCS,SWAC,Greenwood,MS,USA,33.51246,-90.198963,census,city
@@ -66414,7 +66414,7 @@ Mississippi Valley State,Khalil Hunter,Linebacker Linebacker,"Fort Lauderdale, F
 Mississippi Valley State,Landon Brown,OL,"Indianola, MS",St. Joesph High School,,2025,2026,2,2025 2026,SO,FCS,SWAC,Indianola,MS,USA,33.448896,-90.643752,census,city
 Mississippi Valley State,Lawrence Schuster,Offensive Line Offensive Line,"Tustin, California",Tustin HS,,2025,2025,1,2025,FR,FCS,SWAC,Tustin,CA,USA,33.73092,-117.810599,census,city
 Mississippi Valley State,Mahkeil Shuler,DB,"Atlanta, GA",Hapeville Charter Career Academy,,2025,2026,2,2025 2026,FR,FCS,SWAC,Atlanta,GA,USA,33.762909,-84.422675,census,city
-Mississippi Valley State,Malik Kemp,Quarterback Quarterback,"Douglasvillle, Georgia",LaGrange HS,,2025,2025,1,2025,SO,FCS,SWAC,Douglasvillle,GA,USA,33.783658,-84.7029124,nominatim,city
+Mississippi Valley State,Malik Kemp,Quarterback Quarterback,"Douglasvillle, Georgia",LaGrange HS,,2025,2025,1,2025,SO,FCS,SWAC,Douglasville,GA,USA,33.73678,-84.701074,spelling_fix,city
 Mississippi Valley State,Marko Dubak,Kicker Kicker,"Chicago, Illinois",Lyons Township HS,,2025,2025,1,2025,JR,FCS,SWAC,Chicago,IL,USA,41.837045,-87.684939,census,city
 Mississippi Valley State,Martez Williams,TE,"Clarksdale, MS",Clarksdale High School,,2025,2026,2,2025 2026,JR,FCS,SWAC,Clarksdale,MS,USA,34.193796,-90.568598,census,city
 Mississippi Valley State,Matthew Williams,Wide Receiver Wide Receiver,"Lexington, Mississippi",Holmes County Central HS,,2025,2025,1,2025,SO,FCS,SWAC,Lexington,MS,USA,33.11709,-90.049619,census,city
@@ -69073,7 +69073,7 @@ Morehead State,Jacob Ungruhe,Offensive Line OL,"Maineville, Ohio",Little Miami H
 Morehead State,Jah'Dell Lee Quay,Defensive Back DB,"Brentwood, Tenn.",Columbia Academy,,2021,2022,2,2021 2022,SO,FCS,Pioneer,Brentwood,TN,USA,35.993904,-86.770834,census,city
 Morehead State,Jahleel Holmes,Linebacker LB,"Moreno Valley, Calif.",Moreno Valley HS,,2021,2023,3,2021 2022 2023,SO,FCS,Pioneer,Moreno Valley,CA,USA,33.923253,-117.205685,census,city
 Morehead State,James Louis,Running Back RB,"Hillside, N.J.",Hillside HS,,2021,2024,4,2021 2022 2023 2024,FR,FCS,Pioneer,Hillside,NJ,USA,40.695889,-74.2288,census,city
-Morehead State,James Wayne,Offensive Line OL,"Port Saint Lucie, Fla.",Treasure Coast HS,,2021,2024,4,2021 2022 2023 2024,FR,FCS,Pioneer,Port Saint Lucie,FL,USA,27.2939333,-80.3503283,usgs,city
+Morehead State,James Wayne,Offensive Line OL,"Port Saint Lucie, Fla.",Treasure Coast HS,,2021,2024,4,2021 2022 2023 2024,FR,FCS,Pioneer,Port St. Lucie,FL,USA,27.280554,-80.388261,spelling_fix,city
 Morehead State,Javian Browder,Defensive Back DB,"Springfield, Tenn.",Northeast HS,,2021,2021,1,2021,FR,FCS,Pioneer,Springfield,TN,USA,36.493599,-86.872209,census,city
 Morehead State,Jaxsen Spears,Offensive Line OL,"Plainfield, Ind.",Plainfield HS,,2021,2024,4,2021 2022 2023 2024,FR,FCS,Pioneer,Plainfield,IN,USA,39.693193,-86.371985,census,city
 Morehead State,Jihad McCall,Defensive Back DB,"Jersey City, N.J.",Hoboken HS,,2021,2024,4,2021 2022 2023 2024,FR,FCS,Pioneer,Jersey City,NJ,USA,40.711417,-74.06476,census,city
@@ -69565,7 +69565,7 @@ Morgan State,DJ Hamler,RB,"Pontiac, Mich.",Waterford Kettering HS,,2021,2023,3,2
 Morgan State,Danny Chaudhry,DE,"Macomb, Mich.",Macomb Dakota HS,,2021,2021,1,2021,FR,FCS,MEAC,Macomb,MI,USA,42.674031,-82.916765,census,city
 Morgan State,Daylin Gooden,CB,"Norristown, Pa.",Pope John Paul II,,2021,2021,1,2021,FR,FCS,MEAC,Norristown,PA,USA,40.122076,-75.33987,census,city
 Morgan State,Demier Shipley,WR,"Tuskegee, Ala.",Booker T. Washington HS,,2021,2024,3,2021 2023 2024,SO,FCS,MEAC,Tuskegee,AL,USA,32.418723,-85.682509,census,city
-Morgan State,Deshauwn Alleyne,LB,"Port Saint Lucie, Fla.",Saint Lucie West Centennial HS,,2021,2021,1,2021,FR,FCS,MEAC,Port Saint Lucie,FL,USA,27.2939333,-80.3503283,usgs,city
+Morgan State,Deshauwn Alleyne,LB,"Port Saint Lucie, Fla.",Saint Lucie West Centennial HS,,2021,2021,1,2021,FR,FCS,MEAC,Port St. Lucie,FL,USA,27.280554,-80.388261,spelling_fix,city
 Morgan State,Devon Mondy,WR,"Jacksonville, Fla.",Edward H. White HS,,2021,2021,1,2021,JR,FCS,MEAC,Jacksonville,FL,USA,30.336864,-81.661603,census,city
 Morgan State,Dorien Parris,RB,"Fort Myers, Fla.",Golden Gate HS,,2021,2022,2,2021 2022,FR,FCS,MEAC,Fort Myers,FL,USA,26.61982,-81.831673,census,city
 Morgan State,Duce Taylor,QB,"Fort Wayne, Ind.",North Side HS,,2021,2024,4,2021 2022 2023 2024,FR,FCS,MEAC,Fort Wayne,IN,USA,41.088193,-85.142791,census,city
@@ -70530,7 +70530,7 @@ NC State,"Reggie Gallaspy, Jr.",RB,"High Point, N.C.",Southern Guilford,,2016,20
 NC State,Riley Nicholson,LB,"Kissimmee, Fla.",Osceola,,2016,2017,2,2016 2017,SO,FBS,ACC,Kissimmee,FL,USA,28.30278,-81.417831,census,city
 NC State,Ryan Finley,QB,"Phoenix, Ariz.",,Paradise Valley/Boise State,2016,2018,3,2016 2017 2018,R-SO,FBS,ACC,Phoenix,AZ,USA,33.572154,-112.090132,census,city
 NC State,Sean Paul,CB,"Vero Beach, Fla.",Vero Beach,,2016,2016,1,2016,R-JR,FBS,ACC,Vero Beach,FL,USA,27.64722,-80.393136,census,city
-NC State,Shawn Boone,SAF,"W. Palm Beach, Fla.",Dwyer,,2016,2017,2,2016 2017,JR,FBS,ACC,W. Palm Beach,FL,USA,26.715364,-80.0532942,nominatim,city
+NC State,Shawn Boone,SAF,"W. Palm Beach, Fla.",Dwyer,,2016,2017,2,2016 2017,JR,FBS,ACC,West Palm Beach,FL,USA,26.745114,-80.127038,spelling_fix,city
 NC State,Shug Frazier,DT,"Buford, Ga.",Buford,,2016,2017,2,2016 2017,FR,FBS,ACC,Buford,GA,USA,34.118562,-83.98861,census,city
 NC State,Stephen Louis,WR,"West Palm Beach, Fla.",Palm Beach Lakes,,2016,2018,3,2016 2017 2018,R-SO,FBS,ACC,West Palm Beach,FL,USA,26.745114,-80.127038,census,city
 NC State,Stephen Morrison,NIC,"Weddington, N.C.",Weddington,,2016,2018,3,2016 2017 2018,R-SO,FBS,ACC,Weddington,NC,USA,35.022127,-80.735422,census,city
@@ -71326,7 +71326,7 @@ Navy,Dashaun Peele,CB,"Norfolk, Va.",Maury,,2021,2024,4,2021 2022 2023 2024,FR,F
 Navy,David Hixon,C,"Auburn, Ala.",,Auburn,2021,2022,2,2021 2022,FR,FBS,American,Auburn,AL,USA,32.607806,-85.494746,census,city
 Navy,Declan Moriarty,C,"West Barnstable, Mass.",Barnstable,,2021,2022,2,2021 2022,FR,FBS,American,West Barnstable,MA,USA,41.7056643,-70.3744686,usgs,city
 Navy,Donald Berniard Jr.,NG,"Baton Rouge, La.",,University Laboratory,2021,2023,3,2021 2022 2023,SO,FBS,American,Baton Rouge,LA,USA,30.440443,-91.133166,census,city
-Navy,Dre Grace,S,"Port Saint Lucie, Fla.",Centennial,,2021,2022,2,2021 2022,SO,FBS,American,Port Saint Lucie,FL,USA,27.2939333,-80.3503283,usgs,city
+Navy,Dre Grace,S,"Port Saint Lucie, Fla.",Centennial,,2021,2022,2,2021 2022,SO,FBS,American,Port St. Lucie,FL,USA,27.280554,-80.388261,spelling_fix,city
 Navy,Duke Pa'ane,P,"Carlsbad, Calif.",Carlsbad,,2021,2021,1,2021,SO,FBS,American,Carlsbad,CA,USA,33.129284,-117.284183,census,city
 Navy,Eavan Gibbons,Striker,"San Diego, Calif.",St. Augustine,,2021,2023,3,2021 2022 2023,SO,FBS,American,San Diego,CA,USA,32.814977,-117.135562,census,city
 Navy,Elias Larry,CB,"Palmdale, Calif.",Sierra Canyon,,2021,2023,3,2021 2022 2023,FR,FBS,American,Palmdale,CA,USA,34.591038,-118.105403,census,city
@@ -71477,7 +71477,7 @@ Navy,Carson de Avila,S S,"Newport Beach, Calif.",Newport Harbor,,2023,2026,4,202
 Navy,Casey Smith,WR WR,"Annapolis, Md.",St. Mary's,,2023,2026,4,2023 2024 2025 2026,FR,FBS,American,Annapolis,MD,USA,38.972152,-76.505332,census,city
 Navy,Coleman Cauley,LB LB,"Macon, Ga.",First Presbyterian Day School,,2023,2026,4,2023 2024 2025 2026,FR,FBS,American,Macon,GA,USA,32.80899,-83.69406,census,city
 Navy,Conner Lessane,S S,"Lewisville, N.C.",Woodberry Forest (Va.),,2023,2026,4,2023 2024 2025 2026,FR,FBS,American,Lewisville,NC,USA,36.105194,-80.424552,census,city
-Navy,David Stanphill,LS LS,"Saint Simon Island, Ga.",Glynn Academy,,2023,2023,1,2023,FR,FBS,American,Saint Simon Island,GA,USA,31.13627,-81.3872136,nominatim,city
+Navy,David Stanphill,LS LS,"Saint Simon Island, Ga.",Glynn Academy,,2023,2023,1,2023,FR,FBS,American,St. Simons Island,GA,USA,31.1505097,-81.3695404,spelling_fix,city
 Navy,Denim Edwards,SB SB,"Miami, Fla.",Christopher Columbus,,2023,2023,1,2023,FR,FBS,American,Miami,FL,USA,25.775163,-80.208615,census,city
 Navy,Drew Turner,WR WR,"Vienna, Va.",The Potomac School,,2023,2024,2,2023 2024,FR,FBS,American,Vienna,VA,USA,38.898576,-77.258323,census,city
 Navy,Gage Leonard,SB SB,"Chatsworth, Ga.",Calhoun,,2023,2026,4,2023 2024 2025 2026,FR,FBS,American,Chatsworth,GA,USA,34.781091,-84.782472,census,city
@@ -73386,7 +73386,7 @@ New Haven,Justin White,WR,"Holyoke, Mass.",Holyoke,,2017,2017,1,2017,JR,D2,NEC,H
 New Haven,Kevin Leach Brown,Defensive Back DB,"Bronx, N.Y.",Mount St. Michael,,2017,2018,2,2017 2018,SO,D2,NEC,Bronx,NY,USA,40.662712,-73.938677,census,city
 New Haven,Khalim Cisse,Linebacker LB,"Willingboro, N.J.",Willingboro,,2017,2021,4,2017 2018 2019 2021,FR,D2,NEC,Willingboro,NJ,USA,40.02795,-74.886984,census,city
 New Haven,Mcprecia Remy,Linebacker LB,"Brooklyn, N.Y.",Millwood,,2017,2018,2,2017 2018,FR,D2,NEC,Brooklyn,NY,USA,40.662712,-73.938677,census,city
-New Haven,Michael Cappuccilli,Offensive Line OL,"Walkill, N.Y.",Wallkill,,2017,2021,4,2017 2018 2019 2021,FR,D2,NEC,Walkill,NY,USA,41.6272735,-74.1631774,nominatim,city
+New Haven,Michael Cappuccilli,Offensive Line OL,"Walkill, N.Y.",Wallkill,,2017,2021,4,2017 2018 2019 2021,FR,D2,NEC,Wallkill,NY,USA,41.608446,-74.164625,spelling_fix,city
 New Haven,Michael Montecalvo,Defensive Line DL,"Green Brook, N.J.",Watchung Hills Regional,,2017,2021,4,2017 2018 2019 2021,FR,D2,NEC,Green Brook,NJ,USA,40.603832,-74.483208,census,city
 New Haven,Michael Stalenyj,Punter P,"Piscataway, N.J.",Piscataway,,2017,2019,3,2017 2018 2019,FR,D2,NEC,Piscataway,NJ,USA,40.545539,-74.46072,census,city
 New Haven,Michael Wilson,Offensive Line OL,"Atlantic Highlands, N.J.",Middletown South,,2017,2021,4,2017 2018 2019 2021,FR,D2,NEC,Atlantic Highlands,NJ,USA,40.411771,-74.019836,census,city
@@ -73813,7 +73813,7 @@ New Haven,Landen Dikker,Defensive Line DL,"Montgomery, N.J.",Montgomery,,2025,20
 New Haven,Liam Harris,Wide Receiver WR,,,,2025,2025,1,2025,FR,FCS,NEC,,,,,,,
 New Haven,Liam Quigley,Kicker/Punter K/P,"Berkeley Heights, N.J.",Govenor Livingston,,2025,2026,2,2025 2026,JR,FCS,NEC,Berkeley Heights,NJ,USA,40.676119,-74.422756,census,city
 New Haven,Logan Jozwiak,Defensive Line DL,"Greenwich, Conn.",Greenwich,,2025,2026,2,2025 2026,SO,FCS,NEC,Greenwich,CT,USA,41.027773,-73.626931,census,city
-New Haven,Louis Montalvo,Wide Receiver WR,"Wetherfield, Conn.",Suffield Academy,,2025,2025,1,2025,FR,FCS,NEC,Wetherfield,CT,USA,41.7152691,-72.6547759,nominatim,city
+New Haven,Louis Montalvo,Wide Receiver WR,"Wetherfield, Conn.",Suffield Academy,,2025,2025,1,2025,FR,FCS,NEC,Wethersfield,CT,USA,41.702484,-72.669301,spelling_fix,city
 New Haven,Lucas Theriaque,Defensive Back DB,"Woodstock, Conn.",Putnam Science Academy,,2025,2026,2,2025 2026,FR,FCS,NEC,Woodstock,CT,USA,41.966208,-72.022786,census,city
 New Haven,Luke Kelley,Defensive Line DL,"Lancaster, Pa.",Manheim Township,,2025,2025,1,2025,GR,FCS,NEC,Lancaster,PA,USA,40.042061,-76.30099,census,city
 New Haven,Mark Didio Jr.,Wide Receiver WR,"West Port, Conn.",,,2025,2025,1,2025,SR,FCS,NEC,West Port,CT,USA,41.120831,-73.343464,census,city
@@ -75876,7 +75876,7 @@ Norfolk State,Cameron Sapp,Quarterback QB,"Jacksonville, Fla.",,Florida A&M,2023
 Norfolk State,Dantey Menard,Defensive Tackle DT,"Chesapeake, Va.",Oscar Smith HS,,2023,2026,4,2023 2024 2025 2026,FR,FCS,MEAC,Chesapeake,VA,USA,36.679376,-76.301788,census,city
 Norfolk State,David Olasimbo,Offensive Lineman OL,"Huntersville, NC",North Mecklenburg HS,,2023,2026,4,2023 2024 2025 2026,FR,FCS,MEAC,Huntersville,NC,USA,35.40681,-80.86868,census,city
 Norfolk State,Davion Corpening,Defensive Back DB,"Newport News, Va.",Warwick HS,,2023,2024,2,2023 2024,FR,FCS,MEAC,Newport News,VA,USA,37.076136,-76.52198,census,city
-Norfolk State,Elyjah Mitchell,Wide Receiver WR,"Capital Heights, MD",Fort Union Military Academy,,2023,2026,4,2023 2024 2025 2026,FR,FCS,MEAC,Capital Heights,MD,USA,38.888524,-76.913188,nominatim,city
+Norfolk State,Elyjah Mitchell,Wide Receiver WR,"Capital Heights, MD",Fort Union Military Academy,,2023,2026,4,2023 2024 2025 2026,FR,FCS,MEAC,Capitol Heights,MD,USA,38.876687,-76.907569,spelling_fix,city
 Norfolk State,Grant Gaffney,Defensive Lineman DL,"Virginia Beach, Va.",Salem HS,,2023,2025,3,2023 2024 2025,FR,FCS,MEAC,Virginia Beach,VA,USA,36.779525,-76.029142,census,city
 Norfolk State,Gregory Perkins,Tight End TE,"Pensacola, Fla.",,Southern,2023,2024,2,2023 2024,GR,FCS,MEAC,Pensacola,FL,USA,30.440989,-87.191242,census,city
 Norfolk State,I'Mire Talley,Wide Receiver WR,"Chesapeake, Va.",Indian River HS,,2023,2023,1,2023,FR,FCS,MEAC,Chesapeake,VA,USA,36.679376,-76.301788,census,city
@@ -80692,7 +80692,7 @@ Northern Colorado,Ibraheem Musallet,OL,"Chino Hills, Calif.",Bonita,,2025,2026,2
 Northern Colorado,Jacob Willig,PK,"Fort Collins, Colo.",Rocky Mountain HS,CSU Pueblo,2025,2025,1,2025,R-SR,FCS,Big Sky,Fort Collins,CO,USA,40.548216,-105.064833,census,city
 Northern Colorado,Jamir Ford,WR,"Denver, Colo.",Vista Ridge HS,,2025,2025,1,2025,FR,FCS,Big Sky,Denver,CO,USA,39.76185,-104.881105,census,city
 Northern Colorado,Kai Shelton,LB,"Denver, Colo.",Regis Jesuit,,2025,2026,2,2025 2026,FR,FCS,Big Sky,Denver,CO,USA,39.76185,-104.881105,census,city
-Northern Colorado,Kenny Lueth,QB,"Rockling, Calif.",Rocklin,Northern Illinois/American River College,2025,2026,2,2025 2026,R-JR,FCS,Big Sky,Rockling,CA,USA,38.7745345,-121.2509674,nominatim,city
+Northern Colorado,Kenny Lueth,QB,"Rockling, Calif.",Rocklin,Northern Illinois/American River College,2025,2026,2,2025 2026,R-JR,FCS,Big Sky,Rocklin,CA,USA,38.806868,-121.249696,spelling_fix,city
 Northern Colorado,Kieryus Boone,RB,"Saginaw, Mich.",Saginaw,Monterey Peninsula College,2025,2026,2,2025 2026,JR,FCS,Big Sky,Saginaw,MI,USA,43.419945,-83.950172,census,city
 Northern Colorado,Leo Blumentritt,P/PK,"Weichs, Germany",Gymnasium Markt Indersdorf,College of the Sequoias,2025,2025,1,2025,SO,FCS,Big Sky,Weichs,,Germany,48.3813141,11.4144865,nominatim,city
 Northern Colorado,Levi Durrell,QB,"Newberg, Ore.",Newberg,Shasta College,2025,2026,2,2025 2026,SR,FCS,Big Sky,Newberg,OR,USA,45.307257,-122.960198,census,city
@@ -82044,7 +82044,7 @@ Northwestern,Richie Hagarty,DL,"New Palestine, Ind.",Cathedral,Southern Illinois
 Northwestern,Ricky Ahumaraeze,WR,"Kansas City, Mo.",,Liberty,2023,2026,4,2023 2024 2025 2026,FR,FBS,Big Ten,Kansas City,MO,USA,39.125155,-94.550313,census,city
 Northwestern,Tyler Gant,DL,"St. Louis, Mo.",,Christian Brothers College,2023,2026,4,2023 2024 2025 2026,FR,FBS,Big Ten,St. Louis,MO,USA,38.635699,-90.244582,census,city
 Northwestern,Braxton Strong,DL,"Peru, Ind.",Peru,,2024,2026,3,2024 2025 2026,FR,FBS,Big Ten,Peru,IN,USA,40.758651,-86.070561,census,city
-Northwestern,Callen Campbell,DL,"Sault Sainte Marie, Mich.",Sault Area,,2024,2026,3,2024 2025 2026,FR,FBS,Big Ten,Sault Sainte Marie,MI,USA,46.4952997,-84.3453169,usgs,city
+Northwestern,Callen Campbell,DL,"Sault Sainte Marie, Mich.",Sault Area,,2024,2026,3,2024 2025 2026,FR,FBS,Big Ten,Sault Ste. Marie,MI,USA,46.476169,-84.370544,spelling_fix,city
 Northwestern,Cam Russell,WR,"Milwaukee, Wis.",Marquette,,2024,2026,3,2024 2025 2026,FR,FBS,Big Ten,Milwaukee,WI,USA,43.063348,-87.966695,census,city
 Northwestern,Carson Grove,WR,"Arlington Heights, Ill.",John Hersey,,2024,2026,3,2024 2025 2026,FR,FBS,Big Ten,Arlington Heights,IL,USA,42.097362,-87.981671,census,city
 Northwestern,Cooper Lovelace,OL,"Prairie Village, Kan.",Shawnee Mission East,USC,2024,2024,1,2024,GR,FBS,Big Ten,Prairie Village,KS,USA,38.986835,-94.636195,census,city
@@ -84084,7 +84084,7 @@ Ohio State,Preston Wolfe,WR,Columbus,Hilliard Bradley,Indiana State,2025,2025,1,
 Ohio State,Quincy Porter,WR,"New Milford, N.J.",Bergen Catholic,,2025,2025,1,2025,FR,FBS,Big Ten,New Milford,NJ,USA,40.934161,-74.019453,census,city
 Ohio State,Riley Pettijohn,LB,"McKinney, Texas",McKinney,,2025,2026,2,2025 2026,FR,FBS,Big Ten,McKinney,TX,USA,33.201125,-96.664161,census,city
 Ohio State,Stanley Jackson Jr.,RB,"Westerville, Ohio",Westerville North,Marshall,2025,2026,2,2025 2026,SO,FBS,Big Ten,Westerville,OH,USA,40.123435,-82.913324,census,city
-Ohio State,"Tarvos ""TJ"" Alford",LB,"Port Saint Lucie, Fla.",Vero Beach,,2025,2026,2,2025 2026,FR,FBS,Big Ten,Port Saint Lucie,FL,USA,27.2939333,-80.3503283,usgs,city
+Ohio State,"Tarvos ""TJ"" Alford",LB,"Port Saint Lucie, Fla.",Vero Beach,,2025,2026,2,2025 2026,FR,FBS,Big Ten,Port St. Lucie,FL,USA,27.280554,-80.388261,spelling_fix,city
 Ohio State,Tavien St. Clair,QB,"Bellefontaine, Ohio",Bellefontaine,,2025,2026,2,2025 2026,FR,FBS,Big Ten,Bellefontaine,OH,USA,40.362702,-83.762989,census,city
 Ohio State,Trajen Odom,DL,"Inglewood, Calif.",Weddington (N.C.),,2025,2025,1,2025,FR,FBS,Big Ten,Inglewood,CA,USA,33.956068,-118.344274,census,city
 Ohio State,Trey Robinette,QB,"Washington Court House, Ohio",Miami Trace,,2025,2025,1,2025,FR,FBS,Big Ten,Washington Court House,OH,USA,39.537916,-83.427788,census,city
@@ -86605,7 +86605,7 @@ Oregon,Isaiah Pitre,OLB,"Oakland, Calif.",Bishop O'Dowd HS,,2018,2018,1,2018,FR,
 Oregon,JJ Tucker,WR,"Harbor City, Calif.",Narbonne HS,,2018,2018,1,2018,FR,FBS,Big Ten,Harbor City,CA,USA,33.7900173,-118.2978496,usgs,city
 Oregon,Jace Krier,K,"Eugene, Ore.",Marist Catholic HS,,2018,2018,1,2018,FR,FBS,Big Ten,Eugene,OR,USA,44.056848,-123.119019,census,city
 Oregon,Jevon Holland,S,"Coquitlam, Canada",Bishop O'Dowd HS (Calif.),,2018,2019,2,2018 2019,FR,FBS,Big Ten,Coquitlam,,Canada,49.2842958,-122.793281,nominatim,city
-Oregon,John Keller,WR,"Milipitas, Calif.",Milipitas HS,College of San Mateo,2018,2018,1,2018,JR,FBS,Big Ten,Milipitas,CA,USA,37.4187517,-121.877423,nominatim,city
+Oregon,John Keller,WR,"Milipitas, Calif.",Milipitas HS,College of San Mateo,2018,2018,1,2018,JR,FBS,Big Ten,Milpitas,CA,USA,37.433136,-121.890934,spelling_fix,city
 Oregon,Jordan Adeyemi-John,CB,"Placentia, Calif.",Valencia HS,,2018,2019,2,2018 2019,FR,FBS,Big Ten,Placentia,CA,USA,33.881158,-117.854783,census,city
 Oregon,Justin Collins,WR,"Los Angeles, Calif.",Carson HS,Boise State,2018,2019,2,2018 2019,SO,FBS,Big Ten,Los Angeles,CA,USA,34.019394,-118.410825,census,city
 Oregon,Justin Johnson,OL,"Philadelphia, Pa.",Neumann-Goretti HS,,2018,2019,2,2018 2019,FR,FBS,Big Ten,Philadelphia,PA,USA,40.009376,-75.133346,census,city
@@ -88998,7 +88998,7 @@ Portland State,Thomas Hamilton,QB,"Baker City, OR",Oregon City,,2016,2016,1,2016
 Portland State,Tommy Laverde,OL,"Portland, OR",Lincoln,,2016,2019,4,2016 2017 2018 2019,FR,FCS,Big Sky,Portland,OR,USA,45.536951,-122.649971,census,city
 Portland State,Trent Riley,WR,"North Bend, WA",Mount Si,UNLV,2016,2017,2,2016 2017,JR,FCS,Big Sky,North Bend,WA,USA,47.487967,-121.768786,census,city
 Portland State,Troy Bacon,OL,"Oak Hills, CA",Oak Hills,Boise State,2016,2016,1,2016,SO,FCS,Big Sky,Oak Hills,CA,USA,34.389944,-117.403094,census,city
-Portland State,Tyler Foreman,S,"Pasedena, CA",Crespi,UCLA,2016,2017,2,2016 2017,JR,FCS,Big Sky,Pasedena,CA,USA,34.1453632,-118.1477731,nominatim,city
+Portland State,Tyler Foreman,S,"Pasedena, CA",Crespi,UCLA,2016,2017,2,2016 2017,JR,FCS,Big Sky,Pasadena,CA,USA,34.160602,-118.137954,spelling_fix,city
 Portland State,Tyshon Mosley,OL,"Sandy, UT",Jordan,Utah State,2016,2017,2,2016 2017,JR,FCS,Big Sky,Sandy,UT,USA,40.571714,-111.84987,census,city
 Portland State,Walter Santiago,S,"Kahuku, HI",Kamehameha,,2016,2016,1,2016,SR,FCS,Big Sky,Kahuku,HI,USA,21.678943,-157.943157,census,city
 Portland State,William Dawson,DL,"Eugene, OR",Churchill,,2016,2017,2,2016 2017,JR,FCS,Big Sky,Eugene,OR,USA,44.056848,-123.119019,census,city
@@ -92123,7 +92123,7 @@ Rice,JaShon Palmer,WR,"Houston, Texas",Eisenhower,,2019,2019,1,2019,FR,FBS,Ameri
 Rice,Jack Bradley,TE,"Dallas, Texas",Bishop Lynch,,2019,2023,4,2019 2021 2022 2023,FR,FBS,American,Dallas,TX,USA,32.793333,-96.766513,census,city
 Rice,Jake Bailey,WR,"San Clemente, California",St. John Bosco,,2019,2021,2,2019 2021,FR,FBS,American,San Clemente,CA,USA,33.449143,-117.61312,census,city
 Rice,Jawan King,RB,"Atlanta, Texas",Atlanta,,2019,2019,1,2019,FR,FBS,American,Atlanta,TX,USA,33.113238,-94.16761,census,city
-Rice,Jerry Johnson III,FB,"Port Saint Lucie, Florida",Treasure Coast,,2019,2022,3,2019 2021 2022,FR,FBS,American,Port Saint Lucie,FL,USA,27.2939333,-80.3503283,usgs,city
+Rice,Jerry Johnson III,FB,"Port Saint Lucie, Florida",Treasure Coast,,2019,2022,3,2019 2021 2022,FR,FBS,American,Port St. Lucie,FL,USA,27.280554,-80.388261,spelling_fix,city
 Rice,JoVoni Johnson-McCray,WR,"Conway, Arkansas",Conway,,2019,2024,5,2019 2021 2022 2023 2024,FR,FBS,American,Conway,AR,USA,35.074404,-92.467004,census,city
 Rice,Josh Pearcy,OLB,"Moorestown, New Jersey",Moorestown,,2019,2024,5,2019 2021 2022 2023 2024,FR,FBS,American,Moorestown,NJ,USA,39.978716,-74.942651,census,city
 Rice,Joshua Landrum,CB,"Cedar Hill, Texas",Cedar Hill,,2019,2019,1,2019,FR,FBS,American,Cedar Hill,TX,USA,32.584326,-96.958898,census,city
@@ -92857,7 +92857,7 @@ Robert Morris,Zack Zamiska,Defensive Line DL,"Avon Lake, Ohio",Avon Lake,,2016,2
 Robert Morris,Abraham Scotland,DT,"Beltsville, Md.",High Point,,2017,2017,1,2017,,FCS,NEC,Beltsville,MD,USA,39.039903,-76.920443,census,city
 Robert Morris,Adam Sedzmak,Offensive Lineman OL,"Struthers, Ohio",Struthers,,2017,2019,3,2017 2018 2019,,FCS,NEC,Struthers,OH,USA,41.051218,-80.592724,census,city
 Robert Morris,Adrian Gyebi,CB,"Wilmington, Dela.",,Howard,2017,2017,1,2017,,FCS,NEC,Wilmington,DE,USA,39.735651,-75.532104,census,city
-Robert Morris,Alek Kwasniewski,Defensive Back DB,"Kings Mill, Ohio",Kings,,2017,2019,3,2017 2018 2019,,FCS,NEC,Kings Mill,OH,USA,39.3579807,-84.2773415,nominatim,city
+Robert Morris,Alek Kwasniewski,Defensive Back DB,"Kings Mill, Ohio",Kings,,2017,2019,3,2017 2018 2019,,FCS,NEC,Kings Mills,OH,USA,39.358349,-84.243812,spelling_fix,city
 Robert Morris,Alex Minford,Offensive Lineman OL,"Bridgeville, Pa.",South Fayette,,2017,2019,3,2017 2018 2019,,FCS,NEC,Bridgeville,PA,USA,40.358204,-80.10755,census,city
 Robert Morris,Anthony Falletta,DL,"Aliquippa, Pa.",Hopewell,,2017,2017,1,2017,,FCS,NEC,Aliquippa,PA,USA,40.615827,-80.255162,census,city
 Robert Morris,Artie Priore,Linebacker LB,"Pittsburgh, Pa.",Baldwin,,2017,2017,1,2017,,FCS,NEC,Pittsburgh,PA,USA,40.439936,-79.975676,census,city
@@ -92972,7 +92972,7 @@ Robert Morris,Corbin LaFrance,Quarterback QB,"Acworth, Ga.",Carlton Kell,,2021,2
 Robert Morris,D'Andre Hicks,Wide Receiver WR,"Punta Gorda, Fla.",,Charlotte,2021,2022,2,2021 2022,,FCS,NEC,Punta Gorda,FL,USA,26.897754,-82.065812,census,city
 Robert Morris,Dakarai Cabell,Defensive Back DB,"Fort Lauderdale, Fla.",Dillard,,2021,2024,4,2021 2022 2023 2024,,FCS,NEC,Fort Lauderdale,FL,USA,26.141227,-80.146731,census,city
 Robert Morris,Dante Thompson,Offensive Line OL,"Montgomery Village, Md.",Quince Orchard,,2021,2024,4,2021 2022 2023 2024,,FCS,NEC,Montgomery Village,MD,USA,39.188512,-77.205143,census,city
-Robert Morris,Darryl Sullivan,Offensive Line OL,"Wappinger Falls, N.Y.",Roy C. Ketcham,,2021,2022,2,2021 2022,,FCS,NEC,Wappinger Falls,NY,USA,41.6054502,-73.9179091,nominatim,city
+Robert Morris,Darryl Sullivan,Offensive Line OL,"Wappinger Falls, N.Y.",Roy C. Ketcham,,2021,2022,2,2021 2022,,FCS,NEC,Wappingers Falls,NY,USA,41.598156,-73.916945,spelling_fix,city
 Robert Morris,Daunte Boudy,Defensive Line DL,"Vail, Ariz.",Cienega,,2021,2023,3,2021 2022 2023,,FCS,NEC,Vail,AZ,USA,32.021706,-110.693687,census,city
 Robert Morris,De'Mere White,Running Back RB,"Bloomfield, N.J.",DePaul Catholic,,2021,2023,3,2021 2022 2023,,FCS,NEC,Bloomfield,NJ,USA,40.809141,-74.187142,census,city
 Robert Morris,Diego Turcios,Offensive Line OL,"Germantown, Md.",Quince Orchard,,2021,2024,4,2021 2022 2023 2024,,FCS,NEC,Germantown,MD,USA,39.174252,-77.263754,census,city
@@ -94210,7 +94210,7 @@ SMU,Abdul Muhammad,S,"Dallas, Texas",South Oak Cliff,,2023,2026,4,2023 2024 2025
 SMU,Adam Moore,TE,"Miami, Fla.",,Northwestern,2023,2025,3,2023 2024 2025,FR,FBS,ACC,Miami,FL,USA,25.775163,-80.208615,census,city
 SMU,Ahmad Walker,LB,"Warner Robins, Ga.",Warner Robins,Liberty,2023,2024,2,2023 2024,JR,FBS,ACC,Warner Robins,GA,USA,32.597096,-83.653936,census,city
 SMU,Alex Padilla,QB,"Greenwood Village, Colo.",Cherry Creek,Iowa,2023,2023,1,2023,SR,FBS,ACC,Greenwood Village,CO,USA,39.615934,-104.911688,census,city
-SMU,Alex Woods,OL,"Port Saint Lucie, Fla.",Treasure Coast,,2023,2026,4,2023 2024 2025 2026,FR,FBS,ACC,Port Saint Lucie,FL,USA,27.2939333,-80.3503283,usgs,city
+SMU,Alex Woods,OL,"Port Saint Lucie, Fla.",Treasure Coast,,2023,2026,4,2023 2024 2025 2026,FR,FBS,ACC,Port St. Lucie,FL,USA,27.280554,-80.388261,spelling_fix,city
 SMU,Alexander Kilgore,LB,"Katy, Texas",Katy Paetow,,2023,2026,4,2023 2024 2025 2026,FR,FBS,ACC,Katy,TX,USA,29.790915,-95.840711,census,city
 SMU,Braeden Flowers,DE,"San Antonio, Texas",Central Catholic,,2023,2024,2,2023 2024,FR,FBS,ACC,San Antonio,TX,USA,29.462809,-98.524635,census,city
 SMU,Brandon Miyazono,LB,"Frisco, Texas",Frisco,,2023,2026,4,2023 2024 2025 2026,FR,FBS,ACC,Frisco,TX,USA,33.155427,-96.822596,census,city
@@ -94349,7 +94349,7 @@ SMU,Morgan Tribbett,LS,"Eaton, Colo.",Eaton,Colorado State,2025,2026,2,2025 2026
 SMU,Nolan Akins,LS,"Flower Mound, Texas",Marcus,,2025,2025,1,2025,FR,FBS,ACC,Flower Mound,TX,USA,33.037891,-97.113381,census,city
 SMU,Ryan Collins,P,"Santa Clara, Calif.",Bellarmine Prep,Cal Poly,2025,2025,1,2025,R-SR,FBS,ACC,Santa Clara,CA,USA,37.364621,-121.967973,census,city
 SMU,Ryan Earle,LB,"Fort Lauderdale, Fla.",St. Thomas Aquinas,,2025,2025,1,2025,FR,FBS,ACC,Fort Lauderdale,FL,USA,26.141227,-80.146731,census,city
-SMU,Sael Reyes,S,"East Saint Louis, Ill",DeSoto,,2025,2026,2,2025 2026,FR,FBS,ACC,East Saint Louis,IL,USA,38.6244952,-90.1509428,usgs,city
+SMU,Sael Reyes,S,"East Saint Louis, Ill",DeSoto,,2025,2026,2,2025 2026,FR,FBS,ACC,East St. Louis,IL,USA,38.616361,-90.130528,spelling_fix,city
 SMU,Shaadie Clayton-Johnson,RB,"New Orleans, LA",Warren Easton,Colorado,2025,2025,1,2025,GR,FBS,ACC,New Orleans,LA,USA,30.05342,-89.934502,census,city
 SMU,Sione Ma'u,OL,"West Auckland, New Zealand",,New Mexico Military Institute,2025,2026,2,2025 2026,SO,FBS,ACC,West Auckland,,New Zealand,-36.8969431,174.646785,nominatim,city
 SMU,TJ Harden,RB,"Los Angeles, Calif.",Inglewood,UCLA,2025,2025,1,2025,SR,FBS,ACC,Los Angeles,CA,USA,34.019394,-118.410825,census,city
@@ -95020,7 +95020,7 @@ Sacred Heart,Julian Spain,RB,"Montclair, N.J.",Seton Hall Prep,,2016,2016,1,2016
 Sacred Heart,Juwan Dolbrice,DB,"Linden, N.J.",The Peddie School,,2016,2016,1,2016,FR,FCS,Independent,Linden,NJ,USA,40.627337,-74.23631,census,city
 Sacred Heart,Kevin Barry,LB,"River Edge, NJ",River Dell,,2016,2017,2,2016 2017,SR,FCS,Independent,River Edge,NJ,USA,40.926766,-74.037468,census,city
 Sacred Heart,Kevin Daly,K/P,"Campbell Hall, N.Y.",Kennedy Catholic (Rutgers),,2016,2018,3,2016 2017 2018,JR,FCS,Independent,Campbell Hall,NY,USA,41.4553716,-74.2626503,usgs,city
-Sacred Heart,Kevin Duke,QB,"Wappinger Falls, NY",Roy C. Ketcham,,2016,2018,3,2016 2017 2018,JR,FCS,Independent,Wappinger Falls,NY,USA,41.6054502,-73.9179091,nominatim,city
+Sacred Heart,Kevin Duke,QB,"Wappinger Falls, NY",Roy C. Ketcham,,2016,2018,3,2016 2017 2018,JR,FCS,Independent,Wappingers Falls,NY,USA,41.598156,-73.916945,spelling_fix,city
 Sacred Heart,Kevin Sears,LB,"Long Valley, N.J.",West Morris Central,,2016,2019,4,2016 2017 2018 2019,SO,FCS,Independent,Long Valley,NJ,USA,40.781633,-74.776838,census,city
 Sacred Heart,Kevin Small,LB,"Los Alamitos, Calif.",Los Alamitos,,2016,2016,1,2016,SR,FCS,Independent,Los Alamitos,CA,USA,33.796911,-118.061244,census,city
 Sacred Heart,Khaamal Whitaker,DB,"Camp Springs, Md.",St. Stephen's,,2016,2017,2,2016 2017,SR,FCS,Independent,Camp Springs,MD,USA,38.805072,-76.918565,census,city
@@ -95255,7 +95255,7 @@ Sacred Heart,Javin Adderly,DB,"Fayetteville, Ga.",Sandy Creek,,2021,2022,2,2021 
 Sacred Heart,Jaylen DeCoteau,DB,"Williamstown, N.J.",,Kent State,2021,2023,3,2021 2022 2023,SO,FCS,Independent,Williamstown,NJ,USA,39.684201,-74.968674,census,city
 Sacred Heart,Jeremye Brown-Allen,DB,"Bronx, N.Y.",Cardinal Hayes,,2021,2021,1,2021,SO,FCS,Independent,Bronx,NY,USA,40.662712,-73.938677,census,city
 Sacred Heart,Joe Diemer,OL,"Gambrills, Md.",Catholic,,2021,2022,2,2021 2022,GR,FCS,Independent,Gambrills,MD,USA,39.092725,-76.651034,census,city
-Sacred Heart,Joe Dixon II,RB,"Niagra Falls, N.Y.",Canisius,,2021,2024,4,2021 2022 2023 2024,FR,FCS,Independent,Niagra Falls,NY,USA,43.0834925,-79.0029405,nominatim,city
+Sacred Heart,Joe Dixon II,RB,"Niagra Falls, N.Y.",Canisius,,2021,2024,4,2021 2022 2023 2024,FR,FCS,Independent,Niagara Falls,NY,USA,43.092841,-79.014743,spelling_fix,city
 Sacred Heart,Joey Moberg,WR,"St. Paul, Minn.",Johnson,,2021,2022,2,2021 2022,FR,FCS,Independent,St. Paul,MN,USA,44.948901,-93.104063,census,city
 Sacred Heart,John Wood,DB,"Williamstown, N.J.",Williamstown,,2021,2022,2,2021 2022,SO,FCS,Independent,Williamstown,NJ,USA,39.684201,-74.968674,census,city
 Sacred Heart,Jon Moccia,WR,"Collegeville, Pa.",Perkiomen Valley,,2021,2023,3,2021 2022 2023,SO,FCS,Independent,Collegeville,PA,USA,40.186865,-75.457519,census,city
@@ -95395,7 +95395,7 @@ Sacred Heart,Jaylin Johnson,OL,"Dunnellon, Fla.",Dunnellon,,2023,2026,4,2023 202
 Sacred Heart,Jeremiah Derilhomme,DL,"East Brunswick, N.J.",Saint Thomas Aquinas,,2023,2023,1,2023,FR,FCS,Independent,East Brunswick,NJ,USA,40.426249,-74.418244,census,city
 Sacred Heart,John Michalski,QB,"Staten Island, N.Y.",Moore Catholic,,2023,2026,4,2023 2024 2025 2026,FR,FCS,Independent,Staten Island,NY,USA,40.662712,-73.938677,census,city
 Sacred Heart,Josh Fitzgerald,OL,"Youngstown, Ohio",Austintown Fitch,,2023,2026,4,2023 2024 2025 2026,FR,FCS,Independent,Youngstown,OH,USA,41.099095,-80.645902,census,city
-Sacred Heart,Justin Sokol,OL,"Hopkinson, Mass.",Hopkinson,,2023,2026,4,2023 2024 2025 2026,FR,FCS,Independent,Hopkinson,MA,USA,42.3003315,-71.2779257,nominatim,city
+Sacred Heart,Justin Sokol,OL,"Hopkinson, Mass.",Hopkinson,,2023,2026,4,2023 2024 2025 2026,FR,FCS,Independent,Hopkinton,MA,USA,42.225563,-71.524096,spelling_fix,city
 Sacred Heart,Khalil Harden,DB,"Philadelphia, Pa.",New Hampton,,2023,2023,1,2023,FR,FCS,Independent,Philadelphia,PA,USA,40.009376,-75.133346,census,city
 Sacred Heart,Kyle Hall,LB,"Rahway, N.J.",Rahway,,2023,2026,4,2023 2024 2025 2026,FR,FCS,Independent,Rahway,NJ,USA,40.607152,-74.280531,census,city
 Sacred Heart,Logan Booker,DB,"Corning, N.Y.",Corning Painted Post,,2023,2026,4,2023 2024 2025 2026,FR,FCS,Independent,Corning,NY,USA,42.148195,-77.056401,census,city
@@ -96043,7 +96043,7 @@ Saint Francis (PA),Ky'Mir Williams,Safety SAF,Harrisburg Pa.,Harrisburg,,2025,20
 Saint Francis (PA),Lane Lambert,Inside Linebacker ILB,"Somerset, Pa.",Somerset,,2025,2025,1,2025,FR,FCS,NEC,Somerset,PA,USA,40.00503,-79.077855,census,city
 Saint Francis (PA),Lukas Conner,Kicker K,"Ebensburg, Pa.",Bishop Carroll,,2025,2025,1,2025,R-FR,FCS,NEC,Ebensburg,PA,USA,40.48812,-78.726541,census,city
 Saint Francis (PA),Lukas Gilland,Wide Receiver WR,"Mineral, Ohio",Sandy Valley,,2025,2025,1,2025,FR,FCS,NEC,Mineral,OH,USA,40.602709,-81.361479,census,city
-Saint Francis (PA),Mike Darcy,Tight End TE,"Landsdale, Pa.",North Penn,,2025,2025,1,2025,SR,FCS,NEC,Landsdale,PA,USA,40.2424297,-75.3019826,nominatim,city
+Saint Francis (PA),Mike Darcy,Tight End TE,"Landsdale, Pa.",North Penn,,2025,2025,1,2025,SR,FCS,NEC,Lansdale,PA,USA,40.241654,-75.281208,spelling_fix,city
 Saint Francis (PA),Motuila Malafu,Defensive Lineman DL,"Maui, Hawaii",Alta,,2025,2025,1,2025,GR,FCS,NEC,Maui,HI,USA,20.855931,-156.60155,census_county,county
 Saint Francis (PA),Nahjee Adams,Runningback RB,"Easton, Pa.",Easton,Lafayette,2025,2025,1,2025,GR,FCS,NEC,Easton,PA,USA,40.685971,-75.218548,census,city
 Saint Francis (PA),Nate Hampton,Offensive Lineman OL,"Bowie, Md.",Dematah Catholic,,2025,2025,1,2025,FR,FCS,NEC,Bowie,MD,USA,38.954703,-76.738834,census,city
@@ -99881,7 +99881,7 @@ South Carolina State,Eli Young,DL,"Hopkins, SC",,,2022,2023,2,2022 2023,R-SO,FCS
 South Carolina State,Jadin Jones,LB,"Kingsland, GA",Camden County (GA) HS,,2022,2023,2,2022 2023,FR,FCS,MEAC,Kingsland,GA,USA,30.846097,-81.790911,census,city
 South Carolina State,Jaeon Allen,DB,"Bluffon, SC",May River HS,,2022,2023,2,2022 2023,FR,FCS,MEAC,Bluffton,SC,USA,32.214449,-80.929528,census,city
 South Carolina State,Jakari Williams,WR,"Jacksonville, FLA",,,2022,2022,1,2022,FR,FCS,MEAC,Jacksonville,FL,USA,30.336864,-81.661603,census,city
-South Carolina State,Jamaal McKinney,DL,"St. Stephens, SC",Timberland HS,Savannah State,2022,2024,3,2022 2023 2024,FR,FCS,MEAC,St. Stephens,SC,USA,33.4054605,-79.916478,nominatim,city
+South Carolina State,Jamaal McKinney,DL,"St. Stephens, SC",Timberland HS,Savannah State,2022,2024,3,2022 2023 2024,FR,FCS,MEAC,St. Stephen,SC,USA,33.402629,-79.925194,spelling_fix,city
 South Carolina State,Jayden Johnson,OL,"Goose Creek, SC",,,2022,2023,2,2022 2023,FR,FCS,MEAC,Goose Creek,SC,USA,32.994906,-80.009245,census,city
 South Carolina State,Jordan Watkins,DB,"Greensboro, NC",Grimsley HS,,2022,2023,2,2022 2023,FR,FCS,MEAC,Greensboro,NC,USA,36.09485,-79.823624,census,city
 South Carolina State,Josh Shaw,RB,"Hanahan, SC",,,2022,2023,2,2022 2023,FR,FCS,MEAC,Hanahan,SC,USA,32.93096,-80.00217,census,city
@@ -101312,7 +101312,7 @@ South Florida,Kevin Purlett,WR,"Miramar, Fla.",Miramar HS,Florida Tech,2019,2019
 South Florida,Kirk Rygol,QB,"Fort Mill, S.C.",Nation Ford HS,ASA College,2019,2019,1,2019,SO,FBS,American,Fort Mill,SC,USA,35.005997,-80.94,census,city
 South Florida,Latrell Williams,WR,"Lake City, Fla.",Columbia HS,Independence CC,2019,2022,3,2019 2021 2022,JR,FBS,American,Lake City,FL,USA,30.188638,-82.642246,census,city
 South Florida,Leonard Parker,DB,"Tampa, Fla.",Plant HS,,2019,2019,1,2019,FR,FBS,American,Tampa,FL,USA,27.970086,-82.479673,census,city
-South Florida,Matthew McDuffie,OL,"Glen Saint Mary, Fla.",Baker County HS,,2019,2021,2,2019 2021,FR,FBS,American,Glen Saint Mary,FL,USA,30.2757913,-82.1606689,usgs,city
+South Florida,Matthew McDuffie,OL,"Glen Saint Mary, Fla.",Baker County HS,,2019,2021,2,2019 2021,FR,FBS,American,Glen St. Mary,FL,USA,30.275166,-82.160296,spelling_fix,city
 South Florida,McArthur Burnett,DB,"Pahokee, Fla.",Pahokee HS,Coffeyville CC,2019,2019,1,2019,JR,FBS,American,Pahokee,FL,USA,26.820209,-80.662049,census,city
 South Florida,Patrick Macon,LB,"Memphis, Tenn.",Millington Central HS,Oklahoma State,2019,2019,1,2019,GR,FBS,American,Memphis,TN,USA,35.109164,-89.968511,census,city
 South Florida,Ryan Thaxton,DE,"Alexandria, Va.",St. Stephen's & St. Agnes HS,Fort Scott CC/Tennessee,2019,2021,2,2019 2021,SO,FBS,American,Alexandria,VA,USA,38.819251,-77.08367,census,city
@@ -101558,7 +101558,7 @@ South Florida,Zavier Hamilton,LB,"Gulf Breeze, Fla.",Fort Walton Beach,,2024,202
 South Florida,Adam Zouagui,K,"Reston, Va.",Herndon HS,Davidson College,2025,2025,1,2025,JR,FBS,American,Reston,VA,USA,38.949762,-77.346244,census,city
 South Florida,Boogsie Silvera,DB,"Pembroke Pines, Fla.",American Heritage HS,McNeese State,2025,2025,1,2025,GR,FBS,American,Pembroke Pines,FL,USA,26.014716,-80.340171,census,city
 South Florida,Brandon Kubay,TE,"Manitoba, Canada",St. Thomas More HS,,2025,2026,2,2025 2026,FR,FBS,American,Manitoba,,Canada,55.001251,-97.001038,nominatim,city
-South Florida,Brooks Williams Jr.,JACK,"Port Saint Lucie, Fla.",St. Lucie West Centennial HS,,2025,2026,2,2025 2026,FR,FBS,American,Port Saint Lucie,FL,USA,27.2939333,-80.3503283,usgs,city
+South Florida,Brooks Williams Jr.,JACK,"Port Saint Lucie, Fla.",St. Lucie West Centennial HS,,2025,2026,2,2025 2026,FR,FBS,American,Port St. Lucie,FL,USA,27.280554,-80.388261,spelling_fix,city
 South Florida,Caleb Harris,OL,"Miami, Fla.",St. Thomas Aquinas HS,,2025,2026,2,2025 2026,FR,FBS,American,Miami,FL,USA,25.775163,-80.208615,census,city
 South Florida,Cartevious Norton,RB,"Waycross, Ga.",Ware County HS,Charlotte and Iowa State,2025,2025,1,2025,SR,FBS,American,Waycross,GA,USA,31.211006,-82.357658,census,city
 South Florida,Cedrick Hawkins Jr.,S,"Titusville, Fla.",Cocoa HS,Ohio State/UCF,2025,2026,2,2025 2026,JR,FBS,American,Titusville,FL,USA,28.573368,-80.819404,census,city
@@ -102357,7 +102357,7 @@ Southeastern Louisiana,Matt Wright,Defensive Back DB,"Austin, Texas",McNeil HS,N
 Southeastern Louisiana,Michael Sproles,Linebacker LB,"Plaquemine, La.",Plaquemine HS,,2018,2018,1,2018,FR,FCS,Southland,Plaquemine,LA,USA,30.283156,-91.243812,census,city
 Southeastern Louisiana,Mike Mason,Linebacker LB,"Inglewood, Calif.",Crespi HS,El Camino College,2018,2021,3,2018 2019 2021,JR,FCS,Southland,Inglewood,CA,USA,33.956068,-118.344274,census,city
 Southeastern Louisiana,Nathan Holliday,Kicker/Punter K/P,"Watson, La.",Live Oak HS,,2018,2019,2,2018 2019,FR,FCS,Southland,Watson,LA,USA,30.5749,-90.950797,census,city
-Southeastern Louisiana,Pat Allen,Offensive Lineman OL,"Reisertown, Md.",Franklin HS,,2018,2019,2,2018 2019,JR,FCS,Southland,Reisertown,MD,USA,39.5115575,-76.8210496,nominatim,city
+Southeastern Louisiana,Pat Allen,Offensive Lineman OL,"Reisertown, Md.",Franklin HS,,2018,2019,2,2018 2019,JR,FCS,Southland,Reisterstown,MD,USA,39.454112,-76.816023,spelling_fix,city
 Southeastern Louisiana,Steven Wright,Defensive Lineman DL,"Waycross, Ga.",Ware County HS,,2018,2019,2,2018 2019,JR,FCS,Southland,Waycross,GA,USA,31.211006,-82.357658,census,city
 Southeastern Louisiana,Tanner Olsen,Defensive Lineman DL,"Belle Chasse, La.",Brother Martin HS,,2018,2023,5,2018 2019 2021 2022 2023,FR,FCS,Southland,Belle Chasse,LA,USA,29.858697,-90.00329,census,city
 Southeastern Louisiana,Taron Jones,Running Back RB,"Mandeville, La.",Mandeville HS,,2018,2022,4,2018 2019 2021 2022,FR,FCS,Southland,Mandeville,LA,USA,30.376735,-90.101067,census,city
@@ -103484,7 +103484,7 @@ Southern Illinois,Miles Marshall,TE,"Kansas City, Mo.",Pembroke Hill HS,,2022,20
 Southern Illinois,Nathan Torney,P,"Kyabram, Australia",Kyabram,,2022,2023,2,2022 2023,FR,FCS,Missouri Valley,Kyabram,,Australia,-36.3131874,145.0480905,nominatim,city
 Southern Illinois,Nick Okeke,LB,"Smyrna, Tenn.",Smyrna,Louisville,2022,2022,1,2022,SR,FCS,Missouri Valley,Smyrna,TN,USA,35.969019,-86.528617,census,city
 Southern Illinois,Peyton Mazur,G,"Christopher, Ill.",Christopher,,2022,2024,3,2022 2023 2024,FR,FCS,Missouri Valley,Christopher,IL,USA,37.970999,-89.052985,census,city
-Southern Illinois,Quinton Lee,DE,"Lee Summit, Mo",Lee’s Summit,Arkansas State,2022,2022,1,2022,R-SR,FCS,Missouri Valley,Lee Summit,MO,USA,38.9107156,-94.3821295,nominatim,city
+Southern Illinois,Quinton Lee,DE,"Lee Summit, Mo",Lee’s Summit,Arkansas State,2022,2022,1,2022,R-SR,FCS,Missouri Valley,Lee's Summit,MO,USA,38.921601,-94.384763,spelling_fix,city
 Southern Illinois,RJ Orebo,DL,"Dayton, Texas",Dayton,Texas A&M,2022,2022,1,2022,SO,FCS,Missouri Valley,Dayton,TX,USA,30.013177,-94.936004,census,city
 Southern Illinois,Remington Lutz,TE,"Temple, Texas",Belton,Abilene Christian,2022,2022,1,2022,SR,FCS,Missouri Valley,Temple,TX,USA,31.104936,-97.388512,census,city
 Southern Illinois,Ryan Chandley II,DT,"Canton, Ga.",Cherokee,,2022,2025,4,2022 2023 2024 2025,FR,FCS,Missouri Valley,Canton,GA,USA,34.247201,-84.490723,census,city
@@ -103584,7 +103584,7 @@ Southern Illinois,Bernadin Fleurima Jr.,DT,"Valley Stream, N.Y.",Valley Stream N
 Southern Illinois,Blayne Sisson,WR,"Mount Carmel, Ill.",Mount Carmel HS,Illinois,2025,2026,2,2025 2026,R-FR,FCS,Missouri Valley,Mount Carmel,IL,USA,38.419047,-87.769792,census,city
 Southern Illinois,Brendan Bisgrove,OL,"Oswego, Ill.",Oswego HS,,2025,2026,2,2025 2026,FR,FCS,Missouri Valley,Oswego,IL,USA,41.68322,-88.338849,census,city
 Southern Illinois,Brennan King,DE,"West Palm Beach, Fla.",Cardinal Newman HS,,2025,2026,2,2025 2026,FR,FCS,Missouri Valley,West Palm Beach,FL,USA,26.745114,-80.127038,census,city
-Southern Illinois,Cameron Cason,CB,"Weldon Springs, Mo.",Francis Howell HS,,2025,2026,2,2025 2026,FR,FCS,Missouri Valley,Weldon Springs,MO,USA,38.6568692,-90.7346698,nominatim,city
+Southern Illinois,Cameron Cason,CB,"Weldon Springs, Mo.",Francis Howell HS,,2025,2026,2,2025 2026,FR,FCS,Missouri Valley,Weldon Spring,MO,USA,38.709381,-90.652536,spelling_fix,city
 Southern Illinois,Camron Miller,DE,"Missouri City, Texas",Dulles HS,Fresno City College,2025,2026,2,2025 2026,SO,FCS,Missouri Valley,Missouri City,TX,USA,29.562944,-95.535999,census,city
 Southern Illinois,Chandler Chapman,RB,"Bay St. Louis, Miss.",St. Stanislaus Prep,Mississippi Gulf Coast CC,2025,2026,2,2025 2026,JR,FCS,Missouri Valley,Bay St. Louis,MS,USA,30.323448,-89.35879,census,city
 Southern Illinois,Charles Whelpley,LB,"Batavia, Ill.",Batavia HS,Iowa State,2025,2026,2,2025 2026,R-FR,FCS,Missouri Valley,Batavia,IL,USA,41.847692,-88.311047,census,city
@@ -106965,7 +106965,7 @@ Stonehill,Andrew Kibarian,DE,"Lynnfield, Mass.",Lynnfield,,2016,2016,1,2016,SR,D
 Stonehill,Andy Steck,P,"Port Jefferson Station, N.Y.",Comsewogue,,2016,2017,2,2016 2017,JR,D2,NEC,Port Jefferson Station,NY,USA,40.925939,-73.065186,census,city
 Stonehill,Anthony Gill,TE,"Melrose, Mass.",Malden Catholic,,2016,2018,3,2016 2017 2018,SO,D2,NEC,Melrose,MA,USA,42.455723,-71.059019,census,city
 Stonehill,Anthony Leggio,LB,"Commack, N.Y.",Saint Anthony's,,2016,2016,1,2016,SR,D2,NEC,Commack,NY,USA,40.843449,-73.283336,census,city
-Stonehill,Anthony Marsilio,DE,"Tyngsboro, Mass.",Tyngsboro,,2016,2018,3,2016 2017 2018,SO,D2,NEC,Tyngsboro,MA,USA,42.6767568,-71.4245085,usgs,city
+Stonehill,Anthony Marsilio,DE,"Tyngsboro, Mass.",Tyngsboro,,2016,2018,3,2016 2017 2018,SO,D2,NEC,Tyngsborough,MA,USA,42.667762,-71.42882,spelling_fix,city
 Stonehill,Anthony Siciliano,OL,"Monroe, N.Y.",Don Bosco Prep,,2016,2016,1,2016,SR,D2,NEC,Monroe,NY,USA,41.317698,-74.185748,census,city
 Stonehill,Billy Pierce,TE,"Caldwell, N.J.",James Caldwell,,2016,2016,1,2016,SR,D2,NEC,Caldwell,NJ,USA,40.839235,-74.277026,census,city
 Stonehill,Billy Wingo,LB,"Gwynn Oak, Md.",The Boys' Latin School of Maryland,,2016,2018,3,2016 2017 2018,SO,D2,NEC,Gwynn Oak,MD,USA,39.3326065,-76.6927487,usgs,city
@@ -107257,7 +107257,7 @@ Stonehill,Robert Pombriant,TE,"Attleboro, Mass.",Bishop Feehan,,2022,2025,4,2022
 Stonehill,Sean Patrick,DE,"Woodbine, MD.",South Carroll,,2022,2022,1,2022,FR,FCS,NEC,Woodbine,MD,USA,39.3598259,-77.0624803,usgs,city
 Stonehill,Shane Kindred,WR,"Franklin, Mass.",Franklin,,2022,2022,1,2022,FR,FCS,NEC,Franklin,MA,USA,42.0834313,-71.396725,usgs,city
 Stonehill,Trey Cavaan,DB,"Springfield, Mass.",Springfield Central,,2022,2022,1,2022,JR,FCS,NEC,Springfield,MA,USA,42.115454,-72.539978,census,city
-Stonehill,Tyler Bannon,LB,"North Attleborough, Mass.",North Attleborough,,2022,2026,5,2022 2023 2024 2025 2026,FR,FCS,NEC,North Attleborough,MA,USA,41.9841334,-71.3322798,nominatim,city
+Stonehill,Tyler Bannon,LB,"North Attleborough, Mass.",North Attleborough,,2022,2026,5,2022 2023 2024 2025 2026,FR,FCS,NEC,North Attleboro,MA,USA,41.9834324,-71.3328328,spelling_fix,city
 Stonehill,Zack Athy,DT,"Holliston, Mass.",Holliston,,2022,2025,4,2022 2023 2024 2025,FR,FCS,NEC,Holliston,MA,USA,42.195951,-71.45343,census,city
 Stonehill,Zavion Woodard,RB,"Baltimore, Md.",New Town High School,,2022,2025,4,2022 2023 2024 2025,FR,FCS,NEC,Baltimore,MD,USA,39.300032,-76.610476,census,city
 Stonehill,Aaron Fields,WR,"Springfield, Va.",West Springfield,,2023,2024,2,2023 2024,FR,FCS,NEC,Springfield,VA,USA,38.781571,-77.183921,census,city
@@ -108929,7 +108929,7 @@ Tarleton State,Devin Hafford,Defensive Back DB,"Atascocita, TX",Atascocita HS,,2
 Tarleton State,Devvon Miles,Defensive Line DL,"Clute, TX",Brazoswood High School,,2016,2016,1,2016,SR,D2,UAC,Clute,TX,USA,29.025851,-95.398229,census,city
 Tarleton State,Dominique Martin,Defensive Back DB,"Lancaster, TX",Lancaster High School,,2016,2016,1,2016,SR,D2,UAC,Lancaster,TX,USA,32.596203,-96.773789,census,city
 Tarleton State,Dondrei Williams,Running Back RB,"Houston, TX",Alief-Hastings High School,,2016,2016,1,2016,R-FR,D2,UAC,Houston,TX,USA,29.785743,-95.388806,census,city
-Tarleton State,Doudly Aujour,Offensive Line OL,"Sandy Springs, MD",Sherwood HS,,2016,2017,2,2016 2017,JR,D2,UAC,Sandy Springs,MD,USA,39.1399474,-77.0205773,nominatim,city
+Tarleton State,Doudly Aujour,Offensive Line OL,"Sandy Springs, MD",Sherwood HS,,2016,2017,2,2016 2017,JR,D2,UAC,Sandy Spring,MD,USA,39.1495517,-77.0269221,spelling_fix,city
 Tarleton State,Dylan Whiteacre,Offensive Line OL,"Arlington, TX",Arlington HS,,2016,2016,1,2016,R-FR,D2,UAC,Arlington,TX,USA,32.700708,-97.124691,census,city
 Tarleton State,EJ Speed,Linebacker LB,"Fort Worth, TX",North Crowley HS,,2016,2018,3,2016 2017 2018,SO,D2,UAC,Fort Worth,TX,USA,32.781954,-97.348573,census,city
 Tarleton State,Elliott Hart,Defensive Back DB,"Tyler, TX",John Tyler HS,,2016,2017,2,2016 2017,JR,D2,UAC,Tyler,TX,USA,32.317258,-95.305886,census,city
@@ -109783,7 +109783,7 @@ Temple,Jacob LaFree,K,"Plymouth, Ind.",Plymouth,Indianapolis,2019,2019,1,2019,GR
 Temple,Jacoby Sharpe,DL,"Sugar Hill, Ga.",Lanier,,2019,2022,3,2019 2021 2022,FR,FBS,American,Sugar Hill,GA,USA,34.085962,-84.03397,census,city
 Temple,Jake Horoshko,LS,"Allentown, Pa.",Central Catholic,Monmouth,2019,2019,1,2019,R-FR,FBS,American,Allentown,PA,USA,40.593648,-75.478393,census,city
 Temple,Jeremiah Nelson,TE,"Jamaica, N.Y.",Holy Cross,Nassau Community College,2019,2019,1,2019,JR,FBS,American,Jamaica,NY,USA,40.691492,-73.8056894,usgs,city
-Temple,Jeremy Prince,WR,"Landsdale, Pa.",North Penn,Delaware Valley,2019,2019,1,2019,SO,FBS,American,Landsdale,PA,USA,40.2424297,-75.3019826,nominatim,city
+Temple,Jeremy Prince,WR,"Landsdale, Pa.",North Penn,Delaware Valley,2019,2019,1,2019,SO,FBS,American,Lansdale,PA,USA,40.241654,-75.281208,spelling_fix,city
 Temple,Jermaine Donaldson,OL,"Voorhees, N.J.",Eastern Regional,,2019,2023,4,2019 2021 2022 2023,FR,FBS,American,Voorhees,NJ,USA,40.482176,-74.492506,census,city
 Temple,Jordan Magee,LB,"Dover, Del.",Dover,,2019,2023,4,2019 2021 2022 2023,FR,FBS,American,Dover,DE,USA,39.160602,-75.521659,census,city
 Temple,Joseph Hooper,OL,"Kea'au, Hawaii",Kameahemha,Butler CC,2019,2021,2,2019 2021,JR,FBS,American,Kea'au,HI,USA,19.623484,-155.048161,census,city
@@ -111424,7 +111424,7 @@ Tennessee Tech,Clay Massengille,LB,"Cookeville, Tenn.",Cookeville HS,,2019,2021,
 Tennessee Tech,Cody Cantrell,OL,"Livingston, Tenn.",Livingston Academy,,2019,2019,1,2019,R-FR,FCS,SoCon,Livingston,TN,USA,36.386637,-85.326101,census,city
 Tennessee Tech,Colby Long,LB,"Gainesboro, Tenn.",Jackson County HS,,2019,2022,3,2019 2021 2022,R-FR,FCS,SoCon,Gainesboro,TN,USA,36.363219,-85.64868,census,city
 Tennessee Tech,Connor Huff,OL,"Clarksville, Tenn.",Rossview HS,,2019,2019,1,2019,FR,FCS,SoCon,Clarksville,TN,USA,36.56643,-87.345216,census,city
-Tennessee Tech,Demarious Stoudemire,DL,"Murfressboro, Tenn.",Eagleville HS,,2019,2019,1,2019,FR,FCS,SoCon,Murfressboro,TN,USA,35.8608292,-86.440848,nominatim,city
+Tennessee Tech,Demarious Stoudemire,DL,"Murfressboro, Tenn.",Eagleville HS,,2019,2019,1,2019,FR,FCS,SoCon,Murfreesboro,TN,USA,35.853915,-86.421224,spelling_fix,city
 Tennessee Tech,Demetrien Johnson,WR,"Knoxville, Tenn.",Knoxville Central HS,,2019,2019,1,2019,FR,FCS,SoCon,Knoxville,TN,USA,35.97068,-83.94927,census,city
 Tennessee Tech,Devin Parker,K,"Edwardsville, Ill.",ULM,,2019,2023,4,2019 2021 2022 2023,R-FR,FCS,SoCon,Edwardsville,IL,USA,38.790835,-89.988605,census,city
 Tennessee Tech,Ellis Adams,OL,"Hoover, Ala.",Hoover HS,,2019,2023,4,2019 2021 2022 2023,FR,FCS,SoCon,Hoover,AL,USA,33.375128,-86.809416,census,city
@@ -111471,7 +111471,7 @@ Tennessee Tech,Daniel Rickert,DL,"Nolensville, Tenn.",Nolensville HS,,2021,2024,
 Tennessee Tech,David Oghenekaro,OL,"Douglasville, Ga.",,Jackson State,2021,2022,2,2021 2022,FR,FCS,SoCon,Douglasville,GA,USA,33.73678,-84.701074,census,city
 Tennessee Tech,Davis Shanley,QB,"Duluth, Ga.",,Western Kentucky,2021,2021,1,2021,GR,FCS,SoCon,Duluth,GA,USA,34.001517,-84.150464,census,city
 Tennessee Tech,Devin Miller,WR,"Atlanta, Ga.",Mays HS,,2021,2021,1,2021,FR,FCS,SoCon,Atlanta,GA,USA,33.762909,-84.422675,census,city
-Tennessee Tech,Devin Squires,DL,"Kings Mill, Ohio",Kings HS,,2021,2022,2,2021 2022,FR,FCS,SoCon,Kings Mill,OH,USA,39.3579807,-84.2773415,nominatim,city
+Tennessee Tech,Devin Squires,DL,"Kings Mill, Ohio",Kings HS,,2021,2022,2,2021 2022,FR,FCS,SoCon,Kings Mills,OH,USA,39.358349,-84.243812,spelling_fix,city
 Tennessee Tech,Dominic Howard,DB,"Orlando, Fla.",Space Coast HS,,2021,2023,3,2021 2022 2023,FR,FCS,SoCon,Orlando,FL,USA,28.40865,-81.254805,census,city
 Tennessee Tech,Donoven McCallister,DB,"Baxter, Tenn.",Upperman HS,,2021,2022,2,2021 2022,FR,FCS,SoCon,Baxter,TN,USA,36.153678,-85.634922,census,city
 Tennessee Tech,Drew Porter,WR,"Lebanon, Tenn.",Friendship Christian,,2021,2022,2,2021 2022,FR,FCS,SoCon,Lebanon,TN,USA,36.199381,-86.344634,census,city
@@ -112966,7 +112966,7 @@ Texas Southern,Roshard Burney,Running Back RB,"West Palm Beach, FL",,,2016,2016,
 Texas Southern,Ryhean McMorris,Defensive Back DB,"Columbia, MS",,,2016,2016,1,2016,SR,FCS,SWAC,Columbia,MS,USA,31.258593,-89.818669,census,city
 Texas Southern,Sean Jones,Defensive Back DB,"Dallas, Texas",,,2016,2018,3,2016 2017 2018,R-SO,FCS,SWAC,Dallas,TX,USA,32.793333,-96.766513,census,city
 Texas Southern,Terry Smith,Long Snapper LS,"Port Gibson, MS",,,2016,2016,1,2016,GR,FCS,SWAC,Port Gibson,MS,USA,31.955816,-90.983438,census,city
-Texas Southern,Tevin Jones,Full Back FB,"Holly Spring, MS",,,2016,2016,1,2016,SR,FCS,SWAC,Holly Spring,MS,USA,34.7741573,-89.4274668,nominatim,city
+Texas Southern,Tevin Jones,Full Back FB,"Holly Spring, MS",,,2016,2016,1,2016,SR,FCS,SWAC,Holly Springs,MS,USA,34.778017,-89.445819,spelling_fix,city
 Texas Southern,Tony Upchurch,Wide Receiver WR,"Pearland, Texas",,,2016,2017,2,2016 2017,R-SO,FCS,SWAC,Pearland,TX,USA,29.555732,-95.323012,census,city
 Texas Southern,Tracy Johnson,Wide Receiver WR,"St. Petersburg, FL",Lakewood HS,,2016,2017,2,2016 2017,R-JR,FCS,SWAC,St. Petersburg,FL,USA,27.762727,-82.644131,census,city
 Texas Southern,Travis Hutchinson,Linebacker LB,"Jacksonville, FL",Atlantic Coast HS,,2016,2017,2,2016 2017,R-SO,FCS,SWAC,Jacksonville,FL,USA,30.336864,-81.661603,census,city
@@ -113596,7 +113596,7 @@ Texas State,Pierce Withers,Safety S,"Austin, Texas",Bowie HS,,2018,2019,2,2018 2
 Texas State,Seth Caillouet,Tight End TE,"Covington, La.",Archbishop Hannan HS,,2018,2021,3,2018 2019 2021,,FBS,Pac-12,Covington,LA,USA,30.480184,-90.111826,census,city
 Texas State,Shane Carney,Wide Receiver WR,"Porter, Texas",Porter HS,,2018,2018,1,2018,,FBS,Pac-12,Porter,TX,USA,30.1024397,-95.2296553,usgs,city
 Texas State,Stone Harris,Wide Receiver WR,"Sugar Land, Texas",George Ranch HS,McMurry,2018,2018,1,2018,,FBS,Pac-12,Sugar Land,TX,USA,29.592764,-95.633801,census,city
-Texas State,Traveler Surley,Safety S,"China Springs, Texas",China Springs HS,,2018,2018,1,2018,,FBS,Pac-12,China Springs,TX,USA,31.6523853,-97.3077878,usgs,city
+Texas State,Traveler Surley,Safety S,"China Springs, Texas",China Springs HS,,2018,2018,1,2018,,FBS,Pac-12,China Spring,TX,USA,31.649242,-97.304793,spelling_fix,city
 Texas State,Trejon Hugue,Defensive Back DB,"Mansfield, Texas",Lake Ridge HS,,2018,2018,1,2018,,FBS,Pac-12,Mansfield,TX,USA,32.569188,-97.120532,census,city
 Texas State,"Trevis Graham, Jr.",Wide Receiver WR,"Mansfield, Texas",Lake Ridge HS,,2018,2021,3,2018 2019 2021,,FBS,Pac-12,Mansfield,TX,USA,32.569188,-97.120532,census,city
 Texas State,Tyler Vitt,Quarterback QB,"San Antonio, Texas",MacArthur HS,,2018,2021,3,2018 2019 2021,,FBS,Pac-12,San Antonio,TX,USA,29.462809,-98.524635,census,city
@@ -116953,7 +116953,7 @@ Tulane,Jahiem Johnson,DB,"Hammond, LA",Hammond HS,,2023,2025,3,2023 2024 2025,FR
 Tulane,Jai Eugene Jr.,DB,"Destrehan, LA",Destrehan HS,,2023,2023,1,2023,FR,FBS,American,Destrehan,LA,USA,29.972092,-90.354156,census,city
 Tulane,Jake Morgan,K,"Allen, TX",Allen HS,,2023,2023,1,2023,FR,FBS,American,Allen,TX,USA,33.109736,-96.673032,census,city
 Tulane,Jared Moorer,S,"Deerfield Beach, FL",Deerfield Beach HS,Charleston Southern,2023,2024,2,2023 2024,R-SO,FBS,American,Deerfield Beach,FL,USA,26.311716,-80.125378,census,city
-Tulane,Jared Small,LB,"Baton Rogue, LA",Catholic HS,LSU,2023,2023,1,2023,GR,FBS,American,Baton Rogue,LA,USA,30.4798097,-91.2033652,nominatim,city
+Tulane,Jared Small,LB,"Baton Rogue, LA",Catholic HS,LSU,2023,2023,1,2023,GR,FBS,American,Baton Rouge,LA,USA,30.440443,-91.133166,spelling_fix,city
 Tulane,Jean Claude Joseph III,LB,"Covington, GA",Eastside HS,,2023,2026,4,2023 2024 2025 2026,FR,FBS,American,Covington,GA,USA,33.605439,-83.846634,census,city
 Tulane,Joshua Goines,TE,"Frisco, TX",Reedy HS,,2023,2024,2,2023 2024,FR,FBS,American,Frisco,TX,USA,33.155427,-96.822596,census,city
 Tulane,Joshua Moore,DB,"League City, TX",Clear Falls HS,,2023,2026,4,2023 2024 2025 2026,FR,FBS,American,League City,TX,USA,29.490064,-95.109093,census,city
@@ -117303,7 +117303,7 @@ Tulsa,Josh Owens,Center,"Bixby, Okla.",Bixby,,2018,2019,2,2018 2019,FR,FBS,Ameri
 Tulsa,Judge Hartin,Offensive Tackle,"Madill, Okla.",Madill/NE Oklahoma A&M,Northeastern Oklahoma A&M,2018,2019,2,2018 2019,JR,FBS,American,Madill,OK,USA,34.08708,-96.774665,census,city
 Tulsa,Justin Wright,Linebacker,"Abilene, Texas",Cooper,,2018,2022,4,2018 2019 2021 2022,FR,FBS,American,Abilene,TX,USA,32.454514,-99.738147,census,city
 Tulsa,Kendarin Ray,Safety,"Brenham, Texas",Brenham,,2018,2023,5,2018 2019 2021 2022 2023,FR,FBS,American,Brenham,TX,USA,30.15816,-96.395616,census,city
-Tulsa,Kevin Neitzke,Place-Kicker,"San Clarita, Calif.",Valencia/ College of Canyons JC,College of the Canyons,2018,2019,2,2018 2019,SO,FBS,American,San Clarita,CA,USA,34.3450804,-118.508228,nominatim,city
+Tulsa,Kevin Neitzke,Place-Kicker,"San Clarita, Calif.",Valencia/ College of Canyons JC,College of the Canyons,2018,2019,2,2018 2019,SO,FBS,American,Santa Clarita,CA,USA,34.416504,-118.500693,spelling_fix,city
 Tulsa,Malik Welch,Cornerback,"Inglewood, Calif.",North Torrance,Long Beach CC,2018,2018,1,2018,SO,FBS,American,Inglewood,CA,USA,33.956068,-118.344274,census,city
 Tulsa,Marquez Perez,Wide Receiver,"College Station, Texas",College Station,,2018,2018,1,2018,FR,FBS,American,College Station,TX,USA,30.58516,-96.29636,census,city
 Tulsa,Mitchell Kulkin,Linebacker,"Jenks, Okla.",Jenks,,2018,2023,5,2018 2019 2021 2022 2023,FR,FBS,American,Jenks,OK,USA,35.998219,-95.973404,census,city
@@ -124425,7 +124425,7 @@ Utah State,Elia Migao,OL,"Temecula, Calif.",Chaparral HS,,2021,2025,5,2021 2022 
 Utah State,Elliott Nimrod,PK,"Bentonville, Arkansas",Bentonville HS/Arkansas State,,2021,2024,4,2021 2022 2023 2024,SO,FBS,Pac-12,Bentonville,AR,USA,36.352662,-94.231181,census,city
 Utah State,Enoka Migao,OLB,"Temecula, Calif.",Chaparral HS,,2021,2025,5,2021 2022 2023 2024 2025,FR,FBS,Pac-12,Temecula,CA,USA,33.493073,-117.131734,census,city
 Utah State,Falepule Alo,OL,"Gonzales, Louisiana",West (UT) HS,,2021,2024,4,2021 2022 2023 2024,SO,FBS,Pac-12,Gonzales,LA,USA,30.212739,-90.922402,census,city
-Utah State,Franky Jacobsen,WR,"North Salt Lake City, Utah",Woods Cross HS,,2021,2021,1,2021,FR,FBS,Pac-12,North Salt Lake City,UT,USA,40.7683239,-111.9041399,nominatim,city
+Utah State,Franky Jacobsen,WR,"North Salt Lake City, Utah",Woods Cross HS,,2021,2021,1,2021,FR,FBS,Pac-12,North Salt Lake,UT,USA,40.847116,-111.91878,spelling_fix,city
 Utah State,Garrett Larson,QB,"Farmington, Utah",Davis HS,,2021,2022,2,2021 2022,R-FR,FBS,Pac-12,Farmington,UT,USA,40.984669,-111.906306,census,city
 Utah State,Garrett Walchli,WR,"Hermiston, Oregon",Hermiston HS,,2021,2022,2,2021 2022,R-FR,FBS,Pac-12,Hermiston,OR,USA,45.832948,-119.285212,census,city
 Utah State,Gerald Hanson,RB,"Houston, Texas",Klein HS,,2021,2021,1,2021,FR,FBS,Pac-12,Houston,TX,USA,29.785743,-95.388806,census,city
@@ -128950,7 +128950,7 @@ Wagner,Nassir Edwards,Wide Receiver WR,"Elmont, NY",Elmont Memorial,,2025,2026,2
 Wagner,Nicholas Romero,Kicker K,"Pembroke Pines, FL",St. Thomas Aquinas,,2025,2025,1,2025,FR,FCS,NEC,Pembroke Pines,FL,USA,26.014716,-80.340171,census,city
 Wagner,Owen Lock,Linebacker LB,"Bradford West Gwillimbury, Ontario, Canda",Huron Heights,,2025,2026,2,2025 2026,FR,FCS,NEC,Bradford West Gwillimbury,ON,Canada,44.1142354,-79.5647731,nominatim,city
 Wagner,Richard Perkins Jr.,Wide Receiver WR,"Brooklyn, NY",South Shore,,2025,2026,2,2025 2026,FR,FCS,NEC,Brooklyn,NY,USA,40.662712,-73.938677,census,city
-Wagner,Ryan Long,Offensive Line OL,"Broward Country, FL",American Heritage,,2025,2026,2,2025 2026,FR,FCS,NEC,Broward Country,FL,USA,26.1206365,-80.2705348,nominatim,city
+Wagner,Ryan Long,Offensive Line OL,"Broward Country, FL",American Heritage,,2025,2026,2,2025 2026,FR,FCS,NEC,Broward County,FL,USA,26.193535,-80.476683,spelling_fix,county
 Wagner,Ryder Villarreal,Linebacker LB,"Boulder, CO",Fairview,,2025,2026,2,2025 2026,FR,FCS,NEC,Boulder,CO,USA,40.024431,-105.251251,census,city
 Wagner,Salvatore Salafia Jr.,Kicker/Punter K/P,"Mount Olive, NJ",Saint Joseph's Regional,,2025,2025,1,2025,FR,FCS,NEC,Mount Olive,NJ,USA,40.865597,-74.74193,census,city
 Wagner,Steve Charles,Offensive Line OL,"Brooklyn, NY",Erasmus Hall,,2025,2026,2,2025 2026,FR,FCS,NEC,Brooklyn,NY,USA,40.662712,-73.938677,census,city
@@ -129215,7 +129215,7 @@ Wake Forest,Isaiah Essissima,DB,"Houston, TX",Fort Bend Hightower,,2019,2019,1,2
 Wake Forest,Ivan Mora,P,"Dalton, GA",Dalton,,2019,2024,5,2019 2021 2022 2023 2024,FR,FBS,ACC,Dalton,GA,USA,34.767898,-84.972812,census,city
 Wake Forest,JD Kavel,WR,"Johns Creek, GA",Wesleyan,,2019,2019,1,2019,FR,FBS,ACC,Johns Creek,GA,USA,34.032739,-84.203848,census,city
 Wake Forest,Jack Connelly,TE,"Palos Verdes, CA",Chadwick,,2019,2019,1,2019,FR,FBS,ACC,Palos Verdes,CA,USA,33.774271,-118.425754,census,city
-Wake Forest,"Jarrett Alston, Jr.",DB,"Temple Hill, MD",,St. John's College,2019,2022,3,2019 2021 2022,FR,FBS,ACC,Temple Hill,MD,USA,38.8171443,-76.9486713,nominatim,city
+Wake Forest,"Jarrett Alston, Jr.",DB,"Temple Hill, MD",,St. John's College,2019,2022,3,2019 2021 2022,FR,FBS,ACC,Temple Hills,MD,USA,38.810549,-76.949477,spelling_fix,city
 Wake Forest,Jarrett Brown,WR,"Flower Mound, TX",Marcus,,2019,2022,3,2019 2021 2022,FR,FBS,ACC,Flower Mound,TX,USA,33.037891,-97.113381,census,city
 Wake Forest,Jaylen Hudson,DL,"Fayetteville, NC",Cape Fear,,2019,2023,4,2019 2021 2022 2023,FR,FBS,ACC,Fayetteville,NC,USA,35.082766,-78.973515,census,city
 Wake Forest,Justin Cody,DL,"Seffner, FL",Armwood,,2019,2024,5,2019 2021 2022 2023 2024,FR,FBS,ACC,Seffner,FL,USA,28.001639,-82.274077,census,city
@@ -131649,7 +131649,7 @@ West Georgia,Joshua Saddler,Linebacker LB,"Columbia, SC",Ridge View,Coastal Caro
 West Georgia,Justin Wilson,Cornerback CB,"Atlanta, GA",Wheeler,Washburn,2025,2026,2,2025 2026,R-FR,FCS,UAC,Atlanta,GA,USA,33.762909,-84.422675,census,city
 West Georgia,Jyarius Carter,Linebacker LB,"Douglas, GA",Coffee County,,2025,2025,1,2025,FR,FCS,UAC,Douglas,GA,USA,31.506114,-82.854335,census,city
 West Georgia,Kaden Hanson,Tight End TE,"Senoia, GA",Trinity Christian,,2025,2025,1,2025,FR,FCS,UAC,Senoia,GA,USA,33.307664,-84.554759,census,city
-West Georgia,Kaseam Liferidge,Defensive Lineman DL,"St. Stephens, SC",Timberland,,2025,2025,1,2025,FR,FCS,UAC,St. Stephens,SC,USA,33.4054605,-79.916478,nominatim,city
+West Georgia,Kaseam Liferidge,Defensive Lineman DL,"St. Stephens, SC",Timberland,,2025,2025,1,2025,FR,FCS,UAC,St. Stephen,SC,USA,33.402629,-79.925194,spelling_fix,city
 West Georgia,Kyeandre Magloire,Running Back RB,"Minneola, FL",Lake Minneola,EKU,2025,2025,1,2025,SR,FCS,UAC,Minneola,FL,USA,28.602324,-81.729452,census,city
 West Georgia,Leslie Black,Defensive Lineman DL,"Statesboro, GA",Statesboro,Nebraska,2025,2025,1,2025,SO,FCS,UAC,Statesboro,GA,USA,32.437726,-81.775637,census,city
 West Georgia,Lionel Wilson,Defensive Line DL,"St. Petersburg, FL",Lakewood,,2025,2025,1,2025,FR,FCS,UAC,St. Petersburg,FL,USA,27.762727,-82.644131,census,city
@@ -133543,7 +133543,7 @@ Western Kentucky,Jacquez Sloan,WR,"Atlanta, Ga.",Grady HS,,2017,2019,3,2017 2018
 Western Kentucky,Jakairi Moses,RB,"Palm Beach, Fla.",William T. Dwyer HS,,2017,2022,5,2017 2018 2019 2021 2022,FR,FBS,Conference USA,Palm Beach,FL,USA,26.694843,-80.041863,census,city
 Western Kentucky,Joshua Samuel,RB,"Greenville, S.C.",Central Gwinnett HS,,2017,2018,2,2017 2018,FR,FBS,Conference USA,Greenville,SC,USA,34.836902,-82.362997,census,city
 Western Kentucky,Juwuan Jones,DE,"Sugar Hill, Ga.",Lanier HS,,2017,2022,5,2017 2018 2019 2021 2022,FR,FBS,Conference USA,Sugar Hill,GA,USA,34.085962,-84.03397,census,city
-Western Kentucky,Kris Leach,TE,"Bealton, Va.",,Liberty,2017,2018,2,2017 2018,FR,FBS,Conference USA,Bealton,VA,USA,38.5811841,-77.7404149,nominatim,city
+Western Kentucky,Kris Leach,TE,"Bealton, Va.",,Liberty,2017,2018,2,2017 2018,FR,FBS,Conference USA,Bealeton,VA,USA,38.583015,-77.778763,spelling_fix,city
 Western Kentucky,Kyle Bailey,LB,"Carrollton, Ga.",Bremen HS,,2017,2019,3,2017 2018 2019,FR,FBS,Conference USA,Carrollton,GA,USA,33.581847,-85.083333,census,city
 Western Kentucky,LA Rogers-Anderson,DB,"Sumter, S.C.",Ridge View HS,,2017,2018,2,2017 2018,FR,FBS,Conference USA,Sumter,SC,USA,33.940848,-80.395543,census,city
 Western Kentucky,Marcus Floyd,WR,"Frankfort, Ky.",Bryan Station HS/Morehead State,,2017,2019,3,2017 2018 2019,JR,FBS,Conference USA,Frankfort,KY,USA,38.194966,-84.865877,census,city
@@ -136027,7 +136027,7 @@ Wyoming,JJ Uphold,OG,"Bakersfield, Calif.",Garces Memorial,,2021,2023,3,2021 202
 Wyoming,Jack Walsh,C,"Palatine, Ill.",Fremd,,2021,2025,5,2021 2022 2023 2024 2025,FR,FBS,Mountain West,Palatine,IL,USA,42.116467,-88.044361,census,city
 Wyoming,Jayden Clemons,QB,"Lehi, Utah",,University of Utah,2021,2024,4,2021 2022 2023 2024,JR,FBS,Mountain West,Lehi,UT,USA,40.41708,-111.871147,census,city
 Wyoming,Jaylen Sargent,WR,"Logan, Utah",Logan,,2021,2025,5,2021 2022 2023 2024 2025,FR,FBS,Mountain West,Logan,UT,USA,41.740256,-111.841764,census,city
-Wyoming,Joey Braasch,RB,"Colombus, Neb.",Columbus,,2021,2022,2,2021 2022,R-FR,FBS,Mountain West,Colombus,NE,USA,41.4327572,-97.3572476,nominatim,city
+Wyoming,Joey Braasch,RB,"Colombus, Neb.",Columbus,,2021,2022,2,2021 2022,R-FR,FBS,Mountain West,Columbus,NE,USA,41.437066,-97.357351,spelling_fix,city
 Wyoming,John Hoyland,PK,"Broomfield, Colo.",Legacy,,2021,2024,4,2021 2022 2023 2024,SO,FBS,Mountain West,Broomfield,CO,USA,39.953593,-105.050787,census,city
 Wyoming,John Michael Gyllenborg,TE,"Leawood, Kan.",Rockhurst,,2021,2025,5,2021 2022 2023 2024 2025,FR,FBS,Mountain West,Leawood,KS,USA,38.907263,-94.62524,census,city
 Wyoming,Jordon Vaughn,RB,"Manvel, Texas",Manvel,,2021,2022,2,2021 2022,FR,FBS,Mountain West,Manvel,TX,USA,29.485422,-95.362322,census,city
@@ -136823,7 +136823,7 @@ Youngstown State,Alex Howard,LB,"Cincinnati, Ohio",Mount Healthy,,2019,2023,4,20
 Youngstown State,Andres Lehrmann,DE,"Doral, Fla.",Doral Academy,,2019,2023,4,2019 2021 2022 2023,FR,FCS,Missouri Valley,Doral,FL,USA,25.815956,-80.357556,census,city
 Youngstown State,Austin Romanchak,CB,"Freeport, Pa.",Freeport,,2019,2019,1,2019,FR,FCS,Missouri Valley,Freeport,PA,USA,40.686223,-79.682568,census,city
 Youngstown State,Bryce Boyd,TB,"Pittsburgh, Pa.",Shaler Area,,2019,2019,1,2019,SR,FCS,Missouri Valley,Pittsburgh,PA,USA,40.439936,-79.975676,census,city
-Youngstown State,C.J. Charleston,WR,"Gates Mill, Ohio",Gilmour Academy,,2019,2023,4,2019 2021 2022 2023,FR,FCS,Missouri Valley,Gates Mill,OH,USA,41.4375669,-81.6182153,nominatim,city
+Youngstown State,C.J. Charleston,WR,"Gates Mill, Ohio",Gilmour Academy,,2019,2023,4,2019 2021 2022 2023,FR,FCS,Missouri Valley,Gates Mills,OH,USA,41.530992,-81.411153,spelling_fix,city
 Youngstown State,Cheriff Jamison,DE,"Youngstown, Ohio",Cardinal Mooney,,2019,2019,1,2019,FR,FCS,Missouri Valley,Youngstown,OH,USA,41.099095,-80.645902,census,city
 Youngstown State,Chris Fitzgerald,DL,"Youngstown, Ohio",East,,2019,2023,4,2019 2021 2022 2023,FR,FCS,Missouri Valley,Youngstown,OH,USA,41.099095,-80.645902,census,city
 Youngstown State,Chris Julian,DL,"Howland, Ohio",Howland,,2019,2019,1,2019,FR,FCS,Missouri Valley,Howland,OH,USA,41.23828,-80.751872,census,city

@@ -65,7 +65,7 @@ _SUFFIX = re.compile(r"\b(jr|sr|ii|iii|iv|v)\b\.?", re.I)
 
 def person(r: dict) -> tuple:
     """Name + hometown, loose enough to match one player across two schools' rosters."""
-    name = re.sub(r"^\s*#?\d+\s+", "", r["name"] or "")      # some sites put the jersey number in the name
+    name = display_name(r["name"])      # some sites put the jersey number in the name
     name = re.sub(r"[^a-z]", "", _SUFFIX.sub("", name.lower()))
     city = re.sub(r"[^a-z]", "", (r.get("home_city") or "").lower())
     return name, city, r.get("home_state") or r.get("home_country") or ""
@@ -92,6 +92,35 @@ def find_moves(rows: list[dict]) -> dict[int, str]:
                     and int(rb["first_season"]) >= int(ra["last_season"])):
                 came_from[b] = ra["school"]
     return came_from
+
+
+_JERSEY = re.compile(r"^\s*#?\d+(?:[a-z]|[/-]\w{0,3})?\s+(?=\D)", re.I)   # "89 ", "#7 ", "13d ", "16/33 ", "12/DB ", "1-O ", "10030 "
+
+
+def display_name(name: str) -> str:
+    """The player's name as shown on the site, without a jersey number some sites put in front."""
+    return _JERSEY.sub("", name or "").strip()
+
+
+_HS_WORDS = re.compile(r"\b(high\s+school|h\s*\.\s*s\s*\.?|hs)(?=\W|$)", re.I)
+
+
+def hs_key(name: str) -> str:
+    """One key for spellings of the same high school: "Cedar Park HS", "Cedar Park High School",
+    "Cedar Park H.S." -> "cedar park hs". Only the "high school" wording and punctuation are ignored,
+    so "Cedar Park" and "Cedar Park HS" stay apart (they could be different schools)."""
+    s = _HS_WORDS.sub(" hs ", (name or "").lower())
+    s = re.sub(r"[^a-z0-9 ]", " ", s.replace("'", ""))
+    return re.sub(r"\s+", " ", s).strip()
+
+
+def hs_spellings(rows: list[dict]) -> dict[str, str]:
+    """hs_key -> the spelling most players' rosters use (ties go to the shorter, then alphabetical)."""
+    counts: dict[str, Counter] = {}
+    for r in rows:
+        hs = (r["high_school"] or "").strip()
+        counts.setdefault(hs_key(hs), Counter())[hs] += 1
+    return {k: min(c, key=lambda s: (-c[s], len(s), s)) for k, c in counts.items()}
 
 
 UPPERCLASS = {"JR", "SR", "GR"}
@@ -195,6 +224,13 @@ def main(src, dst):
 
     towns, tidx = [], {}
     hs_tab, hidx = [], {}
+    hs_name = hs_spellings(rows)   # hs_key -> the spelling shown on the site
+    spellings = len({(r["high_school"] or "").strip() for r in rows})
+    if spellings > len(hs_name):
+        print(f"high schools: {spellings} spellings merged into {len(hs_name)} names ('HS' / 'High School' / 'H.S.')")
+    jersey_names = sum(display_name(r["name"]) != (r["name"] or "").strip() for r in rows)
+    if jersey_names:
+        print(f"removed a jersey number from {jersey_names} player names")
     P = {k: [] for k in ("s", "t", "p", "f", "l", "x", "o", "d", "h", "n")}
     for i, r in enumerate(rows):
         if r["home_lat"]:
@@ -207,7 +243,7 @@ def main(src, dst):
             t = tidx[key]
         else:
             t = -1
-        hs = (r["high_school"] or "").strip()
+        hs = hs_name[hs_key((r["high_school"] or "").strip())]
         if hs not in hidx:
             hidx[hs] = len(hs_tab)
             hs_tab.append(hs)
@@ -229,7 +265,7 @@ def main(src, dst):
         P["o"].append(sidx[came_from[i]] if i in came_from else -1)   # the D1 school he transferred from, if known
         P["d"].append(divs.index(r["division_first_season"]) if r["division_first_season"] in divs else 0)
         P["h"].append(hidx[hs])
-        P["n"].append(r["name"])
+        P["n"].append(display_name(r["name"]))
     out = {
         "schools": [[s, confs.index(conf[s]), divs.index(div_now[s][1]) if div_now[s][1] in divs else 0,
                      *colors.get(s, ("#777777", "#FFFFFF"))] for s in schools],
