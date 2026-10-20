@@ -853,14 +853,10 @@ if (/(^#|&)compare=/.test(location.hash)) location.replace("compare.html" + loca
     lastHash = h;
     try { history.replaceState(null, "", location.pathname + location.search + (h ? "#" + h : "")); } catch (e) { /* sandboxed previews can refuse */ }
   }
-  // Compare opens the Recruiting Footprints page with the same filters, starting from the school on the map.
-  function updateCompareLink() {
-    const q = F.toParams(new URLSearchParams(), { includeSchool: false });
-    q.delete("conf");
-    if (state.school >= 0) q.set("compare", data.schools[state.school][0]);
-    const h = q.toString().replace(/%2C/gi, ",");
-    $("compareLink").href = "compare.html" + (h ? "#" + h : "");
-  }
+  // Compare opens the Recruiting Footprints page plainly: no schools, no filters from here.
+  // That page remembers its own schools and filters after the first visit.
+  function updateCompareLink() { $("compareLink").href = "compare.html"; }
+
   // Reads the hash into `state`; unknown or stale values are skipped. Returns the saved map view [lon, lat, zoom], if any.
   function readUrl() {
     const q = new URLSearchParams(location.hash.slice(1));

@@ -41,8 +41,9 @@ title; click its × (or "Clear map" in Filters) to empty the map again.
   that state's breakdown. With a conference filter on, ranks are within the conference.
 - Dots grow when the map is sparse (one school's few hundred hometowns) so they're easier to hover
   and click, and stay small when every school is showing.
-- **Compare** opens the Recruiting Footprints page with the same filters, starting from the
-  school on the map.
+- **Compare** opens the Recruiting Footprints page. The first time it starts empty (no schools, no
+  filters); after that it comes back with the schools and filters you last used there, remembered
+  in your browser. A shared Footprints link always opens exactly what it describes.
 - **Copy link** (the chain icon) copies a link that reopens exactly this view.
 
 ## Using Recruiting Footprints
