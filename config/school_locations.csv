@@ -1,0 +1,265 @@
+school,city,state,lat,lon
+Abilene Christian,Abilene,TX,32.4545,-99.7381
+Air Force,Colorado Springs,CO,38.8673,-104.7607
+Akron,Akron,OH,41.0805,-81.5214
+Alabama,Tuscaloosa,AL,33.2344,-87.5283
+Alabama A&M,Huntsville,AL,34.6977,-86.6767
+Alabama State,Montgomery,AL,32.3485,-86.2673
+Albany,Albany,NY,42.6657,-73.7984
+Alcorn State,Lorman,MS,31.8204,-91.0501
+Appalachian State,Boone,NC,36.2138,-81.6652
+Arizona,Tucson,AZ,32.153,-110.8708
+Arizona State,Tempe,AZ,33.3884,-111.9318
+Arkansas,Fayetteville,AR,36.0715,-94.1666
+Arkansas State,Jonesboro,AR,35.8198,-90.679
+Arkansas-Pine Bluff,Pine Bluff,AR,34.2116,-92.0176
+Army,West Point,NY,41.3607,-74.0197
+Auburn,Auburn,AL,32.6078,-85.4947
+Austin Peay,Clarksville,TN,36.5664,-87.3452
+BYU,Provo,UT,40.2453,-111.6451
+Ball State,Muncie,IN,40.1988,-85.3951
+Baylor,Waco,TX,31.558,-97.1898
+Bethune-Cookman,Daytona Beach,FL,29.1907,-81.0971
+Boise State,Boise,ID,43.5993,-116.2298
+Boston College,Chestnut Hill,MA,42.3307,-71.1662
+Bowling Green,Bowling Green,OH,41.3777,-83.6496
+Brown,Providence,RI,41.8231,-71.4188
+Bryant,Smithfield,RI,41.9009,-71.5289
+Bucknell,Lewisburg,PA,40.9641,-76.89
+Buffalo,Buffalo,NY,42.8925,-78.8597
+Butler,Indianapolis,IN,39.7767,-86.1459
+Cal Poly,San Luis Obispo,CA,35.2662,-120.6684
+California,Berkeley,CA,37.8657,-122.2987
+Campbell,Buies Creek,NC,35.411,-78.739
+Central Arkansas,Conway,AR,35.0744,-92.467
+Central Connecticut,New Britain,CT,41.6766,-72.7862
+Central Michigan,Mount Pleasant,MI,43.5967,-84.776
+Charleston Southern,North Charleston,SC,32.9179,-80.065
+Charlotte,Charlotte,NC,35.209,-80.831
+Chattanooga,Chattanooga,TN,35.066,-85.2484
+Cincinnati,Cincinnati,OH,39.1402,-84.5058
+Clemson,Clemson,SC,34.6836,-82.8106
+Coastal Carolina,Conway,SC,33.8345,-79.0492
+Colgate,Hamilton,NY,42.8285,-75.553
+Colorado,Boulder,CO,40.0244,-105.2513
+Colorado State,Fort Collins,CO,40.5482,-105.0648
+Columbia,New York,NY,40.808,-73.962
+Cornell,Ithaca,NY,42.4439,-76.5031
+Dartmouth,Hanover,NH,43.7116,-72.2731
+Davidson,Davidson,NC,35.4804,-80.8209
+Dayton,Dayton,OH,39.7847,-84.1996
+Delaware,Newark,DE,39.6776,-75.7575
+Delaware State,Dover,DE,39.1606,-75.5217
+Drake,Des Moines,IA,41.5726,-93.6102
+Duke,Durham,NC,35.9779,-78.8981
+Duquesne,Pittsburgh,PA,40.4399,-79.9757
+East Carolina,Greenville,NC,35.5964,-77.3753
+East Tennessee State,Johnson City,TN,36.3423,-82.3809
+East Texas A&M,Commerce,TX,33.241,-95.8989
+Eastern Illinois,Charleston,IL,39.4848,-88.1776
+Eastern Kentucky,Richmond,KY,37.7291,-84.2994
+Eastern Michigan,Ypsilanti,MI,42.2444,-83.6212
+Eastern Washington,Cheney,WA,47.4911,-117.5815
+Elon,Elon,NC,36.1023,-79.5088
+FIU,Miami,FL,25.7752,-80.2086
+Florida,Gainesville,FL,29.6795,-82.3468
+Florida A&M,Tallahassee,FL,30.4535,-84.2523
+Florida Atlantic,Boca Raton,FL,26.3727,-80.1037
+Florida State,Tallahassee,FL,30.4535,-84.2523
+Fordham,Bronx,NY,40.861,-73.886
+Fresno State,Fresno,CA,36.7827,-119.7934
+Furman,Greenville,SC,34.8369,-82.363
+Gardner-Webb,Boiling Springs,NC,35.2521,-81.6636
+Georgetown,Washington,DC,38.9042,-77.0165
+Georgia,Athens,GA,33.9496,-83.3701
+Georgia Southern,Statesboro,GA,32.4377,-81.7756
+Georgia State,Atlanta,GA,33.7629,-84.4227
+Georgia Tech,Atlanta,GA,33.7629,-84.4227
+Grambling State,Grambling,LA,32.5263,-92.708
+Hampton,Hampton,VA,37.048,-76.2973
+Harvard,Cambridge,MA,42.376,-71.1187
+Hawaii,Honolulu,HI,21.3243,-157.8476
+Holy Cross,Worcester,MA,42.2695,-71.8078
+Houston,Houston,TX,29.7857,-95.3888
+Houston Christian,Houston,TX,29.7857,-95.3888
+Howard,Washington,DC,38.9042,-77.0165
+Idaho,Moscow,ID,46.7306,-116.9989
+Idaho State,Pocatello,ID,42.8727,-112.4638
+Illinois,Champaign,IL,40.1141,-88.2746
+Illinois State,Normal,IL,40.5201,-88.9922
+Incarnate Word,San Antonio,TX,29.4628,-98.5246
+Indiana,Bloomington,IN,39.1637,-86.5243
+Indiana State,Terre Haute,IN,39.4642,-87.376
+Iowa,Iowa City,IA,41.6557,-91.5309
+Iowa State,Ames,IA,42.0263,-93.6213
+Jackson State,Jackson,MS,32.3158,-90.2129
+Jacksonville State,Jacksonville,AL,33.8101,-85.7552
+James Madison,Harrisonburg,VA,38.4363,-78.8733
+Kansas,Lawrence,KS,38.9596,-95.2655
+Kansas State,Manhattan,KS,39.1883,-96.6059
+Kennesaw State,Kennesaw,GA,34.0272,-84.6171
+Kent State,Kent,OH,41.1476,-81.362
+Kentucky,Lexington,KY,38.0407,-84.4583
+LIU,Brookville,NY,40.8079,-73.5701
+LSU,Baton Rouge,LA,30.4404,-91.1332
+Lafayette,Easton,PA,40.686,-75.2185
+Lamar,Beaumont,TX,30.0849,-94.1453
+Lehigh,Bethlehem,PA,40.6264,-75.3679
+Liberty,Lynchburg,VA,37.399,-79.1955
+Lindenwood,St. Charles,MO,38.7957,-90.5154
+Louisiana,Lafayette,LA,30.2056,-92.0281
+Louisiana Tech,Ruston,LA,32.533,-92.6353
+Louisiana-Monroe,Monroe,LA,32.519,-92.0772
+Louisville,Louisville,KY,38.1654,-85.6474
+Maine,Orono,ME,44.8783,-68.6881
+Marist,Poughkeepsie,NY,41.6946,-73.9199
+Marshall,Huntington,WV,38.4107,-82.4347
+Maryland,College Park,MD,38.9963,-76.9356
+McNeese,Lake Charles,LA,30.199,-93.2108
+Memphis,Memphis,TN,35.1092,-89.9685
+Mercer,Macon,GA,32.809,-83.6941
+Mercyhurst,Erie,PA,42.1166,-80.0735
+Merrimack,North Andover,MA,42.6739,-71.0913
+Miami (FL),Coral Gables,FL,25.6831,-80.2617
+Miami (OH),Oxford,OH,39.5056,-84.7443
+Michigan,Ann Arbor,MI,42.2761,-83.7309
+Michigan State,East Lansing,MI,42.7489,-84.4824
+Middle Tennessee,Murfreesboro,TN,35.8539,-86.4212
+Minnesota,Minneapolis,MN,44.9633,-93.2683
+Mississippi State,Starkville,MS,33.4633,-88.8278
+Mississippi Valley State,Itta Bena,MS,33.5009,-90.3243
+Missouri,Columbia,MO,38.9473,-92.3264
+Missouri State,Springfield,MO,37.1942,-93.2926
+Monmouth,West Long Branch,NJ,40.2879,-74.02
+Montana,Missoula,MT,46.862,-113.985
+Montana State,Bozeman,MT,45.6832,-111.0538
+Morehead State,Morehead,KY,38.19,-83.4491
+Morgan State,Baltimore,MD,39.3,-76.6105
+Murray State,Murray,KY,36.6142,-88.3221
+NC State,Raleigh,NC,35.8319,-78.641
+Navy,Annapolis,MD,38.9722,-76.5053
+Nebraska,Lincoln,NE,40.8103,-96.6749
+Nevada,Reno,NV,39.5491,-119.8499
+New Hampshire,Durham,NH,43.134,-70.926
+New Haven,West Haven,CT,41.2721,-72.9675
+New Mexico,Albuquerque,NM,35.1048,-106.6468
+New Mexico State,Las Cruces,NM,32.3264,-106.7897
+Nicholls,Thibodaux,LA,29.7949,-90.8146
+Norfolk State,Norfolk,VA,36.923,-76.2446
+North Alabama,Florence,AL,34.8298,-87.6622
+North Carolina,Chapel Hill,NC,35.9283,-79.0414
+North Carolina A&T,Greensboro,NC,36.0949,-79.8236
+North Carolina Central,Durham,NC,35.9779,-78.8981
+North Dakota,Grand Forks,ND,47.9196,-97.0873
+North Dakota State,Fargo,ND,46.8647,-96.8291
+North Texas,Denton,TX,33.2174,-97.1413
+Northern Arizona,Flagstaff,AZ,35.1852,-111.6207
+Northern Colorado,Greeley,CO,40.4166,-104.7733
+Northern Illinois,DeKalb,IL,41.9282,-88.7476
+Northern Iowa,Cedar Falls,IA,42.5191,-92.454
+Northwestern,Evanston,IL,42.0464,-87.6944
+Northwestern State,Natchitoches,LA,31.7348,-93.1009
+Notre Dame,South Bend,IN,41.6766,-86.2688
+Ohio,Athens,OH,39.3263,-82.1002
+Ohio State,Columbus,OH,39.9839,-82.9849
+Oklahoma,Norman,OK,35.2406,-97.3453
+Oklahoma State,Stillwater,OK,36.1315,-97.0745
+Old Dominion,Norfolk,VA,36.923,-76.2446
+Ole Miss,Oxford,MS,34.3513,-89.537
+Oregon,Eugene,OR,44.0568,-123.119
+Oregon State,Corvallis,OR,44.5699,-123.2783
+Penn,Philadelphia,PA,40.0094,-75.1333
+Penn State,State College,PA,40.791,-77.8568
+Pittsburgh,Pittsburgh,PA,40.4399,-79.9757
+Portland State,Portland,OR,45.537,-122.65
+Prairie View A&M,Prairie View,TX,30.093,-95.987
+Presbyterian,Clinton,SC,34.4739,-81.8609
+Princeton,Princeton,NJ,40.3582,-74.6667
+Purdue,West Lafayette,IN,40.4437,-86.9236
+Rhode Island,Kingston,RI,41.481,-71.526
+Rice,Houston,TX,29.7857,-95.3888
+Richmond,Richmond,VA,37.5314,-77.476
+Robert Morris,Moon Township,PA,40.5099,-80.2078
+Rutgers,New Brunswick,NJ,40.4867,-74.4444
+SMU,Dallas,TX,32.7933,-96.7665
+Sacramento State,Sacramento,CA,38.5677,-121.4682
+Sacred Heart,Fairfield,CT,41.1759,-73.272
+Saint Francis (PA),Loretto,PA,40.5084,-78.6351
+Sam Houston,Huntsville,TX,30.7005,-95.5549
+Samford,Birmingham,AL,33.5272,-86.797
+San Diego,San Diego,CA,32.815,-117.1356
+San Diego State,San Diego,CA,32.815,-117.1356
+San Jose State,San Jose,CA,37.296,-121.8146
+South Alabama,Mobile,AL,30.6682,-88.1079
+South Carolina,Columbia,SC,34.0405,-80.9061
+South Carolina State,Orangeburg,SC,33.4936,-80.8669
+South Dakota,Vermillion,SD,42.7817,-96.9256
+South Dakota State,Brookings,SD,44.3034,-96.7873
+South Florida,Tampa,FL,27.9701,-82.4797
+Southeast Missouri State,Cape Girardeau,MO,37.3094,-89.5584
+Southeastern Louisiana,Hammond,LA,30.5056,-90.4565
+Southern,Baton Rouge,LA,30.4404,-91.1332
+Southern Illinois,Carbondale,IL,37.7221,-89.2237
+Southern Miss,Hattiesburg,MS,31.3073,-89.3174
+Southern Utah,Cedar City,UT,37.6838,-113.0955
+St. Thomas (MN),St. Paul,MN,44.9489,-93.1041
+Stanford,Stanford,CA,37.4269,-122.1677
+Stephen F. Austin,Nacogdoches,TX,31.6124,-94.652
+Stetson,DeLand,FL,29.0227,-81.2865
+Stonehill,Easton,MA,42.0392,-71.109
+Stony Brook,Stony Brook,NY,40.9078,-73.1275
+Syracuse,Syracuse,NY,43.041,-76.1436
+TCU,Fort Worth,TX,32.782,-97.3486
+Tarleton State,Stephenville,TX,32.2145,-98.2199
+Temple,Philadelphia,PA,40.0094,-75.1333
+Tennessee,Knoxville,TN,35.9707,-83.9493
+Tennessee State,Nashville,TN,36.1718,-86.785
+Tennessee Tech,Cookeville,TN,36.1469,-85.5127
+Texas,Austin,TX,30.2986,-97.7541
+Texas A&M,College Station,TX,30.5852,-96.2964
+Texas Southern,Houston,TX,29.7857,-95.3888
+Texas State,San Marcos,TX,29.889,-97.938
+Texas Tech,Lubbock,TX,33.5619,-101.8889
+The Citadel,Charleston,SC,32.828,-79.9729
+Toledo,Toledo,OH,41.6641,-83.5819
+Towson,Towson,MD,39.3942,-76.6178
+Troy,Troy,AL,31.802,-85.9671
+Tulane,New Orleans,LA,29.94,-90.12
+Tulsa,Tulsa,OK,36.1279,-95.9023
+UAB,Birmingham,AL,33.5272,-86.797
+UC Davis,Davis,CA,38.5561,-121.7378
+UCF,Orlando,FL,28.4087,-81.2548
+UCLA,Los Angeles,CA,34.0194,-118.4108
+UConn,Storrs,CT,41.8089,-72.2516
+UMass,Amherst,MA,42.3804,-72.5231
+UNLV,Las Vegas,NV,36.2335,-115.264
+USC,Los Angeles,CA,34.0194,-118.4108
+UT Martin,Martin,TN,36.3379,-88.8514
+UTEP,El Paso,TX,31.8478,-106.4311
+UTSA,San Antonio,TX,29.4628,-98.5246
+Utah,Salt Lake City,UT,40.7769,-111.931
+Utah State,Logan,UT,41.745,-111.81
+Utah Tech,St. George,UT,37.077,-113.5765
+VMI,Lexington,VA,37.7823,-79.4443
+Valparaiso,Valparaiso,IN,41.4798,-87.0523
+Vanderbilt,Nashville,TN,36.1718,-86.785
+Villanova,Villanova,PA,40.0405,-75.341
+Virginia,Charlottesville,VA,38.0377,-78.4854
+Virginia Tech,Blacksburg,VA,37.2313,-80.4267
+Wagner,Staten Island,NY,40.615,-74.094
+Wake Forest,Winston-Salem,NC,36.1029,-80.2608
+Washington,Seattle,WA,47.6193,-122.3515
+Washington State,Pullman,WA,46.7331,-117.1683
+Weber State,Ogden,UT,41.192,-111.94
+West Georgia,Carrollton,GA,33.5818,-85.0833
+West Virginia,Morgantown,WV,39.6375,-79.9469
+Western Carolina,Cullowhee,NC,35.31,-83.176
+Western Illinois,Macomb,IL,40.4701,-90.6831
+Western Kentucky,Bowling Green,KY,36.9768,-86.4337
+Western Michigan,Kalamazoo,MI,42.2752,-85.5885
+William & Mary,Williamsburg,VA,37.2695,-76.7082
+Wisconsin,Madison,WI,43.0878,-89.4299
+Wofford,Spartanburg,SC,34.9456,-81.9259
+Wyoming,Laramie,WY,41.306,-105.6086
+Yale,New Haven,CT,41.3108,-72.925
+Youngstown State,Youngstown,OH,41.0991,-80.6459
