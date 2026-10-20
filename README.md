@@ -3,8 +3,9 @@
 Where college football players come from: the hometown of every FBS and FCS player on a roster
 since 2016, scraped from each school's official athletics site and put on a world map.
 
-- **264 schools**, about **137,000 player records** and about **10,000 hometowns**
+- **264 schools**, about **137,000 player records** and about **11,000 hometowns**
 - Seasons 2016–2019 and 2021–2026 (there's no 2020 data)
+- About 40,900 transfers (30% of player records), 19,300 of them between two D1 schools in this data (so the school he left is known)
 - One record per player per school, so a transfer appears once for each school he played for
 
 The site lives in `docs/` and is plain static files, so GitHub Pages can host it for free. It has two
@@ -36,7 +37,7 @@ title; click its × (or "Clear map" in Filters) to empty the map again.
   players: name, position, school, seasons, high school.
 - **School stats** (the button in the bottom-left box) opens the numbers for what the map shows:
   totals, where the picked school ranks among D1 schools (players, high-school recruits, transfers,
-  and players from a clicked state) with the schools ranked just above and below it, then top
+  players from a clicked state, share from its home state, and typical distance from campus) with the schools ranked just above and below it, then top
   states, top hometowns, high-school pipelines and biggest rosters. Clicking a state opens it with
   that state's breakdown. With a conference filter on, ranks are within the conference.
 - Dots grow when the map is sparse (one school's few hundred hometowns) so they're easier to hover
@@ -59,6 +60,29 @@ own. On big screens the maps size themselves so all four fit in the window. Filt
 division, season on roster, recruit type and position (each box picks its own school, so there's
 no school or conference filter). **Dot map** goes back with the same filters, showing the first
 school you picked. Players from abroad or Puerto Rico aren't on these maps; each box says how many.
+
+### Head to head
+
+Under the maps (or jump there with "Head-to-head stats ↓"), five panels compare the picked schools,
+all following the page's filters:
+
+- **Scorecard**: players; share of high-school recruits and transfers; how many states each school
+  recruits from; its top state and that state's share; and the fewest states that make up half the
+  roster (1–2 is very local, 6+ is national).
+- **Battleground states**: states where at least two of the schools have 5+ players, with bars on
+  one shared scale, e.g. Georgia: Georgia 327, Alabama 58, LSU 34.
+- **Shared high schools**: high schools that sent players to two or more of the schools, grouped
+  by school name and the players' home state.
+- **Footprint over time**: one line per school by season, showing either how many states that
+  season's roster came from or the share from the school's overall top state. Hover for every
+  school's value that season; a dashed rule marks 2021, the first transfer-portal cycle. Lines
+  whose school colors look alike are drawn dashed, and every line is labeled by name.
+- **Position pipelines**: each school's top home state for every position group, with how many of
+  that group came from there.
+
+The scorecard also shows each school's campus, its share of players from its home state, and its
+typical distance from campus (the median straight-line distance from hometown to campus), and the
+trend chart can show home-state share by season. Each map marks the campus with a dot.
 
 ### Link format
 
@@ -105,17 +129,26 @@ docs/                    the website (this is what GitHub Pages serves)
   common.js              shared by both: data loading, school colors, the Filters dropdown and its link keys
   common.css             shared by both: colors, type, title bar, buttons, the Filters dropdown
   data/map_data.json     every player, packed small; made by build_map_data.py
+  data/school_locations.json   each school's campus; made by build_school_locations.py
   .nojekyll              tells GitHub Pages to serve the files as they are
 scrape_rosters.py        step 1: scrape rosters (fetching, parsing and cleaning all live here)
 geocode_hometowns.py     step 2: hometown -> lat/lon, plus suggested fixes for hometowns it can't place
-build_map_data.py        step 3: pack everything into docs/data/map_data.json
+check_frozen_classes.py  step 3: find seasons whose class years can't be trusted (see How transfers are recognized)
+build_map_data.py        step 4: pack everything into docs/data/map_data.json
+build_school_locations.py  packs config/school_locations.csv for the site
 config/
   schools.csv            school, division, conference, domain, roster_url
   division_history.csv   schools that changed division, and when
   school_colors.csv      each school's primary and secondary color, for the map dots
+  school_locations.csv   each school's campus city, state, latitude and longitude
 tests/                   parser tests: python -m pytest tests -q
+                         (tests/test_previous_school.py also runs on its own: python tests/test_previous_school.py)
 requirements.txt
 ```
+`config/school_locations.csv` holds each school's campus city, state and coordinates; after editing
+it, run `python build_school_locations.py` to rebuild `docs/data/school_locations.json` (the pages
+use it for the campus star, home-state share and distance from campus, and still work without it).
+
 `scrape_rosters.py` and `geocode_hometowns.py` must stay in the same folder (the geocoder
 borrows the scraper's hometown parser).
 
@@ -129,9 +162,17 @@ python scrape_rosters.py --seasons 2016-2019,2021-2026 --retry-failed  # second 
 python geocode_hometowns.py data/players_unique.csv
 #   check the "review" rows in data/hometown_corrections.csv, change any you agree with to "fixed",
 #   then run the geocode line again (or add --use-review to accept them all)
+python check_frozen_classes.py                                         # writes data/frozen_class_seasons.csv
 python build_map_data.py                                               # writes docs/data/map_data.json
 ```
+Run both from the repo's root folder: `build_map_data.py` reads the list `check_frozen_classes.py`
+writes, and without it trusts every season's class years (it prints a warning).
 Then commit `docs/data/map_data.json` and push; the live map updates on its own.
+
+After changing the scraper's cleaning rules, `python scrape_rosters.py --recombine` re-cleans every saved
+season and rebuilds `rosters_all_seasons.csv` and `players_unique.csv` without downloading anything
+(a minute instead of hours); then run `geocode_hometowns.py`, `check_frozen_classes.py` and
+`build_map_data.py` as usual.
 
 Quick test on a few schools: `python scrape_rosters.py --only "Alabama,Clemson,North Dakota State"`.
 For sites that only show the roster after JavaScript runs, add `--render` (needs
@@ -149,6 +190,7 @@ For sites that only show the roster after JavaScript runs, add `--render` (needs
 | `data/players_unique_geocoded.csv` | the above plus latitude and longitude |
 | `data/hometown_corrections.csv` | suggested hometown fixes; your edits here are kept between runs |
 | `data/unmatched_hometowns.csv` | hometowns that still couldn't be placed |
+| `data/frozen_class_seasons.csv` | school-seasons whose class years can't be trusted; the build skips its class-year rule for them |
 
 If you'd rather keep the hometown corrections you've made by hand under version control, remove
 `data/hometown_corrections.csv` from the ignore list (see `.gitignore`).
@@ -163,12 +205,53 @@ For past seasons it tries each site's archive URL styles (`/roster/2019`, `/rost
 `/roster/2019-20`, ...) or a `roster_url` template from `config/schools.csv`. Every archive page
 is checked for its year so a site quietly showing this year's roster isn't saved as 2019.
 
+## How transfers are recognized
+Roster sites label a player's old school in different ways: "Previous School", "Last School" (a
+high school for freshmen, a college for transfers), "College", or one field like "Lamar HS / Texas
+Tech". The scraper sorts every school field it finds: a college goes to `previous_school`, a high
+school to `high_school`. It knows a college by words like University, College, CC or JC, or by its
+name in `config/schools.csv` or a list of well-known junior colleges. A lone "previous school" that
+isn't recognizably a college is treated as the high school (Ohio State's site, for one, files every
+high school there), and "Menard" next to "Menard HS" is one school, not a transfer.
+`build_map_data.py` uses the same rules (it imports them from `scrape_rosters.py`, so keep the two
+together), and also counts players it finds on an earlier
+D1 roster, and newcomers who arrive as juniors or older (see Known issues).
+
+`build_map_data.py` prints any "thin rosters" (a school-season with fewer than 40 players). The ones
+in the data now are seasons the schools' sites simply don't have: Ohio State 2016, Jackson State
+2016–17, Samford 2016–17, Alabama A&M 2019, LIU 2016–18 and 2021, Yale 2016, UAB 2016 (no team) and
+Saint Francis (PA) 2026. Re-scraping won't fill them. The build skips its "arrived as a junior or
+older" transfer rule for the season after each one, so a missing roster can't make returning players
+look like transfers.
+
+Some schools' archive pages also show the wrong class year: each player appears with a later class
+(often his final one) instead of that season's, so freshmen look like juniors. Ohio State 2017–2022
+is the clearest case; the rule had counted 40% of its players as transfers. `check_frozen_classes.py`
+finds these seasons by following returning players from one season to the next: normally about a
+quarter don't move up a class (mostly redshirt years), but on a frozen archive nearly all of them
+stay put. It counts only players who were freshmen, sophomores or juniors the season before, so
+seniors repeating a year (the COVID free year) don't count, unless too few of those remain to judge.
+When 60% or more don't advance, both seasons of the pair go into `data/frozen_class_seasons.csv`,
+and `build_map_data.py` skips its class-year rule for them. Players there still count as transfers
+when the roster lists a previous college or they were on an earlier D1 roster.
+
 ## Fixing a school that fails
 Check `data/reports/scrape_report_*.csv`, then fix its `domain` or paste its exact roster page
 into `roster_url` in `config/schools.csv` (it may contain `{season}`), and run again with
 `--retry-failed`.
 
 ## Known issues
+- A few school-seasons have no roster on the school's site (listed under "Rebuild the data"), so
+  those seasons undercount that school's players.
+- Transfers: many roster pages never list a previous school (Notre Dame, SMU, Arkansas State, Sam
+  Houston and others), so `build_map_data.py` also counts a player as a transfer when he was on
+  another D1 roster earlier with the same name and hometown, or when he's new to a roster whose
+  previous season is also in the data and he's already a junior, senior or grad (so a season that
+  failed to scrape doesn't make returning players look like transfers). The class-year rule is
+  skipped for seasons whose class years can't be trusted (see How transfers are recognized), so
+  transfers from outside D1 with no listed previous school are missed in those seasons. It also
+  misses a transfer from outside D1 whose class year looks like a freshman's or sophomore's, and two different players with the same name and hometown on two
+  rosters in different years would be read as one transfer (rare; same-season pairs are skipped).
 - Some player names start with a jersey number (for example "89 Mason Thomas"), which comes
   from roster pages that put the number in the name field.
 - The same high-school name can belong to schools in different towns; the map can't tell them

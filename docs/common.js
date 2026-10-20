@@ -17,11 +17,15 @@
     const data = await fetch("data/map_data.json").then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); });
     const P = data.players;
     data.N = P.s.length;
-    data.SEASONS = [...new Set(P.f)].map((f) => f + 2000).sort((a, b) => a - b);
+    data.SEASONS = [...new Set([...P.f, ...P.l])].map((f) => f + 2000).sort((a, b) => a - b);   // every season anyone was on a roster
     data.FIRST = data.SEASONS[0]; data.LAST = data.SEASONS[data.SEASONS.length - 1];
     data.nameList = data.names.split("\n");
     data.tState = data.towns.map((t) => { const parts = t[2].split(", "); return parts[parts.length - 1]; });   // state abbr, or a country
     data.schoolIndex = new Map(data.schools.map((s, i) => [s[0].toLowerCase(), i]));
+    // campus city, state and coordinates (built from config/school_locations.csv); the pages work without it
+    let loc = null;
+    try { loc = await fetch("data/school_locations.json").then((r) => r.ok ? r.json() : null); } catch (e) {}
+    data.campus = data.schools.map((s) => { const v = loc && loc.schools[s[0]]; return v ? { city: v[0], state: v[1], lat: v[2], lon: v[3] } : null; });
     return data;
   }
 
@@ -188,6 +192,13 @@
     return { state, passes, sync, reset, activeCount, summary, toParams, fromParams, setOpen, isOpen, updateBadge };
   }
 
+  // Straight-line distance in miles between two lat/lon points.
+  function miles(lat1, lon1, lat2, lon2) {
+    const r = Math.PI / 180, a = Math.sin((lat2 - lat1) * r / 2) ** 2 + Math.cos(lat1 * r) * Math.cos(lat2 * r) * Math.sin((lon2 - lon1) * r / 2) ** 2;
+    return 3958.8 * 2 * Math.asin(Math.min(1, Math.sqrt(a)));
+  }
+  const median = (arr) => { if (!arr.length) return null; const a = Float64Array.from(arr).sort(), m = a.length >> 1; return a.length % 2 ? a[m] : (a[m - 1] + a[m]) / 2; };
+
   // Copy the page's link and say so under the button.
   async function copyLink(toast) {
     try { await navigator.clipboard.writeText(location.href); toast.textContent = "Link to this view copied"; }
@@ -199,5 +210,5 @@
     new ResizeObserver(() => document.documentElement.style.setProperty("--bar-h", bar.getBoundingClientRect().height + "px")).observe(bar);
   }
 
-  window.GP = { $, POS_LABEL, STATE_ABBR, ABBR_STATE, fmt, pct, esc, css, narrow, loadData, makePalette, makeFilters, copyLink, trackBar };
+  window.GP = { $, POS_LABEL, STATE_ABBR, ABBR_STATE, fmt, pct, esc, css, narrow, loadData, makePalette, makeFilters, copyLink, trackBar, miles, median };
 })();

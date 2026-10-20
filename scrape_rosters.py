@@ -6,6 +6,7 @@ Examples
     python scrape_rosters.py --seasons 2016-2019,2021-2026     # last 10 seasons, skipping 2020
     python scrape_rosters.py --seasons 2019 --only "Alabama,Clemson"
     python scrape_rosters.py --seasons 2016-2019,2021-2026 --retry-failed --render
+    python scrape_rosters.py --recombine                       # no downloads: re-clean saved seasons, rebuild the combined files
 
 Outputs (in --out, default ./data)
     seasons/rosters_<season>.csv          every player that season, one row each
@@ -537,7 +538,10 @@ _KEYMAP = {
                    "classyear", "class", "year", "eligibility", "yr"],
     "hometown": ["hometown", "homecity", "hometowncity"],
     "high_school": ["highschool", "hs", "highschoolname", "lastschool"],
-    "previous_school": ["previousschool", "previousschools", "transferschool", "college"],
+    # "Last School" is a high school for freshmen and a college for transfers; sort_schools() decides which.
+    "previous_school": ["previousschool", "previousschools", "previousschoolname", "prevschool", "priorschool",
+                        "formerschool", "transferschool", "transferfrom", "transferredfrom", "previouscollege",
+                        "lastcollege", "college"],
     "weight": ["weight", "wt"],
     "bio_url": ["calltoaction", "relativeurl", "url", "permalink", "biourl"],
 }
@@ -568,6 +572,9 @@ def _record_from_json(obj: dict, parent: dict | None = None) -> dict | None:
             val = _pick(p, field)
             if val:
                 rec[field] = val
+        for field in ("high_school", "previous_school"):   # only to fill a blank: the player's own record wins
+            if not rec[field]:
+                rec[field] = _pick(p, field)
 
     rec["height"] = format_height(d.get("heightfeet"), d.get("heightinches"),
                                   _text(d.get("height") or d.get("heightdisplay") or ""))
@@ -792,7 +799,7 @@ _HEADER_FIELDS = [
     (r"hometown", "hometown"),
     (r"(high\s*school|^hs).*/.*(previous|prior|transfer|college)", "hs_prev"),
     (r"high\s*school|last\s*school|^hs$", "high_school"),
-    (r"previous|transfer|prior", "previous_school"),
+    (r"previous|transfer|prior|former|^college$|^last college$", "previous_school"),
     (r"^(#|no\.?|num|number|jersey)$", "jersey"),
     (r"first\s*name", "first_name"),
     (r"last\s*name", "last_name"),
@@ -987,7 +994,7 @@ MIN_PLAYERS = 25  # a real football roster has 80-130+; anything below this is s
 _CELL_LABEL = re.compile(
     r"^(No\.?|#|Jersey|Name|Full Name|Pos\.?|Position|Cl\.?|Class|Yr\.?|Year|Academic Year|Elig\.?|"
     r"Ht\.?|Height|Wt\.?|Weight|Hometown(?:\s*/\s*[A-Za-z ]+)?|High School|Last School|"
-    r"Previous Schools?|Prev\. School|Experience|Exp\.?)\s*:\s*",
+    r"Previous Schools?|Prev\. School|Former School|College|Experience|Exp\.?)\s*:\s*",
     re.I,
 )
 _CLASS_ONLY = re.compile(
@@ -995,6 +1002,100 @@ _CLASS_ONLY = re.compile(
     r"(fr|fy|so|jr|sr|gr|gs|freshman|sophomore|junior|senior|graduate|grad|5th|6th|"
     r"fifth|sixth)(\s*year)?\.?")
 _HS_WORDS = re.compile(r"\b(hs|h\.s\.|high|academy|prep|preparatory|school)\b", re.I)
+
+
+# Telling a college from a high school, for fields like "Last School" that can hold either.
+# Filled with the names in config/schools.csv when the scraper starts (see main()).
+KNOWN_COLLEGES: set[str] = set()
+# Football junior colleges whose roster names often leave out "College"/"CC" (multi-word or distinctive only:
+# a single common word like "Independence" or "Highland" is also a high school name).
+JUCO_NAMES = ["Iowa Western", "East Mississippi", "Northwest Mississippi", "Mississippi Gulf Coast", "Copiah-Lincoln",
+              "Co-Lin", "Pearl River", "Itawamba", "Hinds", "Holmes", "Garden City", "Dodge City", "Fort Scott",
+              "Coffeyville", "Hutchinson", "Butler", "Ellsworth", "Trinity Valley", "Navarro", "Blinn", "Kilgore",
+              "Arizona Western", "Riverside City", "Mt. San Antonio", "Mt. SAC", "Saddleback", "El Camino", "Butte",
+              "Laney", "Lackawanna", "Georgia Military", "Snow", "Pima", "ASA", "NEO", "Northeastern Oklahoma A&M"]
+_HS_STRONG = re.compile(r"\b(high school|h\.s\.|hs|prep|preparatory|secondary)\b", re.I)
+_COLLEGE_WORDS = re.compile(r"\b(university|univ\.?|college|community college|institute|polytechnic|state|tech|a&m|"
+                            r"naval academy|air force academy|u\.?s\.? military academy|west point)\b", re.I)
+_JUCO = re.compile(r"\b(CC|JC|JUCO)\b")          # capitals only: "C.C. Winn" is a high school in Laredo
+
+
+def _college_key(v: str) -> str:
+    v = re.sub(r"\((fl|fla|oh|ohio|pa)\.?\)", "", v.lower())          # "Miami (FL)" -> "miami"
+    return re.sub(r"[^a-z&]", "", re.sub(r"^(the|university of)\s+", "", v.strip()))
+
+
+def load_known_colleges(schools: list[dict]) -> None:
+    """D1 schools from config/schools.csv plus the junior colleges above."""
+    KNOWN_COLLEGES.update(_college_key(s["school"]) for s in schools)
+    KNOWN_COLLEGES.update(_college_key(n) for n in JUCO_NAMES)
+
+
+def looks_like_college(value: str) -> bool:
+    """'Texas Tech', 'Wake Forest', 'Blinn College', 'Butler CC', 'Univ. of Iowa' -> True.
+    'Lamar HS', 'IMG Academy', 'Mater Dei', 'College Park High School', 'Fork Union Military Academy' -> False."""
+    v = clean(value)
+    if not v or _HS_STRONG.search(v):
+        return False
+    if re.search(r"\b(university|college|naval academy|air force academy|military academy at|west point)\b", v, re.I) \
+            and not re.search(r"\bmilitary academy\b(?! at)", v, re.I):
+        return True
+    if _JUCO.search(v):
+        return True
+    if _COLLEGE_WORDS.search(v) and not re.search(r"\b(academy|school)\b", v, re.I):
+        return True                                          # "Texas Tech", "Penn State", "Prairie View A&M"
+    return _college_key(v) in KNOWN_COLLEGES                 # "Wake Forest", "Notre Dame", "SMU"
+
+
+def _same_school(a: str, b: str) -> bool:
+    """'Menard' and 'Menard HS', or 'Rancho Cucamonga' and 'Rancho Cucamonga High School (Calif.)', are one school."""
+    def n(v):
+        v = re.sub(r"\([^)]*\)", "", v.lower())                                  # "(Calif.)", "(Pa.)"
+        return re.sub(r"[^a-z0-9]", "", re.sub(r"\b(high school|h\.?s\.?|school|the)\b", "", v))
+    x, y = n(a or ""), n(b or "")
+    if not x or not y:
+        return False
+    short, long_ = sorted((x, y), key=len)
+    return x == y or (len(short) >= 5 and long_.startswith(short))
+
+
+def sort_schools(p: dict) -> dict:
+    """Put a college in previous_school and a high school in high_school, whichever field the site used.
+
+    'Lamar HS / Texas Tech' in one field   -> high_school 'Lamar HS', previous_school 'Texas Tech'
+    'Wake Forest' under "Last School"       -> previous_school 'Wake Forest'
+    high school and college swapped         -> swapped back
+    two separate fields the site filled     -> kept as they are otherwise ("Saddleback" stays a previous school)
+    only a "previous school", not a college -> it's his high school (some sites file every high school there)
+    previous school = the high school       -> dropped ('Menard' next to 'Menard HS')"""
+    def parts(v):
+        return [clean(x) for x in re.split(r"\s+/\s+|\s*;\s*", v or "") if clean(x)]
+    hs_parts, prev_parts = parts(p.get("high_school")), parts(p.get("previous_school"))
+    hs, prev = " / ".join(hs_parts), " / ".join(prev_parts)
+    if len(hs_parts) > 1 or len(prev_parts) > 1:              # combined values
+        every = hs_parts + prev_parts
+        colleges = [x for x in every if looks_like_college(x)]
+        others = [x for x in every if x not in colleges]
+        hs = next((x for x in others if _HS_WORDS.search(x)), others[0] if others else "")
+        if colleges:
+            prev = colleges[-1]                               # most recent college is usually listed last
+        elif len(prev_parts) == 1 and prev_parts[0] != hs:
+            prev = prev_parts[0]                              # the site's own previous-school field
+        else:
+            prev = ""
+    elif hs and looks_like_college(hs):
+        if not prev:
+            hs, prev = "", hs
+        elif not looks_like_college(prev):
+            hs, prev = prev, hs                               # the two were swapped
+    elif prev and not hs and not looks_like_college(prev):
+        hs, prev = prev, ""                                   # a high school filed as the previous school
+    if _same_school(hs, prev):
+        prev = ""
+    elif prev and not looks_like_college(prev) and (_HS_STRONG.search(prev) or re.search(r"\bacademy\b", prev, re.I)):
+        hs, prev = hs or prev, ""                             # clearly a high school: never a transfer
+    p["high_school"], p["previous_school"] = hs, prev
+    return p
 
 
 def _undouble(name: str) -> str:
@@ -1054,6 +1155,7 @@ def tidy_players(players: list[dict]) -> list[dict]:
                         dest = f
                     p[dest] = school
                     break
+        sort_schools(p)
     return players
 
 
@@ -1338,6 +1440,37 @@ def build_unique(rows: list[dict]) -> list[dict]:
     return out
 
 
+def write_combined(out_dir: Path, season_dir: Path) -> tuple[list[int], list[dict], list[dict]]:
+    """Rebuild rosters_all_seasons.csv and players_unique.csv from every saved season, re-cleaning
+    each row so parser fixes (names, hometowns, high school vs. previous school) reach old seasons too."""
+    # Combined outputs cover every season saved so far, not just this run.
+    combined = []
+    all_saved = []
+    for path in sorted(season_dir.glob("rosters_*.csv")):
+        m = re.fullmatch(r"rosters_(\d{4})\.csv", path.name)
+        if m:
+            all_saved.append(int(m.group(1)))
+            combined.extend(read_csv(path))
+    n_before = len(combined)
+    combined = [r for r in combined if not is_staff(r)]  # also cleans seasons saved by older versions
+    if n_before != len(combined):
+        log.info("Dropped %d coach/staff rows from the saved rosters", n_before - len(combined))
+    for r in combined:  # re-clean so name/hometown fixes also reach seasons scraped earlier
+        r["name"] = clean_name(r.get("name", ""))
+        home = parse_hometown(r.get("hometown", ""))
+        r["home_city"], r["home_state"], r["home_country"] = home["city"], home["state"], home["country"]
+        r["class_norm"] = normalize_class(r.get("class_year", "")) or r.get("class_norm", "")
+        sort_schools(r)
+    write_csv(out_dir / "rosters_all_seasons.csv", OUT_FIELDS, combined)
+    unique = build_unique(combined)
+    write_csv(out_dir / "players_unique.csv", UNIQUE_FIELDS, unique)
+
+    n_prev = sum(1 for r in unique if r["previous_school"])
+    log.info("Combined files cover seasons %s: %d player-season rows, %d unique players (%d with a previous school) -> %s",
+             ", ".join(map(str, all_saved)), len(combined), len(unique), n_prev, out_dir)
+    return all_saved, combined, unique
+
+
 # ---------------------------------------------------------------------------
 
 def main(argv=None) -> int:
@@ -1358,6 +1491,8 @@ def main(argv=None) -> int:
     ap.add_argument("--save-pages", type=Path, metavar="DIR",
                     help="also copy each roster page used into DIR as <school>_<season>.html (for checking by hand)")
     ap.add_argument("--retry-failed", action="store_true", help="skip school-seasons already 'ok' in the reports")
+    ap.add_argument("--recombine", action="store_true",
+                    help="don't download anything: re-clean every saved season and rebuild the combined files")
     ap.add_argument("-v", "--verbose", action="store_true")
     args = ap.parse_args(argv)
 
@@ -1371,6 +1506,10 @@ def main(argv=None) -> int:
         d.mkdir(parents=True, exist_ok=True)
     all_schools = load_schools(args.schools)
     history = load_division_history(args.division_history)
+    load_known_colleges(all_schools)
+    if args.recombine:
+        write_combined(args.out, season_dir)
+        return 0
 
     schools = list(all_schools)
     if args.division != "all":
@@ -1453,31 +1592,10 @@ def main(argv=None) -> int:
         st = [r.get("status") for r in reports.values()]
         totals.append((season, len(rows), st.count("ok"), st.count("partial"), st.count("failed")))
 
-    # Combined outputs cover every season saved so far, not just this run.
-    combined = []
-    all_saved = []
-    for path in sorted(season_dir.glob("rosters_*.csv")):
-        m = re.fullmatch(r"rosters_(\d{4})\.csv", path.name)
-        if m:
-            all_saved.append(int(m.group(1)))
-            combined.extend(read_csv(path))
-    n_before = len(combined)
-    combined = [r for r in combined if not is_staff(r)]  # also cleans seasons saved by older versions
-    if n_before != len(combined):
-        log.info("Dropped %d coach/staff rows from the saved rosters", n_before - len(combined))
-    for r in combined:  # re-clean so name/hometown fixes also reach seasons scraped earlier
-        r["name"] = clean_name(r.get("name", ""))
-        home = parse_hometown(r.get("hometown", ""))
-        r["home_city"], r["home_state"], r["home_country"] = home["city"], home["state"], home["country"]
-    write_csv(args.out / "rosters_all_seasons.csv", OUT_FIELDS, combined)
-    unique = build_unique(combined)
-    write_csv(args.out / "players_unique.csv", UNIQUE_FIELDS, unique)
-
+    all_saved, combined, unique = write_combined(args.out, season_dir)
     log.info("season  players   ok  partial  failed")
     for season, n, ok, part, fail in totals:
         log.info("%6d  %7d  %3d  %7d  %6d", season, n, ok, part, fail)
-    log.info("Combined files cover seasons %s: %d player-season rows, %d unique players -> %s",
-             ", ".join(map(str, all_saved)), len(combined), len(unique), args.out)
     if any(t[3] or t[4] for t in totals):
         log.info("Not every school worked; see reports/scrape_report_<season>.csv, fix config/schools.csv, then re-run with --retry-failed.")
     return 0
