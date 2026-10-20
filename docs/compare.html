@@ -75,7 +75,7 @@ table.st td.best { font-weight: 700; }
 .bg-list > li > b { font-size: 14px; }
 .bg-rows { display: grid; grid-template-columns: minmax(80px, max-content) 1fr auto; gap: 3px 10px; align-items: center; margin-top: 4px; font-size: 13px; }
 .bg-rows .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.bar { height: 10px; border-radius: 0 4px 4px 0; min-width: 2px; }
+.bg-bar { height: 10px; border-radius: 0 4px 4px 0; min-width: 2px; }   /* not .bar: that is the title bar (common.css) */
 .bg-rows .v { color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .bg-rows .v b { color: var(--fg); font-weight: 600; }
 .hs-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
@@ -163,6 +163,10 @@ table.st td.best { font-weight: 700; }
     <a class="btn" id="mapLink" href="index.html" title="Back to the dot map">
       <svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="5" cy="6" r="2.2" fill="currentColor"/><circle cx="12.5" cy="5" r="1.5" fill="currentColor"/><circle cx="10" cy="12" r="3" fill="currentColor"/></svg>
       <span class="txt">Dot map</span>
+    </a>
+    <a class="btn" id="transfersLink" href="transfers.html" title="Where players transferred, school to school">
+      <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 6h10.5M10.5 3l3 3-3 3M15 12H4.5M7.5 9l-3 3 3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+      <span class="txt">Transfers</span>
     </a>
     <div style="position:relative">
       <button type="button" class="btn icon" id="share" aria-label="Copy a link to this comparison" title="Copy a link to this comparison">
@@ -478,7 +482,7 @@ table.st td.best { font-weight: 700; }
     const max = Math.max(1, ...fights.flatMap((f) => f.v.map((x) => x.n)));
     el.innerHTML = `<h3>Battleground states</h3><p class="note why">States where at least two of these schools have ${BATTLE_MIN}+ players. Bars share one scale.</p>`
       + (fights.length ? `<ol class="bg-list">${fights.map((f) => `<li><b>${esc(ABBR_STATE[f.st])}</b><div class="bg-rows">${f.v.map(({ d, n }) =>
-          `<span class="nm">${schoolName(d)}${d.camp && d.camp.state === f.st ? ` <span class="note">home</span>` : ""}</span><span class="bar" style="width:${(n / max * 100).toFixed(1)}%;background:${colorOf(d)}" title="${schoolName(d)}: ${plural(n, "player")} from ${esc(ABBR_STATE[f.st])}"></span><span class="v"><b>${fmt(n)}</b> · ${pct(n / d.total)}</span>`).join("")}</div></li>`).join("")}</ol>`
+          `<span class="nm">${schoolName(d)}${d.camp && d.camp.state === f.st ? ` <span class="note">home</span>` : ""}</span><span class="bg-bar" style="width:${(n / max * 100).toFixed(1)}%;background:${colorOf(d)}" title="${schoolName(d)}: ${plural(n, "player")} from ${esc(ABBR_STATE[f.st])}"></span><span class="v"><b>${fmt(n)}</b> · ${pct(n / d.total)}</span>`).join("")}</div></li>`).join("")}</ol>`
         : `<p class="note">No state has ${BATTLE_MIN}+ players for two of these schools with these filters.</p>`);
   }
 

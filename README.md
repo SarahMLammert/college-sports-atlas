@@ -5,15 +5,17 @@ since 2016, scraped from each school's official athletics site and put on a worl
 
 - **264 schools**, about **137,000 player records** and about **11,000 hometowns**
 - Seasons 2016–2019 and 2021–2026 (there's no 2020 data)
-- About 40,900 transfers (30% of player records), 19,300 of them between two D1 schools in this data (so the school he left is known)
+- About 40,900 transfers (30% of player records), 19,350 of them between two D1 schools in this data (so the school he left is known)
 - One record per player per school, so a transfer appears once for each school he played for
 
-The site lives in `docs/` and is plain static files, so GitHub Pages can host it for free. It has two
-pages:
+The site lives in `docs/` and is plain static files, so GitHub Pages can host it for free. It has three
+pages, linked from each other's title bars:
 
 - **Recruiting Map** (`index.html`): a world map with a dot for every hometown.
 - **Recruiting Footprints** (`compare.html`): up to four schools side by side on U.S. maps, each
   state shaded by its share of that school's roster.
+- **Transfer Map** (`transfers.html`): lines from campus to campus for every player who moved
+  between two D1 schools.
 
 ## Using the map
 
@@ -45,6 +47,7 @@ title; click its × (or "Clear map" in Filters) to empty the map again.
 - **Compare** opens the Recruiting Footprints page. The first time it starts empty (no schools, no
   filters); after that it comes back with the schools and filters you last used there, remembered
   in your browser. A shared Footprints link always opens exactly what it describes.
+- **Transfers** opens the Transfer Map with its last-used view.
 - **Copy link** (the chain icon) copies a link that reopens exactly this view.
 
 ## Using Recruiting Footprints
@@ -84,6 +87,25 @@ The scorecard also shows each school's campus, its share of players from its hom
 typical distance from campus (the median straight-line distance from hometown to campus), and the
 trend chart can show home-state share by season. Each map marks the campus with a dot.
 
+## Using the Transfer Map
+
+Each line runs from the school a player left to the D1 school he joined, thicker for more players.
+Every school shows as a dot on its campus, sized by how many players moved in and out.
+
+- With no school picked, the map draws the 450 busiest routes, and the lists beside it rank the
+  biggest destinations, the biggest sources and the most common moves (all of them counted, not
+  just the drawn ones). Hover a move in the list to find it on the map.
+- **Pick a school** (click its campus, a name in a list, or the School box in Filters) to see who
+  came in (orange) and who left (blue), with the totals, the net and lists of where they came from
+  and went. Hover a line or campus for its numbers; "All schools" or Esc goes back.
+- **Filters** cover school, division and season on the new school's roster, conference (moves to
+  or from a school in it) and position group.
+- Only transfers whose previous D1 school is known can be drawn: about 19,350 of them. The rest (junior
+  colleges, Division II, or no school named) are counted as "other transfers" but have no line.
+- The lines need `docs/data/school_locations.json`; without it the page says so and the lists
+  still work. Big one-season moves are often a coach taking players with him (Iowa State → Penn
+  State 2026, Toledo → UConn 2026, Gardner-Webb → East Tennessee State 2024).
+
 ### Link format
 
 Everything you see is saved in the part of the address after `#`, so links can also be typed by
@@ -107,6 +129,10 @@ Recruiting Footprints links use the same `div`, `from`, `to`, `arrived` and `pos
 `compare` for the schools: `compare.html#compare=Alabama|Georgia|Texas|LSU&from=2019`. Older
 links to the map page that include `compare=` open this page.
 
+Transfer Map links use the `school`, `conf`, `div`, `from`, `to` and `pos` keys:
+`transfers.html#school=Penn State&from=2024`. Like the other pages, it reopens with the last view
+you used when opened without a link.
+
 ## Publish the map on GitHub Pages
 1. Push this repo to GitHub.
 2. On GitHub: **Settings → Pages → Build and deployment → Deploy from a branch**,
@@ -126,13 +152,15 @@ places.
 docs/                    the website (this is what GitHub Pages serves)
   index.html             Recruiting Map: the dot map, search, players panel and school stats
   compare.html           Recruiting Footprints: four schools on state-shaded U.S. maps
-  common.js              shared by both: data loading, school colors, the Filters dropdown and its link keys
-  common.css             shared by both: colors, type, title bar, buttons, the Filters dropdown
+  transfers.html         Transfer Map: school-to-school moves on a U.S. map, with source and destination lists
+  common.js              shared by all three: data loading, school colors, the Filters dropdown and its link keys
+  common.css             shared by all three: colors, type, title bar, buttons, the Filters dropdown
   data/map_data.json     every player, packed small; made by build_map_data.py
   data/school_locations.json   each school's campus; made by build_school_locations.py
   .nojekyll              tells GitHub Pages to serve the files as they are
 scrape_rosters.py        step 1: scrape rosters (fetching, parsing and cleaning all live here)
 geocode_hometowns.py     step 2: hometown -> lat/lon, plus suggested fixes for hometowns it can't place
+fix_hometown_spellings.py  adds checked fixes for misspelled hometowns to data/hometown_corrections.csv
 check_frozen_classes.py  step 3: find seasons whose class years can't be trusted (see How transfers are recognized)
 build_map_data.py        step 4: pack everything into docs/data/map_data.json
 build_school_locations.py  packs config/school_locations.csv for the site
@@ -252,8 +280,13 @@ into `roster_url` in `config/schools.csv` (it may contain `{season}`), and run a
   transfers from outside D1 with no listed previous school are missed in those seasons. It also
   misses a transfer from outside D1 whose class year looks like a freshman's or sophomore's, and two different players with the same name and hometown on two
   rosters in different years would be read as one transfer (rare; same-season pairs are skipped).
-- Some player names start with a jersey number (for example "89 Mason Thomas"), which comes
-  from roster pages that put the number in the name field.
+- Some roster pages put the jersey number in the name field ("89 Mason Thomas", "13d Drew
+  Melaragno"); `build_map_data.py` removes it from the names on the site and when matching transfers.
+- High-school names that differ only in "HS", "High School" or "H.S." (and punctuation) are merged
+  by `build_map_data.py` and shown under the most common spelling. Names that differ in other ways
+  ("Cedar Park" and "Cedar Park HS") stay separate, since they could be different schools.
+- Misspelled hometowns ("Douglasvillle, GA") show up as an extra dot next to the real town.
+  `fix_hometown_spellings.py` holds a checked list of them; after running it, geocode and build again.
 - The same high-school name can belong to schools in different towns; the map can't tell them
   apart beyond the player's hometown state.
 - Links that include `map=` made before the switch to the world map open at the wrong zoom;

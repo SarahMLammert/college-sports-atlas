@@ -38,6 +38,7 @@ body { background: var(--sea); }
 .results mark { background: none; color: inherit; font-weight: 700; }
 .results .empty { padding: 10px 12px; color: var(--muted); }
 
+.tools { flex-basis: 720px; }   /* room for the search box next to four buttons */
 .panel.right { right: max(var(--gap), env(safe-area-inset-right)); }
 /* legend + zoom */
 .legend {
@@ -177,6 +178,10 @@ body { background: var(--sea); }
     <a class="btn" id="compareLink" href="compare.html" title="Compare where up to four schools find their players">
       <svg viewBox="0 0 18 18" aria-hidden="true"><rect x="2" y="2" width="6" height="6" rx="1.3" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="10" y="2" width="6" height="6" rx="1.3" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="2" y="10" width="6" height="6" rx="1.3" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="10" y="10" width="6" height="6" rx="1.3" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
       <span class="txt">Compare</span>
+    </a>
+    <a class="btn" id="transfersLink" href="transfers.html" title="Where players transferred, school to school">
+      <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 6h10.5M10.5 3l3 3-3 3M15 12H4.5M7.5 9l-3 3 3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+      <span class="txt">Transfers</span>
     </a>
     <div style="position:relative">
       <button type="button" class="btn icon" id="share" aria-label="Copy a link to this view" title="Copy a link to this view">
