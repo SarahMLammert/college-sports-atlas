@@ -8,14 +8,28 @@ since 2016, scraped from each school's official athletics site and put on a worl
 - About 40,900 transfers (30% of player records), 19,350 of them between two D1 schools in this data (so the school he left is known)
 - One record per player per school, so a transfer appears once for each school he played for
 
-The site lives in `docs/` and is plain static files, so GitHub Pages can host it for free. It has three
-pages, linked from each other's title bars:
+The site lives in `docs/` and is plain static files, so GitHub Pages can host it for free. It opens
+on a sport picker (`index.html`), and each sport has its own folder. Football's three pages are in
+`docs/football/`, linked from each other's title bars:
 
-- **Recruiting Map** (`index.html`): a world map with a dot for every hometown.
-- **Recruiting Footprints** (`compare.html`): up to four schools side by side on U.S. maps, each
-  state shaded by its share of that school's roster.
-- **Transfer Map** (`transfers.html`): lines from campus to campus for every player who moved
-  between two D1 schools.
+- **Recruiting Map** (`football/players-dotmap.html`): a world map with a dot for every hometown.
+- **Recruiting Footprints** (`football/players-heatmap.html`): up to four schools side by side on
+  U.S. maps, each state shaded by its share of that school's roster.
+- **Transfer Map** (`football/players-transfers.html`): lines from campus to campus for every player
+  who moved between two D1 schools.
+
+Page names start with `players-` or `staff-` and say what kind of map they are, so every sport's
+folder can use the same names.
+
+## The sport picker
+
+`index.html` shows every sport on a ring around a center circle. Hovering or tapping a sport shows
+its numbers in the middle; the jersey button next to it opens its players pages and the whistle
+button its coaches and staff pages. Sports and pages that aren't built yet show as "coming soon".
+On phones the ring becomes a list. The `SPORTS` list at the top of its script says which pages
+exist: set a sport's `players` or `staff` to a page and its button starts working.
+
+Every page's title bar has a round button (a ring of dots) that goes back to the picker.
 
 ## Using the map
 
@@ -102,14 +116,15 @@ Every school shows as a dot on its campus, sized by how many players moved in an
   or from a school in it) and position group.
 - Only transfers whose previous D1 school is known can be drawn: about 19,350 of them. The rest (junior
   colleges, Division II, or no school named) are counted as "other transfers" but have no line.
-- The lines need `docs/data/school_locations.json`; without it the page says so and the lists
+- The lines need `docs/football/data/school_locations.json`; without it the page says so and the lists
   still work. Big one-season moves are often a coach taking players with him (Iowa State → Penn
   State 2026, Toledo → UConn 2026, Gardner-Webb → East Tennessee State 2024).
 
 ### Link format
 
 Everything you see is saved in the part of the address after `#`, so links can also be typed by
-hand. Leave out anything you don't need.
+hand. Leave out anything you don't need. Dot map links look like
+`football/players-dotmap.html#school=Alabama&pos=QB`.
 
 | key | example | meaning |
 |---|---|---|
@@ -126,21 +141,25 @@ hand. Leave out anything you don't need.
 | `map` | `map=-96.50,38.50,1.00` | longitude, latitude and zoom at the center of the screen |
 
 Recruiting Footprints links use the same `div`, `from`, `to`, `arrived` and `pos` keys, plus
-`compare` for the schools: `compare.html#compare=Alabama|Georgia|Texas|LSU&from=2019`. Older
-links to the map page that include `compare=` open this page.
+`compare` for the schools: `football/players-heatmap.html#compare=Alabama|Georgia|Texas|LSU&from=2019`.
+Older links to the dot map that include `compare=` open this page.
 
 Transfer Map links use the `school`, `conf`, `div`, `from`, `to` and `pos` keys:
-`transfers.html#school=Penn State&from=2024`. Like the other pages, it reopens with the last view
-you used when opened without a link.
+`football/players-transfers.html#school=Penn State&from=2024`. Like the other pages, it reopens
+with the last view you used when opened without a link.
+
+Links from before the football pages moved still work: `index.html#...` (with any `key=value`)
+forwards to the dot map, or to Footprints if it has `compare=`, and `compare.html#...` and
+`transfers.html#...` are small pages that forward to their new addresses with the same view.
 
 ## Publish the map on GitHub Pages
 1. Push this repo to GitHub.
 2. On GitHub: **Settings → Pages → Build and deployment → Deploy from a branch**,
    pick branch `main` and folder `/docs`, then **Save**.
-3. After a minute the map is live at `https://<your-username>.github.io/<repo-name>/`.
+3. After a minute the site is live at `https://<your-username>.github.io/<repo-name>/`.
 
 To look at it on your own computer first: `cd docs && python3 -m http.server`, then open
-http://localhost:8000. Opening `index.html` by double-clicking won't work, because browsers
+http://localhost:8000. Opening the pages by double-clicking won't work, because browsers
 block loading the data file from disk.
 
 The pages load d3 and topojson from cdnjs, and the country and state outlines from jsDelivr
@@ -150,19 +169,23 @@ places.
 ## Folder layout
 ```
 docs/                    the website (this is what GitHub Pages serves)
-  index.html             Recruiting Map: the dot map, search, players panel and school stats
-  compare.html           Recruiting Footprints: four schools on state-shaded U.S. maps
-  transfers.html         Transfer Map: school-to-school moves on a U.S. map, with source and destination lists
-  common.js              shared by all three: data loading, school colors, the Filters dropdown and its link keys
-  common.css             shared by all three: colors, type, title bar, buttons, the Filters dropdown
-  data/map_data.json     every player, packed small; made by build_map_data.py
-  data/school_locations.json   each school's campus; made by build_school_locations.py
+  index.html             the sport picker: every sport on a ring, with players and staff buttons
+  common.js              shared by every sport's pages: data loading, school colors, the Filters dropdown and its link keys
+  common.css             shared by every sport's pages: colors, type, title bar, buttons, the Filters dropdown
+  compare.html           forwards old Footprints links to football/players-heatmap.html
+  transfers.html         forwards old Transfer Map links to football/players-transfers.html
   .nojekyll              tells GitHub Pages to serve the files as they are
+  football/
+    players-dotmap.html      Recruiting Map: the dot map, search, players panel and school stats
+    players-heatmap.html     Recruiting Footprints: four schools on state-shaded U.S. maps
+    players-transfers.html   Transfer Map: school-to-school moves on a U.S. map, with source and destination lists
+    data/map_data.json       every player, packed small; made by build_map_data.py
+    data/school_locations.json   each school's campus; made by build_school_locations.py
 scrape_rosters.py        step 1: scrape rosters (fetching, parsing and cleaning all live here)
 geocode_hometowns.py     step 2: hometown -> lat/lon, plus suggested fixes for hometowns it can't place
 fix_hometown_spellings.py  adds checked fixes for misspelled hometowns to data/hometown_corrections.csv
 check_frozen_classes.py  step 3: find seasons whose class years can't be trusted (see How transfers are recognized)
-build_map_data.py        step 4: pack everything into docs/data/map_data.json
+build_map_data.py        step 4: pack everything into docs/football/data/map_data.json
 build_school_locations.py  packs config/school_locations.csv for the site
 config/
   schools.csv            school, division, conference, domain, roster_url
@@ -173,9 +196,12 @@ tests/                   parser tests: python -m pytest tests -q
                          (tests/test_previous_school.py also runs on its own: python tests/test_previous_school.py)
 requirements.txt
 ```
+The pages in a sport's folder load `../common.js` and `../common.css`, and `common.js` loads
+`data/map_data.json` next to the page, so each sport reads its own `data/` folder.
+
 `config/school_locations.csv` holds each school's campus city, state and coordinates; after editing
-it, run `python build_school_locations.py` to rebuild `docs/data/school_locations.json` (the pages
-use it for the campus star, home-state share and distance from campus, and still work without it).
+it, run `python build_school_locations.py` to rebuild `docs/football/data/school_locations.json` (the
+pages use it for the campus star, home-state share and distance from campus, and still work without it).
 
 `scrape_rosters.py` and `geocode_hometowns.py` must stay in the same folder (the geocoder
 borrows the scraper's hometown parser).
@@ -191,11 +217,11 @@ python geocode_hometowns.py data/players_unique.csv
 #   check the "review" rows in data/hometown_corrections.csv, change any you agree with to "fixed",
 #   then run the geocode line again (or add --use-review to accept them all)
 python check_frozen_classes.py                                         # writes data/frozen_class_seasons.csv
-python build_map_data.py                                               # writes docs/data/map_data.json
+python build_map_data.py                                               # writes docs/football/data/map_data.json
 ```
 Run both from the repo's root folder: `build_map_data.py` reads the list `check_frozen_classes.py`
 writes, and without it trusts every season's class years (it prints a warning).
-Then commit `docs/data/map_data.json` and push; the live map updates on its own.
+Then commit `docs/football/data/map_data.json` and push; the live map updates on its own.
 
 After changing the scraper's cleaning rules, `python scrape_rosters.py --recombine` re-cleans every saved
 season and rebuilds `rosters_all_seasons.csv` and `players_unique.csv` without downloading anything
@@ -291,3 +317,6 @@ into `roster_url` in `config/schools.csv` (it may contain `{season}`), and run a
   apart beyond the player's hometown state.
 - Links that include `map=` made before the switch to the world map open at the wrong zoom;
   everything else in them still works.
+- Each page remembers its last view in the browser under a fixed name (`recruiting-map:last` and
+  similar). When a second sport uses the same page code, that name needs the sport added, or the
+  sports would overwrite each other's saved views.
