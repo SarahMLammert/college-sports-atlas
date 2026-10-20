@@ -12,19 +12,26 @@ The map lives in `docs/` and is a single static page, so GitHub Pages can host i
 ## Using the map
 
 The map fills the whole screen and opens zoomed to the U.S. Scroll or pinch to zoom out to the
-rest of the world, and use ⟲ to come back.
+rest of the world (countries are labeled in English as they come into view), and use ⟲ to come back.
+
+The dot map starts empty: **pick a school** in the box in the middle (or under Filters) to fill it
+in, or choose "show every school at once". The heat map always shows every school.
 
 - **Dots** are hometowns, sized by the number of players and colored by the school that took the
   most players from that town. An outlined dot means the location is approximate (matched to a
   county or a same-name city).
 - **Search** (top right) finds a player, hometown or high school and zooms the map to it. High
   schools are split by hometown state, because names like "Central" repeat across the country.
-- **Filters** opens a panel to narrow by school, conference, division, first season, high school
+- **Filters** opens a dropdown under the button to narrow by school, conference, division, first season, high school
   or transfer, and position group, or to switch to a heat map. The button shows how many filters
   are on.
 - **Details** shows totals and top lists (states, hometowns, schools, players from outside the
   50 states) for whatever the filters leave. Click a dot to list its players, or a state to see
   which schools recruit it.
+- **Compare** replaces the map with four small U.S. heat maps, one school each. Shading is the
+  share of that school's roster from each area, on the same scale in all four, so a big program
+  and a small one compare fairly. Hover or tap a state to see its raw count and share for all four
+  schools at once; tap again to clear. Filters (except school and conference) apply here too.
 - **Copy link** (the chain icon) copies a link that reopens exactly this view.
 
 ### Link format
@@ -34,7 +41,8 @@ hand. Leave out anything you don't need.
 
 | key | example | meaning |
 |---|---|---|
-| `school` | `school=Alabama` | one school |
+| `school` | `school=Alabama` | one school, or `school=all` for every school on the dot map |
+| `compare` | `compare=Alabama\|Georgia\|Texas\|LSU` | open Compare with up to four schools, separated by `\|` |
 | `conf` | `conf=SEC` | one conference (2026 alignment) |
 | `div` | `div=FCS` | division when the player joined: `FBS` or `FCS` |
 | `from`, `to` | `from=2019&to=2024` | range of first seasons on a roster |
