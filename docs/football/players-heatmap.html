@@ -415,7 +415,7 @@ table.st td.best { font-weight: 700; }
   }
   // This browser remembers the last comparison, so coming back from the dot map picks up where you left off.
   // (Stored only on this device; a shared link always wins.)
-  const SAVE_KEY = "recruiting-footprints:last";
+  const SAVE_KEY = GP.saveKey("recruiting-footprints:last");   // per sport (see common.js)
   function writeUrl() {
     const h = hashNow(); lastHash = h;
     try { localStorage.setItem(SAVE_KEY, h); } catch (e) {}
@@ -424,7 +424,7 @@ table.st td.best { font-weight: 700; }
   }
   function readUrl(firstLoad) {
     let hash = location.hash.slice(1);
-    if (!hash && firstLoad) { try { hash = localStorage.getItem(SAVE_KEY) || ""; } catch (e) {} }   // opened plainly: restore the last comparison
+    if (!hash && firstLoad) { hash = GP.readSaved("recruiting-footprints:last"); }   // opened plainly: restore the last comparison
     const q = new URLSearchParams(hash);
     F.fromParams(q);
     state.school = -1; state.allSchools = false; state.conf = "";

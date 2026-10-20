@@ -1,4 +1,4 @@
-// Shared by index.html (the dot map) and compare.html (Recruiting Footprints):
+// Shared by every sport's pages (docs/<sport>/players-*.html):
 // constants, loading the data, school colors, and the Filters dropdown (its controls, logic and link format).
 // Load after d3.
 (function () {
@@ -199,6 +199,16 @@
   }
   const median = (arr) => { if (!arr.length) return null; const a = Float64Array.from(arr).sort(), m = a.length >> 1; return a.length % 2 ? a[m] : (a[m - 1] + a[m]) / 2; };
 
+  // Each page remembers its last view in the browser. The sport is the page's folder
+  // (docs/football/players-dotmap.html -> "football"), so every sport keeps its own.
+  const sport = decodeURIComponent(location.pathname.split("/").slice(-2, -1)[0] || "");
+  const saveKey = (name) => `${sport}:${name}`;
+  // Views saved before the key had the sport in it were all football's; read those once there.
+  function readSaved(name) {
+    try { return localStorage.getItem(saveKey(name)) || (sport === "football" && localStorage.getItem(name)) || ""; }
+    catch (e) { return ""; }
+  }
+
   // Copy the page's link and say so under the button.
   async function copyLink(toast) {
     try { await navigator.clipboard.writeText(location.href); toast.textContent = "Link to this view copied"; }
@@ -210,5 +220,5 @@
     new ResizeObserver(() => document.documentElement.style.setProperty("--bar-h", bar.getBoundingClientRect().height + "px")).observe(bar);
   }
 
-  window.GP = { $, POS_LABEL, STATE_ABBR, ABBR_STATE, fmt, pct, esc, css, narrow, loadData, makePalette, makeFilters, copyLink, trackBar, miles, median };
+  window.GP = { $, sport, saveKey, readSaved, POS_LABEL, STATE_ABBR, ABBR_STATE, fmt, pct, esc, css, narrow, loadData, makePalette, makeFilters, copyLink, trackBar, miles, median };
 })();

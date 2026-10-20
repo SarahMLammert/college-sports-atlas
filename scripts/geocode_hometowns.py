@@ -10,8 +10,9 @@ Offline sources (downloaded once into .cache/):
 Optional online source (--online): OpenStreetMap Nominatim for whatever is left
 (foreign cities, typos), 1 request/second, cached in .cache/nominatim.json.
 
-    python geocode_hometowns.py data/players_unique.csv
-    python geocode_hometowns.py data/players_unique.csv --online --contact you@example.com
+    python scripts/geocode_hometowns.py                       # data/football/players_unique.csv
+    python scripts/geocode_hometowns.py --online --contact you@example.com
+    python scripts/geocode_hometowns.py --sport mens-basketball
 
 Hometowns that don't match get a suggested fix (typos, wrong state, school text mixed in).
 Suggestions marked "fixed" are applied in the same run; "review" ones are applied only with
@@ -47,11 +48,12 @@ from pathlib import Path
 import requests
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from scrape_rosters import US_STATES, parse_hometown  # noqa: E402
+from core.hometowns import US_STATES, parse_hometown  # noqa: E402
+from core.paths import add_sport_argument, load_sport  # noqa: E402
 
-# Next to this script, not the folder it's run from, so every run finds the same downloads and
-# the same saved online answers.
-CACHE = Path(__file__).resolve().parent / ".cache"
+# In the repo folder (this script lives in scripts/), not the folder it's run from, so every run
+# finds the same downloads and the same saved online answers.
+CACHE = Path(__file__).resolve().parent.parent / ".cache"
 GAZ_YEAR = 2024
 GAZ_BASE = f"https://www2.census.gov/geo/docs/maps-data/data/gazetteer/{GAZ_YEAR}_Gazetteer/"
 GAZ_PLACES = f"{GAZ_YEAR}_Gaz_place_national.zip"
@@ -720,7 +722,9 @@ def load_lookup(path: Path, refresh: bool) -> dict[tuple, dict]:
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("rosters", type=Path, help="CSV from scrape_rosters.py (e.g. data/players_unique.csv)")
+    ap.add_argument("rosters", type=Path, nargs="?",
+                    help="CSV from scrape_rosters.py (default: data/<sport>/players_unique.csv)")
+    add_sport_argument(ap)
     ap.add_argument("--online", action="store_true", help="look up leftovers with OpenStreetMap Nominatim")
     ap.add_argument("--contact", default="anonymous", help="email for the Nominatim User-Agent (their policy)")
     ap.add_argument("--corrections", type=Path, default=None,
@@ -729,6 +733,7 @@ def main(argv=None) -> int:
     ap.add_argument("--refresh", action="store_true",
                     help="look every hometown up again instead of reusing hometowns.csv (keeps rows marked 'manual')")
     args = ap.parse_args(argv)
+    args.rosters = args.rosters or load_sport(args.sport).data_dir / "players_unique.csv"
     statuses = {"fixed", "review"} if args.use_review else {"fixed"}
     corr_path = args.corrections or args.rosters.with_name("hometown_corrections.csv")
     table = load_corrections(corr_path)

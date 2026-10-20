@@ -1,10 +1,10 @@
 """Check which geocoder version is in this folder and test a few towns that didn't place.
 
-    python check_geocoder.py
+    python scripts/check_geocoder.py
 """
 from pathlib import Path
 
-src = Path("geocode_hometowns.py").read_text(encoding="utf-8")
+src = (Path(__file__).resolve().parent / "geocode_hometowns.py").read_text(encoding="utf-8")
 print("geocoder has the latest fixes:", "school recruits most" in src)
 print("geocoder has the hometown aliases:", '"hallandale beach"' in src)
 

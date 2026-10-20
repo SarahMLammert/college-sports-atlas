@@ -1,30 +1,33 @@
-"""Add fixes for misspelled hometowns to data/hometown_corrections.csv.
+"""Add fixes for misspelled hometowns to data/<sport>/hometown_corrections.csv (default sport: football).
 
 Each pair below is a misspelling found next to the real town (within 25 km, same state) in the map
 data, checked by hand. Pairs that are two real places (Los Gatos / Los Altos, Monroe / Montrose,
 Grosse Pointe Farms / Park, ...) are left out.
 
-The script finds every raw hometown text in data/players_unique_geocoded.csv that the geocoder placed
-in a misspelled town, and writes a "fixed" row for it in data/hometown_corrections.csv. Rows you
+The script finds every raw hometown text in data/<sport>/players_unique_geocoded.csv that the geocoder placed
+in a misspelled town, and writes a "fixed" row for it in data/<sport>/hometown_corrections.csv. Rows you
 already have for those texts are updated; everything else is kept as it is.
 
-It also updates the geocoder's lookup table, data/hometowns.csv, which the geocoder checks before the
+It also updates the geocoder's lookup table, data/<sport>/hometowns.csv, which the geocoder checks before the
 corrections: each misspelled entry gets the real town's name and location from the same table.
 It's safe to run more than once.
 
-Run from the repo root, then geocode and build again:
-    python fix_hometown_spellings.py
-    python geocode_hometowns.py data/players_unique.csv
-    python check_frozen_classes.py
-    python build_map_data.py
+Run it, then geocode and build again (from the repo folder):
+    python scripts/fix_hometown_spellings.py              # add --sport <name> for another sport
+    python scripts/geocode_hometowns.py
+    python scripts/check_frozen_classes.py
+    python scripts/build_map_data.py
 """
+import argparse
 import csv
 import sys
 from pathlib import Path
 
-PLAYERS = Path("data/players_unique_geocoded.csv")
-CORRECTIONS = Path("data/hometown_corrections.csv")
-LOOKUP = Path("data/hometowns.csv")   # the geocoder's table of hometowns it has already placed
+from core.paths import add_sport_argument, load_sport
+
+# Set from --sport in main(): files in data/<sport>/.
+PLAYERS = CORRECTIONS = LOOKUP = Path()   # players_unique_geocoded.csv, hometown_corrections.csv, and
+                                          # hometowns.csv (the geocoder's table of hometowns it has placed)
 
 # (state or country, misspelled city as it appears on the map, correct city)
 FIXES = [
@@ -68,7 +71,7 @@ FIELDS = ["hometown_raw", "city", "state", "country", "query", "status", "note",
 
 
 def patch_lookup(wrong: dict) -> tuple[int, int]:
-    """The geocoder keeps every hometown it has placed in data/hometowns.csv (keyed by the raw text)
+    """The geocoder keeps every hometown it has placed in data/<sport>/hometowns.csv (keyed by the raw text)
     and reuses those rows before it reads hometown_corrections.csv, so a correction alone never moves
     a hometown it has already placed. Point the misspelled rows at the real town: copy its location
     from the table's own row for that town, or drop the row if the table has none (the next geocode
@@ -111,10 +114,16 @@ def patch_lookup(wrong: dict) -> tuple[int, int]:
     return patched, dropped
 
 
-def main():
+def main(argv=None):
+    global PLAYERS, CORRECTIONS, LOOKUP
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    add_sport_argument(ap)
+    data = load_sport(ap.parse_args(argv).sport).data_dir
+    PLAYERS, CORRECTIONS, LOOKUP = (data / "players_unique_geocoded.csv", data / "hometown_corrections.csv",
+                                    data / "hometowns.csv")
     for p in (PLAYERS, CORRECTIONS):
         if not p.exists():
-            sys.exit(f"{p} not found. Run this from the repo root after geocode_hometowns.py.")
+            sys.exit(f"{p} not found. Run geocode_hometowns.py first.")
     wrong = {(place, bad.lower()): good for place, bad, good in FIXES}
 
     found = {}   # raw hometown text -> (place, bad, good, players)
@@ -170,7 +179,7 @@ def main():
     print(f"{added} corrections added and {updated} updated in {CORRECTIONS}, covering {len(towns)} misspelled towns")
     if missing:
         print("not found in the player data (already fixed, or spelled differently now):", "; ".join(missing))
-    print("next: python geocode_hometowns.py data/players_unique.csv, then check_frozen_classes.py and build_map_data.py")
+    print("next: python scripts/geocode_hometowns.py, then scripts/check_frozen_classes.py and scripts/build_map_data.py")
 
 
 if __name__ == "__main__":

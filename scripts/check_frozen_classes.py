@@ -16,19 +16,20 @@ whether their class moved up. Two measures are printed:
 A frozen archive scores ~90-100% on both. A season inflated by COVID repeats
 scores high on "all" but normal on "no_sr".
 
-Run from the repo root:  python check_frozen_classes.py
-Writes data/frozen_class_seasons.csv (school, season, share) for the build.
+Run:  python scripts/check_frozen_classes.py          # add --sport <name> for another sport
+Writes data/<sport>/frozen_class_seasons.csv (school, season, share) for the build.
 """
+import argparse
 import csv
-import glob
-import os
 import re
 import statistics
 from collections import defaultdict
+from pathlib import Path
+
+from core.paths import add_sport_argument, load_sport
 
 CUTOFF = 0.6        # flag a pair of seasons when this share of players didn't advance
 MIN_PAIRS = 30      # need at least this many returning players to judge
-OUT = "data/frozen_class_seasons.csv"
 WATCH = ("Ohio State", "Alabama", "Georgia", "Miami (FL)", "Florida", "Penn State")
 
 _RANKS = [(("FR", "FY", "FIRST", "1"), 1), (("SO", "2"), 2), (("JR", "JU", "3"), 3),
@@ -48,20 +49,24 @@ def class_rank(value):
     return None
 
 
-def load_rows():
-    path = "data/rosters_all_seasons.csv"
-    files = [path] if os.path.exists(path) else sorted(glob.glob("data/seasons/rosters_*.csv"))
+def load_rows(data: Path):
+    path = data / "rosters_all_seasons.csv"
+    files = [path] if path.exists() else sorted((data / "seasons").glob("rosters_*.csv"))
     if not files:
-        raise SystemExit("No roster data found in data/. Run this from the repo root.")
+        raise SystemExit(f"No roster data found in {data}.")
     for f in files:
         with open(f, encoding="utf-8", newline="") as fh:
             yield from csv.DictReader(fh)
 
 
-def main():
+def main(argv=None):
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    add_sport_argument(ap)
+    data = load_sport(ap.parse_args(argv).sport).data_dir
+    out = data / "frozen_class_seasons.csv"
     by = defaultdict(dict)          # (school, season) -> {(name, hometown): rank}
     unreadable = defaultdict(int)
-    for r in load_rows():
+    for r in load_rows(data):
         rank = class_rank(r.get("class_norm"))
         if rank is None and r.get("class_norm"):
             unreadable[r["class_norm"]] += 1
@@ -130,13 +135,13 @@ def main():
         per_season[season] += 1
     print("\nflagged by season:", dict(sorted(per_season.items())))
 
-    os.makedirs(os.path.dirname(OUT), exist_ok=True)
-    with open(OUT, "w", encoding="utf-8", newline="") as fh:
+    out.parent.mkdir(parents=True, exist_ok=True)
+    with open(out, "w", encoding="utf-8", newline="") as fh:
         w = csv.writer(fh)
         w.writerow(["school", "season", "share"])
         for (school, season), sh in sorted(flagged.items()):
             w.writerow([school, season, f"{sh:.3f}"])
-    print(f"\nwrote {OUT}")
+    print(f"\nwrote {out}")
 
 
 if __name__ == "__main__":
