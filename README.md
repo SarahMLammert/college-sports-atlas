@@ -15,23 +15,30 @@ The map fills the whole screen and opens zoomed to the U.S. Scroll or pinch to z
 rest of the world (countries are labeled in English as they come into view), and use ⟲ to come back.
 
 The dot map starts empty: **pick a school** in the box in the middle (or under Filters) to fill it
-in, or choose "show every school at once". The heat map always shows every school.
+in, or choose "show every school at once". The school you're showing appears as a chip under the
+title; click its × (or "Clear map" in Filters) to empty the map again.
 
 - **Dots** are hometowns, sized by the number of players and colored by the school that took the
   most players from that town. An outlined dot means the location is approximate (matched to a
   county or a same-name city).
 - **Search** (top right) finds a player, hometown or high school and zooms the map to it. High
   schools are split by hometown state, because names like "Central" repeat across the country.
-- **Filters** opens a dropdown under the button to narrow by school, conference, division, first season, high school
-  or transfer, and position group, or to switch to a heat map. The button shows how many filters
-  are on.
+- **Filters** opens a dropdown under the button to narrow by school, division (FBS or FCS when the
+  player joined), conference, season on roster (a player counts if he was on a roster in any season
+  of the range), recruit type (high school or transfer) and position group. The button shows how
+  many filters are on.
 - **Details** shows totals and top lists (states, hometowns, schools, players from outside the
   50 states) for whatever the filters leave. Click a dot to list its players, or a state to see
   which schools recruit it.
-- **Compare** replaces the map with four small U.S. heat maps, one school each. Shading is the
-  share of that school's roster from each area, on the same scale in all four, so a big program
-  and a small one compare fairly. Hover or tap a state to see its raw count and share for all four
-  schools at once; tap again to clear. Filters (except school and conference) apply here too.
+- **Compare** opens a page of its own (the toolbar hides) with four small U.S. heat maps, one
+  school each, shaded in that school's primary color. Shading is the share of that school's roster
+  from each area, on the same scale in all four, so a big program and a small one compare fairly.
+  The maps are large (two per row, scroll for the other two), and under each one is a ranking of
+  that school's states by players, with each state's share of the roster ("All states" expands
+  it past the top 10). Hover or tap a state on any map, or a row in any ranking, to highlight it
+  everywhere and see its rank, raw count and share for all four schools at once; tap again to
+  clear. Division, season, recruit type and position filters from the map still apply, and the
+  page says so when they do. "Back to map" returns to the dot map.
 - **Copy link** (the chain icon) copies a link that reopens exactly this view.
 
 ### Link format
@@ -45,10 +52,9 @@ hand. Leave out anything you don't need.
 | `compare` | `compare=Alabama\|Georgia\|Texas\|LSU` | open Compare with up to four schools, separated by `\|` |
 | `conf` | `conf=SEC` | one conference (2026 alignment) |
 | `div` | `div=FCS` | division when the player joined: `FBS` or `FCS` |
-| `from`, `to` | `from=2019&to=2024` | range of first seasons on a roster |
-| `arrived` | `arrived=transfer` | `hs` (from high school) or `transfer` |
+| `from`, `to` | `from=2019&to=2024` | players on a roster in any season of this range |
+| `arrived` | `arrived=transfer` | recruit type: `hs` (high school) or `transfer` |
 | `pos` | `pos=QB,WR` | position groups |
-| `view` | `view=heat` | heat map instead of dots |
 | `state` | `state=TX` | selected state |
 | `town` | `town=Bastrop, TX` | selected hometown |
 | `player` | `player=Name~School` | selected player (name and school, so links survive a data rebuild) |
