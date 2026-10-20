@@ -875,7 +875,7 @@ if (/(^#|&)compare=/.test(location.hash)) location.replace("players-heatmap.html
     return q.toString().replace(/%2C/gi, ",").replace(/%7E/gi, "~").replace(/%7C/gi, "|");
   }
   // This browser remembers the last view, so the map reopens where you left it (a shared link always wins).
-  const SAVE_KEY = "recruiting-map:last";
+  const SAVE_KEY = GP.saveKey("recruiting-map:last");   // per sport (see common.js)
   function writeUrl() {
     clearTimeout(urlTimer);
     const h = hashFor();
@@ -888,7 +888,7 @@ if (/(^#|&)compare=/.test(location.hash)) location.replace("players-heatmap.html
   // Reads the hash into `state`; unknown or stale values are skipped. Returns the saved map view [lon, lat, zoom], if any.
   function readUrl(firstLoad) {
     let hash = location.hash.slice(1);
-    if (!hash && firstLoad) { try { hash = localStorage.getItem(SAVE_KEY) || ""; } catch (e) {} }   // opened plainly: pick up where you left off
+    if (!hash && firstLoad) { hash = GP.readSaved("recruiting-map:last"); }   // opened plainly: pick up where you left off
     const q = new URLSearchParams(hash);
     F.fromParams(q); Object.assign(state, { focusState: null, town: -1, player: -1, hs: null });
     const v = (key) => (q.get(key) || "").trim();

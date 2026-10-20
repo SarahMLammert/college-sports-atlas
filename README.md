@@ -181,73 +181,104 @@ docs/                    the website (this is what GitHub Pages serves)
     players-transfers.html   Transfer Map: school-to-school moves on a U.S. map, with source and destination lists
     data/map_data.json       every player, packed small; made by build_map_data.py
     data/school_locations.json   each school's campus; made by build_school_locations.py
-scrape_rosters.py        step 1: scrape rosters (fetching, parsing and cleaning all live here)
-geocode_hometowns.py     step 2: hometown -> lat/lon, plus suggested fixes for hometowns it can't place
-fix_hometown_spellings.py  adds checked fixes for misspelled hometowns to data/hometown_corrections.csv
-check_frozen_classes.py  step 3: find seasons whose class years can't be trusted (see How transfers are recognized)
-build_map_data.py        step 4: pack everything into docs/football/data/map_data.json
-build_school_locations.py  packs config/school_locations.csv for the site
+scripts/                 the data pipeline; every script takes --sport (default: football)
+  scrape_rosters.py        step 1: scrape rosters
+  geocode_hometowns.py     step 2: hometown -> lat/lon, plus suggested fixes for hometowns it can't place
+  fix_hometown_spellings.py  adds checked fixes for misspelled hometowns to data/<sport>/hometown_corrections.csv
+  check_frozen_classes.py  step 3: find seasons whose class years can't be trusted (see How transfers are recognized)
+  build_map_data.py        step 4: pack everything into docs/<sport>/data/map_data.json
+  build_school_locations.py  packs config/school_locations.csv for a sport's pages
+  check_geocoder.py        checks the geocoder has its fixes and looks up a few towns that once failed
+  core/                    code the scripts share
+    paths.py               where a sport's files are, and its settings from sport.json
+    fetch.py               downloading pages: retries, pacing per site, the page cache
+    sidearm.py             reading Sidearm/WMT pages: roster URLs, season check, the five parsers,
+                           telling a college from a high school
+    hometowns.py           cleaning hometowns, class years, heights and weights
+data/<sport>/            working files, not committed (see Working files)
 config/
-  schools.csv            school, division, conference, domain, roster_url
-  division_history.csv   schools that changed division, and when
-  school_colors.csv      each school's primary and secondary color, for the map dots
-  school_locations.csv   each school's campus city, state, latitude and longitude
-tests/                   parser tests: python -m pytest tests -q
-                         (tests/test_previous_school.py also runs on its own: python tests/test_previous_school.py)
+  school_colors.csv      each school's primary and secondary color, for the map dots (every sport)
+  school_locations.csv   each school's campus city, state, latitude and longitude (every sport)
+  football/
+    sport.json           football's settings (see Adding a sport)
+    schools.csv          school, division, conference, domain, roster_url
+    division_history.csv   schools that changed division, and when
+tests/                   parser tests: python -m pytest tests -q (conftest.py lets them import from scripts/)
 requirements.txt
 ```
 The pages in a sport's folder load `../common.js` and `../common.css`, and `common.js` loads
 `data/map_data.json` next to the page, so each sport reads its own `data/` folder.
 
 `config/school_locations.csv` holds each school's campus city, state and coordinates; after editing
-it, run `python build_school_locations.py` to rebuild `docs/football/data/school_locations.json` (the
-pages use it for the campus star, home-state share and distance from campus, and still work without it).
+it, run `python scripts/build_school_locations.py` to rebuild `docs/football/data/school_locations.json`
+(only that sport's schools; the pages use it for the campus star, home-state share and distance from
+campus, and still work without it).
 
-`scrape_rosters.py` and `geocode_hometowns.py` must stay in the same folder (the geocoder
-borrows the scraper's hometown parser).
+Each script finds `config/`, `data/` and `docs/` from its own location (`scripts/core/paths.py`), so it
+doesn't matter which folder you run it from. Code more than one script needs lives in `scripts/core/`;
+`scrape_rosters.py` still answers older imports like `from scrape_rosters import parse_hometown`.
+
+## Adding a sport
+
+1. Make `config/<sport>/` (use the athletics sites' name: `mens-basketball`, `baseball`) with:
+   - `sport.json`: copy football's and change `label`, `roster_paths` (the roster page's path on
+     the sites, e.g. `/sports/mens-basketball/roster`), `min_players` (fewer players than this on a
+     page means a bad scrape), `junior_colleges`, and the position settings (`position_groups`,
+     the roster abbreviations in each, words a spelled-out position starts with, and
+     `position_fallback` for anything else).
+   - `schools.csv` and `division_history.csv`, as for football.
+2. Add any new schools' colors and campuses to `config/school_colors.csv` and `school_locations.csv`.
+3. Run the steps under Rebuild the data with `--sport <sport>`.
+4. Copy `docs/football/` to `docs/<sport>/` (without its `data/`), change the page titles, and set the
+   sport's `players` page in the `SPORTS` list in `docs/index.html`.
+
+Each sport's pages remember their own last view in the browser (the key starts with the sport).
 
 ## Rebuild the data
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 
-python scrape_rosters.py --seasons 2016-2019,2021-2026                 # about 1-2 hours
-python scrape_rosters.py --seasons 2016-2019,2021-2026 --retry-failed  # second pass on failures
-python geocode_hometowns.py data/players_unique.csv
-#   check the "review" rows in data/hometown_corrections.csv, change any you agree with to "fixed",
+python scripts/scrape_rosters.py --seasons 2016-2019,2021-2026                 # about 1-2 hours
+python scripts/scrape_rosters.py --seasons 2016-2019,2021-2026 --retry-failed  # second pass on failures
+python scripts/geocode_hometowns.py                                    # reads data/football/players_unique.csv
+#   check the "review" rows in data/football/hometown_corrections.csv, change any you agree with to "fixed",
 #   then run the geocode line again (or add --use-review to accept them all)
-python check_frozen_classes.py                                         # writes data/frozen_class_seasons.csv
-python build_map_data.py                                               # writes docs/football/data/map_data.json
+python scripts/check_frozen_classes.py                                 # writes data/football/frozen_class_seasons.csv
+python scripts/build_map_data.py                                       # writes docs/football/data/map_data.json
 ```
-Run both from the repo's root folder: `build_map_data.py` reads the list `check_frozen_classes.py`
-writes, and without it trusts every season's class years (it prints a warning).
+Run `check_frozen_classes.py` before `build_map_data.py`: the build reads the list it writes, and
+without it trusts every season's class years (it prints a warning).
 Then commit `docs/football/data/map_data.json` and push; the live map updates on its own.
 
-After changing the scraper's cleaning rules, `python scrape_rosters.py --recombine` re-cleans every saved
+After changing the scraper's cleaning rules, `python scripts/scrape_rosters.py --recombine` re-cleans every saved
 season and rebuilds `rosters_all_seasons.csv` and `players_unique.csv` without downloading anything
 (a minute instead of hours); then run `geocode_hometowns.py`, `check_frozen_classes.py` and
 `build_map_data.py` as usual.
 
-Quick test on a few schools: `python scrape_rosters.py --only "Alabama,Clemson,North Dakota State"`.
+Quick test on a few schools: `python scripts/scrape_rosters.py --only "Alabama,Clemson,North Dakota State"`.
+For another sport, add `--sport <sport>` to every command.
 For sites that only show the roster after JavaScript runs, add `--render` (needs
 `pip install playwright && playwright install chromium`).
 
 ## Working files (not committed)
-`data/` and `.cache/` are in `.gitignore`: they're large and can be rebuilt.
+`data/` and `.cache/` are in `.gitignore`: they're large and can be rebuilt. Each sport's files go in
+its own folder under `data/`; football's are in `data/football/`.
 
 | file | contents |
 |---|---|
-| `data/seasons/rosters_<season>.csv` | one row per player that season |
-| `data/reports/scrape_report_<season>.csv` | per school: ok / partial / failed, players found, URL used, errors |
-| `data/rosters_all_seasons.csv` | every season stacked |
-| `data/players_unique.csv` | one row per player per school, with first and last season |
-| `data/players_unique_geocoded.csv` | the above plus latitude and longitude |
-| `data/hometown_corrections.csv` | suggested hometown fixes; your edits here are kept between runs |
-| `data/unmatched_hometowns.csv` | hometowns that still couldn't be placed |
-| `data/frozen_class_seasons.csv` | school-seasons whose class years can't be trusted; the build skips its class-year rule for them |
+| `data/football/seasons/rosters_<season>.csv` | one row per player that season |
+| `data/football/reports/scrape_report_<season>.csv` | per school: ok / partial / failed, players found, URL used, errors |
+| `data/football/rosters_all_seasons.csv` | every season stacked |
+| `data/football/players_unique.csv` | one row per player per school, with first and last season |
+| `data/football/players_unique_geocoded.csv` | the above plus latitude and longitude |
+| `data/football/hometowns.csv` | the geocoder's table of every hometown it has placed; re-runs reuse it |
+| `data/football/hometown_corrections.csv` | suggested hometown fixes; your edits here are kept between runs |
+| `data/football/unmatched_hometowns.csv` | hometowns that still couldn't be placed |
+| `data/football/frozen_class_seasons.csv` | school-seasons whose class years can't be trusted; the build skips its class-year rule for them |
 
 If you'd rather keep the hometown corrections you've made by hand under version control, remove
-`data/hometown_corrections.csv` from the ignore list (see `.gitignore`).
+`data/football/hometown_corrections.csv` from the ignore list (see `.gitignore`).
 
 ## How the scraper works
 Almost every FBS/FCS site is built on **Sidearm** or **WMT**, and both ship the roster as a
@@ -256,7 +287,7 @@ Sidearm markup, Sidearm cards, HTML tables, other embedded JSON) and the best re
 Requests to one site are spaced 1.5 seconds apart, and raw pages are cached in `.cache/html/`.
 
 For past seasons it tries each site's archive URL styles (`/roster/2019`, `/roster/season/2019/`,
-`/roster/2019-20`, ...) or a `roster_url` template from `config/schools.csv`. Every archive page
+`/roster/2019-20`, ...) or a `roster_url` template from `config/football/schools.csv`. Every archive page
 is checked for its year so a site quietly showing this year's roster isn't saved as 2019.
 
 ## How transfers are recognized
@@ -264,7 +295,7 @@ Roster sites label a player's old school in different ways: "Previous School", "
 high school for freshmen, a college for transfers), "College", or one field like "Lamar HS / Texas
 Tech". The scraper sorts every school field it finds: a college goes to `previous_school`, a high
 school to `high_school`. It knows a college by words like University, College, CC or JC, or by its
-name in `config/schools.csv` or a list of well-known junior colleges. A lone "previous school" that
+name in `config/football/schools.csv` or the junior colleges listed in `config/football/sport.json`. A lone "previous school" that
 isn't recognizably a college is treated as the high school (Ohio State's site, for one, files every
 high school there), and "Menard" next to "Menard HS" is one school, not a transfer.
 `build_map_data.py` uses the same rules (it imports them from `scrape_rosters.py`, so keep the two
@@ -285,13 +316,13 @@ finds these seasons by following returning players from one season to the next: 
 quarter don't move up a class (mostly redshirt years), but on a frozen archive nearly all of them
 stay put. It counts only players who were freshmen, sophomores or juniors the season before, so
 seniors repeating a year (the COVID free year) don't count, unless too few of those remain to judge.
-When 60% or more don't advance, both seasons of the pair go into `data/frozen_class_seasons.csv`,
+When 60% or more don't advance, both seasons of the pair go into `data/football/frozen_class_seasons.csv`,
 and `build_map_data.py` skips its class-year rule for them. Players there still count as transfers
 when the roster lists a previous college or they were on an earlier D1 roster.
 
 ## Fixing a school that fails
-Check `data/reports/scrape_report_*.csv`, then fix its `domain` or paste its exact roster page
-into `roster_url` in `config/schools.csv` (it may contain `{season}`), and run again with
+Check `data/football/reports/scrape_report_*.csv`, then fix its `domain` or paste its exact roster page
+into `roster_url` in `config/football/schools.csv` (it may contain `{season}`), and run again with
 `--retry-failed`.
 
 ## Known issues
@@ -317,6 +348,5 @@ into `roster_url` in `config/schools.csv` (it may contain `{season}`), and run a
   apart beyond the player's hometown state.
 - Links that include `map=` made before the switch to the world map open at the wrong zoom;
   everything else in them still works.
-- Each page remembers its last view in the browser under a fixed name (`recruiting-map:last` and
-  similar). When a second sport uses the same page code, that name needs the sport added, or the
-  sports would overwrite each other's saved views.
+- `check_frozen_classes.py` needs 30 returning players per school-season to judge one, which fits
+  football rosters; small-roster sports (basketball) will need that lowered.

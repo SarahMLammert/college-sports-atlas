@@ -413,7 +413,7 @@ body { background: var(--panel); }
   // ---------- links ----------
   // transfers.html#school=Alabama&from=2021&pos=QB  (same keys as the dot map; arrived= doesn't apply)
   let lastHash = "";
-  const SAVE_KEY = "recruiting-transfers:last";
+  const SAVE_KEY = GP.saveKey("recruiting-transfers:last");   // per sport (see common.js)
   function hashNow() {
     const q = F.toParams(new URLSearchParams());
     q.delete("arrived");
@@ -427,7 +427,7 @@ body { background: var(--panel); }
   }
   function readUrl(firstLoad) {
     let hash = location.hash.slice(1);
-    if (!hash && firstLoad) { try { hash = localStorage.getItem(SAVE_KEY) || ""; } catch (e) {} }
+    if (!hash && firstLoad) { hash = GP.readSaved("recruiting-transfers:last"); }
     F.fromParams(new URLSearchParams(hash));
     state.allSchools = false; state.entry = "";
     F.sync();

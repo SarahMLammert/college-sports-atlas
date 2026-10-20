@@ -1,4 +1,4 @@
-/* Shared by index.html and compare.html: colors, type, the title bar, buttons and the Filters dropdown. */
+/* Shared by every sport's pages (docs/<sport>/players-*.html): colors, type, the title bar, buttons and the Filters dropdown. */
 :root {
   --sea: #d3dee2;
   --land: #f1f3ef;

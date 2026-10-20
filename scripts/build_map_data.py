@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""Pack players_unique_geocoded.csv into the JSON the football pages (docs/football/) load.
+"""Pack players_unique_geocoded.csv into the JSON a sport's pages (docs/<sport>/) load.
 
-    python build_map_data.py                      # data/players_unique_geocoded.csv -> docs/football/data/map_data.json
-    python build_map_data.py <input.csv> <output.json>
+    python scripts/build_map_data.py                # data/football/players_unique_geocoded.csv -> docs/football/data/map_data.json
+    python scripts/build_map_data.py --sport mens-basketball
+    python scripts/build_map_data.py <input.csv> <output.json>
 
-Run it again whenever you re-scrape or re-geocode, then commit docs/football/data/map_data.json.
-Dot colors come from config/school_colors.csv (school, primary, secondary hex colors).
+Run it again whenever you re-scrape or re-geocode, then commit docs/<sport>/data/map_data.json.
+Dot colors come from config/school_colors.csv (school, primary, secondary hex colors), shared by every
+sport; position groups from config/<sport>/sport.json.
 
 Transfers: many roster pages never list a previous school, so a player counts as a transfer if
   1. the roster lists a college as his previous school, or
@@ -13,6 +15,7 @@ Transfers: many roster pages never list a previous school, so a player counts as
   3. he's new to a roster whose previous season is also (nearly fully) in the data, and he's already a junior, senior or grad.
 (2) also records the school he came from, so the site can show where transfers moved.
 """
+import argparse
 import csv
 from pathlib import Path
 import json
@@ -21,22 +24,24 @@ import sys
 from collections import Counter
 
 # The scraper's rules for telling a previous college from a high school, so both steps agree.
-from scrape_rosters import load_known_colleges, load_schools, sort_schools
+from core import sidearm
+from core.paths import add_sport_argument, load_schools, load_sport
+from core.sidearm import load_known_colleges, sort_schools
 
-POS_GROUPS = ["QB", "RB", "WR", "TE", "OL", "DL", "LB", "DB", "DEF", "ST", "ATH"]
-ABBR = {
-    "QB": "qb", "RB": "rb hb tb fb ab", "WR": "wr sb", "TE": "te y h",
-    "OL": "ol ot og oc c g t iol ol/dl", "DL": "dl de dt nt ng edge di dle dli",
-    "LB": "lb ilb olb mlb wlb slb will mike sam jack star ban buck", "DB": "db cb s fs ss saf nb nik spr sa",
-    "ST": "k p pk ls ds k/p p/k kos sn",
-}
-ABBR = {a: g for g, v in ABBR.items() for a in v.split()}
-WORDS = [("quarterback", "QB"), ("running", "RB"), ("half", "RB"), ("tail", "RB"), ("full", "RB"),
-         ("wide", "WR"), ("receiver", "WR"), ("slot", "WR"), ("tight", "TE"), ("offensive", "OL"),
-         ("center", "OL"), ("guard", "OL"), ("tackle", "OL"), ("linebacker", "LB"), ("corner", "DB"),
-         ("safety", "DB"), ("nickel", "DB"), ("kick", "ST"), ("punt", "ST"), ("long", "ST"),
-         ("snap", "ST"), ("place", "ST"), ("deep snap", "ST"), ("edge", "DL"), ("nose", "DL"), ("athlete", "ATH"),
-         ("outside", "LB"), ("inside", "LB"), ("bandit", "LB"), ("spur", "DB")]
+# Position groups come from the sport's settings (config/<sport>/sport.json): the groups, the roster
+# abbreviations in each, words a spelled-out position starts with, and the group for anything else.
+POS_GROUPS: list[str] = []
+ABBR: dict[str, str] = {}
+WORDS: list[tuple[str, str]] = []
+FALLBACK = ""
+
+
+def use_positions(sport) -> None:
+    global POS_GROUPS, ABBR, WORDS, FALLBACK
+    POS_GROUPS = list(sport.position_groups)
+    ABBR = {a: g for g, v in sport.position_abbreviations.items() for a in v.split()}
+    WORDS = [tuple(w) for w in sport.position_words]
+    FALLBACK = sport.position_fallback or POS_GROUPS[-1]
 
 
 def pos_group(p: str) -> int:
@@ -46,11 +51,11 @@ def pos_group(p: str) -> int:
         g = ABBR[p]
     elif first in ABBR:
         g = ABBR[first]
-    elif p.startswith("defensive"):
+    elif p.startswith("defensive") and "DEF" in POS_GROUPS:   # football: "Defensive Line", "Defensive Back"
         g = ("DL" if re.search(r"line|end|tackle", p) else "DB" if "back" in p else "DEF")
     else:
-        g = next((grp for w, grp in WORDS if p.startswith(w)), "ATH")
-    return POS_GROUPS.index(g)
+        g = next((grp for w, grp in WORDS if p.startswith(w)), FALLBACK)
+    return POS_GROUPS.index(g) if g in POS_GROUPS else POS_GROUPS.index(FALLBACK)
 
 
 def is_transfer(prev: str, high_school: str) -> int:
@@ -165,13 +170,10 @@ def arrived_as_upperclassman(r: dict, size: Counter, prev_season: dict[int, int]
     return n_before >= 40 and n_before >= 0.6 * n_now
 
 
-COLORS_CSV = Path(__file__).resolve().parent / "config" / "school_colors.csv"
-SCHOOLS_CSV = Path(__file__).resolve().parent / "config" / "schools.csv"
-FROZEN_CSV = Path(__file__).resolve().parent / "data" / "frozen_class_seasons.csv"
 HEX = re.compile(r"^#[0-9A-Fa-f]{6}$")
 
 
-def load_colors(path=COLORS_CSV):
+def load_colors(path):
     """school -> (primary, secondary) hex colors."""
     out = {}
     if not Path(path).exists():
@@ -188,11 +190,13 @@ def load_colors(path=COLORS_CSV):
     return out
 
 
-def main(src, dst):
+def main(src, dst, sport):
+    sidearm.configure(sport)     # the sport's junior colleges, for telling a college from a high school
+    use_positions(sport)
     with open(src, newline="", encoding="utf-8") as fh:
         rows = list(csv.DictReader(fh))
-    if SCHOOLS_CSV.exists():
-        load_known_colleges(load_schools(SCHOOLS_CSV))   # so "Wake Forest" counts as a college
+    if sport.schools_csv.exists():
+        load_known_colleges(load_schools(sport.schools_csv))   # so "Wake Forest" counts as a college
     schools = sorted({r["school"] for r in rows})
     sidx = {s: i for i, s in enumerate(schools)}
     conf = {}
@@ -204,7 +208,7 @@ def main(src, dst):
             div_now[r["school"]] = (fs, r["division_first_season"])
     confs = sorted(set(conf.values()))
     divs = ["FBS", "FCS", "D2", "D3"]
-    colors = load_colors()
+    colors = load_colors(sport.colors_csv)
     missing = [x for x in schools if x not in colors]
     if missing:
         print("no colors in config/school_colors.csv for:", ", ".join(missing))
@@ -217,7 +221,7 @@ def main(src, dst):
     if thin:
         print("thin rosters (fewer than 40 players; the class-year transfer rule skips the season after each):", ", ".join(thin))
     prev_season = dict(zip(all_seasons[1:], all_seasons))   # 2021 -> 2019: there's no 2020 data
-    frozen = load_frozen_class_seasons(FROZEN_CSV)
+    frozen = load_frozen_class_seasons(sport.data_dir / "frozen_class_seasons.csv")
     if frozen:
         print(f"{len(frozen)} school-seasons with untrustworthy class years (the class-year transfer rule skips them)")
     how = Counter()
@@ -285,7 +289,13 @@ def main(src, dst):
 
 
 if __name__ == "__main__":
-    args = sys.argv[1:] or ["data/players_unique_geocoded.csv", "docs/football/data/map_data.json"]
-    if len(args) != 2:
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("files", nargs="*", type=Path, metavar="input.csv output.json",
+                    help="default: data/<sport>/players_unique_geocoded.csv docs/<sport>/data/map_data.json")
+    add_sport_argument(ap)
+    args = ap.parse_args()
+    sport = load_sport(args.sport)
+    if len(args.files) not in (0, 2):
         sys.exit(__doc__)
-    main(*args)
+    src, dst = args.files or (sport.data_dir / "players_unique_geocoded.csv", sport.site_data_dir / "map_data.json")
+    main(src, dst, sport)
