@@ -35,11 +35,15 @@ body { background: var(--panel); }
 .cell-map .empty { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font-size: 14px; pointer-events: none; }
 .cell-hover { position: absolute; left: 10px; top: 10px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 5px 9px; font-size: 13px; line-height: 1.35; box-shadow: var(--shadow); pointer-events: none; font-variant-numeric: tabular-nums; }
 /* state rankings: one line under each map, scrolls sideways */
-.cell-rank {
-  display: flex; align-items: baseline; padding: 6px 10px; border-top: 1px solid var(--line); overflow-x: auto; white-space: nowrap;
-  scrollbar-width: none; font-size: 13px; line-height: 1.3;
-  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 36px), transparent);   /* fades out where the line keeps going */
-}
+.rankwrap { position: relative; border-top: 1px solid var(--line); }
+.cell-rank { display: flex; align-items: baseline; padding: 6px 10px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; font-size: 13px; line-height: 1.3; }
+/* fade whichever end has more states past it */
+.rankwrap.more-r .cell-rank { -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 56px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 56px), transparent); }
+.rankwrap.more-l .cell-rank { -webkit-mask-image: linear-gradient(90deg, transparent, #000 48px); mask-image: linear-gradient(90deg, transparent, #000 48px); }
+.rankwrap.more-l.more-r .cell-rank { -webkit-mask-image: linear-gradient(90deg, transparent, #000 48px, #000 calc(100% - 56px), transparent); mask-image: linear-gradient(90deg, transparent, #000 48px, #000 calc(100% - 56px), transparent); }
+.rnav { position: absolute; top: 50%; transform: translateY(-50%); width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--line); background: var(--panel); box-shadow: var(--shadow); cursor: pointer; display: grid; place-items: center; padding: 0; font-size: 16px; line-height: 1; color: var(--fg); }
+.rnav:hover { border-color: var(--accent); color: var(--accent); }
+.rnav.prev { left: 4px; } .rnav.next { right: 4px; }
 .cell-rank::-webkit-scrollbar { display: none; }
 .cell-rank .label { margin-right: 8px; flex: none; }
 /* each state is plain text that can be hovered or clicked, separated by dots */
@@ -50,6 +54,7 @@ body { background: var(--panel); }
 .rs:hover, .rs.on { background: var(--accent-soft); box-shadow: inset 0 -2px 0 var(--accent); }
 .rs:focus-visible { outline: 2px solid var(--focus); }
 .cell-rank .note { flex: none; margin-left: 10px; padding-right: 30px; }
+.cell-rank > :last-child { margin-right: 24px; }   /* room so the last state isn't under the › button */
 @media (max-width: 1100px) { .cgrid { grid-template-columns: 1fr; justify-content: stretch; } .cell-map { height: auto; aspect-ratio: 1.62; } }
 </style>
 </head>
@@ -169,11 +174,13 @@ body { background: var(--panel); }
     el.innerHTML = `<div class="cell-head"><span class="swc"></span><label class="vh" for="pick${c}">School ${c + 1}</label>
         <input class="field" id="pick${c}" list="schoolList" placeholder="Pick school ${c + 1}" autocomplete="off"><span class="n"></span></div>
       <div class="cell-map"><canvas></canvas><div class="empty">No school picked</div><div class="cell-hover" hidden></div></div>
-      <div class="cell-rank"><span class="note">Pick a school to rank its states</span></div>`;
+      <div class="rankwrap"><div class="cell-rank"><span class="note">Pick a school to rank its states</span></div>
+        <button type="button" class="rnav prev" aria-label="Earlier states" hidden>‹</button><button type="button" class="rnav next" aria-label="More states" hidden>›</button></div>`;
     $("cgrid").appendChild(el);
     const cv = el.querySelector("canvas");
     const cell = { hoverSt: null, pinSt: null, input: el.querySelector("input"), n: el.querySelector(".n"), sw: el.querySelector(".swc"), cv, ctx: cv.getContext("2d"),
-      empty: el.querySelector(".empty"), hover: el.querySelector(".cell-hover"), rank: el.querySelector(".cell-rank") };
+      empty: el.querySelector(".empty"), hover: el.querySelector(".cell-hover"), rank: el.querySelector(".cell-rank"),
+      wrap: el.querySelector(".rankwrap"), prev: el.querySelector(".rnav.prev"), next: el.querySelector(".rnav.next") };
     cells.push(cell);
     cell.input.addEventListener("input", () => {
       const v = cell.input.value.trim().toLowerCase();
@@ -189,10 +196,26 @@ body { background: var(--panel); }
     cell.rank.addEventListener("pointerover", (e) => { const b = e.target.closest("[data-st]"); if (b) setHover(b.dataset.st); });
     cell.rank.addEventListener("pointerleave", () => setHover(null));
     cell.rank.addEventListener("click", (e) => { const b = e.target.closest("[data-st]"); if (b) togglePin(b.dataset.st); });
+    // scrolling the ranking line: mouse wheel goes sideways, ‹ › buttons page through it, touch swipes as usual
+    cell.rank.addEventListener("wheel", (e) => {
+      const r = cell.rank; if (r.scrollWidth <= r.clientWidth || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+      const atStart = r.scrollLeft <= 0 && e.deltaY < 0, atEnd = r.scrollLeft + r.clientWidth >= r.scrollWidth - 1 && e.deltaY > 0;
+      if (atStart || atEnd) return;   // let the page scroll once the line hits an end
+      e.preventDefault(); r.scrollLeft += e.deltaY;
+    }, { passive: false });
+    cell.rank.addEventListener("scroll", () => rankNav(cell), { passive: true });
+    cell.prev.addEventListener("click", () => cell.rank.scrollBy({ left: -cell.rank.clientWidth * .75, behavior: "smooth" }));
+    cell.next.addEventListener("click", () => cell.rank.scrollBy({ left: cell.rank.clientWidth * .75, behavior: "smooth" }));
   }
   const dl = document.createElement("datalist"); dl.id = "schoolList";
   dl.innerHTML = data.schools.map((s) => `<option value="${esc(s[0])}">`).join(""); document.body.appendChild(dl);
 
+  // show ‹ / › and the edge fades only where there's more of the line to see
+  function rankNav(cell) {
+    const r = cell.rank, l = r.scrollLeft > 2, rt = r.scrollLeft + r.clientWidth < r.scrollWidth - 2;
+    cell.wrap.classList.toggle("more-l", l); cell.wrap.classList.toggle("more-r", rt);
+    cell.prev.hidden = !l; cell.next.hidden = !rt;
+  }
   function stateAt(cell, e) {
     const r = cell.cv.getBoundingClientRect(), { dpr } = size;
     cell.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -227,7 +250,9 @@ body { background: var(--panel); }
       cell.rank.innerHTML = `<span class="label">State rank</span>` + d.ranked.map(([st, n]) =>
         `<button type="button" class="rs" data-st="${st}" title="${esc(ABBR_STATE[st])}: ${fmt(n)} players"><span class="r">${d.rankOf.get(st)}</span>${st}<b>${pct(n / d.total)}</b></button>`).join("")
         + (d.off ? `<span class="note">+${fmt(d.off)} not on this map</span>` : "");
+      cell.rank.scrollLeft = 0;
     });
+    cells.forEach(rankNav);
   }
   // Two columns: make each map as big as possible while both rows still fit in the window (but never tiny).
   function fitMaps() {
@@ -251,6 +276,7 @@ body { background: var(--panel); }
     for (const c of cells) { c.cv.width = Math.round(r.width * dpr); c.cv.height = Math.round(r.height * dpr); }
     albers.fitExtent([[10, 10], [r.width - 10, r.height - 10]], US_FIT);
     const path = d3.geoPath(albers);
+    cells.forEach(rankNav);
     paths = stateFeatures.map((f) => ({ abbr: STATE_ABBR[f.properties.name], p: new Path2D(path(f) || "") })).filter((s) => s.abbr && s.abbr !== "PR");
     draw();
   }
@@ -294,8 +320,12 @@ body { background: var(--panel); }
     if (names) q.set("compare", names);
     return q.toString().replace(/%2C/gi, ",").replace(/%7C/gi, "|");
   }
+  // This browser remembers the last comparison, so coming back from the dot map picks up where you left off.
+  // (Stored only on this device; a shared link always wins.)
+  const SAVE_KEY = "recruiting-footprints:last";
   function writeUrl() {
     const h = hashNow(); lastHash = h;
+    try { localStorage.setItem(SAVE_KEY, h); } catch (e) {}
     try { history.replaceState(null, "", location.pathname + location.search + (h ? "#" + h : "")); } catch (e) {}
     // the way back to the dot map keeps the filters and shows the first school picked here
     const q = F.toParams(new URLSearchParams(), { includeSchool: false });
@@ -305,7 +335,9 @@ body { background: var(--panel); }
     $("mapLink").href = "index.html" + (mh ? "#" + mh : "");
   }
   function readUrl() {
-    const q = new URLSearchParams(location.hash.slice(1));
+    let hash = location.hash.slice(1);
+    if (!hash) { try { hash = localStorage.getItem(SAVE_KEY) || ""; } catch (e) {} }   // opened plainly: restore the last comparison
+    const q = new URLSearchParams(hash);
     F.fromParams(q);
     state.school = -1; state.allSchools = false; state.conf = "";
     const parts = (q.get("compare") || "").split("|");
