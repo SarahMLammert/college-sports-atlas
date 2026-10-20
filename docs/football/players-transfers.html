@@ -54,6 +54,11 @@ body { background: var(--panel); }
 .tl .b { grid-column: 1 / -1; height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
 .tl .b span { display: block; height: 100%; background: var(--bar-c, var(--accent)); }
 .tl.in .b span { --bar-c: var(--in); } .tl.out .b span { --bar-c: var(--out); }
+.tside::after {   /* fades the bottom edge while there's more of the list to scroll to */
+  content: ""; position: sticky; bottom: -18px; flex: none; height: 56px; margin: -56px -16px -18px;
+  background: linear-gradient(transparent, var(--panel) 85%); pointer-events: none; opacity: 0; transition: opacity .15s;
+}
+.tside.more::after { opacity: 1; }
 .tside .fine { font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 12px; margin: 0; }
 :root { --in: var(--accent); --out: #2f6fcf; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --out: #6aa7ff; } }
@@ -386,6 +391,10 @@ body { background: var(--panel); }
       $("clearSel").addEventListener("click", () => pick(-1));
     }
   }
+  // fade the panel's bottom edge while more of it is below (scrollbars are hidden on Macs)
+  function sideMore() { const s = $("side"); s.classList.toggle("more", s.scrollTop + s.clientHeight < s.scrollHeight - 4); }
+  $("side").addEventListener("scroll", sideMore, { passive: true });
+  new ResizeObserver(sideMore).observe($("side"));
   // hovering a list row lights up its route; clicking a school name picks that school
   $("side").addEventListener("click", (e) => { const b = e.target.closest("[data-pick]"); if (b) pick(+b.dataset.pick); });
   $("side").addEventListener("pointerover", (e) => {
@@ -446,7 +455,7 @@ body { background: var(--panel); }
   }
   function refresh() {
     state.entry = "";   // never filter by recruit type here: everyone is a transfer
-    compute(); renderSide(); drawKey(); draw(); writeUrl();
+    compute(); renderSide(); sideMore(); drawKey(); draw(); writeUrl();
     const s = F.summary();
     $("filterNote").textContent = s ? `Only ${s}` : "";
     $("hint").textContent = M.sel >= 0 ? "Hover a line or campus for its numbers; click another campus to switch schools" : "Hover a campus to see its transfers; click it to pick that school";
