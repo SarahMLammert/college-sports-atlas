@@ -3,12 +3,12 @@ hometown,school,city,state,country,lat,lon,source,precision,players
 "Miami, Fla.",,Miami,FL,USA,25.775163,-80.208615,census,city,1092
 "Atlanta, Ga.",,Atlanta,GA,USA,33.762909,-84.422675,census,city,1058
 ,,,,,,,,,925
-"Charlotte, N.C.",,Charlotte,NC,USA,35.209045,-80.83099,census,city,822
+"Charlotte, N.C.",,Charlotte,NC,USA,35.209045,-80.83099,census,city,821
 "Dallas, Texas",,Dallas,TX,USA,32.793333,-96.766513,census,city,782
-"Jacksonville, Fla.",,Jacksonville,FL,USA,30.336864,-81.661603,census,city,768
+"Jacksonville, Fla.",,Jacksonville,FL,USA,30.336864,-81.661603,census,city,767
 "New Orleans, La.",,New Orleans,LA,USA,30.05342,-89.934502,census,city,767
 "Tampa, Fla.",,Tampa,FL,USA,27.970086,-82.479673,census,city,733
-"Chicago, Ill.",,Chicago,IL,USA,41.837045,-87.684939,census,city,724
+"Chicago, Ill.",,Chicago,IL,USA,41.837045,-87.684939,census,city,723
 "Cincinnati, Ohio",,Cincinnati,OH,USA,39.140183,-84.505829,census,city,705
 "Orlando, Fla.",,Orlando,FL,USA,28.40865,-81.254805,census,city,638
 "St. Louis, Mo.",,St. Louis,MO,USA,38.635699,-90.244582,census,city,579
@@ -19,7 +19,7 @@ hometown,school,city,state,country,lat,lon,source,precision,players
 "Los Angeles, Calif.",,Los Angeles,CA,USA,34.019394,-118.410825,census,city,486
 "Birmingham, Ala.",,Birmingham,AL,USA,33.527174,-86.797036,census,city,482
 "Philadelphia, Pa.",,Philadelphia,PA,USA,40.009376,-75.133346,census,city,449
-"Indianapolis, Ind.",,Indianapolis,IN,USA,39.776664,-86.145935,census,city,448
+"Indianapolis, Ind.",,Indianapolis,IN,USA,39.776664,-86.145935,census,city,447
 "Detroit, Mich.",,Detroit,MI,USA,42.383037,-83.102237,census,city,433
 "Baton Rouge, La.",,Baton Rouge,LA,USA,30.440443,-91.133166,census,city,432
 "Austin, Texas",,Austin,TX,USA,30.298622,-97.754134,census,city,426
@@ -37,7 +37,7 @@ hometown,school,city,state,country,lat,lon,source,precision,players
 "Phoenix, Ariz.",,Phoenix,AZ,USA,33.572154,-112.090132,census,city,307
 "Tallahassee, Fla.",,Tallahassee,FL,USA,30.453529,-84.252272,census,city,298
 "Montgomery, Ala.",,Montgomery,AL,USA,32.348503,-86.267307,census,city,296
-"Columbus, Ohio",,Columbus,OH,USA,39.983938,-82.984882,census,city,292
+"Columbus, Ohio",,Columbus,OH,USA,39.983938,-82.984882,census,city,290
 "Marietta, Ga.",,Marietta,GA,USA,33.953561,-84.542463,census,city,281
 "Raleigh, N.C.",,Raleigh,NC,USA,35.831868,-78.641042,census,city,279
 "Columbia, S.C.",,Columbia,SC,USA,34.040519,-80.906099,census,city,272
@@ -68,17 +68,17 @@ hometown,school,city,state,country,lat,lon,source,precision,players
 "Suwanee, Ga.",,Suwanee,GA,USA,34.051119,-84.06591,census,city,184
 "El Paso, Texas",,El Paso,TX,USA,31.84778,-106.431106,census,city,181
 "Lakeland, Fla.",,Lakeland,FL,USA,28.055496,-81.954772,census,city,180
-"Atlanta, GA",,Atlanta,GA,USA,33.762909,-84.422675,census,city,177
 "Mansfield, Texas",,Mansfield,TX,USA,32.569188,-97.120532,census,city,177
+"Atlanta, GA",,Atlanta,GA,USA,33.762909,-84.422675,census,city,176
 "Fresno, Calif.",,Fresno,CA,USA,36.782684,-119.793359,census,city,176
 "Little Rock, Ark.",,Little Rock,AR,USA,34.725393,-92.358556,census,city,175
 "St. Petersburg, Fla.",,St. Petersburg,FL,USA,27.762727,-82.644131,census,city,172
 "Chattanooga, Tenn.",,Chattanooga,TN,USA,35.065958,-85.248386,census,city,166
 "Chesapeake, Va.",,Chesapeake,VA,USA,36.679376,-76.301788,census,city,165
 "Fort Myers, Fla.",,Fort Myers,FL,USA,26.61982,-81.831673,census,city,165
-"Roswell, Ga.",,Roswell,GA,USA,34.039453,-84.350946,census,city,162
 "Durham, N.C.",,Durham,NC,USA,35.977928,-78.898109,census,city,161
 "Lexington, Ky.",,Lexington,KY,USA,38.040678,-84.458272,census,city,161
+"Roswell, Ga.",,Roswell,GA,USA,34.039453,-84.350946,census,city,161
 "Gilbert, Ariz.",,Gilbert,AZ,USA,33.310345,-111.743121,census,city,160
 "Pearland, Texas",,Pearland,TX,USA,29.555732,-95.323012,census,city,160
 "Naples, Fla.",,Naples,FL,USA,26.150485,-81.795299,census,city,158
@@ -92,8 +92,8 @@ hometown,school,city,state,country,lat,lon,source,precision,players
 "Monroe, La.",,Monroe,LA,USA,32.518986,-92.07718,census,city,147
 "Oakland, Calif.",,Oakland,CA,USA,37.769846,-122.22569,census,city,146
 "Richmond, Texas",,Richmond,TX,USA,29.581161,-95.760484,census,city,146
-"Tucson, Ariz.",,Tucson,AZ,USA,32.153036,-110.870773,census,city,144
 "Naperville, Ill.",,Naperville,IL,USA,41.749173,-88.162019,census,city,143
+"Tucson, Ariz.",,Tucson,AZ,USA,32.153036,-110.870773,census,city,142
 "Corona, Calif.",,Corona,CA,USA,33.861969,-117.565495,census,city,141
 "San Jose, Calif.",,San Jose,CA,USA,37.296011,-121.814552,census,city,141
 "Kennesaw, Ga.",,Kennesaw,GA,USA,34.027202,-84.61709,census,city,140
@@ -160,18 +160,18 @@ hometown,school,city,state,country,lat,lon,source,precision,players
 "Clearwater, Fla.",,Clearwater,FL,USA,27.979419,-82.771256,census,city,105
 "Alexandria, Va.",,Alexandria,VA,USA,38.819251,-77.08367,census,city,104
 "Madison, Ala.",,Madison,AL,USA,34.710533,-86.76228,census,city,104
-"Newark, N.J.",,Newark,NJ,USA,40.72422,-74.172574,census,city,104
-"Rochester, N.Y.",,Rochester,NY,USA,43.169927,-77.616891,census,city,103
+"Newark, N.J.",,Newark,NJ,USA,40.72422,-74.172574,census,city,103
 "Warner Robins, Ga.",,Warner Robins,GA,USA,32.597096,-83.653936,census,city,103
 "Compton, Calif.",,Compton,CA,USA,33.894047,-118.227469,census,city,102
 "Honolulu, Hawaii",,Honolulu,HI,USA,21.324347,-157.84764,census,city,102
+"Rochester, N.Y.",,Rochester,NY,USA,43.169927,-77.616891,census,city,102
 "Staten Island, N.Y.",,Staten Island,NY,USA,40.662712,-73.938677,census,city,102
 "Tyler, Texas",,Tyler,TX,USA,32.317258,-95.305886,census,city,102
 "Athens, Ga.",,Athens,GA,USA,33.949597,-83.370088,census,city,101
 "Charlotte, NC",,Charlotte,NC,USA,35.209045,-80.83099,census,city,101
 "Overland Park, Kan.",,Overland Park,KS,USA,38.889042,-94.690584,census,city,101
-"Pittsburgh, PA",,Pittsburgh,PA,USA,40.439936,-79.975676,census,city,101
 "Lithonia, Ga.",,Lithonia,GA,USA,33.712954,-84.1062,census,city,100
+"Pittsburgh, PA",,Pittsburgh,PA,USA,40.439936,-79.975676,census,city,100
 "Stone Mountain, Ga.",,Stone Mountain,GA,USA,33.804187,-84.17142,census,city,100
 "Valdosta, Ga.",,Valdosta,GA,USA,30.850126,-83.278833,census,city,100
 "Fairburn, Ga.",,Fairburn,GA,USA,33.547798,-84.587265,census,city,99
@@ -193,9 +193,9 @@ hometown,school,city,state,country,lat,lon,source,precision,players
 "Madison, Miss.",,Madison,MS,USA,32.473884,-90.130865,census,city,93
 "Mission Viejo, Calif.",,Mission Viejo,CA,USA,33.609335,-117.656471,census,city,93
 "Baltimore, MD",,Baltimore,MD,USA,39.300032,-76.610476,census,city,92
-"Carmel, Ind.",,Carmel,IN,USA,39.965479,-86.148369,census,city,92
 "Lake Charles, La.",,Lake Charles,LA,USA,30.19902,-93.210835,census,city,92
 "Stafford, Va.",,Stafford,VA,USA,38.4220694,-77.4083162,usgs,city,92
+"Carmel, Ind.",,Carmel,IN,USA,39.965479,-86.148369,census,city,91
 "Daytona Beach, Fla.",,Daytona Beach,FL,USA,29.19071,-81.097083,census,city,91
 "Leesburg, Va.",,Leesburg,VA,USA,39.106396,-77.559195,census,city,91
 "Riverside, Calif.",,Riverside,CA,USA,33.938143,-117.393168,census,city,91
@@ -208,11 +208,11 @@ hometown,school,city,state,country,lat,lon,source,precision,players
 "Rancho Cucamonga, Calif.",,Rancho Cucamonga,CA,USA,34.130306,-117.566067,census,city,89
 "Stockton, Calif.",,Stockton,CA,USA,37.976553,-121.308598,census,city,89
 "Baton Rouge, LA",,Baton Rouge,LA,USA,30.440443,-91.133166,census,city,88
-"Hampton, Va.",,Hampton,VA,USA,37.047961,-76.297293,census,city,88
 "Peoria, Ariz.",,Peoria,AZ,USA,33.786186,-112.308042,census,city,88
 "Reno, Nev.",,Reno,NV,USA,39.549097,-119.849907,census,city,88
 "Shelby, N.C.",,Shelby,NC,USA,35.290405,-81.545645,census,city,88
 "Concord, N.C.",,Concord,NC,USA,35.392094,-80.63551,census,city,87
+"Hampton, Va.",,Hampton,VA,USA,37.047961,-76.297293,census,city,87
 "Acworth, Ga.",,Acworth,GA,USA,34.061991,-84.681121,census,city,86
 "The Woodlands, Texas",,The Woodlands,TX,USA,30.172562,-95.509813,census,city,86
 "Wilmington, Del.",,Wilmington,DE,USA,39.735651,-75.532104,census,city,86
@@ -237,8 +237,8 @@ hometown,school,city,state,country,lat,lon,source,precision,players
 "Jacksonville, FL",,Jacksonville,FL,USA,30.336864,-81.661603,census,city,80
 "Stockbridge, Ga.",,Stockbridge,GA,USA,33.530019,-84.234275,census,city,80
 "Tacoma, Wash.",,Tacoma,WA,USA,47.252199,-122.459832,census,city,80
-"Tampa, FL",,Tampa,FL,USA,27.970086,-82.479673,census,city,80
 "Roanoke, Va.",,Roanoke,VA,USA,37.278458,-79.958174,census,city,79
+"Tampa, FL",,Tampa,FL,USA,27.970086,-82.479673,census,city,79
 "Alabaster, Ala.",,Alabaster,AL,USA,33.214355,-86.82308,census,city,78
 "Dacula, Ga.",,Dacula,GA,USA,33.981967,-83.90108,census,city,78
 "Littleton, Colo.",,Littleton,CO,USA,39.590375,-105.020084,census,city,78
@@ -258,7 +258,6 @@ hometown,school,city,state,country,lat,lon,source,precision,players
 "Wake Forest, N.C.",,Wake Forest,NC,USA,35.964409,-78.51332,census,city,75
 "Fort Worth, TX",,Fort Worth,TX,USA,32.781954,-97.348573,census,city,74
 "Newnan, Ga.",,Newnan,GA,USA,33.375833,-84.777324,census,city,74
-"Philadelphia, PA",,Philadelphia,PA,USA,40.009376,-75.133346,census,city,74
 "Plantation, Fla.",,Plantation,FL,USA,26.125573,-80.261818,census,city,74
 "Sugar Land, Texas",,Sugar Land,TX,USA,29.592764,-95.633801,census,city,74
 "Anderson, S.C.",,Anderson,SC,USA,34.521487,-82.643517,census,city,73
@@ -266,6 +265,7 @@ hometown,school,city,state,country,lat,lon,source,precision,players
 "Rockwall, Texas",,Rockwall,TX,USA,32.918056,-96.43805,census,city,73
 "Camden, N.J.",,Camden,NJ,USA,39.936787,-75.106644,census,city,72
 "Clarksville, Tenn.",,Clarksville,TN,USA,36.56643,-87.345216,census,city,72
+"Philadelphia, PA",,Philadelphia,PA,USA,40.009376,-75.133346,census,city,72
 "Boise, Idaho",,Boise,ID,USA,43.599335,-116.229817,census,city,71
 "Duncanville, Texas",,Duncanville,TX,USA,32.64595,-96.91387,census,city,71
 "Miami Gardens, Fla.",,Miami Gardens,FL,USA,25.948892,-80.243585,census,city,71
@@ -282,11 +282,11 @@ hometown,school,city,state,country,lat,lon,source,precision,players
 "Irmo, S.C.",,Irmo,SC,USA,34.1026,-81.195897,census,city,68
 "Keller, Texas",,Keller,TX,USA,32.932877,-97.224513,census,city,68
 "Newport News, Va.",,Newport News,VA,USA,37.076136,-76.52198,census,city,68
-"Orlando, FL",,Orlando,FL,USA,28.40865,-81.254805,census,city,68
 "Rome, Ga.",,Rome,GA,USA,34.266133,-85.186052,census,city,68
 "Duluth, Ga.",,Duluth,GA,USA,34.001517,-84.150464,census,city,67
 "Elk Grove, Calif.",,Elk Grove,CA,USA,38.414621,-121.384961,census,city,67
 "Mooresville, N.C.",,Mooresville,NC,USA,35.583717,-80.827755,census,city,67
+"Orlando, FL",,Orlando,FL,USA,28.40865,-81.254805,census,city,67
 "Argyle, Texas",,Argyle,TX,USA,33.105493,-97.17752,census,city,66
 "Chicago, IL",,Chicago,IL,USA,41.837045,-87.684939,census,city,66
 "Kissimmee, Fla.",,Kissimmee,FL,USA,28.30278,-81.417831,census,city,66
@@ -311,7 +311,6 @@ hometown,school,city,state,country,lat,lon,source,precision,players
 "New Iberia, La.",,New Iberia,LA,USA,30.005493,-91.820307,census,city,63
 "Pembroke Pines, Fla.",,Pembroke Pines,FL,USA,26.014716,-80.340171,census,city,63
 "Vancouver, Wash.",,Vancouver,WA,USA,45.637156,-122.596567,census,city,63
-"Carlsbad, Calif.",,Carlsbad,CA,USA,33.129284,-117.284183,census,city,62
 "Cartersville, Ga.",,Cartersville,GA,USA,34.164579,-84.801704,census,city,62
 "Conyers, Ga.",,Conyers,GA,USA,33.657471,-83.983814,census,city,62
 "Coppell, Texas",,Coppell,TX,USA,32.963306,-96.990556,census,city,62
@@ -319,15 +318,16 @@ hometown,school,city,state,country,lat,lon,source,precision,players
 "Greenwood, S.C.",,Greenwood,SC,USA,34.195397,-82.153665,census,city,62
 "Lynchburg, Va.",,Lynchburg,VA,USA,37.399016,-79.195458,census,city,62
 "Palmdale, Calif.",,Palmdale,CA,USA,34.591038,-118.105403,census,city,62
-"Parker, Colo.",,Parker,CO,USA,39.505946,-104.775828,census,city,62
 "Slidell, La.",,Slidell,LA,USA,30.288913,-89.782926,census,city,62
 "St. Augustine, Fla.",,St. Augustine,FL,USA,29.896152,-81.311128,census,city,62
 "West Des Moines, Iowa",,West Des Moines,IA,USA,41.549937,-93.781351,census,city,62
+"Carlsbad, Calif.",,Carlsbad,CA,USA,33.129284,-117.284183,census,city,61
 "Dallas, Ga.",,Dallas,GA,USA,33.915618,-84.841556,census,city,61
 "Des Moines, Iowa",,Des Moines,IA,USA,41.57259,-93.610243,census,city,61
 "Gadsden, Ala.",,Gadsden,AL,USA,34.006597,-86.016078,census,city,61
 "Highlands Ranch, Colo.",,Highlands Ranch,CO,USA,39.540829,-104.971077,census,city,61
 "Milwaukee, Wis.",,Milwaukee,WI,USA,43.063348,-87.966695,census,city,61
+"Parker, Colo.",,Parker,CO,USA,39.505946,-104.775828,census,city,61
 "Westerville, Ohio",,Westerville,OH,USA,40.123435,-82.913324,census,city,61
 "Woodstock, Ga.",,Woodstock,GA,USA,34.10314,-84.512997,census,city,61
 "Belle Glade, Fla.",,Belle Glade,FL,USA,26.692215,-80.665559,census,city,60
@@ -349,7 +349,6 @@ hometown,school,city,state,country,lat,lon,source,precision,players
 "Pflugerville, Texas",,Pflugerville,TX,USA,30.447765,-97.602116,census,city,59
 "Santa Ana, Calif.",,Santa Ana,CA,USA,33.736332,-117.8829,census,city,59
 "South Jordan, Utah",,South Jordan,UT,USA,40.555007,-111.992337,census,city,59
-"Washington, DC",,Washington,DC,USA,38.904247,-77.016517,census,city,59
 "Annapolis, Md.",,Annapolis,MD,USA,38.972152,-76.505332,census,city,58
 "Arvada, Colo.",,Arvada,CO,USA,39.833728,-105.150306,census,city,58
 "Brandon, Miss.",,Brandon,MS,USA,32.278093,-89.990686,census,city,58
@@ -358,6 +357,7 @@ hometown,school,city,state,country,lat,lon,source,precision,players
 "Newport Beach, Calif.",,Newport Beach,CA,USA,33.597332,-117.890352,census,city,58
 "Pittsburg, Calif.",,Pittsburg,CA,USA,38.016771,-121.896948,census,city,58
 "Queen Creek, Ariz.",,Queen Creek,AZ,USA,33.239425,-111.613319,census,city,58
+"Washington, DC",,Washington,DC,USA,38.904247,-77.016517,census,city,58
 "Bellevue, Wash.",,Bellevue,WA,USA,47.597837,-122.15648,census,city,57
 "Frankfort, Ill.",,Frankfort,IL,USA,41.507025,-87.870966,census,city,57
 "Memphis, TN",,Memphis,TN,USA,35.109164,-89.968511,census,city,57
@@ -447,7 +447,6 @@ hometown,school,city,state,country,lat,lon,source,precision,players
 "Conroe, Texas",,Conroe,TX,USA,30.328717,-95.4846,census,city,50
 "Decatur, Ala.",,Decatur,AL,USA,34.572995,-86.989901,census,city,50
 "High Point, N.C.",,High Point,NC,USA,35.990803,-79.992713,census,city,50
-"Hinsdale, Ill.",,Hinsdale,IL,USA,41.800683,-87.928172,census,city,50
 "Metairie, La.",,Metairie,LA,USA,29.997837,-90.177781,census,city,50
 "Nashville, TN",,Nashville,TN,USA,36.1718,-86.785002,census,city,50
 "Port Arthur, Texas",,Port Arthur,TX,USA,29.900008,-93.89442,census,city,50
@@ -478,6 +477,7 @@ hometown,school,city,state,country,lat,lon,source,precision,players
 "Germantown, Tenn.",,Germantown,TN,USA,35.081957,-89.782584,census,city,47
 "Griffin, Ga.",,Griffin,GA,USA,33.243188,-84.271861,census,city,47
 "Henderson, Nev.",,Henderson,NV,USA,36.008958,-115.0268,census,city,47
+"Hinsdale, Ill.",,Hinsdale,IL,USA,41.800683,-87.928172,census,city,47
 "Johns Creek, Ga.",,Johns Creek,GA,USA,34.032739,-84.203848,census,city,47
 "Leesburg, Ga.",,Leesburg,GA,USA,31.732058,-84.168546,census,city,47
 "Matthews, N.C.",,Matthews,NC,USA,35.119788,-80.709693,census,city,47
@@ -598,7 +598,6 @@ hometown,school,city,state,country,lat,lon,source,precision,players
 "Hoschton, Ga.",,Hoschton,GA,USA,34.085619,-83.759869,census,city,38
 "Lancaster, Pa.",,Lancaster,PA,USA,40.042061,-76.30099,census,city,38
 "Lauderhill, Fla.",,Lauderhill,FL,USA,26.162225,-80.224434,census,city,38
-"Lawrenceville, GA",,Lawrenceville,GA,USA,33.952875,-83.992231,census,city,38
 "Loveland, Ohio",,Loveland,OH,USA,39.26768,-84.268756,census,city,38
 "Montreal, Quebec",,Montreal,QC,Canada,45.5031824,-73.5698065,nominatim,city,38
 "Oklahoma City, OK",,Oklahoma City,OK,USA,35.467079,-97.513657,census,city,38
@@ -622,6 +621,7 @@ hometown,school,city,state,country,lat,lon,source,precision,players
 "Kenner, La.",,Kenner,LA,USA,30.010227,-90.25482,census,city,37
 "Lake Oswego, Ore.",,Lake Oswego,OR,USA,45.413551,-122.700007,census,city,37
 "Lakeville, Minn.",,Lakeville,MN,USA,44.676134,-93.251743,census,city,37
+"Lawrenceville, GA",,Lawrenceville,GA,USA,33.952875,-83.992231,census,city,37
 "Mentor, Ohio",,Mentor,OH,USA,41.690159,-81.33588,census,city,37
 "Murfreesboro, TN",,Murfreesboro,TN,USA,35.853915,-86.421224,census,city,37
 "Muscle Shoals, Ala.",,Muscle Shoals,AL,USA,34.742657,-87.633767,census,city,37
@@ -692,20 +692,16 @@ hometown,school,city,state,country,lat,lon,source,precision,players
 "Shreveport, LA",,Shreveport,LA,USA,32.466879,-93.792193,census,city,34
 "Southaven, Miss.",,Southaven,MS,USA,34.951005,-89.977669,census,city,34
 "State College, Pa.",,State College,PA,USA,40.791039,-77.856813,census,city,34
-"Upper Marlboro, MD",,Upper Marlboro,MD,USA,38.816495,-76.75367,census,city,34
 "Wilmette, Ill.",,Wilmette,IL,USA,42.077323,-87.728621,census,city,34
 "Abilene, Texas",,Abilene,TX,USA,32.454514,-99.738147,census,city,33
 "Batavia, Ill.",,Batavia,IL,USA,41.847692,-88.311047,census,city,33
-"Boulder, Colo.",,Boulder,CO,USA,40.024431,-105.251251,census,city,33
 "Buffalo, NY",,Buffalo,NY,USA,42.892492,-78.859686,census,city,33
 "Chandler, AZ",,Chandler,AZ,USA,33.282765,-111.851819,census,city,33
 "Cordele, Ga.",,Cordele,GA,USA,31.95609,-83.770077,census,city,33
 "Doylestown, Pa.",,Doylestown,PA,USA,40.314197,-75.127697,census,city,33
-"Everett, Mass.",,Everett,MA,USA,42.405938,-71.054649,census,city,33
 "Fairhope, Ala.",,Fairhope,AL,USA,30.52092,-87.879122,census,city,33
 "Lemont, Ill.",,Lemont,IL,USA,41.667328,-87.984411,census,city,33
 "Lucas, Texas",,Lucas,TX,USA,33.101031,-96.581182,census,city,33
-"Marietta, GA",,Marietta,GA,USA,33.953561,-84.542463,census,city,33
 "New Haven, Conn.",,New Haven,CT,USA,41.310809,-72.924953,census,city,33
 "New Lenox, Ill.",,New Lenox,IL,USA,41.510022,-87.970002,census,city,33
 "Normal, Ill.",,Normal,IL,USA,40.52014,-88.992234,census,city,33
@@ -719,11 +715,13 @@ hometown,school,city,state,country,lat,lon,source,precision,players
 "Salt Lake City, UT",,Salt Lake City,UT,USA,40.776928,-111.930991,census,city,33
 "San Jose, CA",,San Jose,CA,USA,37.296011,-121.814552,census,city,33
 "Smyrna, Ga.",,Smyrna,GA,USA,33.862559,-84.51612,census,city,33
+"Upper Marlboro, MD",,Upper Marlboro,MD,USA,38.816495,-76.75367,census,city,33
 "Vestavia Hills, Ala.",,Vestavia Hills,AL,USA,33.462496,-86.739508,census,city,33
 "Aliquippa, Pa.",,Aliquippa,PA,USA,40.615827,-80.255162,census,city,32
 "Barrington, Ill.",,Barrington,IL,USA,42.151535,-88.128534,census,city,32
 "Beaufort, S.C.",,Beaufort,SC,USA,32.458085,-80.722543,census,city,32
 "Bloomington, Ill.",,Bloomington,IL,USA,40.475777,-88.969912,census,city,32
+"Boulder, Colo.",,Boulder,CO,USA,40.024431,-105.251251,census,city,32
 "Bozeman, MT",,Bozeman,MT,USA,45.683155,-111.053782,census,city,32
 "Broomfield, Colo.",,Broomfield,CO,USA,39.953593,-105.050787,census,city,32
 "Cape Coral, Fla.",,Cape Coral,FL,USA,26.643192,-81.997364,census,city,32
@@ -731,6 +729,7 @@ hometown,school,city,state,country,lat,lon,source,precision,players
 "Denham Springs, La.",,Denham Springs,LA,USA,30.474329,-90.959027,census,city,32
 "Eastvale, Calif.",,Eastvale,CA,USA,33.963274,-117.582369,census,city,32
 "El Dorado Hills, Calif.",,El Dorado Hills,CA,USA,38.676082,-121.0477,census,city,32
+"Everett, Mass.",,Everett,MA,USA,42.405938,-71.054649,census,city,32
 "Gardena, Calif.",,Gardena,CA,USA,33.894417,-118.307522,census,city,32
 "Hamilton, Ohio",,Hamilton,OH,USA,39.394328,-84.565522,census,city,32
 "Honolulu, HI",,Honolulu,HI,USA,21.324347,-157.84764,census,city,32
@@ -738,6 +737,7 @@ hometown,school,city,state,country,lat,lon,source,precision,players
 "Lake Mary, Fla.",,Lake Mary,FL,USA,28.759104,-81.332813,census,city,32
 "Lewis Center, Ohio",,Lewis Center,OH,USA,40.1983958,-83.0101843,usgs,city,32
 "Lufkin, Texas",,Lufkin,TX,USA,31.322904,-94.729026,census,city,32
+"Marietta, GA",,Marietta,GA,USA,33.953561,-84.542463,census,city,32
 "Palmetto, Fla.",,Palmetto,FL,USA,27.52505,-82.574964,census,city,32
 "Paterson, N.J.",,Paterson,NJ,USA,40.914766,-74.162829,census,city,32
 "Pine Bluff, Ark.",,Pine Bluff,AR,USA,34.211591,-92.017555,census,city,32
@@ -750,15 +750,12 @@ hometown,school,city,state,country,lat,lon,source,precision,players
 "Ventura, Calif.",,Ventura,CA,USA,34.26778,-119.254206,census,city,32
 "Zionsville, Ind.",,Zionsville,IN,USA,39.99153,-86.32175,census,city,32
 "Allentown, Pa.",,Allentown,PA,USA,40.593648,-75.478393,census,city,31
-"Alpharetta, GA",,Alpharetta,GA,USA,34.070866,-84.27265,census,city,31
 "Bluffton, S.C.",,Bluffton,SC,USA,32.214449,-80.929528,census,city,31
 "Castle Rock, Colo.",,Castle Rock,CO,USA,39.376194,-104.852922,census,city,31
-"Columbus, OH",,Columbus,OH,USA,39.983938,-82.984882,census,city,31
 "Corona, CA",,Corona,CA,USA,33.861969,-117.565495,census,city,31
 "Fairfield, Conn.",,Fairfield,CT,USA,41.17594,-73.272046,census,city,31
 "Federal Way, Wash.",,Federal Way,WA,USA,47.311596,-122.337757,census,city,31
 "Gallatin, Tenn.",,Gallatin,TN,USA,36.381524,-86.467021,census,city,31
-"Greenwood, Miss.",,Greenwood,MS,USA,33.51246,-90.198963,census,city,31
 "Hartford, Conn.",,Hartford,CT,USA,41.765933,-72.681579,census,city,31
 "Huntsville, Texas",,Huntsville,TX,USA,30.700542,-95.55489,census,city,31
 "Irvington, N.J.",,Irvington,NJ,USA,40.723859,-74.232522,census,city,31
@@ -778,6 +775,7 @@ hometown,school,city,state,country,lat,lon,source,precision,players
 "West Jordan, Utah",,West Jordan,UT,USA,40.602666,-112.001255,census,city,31
 "Weston, Fla.",,Weston,FL,USA,26.100391,-80.402059,census,city,31
 "Wexford, Pa.",,Wexford,PA,USA,40.6264561,-80.055891,usgs,city,31
+"Alpharetta, GA",,Alpharetta,GA,USA,34.070866,-84.27265,census,city,30
 "Amite, La.",,Amite,LA,USA,30.732164,-90.515286,census,city,30
 "Baytown, Texas",,Baytown,TX,USA,29.76478,-94.967457,census,city,30
 "Billings, Mont.",,Billings,MT,USA,45.788538,-108.552475,census,city,30
@@ -787,12 +785,14 @@ hometown,school,city,state,country,lat,lon,source,precision,players
 "Clemson, S.C.",,Clemson,SC,USA,34.683564,-82.810575,census,city,30
 "Cleveland, OH",,Cleveland,OH,USA,41.478462,-81.679435,census,city,30
 "Columbia, Miss.",,Columbia,MS,USA,31.258593,-89.818669,census,city,30
+"Columbus, OH",,Columbus,OH,USA,39.983938,-82.984882,census,city,30
 "Concord, Calif.",,Concord,CA,USA,37.972184,-122.001587,census,city,30
 "Easton, Pa.",,Easton,PA,USA,40.685971,-75.218548,census,city,30
 "Ellicott City, Md.",,Ellicott City,MD,USA,39.276691,-76.833952,census,city,30
 "Gilbert, AZ",,Gilbert,AZ,USA,33.310345,-111.743121,census,city,30
 "Grapevine, Texas",,Grapevine,TX,USA,32.934969,-97.075912,census,city,30
 "Greensboro, NC",,Greensboro,NC,USA,36.09485,-79.823624,census,city,30
+"Greenwood, Miss.",,Greenwood,MS,USA,33.51246,-90.198963,census,city,30
 "Hammond, La.",,Hammond,LA,USA,30.50565,-90.456493,census,city,30
 "Harlem, N.Y.",,Harlem,NY,USA,40.8078786,-73.9454154,usgs,city,30
 "Huntington, W.Va.",,Huntington,WV,USA,38.410651,-82.434689,census,city,30
@@ -857,7 +857,6 @@ hometown,school,city,state,country,lat,lon,source,precision,players
 "Lagos, Nigeria",,Lagos,,Nigeria,6.4550575,3.3941795,nominatim,city,28
 "Lakewood, Ohio",,Lakewood,OH,USA,41.483258,-81.801143,census,city,28
 "Lansing, Mich.",,Lansing,MI,USA,42.714341,-84.560889,census,city,28
-"Largo, Fla.",,Largo,FL,USA,27.908685,-82.774174,census,city,28
 "Las Cruces, N.M.",,Las Cruces,NM,USA,32.326444,-106.789695,census,city,28
 "Lehigh Acres, Fla.",,Lehigh Acres,FL,USA,26.612695,-81.638845,census,city,28
 "Libertyville, Ill.",,Libertyville,IL,USA,42.284667,-87.966503,census,city,28
@@ -872,7 +871,6 @@ hometown,school,city,state,country,lat,lon,source,precision,players
 "Paducah, Ky.",,Paducah,KY,USA,37.070892,-88.644477,census,city,28
 "Perry, Ga.",,Perry,GA,USA,32.473708,-83.727809,census,city,28
 "Plaquemine, La.",,Plaquemine,LA,USA,30.283156,-91.243812,census,city,28
-"Ponte Vedra, Fla.",,Ponte Vedra,FL,USA,30.2396865,-81.3856384,usgs,city,28
 "Temecula, CA",,Temecula,CA,USA,33.493073,-117.131734,census,city,28
 "Tifton, Ga.",,Tifton,GA,USA,31.462099,-83.520499,census,city,28
 "Willingboro, N.J.",,Willingboro,NJ,USA,40.02795,-74.886984,census,city,28
@@ -897,6 +895,7 @@ hometown,school,city,state,country,lat,lon,source,precision,players
 "Jefferson, Ga.",,Jefferson,GA,USA,34.136239,-83.602157,census,city,27
 "Kernersville, N.C.",,Kernersville,NC,USA,36.106171,-80.081895,census,city,27
 "Lafayette, Ind.",,Lafayette,IN,USA,40.39941,-86.862806,census,city,27
+"Largo, Fla.",,Largo,FL,USA,27.908685,-82.774174,census,city,27
 "Los Gatos, Calif.",,Los Gatos,CA,USA,37.229944,-121.956874,census,city,27
 "Merrillville, Ind.",,Merrillville,IN,USA,41.472687,-87.31807,census,city,27
 "Middletown, Ohio",,Middletown,OH,USA,39.502952,-84.364893,census,city,27
@@ -904,6 +903,7 @@ hometown,school,city,state,country,lat,lon,source,precision,players
 "Newark, NJ",,Newark,NJ,USA,40.72422,-74.172574,census,city,27
 "Peachtree City, Ga.",,Peachtree City,GA,USA,33.391887,-84.570656,census,city,27
 "Piscataway, N.J.",,Piscataway,NJ,USA,40.545539,-74.46072,census,city,27
+"Ponte Vedra, Fla.",,Ponte Vedra,FL,USA,30.2396865,-81.3856384,usgs,city,27
 "Punta Gorda, Fla.",,Punta Gorda,FL,USA,26.897754,-82.065812,census,city,27
 "Richmond, Ky.",,Richmond,KY,USA,37.729145,-84.299364,census,city,27
 "Schertz, Texas",,Schertz,TX,USA,29.563327,-98.250866,census,city,27
@@ -919,7 +919,6 @@ Washington D.C.,,Washington,DC,USA,38.904247,-77.016517,census,city,27
 "Brenham, Texas",,Brenham,TX,USA,30.15816,-96.395616,census,city,26
 "Camden, S.C.",,Camden,SC,USA,34.25893,-80.609202,census,city,26
 "Cookeville, Tenn.",,Cookeville,TN,USA,36.146926,-85.512653,census,city,26
-"Cranberry Township, Pa.",,Cranberry Township,PA,USA,40.709967,-80.105642,census,city,26
 "Dearborn, Mich.",,Dearborn,MI,USA,42.313057,-83.211488,census,city,26
 "Downey, Calif.",,Downey,CA,USA,33.938237,-118.130856,census,city,26
 "Easley, S.C.",,Easley,SC,USA,34.819805,-82.582161,census,city,26
@@ -958,7 +957,6 @@ Washington D.C.,,Washington,DC,USA,38.904247,-77.016517,census,city,27
 "Rosenberg, Texas",,Rosenberg,TX,USA,29.549987,-95.821381,census,city,26
 "Springboro, Ohio",,Springboro,OH,USA,39.562227,-84.233602,census,city,26
 "Stuart, Fla.",,Stuart,FL,USA,27.195272,-80.244114,census,city,26
-"Torrance, Calif.",,Torrance,CA,USA,33.830453,-118.356618,census,city,26
 "Tulare, Calif.",,Tulare,CA,USA,36.200246,-119.339775,census,city,26
 "Urbandale, Iowa",,Urbandale,IA,USA,41.636656,-93.779889,census,city,26
 "Valencia, Calif.",,Valencia,CA,USA,34.4436063,-118.6095321,usgs,city,26
@@ -977,8 +975,8 @@ Washington D.C.,,Washington,DC,USA,38.904247,-77.016517,census,city,27
 "Buford, GA",,Buford,GA,USA,34.118562,-83.98861,census,city,25
 "Celina, Texas",,Celina,TX,USA,33.32296,-96.798821,census,city,25
 "Chantilly, Va.",,Chantilly,VA,USA,38.88918,-77.442088,census,city,25
-"Cheshire, Conn.",,Cheshire,CT,USA,41.511827,-72.903617,census,city,25
 "Columbia, Tenn.",,Columbia,TN,USA,35.625616,-87.044232,census,city,25
+"Cranberry Township, Pa.",,Cranberry Township,PA,USA,40.709967,-80.105642,census,city,25
 "Danville, Ky.",,Danville,KY,USA,37.639256,-84.776013,census,city,25
 "Davidson, N.C.",,Davidson,NC,USA,35.480375,-80.82095,census,city,25
 "Delaware, Ohio",,Delaware,OH,USA,40.286476,-83.074864,census,city,25
@@ -993,7 +991,6 @@ Houston,,Houston,,,29.785743,-95.388806,census_guess_TX,city_guess,25
 "Montgomery, AL",,Montgomery,AL,USA,32.348503,-86.267307,census,city,25
 "Mountain View, Calif.",,Mountain View,CA,USA,37.399686,-122.079269,census,city,25
 "Nacogdoches, Texas",,Nacogdoches,TX,USA,31.612364,-94.652046,census,city,25
-"Naples, FL",,Naples,FL,USA,26.150485,-81.795299,census,city,25
 "Palm Coast, Fla.",,Palm Coast,FL,USA,29.536837,-81.242627,census,city,25
 "Petal, Miss.",,Petal,MS,USA,31.34817,-89.235131,census,city,25
 "Plymouth, Minn.",,Plymouth,MN,USA,45.022312,-93.462883,census,city,25
@@ -1005,6 +1002,7 @@ Houston,,Houston,,,29.785743,-95.388806,census_guess_TX,city_guess,25
 "Sparks, Nev.",,Sparks,NV,USA,39.574341,-119.715154,census,city,25
 "Springdale, Ark.",,Springdale,AR,USA,36.191438,-94.155062,census,city,25
 "Suwanee, GA",,Suwanee,GA,USA,34.051119,-84.06591,census,city,25
+"Torrance, Calif.",,Torrance,CA,USA,33.830453,-118.356618,census,city,25
 "Vancouver, WA",,Vancouver,WA,USA,45.637156,-122.596567,census,city,25
 "Visalia, Calif.",,Visalia,CA,USA,36.32803,-119.328519,census,city,25
 "Waldorf, MD",,Waldorf,MD,USA,38.609172,-76.919776,census,city,25
@@ -1021,6 +1019,7 @@ Houston,,Houston,,,29.785743,-95.388806,census_guess_TX,city_guess,25
 "Camas, Wash.",,Camas,WA,USA,45.601809,-122.430381,census,city,24
 Charlotte,,Charlotte,,,35.209045,-80.83099,census_guess_NC,city_guess,24
 Charlotte,East Carolina,Charlotte,TX,USA,28.85929,-98.700638,census_guess_TX,city_guess,24
+"Cheshire, Conn.",,Cheshire,CT,USA,41.511827,-72.903617,census,city,24
 "Coatesville, Pa.",,Coatesville,PA,USA,39.985152,-75.819,census,city,24
 "Coeur d'Alene, Idaho",,Coeur d'Alene,ID,USA,47.702887,-116.795799,census,city,24
 "Donaldsonville, La.",,Donaldsonville,LA,USA,30.095069,-90.992544,census,city,24
@@ -1038,11 +1037,11 @@ Charlotte,East Carolina,Charlotte,TX,USA,28.85929,-98.700638,census_guess_TX,cit
 "Livermore, Calif.",,Livermore,CA,USA,37.686977,-121.759781,census,city,24
 "McCalla, Ala.",,McCalla,AL,USA,33.303112,-87.02666,census,city,24
 "McLean, Va.",,McLean,VA,USA,38.943545,-77.192913,census,city,24
-"Mechanicsburg, Pa.",,Mechanicsburg,PA,USA,40.211404,-77.00593,census,city,24
 "Milledgeville, Ga.",,Milledgeville,GA,USA,33.087945,-83.240613,census,city,24
 "Monroe, LA",,Monroe,LA,USA,32.518986,-92.07718,census,city,24
 "Montgomery Village, Md.",,Montgomery Village,MD,USA,39.188512,-77.205143,census,city,24
 "Moorestown, N.J.",,Moorestown,NJ,USA,39.978716,-74.942651,census,city,24
+"Naples, FL",,Naples,FL,USA,26.150485,-81.795299,census,city,24
 "Norco, Calif.",,Norco,CA,USA,33.925519,-117.551958,census,city,24
 "Ocala, FL",,Ocala,FL,USA,29.17751,-82.151025,census,city,24
 "Ocoee, Fla.",,Ocoee,FL,USA,28.57882,-81.533045,census,city,24
@@ -1084,6 +1083,7 @@ Charlotte,East Carolina,Charlotte,TX,USA,28.85929,-98.700638,census_guess_TX,cit
 "Laurinburg, N.C.",,Laurinburg,NC,USA,34.762138,-79.477378,census,city,23
 "Malvern, Pa.",,Malvern,PA,USA,40.033147,-75.515363,census,city,23
 "Manhattan Beach, Calif.",,Manhattan Beach,CA,USA,33.90087,-118.420715,census,city,23
+"Mechanicsburg, Pa.",,Mechanicsburg,PA,USA,40.211404,-77.00593,census,city,23
 "Memphis, Tennessee",,Memphis,TN,USA,35.109164,-89.968511,census,city,23
 "Mount Pleasant, S.C.",,Mount Pleasant,SC,USA,32.808382,-79.865038,census,city,23
 "Norristown, Pa.",,Norristown,PA,USA,40.122076,-75.33987,census,city,23
@@ -1130,7 +1130,6 @@ Salt Lake City,,Salt Lake City,,,40.776928,-111.930991,census_guess_UT,city_gues
 "Leawood, Kan.",,Leawood,KS,USA,38.907263,-94.62524,census,city,22
 "Liberty Hill, Texas",,Liberty Hill,TX,USA,30.663377,-97.905506,census,city,22
 "Macon, Miss.",,Macon,MS,USA,33.122065,-88.556713,census,city,22
-"Merritt Island, Fla.",,Merritt Island,FL,USA,28.309239,-80.675956,census,city,22
 "Midwest City, Okla.",,Midwest City,OK,USA,35.458752,-97.37457,census,city,22
 "Milford, Mass.",,Milford,MA,USA,42.150664,-71.517783,census,city,22
 "Morgan City, La.",,Morgan City,LA,USA,29.710332,-91.191542,census,city,22
@@ -1187,6 +1186,7 @@ Salt Lake City,,Salt Lake City,,,40.776928,-111.930991,census_guess_UT,city_gues
 "Longmont, Colo.",,Longmont,CO,USA,40.168199,-105.100522,census,city,21
 "Manalapan, NJ",,Manalapan,NJ,USA,40.282353,-74.346564,census,city,21
 "Menifee, Calif.",,Menifee,CA,USA,33.689858,-117.184383,census,city,21
+"Merritt Island, Fla.",,Merritt Island,FL,USA,28.309239,-80.675956,census,city,21
 "Mission Hills, Calif.",,Mission Hills,CA,USA,34.688779,-120.43975,census,city,21
 "Mokena, Ill.",,Mokena,IL,USA,41.529863,-87.87771,census,city,21
 "Moorpark, Calif.",,Moorpark,CA,USA,34.285942,-118.87704,census,city,21
@@ -1273,9 +1273,7 @@ Salt Lake City,,Salt Lake City,,,40.776928,-111.930991,census_guess_UT,city_gues
 "Picayune, Miss.",,Picayune,MS,USA,30.53082,-89.670628,census,city,20
 "Quincy, Fla.",,Quincy,FL,USA,30.565983,-84.585847,census,city,20
 "Reston, Va.",,Reston,VA,USA,38.949762,-77.346244,census,city,20
-"Roswell, GA",,Roswell,GA,USA,34.039453,-84.350946,census,city,20
 "Rye, N.Y.",,Rye,NY,USA,40.944738,-73.686374,census,city,20
-"Scranton, Pa.",,Scranton,PA,USA,41.404178,-75.665908,census,city,20
 "Selma, Ala.",,Selma,AL,USA,32.416983,-87.035702,census,city,20
 "St. Petersburg, FL",,St. Petersburg,FL,USA,27.762727,-82.644131,census,city,20
 "Sulphur, La.",,Sulphur,LA,USA,30.229792,-93.356343,census,city,20
@@ -1286,7 +1284,6 @@ Salt Lake City,,Salt Lake City,,,40.776928,-111.930991,census_guess_UT,city_gues
 "West Columbia, S.C.",,West Columbia,SC,USA,33.99013,-81.099354,census,city,20
 "Apple Valley, Minn.",,Apple Valley,MN,USA,44.745301,-93.199413,census,city,19
 "Argyle, TX",,Argyle,TX,USA,33.105493,-97.17752,census,city,19
-"Ashburn, VA",,Ashburn,VA,USA,39.027296,-77.471322,census,city,19
 "Ashland, Ky.",,Ashland,KY,USA,38.459492,-82.645081,census,city,19
 "Aurora, CO",,Aurora,CO,USA,39.709537,-104.720509,census,city,19
 "Bellevue, Neb.",,Bellevue,NE,USA,41.144932,-95.93856,census,city,19
@@ -1333,8 +1330,10 @@ Raleigh,,Raleigh,,,35.831868,-78.641042,census_guess_NC,city_guess,19
 "Ridgewood, N.J.",,Ridgewood,NJ,USA,40.981591,-74.113506,census,city,19
 "Rochester Hills, Mich.",,Rochester Hills,MI,USA,42.663484,-83.159196,census,city,19
 "Rockingham, N.C.",,Rockingham,NC,USA,34.938562,-79.760317,census,city,19
+"Roswell, GA",,Roswell,GA,USA,34.039453,-84.350946,census,city,19
 "Saginaw, Mich.",,Saginaw,MI,USA,43.419945,-83.950172,census,city,19
 "San Francisco, CA",,San Francisco,CA,USA,37.727239,-123.032229,census,city,19
+"Scranton, Pa.",,Scranton,PA,USA,41.404178,-75.665908,census,city,19
 "Sioux City, Iowa",,Sioux City,IA,USA,42.49538,-96.389495,census,city,19
 "Somerset, Ky.",,Somerset,KY,USA,37.086473,-84.60535,census,city,19
 "Spanish Fork, Utah",,Spanish Fork,UT,USA,40.113143,-111.642906,census,city,19
@@ -1350,8 +1349,8 @@ Raleigh,,Raleigh,,,35.831868,-78.641042,census_guess_NC,city_guess,19
 "York, S.C.",,York,SC,USA,34.998347,-81.233066,census,city,19
 "Adamsville, Ala.",,Adamsville,AL,USA,33.602315,-86.971527,census,city,18
 "Andalusia, Ala.",,Andalusia,AL,USA,31.309436,-86.478031,census,city,18
+"Ashburn, VA",,Ashburn,VA,USA,39.027296,-77.471322,census,city,18
 "Azle, Texas",,Azle,TX,USA,32.895547,-97.53923,census,city,18
-"Basking Ridge, N.J.",,Basking Ridge,NJ,USA,40.706547,-74.557631,census,city,18
 "Bethel Park, Pa.",,Bethel Park,PA,USA,40.323803,-80.036421,census,city,18
 "Breaux Bridge, La.",,Breaux Bridge,LA,USA,30.283099,-91.905919,census,city,18
 "Burnsville, Minn.",,Burnsville,MN,USA,44.764409,-93.279372,census,city,18
@@ -1441,6 +1440,7 @@ Raleigh,,Raleigh,,,35.831868,-78.641042,census_guess_NC,city_guess,19
 "Alpine, Utah",,Alpine,UT,USA,40.462954,-111.77244,census,city,17
 "Auburn, Calif.",,Auburn,CA,USA,38.895075,-121.076739,census,city,17
 "Bainbridge, Ga.",,Bainbridge,GA,USA,30.906213,-84.572652,census,city,17
+"Basking Ridge, N.J.",,Basking Ridge,NJ,USA,40.706547,-74.557631,census,city,17
 "Bismarck, N.D.",,Bismarck,ND,USA,46.814583,-100.770089,census,city,17
 "Bristow, Va.",,Bristow,VA,USA,38.8148351,-77.2116486,usgs,city,17
 "Calera, Ala.",,Calera,AL,USA,33.122319,-86.745644,census,city,17
@@ -1516,7 +1516,6 @@ Raleigh,East Carolina,Raleigh,FL,USA,29.447868,-82.468078,census_guess_FL,city_g
 "Bartlett, Tenn.",,Bartlett,TN,USA,35.234169,-89.820266,census,city,16
 "Bassfield, Miss.",,Bassfield,MS,USA,31.495955,-89.744932,census,city,16
 "Belton, Texas",,Belton,TX,USA,31.052345,-97.479542,census,city,16
-"Binghamton, N.Y.",,Binghamton,NY,USA,42.101331,-75.909369,census,city,16
 "Bothell, Wash.",,Bothell,WA,USA,47.773531,-122.204376,census,city,16
 "Brentwood, TN",,Brentwood,TN,USA,35.993904,-86.770834,census,city,16
 "Camp Hill, Pa.",,Camp Hill,PA,USA,40.242192,-76.9274,census,city,16
@@ -1531,7 +1530,6 @@ Raleigh,East Carolina,Raleigh,FL,USA,29.447868,-82.468078,census_guess_FL,city_g
 "Deland, Fla.",,Deland,FL,USA,29.022663,-81.286498,census,city,16
 "Dover, Del.",,Dover,DE,USA,39.160602,-75.521659,census,city,16
 "Dunnellon, Fla.",,Dunnellon,FL,USA,29.059608,-82.42538,census,city,16
-"Fair Haven, N.J.",,Fair Haven,NJ,USA,40.36194,-74.038775,census,city,16
 "Findlay, Ohio",,Findlay,OH,USA,41.047364,-83.638093,census,city,16
 "Fleming Island, Fla.",,Fleming Island,FL,USA,30.099116,-81.712394,census,city,16
 "Ft. Worth, Texas",,Ft. Worth,TX,USA,32.781954,-97.348573,census,city,16
@@ -1558,7 +1556,6 @@ Raleigh,East Carolina,Raleigh,FL,USA,29.447868,-82.468078,census_guess_FL,city_g
 "Marysville, Ohio",,Marysville,OH,USA,40.227986,-83.35936,census,city,16
 "Mesquite, TX",,Mesquite,TX,USA,32.75955,-96.584164,census,city,16
 "Milpitas, Calif.",,Milpitas,CA,USA,37.433136,-121.890934,census,city,16
-"Miramar, FL",,Miramar,FL,USA,25.972529,-80.338582,census,city,16
 "Missoula, MT",,Missoula,MT,USA,46.874359,-114.026136,census,city,16
 "Monroeville, Pa.",,Monroeville,PA,USA,40.426324,-79.761379,census,city,16
 "Montvale, N.J.",,Montvale,NJ,USA,41.054594,-74.047298,census,city,16
@@ -1605,6 +1602,7 @@ Raleigh,East Carolina,Raleigh,FL,USA,29.447868,-82.468078,census_guess_FL,city_g
 "Bastrop, La.",,Bastrop,LA,USA,32.774858,-91.907756,census,city,15
 "Bellville, Texas",,Bellville,TX,USA,29.946639,-96.258839,census,city,15
 "Benton, La.",,Benton,LA,USA,32.68958,-93.740132,census,city,15
+"Binghamton, N.Y.",,Binghamton,NY,USA,42.101331,-75.909369,census,city,15
 "Birmingham, Mich.",,Birmingham,MI,USA,42.544805,-83.216576,census,city,15
 "Bozeman, Mont.",,Bozeman,MT,USA,45.683155,-111.053782,census,city,15
 "Bradenton, FL",,Bradenton,FL,USA,27.489798,-82.576804,census,city,15
@@ -1628,6 +1626,7 @@ Raleigh,East Carolina,Raleigh,FL,USA,29.447868,-82.468078,census_guess_FL,city_g
 "Erie, Colo.",,Erie,CO,USA,40.040287,-105.03831,census,city,15
 "Eureka, Mo.",,Eureka,MO,USA,38.498468,-90.64542,census,city,15
 "Ewa Beach, Hawai'i",,Ewa Beach,HI,USA,21.31274,-158.006114,census,city,15
+"Fair Haven, N.J.",,Fair Haven,NJ,USA,40.36194,-74.038775,census,city,15
 "Farmingdale, N.Y.",,Farmingdale,NY,USA,40.732808,-73.446759,census,city,15
 "Forestville, Md.",,Forestville,MD,USA,38.851737,-76.870765,census,city,15
 "Frederick, MD",,Frederick,MD,USA,39.434089,-77.414539,census,city,15
@@ -1665,6 +1664,7 @@ Greenville,East Carolina,Greenville,SC,USA,34.836902,-82.362997,census_guess_SC,
 "McKees Rocks, Pa.",,McKees Rocks,PA,USA,40.469019,-80.063328,census,city,15
 "Melville, N.Y.",,Melville,NY,USA,40.782357,-73.408824,census,city,15
 "Millbrook, Ala.",,Millbrook,AL,USA,32.501474,-86.373914,census,city,15
+"Miramar, FL",,Miramar,FL,USA,25.972529,-80.338582,census,city,15
 "Mobile, AL",,Mobile,AL,USA,30.668246,-88.107853,census,city,15
 "Mount Airy, N.C.",,Mount Airy,NC,USA,36.508487,-80.614538,census,city,15
 "Mount Juliet, Tenn.",,Mount Juliet,TN,USA,36.1992,-86.509489,census,city,15
@@ -1710,7 +1710,6 @@ Salt Lake City,Utah,Salt Lake City,UT,USA,40.776928,-111.930991,census_guess_UT,
 "Zachary, LA",,Zachary,LA,USA,30.664377,-91.165778,census,city,15
 "'Ewa Beach, O'ahu",,Ewa Beach,HI,USA,21.31274,-158.006114,census,city,14
 "Anaheim, CA",,Anaheim,CA,USA,33.855502,-117.758657,census,city,14
-"Annapolis, MD",,Annapolis,MD,USA,38.972152,-76.505332,census,city,14
 "Antelope, Calif.",,Antelope,CA,USA,38.71533,-121.360962,census,city,14
 "Aubrey, Texas",,Aubrey,TX,USA,33.30855,-96.979088,census,city,14
 "Auburndale, Fla.",,Auburndale,FL,USA,28.109997,-81.797322,census,city,14
@@ -1856,6 +1855,7 @@ Salt Lake City,Utah,Salt Lake City,UT,USA,40.776928,-111.930991,census_guess_UT,
 "Accokeek, Md.",,Accokeek,MD,USA,38.676533,-77.000518,census,city,13
 "Adel, Iowa",,Adel,IA,USA,41.609388,-94.012663,census,city,13
 "Agoura Hills, Calif.",,Agoura Hills,CA,USA,34.148942,-118.76393,census,city,13
+"Annapolis, MD",,Annapolis,MD,USA,38.972152,-76.505332,census,city,13
 "Anthem, Ariz.",,Anthem,AZ,USA,33.846766,-112.126999,census,city,13
 "Ashdown, Ark.",,Ashdown,AR,USA,33.674529,-94.126627,census,city,13
 "Attalla, Ala.",,Attalla,AL,USA,33.986189,-86.121037,census,city,13
@@ -1907,7 +1907,6 @@ Houston,Rice,Houston,TX,USA,29.785743,-95.388806,census_guess_TX,city_guess,13
 "Los Lunas, N.M.",,Los Lunas,NM,USA,34.80087,-106.788691,census,city,13
 "Lovejoy, Ga.",,Lovejoy,GA,USA,33.443681,-84.318863,census,city,13
 "Madison, Fla.",,Madison,FL,USA,30.471487,-83.413453,census,city,13
-"Manchester, N.H.",,Manchester,NH,USA,42.984941,-71.444131,census,city,13
 "Maricopa, Ariz.",,Maricopa,AZ,USA,33.041942,-111.999259,census,city,13
 "Massapequa, N.Y.",,Massapequa,NY,USA,40.668302,-73.471515,census,city,13
 "Matteson, Ill.",,Matteson,IL,USA,41.508871,-87.746044,census,city,13
@@ -1966,7 +1965,6 @@ Houston,Rice,Houston,TX,USA,29.785743,-95.388806,census_guess_TX,city_guess,13
 "Toccoa, Ga.",,Toccoa,GA,USA,34.582081,-83.327169,census,city,13
 "Tomball, TX",,Tomball,TX,USA,30.095078,-95.619678,census,city,13
 "Tullahoma, Tenn.",,Tullahoma,TN,USA,35.373311,-86.218277,census,city,13
-"Union, NJ",,Union,NJ,USA,40.696539,-74.269291,census,city,13
 "Uniondale, N.Y.",,Uniondale,NY,USA,40.717593,-73.594656,census,city,13
 "Van Meter, Iowa",,Van Meter,IA,USA,41.524638,-93.94418,census,city,13
 "Van Nuys, Calif.",,Van Nuys,CA,USA,34.1866718,-118.4489711,usgs,city,13
@@ -2053,6 +2051,7 @@ Jacksonville,,Jacksonville,,,30.336864,-81.661603,census_guess_FL,city_guess,12
 "Lockport, Ill.",,Lockport,IL,USA,41.591001,-88.029697,census,city,12
 "Long Island, N.Y.",,Long Island,NY,USA,43.1518603,-76.0611932,nominatim,city,12
 "Magee, Miss.",,Magee,MS,USA,31.873006,-89.734001,census,city,12
+"Manchester, N.H.",,Manchester,NH,USA,42.984941,-71.444131,census,city,12
 "Martin, Tenn.",,Martin,TN,USA,36.337885,-88.851365,census,city,12
 "Menomonie, Wis.",,Menomonie,WI,USA,44.8892,-91.90957,census,city,12
 "Merced, Calif.",,Merced,CA,USA,37.305721,-120.477907,census,city,12
@@ -2119,6 +2118,7 @@ Jacksonville,,Jacksonville,,,30.336864,-81.661603,census_guess_FL,city_guess,12
 "Trenton, Tenn.",,Trenton,TN,USA,35.973196,-88.945218,census,city,12
 "Tuscumbia, Ala.",,Tuscumbia,AL,USA,34.718502,-87.702586,census,city,12
 "Twinsburg, Ohio",,Twinsburg,OH,USA,41.322594,-81.443123,census,city,12
+"Union, NJ",,Union,NJ,USA,40.696539,-74.269291,census,city,12
 "Valley, Ala.",,Valley,AL,USA,32.801427,-85.204438,census,city,12
 "Villa Rica, Ga.",,Villa Rica,GA,USA,33.728365,-84.916662,census,city,12
 "Voorhees, N.J.",,Voorhees,NJ,USA,40.482176,-74.492506,census,city,12
@@ -2136,7 +2136,6 @@ Jacksonville,,Jacksonville,,,30.336864,-81.661603,census_guess_FL,city_guess,12
 "Yuba City, Calif.",,Yuba City,CA,USA,39.129842,-121.641549,census,city,12
 "Acton, Mass.",,Acton,MA,USA,42.483953,-71.438495,census,city,11
 "Alief, Texas",,Alief,TX,USA,29.7110641,-95.5963337,usgs,city,11
-"Ambler, Pa.",,Ambler,PA,USA,40.156385,-75.221532,census,city,11
 "Anderson, SC",,Anderson,SC,USA,34.521487,-82.643517,census,city,11
 "Anna, Texas",,Anna,TX,USA,33.348167,-96.553452,census,city,11
 "Antioch, TN",,Antioch,TN,USA,35.6845132,-88.4425486,usgs,city,11
@@ -2168,14 +2167,12 @@ Jacksonville,,Jacksonville,,,30.336864,-81.661603,census_guess_FL,city_guess,12
 "Clarendon Hills, Ill.",,Clarendon Hills,IL,USA,41.798448,-87.957239,census,city,11
 "Clinton, S.C.",,Clinton,SC,USA,34.473887,-81.860899,census,city,11
 "Coatesville, PA",,Coatesville,PA,USA,39.985152,-75.819,census,city,11
-"Commack, N.Y.",,Commack,NY,USA,40.843449,-73.283336,census,city,11
 "Copperas Cove, Texas",,Copperas Cove,TX,USA,31.119575,-97.914397,census,city,11
 "Crofton, Md.",,Crofton,MD,USA,39.014439,-76.680007,census,city,11
 "Dadeville, Ala.",,Dadeville,AL,USA,32.826114,-85.776201,census,city,11
 "Danville, Ind.",,Danville,IN,USA,39.758812,-86.495282,census,city,11
 "DeWitt, Mich.",,DeWitt,MI,USA,42.838828,-84.583837,census,city,11
 "Denver, CO",,Denver,CO,USA,39.76185,-104.881105,census,city,11
-"Des Plaines, Ill.",,Des Plaines,IL,USA,42.034398,-87.901136,census,city,11
 "Doral, Fla.",,Doral,FL,USA,25.815956,-80.357556,census,city,11
 "Duluth, GA",,Duluth,GA,USA,34.001517,-84.150464,census,city,11
 "Dyersburg, Tenn.",,Dyersburg,TN,USA,36.046823,-89.37797,census,city,11
@@ -2240,14 +2237,12 @@ Greensboro,East Carolina,Greensboro,GA,USA,33.563569,-83.189093,census_guess_GA,
 "Mauldin, S.C.",,Mauldin,SC,USA,34.781025,-82.304234,census,city,11
 "Maumelle, Ark.",,Maumelle,AR,USA,34.852344,-92.399995,census,city,11
 "McDonald, Pa.",,McDonald,PA,USA,40.37007,-80.232521,census,city,11
-"McMurray, Pa.",,McMurray,PA,USA,40.281468,-80.087433,census,city,11
 "Milford, Conn.",,Milford,CT,USA,41.223644,-73.064556,census,city,11
 "Milford, Pa.",,Milford,PA,USA,41.323661,-74.801019,census,city,11
 "Milton, GA",,Milton,GA,USA,34.144325,-84.314188,census,city,11
 "Minneapolis, MN",,Minneapolis,MN,USA,44.963324,-93.26832,census,city,11
 "Mocksville, N.C.",,Mocksville,NC,USA,35.899716,-80.561095,census,city,11
 "Mont Belvieu, Texas",,Mont Belvieu,TX,USA,29.849964,-94.874713,census,city,11
-"Morristown, NJ",,Morristown,NJ,USA,40.796562,-74.477318,census,city,11
 "Murphy, Texas",,Murphy,TX,USA,33.016418,-96.608233,census,city,11
 "Murray, Utah",,Murray,UT,USA,40.650654,-111.886568,census,city,11
 "New Haven, CT",,New Haven,CT,USA,41.310809,-72.924953,census,city,11
@@ -2319,6 +2314,7 @@ Greensboro,East Carolina,Greensboro,GA,USA,33.563569,-83.189093,census_guess_GA,
 "Alexandria, VA",,Alexandria,VA,USA,38.819251,-77.08367,census,city,10
 "Algona, Iowa",,Algona,IA,USA,43.076345,-94.231746,census,city,10
 "Amarillo, TX",,Amarillo,TX,USA,35.198064,-101.833107,census,city,10
+"Ambler, Pa.",,Ambler,PA,USA,40.156385,-75.221532,census,city,10
 "Anchorage, AK",,Anchorage,AK,USA,61.17425,-149.284329,census,city,10
 "Antioch, Ill.",,Antioch,IL,USA,42.47715,-88.067129,census,city,10
 "Apopka, FL",,Apopka,FL,USA,28.701701,-81.531825,census,city,10
@@ -2352,6 +2348,7 @@ Greensboro,East Carolina,Greensboro,GA,USA,33.563569,-83.189093,census_guess_GA,
 "Citra, Fla.",,Citra,FL,USA,29.4119166,-82.1098156,usgs,city,10
 "Clinton Township, Mich.",,Clinton Township,MI,USA,42.068279,-83.965732,census,city,10
 "Colts Neck, N.J.",,Colts Neck,NJ,USA,40.293438,-74.168257,census,city,10
+"Commack, N.Y.",,Commack,NY,USA,40.843449,-73.283336,census,city,10
 "Concord, CA",,Concord,CA,USA,37.972184,-122.001587,census,city,10
 "Cooper City, Fla.",,Cooper City,FL,USA,26.04806,-80.284961,census,city,10
 "Corbin, Ky.",,Corbin,KY,USA,36.931584,-84.10079,census,city,10
@@ -2364,6 +2361,7 @@ Greensboro,East Carolina,Greensboro,GA,USA,33.563569,-83.189093,census_guess_GA,
 "Darien, Ill.",,Darien,IL,USA,41.745663,-87.981494,census,city,10
 "Dayton, OH",,Dayton,OH,USA,39.784743,-84.199632,census,city,10
 "Delray Beach, FL",,Delray Beach,FL,USA,26.455903,-80.09042,census,city,10
+"Des Plaines, Ill.",,Des Plaines,IL,USA,42.034398,-87.901136,census,city,10
 "Destin, Fla.",,Destin,FL,USA,30.40438,-86.471447,census,city,10
 "Diamond Bar, Calif.",,Diamond Bar,CA,USA,34.001573,-117.817601,census,city,10
 "East Meadow, N.Y.",,East Meadow,NY,USA,40.720115,-73.558861,census,city,10
@@ -2438,6 +2436,7 @@ Greensboro,East Carolina,Greensboro,GA,USA,33.563569,-83.189093,census_guess_GA,
 "Marlton, N.J.",,Marlton,NJ,USA,39.901885,-74.929277,census,city,10
 "Marshall, Minn.",,Marshall,MN,USA,44.449061,-95.789201,census,city,10
 "McKenzie, Tenn.",,McKenzie,TN,USA,36.136643,-88.507107,census,city,10
+"McMurray, Pa.",,McMurray,PA,USA,40.281468,-80.087433,census,city,10
 "Menomonee Falls, Wis.",,Menomonee Falls,WI,USA,43.159411,-88.121548,census,city,10
 "Meriden, Conn.",,Meriden,CT,USA,41.536777,-72.794543,census,city,10
 "Methuen, Mass.",,Methuen,MA,USA,42.742641,-71.178651,census,city,10
@@ -2446,6 +2445,7 @@ Greensboro,East Carolina,Greensboro,GA,USA,33.563569,-83.189093,census_guess_GA,
 "Mililani, Hawaii",,Mililani,HI,USA,21.446506,-158.014644,census,city,10
 "Modesto, CA",,Modesto,CA,USA,37.637533,-121.003049,census,city,10
 "Monmouth Beach, N.J.",,Monmouth Beach,NJ,USA,40.335895,-73.985608,census,city,10
+"Morristown, NJ",,Morristown,NJ,USA,40.796562,-74.477318,census,city,10
 "Murray, Ky.",,Murray,KY,USA,36.614202,-88.322075,census,city,10
 "Nashua, N.H.",,Nashua,NH,USA,42.749074,-71.490544,census,city,10
 "Navasota, Texas",,Navasota,TX,USA,30.386399,-96.090734,census,city,10
@@ -2648,7 +2648,6 @@ Draper,BYU,Draper,UT,USA,40.49715,-111.864636,census_guess_UT,city_guess,9
 "Imperial, Pa.",,Imperial,PA,USA,40.453677,-80.249934,census,city,9
 Jacksonville,East Carolina,Jacksonville,GA,USA,31.813353,-82.975805,census_guess_GA,city_guess,9
 "Jennings, La.",,Jennings,LA,USA,30.223978,-92.658295,census,city,9
-"Jupiter, FL",,Jupiter,FL,USA,26.918551,-80.11694,census,city,9
 "Kaneohe, Hawaii",,Kaneohe,HI,USA,21.409332,-157.789648,census,city,9
 "Kaplan, La.",,Kaplan,LA,USA,30.005959,-92.283876,census,city,9
 "Kapolei, Hawai'i",,Kapolei,HI,USA,21.339925,-158.067827,census,city,9
@@ -2771,7 +2770,6 @@ South Jordan,BYU,South Jordan,UT,USA,40.555007,-111.992337,census_guess_UT,city_
 "Wadsworth, Ohio",,Wadsworth,OH,USA,41.027436,-81.732205,census,city,9
 "Waimanalo, Hawaii",,Waimanalo,HI,USA,21.34207,-157.730238,census,city,9
 "Wakefield, Mass.",,Wakefield,MA,USA,42.504361,-71.064061,census,city,9
-"Wall, NJ",,Wall,NJ,USA,40.165827,-74.09799,census,city,9
 "Warner Robbins, Ga.",,Warner Robins,GA,USA,32.597096,-83.653936,census,city,9
 "Waterford, Mich.",,Waterford,MI,USA,42.661978,-83.387921,census,city,9
 "Waukegan, Ill.",,Waukegan,IL,USA,42.369447,-87.870898,census,city,9
@@ -2783,7 +2781,6 @@ South Jordan,BYU,South Jordan,UT,USA,40.555007,-111.992337,census_guess_UT,city_
 "Wilkes-Barre, Pa.",,Wilkes-Barre,PA,USA,41.246561,-75.875689,census,city,9
 "Willoughby, Ohio",,Willoughby,OH,USA,41.645285,-81.414353,census,city,9
 "Wilsonville, Ore.",,Wilsonville,OR,USA,45.311262,-122.77092,census,city,9
-"Windermere, FL",,Windermere,FL,USA,28.501582,-81.535159,census,city,9
 "Woodruff, S.C.",,Woodruff,SC,USA,34.745097,-82.037454,census,city,9
 "Woodville, Texas",,Woodville,TX,USA,30.774433,-94.422454,census,city,9
 "Aberdeen, Miss.",,Aberdeen,MS,USA,33.828299,-88.554741,census,city,8
@@ -2866,7 +2863,6 @@ Eden Prairie,St. Thomas (MN),Eden Prairie,MN,USA,44.849595,-93.458721,census_gue
 "Farmingville, N.Y.",,Farmingville,NY,USA,40.838978,-73.040463,census,city,8
 "Fenton, Mo.",,Fenton,MO,USA,38.528547,-90.450674,census,city,8
 "Ferndale, Wash.",,Ferndale,WA,USA,48.853366,-122.590232,census,city,8
-"Fitchburg, Mass.",,Fitchburg,MA,USA,42.601977,-71.81587,census,city,8
 "Forest, Va.",,Forest,VA,USA,37.374934,-79.277149,census,city,8
 "Forrest City, Ark.",,Forrest City,AR,USA,35.013599,-90.793207,census,city,8
 "Fort Meade, Fla.",,Fort Meade,FL,USA,27.765879,-81.805464,census,city,8
@@ -2909,6 +2905,7 @@ Eden Prairie,St. Thomas (MN),Eden Prairie,MN,USA,44.849595,-93.458721,census_gue
 "Jamaica, N.Y.",,Jamaica,NY,USA,40.691492,-73.8056894,usgs,city,8
 "Jefferson, Texas",,Jefferson,TX,USA,32.763494,-94.350835,census,city,8
 "Jones, Okla.",,Jones,OK,USA,35.56673,-97.288914,census,city,8
+"Jupiter, FL",,Jupiter,FL,USA,26.918551,-80.11694,census,city,8
 "Kane'ohe, O'ahu",,Kane'ohe,HI,USA,21.409332,-157.789648,census,city,8
 "Kaufman, Texas",,Kaufman,TX,USA,32.577249,-96.313715,census,city,8
 "Kennett, Mo.",,Kennett,MO,USA,36.240223,-90.047221,census,city,8
@@ -3022,7 +3019,6 @@ Salt Lake City,BYU,Salt Lake City,UT,USA,40.776928,-111.930991,census_guess_UT,c
 San Antonio,,San Antonio,,,29.462809,-98.524635,census_guess_TX,city_guess,8
 "San Bernardino, CA",,San Bernardino,CA,USA,34.14114,-117.294635,census,city,8
 "San Ramon, CA",,San Ramon,CA,USA,37.765258,-121.931987,census,city,8
-"Sandy Hook, Conn.",,Sandy Hook,CT,USA,41.409,-73.24263,census,city,8
 "Santa Barbara, CA",,Santa Barbara,CA,USA,34.403592,-119.713714,census,city,8
 "Scarborough, Maine",,Scarborough,ME,USA,43.571203,-70.33417,census,city,8
 "Schaumburg, Ill.",,Schaumburg,IL,USA,42.0289,-88.083773,census,city,8
@@ -3060,6 +3056,7 @@ San Antonio,,San Antonio,,,29.462809,-98.524635,census_guess_TX,city_guess,8
 "Uniontown, Ohio",,Uniontown,OH,USA,40.959366,-81.403701,census,city,8
 "Upland, CA",,Upland,CA,USA,34.116073,-117.659922,census,city,8
 "Waipahu, HI",,Waipahu,HI,USA,21.384938,-158.010993,census,city,8
+"Wall, NJ",,Wall,NJ,USA,40.165827,-74.09799,census,city,8
 "Waltham, Mass.",,Waltham,MA,USA,42.388921,-71.242268,census,city,8
 "Warri, Nigeria",,Warri,,Nigeria,5.5186186,5.7480196,nominatim,city,8
 "Washington Court House, Ohio",,Washington Court House,OH,USA,39.537916,-83.427788,census,city,8
@@ -3071,6 +3068,7 @@ San Antonio,,San Antonio,,,29.462809,-98.524635,census_guess_TX,city_guess,8
 "Whitehouse, Ohio",,Whitehouse,OH,USA,41.521565,-83.7957,census,city,8
 "Wilmington, Ohio",,Wilmington,OH,USA,39.429125,-83.816172,census,city,8
 "Wimberley, Texas",,Wimberley,TX,USA,29.984804,-98.090553,census,city,8
+"Windermere, FL",,Windermere,FL,USA,28.501582,-81.535159,census,city,8
 "Woodside, Calif.",,Woodside,CA,USA,37.42215,-122.258593,census,city,8
 "Xenia, Ohio",,Xenia,OH,USA,39.683133,-83.940808,census,city,8
 "Yardley, Pa.",,Yardley,PA,USA,40.240293,-74.838934,census,city,8
@@ -3172,7 +3170,6 @@ Blaine,St. Thomas (MN),Blaine,MN,USA,45.170515,-93.206089,census_guess_MN,city_g
 "Destrehan, LA",,Destrehan,LA,USA,29.972092,-90.354156,census,city,7
 "Dillon, MT",,Dillon,MT,USA,45.217876,-112.63458,census,city,7
 "Dillsburg, Pa.",,Dillsburg,PA,USA,40.111524,-77.032508,census,city,7
-"Dracut, Mass.",,Dracut,MA,USA,42.679723,-71.30068,census,city,7
 "Duarte, Calif.",,Duarte,CA,USA,34.160967,-117.950447,census,city,7
 "Dunbar, W.Va.",,Dunbar,WV,USA,38.369527,-81.736107,census,city,7
 "Duncanville, TX",,Duncanville,TX,USA,32.64595,-96.91387,census,city,7
@@ -3198,6 +3195,7 @@ Blaine,St. Thomas (MN),Blaine,MN,USA,45.170515,-93.206089,census_guess_MN,city_g
 "Farmington, Mich.",,Farmington,MI,USA,42.461379,-83.378385,census,city,7
 "Fayetteville, GA",,Fayetteville,GA,USA,33.449099,-84.472824,census,city,7
 "Fayetteville, Tenn.",,Fayetteville,TN,USA,35.150178,-86.562298,census,city,7
+"Fitchburg, Mass.",,Fitchburg,MA,USA,42.601977,-71.81587,census,city,7
 "Flemington, N.J.",,Flemington,NJ,USA,40.508641,-74.859869,census,city,7
 "Florence, Miss.",,Florence,MS,USA,32.155615,-90.122454,census,city,7
 "Flowery Branch, GA",,Flowery Branch,GA,USA,34.171303,-83.918746,census,city,7
@@ -3220,7 +3218,6 @@ Blaine,St. Thomas (MN),Blaine,MN,USA,45.170515,-93.206089,census_guess_MN,city_g
 "Germantown, Wis.",,Germantown,WI,USA,43.234527,-88.124999,census,city,7
 "Gillette, Wyo.",,Gillette,WY,USA,44.27258,-105.498936,census,city,7
 "Gladewater, Texas",,Gladewater,TX,USA,32.542547,-94.947137,census,city,7
-"Glastonbury, CT",,Glastonbury,CT,USA,41.691883,-72.552173,census,city,7
 "Glenside, Pa.",,Glenside,PA,USA,40.103249,-75.151877,census,city,7
 "Goddard, Kan.",,Goddard,KS,USA,37.664202,-97.557639,census,city,7
 "Goochland, Va.",,Goochland,VA,USA,37.697075,-77.893651,census,city,7
@@ -3328,7 +3325,6 @@ Las Vegas,,Las Vegas,,,36.233499,-115.264037,census_guess_NV,city_guess,7
 "Mullica Hill, N.J.",,Mullica Hill,NJ,USA,39.720693,-75.210107,census,city,7
 "Murphy, N.C.",,Murphy,NC,USA,35.094326,-84.024901,census,city,7
 "Mustang, Okla.",,Mustang,OK,USA,35.391847,-97.72514,census,city,7
-"Naperville, IL",,Naperville,IL,USA,41.749173,-88.162019,census,city,7
 "Napoleonville, La.",,Napoleonville,LA,USA,29.938267,-91.026361,census,city,7
 "Neenah, Wis.",,Neenah,WI,USA,44.164925,-88.479628,census,city,7
 "New Bedford, Mass.",,New Bedford,MA,USA,41.661303,-70.937913,census,city,7
@@ -3404,6 +3400,7 @@ Pleasant Grove,BYU,Pleasant Grove,UT,USA,40.371497,-111.741281,census_guess_UT,c
 "San Marino, Calif.",,San Marino,CA,USA,34.122671,-118.112911,census,city,7
 "San Rafael, Calif.",,San Rafael,CA,USA,37.981003,-122.50693,census,city,7
 "San Tan Valley, Ariz.",,San Tan Valley,AZ,USA,33.178592,-111.562823,census,city,7
+"Sandy Hook, Conn.",,Sandy Hook,CT,USA,41.409,-73.24263,census,city,7
 "Santa Maria, CA",,Santa Maria,CA,USA,34.933076,-120.443559,census,city,7
 "Santa Rosa Beach, Fla.",,Santa Rosa Beach,FL,USA,30.3960324,-86.2288322,usgs,city,7
 "Saratoga Springs, N.Y.",,Saratoga Springs,NY,USA,43.067704,-73.778142,census,city,7
@@ -3466,7 +3463,6 @@ Spanish Fork,BYU,Spanish Fork,UT,USA,40.113143,-111.642906,census_guess_UT,city_
 "Whittier, CA",,Whittier,CA,USA,33.966827,-118.020122,census,city,7
 "Wiggins, Miss.",,Wiggins,MS,USA,30.856048,-89.138981,census,city,7
 "Williamsville, N.Y.",,Williamsville,NY,USA,42.95825,-78.73952,census,city,7
-"Wilmington, Mass.",,Wilmington,MA,USA,42.564647,-71.164516,census,city,7
 "Windsor Mill, Md.",,Windsor Mill,MD,USA,39.3328839,-76.7594179,usgs,city,7
 "Windsor, Ontario",,Windsor,ON,Canada,42.2858536,-82.9780695,nominatim,city,7
 "Winnipeg, Manitoba, Canada",,Winnipeg,MB,Canada,49.8955367,-97.1384584,nominatim,city,7
@@ -3593,6 +3589,7 @@ Austin,,Austin,,,30.298622,-97.754134,census_guess_TX,city_guess,6
 "Dover, Fla.",,Dover,FL,USA,27.986821,-82.231146,census,city,6
 "Dover, Mass.",,Dover,MA,USA,42.246673,-71.268071,census,city,6
 "Dover, N.H.",,Dover,NH,USA,43.18636,-70.883623,census,city,6
+"Dracut, Mass.",,Dracut,MA,USA,42.679723,-71.30068,census,city,6
 "Dumas, Ark.",,Dumas,AR,USA,33.883372,-91.485632,census,city,6
 "East Brunswick, N.J.",,East Brunswick,NJ,USA,40.426249,-74.418244,census,city,6
 "East Lake, Fla.",,East Lake,FL,USA,28.122877,-82.689096,census,city,6
@@ -3636,6 +3633,7 @@ Fort Lauderdale,,Fort Lauderdale,,,26.141227,-80.146731,census_guess_FL,city_gue
 Gilbert,,Gilbert,,,33.310345,-111.743121,census_guess_AZ,city_guess,6
 Gilbert,BYU,Gilbert,AZ,USA,33.310345,-111.743121,census_guess_AZ,city_guess,6
 "Gilbert, S.C.",,Gilbert,SC,USA,33.924111,-81.391042,census,city,6
+"Glastonbury, CT",,Glastonbury,CT,USA,41.691883,-72.552173,census,city,6
 "Glen Cove, N.Y.",,Glen Cove,NY,USA,40.884756,-73.644781,census,city,6
 "Glen Ellyn, IL",,Glen Ellyn,IL,USA,41.866715,-88.062711,census,city,6
 "Glen Ridge, N.J.",,Glen Ridge,NJ,USA,40.804798,-74.204569,census,city,6
@@ -3778,6 +3776,7 @@ Katy,,Katy,,,29.790915,-95.840711,census_guess_TX,city_guess,6
 "Muenster, TX",,Muenster,TX,USA,33.653029,-97.375693,census,city,6
 "Mukilteo, Wash.",,Mukilteo,WA,USA,47.912991,-122.302205,census,city,6
 "Munster, Ind.",,Munster,IN,USA,41.54691,-87.504589,census,city,6
+"Naperville, IL",,Naperville,IL,USA,41.749173,-88.162019,census,city,6
 "Nashville, Tenn",,Nashville,TN,USA,36.1718,-86.785002,census,city,6
 "Needville, Texas",,Needville,TX,USA,29.394952,-95.838154,census,city,6
 "Nettleton, Miss.",,Nettleton,MS,USA,34.08307,-88.626297,census,city,6
@@ -3801,7 +3800,6 @@ Katy,,Katy,,,29.790915,-95.840711,census_guess_TX,city_guess,6
 "Odenton, Md.",,Odenton,MD,USA,39.06614,-76.693788,census,city,6
 "Ogden, UT",,Ogden,UT,USA,41.228391,-111.968147,census,city,6
 "Okeechobee, Fla.",,Okeechobee,FL,USA,27.241608,-80.829311,census,city,6
-"Olathe, KS",,Olathe,KS,USA,38.882031,-94.820054,census,city,6
 "Old Hickory, Tenn.",,Old Hickory,TN,USA,36.2597753,-86.6477741,usgs,city,6
 "Olympia Fields, Ill.",,Olympia Fields,IL,USA,41.521996,-87.691648,census,city,6
 "Opa-locka, Fla.",,Opa-locka,FL,USA,25.899998,-80.255219,census,city,6
@@ -3830,7 +3828,6 @@ Orem,BYU,Orem,UT,USA,40.298065,-111.699445,census_guess_UT,city_guess,6
 Plymouth,,Plymouth,,,45.022312,-93.462883,census_guess_MN,city_guess,6
 "Plymouth, Mass.",,Plymouth,MA,USA,41.958343,-70.6638,census,city,6
 "Pocatello, ID",,Pocatello,ID,USA,42.872748,-112.463836,census,city,6
-"Ponte Vedra, FL",,Ponte Vedra,FL,USA,30.2396865,-81.3856384,usgs,city,6
 "Port Arthur, TX",,Port Arthur,TX,USA,29.900008,-93.89442,census,city,6
 "Portage, Ind.",,Portage,IN,USA,41.591612,-87.178939,census,city,6
 "Portsmouth, VA",,Portsmouth,VA,USA,36.859339,-76.356973,census,city,6
@@ -3941,6 +3938,7 @@ Prior Lake,St. Thomas (MN),Prior Lake,MN,USA,44.725594,-93.440877,census_guess_M
 "Williston, Fla.",,Williston,FL,USA,29.393879,-82.442308,census,city,6
 "Williston, S.C.",,Williston,SC,USA,33.401663,-81.421899,census,city,6
 "Wilmington, DE",,Wilmington,DE,USA,39.735651,-75.532104,census,city,6
+"Wilmington, Mass.",,Wilmington,MA,USA,42.564647,-71.164516,census,city,6
 "Winnfield, La.",,Winnfield,LA,USA,31.923969,-92.642475,census,city,6
 Winston-Salem,,Winston-Salem,,,36.102863,-80.260829,census_guess_NC,city_guess,6
 "Winter Park, FL",,Winter Park,FL,USA,28.59663,-81.345748,census,city,6
@@ -4136,13 +4134,11 @@ Fontana,BYU,Fontana,CA,USA,34.109686,-117.462888,census_guess_CA,city_guess,5
 "Fort Mitchell, Ala.",,Fort Mitchell,AL,USA,32.341536,-85.0215983,usgs,city,5
 "Fort Mitchell, Ky.",,Fort Mitchell,KY,USA,39.045546,-84.556154,census,city,5
 "Fort Morgan, Colo.",,Fort Morgan,CO,USA,40.253003,-103.788652,census,city,5
-"Fort Washington, Pa.",,Fort Washington,PA,USA,40.140762,-75.192575,census,city,5
 "Frankenmuth, Mich.",,Frankenmuth,MI,USA,43.332832,-83.739129,census,city,5
 "Franklin Park, N.J.",,Franklin Park,NJ,USA,40.444632,-74.542041,census,city,5
 "Franklin Square, N.Y.",,Franklin Square,NY,USA,40.700193,-73.677478,census,city,5
 "Franklin Township, N.J.",,Franklin Township,NJ,USA,41.108997,-74.588641,census,city,5
 "Franklin, Ky.",,Franklin,KY,USA,36.718029,-86.557576,census,city,5
-"Franklin, NJ",,Franklin,NJ,USA,41.108997,-74.588641,census,city,5
 "Frankston, Texas",,Frankston,TX,USA,32.057293,-95.504501,census,city,5
 "Ft. Lauderdale, FL",,Ft. Lauderdale,FL,USA,26.141227,-80.146731,census,city,5
 "Ft. Washington, Md.",,Ft. Washington,MD,USA,38.731868,-77.008662,census,city,5
@@ -4286,7 +4282,6 @@ Los Angeles,,Los Angeles,,,34.019394,-118.410825,census_guess_CA,city_guess,5
 "Mahomet, Ill.",,Mahomet,IL,USA,40.190133,-88.389515,census,city,5
 "Mahopac, N.Y.",,Mahopac,NY,USA,41.369734,-73.74069,census,city,5
 "Manasquan, N.J.",,Manasquan,NJ,USA,40.112421,-74.038159,census,city,5
-"Manassas, VA",,Manassas,VA,USA,38.746808,-77.482633,census,city,5
 "Mandeville, LA",,Mandeville,LA,USA,30.376735,-90.101067,census,city,5
 "Manning, S.C.",,Manning,SC,USA,33.693323,-80.216761,census,city,5
 "Manti, UT",,Manti,UT,USA,39.26647,-111.635327,census,city,5
@@ -4377,6 +4372,7 @@ Maple Grove,St. Thomas (MN),Maple Grove,MN,USA,45.112764,-93.462975,census_guess
 "Ocean Township, N.J.",,Ocean Township,NJ,USA,40.254412,-74.031937,census,city,5
 "Oceanport, N.J.",,Oceanport,NJ,USA,40.316012,-74.020479,census,city,5
 "Odessa, TX",,Odessa,TX,USA,31.880461,-102.345314,census,city,5
+"Olathe, KS",,Olathe,KS,USA,38.882031,-94.820054,census,city,5
 "Old Bridge, NJ",,Old Bridge,NJ,USA,40.395367,-74.331185,census,city,5
 "Old Tappan, N.J.",,Old Tappan,NJ,USA,41.023305,-73.984223,census,city,5
 "Oro Valley, Ariz.",,Oro Valley,AZ,USA,32.420713,-110.977,census,city,5
@@ -4417,6 +4413,7 @@ Maple Grove,St. Thomas (MN),Maple Grove,MN,USA,45.112764,-93.462975,census_guess
 Plymouth,St. Thomas (MN),Plymouth,MN,USA,45.022312,-93.462883,census_guess_MN,city_guess,5
 "Plymouth, Ind.",,Plymouth,IN,USA,41.34877,-86.319336,census,city,5
 "Point Pleasant, N.J.",,Point Pleasant,NJ,USA,40.077748,-74.069921,census,city,5
+"Ponte Vedra, FL",,Ponte Vedra,FL,USA,30.2396865,-81.3856384,usgs,city,5
 "Port Sulphur, La.",,Port Sulphur,LA,USA,29.504507,-89.721978,census,city,5
 "Porter, Texas",,Porter,TX,USA,30.1024397,-95.2296553,usgs,city,5
 "Pottsville, Pa.",,Pottsville,PA,USA,40.679854,-76.20921,census,city,5
@@ -4880,6 +4877,7 @@ Edina,St. Thomas (MN),Edina,MN,USA,44.891123,-93.359752,census_guess_MN,city_gue
 "Fort Collins, CO",,Fort Collins,CO,USA,40.548216,-105.064833,census,city,4
 "Fort Meade, Md.",,Fort Meade,MD,USA,39.1057,-76.743278,census,city,4
 "Fort Meyers, Fla.",,Fort Meyers,FL,USA,26.61982,-81.831673,census,city,4
+"Fort Washington, Pa.",,Fort Washington,PA,USA,40.140762,-75.192575,census,city,4
 "Fountain Hills, Ariz.",,Fountain Hills,AZ,USA,33.607799,-111.738398,census,city,4
 "Foxborough, Mass.",,Foxborough,MA,USA,42.064024,-71.248401,census,city,4
 "Frackville, Pa.",,Frackville,PA,USA,40.783315,-76.232931,census,city,4
@@ -4887,6 +4885,7 @@ Edina,St. Thomas (MN),Edina,MN,USA,44.891123,-93.359752,census_guess_MN,city_gue
 "Franklin, Mich.",,Franklin,MI,USA,42.518759,-83.303027,census,city,4
 "Franklin, N.C.",,Franklin,NC,USA,35.179422,-83.380691,census,city,4
 "Franklin, N.J.",,Franklin,NJ,USA,41.108997,-74.588641,census,city,4
+"Franklin, NJ",,Franklin,NJ,USA,41.108997,-74.588641,census,city,4
 "Franklin, Ohio",,Franklin,OH,USA,39.554951,-84.295728,census,city,4
 "Freehold, NJ",,Freehold,NJ,USA,40.260219,-74.275884,census,city,4
 "Freeport, Fla.",,Freeport,FL,USA,30.498517,-86.131349,census,city,4
@@ -5092,6 +5091,7 @@ Knightdale,East Carolina,Knightdale,NC,USA,35.791726,-78.496457,census_guess_NC,
 "Malden, MA",,Malden,MA,USA,42.42938,-71.058706,census,city,4
 "Malden, Mo.",,Malden,MO,USA,36.601,-89.997512,census,city,4
 "Malvern, Ark.",,Malvern,AR,USA,34.373579,-92.82125,census,city,4
+"Manassas, VA",,Manassas,VA,USA,38.746808,-77.482633,census,city,4
 "Manchester, England",,Manchester,,England,53.4424618,-2.2324547,nominatim,city,4
 "Manchester, NH",,Manchester,NH,USA,42.984941,-71.444131,census,city,4
 "Mandan, N.D.",,Mandan,ND,USA,46.829484,-100.88706,census,city,4
@@ -5184,7 +5184,6 @@ Minneapolis,St. Thomas (MN),Minneapolis,MN,USA,44.963324,-93.26832,census_guess_
 "Nevada, Iowa",,Nevada,IA,USA,42.01749,-93.469674,census,city,4
 "New Hartford, Conn.",,New Hartford,CT,USA,41.841053,-72.998664,census,city,4
 "New London, Texas",,New London,TX,USA,32.269395,-94.929777,census,city,4
-"New Market, MD",,New Market,MD,USA,39.39142,-77.273431,census,city,4
 "New Milford, Conn.",,New Milford,CT,USA,41.580295,-73.403934,census,city,4
 New Orleans,,New Orleans,,,30.05342,-89.934502,census_guess_LA,city_guess,4
 "New Orleans, La. / Edna Karr HS",,New Orleans,LA,USA,30.05342,-89.934502,census,city,4
@@ -5362,7 +5361,6 @@ Sandy,BYU,Sandy,UT,USA,40.571714,-111.84987,census_guess_UT,city_guess,4
 "Selma, Texas",,Selma,TX,USA,29.586474,-98.315286,census,city,4
 "Severn, MD",,Severn,MD,USA,39.13549,-76.6956,census,city,4
 "Sewell, NJ",,Sewell,NJ,USA,39.769203,-75.144697,census,city,4
-"Sharon Hill, PA",,Sharon Hill,PA,USA,39.907433,-75.267787,census,city,4
 "Sharon Hill, Pa.",,Sharon Hill,PA,USA,39.907433,-75.267787,census,city,4
 "Sharpsburg, GA",,Sharpsburg,GA,USA,33.337111,-84.650911,census,city,4
 "Sharpsville, Pa.",,Sharpsville,PA,USA,41.259039,-80.481813,census,city,4
@@ -5802,7 +5800,6 @@ Clemmons,East Carolina,Clemmons,NC,USA,36.033223,-80.386699,census_guess_NC,city
 "College Grove, Tenn.",,College Grove,TN,USA,35.788399,-86.6744409,usgs,city,3
 "Collinsville, OK",,Collinsville,OK,USA,36.369263,-95.861756,census,city,3
 "Colonia, N.J.",,Colonia,NJ,USA,40.589329,-74.311415,census,city,3
-"Colonia, NJ",,Colonia,NJ,USA,40.589329,-74.311415,census,city,3
 "Colonial Beach, Va.",,Colonial Beach,VA,USA,38.264407,-76.993729,census,city,3
 "Columbia Falls, Mont.",,Columbia Falls,MT,USA,48.371476,-114.191834,census,city,3
 "Columbus, Oh.",,Columbus,OH,USA,39.983938,-82.984882,census,city,3
@@ -5937,7 +5934,6 @@ Delano,St. Thomas (MN),Delano,MN,USA,45.038266,-93.793012,census_guess_MN,city_g
 "Elmore, Ohio",,Elmore,OH,USA,41.470091,-83.292551,census,city,3
 "Elmsford, N.Y.",,Elmsford,NY,USA,41.054114,-73.814325,census,city,3
 "Elmwood Park, Ill.",,Elmwood Park,IL,USA,41.922458,-87.816321,census,city,3
-"Emerson, NJ",,Emerson,NJ,USA,40.97499,-74.023248,census,city,3
 "Eminence, Ky.",,Eminence,KY,USA,38.363687,-85.176904,census,city,3
 "Endwell, NY",,Endwell,NY,USA,42.122864,-76.023572,census,city,3
 "Enfield, Conn.",,Enfield,CT,USA,41.983993,-72.555553,census,city,3
@@ -6461,6 +6457,7 @@ Missouri City,Rice,Missouri City,TX,USA,29.562944,-95.535999,census_guess_TX,cit
 "New Hartford, N.Y.",,New Hartford,NY,USA,43.071038,-75.288618,census,city,3
 "New Hebron, Miss.",,New Hebron,MS,USA,31.733219,-89.983326,census,city,3
 "New Lothrop, Mich.",,New Lothrop,MI,USA,43.117275,-83.968974,census,city,3
+"New Market, MD",,New Market,MD,USA,39.39142,-77.273431,census,city,3
 "New Oxford, Pa.",,New Oxford,PA,USA,39.863001,-77.055477,census,city,3
 "New Westminster, B.C.",,New Westminster,BC,Canada,49.2067726,-122.9108818,nominatim,city,3
 "Newbern, Tenn.",,Newbern,TN,USA,36.116881,-89.271363,census,city,3
@@ -6730,6 +6727,7 @@ Saratoga Springs,BYU,Saratoga Springs,UT,USA,40.344608,-111.915893,census_guess_
 "Shallowater, Texas",,Shallowater,TX,USA,33.690077,-101.989265,census,city,3
 "Shannon, Miss.",,Shannon,MS,USA,34.114416,-88.693131,census,city,3
 "Sharon Center, Ohio",,Sharon Center,OH,USA,41.096045,-81.739294,census,city,3
+"Sharon Hill, PA",,Sharon Hill,PA,USA,39.907433,-75.267787,census,city,3
 "Shawnee, OK",,Shawnee,OK,USA,35.369413,-96.956408,census,city,3
 "Sheffield Lake, Ohio",,Sheffield Lake,OH,USA,41.488347,-82.097859,census,city,3
 "Shelby, Ohio",,Shelby,OH,USA,40.885138,-82.658308,census,city,3
@@ -7471,6 +7469,7 @@ Cleveland,Ohio State,Cleveland,OH,USA,41.478462,-81.679435,census_guess_OH,city_
 "Cold Spring Harbor, N.Y.",,Cold Spring Harbor,NY,USA,40.864322,-73.456406,census,city,2
 "College Park, Md.",,College Park,MD,USA,38.996276,-76.935594,census,city,2
 "Collins, MS",,Collins,MS,USA,31.648272,-89.567581,census,city,2
+"Colonia, NJ",,Colonia,NJ,USA,40.589329,-74.311415,census,city,2
 "Colony, Ala.",,Colony,AL,USA,33.941393,-86.902001,census,city,2
 "Colquitt, Ga.",,Colquitt,GA,USA,31.173215,-84.732379,census,city,2
 "Colton, Calif.",,Colton,CA,USA,34.054525,-117.325029,census,city,2
@@ -7734,11 +7733,11 @@ Ellensburg,BYU,Ellensburg,WA,USA,47.000124,-120.54954,census_guess_WA,city_guess
 "Elmore, Ala.",,Elmore,AL,USA,32.556606,-86.341025,census,city,2
 "Elon, NC",,Elon,NC,USA,36.102266,-79.508787,census,city,2
 "Elysian Fields, Texas",,Elysian Fields,TX,USA,32.3684895,-94.1829688,usgs,city,2
+"Emerson, NJ",,Emerson,NJ,USA,40.97499,-74.023248,census,city,2
 "Empire, Mich.",,Empire,MI,USA,44.812606,-86.059268,census,city,2
 "Emporia, Kan.",,Emporia,KS,USA,38.40186,-96.191654,census,city,2
 "Emporia, Va.",,Emporia,VA,USA,36.696182,-77.535975,census,city,2
 "England, Ark.",,England,AR,USA,34.545431,-91.967442,census,city,2
-"Englewood Cliffs, NJ",,Englewood Cliffs,NJ,USA,40.884634,-73.944654,census,city,2
 "Englewood, Tenn.",,Englewood,TN,USA,35.422852,-84.488274,census,city,2
 "Englishtown, NJ",,Englishtown,NJ,USA,40.296141,-74.359584,census,city,2
 "Enola, Pa.",,Enola,PA,USA,40.290604,-76.935497,census,city,2
@@ -8063,7 +8062,6 @@ Henderson,East Carolina,Henderson,GA,USA,32.00705,-81.266602,census_guess_GA,cit
 "Herrin, Ill.",,Herrin,IL,USA,37.798389,-89.03065,census,city,2
 "Hershey, PA",,Hershey,PA,USA,40.28001,-76.644328,census,city,2
 "Hesperia, California",,Hesperia,CA,USA,34.397038,-117.315198,census,city,2
-"Hewlett, NY",,Hewlett,NY,USA,40.641996,-73.694393,census,city,2
 "Heyburn, ID",,Heyburn,ID,USA,42.559982,-113.762067,census,city,2
 "Hialeah Gardens, Fla.",,Hialeah Gardens,FL,USA,25.887713,-80.356925,census,city,2
 "Hickory Hills, Ill.",,Hickory Hills,IL,USA,41.724778,-87.828005,census,city,2
@@ -8681,7 +8679,6 @@ Moorpark,BYU,Moorpark,CA,USA,34.285942,-118.87704,census_guess_CA,city_guess,2
 "Moundsview, Minn.",,Moundsview,MN,USA,45.106737,-93.206834,census,city,2
 "Mount Carmel, Pa.",,Mount Carmel,PA,USA,40.795904,-76.411997,census,city,2
 "Mount Enterprise, Texas",,Mount Enterprise,TX,USA,31.911639,-94.682767,census,city,2
-"Mount Laurel, NJ",,Mount Laurel,NJ,USA,39.948992,-74.900247,census,city,2
 "Mount Olive, Miss.",,Mount Olive,MS,USA,31.753807,-89.655945,census,city,2
 "Mount Olive, N.C.",,Mount Olive,NC,USA,35.199807,-78.066131,census,city,2
 "Mount Olive, NJ",,Mount Olive,NJ,USA,40.865597,-74.74193,census,city,2
@@ -8752,7 +8749,6 @@ New Bern,East Carolina,New Bern,NC,USA,35.096688,-77.072641,census_guess_NC,city
 "New London, Iowa",,New London,IA,USA,40.922919,-91.400663,census,city,2
 "New Madrid, Mo.",,New Madrid,MO,USA,36.586409,-89.551222,census,city,2
 New Orleans,Florida,New Orleans,LA,USA,30.05342,-89.934502,census_guess_LA,city_guess,2
-"New Oxford, PA",,New Oxford,PA,USA,39.863001,-77.055477,census,city,2
 "New Paltz, N.Y.",,New Paltz,NY,USA,41.749942,-74.079738,census,city,2
 "New Plymouth, Idaho",,New Plymouth,ID,USA,43.970417,-116.818781,census,city,2
 "New Providence, NJ",,New Providence,NJ,USA,40.69889,-74.406623,census,city,2
@@ -8762,7 +8758,6 @@ New Orleans,Florida,New Orleans,LA,USA,30.05342,-89.934502,census_guess_LA,city_
 "New Washington, Ohio",,New Washington,OH,USA,40.960406,-82.854643,census,city,2
 "New Windsor, NY",,New Windsor,NY,USA,41.46983,-74.031832,census,city,2
 "New York, New York",,New York,NY,USA,40.662712,-73.938677,census,city,2
-"Newark Valley, N.Y.",,Newark Valley,NY,USA,42.222905,-76.186776,census,city,2
 "Newark, Calif.",,Newark,CA,USA,37.504253,-122.03191,census,city,2
 "Newark, OH",,Newark,OH,USA,40.071503,-82.424221,census,city,2
 "Newark, Texas",,Newark,TX,USA,33.013542,-97.488418,census,city,2
@@ -8804,7 +8799,6 @@ Nicollet,St. Thomas (MN),Nicollet,MN,USA,44.274615,-94.188069,census_guess_MN,ci
 "North Logan, Utah",,North Logan,UT,USA,41.775541,-111.806654,census,city,2
 "North Mankato, Minn.",,North Mankato,MN,USA,44.182714,-94.041128,census,city,2
 "North Miami Beach, FL",,North Miami Beach,FL,USA,25.929996,-80.165179,census,city,2
-"North Oaks, Minn.",,North Oaks,MN,USA,45.10484,-93.101065,census,city,2
 "North Potomac, Md.",,North Potomac,MD,USA,39.09677,-77.238503,census,city,2
 "North Salt Lake, UT",,North Salt Lake,UT,USA,40.847116,-111.91878,census,city,2
 "North Sioux City, S.D.",,North Sioux City,SD,USA,42.535885,-96.494717,census,city,2
@@ -8853,7 +8847,6 @@ Ogden,BYU,Ogden,UT,USA,41.228391,-111.968147,census_guess_UT,city_guess,2
 "Oglethorpe, Ga.",,Oglethorpe,GA,USA,32.293176,-84.062807,census,city,2
 "Okinawa, Japan",,Okinawa,,Japan,26.5707754,128.0255901,nominatim,city,2
 "Okmulgee, Okla.",,Okmulgee,OK,USA,35.625162,-95.954032,census,city,2
-"Old Forge, Pa.",,Old Forge,PA,USA,41.370426,-75.7409,census,city,2
 "Old Greenwich, Conn.",,Old Greenwich,CT,USA,41.020119,-73.567675,census,city,2
 "Old Lyme, Conn.",,Old Lyme,CT,USA,41.31232,-72.305742,census,city,2
 "Old Saybrook, Conn.",,Old Saybrook,CT,USA,41.293504,-72.383594,census,city,2
@@ -9806,7 +9799,6 @@ Winterville,East Carolina,Winterville,GA,USA,33.966635,-83.281558,census_guess_G
 "Woodburn, Ore.",,Woodburn,OR,USA,45.147152,-122.861162,census,city,2
 "Woodbury, Ga.",,Woodbury,GA,USA,32.985218,-84.582015,census,city,2
 "Woodbury, NJ",,Woodbury,NJ,USA,39.837906,-75.15153,census,city,2
-"Woodbury, NY",,Woodbury,NY,USA,41.327541,-74.102111,census,city,2
 "Woodbury, Tenn.",,Woodbury,TN,USA,35.82473,-86.072434,census,city,2
 "Woodcliff Lake, N.J.",,Woodcliff Lake,NJ,USA,41.025977,-74.061061,census,city,2
 "Woodland Hills, CA",,Woodland Hills,CA,USA,34.1683386,-118.6059197,usgs,city,2
@@ -12287,6 +12279,7 @@ Ellenboro,East Carolina,Ellenboro,NC,USA,35.330878,-81.761274,census_guess_NC,ci
 "Enfield, CT",,Enfield,CT,USA,41.983993,-72.555553,census,city,1
 "Enfield, N.C.",,Enfield,NC,USA,36.179924,-77.669023,census,city,1
 "Engelhard, NC",,Engelhard,NC,USA,35.509235,-76.00946,census,city,1
+"Englewood Cliffs, NJ",,Englewood Cliffs,NJ,USA,40.884634,-73.944654,census,city,1
 "Englewood, Col.",,Englewood,CO,USA,39.646979,-104.994465,census,city,1
 "Englewood, Fla.",,Englewood,FL,USA,26.96868,-82.347886,census,city,1
 "Enka, N.C.",,Enka,NC,USA,35.5498322,-82.6501279,usgs,city,1
@@ -13290,6 +13283,7 @@ Henderson,BYU,Henderson,TX,USA,32.157256,-94.795898,census_guess_TX,city_guess,1
 "Hewitt, NJ",,Hewitt,NJ,USA,41.176196,-74.324789,census,city,1
 "Hewitt, TX",,Hewitt,TX,USA,31.451248,-97.193315,census,city,1
 "Hewitt, Texas",,Hewitt,TX,USA,31.451248,-97.193315,census,city,1
+"Hewlett, NY",,Hewlett,NY,USA,40.641996,-73.694393,census,city,1
 "Heyworth, Ill.",,Heyworth,IL,USA,40.314356,-88.992276,census,city,1
 "Hiawatha, Iowa",,Hiawatha,IA,USA,42.056054,-91.689939,census,city,1
 "Hiawatha, Kan.",,Hiawatha,KS,USA,39.85166,-95.537789,census,city,1
@@ -15295,6 +15289,7 @@ Mound,St. Thomas (MN),Mound,MN,USA,44.93196,-93.658302,census_guess_MN,city_gues
 "Mount Horeb, Wis",,Mount Horeb,WI,USA,43.005999,-89.731575,census,city,1
 "Mount Horeb, Wisc.",,Mount Horeb,WI,USA,43.005999,-89.731575,census,city,1
 "Mount Kisco, N.Y.",,Mount Kisco,NY,USA,41.201696,-73.728258,census,city,1
+"Mount Laurel, NJ",,Mount Laurel,NJ,USA,39.948992,-74.900247,census,city,1
 "Mount Macedon, Victoria AU",,Mount Macedon,,,-37.3902615,144.5907413,nominatim,city,1
 "Mount Olive, Ala.",,Mount Olive,AL,USA,33.078454,-86.13304,census,city,1
 "Mount Olive, N.J.",,Mount Olive,NJ,USA,40.865597,-74.74193,census,city,1
@@ -15514,6 +15509,7 @@ New Orleans,Nicholls,New Orleans,LA,USA,30.05342,-89.934502,census_guess_LA,city
 "New Orleans, La. / St. Augustine HS",,New Orleans,LA,USA,30.05342,-89.934502,census,city,1
 "New Orleans, Louisianna",,New Orleans,LA,USA,30.05342,-89.934502,census,city,1
 "New Orleans,LA",,New Orleans,LA,USA,30.05342,-89.934502,census,city,1
+"New Oxford, PA",,New Oxford,PA,USA,39.863001,-77.055477,census,city,1
 "New Oxford, PA.",,New Oxford,PA,USA,39.863001,-77.055477,census,city,1
 "New Paris, Pa.",,New Paris,PA,USA,40.108408,-78.643067,census,city,1
 "New Port Richey, FLA",,New Port Richey,FL,USA,28.246638,-82.717502,census,city,1
@@ -15535,6 +15531,7 @@ New Prague,St. Thomas (MN),New Prague,MN,USA,44.545738,-93.575595,census_guess_M
 "New Westminster, British Columbia",,New Westminster,BC,Canada,49.2067726,-122.9108818,nominatim,city,1
 "New Windsor, Md.",,New Windsor,MD,USA,39.54295,-77.099157,census,city,1
 "New York, NY. / Fresno City CC",,New York,NY,USA,40.662712,-73.938677,census,city,1
+"Newark Valley, N.Y.",,Newark Valley,NY,USA,42.222905,-76.186776,census,city,1
 "Newark, CA",,Newark,CA,USA,37.504253,-122.03191,census,city,1
 "Newark, Delaware",,Newark,DE,USA,39.677649,-75.757479,census,city,1
 "Newark, N.J",,Newark,NJ,USA,40.72422,-74.172574,census,city,1
@@ -15683,6 +15680,7 @@ North Little Rock,Arkansas-Pine Bluff,North Little Rock,AR,USA,34.781752,-92.235
 "North Myrtle Beach, SC",,North Myrtle Beach,SC,USA,33.82196,-78.702982,census,city,1
 "North Oaks, MInn.",,North Oaks,MN,USA,45.10484,-93.101065,census,city,1
 "North Oaks, MN",,North Oaks,MN,USA,45.10484,-93.101065,census,city,1
+"North Oaks, Minn.",,North Oaks,MN,USA,45.10484,-93.101065,census,city,1
 "North Olmsted, OH",,North Olmsted,OH,USA,41.414929,-81.919131,census,city,1
 "North Omaha, Nebraska",,North Omaha,NE,USA,41.2983794,-95.967882,nominatim,city,1
 "North Philadelphia, Pa.",,North Philadelphia,PA,USA,39.9939397,-75.154563,nominatim,city,1
@@ -15832,6 +15830,7 @@ Odessa. Texas,,Odessa.,TX,USA,31.880461,-102.345314,census,city,1
 "Olathe, Kansas",,Olathe,KS,USA,38.882031,-94.820054,census,city,1
 "Old Bethpage, N.Y.",,Old Bethpage,NY,USA,40.750823,-73.458396,census,city,1
 "Old Brookville, N.Y.",,Old Brookville,NY,USA,40.83647,-73.605108,census,city,1
+"Old Forge, Pa.",,Old Forge,PA,USA,41.370426,-75.7409,census,city,1
 "Old Greenwich, CT",,Old Greenwich,CT,USA,41.020119,-73.567675,census,city,1
 "Old Greenwich, CT.",,Old Greenwich,CT,USA,41.020119,-73.567675,census,city,1
 "Old Hickory, TN",,Old Hickory,TN,USA,36.2597753,-86.6477741,usgs,city,1
@@ -18760,6 +18759,7 @@ Winston-Salem,Elon,Winston-Salem,NC,USA,36.102863,-80.260829,census_guess_NC,cit
 "Woodburn, Ind.",,Woodburn,IN,USA,41.128114,-84.850513,census,city,1
 "Woodbury Heights, NJ",,Woodbury Heights,NJ,USA,39.81329,-75.15065,census,city,1
 "Woodbury, N.Y.",,Woodbury,NY,USA,41.327541,-74.102111,census,city,1
+"Woodbury, NY",,Woodbury,NY,USA,41.327541,-74.102111,census,city,1
 "Woodford, Va.",,Woodford,VA,USA,38.1131886,-77.4088708,usgs,city,1
 "Woodland Hills, California",,Woodland Hills,CA,USA,34.1683386,-118.6059197,usgs,city,1
 "Woodland Park, NJ",,Woodland Park,NJ,USA,40.889855,-74.194356,census,city,1

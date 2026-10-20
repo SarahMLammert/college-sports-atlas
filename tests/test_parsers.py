@@ -235,3 +235,12 @@ def test_staff_table_with_hometown_column_ignored():
       <tbody><tr><td>Sam Boss</td><td>Head Coach</td><td>Tulsa, Okla.</td></tr></tbody></table>"""
     _, out = parse_roster(html)
     assert out == []
+
+
+def test_clean_name_strips_numbers_and_captain_marks():
+    from scrape_rosters import clean_name
+    for raw in ("89 Mason Thomas", "#89 Mason Thomas", "Mason Thomas 89", "C Mason Thomas", "C 89 Mason Thomas",
+                "Mason Thomas (C)", "Mason Thomas ©", "Mason Thomas*", "Mason Thomas Mason Thomas"):
+        assert clean_name(raw) == "Mason Thomas", raw
+    for keep in ("C.J. Stroud", "CJ Stroud", "C J Stroud", "Charles Woodson", "Tre' Harbison"):
+        assert clean_name(keep) == keep, keep

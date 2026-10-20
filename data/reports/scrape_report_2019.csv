@@ -220,9 +220,9 @@ season,school,division,current_conference,status,season_check,strategy,players,w
 2019,San Diego,FCS,Pioneer,ok,verified,sidearm_classic,92,92,https://usdtoreros.com/sports/football/roster/2019,
 2019,St. Thomas (MN),D3,Pioneer,ok,verified,nuxt_data,148,146,https://tommiesports.com/sports/football/roster/2019,
 2019,Stetson,FCS,Pioneer,ok,verified,sidearm_classic,117,117,https://gohatters.com/sports/football/roster/2019,
-2019,Valparaiso,FCS,Pioneer,partial,verified,sidearm_classic,89,35,https://valpoathletics.com/sports/football/roster/2019-20,https://valpoathletics.com/sports/football/roster/2019: redirected to https://valpoathletics.com/sports/football/roster; https://valpoathletics.com/sports/football/roster/season/2019/: RetryError
+2019,Valparaiso,FCS,Pioneer,partial,verified,sidearm_classic,89,35,https://valpoathletics.com/sports/football/roster/2019-20,
 2019,Chattanooga,FCS,SoCon,ok,verified,nuxt_data,92,92,https://gomocs.com/sports/football/roster/2019,
-2019,East Tennessee State,FCS,SoCon,partial,verified,sidearm_classic,104,10,https://etsubucs.com/sports/football/roster/2019-20,https://etsubucs.com/sports/football/roster/2019: redirected to https://etsubucs.com/sports/football/roster; https://etsubucs.com/sports/football/roster/season/2019/: redirected to https://etsubucs.com/sports/mens-golf/roster/tom-heggarty/2058
+2019,East Tennessee State,FCS,SoCon,partial,verified,sidearm_classic,104,10,https://etsubucs.com/sports/football/roster/2019-20,
 2019,Furman,FCS,SoCon,ok,verified,sidearm_classic,96,96,https://furmanpaladins.com/sports/football/roster/2019,
 2019,Mercer,FCS,SoCon,ok,verified,nuxt_data,104,103,https://mercerbears.com/sports/football/roster/2019,
 2019,Samford,FCS,SoCon,ok,verified,nuxt_data,119,119,https://samfordsports.com/sports/football/roster/2019,

@@ -220,9 +220,9 @@ season,school,division,current_conference,status,season_check,strategy,players,w
 2018,San Diego,FCS,Pioneer,ok,verified,sidearm_classic,93,93,https://usdtoreros.com/sports/football/roster/2018,
 2018,St. Thomas (MN),D3,Pioneer,ok,verified,nuxt_data,134,134,https://tommiesports.com/sports/football/roster/2018,
 2018,Stetson,FCS,Pioneer,ok,verified,sidearm_classic,95,95,https://gohatters.com/sports/football/roster/2018,
-2018,Valparaiso,FCS,Pioneer,partial,verified,sidearm_classic,108,18,https://valpoathletics.com/sports/football/roster/2018-19,https://valpoathletics.com/sports/football/roster/2018: redirected to https://valpoathletics.com/sports/football/roster; https://valpoathletics.com/sports/football/roster/season/2018/: RetryError
+2018,Valparaiso,FCS,Pioneer,partial,verified,sidearm_classic,108,18,https://valpoathletics.com/sports/football/roster/2018-19,
 2018,Chattanooga,FCS,SoCon,ok,verified,nuxt_data,102,102,https://gomocs.com/sports/football/roster/2018,
-2018,East Tennessee State,FCS,SoCon,partial,verified,sidearm_classic,103,1,https://etsubucs.com/sports/football/roster/2018-19,https://etsubucs.com/sports/football/roster/2018: redirected to https://etsubucs.com/sports/football/roster; https://etsubucs.com/sports/football/roster/season/2018/: page shows 2012
+2018,East Tennessee State,FCS,SoCon,partial,verified,sidearm_classic,103,1,https://etsubucs.com/sports/football/roster/2018-19,
 2018,Furman,FCS,SoCon,ok,verified,sidearm_classic,97,97,https://furmanpaladins.com/sports/football/roster/2018,
 2018,Mercer,FCS,SoCon,ok,verified,nuxt_data,103,102,https://mercerbears.com/sports/football/roster/2018,
 2018,Samford,FCS,SoCon,ok,verified,nuxt_data,129,129,https://samfordsports.com/sports/football/roster/2018,

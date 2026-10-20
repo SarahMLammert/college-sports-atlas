@@ -1006,6 +1006,29 @@ def _undouble(name: str) -> str:
     return name
 
 
+_CAPTAIN = re.compile(r"\(\s*c\s*\)|©|\(\s*captain\s*\)|\s+-\s*captain\b|\*+", re.I)
+
+
+def clean_name(name: str) -> str:
+    """Strip roster decorations from a player's name:
+    '89 Mason Thomas', '#89 Mason Thomas', 'Mason Thomas 89'  -> 'Mason Thomas'
+    'C Mason Thomas', 'C 89 Mason Thomas', 'Mason Thomas (C)', 'Mason Thomas*' -> 'Mason Thomas'
+    'Dami Adekunjo Dami Adekunjo' -> 'Dami Adekunjo'
+    A real initial is kept: 'C.J. Stroud', 'CJ Stroud' and 'C J Stroud' are left alone."""
+    n = clean(_CAPTAIN.sub(" ", name or ""))
+    for _ in range(3):  # markers can be stacked: "C #89 Mason Thomas"
+        before = n
+        n = re.sub(r"^#?\d{1,3}\s+(?=\D)", "", n)               # leading jersey number
+        n = re.sub(r"\s+#?\d{1,3}$", "", n)                       # trailing jersey number
+        words = n.split()
+        # a lone leading "C" is a captain marker when a full name (2+ words, not initials) follows
+        if len(words) >= 3 and words[0] in ("C", "C:", "C.") and len(words[1].strip(".")) > 1:
+            n = " ".join(words[1:])
+        if n == before:
+            break
+    return _undouble(n.strip(" -,"))
+
+
 def tidy_players(players: list[dict]) -> list[dict]:
     for p in players:
         for f in ("position", "class_year", "hometown", "high_school", "previous_school", "height", "weight", "jersey"):
@@ -1014,9 +1037,8 @@ def tidy_players(players: list[dict]) -> list[dict]:
         # A class year is never a hometown ("R-Fr.", "Sophomore", "Gr.")
         if p.get("hometown") and _CLASS_ONLY.fullmatch(p["hometown"].strip()):
             p["hometown"] = ""
-        # "25 Jalyn Williams" -> "Jalyn Williams" (jersey number caught in the name)
-        name = re.sub(r"^#?\d{1,3}\s+(?=[^\d\s])", "", p.get("name", "")).strip()
-        p["name"] = _undouble(name)
+        # "25 Jalyn Williams", "C Mason Thomas", "Mason Thomas (C)" -> the bare name
+        p["name"] = clean_name(p.get("name", ""))
         # Hometown sitting in a school column: "Clinton, Md. / Glen Burnie HS"
         if not p.get("hometown"):
             for f in ("high_school", "previous_school"):
@@ -1443,7 +1465,8 @@ def main(argv=None) -> int:
     combined = [r for r in combined if not is_staff(r)]  # also cleans seasons saved by older versions
     if n_before != len(combined):
         log.info("Dropped %d coach/staff rows from the saved rosters", n_before - len(combined))
-    for r in combined:  # re-parse so hometown-parser fixes also reach seasons scraped earlier
+    for r in combined:  # re-clean so name/hometown fixes also reach seasons scraped earlier
+        r["name"] = clean_name(r.get("name", ""))
         home = parse_hometown(r.get("hometown", ""))
         r["home_city"], r["home_state"], r["home_country"] = home["city"], home["state"], home["country"]
     write_csv(args.out / "rosters_all_seasons.csv", OUT_FIELDS, combined)
