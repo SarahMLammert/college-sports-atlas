@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recruiting Maps</title>
+<script>
+  // Old links to the football dot map (index.html#school=Alabama&...) forward to it;
+  // very old ones that carry compare= go to the heatmap.
+  (function () {
+    var h = location.hash;
+    if (!h || h.indexOf('=') < 0) return;
+    var page = /(^#|&)compare=/.test(h) ? 'players-heatmap.html' : 'players-dotmap.html';
+    location.replace('football/' + page + h);
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --bg: #0E1A2B;
+    --panel: #142640;
+    --ink: #F4F1EA;
+    --muted: #A9B4C4;
+    --dim: #C9D1DC;
+    --line: rgba(244, 241, 234, 0.22);
+    --edge: rgba(244, 241, 234, 0.14);
+    --accent: #F2B544;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: 'Barlow', system-ui, sans-serif; }
+  body { min-height: 100vh; display: flex; flex-direction: column; }
+  .cond { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; text-transform: uppercase; }
+
+  /* ---------- Ring (desktop / tablet) ---------- */
+  #ring-view { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; padding: 32px 16px 16px; }
+  #stage { position: relative; }
+  #ring { position: absolute; left: 0; top: 0; width: 920px; height: 800px; transform-origin: 0 0; }
+  .track { position: absolute; left: 170px; top: 110px; width: 580px; height: 580px; border-radius: 50%; border: 1.5px dashed var(--line); }
+  .center { position: absolute; left: 260px; top: 200px; width: 400px; height: 400px; border-radius: 50%; background: var(--panel); border: 1px solid var(--edge); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px; gap: 6px; }
+  .center .sub { font-size: 14px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); min-height: 17px; }
+  .center .name { font-size: 60px; line-height: 1; }
+  .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; width: 270px; margin-top: 14px; }
+  .stats b { display: block; font-family: 'Barlow Condensed', sans-serif; font-size: 28px; line-height: 1; }
+  .stats span { font-size: 12px; color: var(--muted); }
+  .actions { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; justify-content: center; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: 22px; font-weight: 600; font-size: 15px; text-decoration: none; color: var(--bg); background: var(--accent); border: 1.5px solid var(--accent); }
+  .btn.ghost { background: none; color: var(--ink); border-color: var(--ink); }
+  .btn.off { background: none; color: var(--muted); border: 1.5px dashed rgba(244, 241, 234, 0.35); cursor: default; }
+  a.btn:hover { filter: brightness(1.08); }
+  .pill { display: inline-flex; align-items: center; min-height: 28px; padding: 0 12px; border-radius: 14px; border: 1px solid rgba(244, 241, 234, 0.35); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 12px; }
+  .soon-text { font-size: 15px; line-height: 1.5; color: var(--muted); max-width: 240px; margin-top: 6px; }
+
+  /* Sport discs (ring) and badges (list) share colors */
+  .disc, .badge { border-radius: 50%; border: 1.5px solid rgba(244, 241, 234, 0.35); background: var(--bg); color: var(--muted); display: flex; align-items: center; justify-content: center; }
+  .live > .disc, .live > .pick > .badge, .disc.live { background: var(--panel); border-color: var(--ink); color: var(--ink); }
+  .disc.sel, .sel > .pick > .badge { border-color: var(--accent); color: var(--accent); background: var(--panel); }
+  .disc.live.sel, .live.sel > .pick > .badge { background: var(--accent); color: var(--bg); }
+  .disc { position: absolute; width: 84px; height: 84px; padding: 0; cursor: pointer; font: inherit; }
+  .disc.sel { border-width: 3px; }
+
+  .sat { position: absolute; width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid rgba(244, 241, 234, 0.6); background: var(--bg); color: var(--ink); display: flex; align-items: center; justify-content: center; transition: transform 0.12s ease; }
+  a.sat:hover { transform: scale(1.12); }
+  .sat.off { border: 1.5px dashed rgba(244, 241, 234, 0.3); color: var(--muted); }
+  .sat.sel { border-color: var(--accent); color: var(--accent); }
+  .disc:focus-visible, .sat:focus-visible, .btn:focus-visible, .pick:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+  .label { position: absolute; width: 116px; height: 42px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; pointer-events: none; }
+  .label .n { font-size: 20px; line-height: 1.05; letter-spacing: 0.04em; color: var(--dim); }
+  .label.live .n, .label.sel .n { color: var(--ink); }
+  .label .s { font-size: 13px; line-height: 1.2; color: var(--muted); }
+
+  .legend { display: flex; gap: 28px; align-items: center; font-size: 14px; color: var(--muted); }
+  .legend span { display: inline-flex; align-items: center; gap: 8px; }
+
+  /* ---------- List (phones) ---------- */
+  #list-view { display: none; flex: 1; flex-direction: column; gap: 14px; padding: 20px 16px 24px; width: 100%; max-width: 520px; margin: 0 auto; }
+  .card { border-radius: 16px; background: var(--panel); border: 1px solid var(--edge); padding: 18px; display: flex; flex-direction: column; gap: 10px; min-height: 160px; }
+  .card .head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .card .name { font-size: 34px; line-height: 1; }
+  .card .sub { font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .card .meta { font-size: 15px; color: var(--muted); }
+  .card .actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 2px; }
+  .card .soon-text { max-width: none; margin: 0; }
+  .rows { display: flex; flex-direction: column; gap: 8px; }
+  .row { display: flex; align-items: center; gap: 6px; min-height: 60px; padding: 6px 6px 6px 8px; border-radius: 12px; border: 1px solid rgba(244, 241, 234, 0.18); }
+  .row.sel { border: 2px solid var(--accent); }
+  .pick { flex: 1 1 auto; min-width: 0; display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0; background: none; border: 0; color: var(--ink); font: inherit; text-align: left; cursor: pointer; }
+  .badge { width: 40px; height: 40px; flex: 0 0 40px; }
+  .row .n { font-size: 19px; line-height: 1.05; color: var(--dim); }
+  .row.live .n, .row.sel .n { color: var(--ink); }
+  .row .s { display: block; font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .row .sat { position: static; width: 44px; height: 44px; flex: 0 0 44px; }
+
+  @media (max-width: 700px) {
+    #ring-view { display: none; }
+    #list-view { display: flex; }
+  }
+
+  footer { padding: 20px 24px; border-top: 1px solid rgba(244, 241, 234, 0.12); font-size: 14px; line-height: 1.5; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+
+<main id="ring-view">
+  <div id="stage">
+    <div id="ring">
+      <div class="track" aria-hidden="true"></div>
+      <div class="center" id="center" aria-live="polite"></div>
+    </div>
+  </div>
+  <div class="legend">
+    <span><span class="jersey-icon"></span>Players</span>
+    <span><span class="whistle-icon"></span>Coaches &amp; staff</span>
+  </div>
+</main>
+
+<main id="list-view">
+  <div class="card" id="card" aria-live="polite"></div>
+  <div class="rows" id="rows"></div>
+</main>
+
+<footer>Rosters scraped from each school’s official athletics site.</footer>
+
+<script>
+  // ---- Edit this list as sports come online. ----
+  // players / staff: the page to open, or null for "coming soon".
+  // stats: shown in the middle of the ring when the sport is picked.
+  const SPORTS = [
+    { id: 'football',   name: 'Football',   sub: '',        icon: 'football',
+      players: 'football/players-dotmap.html', staff: null,
+      stats: [['264', 'schools'], ['137K', 'players'], ['11K', 'hometowns']] },
+    { id: 'mbb',        name: 'Basketball', sub: "Men's",   icon: 'basketball', players: null, staff: null },
+    { id: 'wbb',        name: 'Basketball', sub: "Women's", icon: 'basketball', players: null, staff: null },
+    { id: 'baseball',   name: 'Baseball',   sub: '',        icon: 'baseball',   players: null, staff: null },
+    { id: 'softball',   name: 'Softball',   sub: '',        icon: 'softball',   players: null, staff: null },
+    { id: 'volleyball', name: 'Volleyball', sub: "Women's", icon: 'volleyball', players: null, staff: null },
+    { id: 'msoc',       name: 'Soccer',     sub: "Men's",   icon: 'soccer',     players: null, staff: null },
+    { id: 'wsoc',       name: 'Soccer',     sub: "Women's", icon: 'soccer',     players: null, staff: null },
+  ];
+
+  // ---- Icons (40×40 for sports, 24×24 for jersey and whistle) ----
+  const SPORT_ICONS = {
+    football: '<ellipse cx="20" cy="20" rx="16" ry="9.5" transform="rotate(-35 20 20)"/><line x1="15.1" y1="23.4" x2="24.9" y2="16.6"/><line x1="15.3" y1="20.3" x2="18.1" y2="24.3"/><line x1="18.6" y1="18" x2="21.4" y2="22"/><line x1="21.9" y1="15.7" x2="24.7" y2="19.7"/>',
+    basketball: '<circle cx="20" cy="20" r="16"/><line x1="20" y1="4" x2="20" y2="36"/><line x1="4" y1="20" x2="36" y2="20"/><path d="M8.7 8.7C14 14 14 26 8.7 31.3"/><path d="M31.3 8.7C26 14 26 26 31.3 31.3"/>',
+    baseball: '<circle cx="20" cy="20" r="16"/><path d="M10.5 7.5C15.5 13 15.5 27 10.5 32.5"/><path d="M29.5 7.5C24.5 13 24.5 27 29.5 32.5"/><path d="M11.8 12.2l2.8-.8M12.8 20h2.8M11.8 27.8l2.8.8M28.2 12.2l-2.8-.8M27.2 20h-2.8M28.2 27.8l-2.8.8"/>',
+    softball: '<circle cx="20" cy="20" r="16"/><path d="M11 7C17 13 17 27 11 33"/><path d="M29 7C23 13 23 27 29 33"/>',
+    volleyball: '<circle cx="20" cy="20" r="16"/><path d="M20 20C20 12 24 7 30 6.5"/><path d="M20 20C13 24 10 29 10.5 33"/><path d="M20 20C27 24 33 23 36 19"/>',
+    soccer: '<circle cx="20" cy="20" r="16"/><polygon points="20,15 24.8,18.5 22.9,24 17.1,24 15.2,18.5"/><path d="M20 15V4M24.8 18.5l10.4-3.4M22.9 24l6.5 8.9M17.1 24l-6.5 8.9M15.2 18.5L4.8 15.1"/>',
+  };
+  const JERSEY = '<path d="M8 3L4 5.5L2.5 10L5.5 11L6 9.5V21H18V9.5L18.5 11L21.5 10L20 5.5L16 3C15.3 4.6 13.8 5.5 12 5.5C10.2 5.5 8.7 4.6 8 3Z"/>';
+  const WHISTLE = '<path d="M10 8H21V12H15.6A6 6 0 1 1 10 8Z"/><circle cx="10" cy="14" r="1.6"/><path d="M6.2 9.4L4.2 6.6"/><circle cx="3.4" cy="5.3" r="1.5"/>';
+
+  function sportSvg(name, size) {
+    return `<svg width="${size}" height="${size}" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="${size > 30 ? 2 : 2.4}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${SPORT_ICONS[name]}</svg>`;
+  }
+  function smallSvg(paths, size) {
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg>`;
+  }
+
+  const fullName = (s) => (s.sub ? s.sub + ' ' : '') + s.name.toLowerCase();
+  const isLive = (s) => !!(s.players || s.staff);
+
+  // A players or staff button: a link when the page exists, otherwise a "coming soon" marker.
+  function satHTML(s, kind, extraStyle) {
+    const href = s[kind];
+    const icon = smallSvg(kind === 'players' ? JERSEY : WHISTLE, 20);
+    const what = kind === 'players' ? 'players' : 'coaches and staff';
+    const style = extraStyle ? ` style="${extraStyle}"` : '';
+    if (href) {
+      return `<a class="sat" data-id="${s.id}" href="${href}" aria-label="${fullName(s)} ${what}" title="${fullName(s)} · ${what}"${style}>${icon}</a>`;
+    }
+    return `<span class="sat off" data-id="${s.id}" role="img" aria-label="${fullName(s)} ${what}, coming soon" title="${fullName(s)} · ${what} (coming soon)"${style}>${icon}</span>`;
+  }
+
+  // ---- Build the ring once ----
+  const CX = 460, CY = 400, R = 290, SAT_DEG = 15;
+  const rad = (d) => d * Math.PI / 180;
+  const at = (deg, dist) => ({ x: CX + dist * Math.sin(rad(deg)), y: CY - dist * Math.cos(rad(deg)) });
+
+  const ring = document.getElementById('ring');
+  SPORTS.forEach((s, i) => {
+    const deg = i * (360 / SPORTS.length);
+    const d = at(deg, R);
+    const p = at(deg - SAT_DEG, R);
+    const st = at(deg + SAT_DEG, R);
+    const ext = Math.abs(Math.sin(rad(deg))) * 58 + Math.abs(Math.cos(rad(deg))) * 21;
+    const l = at(deg, R + 42 + 12 + ext);
+    const live = isLive(s) ? ' live' : '';
+    ring.insertAdjacentHTML('beforeend', `
+      <button type="button" class="disc${live}" data-id="${s.id}" aria-label="${fullName(s)}" aria-pressed="false"
+        style="left:${Math.round(d.x - 42)}px;top:${Math.round(d.y - 42)}px">${sportSvg(s.icon, 40)}</button>
+      ${satHTML(s, 'players', `left:${Math.round(p.x - 20)}px;top:${Math.round(p.y - 20)}px`)}
+      ${satHTML(s, 'staff', `left:${Math.round(st.x - 20)}px;top:${Math.round(st.y - 20)}px`)}
+      <div class="label${live}" data-id="${s.id}" aria-hidden="true" style="left:${Math.round(l.x - 58)}px;top:${Math.round(l.y - 21)}px">
+        <span class="n cond">${s.name}</span><span class="s">${s.sub}</span>
+      </div>`);
+  });
+
+  // ---- Build the phone list once ----
+  const rows = document.getElementById('rows');
+  SPORTS.forEach((s) => {
+    const status = isLive(s) ? 'Live' : 'Coming soon';
+    rows.insertAdjacentHTML('beforeend', `
+      <div class="row${isLive(s) ? ' live' : ''}" data-id="${s.id}">
+        <button type="button" class="pick" data-id="${s.id}" aria-pressed="false">
+          <span class="badge">${sportSvg(s.icon, 24)}</span>
+          <span><span class="n cond">${s.name}</span><span class="s">${s.sub ? s.sub + ' · ' : ''}${status}</span></span>
+        </button>
+        ${satHTML(s, 'players')}
+        ${satHTML(s, 'staff')}
+      </div>`);
+  });
+
+  document.querySelectorAll('.jersey-icon').forEach((el) => { el.outerHTML = smallSvg(JERSEY, 18); });
+  document.querySelectorAll('.whistle-icon').forEach((el) => { el.outerHTML = smallSvg(WHISTLE, 18); });
+
+  // ---- Selection ----
+  function actionsHTML(s) {
+    const players = s.players
+      ? `<a class="btn" href="${s.players}">${smallSvg(JERSEY, 18)}Players</a>`
+      : `<span class="btn off">${smallSvg(JERSEY, 18)}Players · soon</span>`;
+    const staff = s.staff
+      ? `<a class="btn ghost" href="${s.staff}">${smallSvg(WHISTLE, 18)}Coaches &amp; staff</a>`
+      : `<span class="btn off">${smallSvg(WHISTLE, 18)}Staff · soon</span>`;
+    return `<div class="actions">${players}${staff}</div>`;
+  }
+
+  function centerHTML(s) {
+    let body;
+    if (isLive(s)) {
+      const stats = (s.stats || []).map(([v, k]) => `<div><b>${v}</b><span>${k}</span></div>`).join('');
+      body = (stats ? `<div class="stats">${stats}</div>` : '') + actionsHTML(s);
+    } else {
+      body = `<div class="pill">Coming soon</div><div class="soon-text">This sport isn’t on the map yet. Football is ready now.</div>`;
+    }
+    return `<div class="sub">${s.sub}</div><div class="name cond">${s.name}</div>${body}`;
+  }
+
+  function cardHTML(s) {
+    let body;
+    if (isLive(s)) {
+      const meta = (s.stats || []).map(([v, k]) => `${v} ${k}`).join(' · ');
+      body = (meta ? `<div class="meta">${meta}</div>` : '') + actionsHTML(s);
+    } else {
+      body = `<div class="soon-text">Coming soon. This sport isn’t on the map yet.</div>`;
+    }
+    return `<div class="head"><span class="name cond">${s.name}</span><span class="sub">${s.sub}</span></div>${body}`;
+  }
+
+  let selected = null;
+  function select(id) {
+    if (id === selected) return;
+    selected = id;
+    const s = SPORTS.find((x) => x.id === id);
+    document.querySelectorAll('[data-id]').forEach((el) => {
+      const on = el.dataset.id === id;
+      el.classList.toggle('sel', on);
+      if (el.hasAttribute('aria-pressed')) el.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    document.getElementById('center').innerHTML = centerHTML(s);
+    document.getElementById('card').innerHTML = cardHTML(s);
+  }
+
+  document.querySelectorAll('.disc, .sat, .pick').forEach((el) => {
+    const pick = () => select(el.dataset.id);
+    el.addEventListener('click', pick);
+    el.addEventListener('focus', pick);
+    if (!el.classList.contains('pick')) el.addEventListener('mouseenter', pick);
+  });
+
+  select(SPORTS[0].id);
+
+  // ---- Scale the ring to fit the window ----
+  const stage = document.getElementById('stage');
+  function fit() {
+    const k = Math.max(0.6, Math.min(1, (window.innerWidth - 32) / 920, (window.innerHeight - 130) / 800));
+    ring.style.transform = `scale(${k})`;
+    stage.style.width = 920 * k + 'px';
+    stage.style.height = 800 * k + 'px';
+  }
+  window.addEventListener('resize', fit);
+  fit();
+</script>
+</body>
+</html>
