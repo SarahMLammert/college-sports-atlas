@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>D1 College Football Recruiting Footprints</title>
+<meta name="description" content="Compare where up to four D1 college football programs find their players, state by state.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Barlow:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="common.css">
+<style>
+/* Layout: an ordinary scrolling page. Title bar on top, then four big U.S. maps, two per row,
+   each state shaded by its share of that school's roster, with the state ranking on one line underneath. */
+body { background: var(--panel); }
+.bar { position: static; padding-bottom: 6px; }
+.page { padding: 4px max(var(--gap), env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(var(--gap), env(safe-area-inset-left)); display: flex; flex-direction: column; gap: 12px; }
+.head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px 18px; }
+.head .note b { color: var(--fg); }
+.key { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: var(--muted); flex-wrap: wrap; }
+.key i { display: inline-block; width: 22px; height: 12px; border-radius: 3px; border: 1px solid var(--line); }
+.key span { margin-right: 6px; }
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.cell { border: 1px solid var(--line); border-radius: 8px; display: flex; flex-direction: column; overflow: hidden; background: var(--panel); }
+.cell-head { display: flex; gap: 8px; align-items: center; padding: 7px 8px 7px 10px; border-bottom: 1px solid var(--line); }
+.cell-head .field { flex: 1; min-width: 0; padding: 6px 8px; }
+.cell-head .n { font-size: 12px; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.cell-map { position: relative; aspect-ratio: 1.62; background: var(--sea); }
+.cell-map canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: pointer; touch-action: manipulation; }
+.cell-map .empty { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font-size: 14px; pointer-events: none; }
+.cell-hover { position: absolute; left: 10px; top: 10px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 5px 9px; font-size: 13px; line-height: 1.35; box-shadow: var(--shadow); pointer-events: none; font-variant-numeric: tabular-nums; }
+/* state rankings: one line under each map, scrolls sideways */
+.cell-rank { display: flex; align-items: center; gap: 4px; padding: 7px 10px; border-top: 1px solid var(--line); overflow-x: auto; white-space: nowrap; scrollbar-width: thin; min-height: 40px; }
+.cell-rank .label { margin-right: 4px; flex: none; }
+.rs { flex: none; border: 1px solid transparent; background: none; border-radius: 999px; padding: 2px 8px 2px 4px; cursor: pointer; font-size: 13px; display: inline-flex; align-items: center; gap: 4px; }
+.rs .r { display: inline-grid; place-items: center; min-width: 18px; height: 18px; border-radius: 9px; background: var(--line); font-size: 11px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.rs b { font-weight: 600; font-variant-numeric: tabular-nums; }
+.rs:hover, .rs.on { border-color: var(--accent); background: var(--accent-soft); }
+.cell-rank .note { flex: none; margin-left: 6px; }
+@media (max-width: 1100px) { .cgrid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="loading" id="loading">Loading players…</div>
+
+<header class="bar" id="bar">
+  <div class="brand card">
+    <h1>D1 College Football <span>Recruiting Footprints</span></h1>
+    <p class="sub">Where up to four schools find their players, state by state</p>
+  </div>
+  <div class="tools">
+    <div class="fwrap">
+      <button type="button" class="btn filters" id="filtersBtn" aria-expanded="false" aria-controls="filters">
+        <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M2 4h14M5 9h8M7.5 14h3" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+        <span class="txt">Filters</span><span class="badge" id="fcount" hidden></span>
+      </button>
+      <aside class="panel pop card" id="filters" aria-labelledby="filtersTitle" hidden>
+        <div class="panel-head">
+          <h2 id="filtersTitle">Filters</h2>
+          <div class="row"><button type="button" class="link" id="resetAll">Reset</button><button type="button" class="x" data-closepanel="filters" aria-label="Close filters">×</button></div>
+        </div>
+        <div class="panel-body">
+          <p class="note" style="margin:0">Each map picks its own school; these narrow which of its players count.</p>
+          <div class="group">
+            <span class="label" id="divLabel">Division</span>
+            <div class="seg" id="div" role="group" aria-labelledby="divLabel">
+              <button type="button" data-v="" aria-pressed="true">All</button>
+              <button type="button" data-v="0" aria-pressed="false">FBS</button>
+              <button type="button" data-v="1" aria-pressed="false">FCS</button>
+            </div>
+          </div>
+          <div class="group">
+            <span class="label">Season on roster</span>
+            <div class="row">
+              <select class="field" id="from" aria-label="From season"></select>
+              <span class="note">to</span>
+              <select class="field" id="to" aria-label="To season"></select>
+            </div>
+          </div>
+          <div class="group">
+            <span class="label" id="entryLabel">Recruit type</span>
+            <div class="seg" id="entry" role="group" aria-labelledby="entryLabel">
+              <button type="button" data-v="" aria-pressed="true">All</button>
+              <button type="button" data-v="0" aria-pressed="false">High school</button>
+              <button type="button" data-v="1" aria-pressed="false">Transfer</button>
+            </div>
+          </div>
+          <div class="group">
+            <div class="row" style="justify-content: space-between"><span class="label">Position group</span><button type="button" class="link" id="posAll">All</button></div>
+            <div class="chips" id="pos"></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+    <a class="btn" id="mapLink" href="index.html" title="Back to the dot map">
+      <svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="5" cy="6" r="2.2" fill="currentColor"/><circle cx="12.5" cy="5" r="1.5" fill="currentColor"/><circle cx="10" cy="12" r="3" fill="currentColor"/></svg>
+      <span class="txt">Dot map</span>
+    </a>
+    <div style="position:relative">
+      <button type="button" class="btn icon" id="share" aria-label="Copy a link to this comparison" title="Copy a link to this comparison">
+        <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M7.5 10.5a3 3 0 0 0 4.2 0l2.6-2.6a3 3 0 0 0-4.2-4.2l-.9.9M10.5 7.5a3 3 0 0 0-4.2 0L3.7 10.1a3 3 0 0 0 4.2 4.2l.9-.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+      </button>
+      <div class="toast" id="toast" role="status" hidden></div>
+    </div>
+  </div>
+</header>
+
+<main class="page">
+  <div class="head">
+    <span class="note" id="hint">Hover or tap a state to see its rank, players and share for every school</span>
+    <span class="note" id="filterNote"></span>
+    <span class="key" id="key" aria-label="Share of roster"></span>
+  </div>
+  <div class="cgrid" id="cgrid"></div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<script src="common.js"></script>
+<script>
+(async function () {
+  const { $, STATE_ABBR, ABBR_STATE, fmt, pct, esc, css } = GP;
+
+  let data;
+  try { data = await GP.loadData(); }
+  catch (e) { $("loading").textContent = "The player data didn't load. If you opened this file directly, serve the folder instead (python -m http.server), or reload to try again."; return; }
+  const P = data.players, N = data.N, tState = data.tState;
+  const { schoolPalette, swatch } = GP.makePalette(data);
+  const F = GP.makeFilters(data, { onChange: refresh });
+  const state = F.state;
+  let picks = [-1, -1, -1, -1];
+
+  // ---------- shading: share of the school's roster from each state, one scale for all four maps ----------
+  // 0 → the plain map color; small shares get a light tint, ~40% and up the school's full color, then deeper.
+  const STEPS = [.01, .05, .15, .3, .5];
+  function shade(share, color) {
+    if (!share) return null;
+    const t = Math.min(1, Math.sqrt(share / .5));
+    const land = css("--land"), c = d3.color(color), deep = c.darker(1.2);
+    return t < .8 ? d3.interpolateRgb(land, c)(.14 + .86 * t / .8) : d3.interpolateRgb(c, deep)((t - .8) / .2);
+  }
+  function drawKey() {
+    const ink = css("--muted");
+    $("key").innerHTML = `Share of roster:` + STEPS.map((s) => `<i style="background:${shade(s, ink)}"></i><span>${s === .5 ? "50%+" : pct(s)}</span>`).join("")
+      + `<span>· each map in its school's color</span>`;
+  }
+
+  // ---------- the four boxes ----------
+  const albers = d3.geoAlbersUsa();
+  const US_FIT = { type: "MultiPoint", coordinates: [[-124.7, 48.4], [-67, 47.4], [-80.1, 25.1], [-117.1, 32.5], [-97.2, 25.9], [-160, 21], [-150, 61]] };
+  let stateFeatures = [], paths = [], size = { w: 0, h: 0, dpr: 1 }, hover = null, pin = null, boxes = [];
+  const cells = [];
+  for (let c = 0; c < 4; c++) {
+    const el = document.createElement("div");
+    el.className = "cell";
+    el.innerHTML = `<div class="cell-head"><span class="swc"></span><label class="vh" for="pick${c}">School ${c + 1}</label>
+        <input class="field" id="pick${c}" list="schoolList" placeholder="Pick school ${c + 1}" autocomplete="off"><span class="n"></span></div>
+      <div class="cell-map"><canvas></canvas><div class="empty">No school picked</div><div class="cell-hover" hidden></div></div>
+      <div class="cell-rank"><span class="note">Pick a school to rank its states</span></div>`;
+    $("cgrid").appendChild(el);
+    const cv = el.querySelector("canvas");
+    const cell = { input: el.querySelector("input"), n: el.querySelector(".n"), sw: el.querySelector(".swc"), cv, ctx: cv.getContext("2d"),
+      empty: el.querySelector(".empty"), hover: el.querySelector(".cell-hover"), rank: el.querySelector(".cell-rank") };
+    cells.push(cell);
+    cell.input.addEventListener("input", () => {
+      const v = cell.input.value.trim().toLowerCase();
+      if (!v) { picks[c] = -1; refresh(); }
+      else if (data.schoolIndex.has(v)) { picks[c] = data.schoolIndex.get(v); refresh(); }
+    });
+    cv.addEventListener("pointermove", (e) => { if (e.pointerType === "touch") return; const s = stateAt(cell, e); if (s !== hover) { hover = s; draw(); } });
+    cv.addEventListener("pointerleave", () => { if (hover) { hover = null; draw(); } });
+    cv.addEventListener("click", (e) => { const s = stateAt(cell, e); pin = s && s !== pin ? s : null; draw(); });
+    // the ranking line works like the map: hover a state to light it up everywhere, click to pin it
+    cell.rank.addEventListener("pointerover", (e) => { const b = e.target.closest("[data-st]"); if (b && b.dataset.st !== hover) { hover = b.dataset.st; draw(); } });
+    cell.rank.addEventListener("pointerleave", () => { if (hover) { hover = null; draw(); } });
+    cell.rank.addEventListener("click", (e) => { const b = e.target.closest("[data-st]"); if (b) { pin = b.dataset.st !== pin ? b.dataset.st : null; draw(); } });
+  }
+  const dl = document.createElement("datalist"); dl.id = "schoolList";
+  dl.innerHTML = data.schools.map((s) => `<option value="${esc(s[0])}">`).join(""); document.body.appendChild(dl);
+
+  function stateAt(cell, e) {
+    const r = cell.cv.getBoundingClientRect(), { dpr } = size;
+    cell.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    for (const s of paths) if (cell.ctx.isPointInPath(s.p, (e.clientX - r.left) * dpr, (e.clientY - r.top) * dpr)) return s.abbr;
+    return null;
+  }
+
+  // Count each school's players by hometown state and rank the states (ties share a rank: 1, 2, 2, 4).
+  function compute() {
+    boxes = picks.map((si) => {
+      if (si < 0) return null;
+      const byState = new Map(); let total = 0, off = 0;
+      for (let k = 0; k < N; k++) {
+        if (P.s[k] !== si || !F.passes(k, true, true)) continue;
+        total++;
+        const t = P.t[k]; if (t < 0) continue;
+        const st = tState[t];
+        if (!ABBR_STATE[st] || st === "PR") { off++; continue; }   // abroad, or Puerto Rico (not on a U.S. map)
+        byState.set(st, (byState.get(st) || 0) + 1);
+      }
+      const ranked = [...byState.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+      const rankOf = new Map();
+      ranked.forEach(([st, n], i) => rankOf.set(st, i && n === ranked[i - 1][1] ? rankOf.get(ranked[i - 1][0]) : i + 1));
+      return { si, total, byState, off, ranked, rankOf };
+    });
+  }
+  function renderRanks() {
+    cells.forEach((cell, i) => {
+      const d = boxes[i];
+      if (!d) { cell.rank.innerHTML = `<span class="note">Pick a school to rank its states</span>`; return; }
+      if (!d.ranked.length) { cell.rank.innerHTML = `<span class="note">No players from U.S. states match the filters.</span>`; return; }
+      cell.rank.innerHTML = `<span class="label">State rank</span>` + d.ranked.map(([st, n]) =>
+        `<button type="button" class="rs" data-st="${st}" title="${esc(ABBR_STATE[st])}: ${fmt(n)} players"><span class="r">${d.rankOf.get(st)}</span>${st} <b>${pct(n / d.total)}</b></button>`).join("")
+        + (d.off ? `<span class="note">+${fmt(d.off)} not on this map</span>` : "");
+    });
+  }
+  function layout() {
+    const r = cells[0].cv.parentElement.getBoundingClientRect();
+    if (!r.width) return;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    size = { w: r.width, h: r.height, dpr };
+    for (const c of cells) { c.cv.width = Math.round(r.width * dpr); c.cv.height = Math.round(r.height * dpr); }
+    albers.fitExtent([[10, 10], [r.width - 10, r.height - 10]], US_FIT);
+    const path = d3.geoPath(albers);
+    paths = stateFeatures.map((f) => ({ abbr: STATE_ABBR[f.properties.name], p: new Path2D(path(f) || "") })).filter((s) => s.abbr && s.abbr !== "PR");
+    draw();
+  }
+  function draw() {
+    if (!size.w) return;
+    const { w, h, dpr } = size, land = css("--land"), border = css("--border"), fg = css("--fg"), accent = css("--accent");
+    const focus = pin || hover;
+    cells.forEach((cell, i) => {
+      const d = boxes[i], g = cell.ctx;
+      g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, w, h);
+      const color = d ? schoolPalette()[d.si].fill : null;
+      for (const s of paths) {
+        g.fillStyle = (d && d.total && shade((d.byState.get(s.abbr) || 0) / d.total, color)) || land;
+        g.fill(s.p);
+      }
+      g.strokeStyle = border; g.lineWidth = .7; for (const s of paths) g.stroke(s.p);
+      const fs = paths.find((s) => s.abbr === focus);
+      if (fs) { g.strokeStyle = css("--panel"); g.lineWidth = 4.5; g.stroke(fs.p); g.strokeStyle = pin ? fg : accent; g.lineWidth = 2.2; g.stroke(fs.p); }
+      cell.empty.hidden = !!d;
+      cell.sw.innerHTML = d ? swatch(d.si) : "";
+      cell.n.textContent = d ? `${fmt(d.total)} players` : "";
+      cell.hover.hidden = !(d && focus);
+      if (d && focus) {
+        const n = d.byState.get(focus) || 0;
+        cell.hover.innerHTML = `<b>${esc(ABBR_STATE[focus])}</b><br>` + (n ? `#${d.rankOf.get(focus)} of ${d.ranked.length} states · ${fmt(n)} player${n === 1 ? "" : "s"} · ${pct(n / d.total)} of roster` : "No players");
+      }
+      cell.rank.querySelectorAll("[data-st]").forEach((b) => {
+        const on = b.dataset.st === focus; b.classList.toggle("on", on);
+        if (on && pin) b.scrollIntoView({ block: "nearest", inline: "nearest" });
+      });
+    });
+    $("hint").innerHTML = pin ? `<b>${esc(ABBR_STATE[pin])}</b> pinned · click it again to clear` : "Hover or tap a state to see its rank, players and share for every school";
+  }
+
+  // ---------- links ----------
+  // compare.html#compare=Alabama|Georgia|Texas|LSU&from=2019&pos=QB   (filters as on the dot map; no school or conference)
+  let lastHash = "";
+  function hashNow() {
+    const q = F.toParams(new URLSearchParams(), { includeSchool: false });
+    q.delete("conf");
+    const names = picks.map((i) => i >= 0 ? data.schools[i][0] : "").join("|").replace(/\|+$/, "");
+    if (names) q.set("compare", names);
+    return q.toString().replace(/%2C/gi, ",").replace(/%7C/gi, "|");
+  }
+  function writeUrl() {
+    const h = hashNow(); lastHash = h;
+    try { history.replaceState(null, "", location.pathname + location.search + (h ? "#" + h : "")); } catch (e) {}
+    // the way back to the dot map keeps the filters and shows the first school picked here
+    const q = F.toParams(new URLSearchParams(), { includeSchool: false });
+    const first = picks.find((i) => i >= 0);
+    if (first !== undefined) q.set("school", data.schools[first][0]);
+    const mh = q.toString().replace(/%2C/gi, ",");
+    $("mapLink").href = "index.html" + (mh ? "#" + mh : "");
+  }
+  function readUrl() {
+    const q = new URLSearchParams(location.hash.slice(1));
+    F.fromParams(q);
+    state.school = -1; state.allSchools = false; state.conf = "";
+    const parts = (q.get("compare") || "").split("|");
+    picks = [0, 1, 2, 3].map((i) => { const n = (parts[i] || "").trim().toLowerCase(); return data.schoolIndex.has(n) ? data.schoolIndex.get(n) : -1; });
+    cells.forEach((c, i) => { c.input.value = picks[i] >= 0 ? data.schools[picks[i]][0] : ""; });
+    F.sync();
+  }
+  addEventListener("hashchange", () => { if (location.hash.slice(1) !== lastHash) { readUrl(); refresh(); } });
+  $("share").addEventListener("click", () => { writeUrl(); GP.copyLink($("toast")); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && F.isOpen()) { F.setOpen(false); $("filtersBtn").focus(); } });
+
+  function refresh() {
+    compute(); renderRanks(); draw(); writeUrl();
+    const s = F.summary();
+    $("filterNote").textContent = s ? `Only ${s}` : "";
+  }
+
+  readUrl();
+  drawKey();
+  $("loading").remove();
+  refresh();
+  new ResizeObserver(layout).observe(cells[0].cv.parentElement);
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { drawKey(); draw(); renderRanks(); });
+  if (!picks.some((i) => i >= 0)) cells[0].input.focus({ preventScroll: true });
+
+  // state outlines load in the background
+  try {
+    const us = await fetch("https://cdn.jsdelivr.net/npm/us-atlas@3.0.1/states-10m.json").then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); });
+    stateFeatures = topojson.feature(us, us.objects.states).features;
+    layout();
+  } catch (e) {
+    $("hint").textContent = "The state outlines didn't load, so the maps can't be drawn. The state rankings below each box still work; reload to try again.";
+  }
+})();
+</script>
+</body>
+</html>

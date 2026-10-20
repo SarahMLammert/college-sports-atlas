@@ -7,7 +7,12 @@ since 2016, scraped from each school's official athletics site and put on a worl
 - Seasons 2016–2019 and 2021–2026 (there's no 2020 data)
 - One record per player per school, so a transfer appears once for each school he played for
 
-The map lives in `docs/` and is a single static page, so GitHub Pages can host it for free.
+The site lives in `docs/` and is plain static files, so GitHub Pages can host it for free. It has two
+pages:
+
+- **Recruiting Map** (`index.html`): a world map with a dot for every hometown.
+- **Recruiting Footprints** (`compare.html`): up to four schools side by side on U.S. maps, each
+  state shaded by its share of that school's roster.
 
 ## Using the map
 
@@ -27,19 +32,31 @@ title; click its × (or "Clear map" in Filters) to empty the map again.
   player joined), conference, season on roster (a player counts if he was on a roster in any season
   of the range), recruit type (high school or transfer) and position group. The button shows how
   many filters are on.
-- **Details** shows totals and top lists (states, hometowns, schools, players from outside the
-  50 states) for whatever the filters leave. Click a dot to list its players, or a state to see
-  which schools recruit it.
-- **Compare** opens a page of its own (the toolbar hides) with four small U.S. heat maps, one
-  school each, shaded in that school's primary color. Shading is the share of that school's roster
-  from each area, on the same scale in all four, so a big program and a small one compare fairly.
-  The maps are large (two per row, scroll for the other two), and under each one is a ranking of
-  that school's states by players, with each state's share of the roster ("All states" expands
-  it past the top 10). Hover or tap a state on any map, or a row in any ranking, to highlight it
-  everywhere and see its rank, raw count and share for all four schools at once; tap again to
-  clear. Division, season, recruit type and position filters from the map still apply, and the
-  page says so when they do. "Back to map" returns to the dot map.
+- **Players** (right side) opens when you click a dot or pick a search result, and lists those
+  players: name, position, school, seasons, high school.
+- **School stats** (the button in the bottom-left box) opens the numbers for what the map shows:
+  totals, where the picked school ranks among D1 schools (players, high-school recruits, transfers,
+  and players from a clicked state) with the schools ranked just above and below it, then top
+  states, top hometowns, high-school pipelines and biggest rosters. Clicking a state opens it with
+  that state's breakdown. With a conference filter on, ranks are within the conference.
+- Dots grow when the map is sparse (one school's few hundred hometowns) so they're easier to hover
+  and click, and stay small when every school is showing.
+- **Compare** opens the Recruiting Footprints page with the same filters, starting from the
+  school on the map.
 - **Copy link** (the chain icon) copies a link that reopens exactly this view.
+
+## Using Recruiting Footprints
+
+Type a school into each of the four boxes. Each map shades every state by the share of that
+school's roster from there, in the school's own color, on one scale for all four (the key at the
+top shows 1%, 5%, 15%, 30% and 50%+), so a big program and a small one compare fairly. Under each
+map, one line ranks the school's states with their shares; scroll it sideways for the rest.
+
+Hover or tap a state on any map, or in any ranking line, to highlight it on all four and see its
+rank, raw player count and share for each school; click again to clear. Filters here cover
+division, season on roster, recruit type and position (each box picks its own school, so there's
+no school or conference filter). **Dot map** goes back with the same filters, showing the first
+school you picked. Players from abroad or Puerto Rico aren't on these maps; each box says how many.
 
 ### Link format
 
@@ -49,7 +66,6 @@ hand. Leave out anything you don't need.
 | key | example | meaning |
 |---|---|---|
 | `school` | `school=Alabama` | one school, or `school=all` for every school on the dot map |
-| `compare` | `compare=Alabama\|Georgia\|Texas\|LSU` | open Compare with up to four schools, separated by `\|` |
 | `conf` | `conf=SEC` | one conference (2026 alignment) |
 | `div` | `div=FCS` | division when the player joined: `FBS` or `FCS` |
 | `from`, `to` | `from=2019&to=2024` | players on a roster in any season of this range |
@@ -61,6 +77,10 @@ hand. Leave out anything you don't need.
 | `hs` | `hs=IMG Academy~FL` | selected high school, optionally limited to one hometown state |
 | `map` | `map=-96.50,38.50,1.00` | longitude, latitude and zoom at the center of the screen |
 
+Recruiting Footprints links use the same `div`, `from`, `to`, `arrived` and `pos` keys, plus
+`compare` for the schools: `compare.html#compare=Alabama|Georgia|Texas|LSU&from=2019`. Older
+links to the map page that include `compare=` open this page.
+
 ## Publish the map on GitHub Pages
 1. Push this repo to GitHub.
 2. On GitHub: **Settings → Pages → Build and deployment → Deploy from a branch**,
@@ -71,14 +91,17 @@ To look at it on your own computer first: `cd docs && python3 -m http.server`, t
 http://localhost:8000. Opening `index.html` by double-clicking won't work, because browsers
 block loading the data file from disk.
 
-The page loads d3 and topojson from cdnjs, and the country and state outlines from jsDelivr
+The pages load d3 and topojson from cdnjs, and the country and state outlines from jsDelivr
 (`world-atlas` and `us-atlas`). If the outlines can't load, the dots still draw in the right
 places.
 
 ## Folder layout
 ```
 docs/                    the website (this is what GitHub Pages serves)
-  index.html             the map page: layout, styles and code are all in this one file
+  index.html             Recruiting Map: the dot map, search, players panel and school stats
+  compare.html           Recruiting Footprints: four schools on state-shaded U.S. maps
+  common.js              shared by both: data loading, school colors, the Filters dropdown and its link keys
+  common.css             shared by both: colors, type, title bar, buttons, the Filters dropdown
   data/map_data.json     every player, packed small; made by build_map_data.py
   .nojekyll              tells GitHub Pages to serve the files as they are
 scrape_rosters.py        step 1: scrape rosters (fetching, parsing and cleaning all live here)
