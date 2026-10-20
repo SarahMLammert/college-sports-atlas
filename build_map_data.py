@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Pack players_unique_geocoded.csv into the JSON the map site (docs/index.html) loads.
+"""Pack players_unique_geocoded.csv into the JSON the football pages (docs/football/) load.
 
-    python build_map_data.py                      # data/players_unique_geocoded.csv -> docs/data/map_data.json
+    python build_map_data.py                      # data/players_unique_geocoded.csv -> docs/football/data/map_data.json
     python build_map_data.py <input.csv> <output.json>
 
-Run it again whenever you re-scrape or re-geocode, then commit docs/data/map_data.json.
+Run it again whenever you re-scrape or re-geocode, then commit docs/football/data/map_data.json.
 Dot colors come from config/school_colors.csv (school, primary, secondary hex colors).
 
 Transfers: many roster pages never list a previous school, so a player counts as a transfer if
@@ -285,7 +285,7 @@ def main(src, dst):
 
 
 if __name__ == "__main__":
-    args = sys.argv[1:] or ["data/players_unique_geocoded.csv", "docs/data/map_data.json"]
+    args = sys.argv[1:] or ["data/players_unique_geocoded.csv", "docs/football/data/map_data.json"]
     if len(args) != 2:
         sys.exit(__doc__)
     main(*args)
