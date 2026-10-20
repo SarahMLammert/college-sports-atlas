@@ -13,30 +13,44 @@
    each state shaded by its share of that school's roster, with the state ranking on one line underneath. */
 body { background: var(--panel); }
 .bar { position: static; padding-bottom: 6px; }
-.page { padding: 4px max(var(--gap), env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(var(--gap), env(safe-area-inset-left)); display: flex; flex-direction: column; gap: 12px; }
+.tools { justify-content: flex-end; }
+@media (min-width: 1101px) {   /* compact title so four maps fit on laptop screens */
+  .brand { padding: 8px 14px 9px; max-width: none; }
+  .brand h1 { font-size: 26px; white-space: nowrap; }
+  .brand .sub { margin-top: 2px; }
+}
+.page { padding: 0 max(var(--gap), env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(var(--gap), env(safe-area-inset-left)); display: flex; flex-direction: column; gap: 12px; }
 .head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px 18px; }
 .head .note b { color: var(--fg); }
 .key { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: var(--muted); flex-wrap: wrap; }
 .key i { display: inline-block; width: 22px; height: 12px; border-radius: 3px; border: 1px solid var(--line); }
 .key span { margin-right: 6px; }
-.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.cgrid { display: grid; grid-template-columns: repeat(2, minmax(0, var(--col-w, 1fr))); justify-content: center; gap: 14px; }
 .cell { border: 1px solid var(--line); border-radius: 8px; display: flex; flex-direction: column; overflow: hidden; background: var(--panel); }
-.cell-head { display: flex; gap: 8px; align-items: center; padding: 7px 8px 7px 10px; border-bottom: 1px solid var(--line); }
-.cell-head .field { flex: 1; min-width: 0; padding: 6px 8px; }
+.cell-head { display: flex; gap: 8px; align-items: center; padding: 5px 8px 5px 10px; border-bottom: 1px solid var(--line); }
+.cell-head .field { flex: 1; min-width: 0; padding: 4px 8px; }
 .cell-head .n { font-size: 12px; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
-.cell-map { position: relative; aspect-ratio: 1.62; background: var(--sea); }
+.cell-map { position: relative; height: var(--map-h, 360px); background: var(--sea); }   /* --map-h: set by fitMaps() so two rows fit the window */
 .cell-map canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: pointer; touch-action: manipulation; }
 .cell-map .empty { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font-size: 14px; pointer-events: none; }
 .cell-hover { position: absolute; left: 10px; top: 10px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 5px 9px; font-size: 13px; line-height: 1.35; box-shadow: var(--shadow); pointer-events: none; font-variant-numeric: tabular-nums; }
 /* state rankings: one line under each map, scrolls sideways */
-.cell-rank { display: flex; align-items: center; gap: 4px; padding: 7px 10px; border-top: 1px solid var(--line); overflow-x: auto; white-space: nowrap; scrollbar-width: thin; min-height: 40px; }
-.cell-rank .label { margin-right: 4px; flex: none; }
-.rs { flex: none; border: 1px solid transparent; background: none; border-radius: 999px; padding: 2px 8px 2px 4px; cursor: pointer; font-size: 13px; display: inline-flex; align-items: center; gap: 4px; }
-.rs .r { display: inline-grid; place-items: center; min-width: 18px; height: 18px; border-radius: 9px; background: var(--line); font-size: 11px; font-weight: 600; font-variant-numeric: tabular-nums; }
-.rs b { font-weight: 600; font-variant-numeric: tabular-nums; }
-.rs:hover, .rs.on { border-color: var(--accent); background: var(--accent-soft); }
-.cell-rank .note { flex: none; margin-left: 6px; }
-@media (max-width: 1100px) { .cgrid { grid-template-columns: 1fr; } }
+.cell-rank {
+  display: flex; align-items: baseline; padding: 6px 10px; border-top: 1px solid var(--line); overflow-x: auto; white-space: nowrap;
+  scrollbar-width: none; font-size: 13px; line-height: 1.3;
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 36px), transparent);   /* fades out where the line keeps going */
+}
+.cell-rank::-webkit-scrollbar { display: none; }
+.cell-rank .label { margin-right: 8px; flex: none; }
+/* each state is plain text that can be hovered or clicked, separated by dots */
+.rs { all: unset; flex: none; cursor: pointer; padding: 1px 3px; border-radius: 3px; font-variant-numeric: tabular-nums; }
+.rs + .rs::before { content: "·"; color: var(--line); margin: 0 7px 0 -1px; font-weight: 600; pointer-events: none; }
+.rs .r { color: var(--muted); margin-right: 3px; }
+.rs b { font-weight: 600; margin-left: 3px; }
+.rs:hover, .rs.on { background: var(--accent-soft); box-shadow: inset 0 -2px 0 var(--accent); }
+.rs:focus-visible { outline: 2px solid var(--focus); }
+.cell-rank .note { flex: none; margin-left: 10px; padding-right: 30px; }
+@media (max-width: 1100px) { .cgrid { grid-template-columns: 1fr; justify-content: stretch; } .cell-map { height: auto; aspect-ratio: 1.62; } }
 </style>
 </head>
 <body>
@@ -106,7 +120,7 @@ body { background: var(--panel); }
 
 <main class="page">
   <div class="head">
-    <span class="note" id="hint">Hover or tap a state to see its rank, players and share for every school</span>
+    <span class="note" id="hint">Hover or tap a state on a map to see its rank, players and share; click to keep it shown</span>
     <span class="note" id="filterNote"></span>
     <span class="key" id="key" aria-label="Share of roster"></span>
   </div>
@@ -147,7 +161,7 @@ body { background: var(--panel); }
   // ---------- the four boxes ----------
   const albers = d3.geoAlbersUsa();
   const US_FIT = { type: "MultiPoint", coordinates: [[-124.7, 48.4], [-67, 47.4], [-80.1, 25.1], [-117.1, 32.5], [-97.2, 25.9], [-160, 21], [-150, 61]] };
-  let stateFeatures = [], paths = [], size = { w: 0, h: 0, dpr: 1 }, hover = null, pin = null, boxes = [];
+  let stateFeatures = [], paths = [], size = { w: 0, h: 0, dpr: 1 }, boxes = [];
   const cells = [];
   for (let c = 0; c < 4; c++) {
     const el = document.createElement("div");
@@ -158,7 +172,7 @@ body { background: var(--panel); }
       <div class="cell-rank"><span class="note">Pick a school to rank its states</span></div>`;
     $("cgrid").appendChild(el);
     const cv = el.querySelector("canvas");
-    const cell = { input: el.querySelector("input"), n: el.querySelector(".n"), sw: el.querySelector(".swc"), cv, ctx: cv.getContext("2d"),
+    const cell = { hoverSt: null, pinSt: null, input: el.querySelector("input"), n: el.querySelector(".n"), sw: el.querySelector(".swc"), cv, ctx: cv.getContext("2d"),
       empty: el.querySelector(".empty"), hover: el.querySelector(".cell-hover"), rank: el.querySelector(".cell-rank") };
     cells.push(cell);
     cell.input.addEventListener("input", () => {
@@ -166,13 +180,15 @@ body { background: var(--panel); }
       if (!v) { picks[c] = -1; refresh(); }
       else if (data.schoolIndex.has(v)) { picks[c] = data.schoolIndex.get(v); refresh(); }
     });
-    cv.addEventListener("pointermove", (e) => { if (e.pointerType === "touch") return; const s = stateAt(cell, e); if (s !== hover) { hover = s; draw(); } });
-    cv.addEventListener("pointerleave", () => { if (hover) { hover = null; draw(); } });
-    cv.addEventListener("click", (e) => { const s = stateAt(cell, e); pin = s && s !== pin ? s : null; draw(); });
-    // the ranking line works like the map: hover a state to light it up everywhere, click to pin it
-    cell.rank.addEventListener("pointerover", (e) => { const b = e.target.closest("[data-st]"); if (b && b.dataset.st !== hover) { hover = b.dataset.st; draw(); } });
-    cell.rank.addEventListener("pointerleave", () => { if (hover) { hover = null; draw(); } });
-    cell.rank.addEventListener("click", (e) => { const b = e.target.closest("[data-st]"); if (b) { pin = b.dataset.st !== pin ? b.dataset.st : null; draw(); } });
+    // hovering or clicking a state only affects this map (and its ranking line)
+    const setHover = (st) => { if (st !== cell.hoverSt) { cell.hoverSt = st; draw(); } };
+    const togglePin = (st) => { cell.pinSt = st && st !== cell.pinSt ? st : null; draw(); };
+    cv.addEventListener("pointermove", (e) => { if (e.pointerType !== "touch") setHover(stateAt(cell, e)); });
+    cv.addEventListener("pointerleave", () => setHover(null));
+    cv.addEventListener("click", (e) => togglePin(stateAt(cell, e)));
+    cell.rank.addEventListener("pointerover", (e) => { const b = e.target.closest("[data-st]"); if (b) setHover(b.dataset.st); });
+    cell.rank.addEventListener("pointerleave", () => setHover(null));
+    cell.rank.addEventListener("click", (e) => { const b = e.target.closest("[data-st]"); if (b) togglePin(b.dataset.st); });
   }
   const dl = document.createElement("datalist"); dl.id = "schoolList";
   dl.innerHTML = data.schools.map((s) => `<option value="${esc(s[0])}">`).join(""); document.body.appendChild(dl);
@@ -209,11 +225,25 @@ body { background: var(--panel); }
       if (!d) { cell.rank.innerHTML = `<span class="note">Pick a school to rank its states</span>`; return; }
       if (!d.ranked.length) { cell.rank.innerHTML = `<span class="note">No players from U.S. states match the filters.</span>`; return; }
       cell.rank.innerHTML = `<span class="label">State rank</span>` + d.ranked.map(([st, n]) =>
-        `<button type="button" class="rs" data-st="${st}" title="${esc(ABBR_STATE[st])}: ${fmt(n)} players"><span class="r">${d.rankOf.get(st)}</span>${st} <b>${pct(n / d.total)}</b></button>`).join("")
+        `<button type="button" class="rs" data-st="${st}" title="${esc(ABBR_STATE[st])}: ${fmt(n)} players"><span class="r">${d.rankOf.get(st)}</span>${st}<b>${pct(n / d.total)}</b></button>`).join("")
         + (d.off ? `<span class="note">+${fmt(d.off)} not on this map</span>` : "");
     });
   }
+  // Two columns: make each map as big as possible while both rows still fit in the window (but never tiny).
+  function fitMaps() {
+    const root = document.documentElement.style;
+    if (innerWidth <= 1100) { root.removeProperty("--map-h"); root.removeProperty("--col-w"); return; }
+    const grid = $("cgrid"), cell = cells[0].cv.closest(".cell"), mapEl = cells[0].cv.parentElement;
+    const chrome = cell.getBoundingClientRect().height - mapEl.getBoundingClientRect().height;   // school box + ranking line
+    const top = grid.getBoundingClientRect().top + scrollY, gap = 14, bottom = 28;
+    const colMax = (grid.clientWidth - gap) / 2;
+    const byHeight = ((document.documentElement.clientHeight - top - gap - bottom) / 2 - chrome) * .96;   // a little under the exact fit
+    const h = Math.round(Math.max(160, Math.min(colMax / 1.62 * .96, byHeight)));
+    root.setProperty("--map-h", h + "px");
+    root.setProperty("--col-w", Math.round(Math.max(Math.min(colMax, 640), Math.min(colMax, h * 1.62))) + "px");   // columns as wide as the map needs (ranking line keeps ≥640px)
+  }
   function layout() {
+    fitMaps();
     const r = cells[0].cv.parentElement.getBoundingClientRect();
     if (!r.width) return;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -227,9 +257,8 @@ body { background: var(--panel); }
   function draw() {
     if (!size.w) return;
     const { w, h, dpr } = size, land = css("--land"), border = css("--border"), fg = css("--fg"), accent = css("--accent");
-    const focus = pin || hover;
     cells.forEach((cell, i) => {
-      const d = boxes[i], g = cell.ctx;
+      const d = boxes[i], g = cell.ctx, focus = cell.pinSt || cell.hoverSt, pin = cell.pinSt;
       g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, w, h);
       const color = d ? schoolPalette()[d.si].fill : null;
       for (const s of paths) {
@@ -252,7 +281,7 @@ body { background: var(--panel); }
         if (on && pin) b.scrollIntoView({ block: "nearest", inline: "nearest" });
       });
     });
-    $("hint").innerHTML = pin ? `<b>${esc(ABBR_STATE[pin])}</b> pinned · click it again to clear` : "Hover or tap a state to see its rank, players and share for every school";
+
   }
 
   // ---------- links ----------
@@ -299,6 +328,7 @@ body { background: var(--panel); }
   $("loading").remove();
   refresh();
   new ResizeObserver(layout).observe(cells[0].cv.parentElement);
+  addEventListener("resize", layout);
   matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { drawKey(); draw(); renderRanks(); });
   if (!picks.some((i) => i >= 0)) cells[0].input.focus({ preventScroll: true });
 

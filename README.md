@@ -52,8 +52,9 @@ school's roster from there, in the school's own color, on one scale for all four
 top shows 1%, 5%, 15%, 30% and 50%+), so a big program and a small one compare fairly. Under each
 map, one line ranks the school's states with their shares; scroll it sideways for the rest.
 
-Hover or tap a state on any map, or in any ranking line, to highlight it on all four and see its
-rank, raw player count and share for each school; click again to clear. Filters here cover
+Hover or tap a state on a map, or in its ranking line, to see that school's rank, raw player count
+and share for the state; click to keep it shown, click again to clear. Each map highlights on its
+own. On big screens the maps size themselves so all four fit in the window. Filters here cover
 division, season on roster, recruit type and position (each box picks its own school, so there's
 no school or conference filter). **Dot map** goes back with the same filters, showing the first
 school you picked. Players from abroad or Puerto Rico aren't on these maps; each box says how many.
