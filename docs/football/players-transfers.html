@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Barlow:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="../common.css">
 <style>
-/* Layout: an ordinary scrolling page like compare.html. Title bar on top, then the U.S. map of
+/* Layout: an ordinary scrolling page like players-heatmap.html. Title bar on top, then the U.S. map of
    school-to-school transfers on the left and the lists on the right (stacked on narrow screens). */
 body { background: var(--panel); }
 .bar { position: static; padding-bottom: 6px; }
@@ -54,11 +54,8 @@ body { background: var(--panel); }
 .tl .b { grid-column: 1 / -1; height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
 .tl .b span { display: block; height: 100%; background: var(--bar-c, var(--accent)); }
 .tl.in .b span { --bar-c: var(--in); } .tl.out .b span { --bar-c: var(--out); }
-.tside::after {   /* fades the bottom edge while there's more of the list to scroll to */
-  content: ""; position: sticky; bottom: -18px; flex: none; height: 56px; margin: -56px -16px -18px;
-  background: linear-gradient(transparent, var(--panel) 85%); pointer-events: none; opacity: 0; transition: opacity .15s;
-}
-.tside.more::after { opacity: 1; }
+.tl.lv .b span { --bar-c: var(--muted); }
+.tl.lv .pct { color: var(--muted); font-size: 12px; margin-left: 6px; }
 .tside .fine { font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 12px; margin: 0; }
 :root { --in: var(--accent); --out: #2f6fcf; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --out: #6aa7ff; } }
@@ -184,15 +181,19 @@ body { background: var(--panel); }
   $("schoolClear").addEventListener("click", () => pick(-1));
   const hasCampus = data.campus.some(Boolean);
   const name = (i) => esc(data.schools[i][0]);
+  // Where transfers with no line came from (P.v = index in data.levels + 1; 0 = not one of those).
+  const LEVELS = data.levels || [], HAS_LEVELS = LEVELS.length > 0 && Array.isArray(P.v);
+  const LEVEL_LABEL = { D1: "D1 school, not matched", D2: "Division II", D3: "Division III", NAIA: "NAIA", JUCO: "Junior college", unknown: "Unknown" };
 
   // ---------- counting ----------
   // A move is one player record that's a transfer with a known D1 previous school (P.o >= 0): from P.o to P.s.
+  // Every other transfer is counted in M.others, and by the level of the school he came from in M.lv.
   // Filters apply to the new school's roster: seasons on it, division when he joined, position.
   // The conference filter keeps moves to or from a school in that conference.
   let M = null;
   function compute() {
     const sel = state.school, conf = state.conf === "" ? -1 : +state.conf;
-    const inD1 = new Int32Array(S), out = new Int32Array(S), other = new Int32Array(S);
+    const inD1 = new Int32Array(S), out = new Int32Array(S), other = new Int32Array(S), lv = new Int32Array(LEVELS.length);
     const pairs = new Map();   // from * S + to -> players
     let moves = 0, others = 0;
     for (let k = 0; k < N; k++) {
@@ -200,7 +201,7 @@ body { background: var(--panel); }
       const to = P.s[k], from = P.o[k];
       if (conf >= 0 && data.schools[to][1] !== conf && !(from >= 0 && data.schools[from][1] === conf)) continue;
       if (from < 0) {   // a transfer from outside D1, or from a school this data can't name
-        if (sel < 0 || to === sel) { other[to]++; others++; }
+        if (sel < 0 || to === sel) { other[to]++; others++; if (HAS_LEVELS && P.v[k] > 0) lv[P.v[k] - 1]++; }
         continue;
       }
       if (sel >= 0 && to !== sel && from !== sel) continue;
@@ -208,7 +209,7 @@ body { background: var(--panel); }
       const key = from * S + to; pairs.set(key, (pairs.get(key) || 0) + 1);
     }
     const routes = [...pairs.entries()].map(([key, n]) => ({ from: Math.floor(key / S), to: key % S, n })).sort((a, b) => b.n - a.n || a.from - b.from);
-    M = { sel, inD1, out, other, routes, moves, others };
+    M = { sel, inD1, out, other, routes, moves, others, lv };
   }
 
   // ---------- the map ----------
@@ -337,7 +338,7 @@ body { background: var(--panel); }
     if (si !== hoverSchool || r !== hoverRoute) { hoverSchool = si; hoverRoute = r; draw(); highlightList(); }
     cv.classList.toggle("hot", si >= 0);
     if (si >= 0) {
-      const extra = M.other[si] ? `<br><span class="note">+${fmt(M.other[si])} from outside D1 or unknown</span>` : "";
+      const extra = M.other[si] ? `<br><span class="note">+${fmt(M.other[si])} other transfers in (no line)</span>` : "";
       showTip(`${swatch(si)}<b>${name(si)}</b><br>${fmt(M.inD1[si])} in · ${fmt(M.out[si])} out${extra}${si === M.sel ? "" : `<br><span class="note">Click to pick this school</span>`}`, mx, my);
     } else if (r) showTip(routeText(r), mx, my);
     else $("ttip").hidden = true;
@@ -355,15 +356,26 @@ body { background: var(--panel); }
   }
   const pickBtn = (i) => `<button type="button" data-pick="${i}" title="Show ${name(i)}'s transfers">${swatch(i)}${name(i)}</button>`;
   const top = (arr, n = 10) => Array.from(arr, (v, i) => ({ i, n: v })).filter((x) => x.n > 0).sort((a, b) => b.n - a.n || a.i - b.i).slice(0, n);
+  // The other transfers, by the level of the school they came from (largest first, unknown last).
+  function levelGroup(title) {
+    if (!HAS_LEVELS || !M.others) return "";
+    const rows = LEVELS.map((l, i) => ({ l, n: M.lv[i] })).filter((r) => r.n > 0)
+      .sort((a, b) => (a.l === "unknown") - (b.l === "unknown") || b.n - a.n);
+    const max = Math.max(1, ...rows.map((r) => r.n));
+    return `<div class="group"><h2>${title}</h2><p class="note">The level of the school the roster names; no line is drawn for these</p>
+      ${list(rows.map((r) => ({ label: `${esc(LEVEL_LABEL[r.l] || r.l)}<span class="pct">${Math.round(r.n / M.others * 100)}%</span>`, n: r.n, from: -1, to: -1 })), "lv", max)}
+      ${M.lv[LEVELS.indexOf("D1")] ? `<p class="note">D1 school, not matched: the roster names a D1 school, but he isn't on that school's roster in this data (a different spelling, a stint before 2016, or a high school with the same name).</p>` : ""}</div>`;
+  }
   function renderSide() {
     const side = $("side"), sel = M.sel;
-    const fine = `<p class="fine">A move is one player found on two D1 rosters in turn, or whose roster names his old D1 school. Transfers from junior colleges, Division II and other schools have no known previous D1 school, so they're counted but not drawn.${hasCampus ? "" : " Campus locations (data/school_locations.json) didn't load, so the map can't place the schools."}</p>`;
+    const fine = `<p class="fine">A move is one player found on two D1 rosters in turn, or whose roster names his old D1 school. Transfers from junior colleges, Division II, Division III, NAIA and other schools have no known previous D1 school, so they're counted, by level, but not drawn. "Unknown" means the roster names no school (he was counted as a transfer because he arrived as a junior or older), or a name that fits schools at two levels ("Bethel", "Concordia").${hasCampus ? "" : " Campus locations (school_locations.json) didn't load, so the map can't place the schools."}</p>`;
     if (sel < 0) {
       const dest = top(M.inD1), src = top(M.out), routes = M.routes.slice(0, 12);
       side.innerHTML = `<div class="big">
           <div><b>${fmt(M.moves)}</b><small>moves between D1 schools</small></div>
-          <div><b>${fmt(M.others)}</b><small>other transfers (from outside D1 or unknown)</small></div>
+          <div><b>${fmt(M.others)}</b><small>other transfers, no line drawn</small></div>
         </div>
+        ${levelGroup("Where the other transfers came from")}
         <div class="group"><h2>Biggest destinations</h2><p class="note">Most players arriving from another D1 school</p>
           ${list(dest.map((x) => ({ label: pickBtn(x.i), n: x.n, from: -1, to: x.i })), "in", dest.length ? dest[0].n : 1)}</div>
         <div class="group"><h2>Biggest sources</h2><p class="note">Most players leaving for another D1 school</p>
@@ -381,8 +393,9 @@ body { background: var(--panel); }
           <div><b class="in">${fmt(nIn)}</b><small>came in from D1 schools</small></div>
           <div><b class="out">${fmt(nOut)}</b><small>left for D1 schools</small></div>
           <div><b>${net > 0 ? "+" : ""}${fmt(net)}</b><small>net, D1 to D1</small></div>
-          <div><b>${fmt(M.other[sel])}</b><small>came in from outside D1 or unknown</small></div>
+          <div><b>${fmt(M.other[sel])}</b><small>other transfers in, no line drawn</small></div>
         </div>
+        ${levelGroup("Other transfers came from")}
         <div class="group"><h2>Came in from</h2>${list(ins.slice(0, 15).map((r) => ({ label: pickBtn(r.from), n: r.n, from: r.from, to: r.to })), "in", ins.length ? ins[0].n : 1)}
           ${ins.length > 15 ? `<p class="note">+${plural(ins.length - 15, "more school")}</p>` : ""}</div>
         <div class="group"><h2>Left for</h2>${list(outs.slice(0, 15).map((r) => ({ label: pickBtn(r.to), n: r.n, from: r.from, to: r.to })), "out", outs.length ? outs[0].n : 1)}
@@ -391,10 +404,6 @@ body { background: var(--panel); }
       $("clearSel").addEventListener("click", () => pick(-1));
     }
   }
-  // fade the panel's bottom edge while more of it is below (scrollbars are hidden on Macs)
-  function sideMore() { const s = $("side"); s.classList.toggle("more", s.scrollTop + s.clientHeight < s.scrollHeight - 4); }
-  $("side").addEventListener("scroll", sideMore, { passive: true });
-  new ResizeObserver(sideMore).observe($("side"));
   // hovering a list row lights up its route; clicking a school name picks that school
   $("side").addEventListener("click", (e) => { const b = e.target.closest("[data-pick]"); if (b) pick(+b.dataset.pick); });
   $("side").addEventListener("pointerover", (e) => {
@@ -420,7 +429,7 @@ body { background: var(--panel); }
   }
 
   // ---------- links ----------
-  // transfers.html#school=Alabama&from=2021&pos=QB  (same keys as the dot map; arrived= doesn't apply)
+  // players-transfers.html#school=Alabama&from=2021&pos=QB  (same keys as the dot map; arrived= doesn't apply)
   let lastHash = "";
   const SAVE_KEY = GP.saveKey("recruiting-transfers:last");   // per sport (see common.js)
   function hashNow() {
@@ -455,11 +464,11 @@ body { background: var(--panel); }
   }
   function refresh() {
     state.entry = "";   // never filter by recruit type here: everyone is a transfer
-    compute(); renderSide(); sideMore(); drawKey(); draw(); writeUrl();
+    compute(); renderSide(); drawKey(); draw(); writeUrl();
     const s = F.summary();
     $("filterNote").textContent = s ? `Only ${s}` : "";
     $("hint").textContent = M.sel >= 0 ? "Hover a line or campus for its numbers; click another campus to switch schools" : "Hover a campus to see its transfers; click it to pick that school";
-    if (!hasCampus) { $("msg").hidden = false; $("msg").textContent = "Campus locations didn't load (data/school_locations.json), so the moves can't be drawn. The lists beside the map still work."; }
+    if (!hasCampus) { $("msg").hidden = false; $("msg").textContent = "Campus locations didn't load (school_locations.json), so the moves can't be drawn. The lists beside the map still work."; }
   }
 
   let stateFeatures = [];

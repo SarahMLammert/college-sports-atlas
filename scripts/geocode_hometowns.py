@@ -10,23 +10,24 @@ Offline sources (downloaded once into .cache/):
 Optional online source (--online): OpenStreetMap Nominatim for whatever is left
 (foreign cities, typos), 1 request/second, cached in .cache/nominatim.json.
 
-    python scripts/geocode_hometowns.py                       # data/football/players_unique.csv
+    python scripts/geocode_hometowns.py                       # rosters/football/players_unique.csv
     python scripts/geocode_hometowns.py --online --contact you@example.com
     python scripts/geocode_hometowns.py --sport mens-basketball
 
 Hometowns that don't match get a suggested fix (typos, wrong state, school text mixed in).
 Suggestions marked "fixed" are applied in the same run; "review" ones are applied only with
---use-review. All suggestions are saved to hometown_corrections.csv, where your hand edits
-are kept from run to run and win over the built-in rules.
+--use-review. All suggestions are saved to config/<sport>_hometown_corrections.csv, where your
+hand edits are kept from run to run and win over the built-in rules.
 
-Writes next to the input:
-  <input>_geocoded.csv        the rows + home_lat, home_lon, geo_source, geo_precision
+Writes config/<sport>_hometown_corrections.csv (the fix table: status fixed / review / unfixable),
+and in rosters/<sport>/:
+  <input>_geocoded.csv        the rows + home_lat, home_lon, geo_source, geo_precision, with each
+                              hometown's corrected city/state/country
   hometowns.csv               one row per hometown: what the roster said, the town it was read as,
                               lat/lon, where the answer came from, and how many players. Open it
                               to look anything up. Re-runs reuse it, so only new hometowns are
                               looked up. To move a dot by hand, change its lat/lon and set its
                               source to "manual"; manual rows are always kept.
-  hometown_corrections.csv    the fix table (status: fixed / review / unfixable)
   unmatched_hometowns.csv     what still couldn't be placed, most common first
 
 After changing the parser or this script, run with --refresh to look every hometown up again.
@@ -48,8 +49,8 @@ from pathlib import Path
 import requests
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from core.hometowns import US_STATES, parse_hometown  # noqa: E402
-from core.paths import add_sport_argument, load_sport  # noqa: E402
+from hometowns import US_STATES, parse_hometown  # noqa: E402
+from paths import add_sport_argument, load_sport  # noqa: E402
 
 # In the repo folder (this script lives in scripts/), not the folder it's run from, so every run
 # finds the same downloads and the same saved online answers.
@@ -723,21 +724,22 @@ def load_lookup(path: Path, refresh: bool) -> dict[tuple, dict]:
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("rosters", type=Path, nargs="?",
-                    help="CSV from scrape_rosters.py (default: data/<sport>/players_unique.csv)")
+                    help="CSV from scrape_rosters.py (default: rosters/<sport>/players_unique.csv)")
     add_sport_argument(ap)
     ap.add_argument("--online", action="store_true", help="look up leftovers with OpenStreetMap Nominatim")
     ap.add_argument("--contact", default="anonymous", help="email for the Nominatim User-Agent (their policy)")
     ap.add_argument("--corrections", type=Path, default=None,
-                    help="fix table to read and update (default: hometown_corrections.csv next to the input)")
+                    help="fix table to read and update (default: config/<sport>_hometown_corrections.csv)")
     ap.add_argument("--use-review", action="store_true", help="also apply corrections marked 'review'")
     ap.add_argument("--refresh", action="store_true",
                     help="look every hometown up again instead of reusing hometowns.csv (keeps rows marked 'manual')")
     args = ap.parse_args(argv)
-    args.rosters = args.rosters or load_sport(args.sport).data_dir / "players_unique.csv"
+    sport = load_sport(args.sport)
+    args.rosters = args.rosters or sport.rosters_dir / "players_unique.csv"
     statuses = {"fixed", "review"} if args.use_review else {"fixed"}
-    corr_path = args.corrections or args.rosters.with_name("hometown_corrections.csv")
+    corr_path = args.corrections or sport.hometown_corrections_csv
     table = load_corrections(corr_path)
-    lookup_path = args.rosters.with_name("hometowns.csv")
+    lookup_path = sport.rosters_dir / "hometowns.csv"
     known = load_lookup(lookup_path, args.refresh)
 
     with open(args.rosters, newline="", encoding="utf-8") as fh:
@@ -867,7 +869,7 @@ def main(argv=None) -> int:
         counts[prec] = counts.get(prec, 0) + n
         if not resolved[raw][0]:
             unmatched[raw] = n
-    um_path = args.rosters.with_name("unmatched_hometowns.csv")
+    um_path = sport.rosters_dir / "unmatched_hometowns.csv"
     with open(um_path, "w", newline="", encoding="utf-8") as fh:
         w = csv.writer(fh)
         w.writerow(["hometown_raw", "city", "state", "country", "status", "note", "players"])

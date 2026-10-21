@@ -7,17 +7,18 @@ Examples
     python scripts/scrape_rosters.py --seasons 2019 --only "Alabama,Clemson"
     python scripts/scrape_rosters.py --seasons 2016-2019,2021-2026 --retry-failed --render
     python scripts/scrape_rosters.py --recombine                       # no downloads: re-clean saved seasons, rebuild the combined files
-    python scripts/scrape_rosters.py --sport mens-basketball           # another sport (needs config/mens-basketball/)
+    python scripts/scrape_rosters.py --sport mens-basketball           # another sport (needs config/mens-basketball.json)
 
-Reads config/<sport>/schools.csv, division_history.csv and sport.json (default sport: football).
+Reads config/<sport>.json and config/<sport>_schools.csv (default sport: football).
 
-Outputs (in --out, default data/<sport>/)
-    seasons/rosters_<season>.csv          every player that season, one row each
-    reports/scrape_report_<season>.csv    per school: status, strategy, player counts, URL, errors
-    rosters_all_seasons.csv       all requested seasons stacked (one row per player per season)
+Outputs (in rosters/<sport>/, or --out). The rosters are all cleaned: no jersey numbers or captain
+marks in names, hometowns split into city/state/country, high school and previous school sorted out.
+    rosters_<season>.csv          every player that season, one row each
+    rosters_all_seasons.csv       every saved season stacked (one row per player per season)
     players_unique.csv            one row per player per school, with first/last season on the roster
+    scrape_report_<season>.csv    per school: status, strategy, player counts, URL, errors
 
-Fetching, page parsing and field cleaning live in scripts/core/.
+Fetching, page parsing and field cleaning live in fetch.py, sidearm.py and hometowns.py next to this script.
 """
 from __future__ import annotations
 
@@ -32,11 +33,11 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from urllib.parse import urljoin
 
-from core import fetch, hometowns, sidearm
-from core.fetch import Fetcher, current_season
-from core.hometowns import *            # noqa: F401,F403
-from core.paths import ROOT, add_sport_argument, division_for, load_division_history, load_schools, load_sport
-from core.sidearm import *              # noqa: F401,F403
+import fetch, hometowns, sidearm
+from fetch import Fetcher, current_season
+from hometowns import *            # noqa: F401,F403
+from paths import ROOT, add_sport_argument, division_for, load_division_history, load_schools, load_sport
+from sidearm import *              # noqa: F401,F403
 
 # Older code imported everything from this file (`from scrape_rosters import parse_hometown`); keep
 # those names here, including the underscored helpers, so it still works.
@@ -278,27 +279,61 @@ def build_unique(rows: list[dict]) -> list[dict]:
     return out
 
 
-def write_combined(out_dir: Path, season_dir: Path) -> tuple[list[int], list[dict], list[dict]]:
-    """Rebuild rosters_all_seasons.csv and players_unique.csv from every saved season, re-cleaning
-    each row so parser fixes (names, hometowns, high school vs. previous school) reach old seasons too."""
+def season_files(out_dir: Path) -> dict[int, Path]:
+    """season -> rosters_<season>.csv for every season saved in the folder."""
+    out = {}
+    for path in out_dir.glob("rosters_*.csv"):
+        m = re.fullmatch(r"rosters_(\d{4})\.csv", path.name)
+        if m:
+            out[int(m.group(1))] = path
+    return dict(sorted(out.items()))
+
+
+def restore_season_files(out_dir: Path) -> None:
+    """If the per-season files are gone but rosters_all_seasons.csv is there, split it back into
+    rosters_<season>.csv, so a run never rebuilds the combined files from nothing."""
+    combined = out_dir / "rosters_all_seasons.csv"
+    if season_files(out_dir) or not combined.exists():
+        return
+    by_season: dict[int, list[dict]] = {}
+    for r in read_csv(combined):
+        by_season.setdefault(int(r["season"]), []).append(r)
+    for season, rows in by_season.items():
+        write_csv(out_dir / f"rosters_{season}.csv", OUT_FIELDS, rows)
+    log.info("Rebuilt %d season files from %s", len(by_season), combined.name)
+
+
+def clean_row(r: dict) -> dict:
+    """Clean one saved roster row with the current rules, so parser fixes (names, hometowns, high school
+    vs. previous school) reach seasons scraped earlier too."""
+    r["name"] = clean_name(r.get("name", ""))
+    home = parse_hometown(r.get("hometown", ""))
+    r["home_city"], r["home_state"], r["home_country"] = home["city"], home["state"], home["country"]
+    r["class_norm"] = normalize_class(r.get("class_year", "")) or r.get("class_norm", "")
+    return sort_schools(r)
+
+
+def clean_rows(rows: list[dict]) -> list[dict]:
+    """Drop coaches and staff, and clean every remaining row."""
+    return [clean_row(r) for r in rows if not is_staff(r)]
+
+
+def write_combined(out_dir: Path) -> tuple[list[int], list[dict], list[dict]]:
+    """Clean every saved season file in place, then rebuild rosters_all_seasons.csv and players_unique.csv
+    from them. Every roster file holds only the cleaned version."""
     # Combined outputs cover every season saved so far, not just this run.
     combined = []
     all_saved = []
-    for path in sorted(season_dir.glob("rosters_*.csv")):
-        m = re.fullmatch(r"rosters_(\d{4})\.csv", path.name)
-        if m:
-            all_saved.append(int(m.group(1)))
-            combined.extend(read_csv(path))
-    n_before = len(combined)
-    combined = [r for r in combined if not is_staff(r)]  # also cleans seasons saved by older versions
+    n_before = 0
+    for season, path in season_files(out_dir).items():
+        rows = read_csv(path)
+        n_before += len(rows)
+        rows = clean_rows(rows)
+        write_csv(path, OUT_FIELDS, rows)
+        all_saved.append(season)
+        combined.extend(rows)
     if n_before != len(combined):
         log.info("Dropped %d coach/staff rows from the saved rosters", n_before - len(combined))
-    for r in combined:  # re-clean so name/hometown fixes also reach seasons scraped earlier
-        r["name"] = clean_name(r.get("name", ""))
-        home = parse_hometown(r.get("hometown", ""))
-        r["home_city"], r["home_state"], r["home_country"] = home["city"], home["state"], home["country"]
-        r["class_norm"] = normalize_class(r.get("class_year", "")) or r.get("class_norm", "")
-        sort_schools(r)
     write_csv(out_dir / "rosters_all_seasons.csv", OUT_FIELDS, combined)
     unique = build_unique(combined)
     write_csv(out_dir / "players_unique.csv", UNIQUE_FIELDS, unique)
@@ -314,14 +349,14 @@ def write_combined(out_dir: Path, season_dir: Path) -> tuple[list[int], list[dic
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     add_sport_argument(ap)
-    ap.add_argument("--schools", type=Path, help="default: config/<sport>/schools.csv")
-    ap.add_argument("--division-history", type=Path, help="default: config/<sport>/division_history.csv")
+    ap.add_argument("--schools", type=Path, help="default: config/<sport>_schools.csv")
+    ap.add_argument("--division-history", type=Path, help="default: config/<sport>_schools.csv (its rows with a season range)")
     ap.add_argument("--seasons", help="e.g. 2016-2019,2021-2026 (default: current season)")
     ap.add_argument("--season", type=int, help="single season (same as --seasons N)")
     ap.add_argument("--division", choices=["FBS", "FCS", "all"], default="all", help="by current division")
     ap.add_argument("--conference", help="only this current conference (as in schools.csv)")
     ap.add_argument("--only", help="comma-separated school names")
-    ap.add_argument("--out", type=Path, help="default: data/<sport>/")
+    ap.add_argument("--out", type=Path, help="where the rosters go (default: rosters/<sport>/)")
     ap.add_argument("--cache", default=ROOT / ".cache" / "html", type=Path)
     ap.add_argument("--workers", type=int, default=6, help="schools scraped in parallel (different sites)")
     ap.add_argument("--delay", type=float, default=1.5, help="seconds between requests to the same site")
@@ -338,21 +373,22 @@ def main(argv=None) -> int:
     sidearm.configure(sport)
     args.schools = args.schools or sport.schools_csv
     args.division_history = args.division_history or sport.division_history_csv
-    args.out = args.out or sport.data_dir
+    args.out = args.out or sport.rosters_dir
 
     logging.basicConfig(level=logging.DEBUG if args.verbose else logging.INFO,
                         format="%(asctime)s %(levelname)s %(message)s", datefmt="%H:%M:%S")
     logging.getLogger("urllib3").setLevel(logging.ERROR)
 
     seasons = parse_seasons(args.seasons) if args.seasons else [args.season or current_season()]
-    season_dir, report_dir = args.out / "seasons", args.out / "reports"
+    season_dir = report_dir = args.out
     for d in (season_dir, report_dir):
         d.mkdir(parents=True, exist_ok=True)
+    restore_season_files(season_dir)
     all_schools = load_schools(args.schools)
     history = load_division_history(args.division_history)
     load_known_colleges(all_schools)
     if args.recombine:
-        write_combined(args.out, season_dir)
+        write_combined(season_dir)
         return 0
 
     schools = list(all_schools)
@@ -388,14 +424,10 @@ def main(argv=None) -> int:
     # seasons inside the requested range, so --retry-failed still has the newest roster to
     # compare against when that season is skipped as already done.
     references: dict[str, tuple[int, set[str]]] = {}
-    saved = sorted(season_dir.glob("rosters_*.csv"), reverse=True)
-    for path in saved:
-        m = re.fullmatch(r"rosters_(\d{4})\.csv", path.name)
-        if not m:
-            continue
+    for season, path in sorted(season_files(season_dir).items(), reverse=True):
         for r in read_csv(path):
-            if r["school"] not in references or references[r["school"]][0] == int(m.group(1)):
-                references.setdefault(r["school"], (int(m.group(1)), set()))[1].add(r["name"].lower())
+            if r["school"] not in references or references[r["school"]][0] == season:
+                references.setdefault(r["school"], (season, set()))[1].add(r["name"].lower())
 
     save_dir = args.save_pages.expanduser() if args.save_pages else None
     if save_dir:
@@ -436,12 +468,12 @@ def main(argv=None) -> int:
         st = [r.get("status") for r in reports.values()]
         totals.append((season, len(rows), st.count("ok"), st.count("partial"), st.count("failed")))
 
-    all_saved, combined, unique = write_combined(args.out, season_dir)
+    all_saved, combined, unique = write_combined(season_dir)
     log.info("season  players   ok  partial  failed")
     for season, n, ok, part, fail in totals:
         log.info("%6d  %7d  %3d  %7d  %6d", season, n, ok, part, fail)
     if any(t[3] or t[4] for t in totals):
-        log.info("Not every school worked; see reports/scrape_report_<season>.csv, fix config/schools.csv, then re-run with --retry-failed.")
+        log.info("Not every school worked; see rosters/<sport>/scrape_report_<season>.csv, fix config/<sport>_schools.csv, then re-run with --retry-failed.")
     return 0
 
 

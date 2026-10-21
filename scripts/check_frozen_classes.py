@@ -17,7 +17,8 @@ A frozen archive scores ~90-100% on both. A season inflated by COVID repeats
 scores high on "all" but normal on "no_sr".
 
 Run:  python scripts/check_frozen_classes.py          # add --sport <name> for another sport
-Writes data/<sport>/frozen_class_seasons.csv (school, season, share) for the build.
+Reads the rosters in rosters/<sport>/ and writes rosters/<sport>/frozen_class_seasons.csv
+(school, season, share) for the build.
 """
 import argparse
 import csv
@@ -26,7 +27,7 @@ import statistics
 from collections import defaultdict
 from pathlib import Path
 
-from core.paths import add_sport_argument, load_sport
+from paths import add_sport_argument, load_sport
 
 CUTOFF = 0.6        # flag a pair of seasons when this share of players didn't advance
 MIN_PAIRS = 30      # need at least this many returning players to judge
@@ -49,11 +50,12 @@ def class_rank(value):
     return None
 
 
-def load_rows(data: Path):
-    path = data / "rosters_all_seasons.csv"
-    files = [path] if path.exists() else sorted((data / "seasons").glob("rosters_*.csv"))
+def load_rows(rosters: Path):
+    path = rosters / "rosters_all_seasons.csv"
+    files = [path] if path.exists() else sorted(p for p in rosters.glob("rosters_*.csv")
+                                                  if re.fullmatch(r"rosters_\d{4}\.csv", p.name))
     if not files:
-        raise SystemExit(f"No roster data found in {data}.")
+        raise SystemExit(f"No roster data found in {rosters}.")
     for f in files:
         with open(f, encoding="utf-8", newline="") as fh:
             yield from csv.DictReader(fh)
@@ -62,11 +64,11 @@ def load_rows(data: Path):
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     add_sport_argument(ap)
-    data = load_sport(ap.parse_args(argv).sport).data_dir
-    out = data / "frozen_class_seasons.csv"
+    sport = load_sport(ap.parse_args(argv).sport)
+    out = sport.rosters_dir / "frozen_class_seasons.csv"
     by = defaultdict(dict)          # (school, season) -> {(name, hometown): rank}
     unreadable = defaultdict(int)
-    for r in load_rows(data):
+    for r in load_rows(sport.rosters_dir):
         rank = class_rank(r.get("class_norm"))
         if rank is None and r.get("class_norm"):
             unreadable[r["class_norm"]] += 1

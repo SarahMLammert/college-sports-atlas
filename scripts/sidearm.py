@@ -5,7 +5,7 @@ shows, and pulling players out of it (five parsers, best result kept). Also the 
 previous college from a high school.
 
 Sport-specific settings (roster URL paths, minimum roster size, junior-college names) come from
-config/<sport>/sport.json through configure(), which the scripts call at startup."""
+config/<sport>.json through configure(), which the scripts call at startup."""
 import json
 import re
 from itertools import zip_longest
@@ -14,9 +14,9 @@ from urllib.parse import urljoin
 
 from bs4 import BeautifulSoup, Tag
 
-from core.fetch import current_season
-from core.hometowns import *            # noqa: F401,F403  clean, parse_hometown, normalize_class, ...
-from core.hometowns import _PLACEHOLDERS, _key, _lookup   # noqa: F401
+from fetch import current_season
+from hometowns import *            # noqa: F401,F403  clean, parse_hometown, normalize_class, ...
+from hometowns import _PLACEHOLDERS, _key, _lookup   # noqa: F401
 
 # Set by configure() from the sport's settings; these defaults are football's.
 ROSTER_PATHS = ["/sports/football/roster"]
@@ -784,19 +784,22 @@ def _undouble(name: str) -> str:
     return name
 
 
+# "89 ", "#7 ", "13d ", "16/33 ", "12/DB ", "1-O ", "10030 " in front of a name
+_LEADING_JERSEY = re.compile(r"^#?\d+(?:[a-z]|[/-]\w{0,3})?\s+(?=\D)", re.I)
 _CAPTAIN = re.compile(r"\(\s*c\s*\)|©|\(\s*captain\s*\)|\s+-\s*captain\b|\*+", re.I)
 
 
 def clean_name(name: str) -> str:
     """Strip roster decorations from a player's name:
     '89 Mason Thomas', '#89 Mason Thomas', 'Mason Thomas 89'  -> 'Mason Thomas'
+    '13d Drew Melaragno', '16/33 Drew Melaragno', '12/DB Drew Melaragno', '1-O Drew Melaragno' -> 'Drew Melaragno'
     'C Mason Thomas', 'C 89 Mason Thomas', 'Mason Thomas (C)', 'Mason Thomas*' -> 'Mason Thomas'
     'Dami Adekunjo Dami Adekunjo' -> 'Dami Adekunjo'
     A real initial is kept: 'C.J. Stroud', 'CJ Stroud' and 'C J Stroud' are left alone."""
     n = clean(_CAPTAIN.sub(" ", name or ""))
     for _ in range(3):  # markers can be stacked: "C #89 Mason Thomas"
         before = n
-        n = re.sub(r"^#?\d{1,3}\s+(?=\D)", "", n)               # leading jersey number
+        n = _LEADING_JERSEY.sub("", n)                            # leading jersey number
         n = re.sub(r"\s+#?\d{1,3}$", "", n)                       # trailing jersey number
         words = n.split()
         # a lone leading "C" is a captain marker when a full name (2+ words, not initials) follows

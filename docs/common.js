@@ -14,7 +14,7 @@
 
   // ---------- data ----------
   async function loadData() {
-    const data = await fetch("data/map_data.json").then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); });
+    const data = await fetch("map_data.json").then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); });
     const P = data.players;
     data.N = P.s.length;
     data.SEASONS = [...new Set([...P.f, ...P.l])].map((f) => f + 2000).sort((a, b) => a - b);   // every season anyone was on a roster
@@ -24,7 +24,7 @@
     data.schoolIndex = new Map(data.schools.map((s, i) => [s[0].toLowerCase(), i]));
     // campus city, state and coordinates (built from config/school_locations.csv); the pages work without it
     let loc = null;
-    try { loc = await fetch("data/school_locations.json").then((r) => r.ok ? r.json() : null); } catch (e) {}
+    try { loc = await fetch("school_locations.json").then((r) => r.ok ? r.json() : null); } catch (e) {}
     data.campus = data.schools.map((s) => { const v = loc && loc.schools[s[0]]; return v ? { city: v[0], state: v[1], lat: v[2], lon: v[3] } : null; });
     return data;
   }
@@ -54,7 +54,7 @@
 
   // ---------- Filters dropdown ----------
   // Builds and runs whatever filter controls the page has. The School and Conference controls are optional:
-  // compare.html leaves them out because each of its boxes picks its own school.
+  // players-heatmap.html leaves them out because each of its boxes picks its own school.
   //   onChange()    called after any filter changes
   //   onSchool(i)   called when the School box picks a school (-1 = cleared)
   //   onOpen()      called when the dropdown opens (so the page can close other panels on phones)
@@ -203,9 +203,8 @@
   // (docs/football/players-dotmap.html -> "football"), so every sport keeps its own.
   const sport = decodeURIComponent(location.pathname.split("/").slice(-2, -1)[0] || "");
   const saveKey = (name) => `${sport}:${name}`;
-  // Views saved before the key had the sport in it were all football's; read those once there.
   function readSaved(name) {
-    try { return localStorage.getItem(saveKey(name)) || (sport === "football" && localStorage.getItem(name)) || ""; }
+    try { return localStorage.getItem(saveKey(name)) || ""; }
     catch (e) { return ""; }
   }
 
