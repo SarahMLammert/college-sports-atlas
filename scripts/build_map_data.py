@@ -1,19 +1,25 @@
 #!/usr/bin/env python3
 """Pack players_unique_geocoded.csv into the JSON a sport's pages (docs/<sport>/) load.
 
-    python scripts/build_map_data.py                # data/football/players_unique_geocoded.csv -> docs/football/data/map_data.json
+    python scripts/build_map_data.py                # rosters/football/players_unique_geocoded.csv -> docs/football/map_data.json
     python scripts/build_map_data.py --sport mens-basketball
     python scripts/build_map_data.py <input.csv> <output.json>
 
-Run it again whenever you re-scrape or re-geocode, then commit docs/<sport>/data/map_data.json.
+Run it again whenever you re-scrape or re-geocode, then commit docs/<sport>/map_data.json.
 Dot colors come from config/school_colors.csv (school, primary, secondary hex colors), shared by every
-sport; position groups from config/<sport>/sport.json.
+sport; position groups from config/<sport>.json.
 
 Transfers: many roster pages never list a previous school, so a player counts as a transfer if
   1. the roster lists a college as his previous school, or
   2. he was on another D1 roster in this data first (same name and hometown), or
   3. he's new to a roster whose previous season is also (nearly fully) in the data, and he's already a junior, senior or grad.
 (2) also records the school he came from, so the site can show where transfers moved.
+
+Every other transfer gets the level of the school he came from (scripts/levels.py, with the colleges in
+config/<sport>_schools.csv): a D1 school he wasn't found on, Division II or III, NAIA, junior
+college, or unknown (no school named, or a name that fits two levels).
+
+It reads frozen_class_seasons.csv from rosters/<sport>/ and writes transfer_levels.csv there.
 """
 import argparse
 import csv
@@ -24,11 +30,12 @@ import sys
 from collections import Counter
 
 # The scraper's rules for telling a previous college from a high school, so both steps agree.
-from core import sidearm
-from core.paths import add_sport_argument, load_schools, load_sport
-from core.sidearm import load_known_colleges, sort_schools
+import sidearm
+from levels import LEVELS, Levels, is_major
+from paths import add_sport_argument, load_schools, load_sport
+from sidearm import clean_name, load_known_colleges, sort_schools
 
-# Position groups come from the sport's settings (config/<sport>/sport.json): the groups, the roster
+# Position groups come from the sport's settings (config/<sport>.json): the groups, the roster
 # abbreviations in each, words a spelled-out position starts with, and the group for anything else.
 POS_GROUPS: list[str] = []
 ABBR: dict[str, str] = {}
@@ -58,11 +65,17 @@ def pos_group(p: str) -> int:
     return POS_GROUPS.index(g) if g in POS_GROUPS else POS_GROUPS.index(FALLBACK)
 
 
+def previous_college(prev: str, high_school: str) -> str:
+    """The college the roster says he came from, or "". Uses the scraper's sort_schools(), so a high school
+    filed as "previous school" ('Pickerington Central', 'Menard' next to 'Menard HS', 'IMG Academy') isn't one,
+    and a major in that field ('Business', 'Sport Management' on Valparaiso's roster) isn't either."""
+    p = sort_schools({"high_school": high_school or "", "previous_school": prev or ""})["previous_school"]
+    return "" if is_major(p) else p
+
+
 def is_transfer(prev: str, high_school: str) -> int:
-    """1 if the roster names a college he came from. Uses the scraper's sort_schools(), so a high school
-    filed as "previous school" ('Pickerington Central', 'Menard' next to 'Menard HS', 'IMG Academy') isn't one."""
-    p = sort_schools({"high_school": high_school or "", "previous_school": prev or ""})
-    return int(bool(p["previous_school"]))
+    """1 if the roster names a college he came from."""
+    return int(bool(previous_college(prev, high_school)))
 
 
 _SUFFIX = re.compile(r"\b(jr|sr|ii|iii|iv|v)\b\.?", re.I)
@@ -70,7 +83,7 @@ _SUFFIX = re.compile(r"\b(jr|sr|ii|iii|iv|v)\b\.?", re.I)
 
 def person(r: dict) -> tuple:
     """Name + hometown, loose enough to match one player across two schools' rosters."""
-    name = display_name(r["name"])      # some sites put the jersey number in the name
+    name = clean_name(r["name"])        # the scraper cleans names; this covers rosters cleaned by an older version
     name = re.sub(r"[^a-z]", "", _SUFFIX.sub("", name.lower()))
     city = re.sub(r"[^a-z]", "", (r.get("home_city") or "").lower())
     return name, city, r.get("home_state") or r.get("home_country") or ""
@@ -97,14 +110,6 @@ def find_moves(rows: list[dict]) -> dict[int, str]:
                     and int(rb["first_season"]) >= int(ra["last_season"])):
                 came_from[b] = ra["school"]
     return came_from
-
-
-_JERSEY = re.compile(r"^\s*#?\d+(?:[a-z]|[/-]\w{0,3})?\s+(?=\D)", re.I)   # "89 ", "#7 ", "13d ", "16/33 ", "12/DB ", "1-O ", "10030 "
-
-
-def display_name(name: str) -> str:
-    """The player's name as shown on the site, without a jersey number some sites put in front."""
-    return _JERSEY.sub("", name or "").strip()
 
 
 _HS_WORDS = re.compile(r"\b(high\s+school|h\s*\.\s*s\s*\.?|hs)(?=\W|$)", re.I)
@@ -197,6 +202,7 @@ def main(src, dst, sport):
         rows = list(csv.DictReader(fh))
     if sport.schools_csv.exists():
         load_known_colleges(load_schools(sport.schools_csv))   # so "Wake Forest" counts as a college
+    levels = Levels.load(sport)
     schools = sorted({r["school"] for r in rows})
     sidx = {s: i for i, s in enumerate(schools)}
     conf = {}
@@ -221,10 +227,11 @@ def main(src, dst, sport):
     if thin:
         print("thin rosters (fewer than 40 players; the class-year transfer rule skips the season after each):", ", ".join(thin))
     prev_season = dict(zip(all_seasons[1:], all_seasons))   # 2021 -> 2019: there's no 2020 data
-    frozen = load_frozen_class_seasons(sport.data_dir / "frozen_class_seasons.csv")
+    frozen = load_frozen_class_seasons(sport.rosters_dir / "frozen_class_seasons.csv")
     if frozen:
         print(f"{len(frozen)} school-seasons with untrustworthy class years (the class-year transfer rule skips them)")
     how = Counter()
+    level_count, matched = Counter(), Counter()
 
     towns, tidx = [], {}
     hs_tab, hidx = [], {}
@@ -232,10 +239,11 @@ def main(src, dst, sport):
     spellings = len({(r["high_school"] or "").strip() for r in rows})
     if spellings > len(hs_name):
         print(f"high schools: {spellings} spellings merged into {len(hs_name)} names ('HS' / 'High School' / 'H.S.')")
-    jersey_names = sum(display_name(r["name"]) != (r["name"] or "").strip() for r in rows)
-    if jersey_names:
-        print(f"removed a jersey number from {jersey_names} player names")
-    P = {k: [] for k in ("s", "t", "p", "f", "l", "x", "o", "d", "h", "n")}
+    unclean = sum(clean_name(r["name"]) != (r["name"] or "").strip() for r in rows)
+    if unclean:
+        print(f"cleaned {unclean} player names here; run scrape_rosters.py --recombine and geocode again"
+              " to clean them in the roster files too")
+    P = {k: [] for k in ("s", "t", "p", "f", "l", "x", "o", "v", "d", "h", "n")}
     for i, r in enumerate(rows):
         if r["home_lat"]:
             key = (round(float(r["home_lat"]), 4), round(float(r["home_lon"]), 4))
@@ -251,7 +259,8 @@ def main(src, dst, sport):
         if hs not in hidx:
             hidx[hs] = len(hs_tab)
             hs_tab.append(hs)
-        listed, moved, upper = (is_transfer(r["previous_school"], r["high_school"]), i in came_from,
+        prev = previous_college(r["previous_school"], r["high_school"])
+        listed, moved, upper = (int(bool(prev)), i in came_from,
                                 arrived_as_upperclassman(r, have, prev_season, frozen))
         transfer = int(listed or moved or upper)
         how["previous school on the roster"] += listed
@@ -267,13 +276,20 @@ def main(src, dst, sport):
         P["l"].append(int(r["last_season"]) - 2000)
         P["x"].append(transfer)
         P["o"].append(sidx[came_from[i]] if i in came_from else -1)   # the D1 school he transferred from, if known
+        # level of the school a transfer with no line came from: LEVELS index + 1; 0 = not one of those
+        lvl = ""
+        if transfer and i not in came_from:
+            lvl, school = levels.level(prev, int(r["first_season"]) - 1) if prev else ("unknown", "")
+            level_count[lvl] += 1
+            matched[(lvl, school or prev)] += 1
+        P["v"].append(LEVELS.index(lvl) + 1 if lvl else 0)
         P["d"].append(divs.index(r["division_first_season"]) if r["division_first_season"] in divs else 0)
         P["h"].append(hidx[hs])
-        P["n"].append(display_name(r["name"]))
+        P["n"].append(clean_name(r["name"]))
     out = {
         "schools": [[s, confs.index(conf[s]), divs.index(div_now[s][1]) if div_now[s][1] in divs else 0,
                      *colors.get(s, ("#777777", "#FFFFFF"))] for s in schools],
-        "confs": confs, "divs": divs, "pos": POS_GROUPS, "towns": towns, "hs": hs_tab,
+        "confs": confs, "divs": divs, "pos": POS_GROUPS, "towns": towns, "hs": hs_tab, "levels": LEVELS,
         "players": {k: v for k, v in P.items() if k != "n"}, "names": "\n".join(P["n"]),
     }
     Path(dst).parent.mkdir(parents=True, exist_ok=True)
@@ -286,16 +302,31 @@ def main(src, dst, sport):
     if skipped:
         print(f"not counted as transfers: {skipped} newcomers listed as juniors or older in a season with untrustworthy class years")
     print("D1-to-D1 moves with a known previous school:", sum(o >= 0 for o in P["o"]))
+    print("other transfers by the level of the school they came from:",
+          ", ".join(f"{lv} {level_count[lv]}" for lv in LEVELS))
+    if matched:
+        write_levels_report(matched, sport.rosters_dir / "transfer_levels.csv")
+
+
+def write_levels_report(matched: Counter, path) -> None:
+    """Every previous-school name of a transfer without a line, with the level it got, for checking by hand."""
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "w", newline="", encoding="utf-8") as fh:
+        w = csv.writer(fh)
+        w.writerow(["level", "school", "players"])
+        w.writerows([lv, name, n] for (lv, name), n in sorted(matched.items(), key=lambda x: (LEVELS.index(x[0][0]), -x[1], x[0][1])))
+    print(f"previous schools and their levels -> {path}")
 
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("files", nargs="*", type=Path, metavar="input.csv output.json",
-                    help="default: data/<sport>/players_unique_geocoded.csv docs/<sport>/data/map_data.json")
+                    help="default: rosters/<sport>/players_unique_geocoded.csv docs/<sport>/map_data.json")
     add_sport_argument(ap)
     args = ap.parse_args()
     sport = load_sport(args.sport)
     if len(args.files) not in (0, 2):
         sys.exit(__doc__)
-    src, dst = args.files or (sport.data_dir / "players_unique_geocoded.csv", sport.site_data_dir / "map_data.json")
+    src, dst = args.files or (sport.rosters_dir / "players_unique_geocoded.csv", sport.site_dir / "map_data.json")
     main(src, dst, sport)

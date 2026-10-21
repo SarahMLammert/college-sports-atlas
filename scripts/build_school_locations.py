@@ -1,8 +1,8 @@
-"""Pack config/school_locations.csv into docs/<sport>/data/school_locations.json for the website.
+"""Pack config/school_locations.csv into docs/<sport>/school_locations.json for the website.
 
 Each school's campus city, state and coordinates. The map pages use it for the campus marker,
 home-state share and distance from campus. The CSV is shared by every sport; each sport's JSON only
-holds that sport's schools (from config/<sport>/schools.csv) when that file exists. Run it after
+holds that sport's schools (from config/<sport>_schools.csv) when that file exists. Run it after
 editing the CSV:
 
     python scripts/build_school_locations.py                 # football
@@ -12,7 +12,7 @@ import argparse
 import csv
 import json
 
-from core.paths import ROOT, add_sport_argument, load_schools, load_sport
+from paths import ROOT, add_sport_argument, load_schools, load_sport
 
 
 def main(argv=None):
@@ -25,7 +25,7 @@ def main(argv=None):
         for row in csv.DictReader(f):
             if wanted is None or row["school"] in wanted:
                 schools[row["school"]] = [row["city"], row["state"], float(row["lat"]), float(row["lon"])]
-    out = sport.site_data_dir / "school_locations.json"
+    out = sport.site_dir / "school_locations.json"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps({"fields": ["city", "state", "lat", "lon"], "schools": schools}, separators=(",", ":")), encoding="utf-8")
     print(f"wrote {len(schools)} schools to {out.relative_to(ROOT)}")

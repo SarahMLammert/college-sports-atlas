@@ -230,8 +230,6 @@ body { background: var(--sea); }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
 <script src="../common.js"></script>
 <script>
-// Links made when Compare lived on this page now open the Recruiting Footprints page.
-if (/(^#|&)compare=/.test(location.hash)) location.replace("players-heatmap.html" + location.hash);
 (async function () {
   const { $, STATE_ABBR, ABBR_STATE, fmt, pct, esc, css, narrow } = GP;
   const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;

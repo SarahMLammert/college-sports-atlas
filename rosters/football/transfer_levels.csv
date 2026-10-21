@@ -1,0 +1,2305 @@
+level,school,players
+D1,Liberty,115
+D1,Washington,95
+D1,Auburn,84
+D1,Marshall,79
+D1,Lafayette,73
+D1,Marist,69
+D1,Louisville,66
+D1,Notre Dame,64
+D1,Lamar,57
+D1,Wake Forest,57
+D1,Troy,55
+D1,Holy Cross,53
+D1,Temple,52
+D1,Oklahoma,51
+D1,Princeton,51
+D1,Arkansas,50
+D1,Air Force,49
+D1,Memphis,49
+D1,Alabama,47
+D1,East Carolina,47
+D1,Houston,46
+D1,Illinois,46
+D1,Columbia,45
+D1,West Virginia,45
+D1,Northwestern,44
+D1,Wyoming,44
+D1,Ohio State,43
+D1,Washington State,43
+D1,South Carolina,42
+D1,Army,41
+D1,Indiana,41
+D1,Michigan State,40
+D1,Arkansas State,39
+D1,Bowling Green,39
+D1,Charlotte,39
+D1,James Madison,39
+D1,LSU,39
+D1,Texas Tech,39
+D1,Virginia Tech,39
+D1,Western Kentucky,39
+D1,Arizona State,38
+D1,BYU,38
+D1,Mississippi State,38
+D1,FIU,37
+D1,Oklahoma State,37
+D1,Utah,37
+D1,Georgia Tech,36
+D1,Oregon,36
+D1,Tennessee,36
+D1,UAB,36
+D1,Utah State,35
+D1,Kentucky,34
+D1,Ole Miss,34
+D1,California,33
+D1,Campbell,33
+D1,Colorado,33
+D1,Florida State,33
+D1,Minnesota,33
+D1,Texas,33
+D1,UNLV,33
+D1,Kansas State,32
+D1,Missouri,32
+D1,NC State,32
+D1,UConn,32
+D1,Iowa,31
+D1,Michigan,31
+D1,TCU,31
+D1,UCF,31
+D1,Georgia,30
+D1,Northern Illinois,30
+D1,Western Michigan,30
+D1,Baylor,29
+D1,Coastal Carolina,29
+D1,Georgia State,29
+D1,Hampton,29
+D1,Maryland,29
+D1,Old Dominion,29
+D1,Purdue,29
+D1,Rutgers,29
+D1,UCLA,29
+D1,Boston College,28
+D1,Florida,28
+D1,North Texas,28
+D1,Penn State,28
+D1,Pittsburgh,28
+D1,UTEP,28
+D1,New Mexico State,27
+D1,Syracuse,27
+D1,Texas A&M,27
+D1,Tulane,27
+D1,Virginia,27
+D1,Kansas,26
+D1,Nebraska,26
+D1,SMU,26
+D1,Houston Christian,25
+D1,Louisiana Tech,25
+D1,Louisiana-Monroe,25
+D1,North Carolina,25
+D1,USC,25
+D1,Vanderbilt,25
+D1,Appalachian State,24
+D1,Arizona,24
+D1,Boise State,24
+D1,Buffalo,24
+D1,Iowa State,24
+D1,Kent State,24
+D1,Penn,24
+D1,Jacksonville State,23
+D1,Texas State,23
+D1,UMass,23
+D1,Eastern Michigan,22
+D1,Colorado State,21
+D1,East Tennessee State,21
+D1,Georgetown,21
+D1,Hawaii,21
+D1,Miami,21
+D1,Navy,21
+D1,Nevada,21
+D1,Sam Houston,21
+D1,South Florida,21
+D1,Wisconsin,21
+D1,Eastern Illinois,20
+D1,Jackson State,20
+D1,Middle Tennessee,20
+D1,Oregon State,20
+D1,Southern Miss,20
+D1,Toledo,20
+D1,Wagner,20
+D1,Bryant,19
+D1,Davidson,19
+D1,Miami (OH),19
+D1,San Diego State,19
+D1,Southern Utah,19
+D1,Stephen F. Austin,19
+D1,Valparaiso,19
+D1,Florida Atlantic,18
+D1,Howard,18
+D1,New Mexico,18
+D1,Richmond,18
+D1,Robert Morris,18
+D1,Sacred Heart,18
+D1,Towson,18
+D1,Weber State,18
+D1,Ball State,17
+D1,Dartmouth,17
+D1,McNeese,17
+D1,Ohio,17
+D1,UTSA,17
+D1,Western Carolina,17
+D1,Akron,16
+D1,Gardner-Webb,16
+D1,Grambling State,16
+D1,Jacksonville,16
+D1,Tulsa,16
+D1,UT Martin,16
+D1,Austin Peay,15
+D1,Bethune-Cookman,15
+D1,Clemson,15
+D1,Montana State,15
+D1,Stanford,15
+D1,Youngstown State,15
+D1,Cincinnati,14
+D1,Miami (FL),14
+D1,Tennessee State,14
+D1,Alabama A&M,13
+D1,Idaho State,13
+D1,Mercer,13
+D1,Monmouth,13
+D1,Murray State,13
+D1,Northern Colorado,13
+D1,Northwestern State,13
+D1,Presbyterian,13
+D1,Rhode Island,13
+D1,Samford,13
+D1,San Jose State,13
+D1,Tennessee Tech,13
+D1,Western Illinois,13
+D1,Albany,12
+D1,Central Michigan,12
+D1,Chattanooga,12
+D1,Delaware State,12
+D1,Duke,12
+D1,Eastern Kentucky,12
+D1,Florida A&M,12
+D1,Fresno State,12
+D1,Idaho,12
+D1,Kennesaw State,12
+D1,Lehigh,12
+D1,Stony Brook,12
+D1,Alabama State,11
+D1,Furman,11
+D1,Georgia Southern,11
+D1,Northern Arizona,11
+D1,San Diego,11
+D1,South Carolina State,11
+D1,Southeastern Louisiana,11
+D1,Southern Illinois,11
+D1,Stetson,11
+D1,Alcorn State,10
+D1,Cornell,10
+D1,Dayton,10
+D1,Illinois State,10
+D1,Louisiana,10
+D1,Maine,10
+D1,Mississippi Valley State,10
+D1,North Carolina Central,10
+D1,Savannah State,10
+D1,South Alabama,10
+D1,Southeast Missouri State,10
+D1,Charleston Southern,9
+D1,Elon,9
+D1,Incarnate Word,9
+D1,Missouri State,9
+D1,Morehead State,9
+D1,Morgan State,9
+D1,South Dakota,9
+D1,Southern,9
+D1,Abilene Christian,8
+D1,Arkansas-Pine Bluff,8
+D1,Brown,8
+D1,Merrimack,8
+D1,Norfolk State,8
+D1,Prairie View A&M,8
+D1,Rice,8
+D1,Sacramento State,8
+D1,Texas Southern,8
+D1,Villanova,8
+D1,Delaware,7
+D1,Indiana State,7
+D1,LIU,7
+D1,Montana,7
+D1,North Carolina A&T,7
+D1,North Dakota,7
+D1,Northern Iowa,7
+D1,Tarleton State,7
+D1,West Georgia,7
+D1,Wofford,7
+D1,Central Arkansas,6
+D1,Duquesne,6
+D1,Harvard,6
+D1,Nicholls,6
+D1,North Dakota State,6
+D1,Portland State,6
+D1,South Dakota State,6
+D1,The Citadel,6
+D1,UC Davis,6
+D1,Utah Tech,6
+D1,VMI,6
+D1,Bucknell,5
+D1,Colgate,5
+D1,Drake,5
+D1,Fordham,5
+D1,Saint Francis (PA),5
+D1,Central Connecticut,4
+D1,Eastern Washington,4
+D1,Lindenwood,4
+D1,New Hampshire,4
+D1,North Alabama,4
+D1,UTRGV,4
+D1,East Texas A&M,3
+D1,Stonehill,3
+D1,University of Miami,3
+D1,William & Mary,3
+D1,Yale,3
+D1,Akron/Miami,1
+D1,Cal Poly,1
+D1,Graceland/Miami,1
+D1,Univ. of Miami,1
+D2,Notre Dame College,41
+D2,Lenoir-Rhyne,36
+D2,Lincoln (MO),27
+D2,Albany State (GA),26
+D2,Tiffin,26
+D2,Harding,25
+D2,Valdosta State,25
+D2,Angelo State,24
+D2,Benedict,24
+D2,Savannah State,24
+D2,Virginia Union,23
+D2,Wingate,23
+D2,West Florida,22
+D2,Arkansas-Monticello,21
+D2,Carson-Newman,21
+D2,Shorter,21
+D2,UT Permian Basin,21
+D2,Colorado State-Pueblo,20
+D2,Frostburg State,20
+D2,Shepherd,20
+D2,Tusculum,20
+D2,West Texas A&M,20
+D2,Grand Valley State,19
+D2,Saginaw Valley State,19
+D2,Midwestern State,18
+D2,Miles,18
+D2,Azusa Pacific,17
+D2,Central Oklahoma,17
+D2,Fort Valley State,17
+D2,Henderson State,17
+D2,Kentucky Wesleyan,17
+D2,Limestone,17
+D2,Mars Hill,17
+D2,Shippensburg,17
+D2,Sioux Falls,17
+D2,Davenport,16
+D2,Glenville State,16
+D2,North Greenville,16
+D2,Ohio Dominican,16
+D2,Southern Connecticut State,16
+D2,Wayne State (MI),16
+D2,Central Washington,15
+D2,Ferris State,15
+D2,McKendree,15
+D2,Newberry,15
+D2,Texas A&M-Kingsville,15
+D2,UNC Pembroke,15
+D2,Adams State,14
+D2,Central Missouri,14
+D2,Delta State,14
+D2,Gannon,14
+D2,Mississippi College,14
+D2,Missouri Western,14
+D2,Nebraska-Kearney,14
+D2,Walsh,14
+D2,Western New Mexico,14
+D2,Assumption,13
+D2,California (PA),13
+D2,Catawba,13
+D2,Charleston (WV),13
+D2,Clark Atlanta,13
+D2,East Central (OK),13
+D2,Findlay,13
+D2,Kentucky State,13
+D2,Missouri Southern,13
+D2,Northwest Missouri State,13
+D2,UVA Wise,13
+D2,Alderson Broaddus,12
+D2,Allen,12
+D2,American International,12
+D2,Concord,12
+D2,Eastern New Mexico,12
+D2,Emory & Henry,12
+D2,Fort Lewis,12
+D2,Virginia State,12
+D2,West Liberty,12
+D2,Clarion,11
+D2,Colorado Mesa,11
+D2,Florida Tech,11
+D2,Indianapolis,11
+D2,Lane,11
+D2,Livingstone,11
+D2,Mary,11
+D2,Minot State,11
+D2,Northern Michigan,11
+D2,Ouachita Baptist,11
+D2,Pittsburg State,11
+D2,Seton Hill,11
+D2,Southwest Baptist,11
+D2,Southwestern Oklahoma State,11
+D2,Wheeling,11
+D2,Bowie State,10
+D2,Chadron State,10
+D2,Elizabeth City State,10
+D2,Morehouse,10
+D2,Saint Anselm,10
+D2,West Alabama,10
+D2,Bloomsburg,9
+D2,Central State (OH),9
+D2,Hillsdale,9
+D2,Millersville,9
+D2,Northwood,9
+D2,Oklahoma Baptist,9
+D2,South Dakota Mines,9
+D2,Arkansas Tech,8
+D2,Ashland,8
+D2,Barton,8
+D2,Bluefield State,8
+D2,Chowan,8
+D2,Colorado School of Mines,8
+D2,Edinboro,8
+D2,Erskine,8
+D2,Fairmont State,8
+D2,Fayetteville State,8
+D2,Lake Erie,8
+D2,Minnesota State,8
+D2,Quincy,8
+D2,Slippery Rock,8
+D2,Southern Nazarene,8
+D2,Washburn,8
+D2,West Chester,8
+D2,West Virginia State,8
+D2,West Virginia Wesleyan,8
+D2,Western Colorado,8
+D2,Winona State,8
+D2,Black Hills State,7
+D2,Concordia-St. Paul,7
+D2,East Stroudsburg,7
+D2,Fort Hays State,7
+D2,Johnson C. Smith,7
+D2,Lock Haven,7
+D2,Northern State,7
+D2,Southeastern Oklahoma State,7
+D2,Tuskegee,7
+D2,Upper Iowa,7
+D2,Western Oregon,7
+D2,William Jewell,7
+D2,Emporia State,6
+D2,Franklin Pierce,6
+D2,Humboldt State,6
+D2,Minnesota Duluth,6
+D2,New Mexico Highlands,6
+D2,Northwestern Oklahoma State,6
+D2,Southern Arkansas,6
+D2,Truman State,6
+D2,Urbana,6
+D2,West Georgia,6
+D2,Minnesota State Moorhead,5
+D2,Missouri S&T,5
+D2,New Haven,5
+D2,Post,5
+D2,Shaw,5
+D2,Winston-Salem State,5
+D2,Bemidji State,4
+D2,Edward Waters,4
+D2,IUP,4
+D2,Lincoln (PA),4
+D2,Minnesota Crookston,4
+D2,Pace,4
+D2,Saint Augustine's,4
+D2,Simon Fraser,4
+D2,St. Cloud State,4
+D2,Sul Ross State,4
+D2,Thomas More,4
+D2,Wayne State (NE),4
+D2,Bentley,3
+D2,Brevard,3
+D2,Kutztown,3
+D2,Lindenwood,3
+D2,Mercyhurst,3
+D2,Northeastern State,3
+D2,Roosevelt,3
+D2,Southwest Minnesota State,3
+D2,East Texas A&M,2
+D2,Jamestown,2
+D2,Oklahoma Panhandle State,2
+D2,Tarleton State,2
+D2,Utah Tech,2
+D2,Anderson (SC),1
+D2,Ferrum,1
+D2,Malone,1
+D2,Merrimack,1
+D2,Michigan Tech,1
+D2,Stonehill,1
+D3,Mary Hardin-Baylor,16
+D3,Wesley,14
+D3,Mount Union,12
+D3,Dean,11
+D3,Millsaps,9
+D3,Sewanee,9
+D3,Birmingham-Southern,8
+D3,East Texas Baptist,8
+D3,Guilford,8
+D3,LaGrange,8
+D3,Susquehanna,8
+D3,Texas Lutheran,8
+D3,Lewis & Clark,7
+D3,Maryville (TN),7
+D3,Southern Virginia,7
+D3,Union (NY),7
+D3,Austin,6
+D3,Howard Payne,6
+D3,Huntingdon,6
+D3,Louisiana College,6
+D3,Stevenson,6
+D3,Trinity (TX),6
+D3,Albion,5
+D3,Anna Maria,5
+D3,Bates,5
+D3,Belhaven,5
+D3,Brockport,5
+D3,Christopher Newport,5
+D3,Hobart,5
+D3,Hope,5
+D3,Southwestern (TX),5
+D3,Tufts,5
+D3,Wabash,5
+D3,Wheaton (IL),5
+D3,Wisconsin-Whitewater,5
+D3,Brevard,4
+D3,Colby,4
+D3,Franklin,4
+D3,Hampden-Sydney,4
+D3,Manchester,4
+D3,McMurry,4
+D3,Mount St. Joseph,4
+D3,Pacific (OR),4
+D3,Redlands,4
+D3,Rhodes,4
+D3,Trinity (CT),4
+D3,Wesleyan (CT),4
+D3,Wisconsin-River Falls,4
+D3,Wittenberg,4
+D3,Wooster,4
+D3,Adrian,3
+D3,Allegheny,3
+D3,Amherst,3
+D3,Averett,3
+D3,Bridgewater (VA),3
+D3,Buffalo State,3
+D3,Concordia (IL),3
+D3,Delaware Valley,3
+D3,Dickinson,3
+D3,Dubuque,3
+D3,Ferrum,3
+D3,Gettysburg,3
+D3,Hardin-Simmons,3
+D3,Linfield,3
+D3,Methodist,3
+D3,Nichols,3
+D3,North Carolina Wesleyan,3
+D3,North Central (IL),3
+D3,Ohio Wesleyan,3
+D3,Puget Sound,3
+D3,Randolph-Macon,3
+D3,Rochester,3
+D3,Rowan,3
+D3,Saint Vincent,3
+D3,Shenandoah,3
+D3,Sul Ross State,3
+D3,Ursinus,3
+D3,Alfred,2
+D3,Augustana (IL),2
+D3,Aurora,2
+D3,Berry,2
+D3,Cal Lutheran,2
+D3,Central (IA),2
+D3,Centre,2
+D3,Claremont-Mudd-Scripps,2
+D3,Concordia (WI),2
+D3,Cornell College,2
+D3,Crown,2
+D3,Endicott,2
+D3,Frostburg State,2
+D3,George Fox,2
+D3,Greenville,2
+D3,Grinnell,2
+D3,Hartwick,2
+D3,Heidelberg,2
+D3,Hendrix,2
+D3,Husson,2
+D3,Illinois College,2
+D3,Ithaca,2
+D3,La Verne,2
+D3,Lakeland,2
+D3,Lyon,2
+D3,Marietta,2
+D3,Millikin,2
+D3,Monmouth (IL),2
+D3,Muhlenberg,2
+D3,New England College,2
+D3,North Park,2
+D3,Simpson (IA),2
+D3,Springfield,2
+D3,St. Norbert,2
+D3,Trine,2
+D3,Western New England,2
+D3,Westminster,2
+D3,Whittier,2
+D3,Whitworth,2
+D3,William Paterson,2
+D3,Wilmington (OH),2
+D3,Wisconsin Lutheran,2
+D3,Wisconsin-La Crosse,2
+D3,Wisconsin-Platteville,2
+D3,Wisconsin-Stevens Point,2
+D3,Worcester State,2
+D3,Albright,1
+D3,Alfred State,1
+D3,Alma,1
+D3,Alvernia,1
+D3,Augsburg,1
+D3,Baldwin Wallace,1
+D3,Beloit,1
+D3,Bowdoin,1
+D3,Carleton,1
+D3,Centenary,1
+D3,Concordia (Moorhead),1
+D3,Cortland,1
+D3,Curry,1
+D3,DePauw,1
+D3,Defiance,1
+D3,Denison,1
+D3,Eastern,1
+D3,FDU-Florham,1
+D3,Fitchburg State,1
+D3,Franklin & Marshall,1
+D3,Grove City,1
+D3,Gustavus Adolphus,1
+D3,Hamilton,1
+D3,Hiram,1
+D3,Illinois Wesleyan,1
+D3,Iowa Wesleyan,1
+D3,John Carroll,1
+D3,Johns Hopkins,1
+D3,Kean,1
+D3,Kenyon,1
+D3,Lawrence,1
+D3,MacMurray,1
+D3,Maine Maritime,1
+D3,Middlebury,1
+D3,Minnesota Morris,1
+D3,Moravian,1
+D3,Mount Ida,1
+D3,Ohio Northern,1
+D3,Olivet,1
+D3,Plymouth State,1
+D3,Pomona-Pitzer,1
+D3,RPI,1
+D3,Rose-Hulman,1
+D3,Saint John's (MN),1
+D3,Salisbury,1
+D3,St. Lawrence,1
+D3,St. Olaf,1
+D3,University of New England,1
+D3,Utica,1
+D3,WPI,1
+D3,Wartburg,1
+D3,Washington & Lee,1
+D3,Washington (MO),1
+D3,Waynesburg,1
+D3,Western Connecticut,1
+D3,Widener,1
+D3,Willamette,1
+D3,Williams,1
+D3,Wisconsin-Oshkosh,1
+NAIA,St. Thomas (FL),19
+NAIA,Keiser,17
+NAIA,Arkansas Baptist,12
+NAIA,Lindsey Wilson,11
+NAIA,Missouri Valley,11
+NAIA,Olivet Nazarene,11
+NAIA,Cumberlands,10
+NAIA,Faulkner,10
+NAIA,Indiana Wesleyan,10
+NAIA,Southeastern (FL),10
+NAIA,Campbellsville,9
+NAIA,Texas Wesleyan,9
+NAIA,Warner,9
+NAIA,College of Idaho,8
+NAIA,Langston,8
+NAIA,Lindenwood-Belleville,8
+NAIA,Marian (IN),8
+NAIA,Point,8
+NAIA,Reinhardt,8
+NAIA,Pikeville,7
+NAIA,Briar Cliff,6
+NAIA,Culver-Stockton,6
+NAIA,Georgetown (KY),6
+NAIA,Kentucky Christian,6
+NAIA,Peru State,6
+NAIA,Baker,5
+NAIA,Bluefield,5
+NAIA,Central Methodist,5
+NAIA,Cumberland (TN),5
+NAIA,Florida Memorial,5
+NAIA,Louisiana Christian,5
+NAIA,Montana Tech,5
+NAIA,Nelson,5
+NAIA,Rocky Mountain,5
+NAIA,Siena Heights,5
+NAIA,Texas College,5
+NAIA,Arizona Christian,4
+NAIA,Ave Maria,4
+NAIA,Defiance,4
+NAIA,Ottawa (AZ),4
+NAIA,Ottawa (KS),4
+NAIA,Webber International,4
+NAIA,Benedictine (KS),3
+NAIA,Dakota State,3
+NAIA,Lawrence Tech,3
+NAIA,MidAmerica Nazarene,3
+NAIA,Missouri Baptist,3
+NAIA,Morningside,3
+NAIA,Saint Francis (IN),3
+NAIA,Saint Xavier,3
+NAIA,Southern Oregon,3
+NAIA,St. Ambrose,3
+NAIA,Tabor,3
+NAIA,Taylor,3
+NAIA,Avila,2
+NAIA,Concordia (NE),2
+NAIA,Doane,2
+NAIA,Dordt,2
+NAIA,Eastern Oregon,2
+NAIA,Evangel,2
+NAIA,Graceland,2
+NAIA,Hastings,2
+NAIA,Judson,2
+NAIA,Kansas Wesleyan,2
+NAIA,Montana Western,2
+NAIA,Northwestern (IA),2
+NAIA,Oklahoma Panhandle State,2
+NAIA,Sterling,2
+NAIA,Trinity International,2
+NAIA,Valley City State,2
+NAIA,Wayland Baptist,2
+NAIA,Andrew,1
+NAIA,Bethel (TN),1
+NAIA,Dakota Wesleyan,1
+NAIA,Edward Waters,1
+NAIA,Friends,1
+NAIA,Madonna,1
+NAIA,Mayville State,1
+NAIA,Midland,1
+NAIA,Montana State-Northern,1
+NAIA,Rio Grande,1
+NAIA,Robert Morris (IL),1
+NAIA,St. Francis (IL),1
+NAIA,Thomas More,1
+NAIA,William Penn,1
+NAIA,William Woods,1
+JUCO,Hutchinson CC,183
+JUCO,Butler CC,154
+JUCO,Tyler JC,149
+JUCO,Iowa Western CC,146
+JUCO,College of San Mateo,144
+JUCO,Independence CC,144
+JUCO,Coffeyville CC,133
+JUCO,East Mississippi CC,133
+JUCO,Snow College,132
+JUCO,Trinity Valley CC,124
+JUCO,Riverside City College,122
+JUCO,Garden City CC,107
+JUCO,Blinn,105
+JUCO,Northwest Mississippi CC,105
+JUCO,Iowa Central CC,104
+JUCO,Mississippi Gulf Coast CC,104
+JUCO,Northeastern Oklahoma A&M,102
+JUCO,Jones College,99
+JUCO,Dodge City CC,89
+JUCO,Lackawanna College,89
+JUCO,College of the Canyons,88
+JUCO,College of DuPage,87
+JUCO,City College of San Francisco,84
+JUCO,Fullerton College,84
+JUCO,Georgia Military College,80
+JUCO,New Mexico Military Institute,80
+JUCO,Copiah-Lincoln CC,79
+JUCO,Navarro College,79
+JUCO,East Central CC,76
+JUCO,Hinds CC,74
+JUCO,Kilgore College,74
+JUCO,Saddleback College,73
+JUCO,American River College,72
+JUCO,Northeast Mississippi CC,71
+JUCO,Ventura College,68
+JUCO,Mt. San Antonio College,65
+JUCO,Monroe College,64
+JUCO,Pearl River CC,64
+JUCO,Butte College,62
+JUCO,Laney College,62
+JUCO,Cerritos College,61
+JUCO,Itawamba CC,60
+JUCO,Highland CC,59
+JUCO,Cisco,58
+JUCO,Holmes CC,54
+JUCO,Southwest Mississippi CC,53
+JUCO,Long Beach City College,52
+JUCO,ASA College,51
+JUCO,El Camino College,51
+JUCO,Fresno City College,50
+JUCO,Golden West College,50
+JUCO,Sierra College,49
+JUCO,Diablo Valley College,48
+JUCO,Iowa Western,46
+JUCO,Ellsworth CC,44
+JUCO,San Diego Mesa College,43
+JUCO,Fort Scott CC,42
+JUCO,Modesto JC,42
+JUCO,Reedley College,41
+JUCO,Bakersfield College,37
+JUCO,College of the Sequoias,36
+JUCO,Georgia Military,36
+JUCO,Los Angeles Valley College,36
+JUCO,Contra Costa College,35
+JUCO,Palomar College,35
+JUCO,Santa Rosa JC,35
+JUCO,Foothill College,34
+JUCO,Citrus College,32
+JUCO,East Los Angeles College,31
+JUCO,Louisburg College,31
+JUCO,Coahoma CC,30
+JUCO,Glendale CC,30
+JUCO,Orange Coast College,30
+JUCO,Mississippi Gulf Coast,29
+JUCO,Mt. San Jacinto College,29
+JUCO,Scottsdale CC,29
+JUCO,Mesa CC,27
+JUCO,Mississippi Delta CC,27
+JUCO,Nassau CC,27
+JUCO,Sacramento City College,27
+JUCO,Santa Barbara City College,27
+JUCO,Grossmont College,26
+JUCO,Pima CC,26
+JUCO,Chaffey College,25
+JUCO,Pasadena City College,25
+JUCO,Moorpark College,24
+JUCO,Allan Hancock College,23
+JUCO,Arizona Western College,22
+JUCO,Santa Monica College,22
+JUCO,Blinn JC,21
+JUCO,Monterey Peninsula College,21
+JUCO,El Camino CC,20
+JUCO,Santa Ana College,20
+JUCO,De Anza College,19
+JUCO,Santa Barbara CC,19
+JUCO,Antelope Valley College,18
+JUCO,Arizona Western,18
+JUCO,Hudson Valley CC,18
+JUCO,Los Angeles Pierce College,18
+JUCO,Navarro JC,18
+JUCO,San Jose City College,18
+JUCO,Eastern Arizona College,17
+JUCO,Hartnell College,17
+JUCO,Chabot College,16
+JUCO,Feather River College,16
+JUCO,Garden City,16
+JUCO,Saddleback CC,15
+JUCO,Victor Valley College,15
+JUCO,Co-Lin CC,14
+JUCO,Hutchinson Community College,14
+JUCO,Phoenix College,14
+JUCO,ASA College Miami,13
+JUCO,Kilgore JC,13
+JUCO,College of the Siskiyous,12
+JUCO,Kilgore CC,12
+JUCO,Laney,12
+JUCO,Long Beach CC,12
+JUCO,American River CC,11
+JUCO,Blinn CC,11
+JUCO,Lackawanna JC,11
+JUCO,Mt. SAC,11
+JUCO,North Dakota State College of Science,11
+JUCO,Saddleback,11
+JUCO,Trinity Valley,11
+JUCO,West Los Angeles College,11
+JUCO,American River JC,10
+JUCO,Arizona Western CC,10
+JUCO,Eastern Arizona CC,10
+JUCO,Hutchinson,10
+JUCO,Los Angeles Harbor College,10
+JUCO,Navarro CC,10
+JUCO,Cabrillo College,9
+JUCO,Copiah-Lincoln [MS] CC,9
+JUCO,Diablo Valley CC,9
+JUCO,Jones CC,9
+JUCO,Kilgore,9
+JUCO,Lackawanna,9
+JUCO,Lackawanna CC,9
+JUCO,Mt. San Antonio,9
+JUCO,Navarro,9
+JUCO,Northwest CC,9
+JUCO,Northwest Mississippi Community College,9
+JUCO,San Bernardino Valley College,9
+JUCO,San Diego Mesa CC,9
+JUCO,Shasta College,9
+JUCO,Sierra JC,9
+JUCO,Trinity Valley Community College,9
+JUCO,Cisco JC,8
+JUCO,Coffeyville Community College,8
+JUCO,College of the Desert,8
+JUCO,East Mississippi,8
+JUCO,El Camino,8
+JUCO,Ellsworth Community College,8
+JUCO,Hinds Community College,8
+JUCO,Los Medanos College,8
+JUCO,San Francisco CC,8
+JUCO,San Mateo JC,8
+JUCO,Snow JC,8
+JUCO,Cisco CC,7
+JUCO,Citrus CC,7
+JUCO,College of the Redwoods,7
+JUCO,Copiah-Lincoln,7
+JUCO,Dodge City,7
+JUCO,Fresno City JC,7
+JUCO,Fullerton JC,7
+JUCO,Golden West CC,7
+JUCO,Iowa Western Community College,7
+JUCO,Merced College,7
+JUCO,Mesa Community College,7
+JUCO,Monroe CC,7
+JUCO,Mt. San Antonio JC,7
+JUCO,Orange Coast CC,7
+JUCO,Butte,6
+JUCO,Coffeyville,6
+JUCO,Copiah-Lincoln Community College,6
+JUCO,Eastern Arizona JC,6
+JUCO,Erie CC,6
+JUCO,Fullerton CC,6
+JUCO,Glendale CC (CA),6
+JUCO,Iowa Central Community College,6
+JUCO,Itawamba Community College,6
+JUCO,Palomar CC,6
+JUCO,Riverside JC,6
+JUCO,Rochester CTC,6
+JUCO,Saddleback JC,6
+JUCO,Tyler CC,6
+JUCO,Butte JC,5
+JUCO,CC of San Francisco,5
+JUCO,Cerritos CC,5
+JUCO,Cerritos JC,5
+JUCO,Coalinga College,5
+JUCO,Dodge City Community College,5
+JUCO,Laney CC,5
+JUCO,Minnesota State CTC,5
+JUCO,Nassau Community College,5
+JUCO,Pasadena CC,5
+JUCO,Pearl River,5
+JUCO,San Joaquin Delta College,5
+JUCO,Santa Monica CC,5
+JUCO,Butte CC,4
+JUCO,Central Lakes,4
+JUCO,Cisco Junior College,4
+JUCO,Citrus JC,4
+JUCO,Contra Costa CC,4
+JUCO,Gila River JC,4
+JUCO,Glendale College,4
+JUCO,Golden West JC,4
+JUCO,Hutchinson [Kan.] CC,4
+JUCO,Itasca CC,4
+JUCO,Jones County CC,4
+JUCO,Long Beach Community College,4
+JUCO,Los Medanos CC,4
+JUCO,Mississippi Gulf Coast Community College,4
+JUCO,Moorpark JC,4
+JUCO,NEO A&M JC,4
+JUCO,Northeastern Oklahoma A&M JC,4
+JUCO,Pearl River Community College,4
+JUCO,Reedley JC,4
+JUCO,Sacramento CC,4
+JUCO,Scottsdale Community College,4
+JUCO,Southwest CC,4
+JUCO,Trinity Valley JC,4
+JUCO,Ventura CC,4
+JUCO,ASA,3
+JUCO,ASA JC,3
+JUCO,Bakersfield JC,3
+JUCO,City College of San Fransisco,3
+JUCO,Coahoma Community College,3
+JUCO,Coffeyville College,3
+JUCO,Dakota College at Bottineau,3
+JUCO,Dodge City JC,3
+JUCO,Ellsworth,3
+JUCO,Feather River CC,3
+JUCO,Feather River JC,3
+JUCO,Foothill JC,3
+JUCO,Fort Scott,3
+JUCO,Fresno City CC,3
+JUCO,Garden City Community College,3
+JUCO,Gavilan College,3
+JUCO,Highlands CC,3
+JUCO,Independence [Kan.] CC,3
+JUCO,Indy CC,3
+JUCO,Itawamba [MS] CC,3
+JUCO,Lackawanna C.C.,3
+JUCO,Los Angeles Southwest College,3
+JUCO,Mississippi Delta JC,3
+JUCO,Monroe C.C.,3
+JUCO,Monroe Community College,3
+JUCO,Monroe JC,3
+JUCO,Monterey Peninsula CC,3
+JUCO,Mt. San Jacinto JC,3
+JUCO,NW Mississippi,3
+JUCO,Navarro Junior College,3
+JUCO,Reedley CC,3
+JUCO,San Bernardino Valley JC,3
+JUCO,Santa Ana JC,3
+JUCO,Santa Rosa CC,3
+JUCO,Southwestern CC,3
+JUCO,Trinity Valley [Texas] CC,3
+JUCO,Valley Forge Military College,3
+JUCO,Ventura JC,3
+JUCO,West Hills CC,3
+JUCO,Yuba College,3
+JUCO,ASA CC,2
+JUCO,Allan Hancock CC,2
+JUCO,Antelope Valley JC,2
+JUCO,Bakersfield CC,2
+JUCO,Barton CC,2
+JUCO,Blinn J.C.,2
+JUCO,Blinn Junior College,2
+JUCO,Butler Co. Junior College,2
+JUCO,Butte Community College,2
+JUCO,CC San Francisco,2
+JUCO,Chabot JC,2
+JUCO,Chaffey CC,2
+JUCO,Chaffey Junior College,2
+JUCO,City College,2
+JUCO,Coffeyville JC,2
+JUCO,Contra Costa JC,2
+JUCO,Delta JC,2
+JUCO,Diablo Valley C.C.,2
+JUCO,Diablo Valley JC,2
+JUCO,Dupage JC,2
+JUCO,East Los Angeles CC,2
+JUCO,East Mississippi Community College,2
+JUCO,Eastern Arizona Junior College,2
+JUCO,El Camino JC,2
+JUCO,Ellsworth JC,2
+JUCO,Erie Community College,2
+JUCO,Fresno CC,2
+JUCO,Garden City College (Kan.),2
+JUCO,Glendale C.C.,2
+JUCO,Glendale CC (AZ),2
+JUCO,Hartnell CC,2
+JUCO,Holmes Community College,2
+JUCO,Holmes JC,2
+JUCO,Hutchison CC,2
+JUCO,Jones Co. JC,2
+JUCO,Jones Community College,2
+JUCO,Jones County Community College,2
+JUCO,Jones County Junior College,2
+JUCO,Kilgore J.C.,2
+JUCO,LA Valley CC,2
+JUCO,LSU-Eunice,2
+JUCO,Laney JC,2
+JUCO,Long Beach City CC,2
+JUCO,Los Medanos JC,2
+JUCO,Louisburg JC,2
+JUCO,MS Gulf Coast CC,2
+JUCO,Mesabi Range,2
+JUCO,Mesabi Range CC,2
+JUCO,Mississippi Gulf Coast College,2
+JUCO,NE Missississippi CC,2
+JUCO,Nassau Junior College,2
+JUCO,Navarro J.C.,2
+JUCO,Northeast CC,2
+JUCO,Northeast Mississippi JC,2
+JUCO,Northeast Oklahoma CC,2
+JUCO,Northwest MS CC,2
+JUCO,Northwest Mississippi,2
+JUCO,Orange Coast JC,2
+JUCO,Palomar JC,2
+JUCO,Pasadena Community College,2
+JUCO,Phoenix CC,2
+JUCO,Pierce CC,2
+JUCO,Pima College,2
+JUCO,Riverside Community College,2
+JUCO,Rochester CC,2
+JUCO,Saddleback Community College,2
+JUCO,Saddleback J.C.,2
+JUCO,Saddleback Junior College,2
+JUCO,Salt Lake CC,2
+JUCO,Salt Lake Community College,2
+JUCO,San Antonio College,2
+JUCO,San Diego Mesa JC,2
+JUCO,Santa Monica JC,2
+JUCO,Snow,2
+JUCO,Snow CC,2
+JUCO,Southwest Mississippi JC,2
+JUCO,Southwestern College (CA),2
+JUCO,Southwestern JC,2
+JUCO,Sussex County CC,2
+JUCO,Tallahassee Community College,2
+JUCO,Trinity Valley College,2
+JUCO,Tyler [TX] JC,2
+JUCO,Tyler [Texas] JC,2
+JUCO,West LA JC,2
+JUCO,West Los Angeles CC,2
+JUCO,(Copiah-Lincoln),1
+JUCO,ALA-Queen Creek | Riverside City College,1
+JUCO,ASA (N.Y.) CC,1
+JUCO,ASA C.C.,1
+JUCO,ASA CC NY,1
+JUCO,ASA Junior College,1
+JUCO,Air Force/Tyler JC,1
+JUCO,Allan Hancock (Calif.) JC,1
+JUCO,Allan Hancock JC,1
+JUCO,Allen Hancock JC,1
+JUCO,Allen/Holmes CC,1
+JUCO,Antelope Valley C.C.,1
+JUCO,Antelope Valley CC,1
+JUCO,Arizona Christian/Hutchinson CC,1
+JUCO,Arizona Western C.C.,1
+JUCO,Arizona Western C.C./Rhode Island,1
+JUCO,Arizona Western CC/The Avalon School,1
+JUCO,Arizona Western JC,1
+JUCO,Arizona-Butler C.C.,1
+JUCO,Arkansas State/Highland CC/Coffeyville CC,1
+JUCO,Arkansas-Iowa Western C.C.,1
+JUCO,Asa-Miami JC,1
+JUCO,"Ashland Community College, Coffeyville Community College",1
+JUCO,Attestat O Srednow/San Mateo JC,1
+JUCO,BYU/Snow JC,1
+JUCO,Bakersfield Community College,1
+JUCO,Bakersfield JC/Eastern Michigan,1
+JUCO,Baton Rouge CC,1
+JUCO,Baton Rouge Community College,1
+JUCO,Baylor/Southwest Mississippi CC,1
+JUCO,Bethany CC,1
+JUCO,Bishop Ford/ASA Junior College,1
+JUCO,Blinn C.C.,1
+JUCO,Blinn Community College,1
+JUCO,Blinn JC/UAB,1
+JUCO,Blinn [Texas] JC,1
+JUCO,Boise State/Coffeyville CC,1
+JUCO,Bossier Parish CC,1
+JUCO,Brookdale C.C.,1
+JUCO,Brookdale CC,1
+JUCO,Brunswick CC,1
+JUCO,Buckhorn | Kentucky | Independence CC,1
+JUCO,Buffalo Erie C.C.,1
+JUCO,Butler (Kan. Community College,1
+JUCO,Butler CC/San Bernardino Valley CC,1
+JUCO,Butler CC/Western Carolina,1
+JUCO,Butler Community College Cisco Community College,1
+JUCO,Butte Junior College,1
+JUCO,C.C.C. Southwest,1
+JUCO,CBC Fremantle (Georgia State/Trinity Valley CC),1
+JUCO,CCSF/De Anza CC,1
+JUCO,CSU/Hutchison CC/West Virginia,1
+JUCO,Cabrillo/Long Beach City College,1
+JUCO,Caffey CC,1
+JUCO,Cahoma CC,1
+JUCO,Calvary Baptist Academy/Navarro CC,1
+JUCO,Caruthersville | Butler CC,1
+JUCO,Catawba CC,1
+JUCO,Centennial/Pima CC (Ariz.),1
+JUCO,Center Hill/Itawamba CC,1
+JUCO,Central Georgia Tech CC,1
+JUCO,Central Hinds Academy (Hinds CC),1
+JUCO,Central Holmes Christian (Holmes CC),1
+JUCO,Central Lakes JC,1
+JUCO,Central Missouri/Independence C.C.,1
+JUCO,Central Oklahoma/Riverside CC,1
+JUCO,Chabot CC,1
+JUCO,Chabot Community College,1
+JUCO,Chaffey J.C.,1
+JUCO,Chaffey JC,1
+JUCO,Charlotte/Ocean CC,1
+JUCO,Christian Brothers/Sacramento City CC,1
+JUCO,Cisco (Texas) C.C.,1
+JUCO,Cisco Community College,1
+JUCO,Cisco J.C.,1
+JUCO,Citrus CC/Toledo,1
+JUCO,Citrus [Calif.] JC,1
+JUCO,City College of S.F.,1
+JUCO,Cleveland CC,1
+JUCO,Clinton/East Mississippi CC,1
+JUCO,Co-Lin,1
+JUCO,Co-Lin JC,1
+JUCO,Co-Lin JC/Southern Miss,1
+JUCO,Co-Lin MS CC,1
+JUCO,Coahoma CC | UNLV,1
+JUCO,Coahoma-Lincoln CC,1
+JUCO,Coastal Alabama CC,1
+JUCO,Coffeeville CC,1
+JUCO,"Coffeeville, CC",1
+JUCO,Coffeyville CC | Southeastern Louisiana,1
+JUCO,Coffeyville CC/Johnson County/Blue Valley Northwest,1
+JUCO,Coffeyville CC?Monsignor Pace,1
+JUCO,Coffeyville J.C.,1
+JUCO,Coffeyville JC/Wyoming,1
+JUCO,Coffeyville [Kan.] CC,1
+JUCO,Coffeyville/Allen Hancock,1
+JUCO,Cohoma CC,1
+JUCO,Colin CC,1
+JUCO,"College of Redwoods CC, Calif.",1
+JUCO,College of the Canyons CC,1
+JUCO,College of the Canyons/Glendale CC,1
+JUCO,College of the Desert CC,1
+JUCO,Compton CC,1
+JUCO,Compton College,1
+JUCO,Contra Costa C.C.,1
+JUCO,Contra Costa [Calif.] JC,1
+JUCO,Copiah Lincoln,1
+JUCO,Copiah Lincoln Community College,1
+JUCO,Copiah Lincoln Junior College,1
+JUCO,Copiah-Lincoln College,1
+JUCO,Cornerstone Christian (Saddleback CC),1
+JUCO,Crete-Monee | Independence CC,1
+JUCO,Cummings (UNC Charlotte/Coffeyville CC),1
+JUCO,Cypress/Fullerton CC,1
+JUCO,Dacula/Garden City (Kan.) CC,1
+JUCO,Delta Junior College,1
+JUCO,Diablo Valley CC/Clayton Valley Charter,1
+JUCO,Diablo Valley CC/Ole Miss,1
+JUCO,Diablo Valley Community College,1
+JUCO,Diablo Valley Junior College,1
+JUCO,Diablo Valley [Calif.] JC,1
+JUCO,Dodge City College,1
+JUCO,Dodge City [Kan.] CC,1
+JUCO,Douglas/Dodge City CC,1
+JUCO,Dunbar/ Asa JC,1
+JUCO,"Dusquesne, Lackawanna CC",1
+JUCO,EC Mississippi CC,1
+JUCO,East Arizona CC,1
+JUCO,East Carolina/Hutchinson CC,1
+JUCO,East Central CC/Nevada,1
+JUCO,East Central Mississippi CC,1
+JUCO,East Central Mississippi Community College,1
+JUCO,East Los Angeles Community College,1
+JUCO,East MS CC,1
+JUCO,East Miss. CC/UAB,1
+JUCO,East Misssissippi CC,1
+JUCO,Easter Arizona J.C.,1
+JUCO,Eastern Arizona J.C.,1
+JUCO,Eerie CC,1
+JUCO,"El Camino CC, Calif.",1
+JUCO,El Camino City College,1
+JUCO,El Camino Community College,1
+JUCO,El Camino JC JC,1
+JUCO,Ellsworth JC/SW Oklahoma State,1
+JUCO,Ellsworth [Iowa] CC,1
+JUCO,Eric Francis JC,1
+JUCO,Essex CC,1
+JUCO,Etiwanta/Riverside City College,1
+JUCO,Exeter Academy | Coffeyville CC,1
+JUCO,Faulkner (Ala.) State CC,1
+JUCO,Florence/Pima CC,1
+JUCO,Florida/Tyler JC,1
+JUCO,Fond Du Lac Tribal & Community College,1
+JUCO,Fond du Lac,1
+JUCO,Fort Scott CC/Coahoma CC,1
+JUCO,Fort Scott College,1
+JUCO,Fort Scott Community College,1
+JUCO,Fort Scott Junior College,1
+JUCO,Fort Scott [Kan.] CC,1
+JUCO,Fort Scott [Kan.] Community College,1
+JUCO,Frenso City College,1
+JUCO,Fresno City College/Western Colorado,1
+JUCO,Fresno City College/Western Michigan,1
+JUCO,Fresno City Community College,1
+JUCO,Fresno City J.C.,1
+JUCO,Fullerton College (CA) JC,1
+JUCO,Fullerton JC/ Santa Ana JC/Sam Houston State,1
+JUCO,Ga. Military,1
+JUCO,Garden City C.C. (Kansas)/Highland C.C. (Kansas),1
+JUCO,"Garden City CC, Kan.",1
+JUCO,Garden City CC/Cisco College,1
+JUCO,Garden City CC/Dodge City CC,1
+JUCO,Garden City [Kan.] CC,1
+JUCO,Gateway Community College,1
+JUCO,Gavilan CC,1
+JUCO,Gila C.C.,1
+JUCO,Glendale,1
+JUCO,Glendale Arizona CC,1
+JUCO,Glendale City College,1
+JUCO,Glendale Comm. College,1
+JUCO,Glendale JC,1
+JUCO,Glendale [Ariz.] CC/LSU,1
+JUCO,Globe Tech CC,1
+JUCO,Golden Gate CC,1
+JUCO,Golden West C.C.,1
+JUCO,Golden West Community College,1
+JUCO,Governor Mifflin/Nassau CC,1
+JUCO,Grand Rapids CC,1
+JUCO,Greece Olympia/Hudson Valley CC,1
+JUCO,Green River CC,1
+JUCO,Griffin/Hinds (Miss.) CC,1
+JUCO,Grossman JC,1
+JUCO,Grossmont CC,1
+JUCO,Grossmont JC,1
+JUCO,Grove City College,1
+JUCO,Gulf Coast CC/Arkansas,1
+JUCO,Gulf Coast [MS] CC,1
+JUCO,Hartnell JC,1
+JUCO,Hawkeye CC,1
+JUCO,Hays/Tyler JC,1
+JUCO,Highland CC/University of Charleston,1
+JUCO,Highland [Kan.] CC,1
+JUCO,Hinds CC/Northeast Mississippi CC/Southeast Missouri State,1
+JUCO,Hinds [MS] CC,1
+JUCO,Hinds [Miss.] CC,1
+JUCO,Hocking CC,1
+JUCO,Holmes,1
+JUCO,Holmes (Miss.) Community College,1
+JUCO,Holmes County CC,1
+JUCO,Holmes [MS] CC,1
+JUCO,Hudson Valley Community College and Temple University,1
+JUCO,Humboldt State/Modesto JC,1
+JUCO,Hutchinson (Kan.) CC/Florida State,1
+JUCO,Hutchinson (Kan.) Community College,1
+JUCO,Hutchinson CC [Kan.],1
+JUCO,Hutchinson CC/Arkansas State,1
+JUCO,Hutchinson CC/Buffalo,1
+JUCO,Hutchinson CC/Kent State,1
+JUCO,Hutchinson CC/Missouri,1
+JUCO,Hutchinson CC/Nebraska,1
+JUCO,Hutchinson JC,1
+JUCO,Hutchinson [KS] CC,1
+JUCO,IMG Academy/Butler CC,1
+JUCO,Illinois/Butler [Kan.] CC,1
+JUCO,Independence (Kan.) CC/Auburn,1
+JUCO,Independence CC/Coastal Carolina,1
+JUCO,Independence CC/Fullerton CC,1
+JUCO,Independence JC,1
+JUCO,Independence [KS] CC,1
+JUCO,Indian River CC,1
+JUCO,Indy JC,1
+JUCO,Iowa C.C.,1
+JUCO,Iowa CC,1
+JUCO,Iowa Central CC/Nebraska,1
+JUCO,Iowa State/Blinn JC,1
+JUCO,Iowa Western CC/Bethune-Cookman,1
+JUCO,Iowa Western CC/Santa Barbara City College,1
+JUCO,Iowa Western College,1
+JUCO,Iowa Western J.C.,1
+JUCO,Iowa Western JC,1
+JUCO,Itawamba CC/Delta St.,1
+JUCO,Itawamba College,1
+JUCO,Itawamba JC,1
+JUCO,Itwamba Community College,1
+JUCO,Ivybridge CC,1
+JUCO,Iwawamba CC,1
+JUCO,JW North (Riverside CC),1
+JUCO,Jefferson State C.C.,1
+JUCO,Jeffersontown/Coffeyville CC,1
+JUCO,Johnson (Santa Monica CC),1
+JUCO,Jones C.C.,1
+JUCO,Jones County JC/Vicksburg,1
+JUCO,Kalamazoo Valley CC,1
+JUCO,Kan. CC,1
+JUCO,Kansas CC,1
+JUCO,Kapi‘olani CC,1
+JUCO,Kilgore (Texas) CC,1
+JUCO,Kilgore Community College,1
+JUCO,King's JC,1
+JUCO,Kingfisher/Northeastern Oklahoma A&M CC,1
+JUCO,L.A. Pierce JC,1
+JUCO,L.A. Valley JC,1
+JUCO,LA Pierce (Calif.) CC,1
+JUCO,LA Pierce JC,1
+JUCO,LA Southwest CC,1
+JUCO,LA Southwest JC,1
+JUCO,LA Valley CC/West Virginia,1
+JUCO,LA Valley Junior College,1
+JUCO,La Cueva | Garden City CC,1
+JUCO,Lackawanna (Pa.) CC,1
+JUCO,Lackawanna C.C. (PA),1
+JUCO,Lackawanna Community College,1
+JUCO,Lackawanna Junior College,1
+JUCO,Lackawanna/Independence CC,1
+JUCO,Lane CC,1
+JUCO,Laney (Calif.) CC,1
+JUCO,"Laney College, Santa Barbara City College",1
+JUCO,Lewis & Clark CC,1
+JUCO,Lewis and Clark CC,1
+JUCO,Linn-Benton CC,1
+JUCO,Lone Star C.C.,1
+JUCO,Los Angeles Adventist Academy (Cerritos CC),1
+JUCO,Los Angeles Harbor JC,1
+JUCO,Los Angeles Pierce CC,1
+JUCO,Los Angeles Valley CC,1
+JUCO,Los Angeles Valley CC/Pierce CC,1
+JUCO,Los Angeles Valley Community College,1
+JUCO,Los Angeles Valley JC,1
+JUCO,Louisburg CC,1
+JUCO,Louisburg Community College,1
+JUCO,Loyola (Glendale College),1
+JUCO,Maricopa CC,1
+JUCO,Marietta/Iowa Western CC,1
+JUCO,Marion County/Coffeyville CC,1
+JUCO,Mary G. Montgomery | Holmes CC,1
+JUCO,Maryland/Coffeyville,1
+JUCO,Maryland/Garden City CC/Dodge City CC,1
+JUCO,Maryland/Independence CC,1
+JUCO,McKinleyville | Riverside City College,1
+JUCO,McLennan CC,1
+JUCO,Memphis/Itawamba Community College,1
+JUCO,Mendocino C.C.,1
+JUCO,Mendocino College,1
+JUCO,Merced CC,1
+JUCO,Merced College/Modesto Junior College,1
+JUCO,Merced [Calif.] JC,1
+JUCO,Mesa,1
+JUCO,Mesa (Ariz.) Community College,1
+JUCO,Mesa CC/Boise State,1
+JUCO,Mesa CC/Georgia Tech,1
+JUCO,Mesa [Ariz.] CC,1
+JUCO,Miami (Fla.)/Lackawanna CC,1
+JUCO,Middle Tennessee State/Iowa Central CC,1
+JUCO,Middle Tennessee/Mississippi Gulf Coast,1
+JUCO,Mill Valley/Coffeyville CC,1
+JUCO,Mira Mar CC,1
+JUCO,Miss. Gulf Coast Community College,1
+JUCO,Mississippi Delta Community College,1
+JUCO,Mississippi Gulf C.C.,1
+JUCO,Mississippi Gulf CC,1
+JUCO,Mississippi Gulf Coast CC/Illinois,1
+JUCO,Mississippi State/Coahoma CC,1
+JUCO,Missouri/Mississippi Gulf Coast CC,1
+JUCO,Modesto CC,1
+JUCO,Monroe College/Dodge City CC,1
+JUCO,Monroe [N.Y.] JC,1
+JUCO,Monterey [Calif.] Peninsula JC,1
+JUCO,Moorpark College/Coffeyville CC/Misericordia,1
+JUCO,Morehouse College/NW Mississippi,1
+JUCO,Morton/NW Mississippi CC,1
+JUCO,Motlow State CC,1
+JUCO,Mount SAC College,1
+JUCO,Mount Sac,1
+JUCO,Mount San Antonio,1
+JUCO,Mount San Jacinto CC,1
+JUCO,Mount San Jacinto JC,1
+JUCO,Mountain Pointe/Scottsdale CC,1
+JUCO,Ms. Gulf Coast CC,1
+JUCO,Mt SAC,1
+JUCO,Mt. SAC (San Antonio College),1
+JUCO,Mt. SAC College,1
+JUCO,Mt. Sac,1
+JUCO,Mt. Sac CC,1
+JUCO,Mt. Sac College,1
+JUCO,Mt. Sac JC,1
+JUCO,Mt. Sac/L.A. Pierce/Coffeyville,1
+JUCO,Mt. Sacramento JC,1
+JUCO,Mt. San Antonio CC,1
+JUCO,Mt. San Jacinto CC,1
+JUCO,NE Mississippi Community College,1
+JUCO,NEO,1
+JUCO,Nassau Community College (N.Y.),1
+JUCO,Nassau Community College (NY),1
+JUCO,Nassau [N.Y.] CC/Mesa [Ariz.] CC/Ventura [Calif.] JC,1
+JUCO,Navarro C.C.,1
+JUCO,Navarro CC/Hargrave,1
+JUCO,Navarro JC/The Citadel,1
+JUCO,Navarro [Texas] JC,1
+JUCO,Neosho County Community College,1
+JUCO,New Mexico Military Institute/Hutchinson [Kan.] CC,1
+JUCO,Niagara Falls/Erie CC,1
+JUCO,Norcross | Butler CC,1
+JUCO,Northeast Missisippi CC,1
+JUCO,Northeast Mississippi Community College,1
+JUCO,Northeastern Oklahoma CC,1
+JUCO,Northern Arizona/East Mississippi C.C.,1
+JUCO,Northern Colorado/Arizona Western JC,1
+JUCO,Northern Illinois/Trinity Valley JC,1
+JUCO,Northern Iowa/Iowa Western,1
+JUCO,Northland (Minn.) CC,1
+JUCO,Northmont/Butler CC,1
+JUCO,Northwest (Miss.) CC,1
+JUCO,Northwest CC (Miss.),1
+JUCO,Northwest Mississipi CC,1
+JUCO,Northwest Mississippi JC,1
+JUCO,Northwestern College/Modesto Junior College,1
+JUCO,Northwestern Mississippi CC,1
+JUCO,Notre Dame/Iowa Western CC,1
+JUCO,Oaks Christian/Pierce JC/New Mexico Military Institute,1
+JUCO,Ocean CC,1
+JUCO,Ohio State/NW Mississippi CC,1
+JUCO,Oklahoma State/Blinn JC,1
+JUCO,Oklahoma State/Independence CC,1
+JUCO,Oregon/Holmes CC [Miss.],1
+JUCO,Orestimba (Modesto JC),1
+JUCO,Oscar Smith (VA)/Independence CC,1
+JUCO,Palm Beach CC,1
+JUCO,Palomar C.C.,1
+JUCO,Palomar [Calif.] JC,1
+JUCO,Papago J.C.,1
+JUCO,Parklane Academy (East Central CC),1
+JUCO,Pasadena City CC,1
+JUCO,Patrick Henry CC,1
+JUCO,Peal River CC,1
+JUCO,Peal River CC/ Lane College,1
+JUCO,Pearl City CC,1
+JUCO,Pearl River JC,1
+JUCO,Person/Piedmont CC,1
+JUCO,Peru State JC/Coffeyville JC,1
+JUCO,Phillipsburg (Hudson Valley CC),1
+JUCO,Pierce JC,1
+JUCO,Pima,1
+JUCO,Purdue/Kilgore Community College,1
+JUCO,Quincy/Butte,1
+JUCO,Redlands CC,1
+JUCO,Reedley (Calif.) JC,1
+JUCO,"Reedley College CC, Calif.",1
+JUCO,Reedley JC (Calif.),1
+JUCO,Reedley JC/Clovis North,1
+JUCO,Revere (Vermilion CC),1
+JUCO,Ridge Point (Texas)/Trinity Valley CC,1
+JUCO,Ridge Water Community College,1
+JUCO,Riordan/City College of San Francisco,1
+JUCO,Riverside CC/Montana,1
+JUCO,Riverside CC/Ventura JC,1
+JUCO,Riverside City,1
+JUCO,"Riverside City College, CA",1
+JUCO,Riverside City College/Sacramento State,1
+JUCO,Roane State CC,1
+JUCO,Rochester (Minn.) CC,1
+JUCO,Rochester Community College,1
+JUCO,Rockland CC,1
+JUCO,Ruston/Mississippi Gulf Coast Community College,1
+JUCO,S. Pasadena/Pasadena City College,1
+JUCO,SF City College,1
+JUCO,SMU/Navarro [Texas] JC,1
+JUCO,SMU/Trinity Valley JC,1
+JUCO,Sac City CC,1
+JUCO,Sacramento City CC,1
+JUCO,Sacramento City JC,1
+JUCO,Sacramento State/Sierra J.C.,1
+JUCO,Saddleback C.C.,1
+JUCO,Saddleback CC/Louisiana-Lafayette,1
+JUCO,San Bernadino Valley (Calif.) CC,1
+JUCO,San Bernardino CC,1
+JUCO,San Bernardino Valley CC,1
+JUCO,San Bernardino Valley CC (Calif.),1
+JUCO,San Clemente/Saddleback CC,1
+JUCO,San Joaquin Delta JC,1
+JUCO,San Jose CC,1
+JUCO,San Jose City Community College,1
+JUCO,San Jose City JC,1
+JUCO,San Mateo CC,1
+JUCO,San Mateo Community College,1
+JUCO,Santa Monica Junior College,1
+JUCO,Santa Rosa [CA] JC,1
+JUCO,Scottsdale CC/Independence,1
+JUCO,Senatobia | East Mississippi CC,1
+JUCO,Sequioas JC,1
+JUCO,Seward County CC,1
+JUCO,Shawnee Mission East (Hutchinson CC),1
+JUCO,Shawsheen Tech (Louisiana Tech/St. George C.C./Stonehill),1
+JUCO,Sierra C.C.,1
+JUCO,Sierra Junior College,1
+JUCO,Siskiyous JC,1
+JUCO,Skutt Catholic | Midland Uni. | Butler CC | Colorado State,1
+JUCO,Snead State CC,1
+JUCO,Snow J.C.,1
+JUCO,Snow Junior College,1
+JUCO,Snow),1
+JUCO,South Alabama/Holmes CC,1
+JUCO,South Carolina State/Hutchinson,1
+JUCO,South Dade | Butler CC,1
+JUCO,South Dakota State/Iowa Western,1
+JUCO,South Delta/Mississippi Delta CC,1
+JUCO,South Mountain CC/James Madison,1
+JUCO,South Pointe/Iowa Western CC,1
+JUCO,Southeast/Iowa Western CC,1
+JUCO,Southern Connecticut/Nassau JC,1
+JUCO,Southern Miss | Highland CC,1
+JUCO,Southwest MS CC,1
+JUCO,Southwest Mississippi Community College,1
+JUCO,Southwest/Iowa Western CC,1
+JUCO,Southwestern (Calif.) CC,1
+JUCO,Southwestern Junior College,1
+JUCO,Southwestern [Calif.] JC,1
+JUCO,Spartanburg/Hutchinson (Kan.) CC,1
+JUCO,St. George Eagles JC,1
+JUCO,St. Mary's/City College of San Francisco,1
+JUCO,St. Petersburg CC,1
+JUCO,Stony Brook/Iowa Western CC,1
+JUCO,Sussex CC,1
+JUCO,Tacoma CC,1
+JUCO,Tallahassee JC,1
+JUCO,Tarrant CC,1
+JUCO,Tarrant County CC,1
+JUCO,Texas CC,1
+JUCO,Thompson Valley/Independence CC),1
+JUCO,Thomson (Highland CC),1
+JUCO,Tiffin-Butler C.C.,1
+JUCO,Trinity Christian Academy/Jones County JC,1
+JUCO,Trinity Valley CC/UAB,1
+JUCO,Truckee Meadows CC,1
+JUCO,Tyler JC/UTSA,1
+JUCO,ULM/Fresno City College,1
+JUCO,UNI/Iowa Western CC,1
+JUCO,UNLV/Dodge City CC,1
+JUCO,UTSA/Jones JC,1
+JUCO,UTSA/Pearl River CC,1
+JUCO,Union County CC,1
+JUCO,Utah/Hutchinson JC,1
+JUCO,Utah/Mesa CC,1
+JUCO,Vashon/Ellsworth CC,1
+JUCO,Ventura C.C.,1
+JUCO,Ventura Community College,1
+JUCO,Ventura JC/Fresno State,1
+JUCO,Ventura Junior College,1
+JUCO,Victor Valley CC,1
+JUCO,Volunteer State CC,1
+JUCO,Wagner/Saddleback [Calif.] JC,1
+JUCO,Walters State CC,1
+JUCO,Washington St./Highlands CC,1
+JUCO,Washington Township/Lackawanna CC (PA),1
+JUCO,Washington/Coffeyville,1
+JUCO,Wayne State/Ellsworth C.C.,1
+JUCO,West Hills (Calif.) CC,1
+JUCO,West Hills Community College,1
+JUCO,West Hills JC,1
+JUCO,West Hills-Coalinga CC,1
+JUCO,West Los Angeles CC/Norfolk State,1
+JUCO,West Los Angeles JC,1
+JUCO,West Valley (Mount San Jacinto CC),1
+JUCO,Western Illinois | Cerritos JC | Fort Lewis JC,1
+JUCO,Western Kentucky - Garden City C.C.,1
+JUCO,Westlake (San Diego Mesa CC),1
+JUCO,Wheeler | Hutchinson CC,1
+JUCO,Wilcox (San Francisco City CC),1
+JUCO,Willamette/Pasadena City College,1
+JUCO,Wilson Area (Ellsworth CC),1
+JUCO,Wor-Wic Community College,1
+JUCO,Wyoming/Mesa,1
+JUCO,Yuba CC (Calif.),1
+unknown,,2942
+unknown,University School,66
+unknown,St. John's College,49
+unknown,University,44
+unknown,Butler,40
+unknown,Cass Tech,36
+unknown,Memphis University School,33
+unknown,Tampa Bay Tech,31
+unknown,State College Area,27
+unknown,Gonzaga College,26
+unknown,Saint Francis,24
+unknown,Aquinas Institute,23
+unknown,Southwestern College,20
+unknown,A&M Consolidated,19
+unknown,Christian Brothers College,19
+unknown,Bethel,17
+unknown,College Station,17
+unknown,La Salle College,17
+unknown,Hocking College,12
+unknown,University School of Jackson,12
+unknown,College Park,11
+unknown,Fork Union,11
+unknown,Bradwell Institute,10
+unknown,State College,10
+unknown,Florida State University School,9
+unknown,Free State,9
+unknown,St. Joseph's College,9
+unknown,University Laboratory School,9
+unknown,Boston College High,8
+unknown,La Salle Institute,8
+unknown,Vanier College,8
+unknown,De La Salle Institute,7
+unknown,Gonzaga College H.S.,7
+unknown,Marquette University,7
+unknown,University Christian School,7
+unknown,University of Detroit Jesuit,7
+unknown,Calvert Hall College,6
+unknown,Fork Union Military,6
+unknown,Gonzaga College High,6
+unknown,La Salle College H.S.,6
+unknown,NSU University School,6
+unknown,Passaic Tech,6
+unknown,St. John's College H.S.,6
+unknown,St. Louis University,6
+unknown,University Lab School,6
+unknown,West Florida Tech,6
+unknown,Anderson,5
+unknown,Calvert Hall College (H.S.),5
+unknown,Carroll,5
+unknown,Imhotep Institute,5
+unknown,Myrtle Beach Collegiate,5
+unknown,St. Joseph's Collegiate Institute,5
+unknown,The Scots College,5
+unknown,Xavier College,5
+unknown,Baltimore Polytechnic Institute,4
+unknown,Bethany College,4
+unknown,Bethel University,4
+unknown,Brooklyn Tech,4
+unknown,Calvert Hall College H.S.,4
+unknown,Central Georgia Tech,4
+unknown,Emanuel County Institute,4
+unknown,Exploratory,4
+unknown,Monash University,4
+unknown,Palm Harbor University,4
+unknown,Polytechnic,4
+unknown,Silliman Institute,4
+unknown,St. Francis,4
+unknown,St. Thomas More,4
+unknown,The Taft School,4
+unknown,University Laboratory,4
+unknown,Avon Old Farms,3
+unknown,Barker College,3
+unknown,Benedictine,3
+unknown,Central Georgia Technical College,3
+unknown,Deakin University,3
+unknown,Georgia Military Institute,3
+unknown,Haileybury College,3
+unknown,Hodgson Vo-Tech,3
+unknown,Hodgson-Vo-Tech,3
+unknown,Imhotep Institute Charter,3
+unknown,Lawrence Free State,3
+unknown,Marcellin College,3
+unknown,Mary Institute & St. Louis Country Day,3
+unknown,McKinley Tech,3
+unknown,Middle Georgia State,3
+unknown,Montmorency College,3
+unknown,Passaic County Tech,3
+unknown,Southern University Lab School,3
+unknown,St. John's College (H.S.),3
+unknown,University Liggett School,3
+unknown,University School of NSU,3
+unknown,West Virgina State,3
+unknown,Aquinas Institute of Rochester,2
+unknown,Arsenal Tech,2
+unknown,Avon Old Farms (Conn.),2
+unknown,Biology/Chemistry,2
+unknown,Boston College H.S.,2
+unknown,Business Analytics,2
+unknown,Carroll College,2
+unknown,Champlain College,2
+unknown,Choate Rosemary Hall,2
+unknown,Choate Rosemary Hall (Conn.),2
+unknown,Detroit Cass Tech,2
+unknown,Florida State University Schools,2
+unknown,Guelph,2
+unknown,Hocking Technical College,2
+unknown,Imhotep Charter Institute,2
+unknown,Liberty Tech,2
+unknown,Liberty Tech Magnet,2
+unknown,Long Beach Polytechnic,2
+unknown,MBA,2
+unknown,McDougle Technical Institute,2
+unknown,Mergenthaler Vo-Tech,2
+unknown,Milford (N.Y.),2
+unknown,Newington College,2
+unknown,Oakland Tech,2
+unknown,Presentation College,2
+unknown,Rollins College,2
+unknown,Saint Francis University,2
+unknown,San Bernadino Valley College,2
+unknown,Shawnee State,2
+unknown,Somerset College,2
+unknown,Southfield Arts & Tech,2
+unknown,Southwest Mississippi State,2
+unknown,St. Bedes College,2
+unknown,St. Cloud Tech,2
+unknown,St. Georges Tech,2
+unknown,St. Helena College & Career Academy,2
+unknown,St. Joseph’s Collegiate Institute,2
+unknown,St. Louis University H.S.,2
+unknown,St. Louis University High,2
+unknown,Texas Military Institute,2
+unknown,The Hun School of Princeton,2
+unknown,Univ. of Detroit Jesuit,2
+unknown,University High,2
+unknown,University of British Columbia,2
+unknown,Upper Coomera State College,2
+unknown,Victoria University,2
+unknown,Virginia Lynchburg,2
+unknown,Virginia-Lynchburg,2
+unknown,Western Tech,2
+unknown,Whitefriars College,2
+unknown,Whittier Tech,2
+unknown,(UConn),1
+unknown,A&T Four Middle College,1
+unknown,ACA College (Brooklyn),1
+unknown,ASA Brooklyn,1
+unknown,Aberdeen/College of Sequioas,1
+unknown,Ainsworth,1
+unknown,Albany Creek State,1
+unknown,Albert Park College,1
+unknown,Alberta College,1
+unknown,Alcorn,1
+unknown,Allen Hancock College,1
+unknown,Anderson Univ.,1
+unknown,Anderson University,1
+unknown,André-Grasset College,1
+unknown,Archbishop Hoban H.S. and Arizona State,1
+unknown,Arizona Christian Univeristy,1
+unknown,Arizona-Riverside City,1
+unknown,Army Westpoint,1
+unknown,Assumption College Kilmore,1
+unknown,Athens Technical College,1
+unknown,Atkins (transfer from Jackson State),1
+unknown,Atlanta Sports Acad.,1
+unknown,Atlantic City Institute of Technology,1
+unknown,Augustana,1
+unknown,Austin [Texas] College,1
+unknown,Australian Catholic University,1
+unknown,Ballarat Clarendon College,1
+unknown,Baltimore City College (H.S.),1
+unknown,Baltimore Poly Institute,1
+unknown,Baltimore Poly Tech,1
+unknown,Benalla P-12 College,1
+unknown,Bendigo Catholic College,1
+unknown,Bentonville West (Southwestern College),1
+unknown,Bergen Tech H.S.,1
+unknown,Bethel [Kan.] College,1
+unknown,Bishop Gorman,1
+unknown,Blackrock College,1
+unknown,Bond University (Australia),1
+unknown,Bradley Tech,1
+unknown,Bradwell (Ga.) Institute,1
+unknown,Brauer College,1
+unknown,Brocksport State,1
+unknown,Brooks,1
+unknown,Buckley Park College,1
+unknown,Burlington Country Institute of Technology,1
+unknown,Butler College,1
+unknown,Butler College (Kan.),1
+unknown,Butler University,1
+unknown,"Butte College, Simon Fraser",1
+unknown,Cal State Fullerton,1
+unknown,Cal State Northridge,1
+unknown,Calumet New Tech,1
+unknown,Calvert Hall College High,1
+unknown,Calvert Hill College,1
+unknown,Camden Military,1
+unknown,Cameron University,1
+unknown,Cantebury,1
+unknown,Canterbury School,1
+unknown,Canterbury School (Conn.),1
+unknown,Carroll University,1
+unknown,Cass Tech H.S.,1
+unknown,Central A&M,1
+unknown,Central GA Tech College,1
+unknown,Central Mo.,1
+unknown,Central Tech,1
+unknown,Central Texas College,1
+unknown,Champlain-Lennoxville College,1
+unknown,Charles Sturt University,1
+unknown,Chattanooga State,1
+unknown,Cicso College,1
+unknown,Cincinnati Christian,1
+unknown,Cincinnati Christian Univ.,1
+unknown,Cisco Jr. College,1
+unknown,City College H.S.,1
+unknown,Claremont McKena College,1
+unknown,Clongowes Wood College SJ,1
+unknown,College Andre-Grasset,1
+unknown,College Charles LeMoyne/McCallie School,1
+unknown,College St Etienne,1
+unknown,College Vanier,1
+unknown,College of San Fransisco,1
+unknown,College of the Dessert,1
+unknown,Colorado Early College,1
+unknown,Columbine/Metro State,1
+unknown,Communication & Visual Arts,1
+unknown,Concordia Univ.,1
+unknown,Concordia University,1
+unknown,Conners State College,1
+unknown,Copperfield College,1
+unknown,Coppin State University,1
+unknown,Costal Carolina,1
+unknown,Cypress College,1
+unknown,Data Analytics,1
+unknown,Daytona State,1
+unknown,Dean [MA] College,1
+unknown,Delcastle Tech,1
+unknown,Denmark Gold Diggers,1
+unknown,Dixie College,1
+unknown,Donvale Christian College,1
+unknown,Dort College (IA),1
+unknown,Dutch Fork (University of South Carolina transfer,1
+unknown,E Texas A&M,1
+unknown,E. Arizona College,1
+unknown,ECCC,1
+unknown,EIU,1
+unknown,EPCC,1
+unknown,East Central Oklahoma,1
+unknown,East Georgia State College,1
+unknown,East New Mexico University,1
+unknown,Eastern Carolina University,1
+unknown,Eastern Tech,1
+unknown,Eastern Vo-Tech,1
+unknown,Eastern WV Tech,1
+unknown,Eckerd College,1
+unknown,Edith Cowan,1
+unknown,El Comino College,1
+unknown,El Toro H.S.,1
+unknown,Emmanuel County Institute,1
+unknown,Episcopal (Va.),1
+unknown,Essendon Keilor College,1
+unknown,Essex County Voc Tech,1
+unknown,Everett College,1
+unknown,FAMU,1
+unknown,FGCU,1
+unknown,FSU University School,1
+unknown,Faculdades Metropolitanas Unidas,1
+unknown,Fairfield University,1
+unknown,Fayteville State,1
+unknown,"Feather River College, College of the Desert",1
+unknown,Fesno City,1
+unknown,Florida Southern,1
+unknown,Florida State High,1
+unknown,Florida State University High,1
+unknown,Flourish College,1
+unknown,Foothills,1
+unknown,Fork Union Military (VA),1
+unknown,Fort Hays,1
+unknown,Fort Lauderdale,1
+unknown,"Fort Lewis College, Colo.",1
+unknown,Fort Union Military,1
+unknown,Fort Valley,1
+unknown,Friends [Kan.],1
+unknown,Friendship College Academy,1
+unknown,Friendship College Charter,1
+unknown,Frostburg,1
+unknown,Furham,1
+unknown,Galen College,1
+unknown,Galivan College,1
+unknown,Garner (Pembroke Univ.),1
+unknown,George Washington Carver College Academy,1
+unknown,Georgia Mililtary,1
+unknown,Georgia Military School,1
+unknown,Gila River,1
+unknown,Gordon State,1
+unknown,Grafton H.S.,1
+unknown,Grandview,1
+unknown,Griffith University,1
+unknown,Grovedale College,1
+unknown,Hallam Senior College,1
+unknown,Hallam Senior College (Pro Kick Australia),1
+unknown,Harford Tech,1
+unknown,Hargrave Military,1
+unknown,Havelock (Naval Academy transfer,1
+unknown,Hendersonville,1
+unknown,High,1
+unknown,Hill College,1
+unknown,Hilton College,1
+unknown,Hobart & Williams Smith,1
+unknown,Hocking,1
+unknown,Hocking College [Ohio],1
+unknown,Huntington Valley University School,1
+unknown,IUPUI,1
+unknown,Ignatius Park College,1
+unknown,Illnois State,1
+unknown,Imhotep Institute Charter (USMAPS),1
+unknown,Immanuel College,1
+unknown,Ind.,1
+unknown,Indian River/St. Andrew's University,1
+unknown,Institute of Technology Central,1
+unknown,Iona College,1
+unknown,Iona College Brisbane,1
+unknown,Jackson State Universitiy,1
+unknown,Jacksonville AA Christian,1
+unknown,Jefferson College,1
+unknown,Jefferson State,1
+unknown,Jesuit College Prepatory,1
+unknown,John Abbot College,1
+unknown,John Abbott,1
+unknown,John Abbott College,1
+unknown,John Abbott College (Simon Fraiser University),1
+unknown,John Paul College,1
+unknown,Jones College [Miss.],1
+unknown,Jones County Junior Colege,1
+unknown,Jones [Miss.] College,1
+unknown,K-State,1
+unknown,Kansas State-Iowa Western,1
+unknown,Kaskaskia (Ill.) College,1
+unknown,Kaskaskia College,1
+unknown,Keele University,1
+unknown,Keio University,1
+unknown,Kennedy-King College,1
+unknown,Kent School (Conn.),1
+unknown,"Kilgore College, New Mexico Military Institute",1
+unknown,Kirkwood,1
+unknown,Kyabram P-12 College,1
+unknown,LA Southwestern College,1
+unknown,LA Tech,1
+unknown,La Salle College Prepatory,1
+unknown,La Salle Institute (USMAPS),1
+unknown,La Tech,1
+unknown,La Trobe University,1
+unknown,La. Tech,1
+unknown,LaSalle Institute,1
+unknown,LaTrobe University,1
+unknown,Lackawanna [PA] College,1
+unknown,Lake Land College,1
+unknown,Lane Tech,1
+unknown,Lathrup,1
+unknown,Latrobe University,1
+unknown,Laurier,1
+unknown,Lawrence Free State (Kan.),1
+unknown,Lawrence Free State High,1
+unknown,LeTourneau University,1
+unknown,Lenoir-Rhyan University,1
+unknown,Lenoir-Ryne,1
+unknown,Leo Catholic,1
+unknown,Lethbridge Collegiate Institute,1
+unknown,Lewis-Clark State,1
+unknown,Liberty '20,1
+unknown,Liberty '22,1
+unknown,Lighthouse Christian College,1
+unknown,Lindsay Wilson,1
+unknown,Livingston College,1
+unknown,Lone Star College,1
+unknown,Lonestar College,1
+unknown,Loreto College,1
+unknown,Los Osos/Citris College,1
+unknown,Loughborough College,1
+unknown,Lumen Christi College,1
+unknown,Lyndon B. Johnson Early College H.S.,1
+unknown,MSU Moorhead,1
+unknown,MacKillop College,1
+unknown,Mackillop College,1
+unknown,Macquarie University,1
+unknown,Manor New Tech,1
+unknown,Mansfield,1
+unknown,Marcus,1
+unknown,Maribyrnong College,1
+unknown,Marist Catholic College Penshurst,1
+unknown,Marist College Canberra,1
+unknown,Marquette University High,1
+unknown,Mary Institute and Country Day,1
+unknown,Mater Dei Catholic College,1
+unknown,Mazenod College,1
+unknown,McDougale Tech,1
+unknown,"McDougle Technical Institute (Pompano Beach, Fla.)",1
+unknown,Melbourne,1
+unknown,Melbourne University,1
+unknown,Mercedes College,1
+unknown,Mercy College,1
+unknown,Mergenthaler Vo Tech,1
+unknown,Mergenthaler Vocational Tech,1
+unknown,Meridan State College,1
+unknown,Merritt College,1
+unknown,Miami Dade College,1
+unknown,Miami Hurricanes,1
+unknown,Miami-Dade College,1
+unknown,Middle College,1
+unknown,Middle College at NC A&T,1
+unknown,Middle Georgia/Central Texas,1
+unknown,Midland [Neb]. University,1
+unknown,Midlands Tech,1
+unknown,Midpark,1
+unknown,Millikan College,1
+unknown,Milsaps,1
+unknown,Minn. St. Moorhead,1
+unknown,Minnesota State C&TC,1
+unknown,Minnesota West Comm. & Tech.,1
+unknown,Mira Costa College,1
+unknown,Moore Park College,1
+unknown,"Moorpark College, Air Force Academy",1
+unknown,Moriah College,1
+unknown,Mornigside College,1
+unknown,Mount Scopus Memorial College,1
+unknown,Muhammed University of Islam,1
+unknown,N. Dakota State,1
+unknown,N.D. State College of Sciences,1
+unknown,NAU,1
+unknown,NM Military Institute,1
+unknown,NMHU,1
+unknown,NW Oklahoma St.,1
+unknown,NWMCC,1
+unknown,Nacoochee (Ga.),1
+unknown,Naropa University,1
+unknown,Nashoba Tech,1
+unknown,Nassau Community,1
+unknown,Nature Coast Tech,1
+unknown,"Navarro College, New Mexico Highlands, and Mississippi Valley State",1
+unknown,Nebraska-Lincoln,1
+unknown,Nebraska-Omaha,1
+unknown,New Baunfels H.S.,1
+unknown,New Hampton School,1
+unknown,New Jersey Institute of Technology,1
+unknown,New Mexico Military Institue,1
+unknown,New Orleans,1
+unknown,Newark Tech,1
+unknown,Newark Vo-Tech,1
+unknown,Norte Dame College,1
+unknown,North American Univ.,1
+unknown,North Carolina A&T State,1
+unknown,North Eastern Oklahoma A&M,1
+unknown,North Toronto College Institute,1
+unknown,Northeastern A&M,1
+unknown,Northern Kentucky Univ.,1
+unknown,Northest Oklahoma A&M,1
+unknown,Northfield Mt. Hermon,1
+unknown,Northland,1
+unknown,Northland C&T College,1
+unknown,Northland Community & Technical College,1
+unknown,Northwest College,1
+unknown,Northwest Mississipppi,1
+unknown,Northwest Nazarene,1
+unknown,Northwest Oklahoma State,1
+unknown,Nova Southeastern University School,1
+unknown,Nudgee College,1
+unknown,Ohio U.,1
+unknown,Oklahoma A&M,1
+unknown,Oldenburg Knights,1
+unknown,Orebro Black Knights,1
+unknown,Oregon-Ventura College,1
+unknown,PDTC,1
+unknown,Pa. U.,1
+unknown,Pace Universty,1
+unknown,Pacific U.,1
+unknown,Padua College,1
+unknown,Paine College,1
+unknown,Panola College,1
+unknown,Peddie School (N.J.),1
+unknown,Peninsula College,1
+unknown,Pensacola State College,1
+unknown,Physics,1
+unknown,Pickerington Central,1
+unknown,Pierre T.F. Riggs H.S.,1
+unknown,Poly Tech,1
+unknown,Prepa Tec/Monterrey Tech,1
+unknown,Prince Alfred College,1
+unknown,Pro-Kick Australia,1
+unknown,Public Health,1
+unknown,Purdue Univ. NW,1
+unknown,Purdue-DuPage,1
+unknown,Quincey University,1
+unknown,R/R,1
+unknown,Redcliffe State,1
+unknown,Reedley College [Calif.],1
+unknown,Reedly College,1
+unknown,Rio Salado College,1
+unknown,Riverside Polytechnic,1
+unknown,Roberts Wesleyan,1
+unknown,Rochester (Minn.) Community Tech,1
+unknown,Rochester Community & Tech College,1
+unknown,Rochester Community Technical School,1
+unknown,Rocky,1
+unknown,S. Conn. State,1
+unknown,SEDA College-Victoria,1
+unknown,SHU/Southern Alabama,1
+unknown,SMSU,1
+unknown,SW Oklahoma St.,1
+unknown,SW Oklahoma State,1
+unknown,SWOSU,1
+unknown,Sacred Heart College Auckland,1
+unknown,"Sacred Heart University, Conn.",1
+unknown,Saddlback,1
+unknown,Saint Francis (Fort Wayne),1
+unknown,Saint Francis U,1
+unknown,Saint Ignatius’ College,1
+unknown,Saint John's,1
+unknown,Saint John’s,1
+unknown,Saint Joseph's Collegiate Institute,1
+unknown,Saint Mary's College,1
+unknown,Saint Mary's College High (Calif.),1
+unknown,Saint Stanislaus College,1
+unknown,Salesian College,1
+unknown,Salisbury School (Conn.),1
+unknown,San Bernandino Valley,1
+unknown,San Jacinto College,1
+unknown,San Ysidro (Southwestern College),1
+unknown,Sandringham College,1
+unknown,Sandringham College School,1
+unknown,Santa Anna College,1
+unknown,Santa Barbara (Calif.) College,1
+unknown,Santa Barbara College,1
+unknown,Santa Barbara College (Calif.),1
+unknown,School of the Sequoias,1
+unknown,Scotch College Perth,1
+unknown,"Seven Lakes (Blinn College, Franklin Pierce)",1
+unknown,Seymour College,1
+unknown,Shawsheen Tech,1
+unknown,Shepard University,1
+unknown,Shippensberg,1
+unknown,Shippensburg Univ of Penn.,1
+unknown,Siena Hts.,1
+unknown,Sienna Heights,1
+unknown,Simpson University,1
+unknown,Snow College [Utah],1
+unknown,Solihull Technology College,1
+unknown,Sonoran Sidewinders,1
+unknown,South Brunswick,1
+unknown,South Plains College,1
+unknown,South Virginia,1
+unknown,Southern Cal,1
+unknown,Southern Poly,1
+unknown,Southern University Laboratory School,1
+unknown,Southern Wesleyan University,1
+unknown,Southwest Assemblies Of God,1
+unknown,Southwest Oklahoma State,1
+unknown,Southwestern OK State Univ.,1
+unknown,St Columba's College,1
+unknown,St Mary MacKillop College,1
+unknown,St. Andrew's College,1
+unknown,St. Andrews,1
+unknown,St. Andrews College,1
+unknown,St. Andrews Univ.,1
+unknown,St. Andrews University,1
+unknown,St. Augustine College,1
+unknown,St. Dominic's College,1
+unknown,St. Francis (III.),1
+unknown,St. Francis University,1
+unknown,St. Francis Xavier College,1
+unknown,St. George Eagles (USA-C),1
+unknown,St. Georges Tech.,1
+unknown,St. John's College H.S. (D.C.),1
+unknown,St. John’s College H.S.,1
+unknown,St. Joseph Collegiate Institute,1
+unknown,St. Joseph's Nudgee College,1
+unknown,St. Kevin's College (Melbourne),1
+unknown,St. Louis University School,1
+unknown,St. Mary’s Ryken College,1
+unknown,St. Patrick's College Ballarat,1
+unknown,St. Patrick's College Maghera,1
+unknown,St. Patrick’s College,1
+unknown,St. Patrick’s College Maghera,1
+unknown,St. Peter's Lutheran College,1
+unknown,St. Petersburg College,1
+unknown,St. Peter’s College Dunboyne,1
+unknown,St. Thomas Aquinas College,1
+unknown,St. Thomas Moore,1
+unknown,St. Thomas More (CT),1
+unknown,St. Thomas More (Conn.),1
+unknown,St.Joseph's Collegiate Institute,1
+unknown,Stanford U.,1
+unknown,Stanislaus State,1
+unknown,Staten Island Tech,1
+unknown,Stillman College,1
+unknown,Stockton College,1
+unknown,Sulphur,1
+unknown,Sussex Tech,1
+unknown,Sussex Tech.,1
+unknown,Swinburne University,1
+unknown,Swinburne University of Technology,1
+unknown,Swinburne University of Technology in Melbourne,1
+unknown,Swinburne University/Flinders University,1
+unknown,Tampa Bay Tech (USMAPS),1
+unknown,Tampa Bay Tech High,1
+unknown,Tampa Tech,1
+unknown,Tarleton,1
+unknown,The Hun School (NJ),1
+unknown,The Kiski School,1
+unknown,The Lawrenceville School,1
+unknown,The Peddie School,1
+unknown,The Peddie School (N.J.),1
+unknown,The Peddie School (NJ),1
+unknown,The Thomas Moore Institute,1
+unknown,The Woodlands College Park,1
+unknown,Tocal College,1
+unknown,Triangle Razorbacks/NW Oklahoma State,1
+unknown,Trinity Bay State,1
+unknown,Triton College,1
+unknown,Tuskeegee,1
+unknown,Tusla,1
+unknown,U. of Toronto,1
+unknown,UA Rich Mountain,1
+unknown,UC Santa Cruz,1
+unknown,UCCS,1
+unknown,UMass Lowell,1
+unknown,UNC Chapel Hill,1
+unknown,UNW,1
+unknown,USC Lancaster,1
+unknown,USC-Union,1
+unknown,USMAPS,1
+unknown,UT Permian,1
+unknown,Union (Bryant & Stratton College),1
+unknown,Univ. of Saint Francis,1
+unknown,Univ. or Arizona,1
+unknown,University '12,1
+unknown,University Academy,1
+unknown,University Charter School,1
+unknown,University City High,1
+unknown,University H.S.,1
+unknown,University Nova South,1
+unknown,University Of Detroit Jesuit,1
+unknown,University Orange City,1
+unknown,University Preperatory,1
+unknown,University School of Milwaukee,1
+unknown,University School of Nova,1
+unknown,University School of Nova Southeastern University,1
+unknown,University of Australia,1
+unknown,University of Calgary,1
+unknown,University of Melbourne,1
+unknown,University of Newcastle,1
+unknown,University of Orange City,1
+unknown,University of Queensland,1
+unknown,University of Southern Queensland,1
+unknown,University of Technology Sydney,1
+unknown,University of Ulster,1
+unknown,University of Waterloo,1
+unknown,Upike,1
+unknown,Utah Valley,1
+unknown,Valhalla (Southwestern College),1
+unknown,Valley State Pre,1
+unknown,Valor Christian,1
+unknown,Veterans (Hocking College),1
+unknown,"Victoria University, Melbourne",1
+unknown,Victory Valley College,1
+unknown,Viewbank College,1
+unknown,Vincennes University,1
+unknown,Virginia Univ. Lynchburg,1
+unknown,Virginia University of Lynchburg,1
+unknown,Virginia University-Lynchurg,1
+unknown,Vol State,1
+unknown,WNMU,1
+unknown,WV Wesleyan,1
+unknown,WVU,1
+unknown,Waco University,1
+unknown,Waseda University,1
+unknown,Washington U.,1
+unknown,Weatherford College,1
+unknown,Webb International Univ.,1
+unknown,West Charlotte (Southwestern College),1
+unknown,West Hill College,1
+unknown,West Hill College Coalinga,1
+unknown,West Hills College Coalinga,1
+unknown,"West Hills College, Merced College",1
+unknown,West Liberty State,1
+unknown,West Liberty State Univ.,1
+unknown,West Liberty and Notre Dame,1
+unknown,West Montgomery (transfer from Appalachian State),1
+unknown,West Texas,1
+unknown,West Virginia Tech,1
+unknown,Westgate Christian University,1
+unknown,Whale Branch Early College,1
+unknown,Wilcox Tech,1
+unknown,Will Rogers College,1
+unknown,Williston Northampton School,1
+unknown,Windsor,1
+unknown,Winston-Salem,1
+unknown,Withrow University,1
+unknown,Woodhouse College,1
+unknown,Worcester Tech,1
+unknown,Wyoming Seminary Upper School,1
+unknown,York County Tech,1
+unknown,York Institute,1

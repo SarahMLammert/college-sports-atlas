@@ -1,10 +1,10 @@
-"""Run with:  python -m pytest tests -q"""
+"""Roster page parsers, hometowns, class years and names (scripts/scrape_rosters.py)."""
 import json
 from pathlib import Path
 
 from scrape_rosters import normalize_class, parse_hometown, parse_roster, split_hometown_highschool
 
-FIX = Path(__file__).parent / "fixtures"
+HERE = Path(__file__).parent
 
 
 def devalue_flatten(value) -> list:
@@ -39,7 +39,7 @@ def nuxt_page(tree) -> str:
 
 
 def test_sidearm_nextgen_table():
-    strategy, players = parse_roster((FIX / "sidearm_nextgen_table.html").read_text())
+    strategy, players = parse_roster((HERE / "sidearm_nextgen_table.html").read_text())
     assert strategy == "html_table"
     assert len(players) == 4  # coaching staff table ignored
     p = players[2]
@@ -50,7 +50,7 @@ def test_sidearm_nextgen_table():
 
 
 def test_sidearm_classic():
-    strategy, players = parse_roster((FIX / "sidearm_classic.html").read_text())
+    strategy, players = parse_roster((HERE / "sidearm_classic.html").read_text())
     assert strategy == "sidearm_classic"
     a, b = players
     assert (a["name"], a["jersey"], a["position"], a["class_year"]) == ("John Smith", "7", "QB", "R-Jr.")

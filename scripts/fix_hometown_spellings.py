@@ -1,14 +1,14 @@
-"""Add fixes for misspelled hometowns to data/<sport>/hometown_corrections.csv (default sport: football).
+"""Add fixes for misspelled hometowns to config/<sport>_hometown_corrections.csv (default sport: football).
 
 Each pair below is a misspelling found next to the real town (within 25 km, same state) in the map
 data, checked by hand. Pairs that are two real places (Los Gatos / Los Altos, Monroe / Montrose,
 Grosse Pointe Farms / Park, ...) are left out.
 
-The script finds every raw hometown text in data/<sport>/players_unique_geocoded.csv that the geocoder placed
-in a misspelled town, and writes a "fixed" row for it in data/<sport>/hometown_corrections.csv. Rows you
-already have for those texts are updated; everything else is kept as it is.
+The script finds every raw hometown text in rosters/<sport>/players_unique_geocoded.csv that the geocoder
+placed in a misspelled town, and writes a "fixed" row for it in config/<sport>_hometown_corrections.csv.
+Rows you already have for those texts are updated; everything else is kept as it is.
 
-It also updates the geocoder's lookup table, data/<sport>/hometowns.csv, which the geocoder checks before the
+It also updates the geocoder's lookup table, rosters/<sport>/hometowns.csv, which the geocoder checks before the
 corrections: each misspelled entry gets the real town's name and location from the same table.
 It's safe to run more than once.
 
@@ -23,9 +23,9 @@ import csv
 import sys
 from pathlib import Path
 
-from core.paths import add_sport_argument, load_sport
+from paths import add_sport_argument, load_sport
 
-# Set from --sport in main(): files in data/<sport>/.
+# Set from --sport in main().
 PLAYERS = CORRECTIONS = LOOKUP = Path()   # players_unique_geocoded.csv, hometown_corrections.csv, and
                                           # hometowns.csv (the geocoder's table of hometowns it has placed)
 
@@ -71,7 +71,7 @@ FIELDS = ["hometown_raw", "city", "state", "country", "query", "status", "note",
 
 
 def patch_lookup(wrong: dict) -> tuple[int, int]:
-    """The geocoder keeps every hometown it has placed in data/<sport>/hometowns.csv (keyed by the raw text)
+    """The geocoder keeps every hometown it has placed in rosters/<sport>/hometowns.csv (keyed by the raw text)
     and reuses those rows before it reads hometown_corrections.csv, so a correction alone never moves
     a hometown it has already placed. Point the misspelled rows at the real town: copy its location
     from the table's own row for that town, or drop the row if the table has none (the next geocode
@@ -118,9 +118,9 @@ def main(argv=None):
     global PLAYERS, CORRECTIONS, LOOKUP
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     add_sport_argument(ap)
-    data = load_sport(ap.parse_args(argv).sport).data_dir
-    PLAYERS, CORRECTIONS, LOOKUP = (data / "players_unique_geocoded.csv", data / "hometown_corrections.csv",
-                                    data / "hometowns.csv")
+    sport = load_sport(ap.parse_args(argv).sport)
+    PLAYERS, CORRECTIONS, LOOKUP = (sport.rosters_dir / "players_unique_geocoded.csv", sport.hometown_corrections_csv,
+                                    sport.rosters_dir / "hometowns.csv")
     for p in (PLAYERS, CORRECTIONS):
         if not p.exists():
             sys.exit(f"{p} not found. Run geocode_hometowns.py first.")

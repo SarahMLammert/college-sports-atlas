@@ -1,11 +1,10 @@
-"""Previous school vs. high school: python -m pytest tests -q  (or: python tests/test_previous_school.py)"""
+"""Previous school vs. high school: sorting the school fields a roster gives (scripts/scrape_rosters.py)."""
 import json
-import sys
-from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
-import scrape_rosters as sr  # noqa: E402
+import scrape_rosters as sr
+from paths import load_sport
 
+sr.sidearm.configure(load_sport("football"))   # football's junior colleges, so "Iowa Western" counts as a college
 sr.load_known_colleges([{"school": n} for n in
                         ["Wake Forest", "Notre Dame", "SMU", "Texas", "Miami (FL)", "Duke", "Alabama", "Texas Tech"]])
 
@@ -93,13 +92,3 @@ def test_recombine_fixes_saved_rows():
     sr.sort_schools(row)
     assert row == {"high_school": "", "previous_school": "Wake Forest"}
 
-
-if __name__ == "__main__":
-    fails = 0
-    for name, fn in list(globals().items()):
-        if name.startswith("test_"):
-            try:
-                fn(); print("PASS", name)
-            except AssertionError as e:
-                fails += 1; print("FAIL", name, e)
-    sys.exit(1 if fails else 0)
