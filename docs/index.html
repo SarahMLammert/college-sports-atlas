@@ -77,10 +77,23 @@
     display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 48px; gap: 10px;
     overflow: hidden; transition: box-shadow 0.3s;
   }
-  .center > :not(.graticule) { position: relative; }
-  .graticule { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-  .graticule path, .graticule line { fill: none; stroke: var(--ink); stroke-width: 1; opacity: 0.16; }
-  .graticule .eq { opacity: 0.3; stroke-dasharray: 5 4; }
+  .center > :not(.earth):not(.shade) { position: relative; }
+  /* The Earth: continents drawn on the sea, turning on a tilted axis */
+  .earth { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .earth .land { fill: var(--land); stroke: rgba(58, 46, 34, 0.55); stroke-width: 0.8; stroke-linejoin: round; opacity: 0.78; }
+  .earth .grat { fill: none; stroke: var(--ink); stroke-width: 0.7; opacity: 0.14; }
+  .earth .eq { fill: none; stroke: var(--ink); stroke-width: 1; opacity: 0.32; stroke-dasharray: 5 4; }
+  /* light from the upper left, a darker limb, and a soft pale wash behind the words so they stay readable */
+  .shade { position: absolute; inset: 0; border-radius: 50%; pointer-events: none;
+    background:
+      radial-gradient(circle at 50% 54%, rgba(247, 240, 223, 0.62) 0%, rgba(247, 240, 223, 0.38) 34%, rgba(247, 240, 223, 0) 58%),
+      radial-gradient(circle at 34% 28%, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0) 42%),
+      radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0) 62%, rgba(40, 52, 46, 0.32) 100%); }
+  /* The spindle: the Earth's axis, sticking out past both poles */
+  .scale .axis { stroke: var(--ink); stroke-width: 3.5; stroke-linecap: round; opacity: 0.8; }
+  .scale .pin { fill: var(--paper-hi); stroke: var(--ink); stroke-width: 2; }
+  .scale .pin-dot { fill: var(--ink); }
+  .scale .pole { font: 700 17px/1 'Cormorant Garamond', Georgia, serif; fill: var(--ink); text-anchor: middle; dominant-baseline: central; }
   .kicker { font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim); }
   .center .title { font-size: 46px; line-height: 0.95; margin: 0; }
   .center .title span, .list-head .title span { color: var(--accent); font-style: italic; text-transform: none; letter-spacing: 0.02em; font-size: 1.12em; transition: color 0.2s; }
@@ -156,21 +169,34 @@
     #ring-view { display: none; }
     #list-view { display: flex; }
   }
+  /* Desktop and tablet: the whole page fits the window, with no scrolling; the globe shrinks to fit */
+  @media (min-width: 701px) {
+    html, body { height: 100%; overflow: hidden; }
+    body { min-height: 0; height: 100dvh; }
+    #ring-view { min-height: 0; padding: 20px 16px 8px; gap: 8px; }
+    footer { padding: 10px 24px 22px; font-size: 15px; }
+  }
 
   footer { padding: 18px 24px 26px; border-top: 1px solid var(--edge); margin: 0 18px; font: italic 600 16px/1.5 'Cormorant Garamond', Georgia, serif; color: var(--muted); text-align: center; }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
 </head>
 <body data-mode="recruiting">
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
 
 <main id="ring-view">
   <div id="stage">
     <div id="ring">
       <svg class="scale" width="1040" height="860" aria-hidden="true">
         <g id="dial"></g>
+        <g id="axis"></g>
       </svg>
       <div class="center">
-        <svg class="graticule" viewBox="0 0 400 400" aria-hidden="true"><g id="grat"></g></svg>
+        <svg class="earth" viewBox="0 0 400 400" aria-hidden="true">
+          <path class="grat"/><path class="land"/><path class="eq"/>
+        </svg>
+        <div class="shade" aria-hidden="true"></div>
         <div class="kicker">College sports</div>
         <h1 class="title cond" data-role="title"></h1>
         <p class="hint" data-role="hint"></p>
@@ -316,21 +342,52 @@
   })();
   const dial = document.getElementById('dial');
 
-  // Lines of latitude stay put; meridians slide across the globe as it turns.
-  const grat = document.getElementById('grat');
-  const PARALLELS = [-60, -30, 0, 30, 60].map((lat) => {
-    const y = GLOBE - GLOBE * Math.sin(rad(lat)), half = GLOBE * Math.cos(rad(lat));
-    return `<line${lat === 0 ? ' class="eq"' : ''} x1="${(GLOBE - half).toFixed(1)}" y1="${y.toFixed(1)}" x2="${(GLOBE + half).toFixed(1)}" y2="${y.toFixed(1)}"/>`;
-  }).join('');
-  function drawGraticule(phase) {
-    let d = '';
-    for (let lon = 0; lon < 360; lon += 30) {
-      const a = rad(lon + phase);
-      if (Math.cos(a) <= 0) continue;                    // the back of the globe
-      const x = GLOBE * Math.sin(a), rx = Math.max(0.01, Math.abs(x)).toFixed(1);
-      d += `M${GLOBE},0A${rx},${GLOBE} 0 0 ${x >= 0 ? 1 : 0} ${GLOBE},${GLOBE * 2}`;
+  // ---- The Earth ----
+  // A real map of the land, seen from space, spinning west to east on an axis tilted 23.4° like the real one.
+  // The map comes from the world-atlas package; if it can't load, the globe still shows its grid lines.
+  const TILT = 23.4;
+  const EARTH_SPIN = 4;          // the Earth turns this many times faster than the ring of sports
+  const earthSvg = document.querySelector('.earth');
+  const earthParts = { grat: earthSvg.querySelector('.grat'), land: earthSvg.querySelector('.land'), eq: earthSvg.querySelector('.eq') };
+  const hasD3 = typeof d3 !== 'undefined' && d3.geoOrthographic;
+  const proj = hasD3 ? d3.geoOrthographic().scale(GLOBE).translate([GLOBE, GLOBE]).clipAngle(90).precision(0.5) : null;
+  const geoPath = hasD3 ? d3.geoPath(proj) : null;
+  const GRAT = hasD3 ? d3.geoGraticule().step([30, 30])() : null;
+  const EQUATOR = { type: 'LineString', coordinates: [[-180, 0], [-90, 0], [0, 0], [90, 0], [180, 0]] };
+  let land = null, earthLon = -20;   // start with the Atlantic facing us
+
+  function drawEarth(lon) {
+    if (!hasD3) return;
+    earthLon = lon;
+    proj.rotate([lon, 0, -TILT]);    // the axis lies flat in the page, leaning 23.4° from upright with the north pole to the right
+    earthParts.grat.setAttribute('d', geoPath(GRAT) || '');
+    earthParts.eq.setAttribute('d', geoPath(EQUATOR) || '');
+    earthParts.land.setAttribute('d', land ? geoPath(land) || '' : '');
+  }
+
+  // The axle the Earth turns on, like a desk globe's: a rod through both poles, pinned at the dial.
+  function drawAxis() {
+    if (!hasD3) return;
+    const north = proj([0, 90]);
+    const dx = north[0] - GLOBE, dy = north[1] - GLOBE, len = Math.hypot(dx, dy) || 1;
+    const ux = dx / len, uy = dy / len;
+    const pt = (r) => [(CX + ux * r).toFixed(1), (CY + uy * r).toFixed(1)];
+    const ang = (Math.atan2(uy, ux) * 180 / Math.PI + 90).toFixed(2);   // the rod's lean, for the labels
+    let svg = '';
+    for (const sgn of [1, -1]) {
+      const a = pt(sgn * 198), b = pt(sgn * 252), cap = pt(sgn * 256), lab = pt(sgn * 276);
+      svg += `<line class="axis" x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}"/>` +
+             `<circle class="pin" cx="${cap[0]}" cy="${cap[1]}" r="6"/><circle class="pin-dot" cx="${cap[0]}" cy="${cap[1]}" r="2"/>` +
+             `<text class="pole" x="${lab[0]}" y="${lab[1]}" transform="rotate(${ang} ${lab[0]} ${lab[1]})">${sgn > 0 ? 'N' : 'S'}</text>`;
     }
-    grat.innerHTML = PARALLELS + `<path d="${d}"/>`;
+    document.getElementById('axis').innerHTML = svg;
+  }
+
+  if (hasD3 && typeof topojson !== 'undefined') {
+    fetch('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/land-110m.json')
+      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+      .then((world) => { land = topojson.feature(world, world.objects.land); drawEarth(earthLon); })
+      .catch(() => {});
   }
 
   // Put every sport where it belongs for this much rotation (degrees).
@@ -346,9 +403,10 @@
       it.label.style.translate = `calc(${a.x.toFixed(2)}px + ${(-50 + 50 * sn).toFixed(2)}%) calc(${a.y.toFixed(2)}px + ${(-50 - 50 * cs).toFixed(2)}%)`;
     });
     dial.setAttribute('transform', `rotate(${rot.toFixed(3)} ${CX} ${CY})`);
-    drawGraticule(-rot * 1.5);
+    drawEarth(-20 + rot * EARTH_SPIN);
   }
   place(0);
+  drawAxis();
 
   // ---- Draw everything that depends on the side ----
   const rowsEl = document.getElementById('rows');
@@ -464,8 +522,14 @@
   // ---- Scale the ring to fit the window ----
   const stage = document.getElementById('stage');
   let scaleK = 1;
+  const ringViewEl = document.getElementById('ring-view'), legendEl = document.getElementById('legend');
   function fit() {
-    scaleK = Math.max(0.55, Math.min(1, (window.innerWidth - 32) / 1040, (window.innerHeight - 110) / 860));
+    // the room left for the globe: the ring area's height, minus its padding, the legend and the gap above it
+    stage.style.width = stage.style.height = '0px';   // measure without the old size propping the area open
+    const cs = getComputedStyle(ringViewEl);
+    const roomH = ringViewEl.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom) - legendEl.offsetHeight - parseFloat(cs.rowGap || 0);
+    const roomW = ringViewEl.clientWidth - 32;
+    scaleK = Math.max(0.3, Math.min(1, roomW / 1040, roomH / 860));
     ring.style.transform = `scale(${scaleK})`;
     stage.style.width = 1040 * scaleK + 'px';
     stage.style.height = 860 * scaleK + 'px';
