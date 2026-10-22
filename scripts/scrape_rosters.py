@@ -431,8 +431,10 @@ def plain_reason(report: dict) -> str:
     return short or "no details"
 
 
-def write_missing_rosters(report_dir: Path, schools_csv: Path, sport_label: str, no_site: list[str]) -> Path:
-    """Write rosters/<sport>/MISSING_ROSTERS.md from every scrape report in the folder.
+def write_missing_rosters(report_dir: Path, schools_csv: Path, sport_label: str, no_site: list[str],
+                          out_dir: Path | None = None) -> Path:
+    """Write MISSING_ROSTERS.md from every scrape report in report_dir, into out_dir (the sport's
+    rosters/<sport>/ folder, so it's always in the same place, even for a test run with --out).
 
     For each division: schools with a failed season (no roster saved) and schools with a partial one
     (saved, but most players without a hometown), each with its seasons and why. The reason is the
@@ -457,9 +459,12 @@ def write_missing_rosters(report_dir: Path, schools_csv: Path, sport_label: str,
             groups.setdefault((div, r["status"]), {}).setdefault(r["school"], []).append((int(r["season"]), r))
 
     from datetime import date
+    out_dir = Path(out_dir or report_dir)
+    where = ("this folder" if out_dir.resolve() == Path(report_dir).resolve()
+             else f"`{report_dir}` (a test run with --out)")
     out = [f"# {sport_label} rosters that are missing or incomplete", "",
-           f"Written by `scripts/scrape_rosters.py` on {date.today().isoformat()} from the scrape reports in this "
-           f"folder (seasons {_seasons_text(seasons_checked) or 'none yet'}). It is rewritten after every run, so "
+           f"Written by `scripts/scrape_rosters.py` on {date.today().isoformat()} from the scrape reports in "
+           f"{where} (seasons {_seasons_text(seasons_checked) or 'none yet'}). It is rewritten after every run, so "
            "don't edit it here: to explain a school, add a `note` to its row in the schools file, and that note "
            "becomes its reason below.", "",
            "- **Failed**: no roster was saved for that season.",
@@ -519,7 +524,8 @@ def write_missing_rosters(report_dir: Path, schools_csv: Path, sport_label: str,
                 note = notes.get(school)
                 out.append(f"- {school} ({division_of.get(school, '?')})" + (f": {note}" if note else ""))
             out.append("")
-    path = report_dir / MISSING_FILE
+    out_dir.mkdir(parents=True, exist_ok=True)
+    path = out_dir / MISSING_FILE
     path.write_text("\n".join(out), encoding="utf-8")
     return path
 
@@ -715,7 +721,9 @@ def main(argv=None) -> int:
                  len(no_site), args.schools.name, " (-v lists them)" if not args.verbose else "")
         log.debug("Skipped (closed programs, or sites still to find): %s", ", ".join(no_site))
     def write_missing() -> None:
-        path = write_missing_rosters(report_dir, args.schools, getattr(sport, "label", args.sport), no_site)
+        # Always in rosters/<sport>/, even when --out sends the rosters somewhere else
+        path = write_missing_rosters(report_dir, args.schools, getattr(sport, "label", args.sport), no_site,
+                                     out_dir=sport.rosters_dir)
         log.info("Failing and partial schools, with reasons -> %s", path)
 
     if args.recombine:
