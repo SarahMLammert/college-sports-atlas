@@ -6,90 +6,120 @@
 <title>Recruiting Maps</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Barlow:wght@400;500;600&display=swap">
 <style>
+  /* An old paper atlas: parchment, sepia ink, a pale sea, olive land and a terracotta accent. */
   :root {
-    --bg: #0E1A2B;
-    --panel: #142640;
-    --ink: #F4F1EA;
-    --muted: #A9B4C4;
-    --dim: #C9D1DC;
-    --line: rgba(244, 241, 234, 0.22);
-    --edge: rgba(244, 241, 234, 0.14);
-    --accent: #F2B544;                 /* recruiting: gold */
-    --glow: rgba(242, 181, 68, 0.34);
+    --paper: #EFE5CF;
+    --paper-hi: #F7F0DF;
+    --panel: #F9F3E4;
+    --ink: #3A2E22;
+    --dim: #4F4132;
+    --muted: #6E5E4A;
+    --line: rgba(58, 46, 34, 0.32);
+    --edge: rgba(58, 46, 34, 0.2);
+    --sea-hi: #DDE8E0;
+    --sea: #B7CEC5;
+    --sea-lo: #8FB0A7;
+    --land: #A9B07A;
+    --accent: #A8461C;                 /* recruiting: terracotta */
+    --glow: rgba(168, 70, 28, 0.24);
   }
   body[data-mode="learn"] {
-    --accent: #7FD6E6;                 /* learn: ice */
-    --glow: rgba(127, 214, 230, 0.34);
+    --accent: #23606B;                 /* learn: deep sea */
+    --glow: rgba(35, 96, 107, 0.24);
   }
   * { box-sizing: border-box; }
-  html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: 'Barlow', system-ui, sans-serif; }
-  body { min-height: 100vh; display: flex; flex-direction: column; }
-  .cond { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; text-transform: uppercase; }
+  html, body { margin: 0; color: var(--ink); font-family: 'Barlow', system-ui, sans-serif; }
+  html {
+    background-color: var(--paper);
+    /* faint paper grain and a darker, sun-worn edge */
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .23 0 0 0 0 .18 0 0 0 0 .13 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+      radial-gradient(ellipse at 50% 45%, var(--paper-hi) 0%, var(--paper) 55%, #E2D4B5 100%);
+    background-attachment: fixed;
+  }
+  body { min-height: 100vh; display: flex; flex-direction: column; position: relative; }
+  /* the map's neatline: a double rule just inside the page edge */
+  body::before {
+    content: ""; position: fixed; inset: 10px; pointer-events: none; z-index: 0;
+    border: 1px solid var(--line); outline: 1px solid var(--edge); outline-offset: 4px;
+  }
+  main, footer { position: relative; z-index: 1; }
+  .cond { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; }
   .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-  /* ---------- Mode switch (center of the ring, top of the phone list) ---------- */
-  .switch { display: inline-flex; padding: 4px; gap: 4px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg); }
+  /* ---------- Mode switch (center of the globe, top of the phone list) ---------- */
+  .switch { display: inline-flex; padding: 3px; gap: 3px; border-radius: 999px; border: 1px solid var(--line); background: var(--panel); }
   .switch button {
-    min-height: 40px; padding: 0 20px; border: 0; border-radius: 999px; background: none; color: var(--muted); cursor: pointer;
-    font: 700 17px/1 'Barlow Condensed', sans-serif; text-transform: uppercase; letter-spacing: 0.06em;
+    min-height: 38px; padding: 0 18px; border: 0; border-radius: 999px; background: none; color: var(--muted); cursor: pointer;
+    font: 700 15px/1 'Cormorant Garamond', Georgia, serif; text-transform: uppercase; letter-spacing: 0.14em;
     transition: background 0.2s, color 0.2s;
   }
   .switch button:hover { color: var(--ink); }
-  .switch button[aria-pressed="true"] { background: var(--accent); color: var(--bg); }
+  .switch button[aria-pressed="true"] { background: var(--accent); color: var(--paper-hi); }
 
   /* ---------- Ring (desktop / tablet) ---------- */
-  #ring-view { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 24px 16px 16px; }
+  #ring-view { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 28px 16px 16px; }
   #stage { position: relative; }
   #ring { position: absolute; left: 0; top: 0; width: 1040px; height: 860px; transform-origin: 0 0; }
-  .track { position: absolute; left: 230px; top: 140px; width: 580px; height: 580px; border-radius: 50%; border: 1.5px dashed var(--line); }
+  #ring > svg.scale { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; }
+  .scale .orbit { fill: none; stroke: var(--line); stroke-width: 1.5; stroke-dasharray: 2 7; stroke-linecap: round; }
+  .scale .rule { fill: none; stroke: var(--line); stroke-width: 1; }
+  .scale .tick { stroke: var(--muted); stroke-width: 1; opacity: 0.6; }
+  .scale .tick.major { stroke-width: 1.6; opacity: 0.9; }
+
+  /* The globe */
   .center {
-    position: absolute; left: 320px; top: 230px; width: 400px; height: 400px; border-radius: 50%; background: var(--panel);
-    border: 1px solid var(--edge); box-shadow: 0 0 0 1px transparent, 0 0 60px -20px var(--glow);
+    position: absolute; left: 320px; top: 230px; width: 400px; height: 400px; border-radius: 50%;
+    background: radial-gradient(circle at 36% 30%, var(--sea-hi) 0%, var(--sea) 52%, var(--sea-lo) 100%);
+    box-shadow: 0 0 0 1.5px var(--ink), 0 0 0 6px var(--paper), 0 0 0 7px var(--line), 0 18px 50px -24px rgba(58, 46, 34, 0.55), 0 0 60px -10px var(--glow);
     display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 48px; gap: 10px;
-    transition: box-shadow 0.3s;
+    overflow: hidden; transition: box-shadow 0.3s;
   }
-  .kicker { font-size: 13px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
-  .center .title { font-size: 52px; line-height: 0.95; margin: 0; }
-  .center .title span { color: var(--accent); transition: color 0.2s; }
-  .hint { margin: 0 0 14px; font-size: 15px; line-height: 1.45; color: var(--muted); max-width: 260px; }
+  .center > :not(.graticule) { position: relative; }
+  .graticule { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .graticule path, .graticule line { fill: none; stroke: var(--ink); stroke-width: 1; opacity: 0.16; }
+  .graticule .eq { opacity: 0.3; stroke-dasharray: 5 4; }
+  .kicker { font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim); }
+  .center .title { font-size: 46px; line-height: 0.95; margin: 0; }
+  .center .title span, .list-head .title span { color: var(--accent); font-style: italic; text-transform: none; letter-spacing: 0.02em; font-size: 1.12em; transition: color 0.2s; }
+  .hint { margin: 0 0 14px; font-size: 15px; line-height: 1.45; color: var(--dim); max-width: 260px; }
 
   /* Sport discs: dashed when the sport has nothing on this side yet */
-  .disc, .badge { border-radius: 50%; border: 1.5px dashed rgba(244, 241, 234, 0.35); background: var(--bg); color: var(--muted); display: flex; align-items: center; justify-content: center; }
-  .disc.live, .live > .pick > .badge { border-style: solid; border-color: var(--ink); background: var(--panel); color: var(--ink); }
-  .disc { position: absolute; width: 84px; height: 84px; padding: 0; cursor: pointer; font: inherit; transition: transform 0.18s ease, opacity 0.18s, box-shadow 0.18s, border-color 0.18s, background 0.18s, color 0.18s; }
+  .disc, .badge { border-radius: 50%; border: 1.5px dashed rgba(58, 46, 34, 0.42); background: var(--paper-hi); color: var(--muted); display: flex; align-items: center; justify-content: center; }
+  .disc.live, .live > .pick > .badge { border-style: solid; border-color: var(--ink); background: var(--panel); color: var(--ink); box-shadow: inset 0 0 0 4px var(--paper-hi), inset 0 0 0 5px var(--edge); }
+  .disc { position: absolute; left: 0; top: 0; width: 84px; height: 84px; padding: 0; cursor: pointer; font: inherit; transition: transform 0.18s ease, opacity 0.18s, box-shadow 0.18s, border-color 0.18s, background 0.18s, color 0.18s; }
 
-  /* Lighting: the lit sport glows, the rest dim */
-  .disc.lit { transform: scale(1.14); border-color: var(--accent); color: var(--accent); box-shadow: 0 0 0 6px var(--glow), 0 0 36px var(--glow); }
-  .disc.live.lit { background: var(--accent); color: var(--bg); }
+  /* Lighting: the lit sport glows, the rest fade */
+  .disc.lit { transform: scale(1.14); border-color: var(--accent); color: var(--accent); box-shadow: 0 0 0 6px var(--glow), 0 0 30px var(--glow); }
+  .disc.live.lit { background: var(--accent); color: var(--paper-hi); box-shadow: inset 0 0 0 4px var(--accent), inset 0 0 0 5px rgba(247, 240, 223, 0.5), 0 0 0 6px var(--glow), 0 0 30px var(--glow); }
   #ring.has-lit .disc:not(.lit), #ring.has-lit .label:not(.lit) { opacity: 0.4; }
-  .label { transition: opacity 0.18s; }
 
   /* A switch of sides pulses the sports that have pages there */
-  @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 transparent; } 40% { box-shadow: 0 0 0 9px var(--glow), 0 0 30px var(--glow); border-color: var(--accent); } }
+  @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 transparent; } 40% { box-shadow: 0 0 0 9px var(--glow), 0 0 26px var(--glow); border-color: var(--accent); } }
   .disc.pulse { animation: pulse 0.7s ease-out both; }
 
   /* The lit sport's page buttons fade in beside it */
   .sat {
-    position: absolute; width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--accent); background: var(--bg); color: var(--accent);
+    position: absolute; left: 0; top: 0; width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--accent); background: var(--paper-hi); color: var(--accent);
     display: flex; align-items: center; justify-content: center; text-decoration: none;
     opacity: 0; visibility: hidden; transform: scale(0.6);
     transition: opacity 0.16s, transform 0.16s, visibility 0s 0.16s;
   }
   .sat.lit { opacity: 1; visibility: visible; transform: none; transition: opacity 0.16s, transform 0.16s, visibility 0s; }
-  a.sat.lit:hover { transform: scale(1.12); background: var(--accent); color: var(--bg); }
-  .sat.off { border: 1.5px dashed rgba(244, 241, 234, 0.35); color: var(--muted); }
+  a.sat.lit:hover { transform: scale(1.12); background: var(--accent); color: var(--paper-hi); }
+  .sat.off { border: 1.5px dashed rgba(58, 46, 34, 0.42); color: var(--muted); }
   body[data-mode="recruiting"] .sat[data-kind="learn"],
   body[data-mode="learn"] .sat[data-kind="players"],
   body[data-mode="learn"] .sat[data-kind="staff"] { display: none; }
   .disc:focus-visible, .sat:focus-visible, .btn:focus-visible, .pick:focus-visible, .switch button:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 
-  /* Names sit outside the ring; the summary line appears when the sport is lit */
-  .label { position: absolute; width: 176px; display: flex; flex-direction: column; align-items: center; text-align: center; pointer-events: none; gap: 2px; }
-  .label .n { font-size: 20px; line-height: 1.05; letter-spacing: 0.04em; color: var(--dim); }
+  /* Names sit outside the ring like place names on a map; the summary appears when the sport is lit */
+  .label { position: absolute; left: 0; top: 0; width: 176px; display: flex; flex-direction: column; align-items: center; text-align: center; pointer-events: none; gap: 1px; transition: opacity 0.18s; }
+  .label .n { font-size: 19px; line-height: 1.05; color: var(--dim); }
   .label.live .n, .label.lit .n { color: var(--ink); }
-  .label .s { font-size: 13px; line-height: 1.2; color: var(--muted); min-height: 16px; }
+  .label .s { font: italic 600 15px/1.2 'Cormorant Garamond', Georgia, serif; color: var(--muted); min-height: 17px; }
   .label .sum { font-size: 13px; font-weight: 600; line-height: 1.25; color: var(--accent); opacity: 0; transform: translateY(-3px); transition: opacity 0.18s, transform 0.18s; }
   .label.lit .sum { opacity: 1; transform: none; }
 
@@ -97,19 +127,19 @@
   .legend span { display: inline-flex; align-items: center; gap: 8px; }
 
   /* ---------- List (phones) ---------- */
-  #list-view { display: none; flex: 1; flex-direction: column; gap: 14px; padding: 20px 16px 24px; width: 100%; max-width: 520px; margin: 0 auto; }
+  #list-view { display: none; flex: 1; flex-direction: column; gap: 14px; padding: 28px 22px 24px; width: 100%; max-width: 520px; margin: 0 auto; }
   .list-head { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; padding-bottom: 4px; }
-  .list-head .title { font-size: 36px; line-height: 1; margin: 0; }
-  .list-head .title span { color: var(--accent); }
-  .list-head .hint { margin: 0 0 4px; max-width: 320px; }
+  .list-head .title { font-size: 34px; line-height: 1; margin: 0; }
+  .list-head .hint { margin: 0 0 4px; max-width: 320px; color: var(--muted); }
   .rows { display: flex; flex-direction: column; gap: 8px; }
-  .row { display: flex; flex-direction: column; border-radius: 12px; border: 1px solid rgba(244, 241, 234, 0.18); transition: border-color 0.18s, box-shadow 0.18s, opacity 0.18s; }
+  .row { display: flex; flex-direction: column; border-radius: 12px; border: 1px solid var(--line); background: rgba(249, 243, 228, 0.6); transition: border-color 0.18s, box-shadow 0.18s, opacity 0.18s; }
   .rows.has-lit .row:not(.lit) { opacity: 0.55; }
   .row.lit { border-color: var(--accent); box-shadow: 0 0 0 3px var(--glow); }
   .pick { display: flex; align-items: center; gap: 12px; min-height: 60px; padding: 8px 12px; background: none; border: 0; color: var(--ink); font: inherit; text-align: left; cursor: pointer; border-radius: 12px; }
   .badge { width: 40px; height: 40px; flex: 0 0 40px; transition: background 0.18s, color 0.18s, border-color 0.18s; }
+  .live > .pick > .badge { box-shadow: none; }
   .row.lit .badge { border-color: var(--accent); color: var(--accent); }
-  .row.live.lit .badge { background: var(--accent); color: var(--bg); }
+  .row.live.lit .badge { background: var(--accent); color: var(--paper-hi); }
   .row .n { font-size: 19px; line-height: 1.05; color: var(--dim); }
   .row.live .n, .row.lit .n { color: var(--ink); }
   .row .s { display: block; font-size: 12px; color: var(--muted); margin-top: 2px; }
@@ -117,9 +147,9 @@
   .row.lit .more { display: flex; }
   .more .sum { font-size: 14px; font-weight: 600; color: var(--accent); }
   .actions { display: flex; flex-wrap: wrap; gap: 8px; }
-  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 22px; font-weight: 600; font-size: 15px; text-decoration: none; color: var(--bg); background: var(--accent); border: 1.5px solid var(--accent); }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 22px; font-weight: 600; font-size: 15px; text-decoration: none; color: var(--paper-hi); background: var(--accent); border: 1.5px solid var(--accent); }
   .btn.ghost { background: none; color: var(--ink); border-color: var(--ink); }
-  .btn.off { background: none; color: var(--muted); border: 1.5px dashed rgba(244, 241, 234, 0.35); cursor: default; }
+  .btn.off { background: none; color: var(--muted); border: 1.5px dashed rgba(58, 46, 34, 0.42); cursor: default; }
   a.btn:hover { filter: brightness(1.08); }
 
   @media (max-width: 700px) {
@@ -127,7 +157,7 @@
     #list-view { display: flex; }
   }
 
-  footer { padding: 20px 24px; border-top: 1px solid rgba(244, 241, 234, 0.12); font-size: 14px; line-height: 1.5; color: var(--muted); text-align: center; }
+  footer { padding: 18px 24px 26px; border-top: 1px solid var(--edge); margin: 0 18px; font: italic 600 16px/1.5 'Cormorant Garamond', Georgia, serif; color: var(--muted); text-align: center; }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
 </head>
@@ -136,8 +166,11 @@
 <main id="ring-view">
   <div id="stage">
     <div id="ring">
-      <div class="track" aria-hidden="true"></div>
+      <svg class="scale" width="1040" height="860" aria-hidden="true">
+        <g id="dial"></g>
+      </svg>
       <div class="center">
+        <svg class="graticule" viewBox="0 0 400 400" aria-hidden="true"><g id="grat"></g></svg>
         <div class="kicker">College sports</div>
         <h1 class="title cond" data-role="title"></h1>
         <p class="hint" data-role="hint"></p>
@@ -238,10 +271,10 @@
   }
 
   // A page button: a link when the page exists, otherwise a "coming soon" marker.
-  function satHTML(s, kind, style) {
+  function satHTML(s, kind) {
     const k = KINDS[kind], href = s[kind], icon = smallSvg(k.icon, 20);
-    if (href) return `<a class="sat" data-id="${s.id}" data-kind="${kind}" href="${href}" aria-label="${fullName(s)}: ${k.what}" title="${fullName(s)} · ${k.what}" style="${style}">${icon}</a>`;
-    return `<span class="sat off" data-id="${s.id}" data-kind="${kind}" role="img" aria-label="${fullName(s)}: ${k.what}, coming soon" title="${fullName(s)} · ${k.what} (coming soon)" style="${style}">${icon}</span>`;
+    if (href) return `<a class="sat" data-id="${s.id}" data-kind="${kind}" href="${href}" aria-label="${fullName(s)}: ${k.what}" title="${fullName(s)} · ${k.what}">${icon}</a>`;
+    return `<span class="sat off" data-id="${s.id}" data-kind="${kind}" role="img" aria-label="${fullName(s)}: ${k.what}, coming soon" title="${fullName(s)} · ${k.what} (coming soon)">${icon}</span>`;
   }
   function actionsHTML(s) {
     return '<div class="actions">' + kindsFor().map((kind, i) => {
@@ -252,26 +285,70 @@
   }
 
   // ---- Build the ring once (positions in a 1040×860 box, scaled to fit) ----
-  const CX = 520, CY = 430, R = 290, SAT_DEG = 15;
+  const CX = 520, CY = 430, R = 290, SAT_DEG = 15, GLOBE = 200;
   const rad = (d) => d * Math.PI / 180;
   const at = (deg, dist) => ({ x: CX + dist * Math.sin(rad(deg)), y: CY - dist * Math.cos(rad(deg)) });
-  const px = (p, half) => `left:${Math.round(p.x - half)}px;top:${Math.round(p.y - half)}px`;
 
   const ring = document.getElementById('ring');
-  SPORTS.forEach((s, i) => {
-    const deg = i * (360 / SPORTS.length);
-    const sn = Math.sin(rad(deg)), cs = Math.cos(rad(deg));
-    const a = at(deg, R + 42 + 24);   // the label's edge nearest the disc sits here, so it grows away from the ring
-    const tx = (-50 + 50 * sn).toFixed(1), ty = (-50 - 50 * cs).toFixed(1);
+  const STEP = 360 / SPORTS.length;
+  const items = SPORTS.map((s, i) => {
     ring.insertAdjacentHTML('beforeend', `
-      <button type="button" class="disc" data-id="${s.id}" aria-pressed="false" style="${px(at(deg, R), 42)}">${sportSvg(s.icon, 40)}</button>
-      ${satHTML(s, 'players', px(at(deg - SAT_DEG, R), 20))}
-      ${satHTML(s, 'staff',   px(at(deg + SAT_DEG, R), 20))}
-      ${satHTML(s, 'learn',   px(at(deg - SAT_DEG, R), 20))}
-      <div class="label" data-id="${s.id}" aria-hidden="true" style="left:${Math.round(a.x)}px;top:${Math.round(a.y)}px;transform:translate(${tx}%,${ty}%)">
+      <button type="button" class="disc" data-id="${s.id}" aria-pressed="false">${sportSvg(s.icon, 40)}</button>
+      ${satHTML(s, 'players')}
+      ${satHTML(s, 'staff')}
+      ${satHTML(s, 'learn')}
+      <div class="label" data-id="${s.id}" aria-hidden="true">
         <span class="n cond">${s.name}</span><span class="s">${s.sub}</span><span class="sum"></span>
       </div>`);
+    const q = (sel) => ring.querySelector(`${sel}[data-id="${s.id}"]`);
+    return { base: i * STEP, disc: q('.disc'), players: q('.sat[data-kind="players"]'), staff: q('.sat[data-kind="staff"]'),
+             learn: q('.sat[data-kind="learn"]'), label: q('.label') };
   });
+
+  // The dial between the globe and the ring: a dotted orbit plus a graduated scale, like a globe's meridian ring.
+  (function buildDial() {
+    let svg = `<circle class="orbit" cx="${CX}" cy="${CY}" r="${R}"/><circle class="rule" cx="${CX}" cy="${CY}" r="226"/><circle class="rule" cx="${CX}" cy="${CY}" r="242"/>`;
+    for (let d = 0; d < 360; d += 5) {
+      const major = d % 30 === 0, a = at(d, 226), b = at(d, major ? 242 : 233);
+      svg += `<line class="tick${major ? ' major' : ''}" x1="${a.x.toFixed(1)}" y1="${a.y.toFixed(1)}" x2="${b.x.toFixed(1)}" y2="${b.y.toFixed(1)}"/>`;
+    }
+    document.getElementById('dial').innerHTML = svg;
+  })();
+  const dial = document.getElementById('dial');
+
+  // Lines of latitude stay put; meridians slide across the globe as it turns.
+  const grat = document.getElementById('grat');
+  const PARALLELS = [-60, -30, 0, 30, 60].map((lat) => {
+    const y = GLOBE - GLOBE * Math.sin(rad(lat)), half = GLOBE * Math.cos(rad(lat));
+    return `<line${lat === 0 ? ' class="eq"' : ''} x1="${(GLOBE - half).toFixed(1)}" y1="${y.toFixed(1)}" x2="${(GLOBE + half).toFixed(1)}" y2="${y.toFixed(1)}"/>`;
+  }).join('');
+  function drawGraticule(phase) {
+    let d = '';
+    for (let lon = 0; lon < 360; lon += 30) {
+      const a = rad(lon + phase);
+      if (Math.cos(a) <= 0) continue;                    // the back of the globe
+      const x = GLOBE * Math.sin(a), rx = Math.max(0.01, Math.abs(x)).toFixed(1);
+      d += `M${GLOBE},0A${rx},${GLOBE} 0 0 ${x >= 0 ? 1 : 0} ${GLOBE},${GLOBE * 2}`;
+    }
+    grat.innerHTML = PARALLELS + `<path d="${d}"/>`;
+  }
+
+  // Put every sport where it belongs for this much rotation (degrees).
+  const put = (el, p, half) => { el.style.translate = `${(p.x - half).toFixed(2)}px ${(p.y - half).toFixed(2)}px`; };
+  function place(rot) {
+    items.forEach((it) => {
+      const deg = it.base + rot, sn = Math.sin(rad(deg)), cs = Math.cos(rad(deg));
+      put(it.disc, at(deg, R), 42);
+      put(it.players, at(deg - SAT_DEG, R), 20);
+      put(it.staff, at(deg + SAT_DEG, R), 20);
+      put(it.learn, at(deg - SAT_DEG, R), 20);
+      const a = at(deg, R + 42 + 24);   // the label's edge nearest the disc sits here, so it grows away from the ring
+      it.label.style.translate = `calc(${a.x.toFixed(2)}px + ${(-50 + 50 * sn).toFixed(2)}%) calc(${a.y.toFixed(2)}px + ${(-50 - 50 * cs).toFixed(2)}%)`;
+    });
+    dial.setAttribute('transform', `rotate(${rot.toFixed(3)} ${CX} ${CY})`);
+    drawGraticule(-rot * 1.5);
+  }
+  place(0);
 
   // ---- Draw everything that depends on the side ----
   const rowsEl = document.getElementById('rows');
@@ -386,14 +463,44 @@
 
   // ---- Scale the ring to fit the window ----
   const stage = document.getElementById('stage');
+  let scaleK = 1;
   function fit() {
-    const k = Math.max(0.55, Math.min(1, (window.innerWidth - 32) / 1040, (window.innerHeight - 110) / 860));
-    ring.style.transform = `scale(${k})`;
-    stage.style.width = 1040 * k + 'px';
-    stage.style.height = 860 * k + 'px';
+    scaleK = Math.max(0.55, Math.min(1, (window.innerWidth - 32) / 1040, (window.innerHeight - 110) / 860));
+    ring.style.transform = `scale(${scaleK})`;
+    stage.style.width = 1040 * scaleK + 'px';
+    stage.style.height = 860 * scaleK + 'px';
   }
   window.addEventListener('resize', fit);
   fit();
+
+  // ---- The slow turn ----
+  // One full turn every 200 seconds. It eases to a stop while the mouse is over the globe and its ring,
+  // or while a sport is lit, and picks up again when you move away. Reduced motion: it stays still.
+  const TURN = 360 / 200;   // degrees per second
+  const still = matchMedia('(prefers-reduced-motion: reduce)');
+  const ringView = document.getElementById('ring-view');
+  let rot = 0, speed = still.matches ? 0 : TURN, hovering = false, last = null;
+
+  document.addEventListener('pointermove', (e) => {
+    if (e.pointerType !== 'mouse' && e.pointerType !== 'pen') return;
+    const r = stage.getBoundingClientRect();
+    const dx = e.clientX - (r.left + CX * scaleK), dy = e.clientY - (r.top + CY * scaleK);
+    hovering = Math.hypot(dx, dy) < (R + 50) * scaleK;
+  });
+  document.documentElement.addEventListener('pointerleave', () => { hovering = false; });
+
+  function tick(t) {
+    const dt = last == null ? 0 : Math.min(0.1, (t - last) / 1000);
+    last = t;
+    const target = still.matches || hovering || lit || pinned ? 0 : TURN;
+    speed += (target - speed) * Math.min(1, dt * 3);
+    if (speed > 0.001 && ringView.offsetParent !== null) {
+      rot = (rot + speed * dt) % 360;
+      place(rot);
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
 </script>
 </body>
 </html>
