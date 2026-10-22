@@ -6,12 +6,12 @@
 <title>D1 College Football Recruiting Footprints</title>
 <meta name="description" content="Compare where up to four D1 college football programs find their players, state by state.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Barlow:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Barlow:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="../common.css">
 <style>
 /* Layout: an ordinary scrolling page. Title bar on top, then four big U.S. maps, two per row,
    each state shaded by its share of that school's roster, with the state ranking on one line underneath. */
-body { background: var(--panel); }
+body { background: var(--panel) var(--paper-grain); }
 .bar { position: static; padding-bottom: 6px; }
 .tools { justify-content: flex-end; }
 @media (min-width: 1101px) {   /* compact title so four maps fit on laptop screens */
@@ -62,7 +62,7 @@ body { background: var(--panel); }
 .h2h-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .box { border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 10px; min-width: 0; position: relative; }
 .box.span2 { grid-column: 1 / -1; }
-.box h3 { font: 800 18px/1.1 var(--display); text-transform: uppercase; letter-spacing: .02em; margin: 0; }
+.box h3 { font: 700 19px/1.1 var(--display); text-transform: uppercase; letter-spacing: .1em; margin: 0; }
 .box .why { margin: -4px 0 0; }
 .tscroll { overflow-x: auto; }
 table.st { border-collapse: collapse; width: 100%; font-size: 14px; font-variant-numeric: tabular-nums; }
