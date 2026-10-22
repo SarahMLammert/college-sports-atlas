@@ -13,7 +13,7 @@ Written by `scripts/scrape_rosters.py` on 2026-10-22 from the scrape reports in 
 | D2 | 316 | 2 | 6 |
 | D3 | 481 | 0 | 4 |
 | NAIA | 151 | 2 | 13 |
-| JUCO | 45 | 9 | 149 |
+| JUCO | 104 | 22 | 77 |
 
 ## FCS
 
@@ -69,97 +69,71 @@ Written by `scripts/scrape_rosters.py` on 2026-10-22 from the scrape reports in 
 
 ### Failed
 
-- **Allan Hancock College** (2018, 2024): couldn't connect to the site: the address in the schools file may be wrong or dead.
-- **American River College** (2018, 2024): 2018: bot check ×2; 2024: the roster page opened but no players could be read from it.
+- **American River College** (2018, 2024): the site blocks plain downloads, and the pages the browser opened had no roster.
 - **Antelope Valley College** (2018, 2024): couldn't connect to the site: the address in the schools file may be wrong or dead.
 - **Arkansas Baptist** (2018): the site has no roster for this season: its old-season addresses lead to a newer roster. Note: NJCAA through 2020-21; site has no rosters before 2022 (checked Oct 2026); site has rosters for 2022, 2023, 2025, 2026 only (checked Oct 2026).
-- **Butler CC** (2018, 2024): bot check ×2.
 - **Butte College** (2018, 2024): no roster page at any of the usual addresses: the site may have moved or use another layout.
 - **Cabrillo College** (2018, 2024): couldn't connect to the site: the address in the schools file may be wrong or dead.
-- **Cerritos College** (2018, 2024): bot check ×2.
-- **Chabot College** (2018, 2024): couldn't connect to the site: the address in the schools file may be wrong or dead.
-- **Chaffey College** (2018, 2024): bot check ×2.
-- **Cisco** (2018, 2024): bot check ×2.
-- **Citrus College** (2018, 2024): bot check ×2.
+- **Chaffey College** (2018, 2024): the site blocks plain downloads, and the pages the browser opened had no roster.
 - **Coalinga College** (2018, 2024): no roster page at any of the usual addresses: the site may have moved or use another layout.
-- **Coffeyville CC** (2018, 2024): bot check ×2.
-- **College of the Canyons** (2018, 2024): bot check ×2.
-- **College of the Desert** (2018, 2024): bot check ×2.
-- **College of the Sequoias** (2018, 2024): 2018: no roster page at any of the usual addresses: the site may have moved or use another layout; 2024: bot check ×2.
-- **College of the Siskiyous** (2018, 2024): bot check ×2.
+- **College of the Canyons** (2018, 2024): the site blocks plain downloads, and the pages the browser opened had no roster.
+- **College of the Desert** (2018, 2024): the site blocks plain downloads, and the pages the browser opened had no roster.
+- **College of the Siskiyous** (2018): the site blocks plain downloads, and the pages the browser opened had no roster.
 - **Compton College** (2018): no roster page at any of the usual addresses: the site may have moved or use another layout.
-- **Copiah-Lincoln CC** (2018, 2024): bot check ×2.
 - **De Anza College** (2018): no roster page at any of the usual addresses: the site may have moved or use another layout.
-- **Diablo Valley College** (2018, 2024): bot check ×2.
-- **East Los Angeles College** (2018, 2024): bot check ×2.
-- **East Mississippi CC** (2018, 2024): bot check ×2.
-- **El Camino College** (2018, 2024): bot check ×2.
-- **Ellsworth CC** (2018, 2024): bot check ×2.
-- **Erie CC** (2018, 2024): couldn't connect to the site: the address in the schools file may be wrong or dead.
+- **Diablo Valley College** (2018, 2024): the site blocks plain downloads, and the pages the browser opened had no roster.
+- **East Los Angeles College** (2018, 2024): the site blocks plain downloads, and the pages the browser opened had no roster.
 - **Feather River College** (2018, 2024): couldn't connect to the site: the address in the schools file may be wrong or dead.
 - **Foothill College** (2018, 2024): no roster page at any of the usual addresses: the site may have moved or use another layout.
-- **Fresno City College** (2018, 2024): bot check ×2.
-- **Fullerton College** (2018, 2024): bot check ×2.
-- **Garden City CC** (2018, 2024): bot check ×2.
+- **Fresno City College** (2024): the site blocks plain downloads, and the pages the browser opened had no roster.
+- **Fullerton College** (2018, 2024): the site blocks plain downloads, and the pages the browser opened had no roster.
 - **Gavilan College** (2018): no roster page at any of the usual addresses: the site may have moved or use another layout.
-- **Georgia Military College** (2018, 2024): bot check ×2.
-- **Glendale CC (CA)** (2018, 2024): bot check ×2.
-- **Golden West College** (2018, 2024): bot check ×2.
-- **Grossmont College** (2018, 2024): bot check ×2.
-- **Hartnell College** (2018, 2024): bot check ×2.
-- **Holmes CC** (2018, 2024): bot check ×2.
-- **Hudson Valley CC** (2018, 2024): bot check ×2.
-- **Hutchinson CC** (2018): bot check ×2.
-- **Iowa Central CC** (2018, 2024): bot check ×2.
-- **Iowa Western CC** (2018): bot check ×2.
-- **Itawamba CC** (2018, 2024): bot check ×2.
-- **Kilgore College** (2018): bot check ×2.
+- **Golden West College** (2018, 2024): the site blocks plain downloads, and the pages the browser opened had no roster.
+- **Hartnell College** (2018, 2024): the site blocks plain downloads, and the pages the browser opened had no roster.
+- **Kilgore College** (2018): the site blocks plain downloads, and the pages the browser opened had no roster.
 - **Lackawanna College** (2018): the site has no roster for this season: its old-season addresses lead to a newer roster. Note: site has no 2018 roster; old seasons redirect or are not found (checked Oct 2026).
 - **Laney College** (2018, 2024): Left out: rosters are PDFs only (2025, 2026), no web roster pages, Oct 2026.
-- **Long Beach City College** (2018, 2024): bot check ×2.
+- **Long Beach City College** (2018, 2024): the site blocks plain downloads, and the pages the browser opened had no roster.
 - **Los Angeles Harbor College** (2018, 2024): no roster page at any of the usual addresses: the site may have moved or use another layout.
 - **Los Angeles Pierce College** (2018): no roster page at any of the usual addresses: the site may have moved or use another layout.
-- **Louisburg College** (2018, 2024): bot check ×2.
 - **Minnesota State CTC** (2018, 2024): couldn't connect to the site: the address in the schools file may be wrong or dead.
-- **Minnesota West CTC** (2018, 2024): bot check ×2.
-- **Mississippi Delta CC** (2018, 2024): bot check ×2.
-- **Mississippi Gulf Coast CC** (2018, 2024): bot check ×2.
-- **Modesto JC** (2018, 2024): bot check, certificate error.
-- **Moorpark College** (2018, 2024): bot check ×2.
-- **Mt. San Jacinto College** (2018, 2024): bot check ×2.
+- **Minnesota West CTC** (2018, 2024): the site blocks plain downloads, and the pages the browser opened had no roster.
+- **Modesto JC** (2018, 2024): the site blocks plain downloads, and the pages the browser opened had no roster.
+- **Mt. San Jacinto College** (2018, 2024): the site blocks plain downloads, and the pages the browser opened had no roster.
 - **Navarro College** (2018): the site has no roster for this season: its old-season addresses lead to a newer roster. Note: site has no 2018 roster; old seasons show the 2026 roster (checked Oct 2026).
-- **New Mexico Military Institute** (2018, 2024): bot check ×2.
-- **North Dakota State College of Science** (2018, 2024): bot check ×2.
-- **Orange Coast College** (2018, 2024): bot check ×2.
 - **Palomar College** (2018, 2024): no roster page at any of the usual addresses: the site may have moved or use another layout.
-- **Pasadena City College** (2018, 2024): bot check ×2.
-- **Pearl River CC** (2018, 2024): bot check ×2.
-- **Reedley College** (2018, 2024): bot check ×2.
-- **Riverside City College** (2018): bot check ×2.
-- **Sacramento City College** (2018, 2024): 2018: bot check ×2; 2024: no roster page at any of the usual addresses: the site may have moved or use another layout.
-- **Saddleback College** (2018, 2024): bot check ×2.
-- **San Bernardino Valley College** (2018, 2024): bot check ×2.
-- **San Diego Mesa College** (2018, 2024): bot check ×2.
-- **San Joaquin Delta College** (2018, 2024): bot check ×2.
+- **Pasadena City College** (2018, 2024): the site blocks plain downloads, and the pages the browser opened had no roster.
+- **Reedley College** (2018, 2024): the site blocks plain downloads, and the pages the browser opened had no roster.
+- **Sacramento City College** (2018, 2024): the site blocks plain downloads, and the pages the browser opened had no roster.
+- **Saddleback College** (2018, 2024): the site blocks plain downloads, and the pages the browser opened had no roster.
+- **San Bernardino Valley College** (2018, 2024): the site blocks plain downloads, and the pages the browser opened had no roster.
+- **San Diego Mesa College** (2018, 2024): the site blocks plain downloads, and the pages the browser opened had no roster.
+- **San Joaquin Delta College** (2018, 2024): the site blocks plain downloads, and the pages the browser opened had no roster.
 - **San Jose City College** (2018, 2024): 2018: no roster page at any of the usual addresses: the site may have moved or use another layout; 2024: the site has no roster for this season: its old-season addresses lead to a newer roster.
-- **Santa Ana College** (2018, 2024): bot check ×2.
-- **Santa Barbara City College** (2018, 2024): bot check ×2.
-- **Santa Monica College** (2018, 2024): bot check ×2.
-- **Shasta College** (2018, 2024): bot check ×2.
-- **Tyler JC** (2018, 2024): the roster page opened but no players could be read from it.
-- **Ventura College** (2018, 2024): bot check ×2.
-- **Victor Valley College** (2018, 2024): couldn't connect to the site: the address in the schools file may be wrong or dead.
+- **Santa Ana College** (2018, 2024): the site blocks plain downloads, and the pages the browser opened had no roster.
+- **Santa Barbara City College** (2024): the site blocks plain downloads, and the pages the browser opened had no roster.
+- **Shasta College** (2018, 2024): the site blocks plain downloads, and the pages the browser opened had no roster.
 
 ### Partial
 
-- **Blinn** (2018: 78 players, 1 with a hometown): the site lists hometowns for only some players.
-- **College of DuPage** (2018: 86 players, 25 with a hometown): the site lists hometowns for only some players.
-- **College of San Mateo** (2018: 79 players, 0 with a hometown): the site lists hometowns for only some players.
-- **De Anza College** (2024: 64 players, 0 with a hometown): the site lists hometowns for only some players.
-- **Independence CC** (2024: 60 players, 0 with a hometown): the site lists hometowns for only some players.
-- **Santa Rosa JC** (2018: 74 players, 0 with a hometown; 2024: 80 players, 0 with a hometown): the site lists hometowns for only some players.
-- **Sierra College** (2018: 74 players, 0 with a hometown): the site lists hometowns for only some players.
-- **Trinity Valley CC** (2018: 92 players, 15 with a hometown): the site lists hometowns for only some players.
+- **Blinn** (2018: 78 players, 1 with a hometown): neither the roster page nor the players' own pages list most hometowns.
+- **Chabot College** (2018: 71 players, 0 with a hometown): neither the roster page nor the players' own pages list most hometowns.
+- **Cisco** (2018: 107 players, 0 with a hometown; 2024: 88 players, 0 with a hometown): neither the roster page nor the players' own pages list most hometowns.
+- **Citrus College** (2018: 62 players, 17 with a hometown; 2024: 84 players, 0 with a hometown): neither the roster page nor the players' own pages list most hometowns.
+- **College of DuPage** (2018: 86 players, 25 with a hometown): neither the roster page nor the players' own pages list most hometowns.
+- **College of San Mateo** (2018: 79 players, 0 with a hometown): neither the roster page nor the players' own pages list most hometowns.
+- **De Anza College** (2024: 64 players, 0 with a hometown): neither the roster page nor the players' own pages list most hometowns.
+- **Fresno City College** (2018: 65 players, 0 with a hometown): neither the roster page nor the players' own pages list most hometowns.
+- **Garden City CC** (2018: 66 players, 0 with a hometown): neither the roster page nor the players' own pages list most hometowns.
+- **Grossmont College** (2018: 71 players, 0 with a hometown): neither the roster page nor the players' own pages list most hometowns.
+- **Independence CC** (2024: 60 players, 0 with a hometown): neither the roster page nor the players' own pages list most hometowns.
+- **Moorpark College** (2018: 86 players, 0 with a hometown): neither the roster page nor the players' own pages list most hometowns.
+- **North Dakota State College of Science** (2024: 96 players, 5 with a hometown): neither the roster page nor the players' own pages list most hometowns.
+- **Santa Rosa JC** (2018: 74 players, 0 with a hometown; 2024: 80 players, 0 with a hometown): neither the roster page nor the players' own pages list most hometowns.
+- **Sierra College** (2018: 74 players, 0 with a hometown): neither the roster page nor the players' own pages list most hometowns.
+- **Trinity Valley CC** (2018: 92 players, 15 with a hometown): neither the roster page nor the players' own pages list most hometowns.
+- **Tyler JC** (2018: 97 players, 1 with a hometown; 2024: 70 players, 1 with a hometown): neither the roster page nor the players' own pages list most hometowns.
+- **Victor Valley College** (2018: 64 players, 0 with a hometown): neither the roster page nor the players' own pages list most hometowns.
 
 ## Skipped: no athletics site in the schools file
 
