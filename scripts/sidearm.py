@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-"""Reading Sidearm and WMT athletics pages: building roster URLs, checking which season a page
+"""Reading Sidearm, WMT and PrestoSports athletics pages: building roster URLs, checking which season a page
 shows, and pulling players out of it (five parsers, best result kept). Also the rules for telling a
 previous college from a high school.
 
@@ -20,14 +20,18 @@ from hometowns import _PLACEHOLDERS, _key, _lookup   # noqa: F401
 
 # Set by configure() from the sport's settings; these defaults are football's.
 ROSTER_PATHS = ["/sports/football/roster"]
+# PrestoSports puts the season in the middle of the path (/sports/fball/2024-25/roster), so these are
+# templates with {season}, {next_season} and {next_yy}, filled in for each season.
+PRESTO_PATHS = ["/sports/fball/{season}-{next_yy}/roster"]
 MIN_PLAYERS = 25  # fewer players than this on a page is suspicious
 JUCO_NAMES: list[str] = []
 
 
 def configure(sport) -> None:
     """Use a sport's roster URL paths, minimum roster size and junior-college names."""
-    global ROSTER_PATHS, MIN_PLAYERS, JUCO_NAMES
+    global ROSTER_PATHS, PRESTO_PATHS, MIN_PLAYERS, JUCO_NAMES
     ROSTER_PATHS = list(sport.roster_paths)
+    PRESTO_PATHS = list(getattr(sport, "presto_paths", []))
     MIN_PLAYERS = sport.min_players
     JUCO_NAMES = list(sport.junior_colleges)
 
@@ -64,6 +68,16 @@ def candidate_urls(domain: str, override: str = "", season: int | None = None) -
             urls.append(f"{base}{path}/season/{season}-{yy}/")   # WMT:      /roster/season/2019-20/ (Notre Dame, Georgia Tech)
         else:
             urls.append(f"{base}{path}")
+    # PrestoSports: /sports/fball/2019-20/roster. The list view first: some sites (Morningside) only
+    # put the roster table there. Then the same on www.: some sites (Hutchinson, Iowa Western,
+    # Kilgore) only answer there. Hosts with a subdomain (deanza.prestosports.com) get no www. copy.
+    presto_hosts = [base]
+    if domain and domain.strip().strip("/").count(".") == 1:
+        presto_hosts.append(f"https://www.{domain.strip().strip('/')}")
+    for host in presto_hosts:
+        for template in PRESTO_PATHS:
+            path = _fill(template, season if season else current_season())
+            urls += [f"{host}{path}?view=list", f"{host}{path}"]
     if domain and not domain.startswith("www."):
         urls.append(f"https://www.{domain}{ROSTER_PATHS[0]}" + (f"/{season}" if season else ""))
     seen, out = set(), []
@@ -90,7 +104,8 @@ def detect_season(html: str) -> int | None:
     if soup.title:  # .string is None when the title has child nodes; get_text() isn't
         candidates.append(soup.title.get_text(" "))
     for sel in ("select[name=season] option[selected]", "select option[selected]",
-                "h1", "h2", "[class*=roster-title]", "[class*=season] [aria-selected=true]"):
+                "h1", "h2", "[class*=roster-title]", "[class*=season] [aria-selected=true]",
+                ".school-team-suite__eyebrow"):   # Ardor Sports Hub (NJCAA app): "Football · 2024-25"
         for el in soup.select(sel)[:3]:
             candidates.append(el.get_text(" "))
     for text in candidates:
@@ -115,6 +130,7 @@ def detect_season(html: str) -> int | None:
 #   3. sidearm_cards   - Sidearm nextgen person cards (data-test-id attributes)
 #   4. html_table      - any <table> whose header mentions Hometown
 #   5. embedded_json   - any other <script> JSON blob (__NEXT_DATA__, ld+json, ...) with hometown keys
+#   6. ardor_cards     - Ardor Sports Hub cards (the NJCAA's app, e.g. Tyler JC; needs --render)
 
 FIELDS = [
     "name", "first_name", "last_name", "jersey", "position", "class_year",
@@ -391,8 +407,11 @@ def parse_sidearm_classic(html: str, soup: BeautifulSoup) -> list[dict]:
         name_el = li.select_one(".sidearm-roster-player-name h3 a, .sidearm-roster-player-name a, "
                                 ".sidearm-roster-player-name h3, .sidearm-roster-player-name")
         rec["name"] = clean(name_el.get_text(" ")) if name_el else ""
-        if name_el is not None and name_el.name == "a":
-            rec["bio_url"] = name_el.get("href", "")
+        # select_one returns the first match in page order, which is the name box, not the link in
+        # it, so the player's page link is looked up on its own.
+        link = li.select_one(".sidearm-roster-player-name a[href]")
+        if link is not None:
+            rec["bio_url"] = link.get("href", "")
         rec["jersey"] = _sel_text(li, ".sidearm-roster-player-jersey-number")
         rec["position"] = _sel_text(li, ".sidearm-roster-player-position-long-short, .sidearm-roster-player-position > span:first-child, .sidearm-roster-player-position")
         rec["class_year"] = _sel_text(li, ".sidearm-roster-player-academic-year")
@@ -478,6 +497,7 @@ def parse_sidearm_cards(html: str, soup: BeautifulSoup) -> list[dict]:
 
 _HEADER_FIELDS = [
     (r"hometown\s*/\s*(high school|last school|previous school)", "hometown_hs"),
+    (r"(high\s*school|^hs)\s*/\s*(hs\s*)?(city|hometown)", "hs_hometown"),   # Riverside: "High School/HS City"
     (r"hometown", "hometown"),
     (r"(high\s*school|^hs).*/.*(previous|prior|transfer|college)", "hs_prev"),
     (r"high\s*school|last\s*school|^hs$", "high_school"),
@@ -534,7 +554,7 @@ def parse_html_tables(html: str, soup: BeautifulSoup) -> list[dict]:
         cap = table.find("caption")
         if (cap is not None and _STAFF_SECTIONS.search(cap.get_text(" "))) or _in_staff_section(table):
             continue
-        if "hometown" not in headers and "hometown_hs" not in headers:
+        if not {"hometown", "hometown_hs", "hs_hometown"} & set(headers):
             continue
         if "name" not in headers and "last_name" not in headers:
             continue
@@ -542,6 +562,12 @@ def parse_html_tables(html: str, soup: BeautifulSoup) -> list[dict]:
         rows = []
         for tr in body_rows:
             cells = tr.find_all(["td", "th"])
+            if len(cells) > len(headers):
+                # PrestoSports (Avila) adds a phone-only copy of the jersey number to each row
+                # (class d-md-none), which pushes every column one place to the right.
+                shown = [c for c in cells if "d-md-none" not in (c.get("class") or [])]
+                if len(shown) >= len(headers) - 1:
+                    cells = shown
             if len(cells) < len(headers) - 1:
                 continue
             # Some sites repeat the header row inside the table (once per position group). Those
@@ -564,6 +590,12 @@ def parse_html_tables(html: str, soup: BeautifulSoup) -> list[dict]:
                     val = _name_from_link(cell)
                 if field == "hometown_hs":
                     rec["hometown"], rec["high_school"] = split_hometown_highschool(val)
+                elif field == "hs_hometown":           # school first, town second ("Poly / Riverside, Calif.")
+                    school, town = split_hometown_highschool(val)
+                    h1, h2 = parse_hometown(school), parse_hometown(town)
+                    if (h1["state"] or h1["country"]) and not (h2["state"] or h2["country"]):
+                        school, town = town, school    # written town first after all
+                    rec["high_school"], rec["hometown"] = school, town
                 elif field == "hs_prev":
                     rec["high_school"], rec["previous_school"] = split_hometown_highschool(val)
                 elif not rec.get(field):
@@ -632,6 +664,124 @@ def _json_candidates(txt: str) -> Iterable[Any]:
 
 
 # ---------------------------------------------------------------------------
+# 6. Ardor Sports Hub cards (the NJCAA's app; the page is built by script, so only with --render)
+# ---------------------------------------------------------------------------
+# <a class="school-team-suite__roster-card" href="/athletes/379004/fball/2024-25/profile?...">
+#   <span class="school-team-suite__roster-number">02</span>
+#   <div class="school-team-suite__roster-copy"><b>Terrence Naulings</b>
+#     <small>WR · sophomore<br>Houston</small></div></a>
+# The <small> line is "position · class", either part optional, then the hometown after a <br>
+# when the site has one. Most cards carry only the class; one Tyler card just says "Roster".
+# Every card is kept, however little it says.
+
+_ARDOR_FILLER = {"roster", "player", "athlete", ""}
+
+
+def parse_ardor_cards(html: str, soup: BeautifulSoup) -> list[dict]:
+    out = []
+    for card in soup.select("a.school-team-suite__roster-card, .school-team-suite__roster-card"):
+        if _in_staff_section(card):
+            continue
+        rec = _blank()
+        name_el = card.select_one(".school-team-suite__roster-copy b, .school-team-suite__roster-copy strong")
+        rec["name"] = re.sub(r"(\w)-\s+(?=\w)", r"\1-", clean(name_el.get_text(" "))) if name_el else ""
+        if not rec["name"]:
+            continue
+        rec["jersey"] = _sel_text(card, ".school-team-suite__roster-number")
+        rec["bio_url"] = card.get("href", "") if card.name == "a" else ""
+        small = card.select_one(".school-team-suite__roster-copy small")
+        if small is not None:
+            for br in small.find_all("br"):
+                br.replace_with("\n")
+            lines = [clean(x) for x in small.get_text().split("\n") if clean(x)]
+            first, rest = (lines[0] if lines else ""), lines[1:]
+            parts = [clean(p) for p in re.split(r"\s*[·•|]\s*", first) if clean(p)]
+            if len(parts) == 1 and not _CLASS_ONLY.fullmatch(parts[0]) and parts[0].lower() not in _ARDOR_FILLER \
+                    and not rest and (parse_hometown(parts[0])["state"] or "," in parts[0]):
+                rest, parts = [parts[0]], []          # a card with only a hometown on it
+            for p in parts:
+                if p.lower() in _ARDOR_FILLER:
+                    continue
+                if _CLASS_ONLY.fullmatch(p):
+                    rec["class_year"] = rec["class_year"] or p
+                elif not rec["position"]:
+                    rec["position"] = p
+            if rest:
+                ht, hs = split_hometown_highschool(" / ".join(rest))
+                rec["hometown"], rec["high_school"] = ht, hs
+        out.append(rec)
+    return out
+
+
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# A player's own page (--bios): hometown and schools for rosters that leave them out
+# ---------------------------------------------------------------------------
+# Sidearm player pages list "Label value" pairs: <dt>Hometown</dt><dd>College Park, GA</dd> on the
+# older design, <span class="...title">Hometown</span> College Park, GA on the newer one. Only the
+# hometown and schools are read: they don't change from season to season, while position and class
+# might (the page can show a later season than the roster).
+
+_BIO_WANTED = {"hometown", "hometown_hs", "hs_hometown", "high_school", "previous_school", "hs_prev"}
+_BIO_LABEL_TAGS = ["dt", "th", "span", "strong", "b", "label", "div", "p", "h3", "h4", "h5"]
+
+
+def _bio_value(label: Tag) -> str:
+    if label.name == "dt":
+        dd = label.find_next_sibling("dd")
+        return clean(dd.get_text(" ")) if dd else ""
+    if label.name == "th":
+        td = label.find_next_sibling("td")
+        return clean(td.get_text(" ")) if td else ""
+    sib = label.find_next_sibling()
+    if sib is not None and clean(sib.get_text(" ")):
+        return clean(sib.get_text(" "))
+    parent = label.parent                      # "<li><span>Hometown</span> College Park, GA</li>"
+    if parent is not None:
+        text, own = clean(parent.get_text(" ")), clean(label.get_text(" "))
+        if text.startswith(own):
+            return text[len(own):].strip(" :")
+    return ""
+
+
+def parse_bio(html: str) -> dict:
+    """{'hometown': ..., 'high_school': ..., 'previous_school': ...} from a player's page (blank if absent)."""
+    soup = BeautifulSoup(html, "lxml")
+    # Not <header>: Sidearm puts the player's details in one (Morehouse); menus are in <nav>.
+    for junk in soup(["script", "style", "nav", "footer", "noscript"]):
+        junk.decompose()
+    out = {"hometown": "", "high_school": "", "previous_school": ""}
+    for el in soup.find_all(_BIO_LABEL_TAGS):
+        label = clean(el.get_text(" ")).rstrip(":").strip()
+        if not label or len(label) > 40 or el.find(_BIO_LABEL_TAGS):
+            continue                               # not a label: long text, or a wrapper around one
+        field = _header_field(label)
+        if field not in _BIO_WANTED:
+            continue
+        val = _bio_value(el)
+        if not val or val.lower() == label.lower() or len(val) > 120:
+            continue
+        if field == "hometown_hs":
+            ht, hs = split_hometown_highschool(val)
+            out["hometown"] = out["hometown"] or ht
+            out["high_school"] = out["high_school"] or hs
+        elif field == "hs_hometown":
+            hs, ht = split_hometown_highschool(val)
+            out["hometown"] = out["hometown"] or ht
+            out["high_school"] = out["high_school"] or hs
+        elif field == "hs_prev":
+            hs, prev = split_hometown_highschool(val)
+            out["high_school"] = out["high_school"] or hs
+            out["previous_school"] = out["previous_school"] or prev
+        elif not out[field]:
+            out[field] = val
+    if out["hometown"].strip().lower().rstrip(":. ") in _PLACEHOLDERS or _CLASS_ONLY.fullmatch(out["hometown"]):
+        out["hometown"] = ""
+    return out
+
+
+# ---------------------------------------------------------------------------
 
 def _merge_into(kept: dict, r: dict) -> None:
     for f, v in r.items():
@@ -668,13 +818,14 @@ STRATEGIES: list[tuple[str, Callable[[str, BeautifulSoup], list[dict]]]] = [
     ("sidearm_cards", parse_sidearm_cards),
     ("html_table", parse_html_tables),
     ("embedded_json", parse_embedded_json),
+    ("ardor_cards", parse_ardor_cards),
 ]
 
 
 
 _CELL_LABEL = re.compile(
     r"^(No\.?|#|Jersey|Name|Full Name|Pos\.?|Position|Cl\.?|Class|Yr\.?|Year|Academic Year|Elig\.?|"
-    r"Ht\.?|Height|Wt\.?|Weight|Hometown(?:\s*/\s*[A-Za-z ]+)?|High School|Last School|"
+    r"Ht\.?|Height|Wt\.?|Weight|Hometown(?:\s*/\s*[A-Za-z ]+)?|High School(?:\s*/\s*[A-Za-z ]+)?|Last School|"
     r"Previous Schools?|Prev\. School|Former School|College|Experience|Exp\.?)\s*:\s*",
     re.I,
 )

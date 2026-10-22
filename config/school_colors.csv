@@ -240,6 +240,7 @@ Nicholls,#C8102E,#6F9FD8
 Northwestern State,#492F92,#F57F28
 Southeastern Louisiana,#006341,#F2A900
 Stephen F. Austin,#5F259F,#FFFFFF
+UTRGV,#F05023,#0C2340
 Alabama A&M,#660000,#FFFFFF
 Alabama State,#000000,#C99700
 Alcorn State,#46166B,#E9A900
@@ -263,3 +264,524 @@ Utah Tech,#BA1C21,#003058
 West Georgia,#0656A5,#DA2128
 Merrimack,#003768,#F2A900
 Sacred Heart,#CE1141,#000000
+Adams State,#124734,#FFFFFF
+Albany State (GA),#0039A6,#EAAB00
+Allen,#004C97,#FFD100
+American International,#000000,#FFFFFF
+Anderson (SC),#010101,#8C714C
+Angelo State,#245397,#F0C33B
+Arkansas Tech,#115740,#FFCD00
+Arkansas-Monticello,#00965E,#FFFFFF
+Ashland,#5C068C,#FFC72C
+Assumption,#005B99,#FFFFFF
+Augustana (SD),#002D62,#FFDD00
+Barton,#18468B,#000000
+Bemidji State,#004D44,#FFFFFF
+Benedict,#4C145E,#F9D616
+Bentley,#000000,#FFFFFF
+Black Hills State,#006233,#FFC726
+Bluefield State,#13294B,#B9975B
+Bowie State,#1D252C,#FFCE00
+California (PA),#DA291C,#27251F
+Carson-Newman,#FF671F,#0C2340
+Catawba,#13294E,#989AA5
+Central Missouri,#CF202E,#000000
+Central Oklahoma,#003366,#FFCC00
+Central State (OH),#71273D,#FFCB00
+Central Washington,#AB0032,#2C2A29
+Chadron State,#660033,#FFFFFF
+Charleston (WV),#992244,#FFD200
+Chowan,#003087,#FFFFFF
+Clarion,#003366,#97824A
+Clark Atlanta,#CE1126,#000000
+Colorado Mesa,#5D0022,#FFFFFF
+Colorado School of Mines,#21314D,#B2B4B3
+Colorado State-Pueblo,#00396A,#AD123A
+Bloomsburg,#6E121E,#FFDD00
+Lock Haven,#7A0026,#FFFFFF
+Concord,#862633,#768692
+Concordia-St. Paul,#002F65,#DEB407
+Davenport,#D5160C,#000000
+Delta State,#00753E,#FFFFFF
+East Central (OK),#000000,#FF5200
+East Stroudsburg,#DB0436,#000000
+Eastern New Mexico,#006633,#A7A9AC
+Edinboro,#BB131A,#FFFFFF
+Edward Waters,#772583,#E87722
+Elizabeth City State,#0032A0,#FFFFFF
+Emory & Henry,#1B3D75,#D5AD28
+Emporia State,#000000,#BB8D0A
+Erskine,#6F1931,#B8A46A
+Fairmont State,#6F263D,#FFFFFF
+Fayetteville State,#0067B1,#B0B7BC
+Ferris State,#BA0C2F,#FFD043
+Ferrum,#010101,#998542
+Findlay,#000000,#F47920
+Fort Hays State,#000000,#F6BE00
+Fort Lewis,#000066,#FFCC33
+Fort Valley State,#003087,#EAAA00
+Franklin Pierce,#A91938,#6D6E71
+Frostburg State,#BA0C2F,#FFFFFF
+Gannon,#960A2C,#F9A72B
+Glenville State,#003DA5,#FFFFFF
+Grand Valley State,#0033A0,#FFFFFF
+Harding,#000000,#CBB778
+Henderson State,#A91D36,#000000
+Hillsdale,#004678,#FFFFFF
+IUP,#9E1B32,#A2A5A4
+Indianapolis,#9D2136,#C0BFBA
+Jamestown,#F2622B,#080808
+Johnson C. Smith,#002D56,#FFCF01
+Kentucky State,#046A38,#FFD100
+Kentucky Wesleyan,#392082,#A7A8AA
+Kutztown,#782F40,#A49473
+Lake Erie,#113D2A,#FFFFFF
+Lane,#000080,#990000
+Lenoir-Rhyne,#89192C,#000000
+Lincoln (MO),#102548,#FFFFFF
+Lincoln (PA),#003366,#FF7F00
+Livingstone,#86B0C6,#000000
+Mars Hill,#002D72,#90754D
+Mary,#00539B,#FFFFFF
+McKendree,#470A68,#FFFFFF
+Michigan Tech,#000000,#FFCD00
+Midwestern State,#862633,#EAAA00
+Miles,#580D69,#E2D000
+Millersville,#000000,#EEB111
+Minnesota Duluth,#7A0019,#FFCC33
+Minnesota State,#480059,#F7E400
+Minnesota State Moorhead,#A6192E,#FFFFFF
+Minot State,#006242,#CF102D
+Missouri S&T,#154734,#CEB888
+Missouri Southern,#006338,#F6CF3F
+Missouri Western,#000000,#FFC700
+Morehouse,#891E31,#FFFFFF
+Nebraska-Kearney,#004D86,#E4A115
+New Mexico Highlands,#502D7F,#FFFFFF
+Newberry,#CE0E2D,#898A8D
+UNC Pembroke,#000000,#A67F31
+North Greenville,#000000,#D60036
+Northeastern State,#008265,#FFFFFF
+Northern Michigan,#095339,#FFC425
+Northern State,#990033,#FFCC66
+Northwest Missouri State,#006A4E,#FFFFFF
+Northwestern Oklahoma State,#000000,#CC092F
+Northwood,#093161,#FFFFFF
+Ohio Dominican,#000000,#FFC72C
+Oklahoma Baptist,#007934,#F3CF45
+Ouachita Baptist,#552988,#FFC627
+Pace,#00337F,#FFC61E
+Pittsburg State,#CC0C2F,#FCD116
+Post,#5E2750,#FF8200
+Quincy,#581E00,#FFFFFF
+Roosevelt,#008752,#FFFFFF
+Saginaw Valley State,#AC162A,#FFFFFF
+Saint Anselm,#143E5F,#FFFFFF
+Savannah State,#002395,#FF5B00
+Seton Hill,#BF0033,#FCD06B
+Shaw,#671333,#F5B544
+Shepherd,#041E42,#C0B661
+Shippensburg,#001541,#EE373D
+Shorter,#0068B3,#FFFFFF
+Sioux Falls,#492F91,#FFFFFF
+Slippery Rock,#006951,#FFFFFF
+South Dakota Mines,#071D49,#B3A369
+Southeastern Oklahoma State,#0033A0,#FFDD00
+Southern Arkansas,#003DA5,#FFD100
+Southern Connecticut State,#001489,#FFFFFF
+Southern Nazarene,#891717,#FFFFFF
+Southwest Baptist,#4A217E,#FFFFFF
+Southwest Minnesota State,#3A1807,#BCAA71
+Southwestern Oklahoma State,#1B365D,#FFFFFF
+Sul Ross State,#C70032,#7D8888
+Texas A&M-Kingsville,#005DAA,#FCC01F
+Thomas More,#00559F,#9FA1A3
+Tiffin,#154734,#DAAA00
+Truman State,#510C76,#FFFFFF
+Tusculum,#FF651C,#000000
+Tuskegee,#7B0707,#F2BD2C
+Upper Iowa,#0D1030,#FFFFFF
+UT Permian Basin,#E35205,#000000
+UVA Wise,#D21414,#232D4B
+Valdosta State,#CC0000,#000000
+Virginia State,#1F3D7B,#E05527
+Virginia Union,#8F012D,#A4A4A4
+Walsh,#6D0020,#B6985A
+Washburn,#002E5E,#FFFFFF
+Wayne State (MI),#115E56,#C79316
+Wayne State (NE),#000000,#FBBF22
+West Alabama,#A6192E,#FFFFFF
+West Chester,#540E69,#FAAA20
+West Florida,#0072CE,#00AF66
+West Liberty,#000000,#FFCD33
+West Texas A&M,#581818,#FFFFFF
+West Virginia State,#000000,#C99700
+West Virginia Wesleyan,#FF4C00,#000000
+Western Colorado,#A71930,#565A5C
+Western New Mexico,#42196F,#FEBE10
+Western Oregon,#E31837,#FFFFFF
+Wheeling,#E31937,#222222
+William Jewell,#E4002B,#000000
+Wingate,#00205B,#C5B783
+Winona State,#4B08A1,#FFFFFF
+Winston-Salem State,#C8102E,#FFFFFF
+Azusa Pacific,#990000,#000000
+Florida Tech,#770000,#9DA0A0
+Malone,#003E7E,#C41230
+Minnesota Crookston,#7A0019,#FFCC33
+St. Cloud State,#A10209,#000000
+Simon Fraser,#CC0633,#FFFFFF
+Brevard,#003A70,#FFFFFF
+Adrian,#000000,#FFC72C
+Albion,#512D6D,#EAAA00
+Albright,#BA0C2F,#FFFFFF
+Alfred,#550D8A,#F5AA01
+Alfred State,#003C71,#FFCD00
+Allegheny,#0C2340,#FFC72C
+Alma,#862633,#FFFFFF
+Alvernia,#9B2743,#C8C9C7
+Amherst,#3F1F69,#FFFFFF
+Anderson (IN),#FE5000,#010101
+Augsburg,#75263B,#747678
+Augustana (IL),#002F6C,#FFD100
+Aurora,#003591,#FFFFFF
+Austin,#9D2235,#C69214
+Averett,#0C2340,#FFB81C
+Baldwin Wallace,#4E3629,#F1C400
+Bates,#B30838,#C4C6C8
+Belhaven,#1D3C34,#FFD100
+Beloit,#003865,#F2A900
+Benedictine (IL),#BA0C2F,#000000
+Berry,#00205B,#9EA2A2
+Bethany (WV),#115740,#FFFFFF
+Bethel (MN),#002F5F,#FDC900
+Bluffton,#512D6D,#FFFFFF
+Bowdoin,#000000,#FFFFFF
+Bridgewater (VA),#9D2235,#89734C
+Bridgewater State,#A6192E,#FFFFFF
+Brockport,#00533E,#FFC726
+Buena Vista,#0C2340,#FFCD00
+Buffalo State,#CC6600,#000000
+Cal Lutheran,#2E1A47,#F1C400
+Calvin,#93282C,#F2CD00
+Capital,#330072,#FFFFFF
+Carleton,#0B5091,#F3B61D
+Carnegie Mellon,#990000,#464646
+Carroll (WI),#E35205,#FFFFFF
+Carthage,#D72316,#FFFFFF
+Case Western Reserve,#003071,#FFFFFF
+Catholic,#990000,#000000
+Centenary,#8A2432,#FFFFFF
+Central (IA),#E4002B,#FFFFFF
+Centre,#000000,#FFFFFF
+Chapman,#862633,#A2AAAD
+Chicago,#800000,#FFFFFF
+Christopher Newport,#0039A6,#84888B
+Claremont-Mudd-Scripps,#862633,#EAAA00
+Coast Guard,#2554C7,#F47F24
+Colby,#002878,#E3D7D1
+Coe,#93282C,#CBA052
+TCNJ,#154A7C,#FCBC15
+Concordia (IL),#9D2235,#FFC72C
+Concordia (Moorhead),#7D0042,#FFFFFF
+Concordia (WI),#005596,#FAA634
+Cornell College,#523178,#FFFFFF
+Cortland,#B91000,#FFFFFF
+Crown,#3C1053,#75787B
+Curry,#462C8D,#FFFFFF
+Dean,#862633,#FFFFFF
+Delaware Valley,#215732,#010101
+Denison,#A6192E,#FFFFFF
+DePauw,#111C24,#FFCF01
+Dickinson,#E31837,#000000
+Dubuque,#002D72,#FFFFFF
+East Texas Baptist,#081F2C,#ECBC00
+Eastern,#6F2C3F,#FFFFFF
+Elmhurst,#0C2340,#FFFFFF
+Endicott,#00325B,#007C5A
+Eureka,#862633,#AC8400
+FDU-Florham,#22324B,#712A3C
+Fitchburg State,#00563F,#E9AF2F
+Framingham State,#EBAB00,#000000
+Franklin,#FFD100,#001E60
+Franklin & Marshall,#0035AD,#FFFFFF
+Gallaudet,#E8D4A2,#002A5C
+Geneva,#89734C,#FFFFFF
+George Fox,#081E3F,#BC9C16
+Gettysburg,#E87722,#002F6C
+Greensboro,#007A53,#FFFFFF
+Greenville,#E35205,#010101
+Grinnell,#000000,#DA291C
+Grove City,#DA291C,#FFFFFF
+Guilford,#862633,#D9D9D9
+Gustavus Adolphus,#000000,#FFCF00
+Hamilton,#002F86,#D6BA8B
+Hamline,#95021E,#BFB9B6
+Hampden-Sydney,#9D183D,#B1B7BB
+Hanover,#A6192E,#003087
+Hardin-Simmons,#581483,#FFC72C
+Hartwick,#0033A1,#FFFFFF
+Heidelberg,#FA4616,#C8102E
+Hendrix,#010101,#E87722
+Hilbert,#0071CE,#FFC629
+Hiram,#003A70,#8A1538
+Hobart,#472663,#FF6418
+Hope,#E35205,#0C2340
+Howard Payne,#00205B,#FED141
+Huntingdon,#C8102E,#BBBCBC
+Husson,#004C45,#A89968
+Illinois College,#004A77,#FFFFFF
+Illinois Wesleyan,#006747,#FFFFFF
+Ithaca,#003B71,#9C9C9C
+John Carroll,#28334A,#B9975B
+Johns Hopkins,#68ACE5,#000000
+Juniata,#1B365D,#A89968
+Kalamazoo,#EC6820,#222020
+Kean,#003057,#7C878E
+Kenyon,#4B2E84,#FFFFFF
+Keystone,#001680,#F79239
+King's (PA),#CC0033,#FFCD00
+Knox,#5B2B82,#FCE200
+La Verne,#2C5234,#FF8200
+LaGrange,#C4203C,#000000
+Lake Forest,#C8102E,#000000
+Lakeland,#0C233F,#FFC62F
+Lawrence,#003D6A,#231F20
+Lebanon Valley,#00305C,#FFFFFF
+Lewis & Clark,#F36F21,#000000
+Linfield,#470A68,#D50032
+Loras,#442D7D,#D1B888
+Luther,#004C97,#000000
+Lycoming,#00305C,#E6B012
+Lyon,#001E51,#83141B
+Macalester,#01426A,#D44420
+Maine Maritime,#005EAE,#FEC925
+Manchester,#E0CC61,#0A0203
+Marietta,#00205B,#FFFFFF
+Martin Luther,#000000,#FFFFFF
+Mary Hardin-Baylor,#4F1F91,#FFC726
+Maryville (TN),#640A28,#FF6600
+UMass Dartmouth,#003764,#FEC24D
+Massachusetts Maritime,#002066,#FFD527
+McDaniel,#00674D,#F6D016
+McMurry,#6F1830,#000000
+Merchant Marine,#093A88,#6C6C6C
+Methodist,#034D36,#FABF16
+Middlebury,#003882,#FFFFFF
+Millikin,#113C61,#FFFFFF
+Millsaps,#330066,#FFFFFF
+Minnesota Morris,#8C1919,#E19B14
+Misericordia,#0168B3,#FED105
+MIT,#A31F34,#C2C0BF
+Monmouth (IL),#D3282F,#FFFFFF
+Montclair State,#D1190D,#333333
+Moravian,#00267A,#CCCCCC
+Morrisville,#004730,#FFFFFF
+Mount Union,#661C78,#FFFFFF
+Mount St. Joseph,#003366,#FFCC00
+Muhlenberg,#A41D36,#A2AAA4
+Muskingum,#BF2037,#000000
+Nebraska Wesleyan,#AA985D,#000000
+University of New England,#003882,#FFFFFF
+New England College,#000F30,#FFFFFF
+Nichols,#000000,#007A5F
+North Carolina Wesleyan,#0F4D76,#EEC626
+North Central (IL),#AB3541,#231F20
+North Park,#0057A8,#FCCE0D
+Northwestern (MN),#3D1A54,#E0AD12
+Norwich,#87212E,#907C4B
+Oberlin,#CF102D,#FFC72C
+Ohio Northern,#FF6600,#FFFFFF
+Ohio Wesleyan,#C51230,#010100
+Olivet,#BD0034,#FFFFFF
+Otterbein,#E21B23,#CA9E5A
+Pacific (OR),#B51217,#000000
+Pacific Lutheran,#000000,#FBBA37
+Plymouth State,#135841,#FFFFFF
+Pomona-Pitzer,#20438F,#F7941D
+Puget Sound,#660000,#FFFFFF
+Randolph-Macon,#000000,#F9DC30
+Redlands,#7A2426,#666666
+Rhodes,#C4022B,#000000
+Ripon,#C31D36,#FFFFFF
+Roanoke,#AD1742,#B7B9BA
+Rochester,#001E5F,#FFD82B
+Rockford,#522E91,#FFCE51
+Rose-Hulman,#741415,#FFFFFF
+Rowan,#57150B,#FFCC00
+RPI,#E2231B,#FFFFFF
+St. John Fisher,#993333,#FFCC33
+Saint John's (MN),#BE0F34,#5A7E92
+St. Lawrence,#AF1E2D,#4B2B23
+St. Norbert,#1A472B,#EDBD3D
+St. Olaf,#000000,#C7940D
+St. Scholastica,#0033A0,#FFFFFF
+Saint Vincent,#1E5632,#DAAC28
+Salisbury,#8A0000,#FFC420
+Salve Regina,#00447C,#005D55
+Schreiner,#581515,#FFFFFF
+Sewanee,#582C83,#CEB888
+Shenandoah,#98012D,#002C62
+Simpson (IA),#931A29,#EFB402
+Southern Virginia,#9E1B32,#FFFFFF
+Southwestern (TX),#000000,#FFCC33
+Springfield,#862633,#FFFFFF
+Stevenson,#004E42,#FFFFFF
+SUNY Maritime,#62082C,#14214E
+Susquehanna,#651C32,#FF6A14
+Texas Lutheran,#000000,#EAAB00
+Thiel,#998643,#0D204A
+Trine,#00305C,#FFFFFF
+Trinity (CT),#00305C,#F7D117
+Trinity (TX),#723130,#FFFFFF
+Tufts,#3E8EDE,#512C1D
+Union (NY),#822433,#FFFFFF
+Ursinus,#98012E,#FCB034
+Utica,#0C223F,#E75200
+Castleton,#00563B,#FFFFFF
+Wabash,#EC1C2C,#FFFFFF
+Wartburg,#F58025,#000000
+Washington & Jefferson,#000000,#A4343A
+Washington & Lee,#003399,#FFFFFF
+Washington (MO),#A51417,#007360
+Waynesburg,#B95205,#000000
+Wesleyan (CT),#D72121,#000000
+Western Connecticut,#002856,#FF4D00
+Western New England,#003082,#E6B012
+Westfield State,#00247D,#FFFFFF
+Westminster (MO),#002F56,#6EB1DF
+Westminster (PA),#0C2340,#FFFFFF
+Wheaton (IL),#00447C,#D15E14
+Whittier,#661C78,#EDB200
+Whitworth,#C22033,#000000
+Widener,#0057B8,#FFC845
+Wilkes,#002855,#FFCD00
+Willamette,#98002E,#B39D6E
+William Paterson,#F06023,#22211F
+Williams,#512698,#FDCC09
+Wilmington (OH),#024E43,#FFFFFF
+Wisconsin Lutheran,#006643,#000000
+Wisconsin-Eau Claire,#2B3E85,#EDAC1A
+Wisconsin-La Crosse,#830019,#969799
+Wisconsin-Oshkosh,#000000,#FFCC00
+Wisconsin-Platteville,#FF5800,#0047BA
+Wisconsin-River Falls,#C80F2E,#FFFFFF
+Wisconsin-Stevens Point,#59178A,#FCC917
+Wisconsin-Stout,#012169,#FFFFFF
+Wisconsin-Whitewater,#502D7F,#FFFFFF
+Wittenberg,#C51F35,#FFFFFF
+Wooster,#000000,#F7BE15
+WPI,#AC2B37,#A9B0B7
+Worcester State,#003896,#F0E07D
+Earlham,#861F41,#FFFFFF
+Maranatha Baptist,#041E41,#F0C415
+Occidental,#000000,#FF671F
+Andrew,#003087,#FFC72C
+Arizona Christian,#DA291C,#F1B434
+Arkansas Baptist,#4B2E83,#FFFFFF
+Ave Maria,#0A2240,#00833E
+Avila,#48176D,#A29061
+Baker,#1E2D50,#F4761D
+Benedictine (KS),#231F20,#FFFFFF
+Bethany (KS),#0035AD,#FFD100
+Bethel (TN),#5F249F,#F1C400
+Bethel (KS),#8A2432,#888B8D
+Bluefield,#071D49,#FF001F
+Briar Cliff,#00205B,#F2A900
+Campbellsville,#862633,#B1B3B3
+Carroll (MT),#330072,#CEB888
+Central Methodist,#006341,#010101
+Clarke,#0C2340,#FFFFFF
+Concordia (NE),#002855,#FFFFFF
+Culver-Stockton,#003594,#FFFFFF
+Cumberland (TN),#98002E,#FFFFFF
+Cumberlands,#BA0C2F,#041E42
+Dakota State,#004165,#00A9E0
+Dakota Wesleyan,#004C97,#FFFFFF
+Defiance,#512D6D,#F3DD6D
+Dickinson State,#002D72,#C0C0C0
+Doane,#FF7900,#000000
+Dordt,#010101,#FFFFFF
+Eastern Oregon,#002855,#B3A369
+Evangel,#75243D,#FFFFFF
+Faulkner,#0032A0,#BBBCBC
+Florida Memorial,#003DA5,#FE5000
+Friends,#AB0635,#444F51
+Georgetown (KY),#000000,#FF6600
+Graceland,#00275C,#FFCB0B
+Grand View,#BA0C2F,#FFFFFF
+Hastings,#9D2235,#FFFFFF
+College of Idaho,#412D5E,#DED6C9
+Indiana Wesleyan,#A6192E,#626466
+Judson,#172751,#A4832E
+Kansas Wesleyan,#5A2A82,#FEC524
+Keiser,#0D295E,#006DB3
+Kentucky Christian,#EB1927,#080808
+Langston,#1B3668,#F2682A
+Lawrence Tech,#005EB8,#FFFFFF
+Lindsey Wilson,#0063A5,#000000
+Louisiana Christian,#0038A8,#F74902
+Madonna,#003893,#FCD116
+Marian (IN),#031E51,#FDB813
+Mayville State,#0033A0,#FFFFFF
+McPherson,#CC0000,#FFFFFF
+MidAmerica Nazarene,#071D49,#FFFFFF
+Midland,#0C2340,#E87722
+Missouri Baptist,#002144,#FFFFFF
+Missouri Valley,#501E54,#F56600
+Montana State-Northern,#722325,#E1A800
+Montana Tech,#315338,#995339
+Montana Western,#CD262D,#FFFFFF
+Morningside,#7C2629,#FFFFFF
+Mount Marty,#091F40,#FDB71A
+Mount Mercy,#003768,#FFFFFF
+Nelson,#592C82,#F9A51B
+Northwestern (IA),#A80000,#FFFFFF
+Oklahoma Panhandle State,#001F5B,#CF0A2C
+Olivet Nazarene,#48206E,#FDB913
+Ottawa (KS),#000000,#FFBE29
+Ottawa (AZ),#FF8300,#000000
+Peru State,#0D4D92,#FFFFFF
+Pikeville,#FF4713,#000000
+Point,#00407A,#FCC917
+Reinhardt,#003468,#F0B310
+Rio Grande,#B80000,#FFFFFF
+Rocky Mountain,#005A2D,#AF9B0A
+St. Ambrose,#1E3D7D,#FFFFFF
+St. Francis (IL),#503412,#FFD400
+Saint Francis (IN),#084CA4,#FFFFFF
+Saint Mary (KS),#0C2340,#FFD100
+Saint Mary-of-the-Woods,#0D2C6C,#61AEE1
+St. Thomas (FL),#002855,#862633
+Saint Xavier,#B20838,#919295
+Simpson (CA),#C8102E,#FFFFFF
+Southeastern (FL),#000000,#E31B23
+Southern Oregon,#C8102E,#000000
+Southwestern (KS),#8031A7,#FFFFFF
+Sterling,#00275D,#A9233E
+Tabor,#002D72,#FFCD00
+Taylor,#522D72,#B2B4BE
+Texas College,#563971,#AD8120
+Texas Wesleyan,#002460,#FED000
+Thomas (GA),#355E3B,#FFFFFF
+Union Commonwealth,#F16422,#040707
+Valley City State,#810027,#000000
+Waldorf,#471F6E,#B79257
+Warner,#1A305B,#E8A825
+Wayland Baptist,#004A8D,#FFD200
+Webber International,#234F33,#FFFFFF
+William Penn,#0C2340,#C99700
+William Woods,#124734,#FFFFFF
+Butler CC,#49176D,#A39161
+College of DuPage,#004D35,#231F20
+Garden City CC,#512F2E,#FFFFFF
+Highland CC,#002855,#FFC72C
+Hutchinson CC,#D9293E,#004693
+Independence CC,#1F2C5B,#9F9166
+Rochester CTC,#001E5F,#FFD82B
+Snow College,#1E376C,#FAA634
+El Camino College,#20419A,#FFFFFF
+Riverside City College,#000000,#FF5A00
+Fullerton College,#0F406B,#FFD600
+Grossmont College,#00685E,#EA9610
+Southwestern College (CA),#9B2743,#EAAA00

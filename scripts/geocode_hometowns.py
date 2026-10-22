@@ -781,7 +781,7 @@ def main(argv=None) -> int:
     # Pass 2: suggest a fix for each new string that didn't place, and use it right away if confident.
     suggested = applied = 0
     for raw in todo:
-        if resolved[raw][0] or raw in table:
+        if resolved[raw][0] or raw in table or not raw.strip():   # a blank hometown has nothing to fix
             continue
         city, state, country, status, note = suggest_correction(raw)
         if status != "unfixable" and not (city or state or country):
@@ -862,9 +862,15 @@ def main(argv=None) -> int:
         w.writeheader()
         w.writerows(lookup_rows)
 
+    # Players whose roster gives no hometown are counted on their own line: they aren't a town that
+    # failed to place, so they stay out of the success rate and out of unmatched_hometowns.csv.
     counts: dict[str, int] = {}
     unmatched: dict[str, int] = {}
+    no_hometown = 0
     for raw, n in players_per_raw.items():
+        if not raw.strip():
+            no_hometown += n
+            continue
         prec = resolved[raw][3] or "unmatched"
         counts[prec] = counts.get(prec, 0) + n
         if not resolved[raw][0]:
@@ -877,12 +883,14 @@ def main(argv=None) -> int:
             h, t = homes[raw], table.get(raw, {})
             w.writerow([raw, h["city"], h["state"], h["country"], t.get("status", ""), t.get("note", ""), n])
 
-    total = len(rows)
+    total = len(rows) - no_hometown          # players with a hometown to place
     placed = total - counts.get("unmatched", 0)
-    print(f"Geocoded {placed}/{total} players ({placed / max(total, 1):.1%}) -> {out_path}")
+    print(f"Geocoded {placed}/{total} players with a hometown ({placed / max(total, 1):.1%}) -> {out_path}")
     for prec in ("city", "city_guess", "county", "region", "country", "unmatched"):
         if counts.get(prec):
             print(f"  {prec:11s} {counts[prec]:7d}")
+    if no_hometown:
+        print(f"  {'no hometown':11s} {no_hometown:7d}   (roster gives none; kept, with no dot on the map)")
     print(f"Hometown lookup table ({len(lookup_rows):,} rows) -> {lookup_path}")
     print(f"{suggested} new correction suggestions ({applied} applied this run) -> {corr_path}")
     review = sum(1 for raw in unmatched if table.get(raw, {}).get("status") == "review")

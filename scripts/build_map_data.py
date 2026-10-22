@@ -11,7 +11,7 @@ sport; position groups from config/<sport>.json.
 
 Transfers: many roster pages never list a previous school, so a player counts as a transfer if
   1. the roster lists a college as his previous school, or
-  2. he was on another D1 roster in this data first (same name and hometown), or
+  2. he was on another college's roster in this data first (same name and hometown), or
   3. he's new to a roster whose previous season is also (nearly fully) in the data, and he's already a junior, senior or grad.
 (2) also records the school he came from, so the site can show where transfers moved.
 
@@ -32,7 +32,7 @@ from collections import Counter
 # The scraper's rules for telling a previous college from a high school, so both steps agree.
 import sidearm
 from levels import LEVELS, Levels, is_major
-from paths import add_sport_argument, load_schools, load_sport
+from paths import add_sport_argument, d1_schools, load_sport
 from sidearm import clean_name, load_known_colleges, sort_schools
 
 # Position groups come from the sport's settings (config/<sport>.json): the groups, the roster
@@ -90,7 +90,7 @@ def person(r: dict) -> tuple:
 
 
 def find_moves(rows: list[dict]) -> dict[int, str]:
-    """Row index -> the school he played for before, for players found on two D1 rosters in turn.
+    """Row index -> the school he played for before, for players found on two schools' rosters in turn.
 
     Only players with a name and hometown are matched. If the same name + hometown is on two rosters
     in the same season, it's probably two different people, so that pair is left alone."""
@@ -201,7 +201,7 @@ def main(src, dst, sport):
     with open(src, newline="", encoding="utf-8") as fh:
         rows = list(csv.DictReader(fh))
     if sport.schools_csv.exists():
-        load_known_colleges(load_schools(sport.schools_csv))   # so "Wake Forest" counts as a college
+        load_known_colleges(d1_schools(sport.schools_csv))   # so "Wake Forest" counts as a college
     levels = Levels.load(sport)
     schools = sorted({r["school"] for r in rows})
     sidx = {s: i for i, s in enumerate(schools)}
@@ -213,7 +213,7 @@ def main(src, dst, sport):
         if fs >= div_now.get(r["school"], (0, ""))[0]:
             div_now[r["school"]] = (fs, r["division_first_season"])
     confs = sorted(set(conf.values()))
-    divs = ["FBS", "FCS", "D2", "D3"]
+    divs = ["FBS", "FCS", "D2", "D3", "NAIA", "JUCO"]
     colors = load_colors(sport.colors_csv)
     missing = [x for x in schools if x not in colors]
     if missing:
@@ -264,7 +264,7 @@ def main(src, dst, sport):
                                 arrived_as_upperclassman(r, have, prev_season, frozen))
         transfer = int(listed or moved or upper)
         how["previous school on the roster"] += listed
-        how["found on an earlier D1 roster"] += moved and not listed
+        how["found on an earlier roster in the data"] += moved and not listed
         how["arrived as a junior/senior/grad"] += upper and not (listed or moved)
         if (not transfer and frozen and (r["school"], int(r["first_season"])) in frozen
                 and arrived_as_upperclassman(r, have, prev_season)):
@@ -301,7 +301,7 @@ def main(src, dst, sport):
     print("transfers:", sum(P["x"]), "| counted because:", dict(how))
     if skipped:
         print(f"not counted as transfers: {skipped} newcomers listed as juniors or older in a season with untrustworthy class years")
-    print("D1-to-D1 moves with a known previous school:", sum(o >= 0 for o in P["o"]))
+    print("moves between two schools in the data (a known previous school):", sum(o >= 0 for o in P["o"]))
     print("other transfers by the level of the school they came from:",
           ", ".join(f"{lv} {level_count[lv]}" for lv in LEVELS))
     if matched:

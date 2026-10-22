@@ -32,6 +32,7 @@ class Sport:
     name: str                                   # folder name: football, mens-basketball, ...
     label: str = ""
     roster_paths: list[str] = field(default_factory=list)
+    presto_paths: list[str] = field(default_factory=list)   # PrestoSports season pages: /sports/fball/{season}-{next_yy}/roster
     min_players: int = 25
     junior_colleges: list[str] = field(default_factory=list)
     position_groups: list[str] = field(default_factory=list)
@@ -104,6 +105,7 @@ def add_sport_argument(ap: argparse.ArgumentParser) -> None:
 # ---- reading a sport's school lists ----
 
 D1 = {"FBS", "FCS"}
+SCRAPED = {"FBS", "FCS", "D2", "D3", "NAIA", "JUCO"}     # divisions the scraper downloads (not HS or "none")
 
 
 def _rows(path: Path) -> list[dict]:
@@ -115,10 +117,59 @@ def _spans(r: dict) -> bool:
     return bool((r.get("first_season") or "").strip() or (r.get("last_season") or "").strip())
 
 
-def load_schools(path: Path) -> list[dict]:
-    """The D1 schools the scraper downloads: FBS/FCS rows of schools.csv with no season range.
-    (The file's other rows are those schools' seasons in another division, and the D2, D3, NAIA and
-    junior colleges used to sort transfers; load_all_colleges() reads everything.)"""
+def _season(v: str, default: int) -> int:
+    v = (v or "").strip()
+    return int(v) if v else default
+
+
+def _main_row(rows: list[dict]) -> tuple[dict, bool]:
+    """(the row a college is scraped under, whether it has a row with no season range).
+    That's its row with no season range; failing that, its open-ended range (Thomas More: D2 from
+    2023); failing that, its latest range (a program that has closed)."""
+    plain = [r for r in rows if not _spans(r)]
+    if plain:
+        return plain[0], True
+    open_ended = [r for r in rows if not (r.get("last_season") or "").strip()]
+    if open_ended:
+        return max(open_ended, key=lambda r: _season(r.get("first_season"), 0)), False
+    return max(rows, key=lambda r: _season(r.get("last_season"), 0)), False
+
+
+def load_schools(path: Path, divisions: set[str] | None = None) -> list[dict]:
+    """The colleges the scraper downloads: one row per college with a domain or roster_url, in the
+    file's order, limited to `divisions` (by the college's current division) if given.
+
+    Each college's row is the one with no season range, or, for a college that only has ranges (it
+    moved between divisions, started recently or closed), its current or latest range; a domain or
+    roster_url missing there is taken from another of its rows. Its other rows are its seasons in
+    another division or with no team (load_division_history). A college with only ranges gets
+    ``has_plain_row = False``, so division_for() reads seasons outside every range as "none".
+    D1 schools come back exactly as before. load_all_colleges() reads every row, d1_schools() only D1."""
+    groups: dict[str, list[tuple[int, dict]]] = {}
+    for i, r in enumerate(_rows(path)):
+        if r["division"].strip() in SCRAPED:
+            groups.setdefault(r["school"], []).append((i, r))
+    picked = []
+    for name, rows in groups.items():
+        main, plain = _main_row([r for _, r in rows])
+        if divisions and main["division"].strip() not in divisions:
+            continue
+        row = dict(main)
+        for f in ("domain", "roster_url"):
+            if not (row.get(f) or "").strip():
+                row[f] = next(((r.get(f) or "").strip() for _, r in rows if (r.get(f) or "").strip()), "")
+        if not (row["domain"] or (row.get("roster_url") or "").strip()):
+            continue                                       # no site known yet: nothing to download
+        if not plain:
+            row["has_plain_row"] = False
+        picked.append((next(i for i, r in rows if r is main), row))
+    return [row for _, row in sorted(picked, key=lambda p: p[0])]
+
+
+def d1_schools(path: Path) -> list[dict]:
+    """FBS/FCS rows with no season range: the D1 schools. The scraper's "is this a college?" check
+    (sidearm.load_known_colleges) uses only these names, since many smaller colleges share a name
+    with high schools ("Central", "Union", "Franklin")."""
     return [r for r in _rows(path) if r["division"].strip() in D1 and not _spans(r)]
 
 
@@ -127,21 +178,23 @@ def load_all_colleges(path: Path) -> list[dict]:
 
 
 def load_division_history(path: Path) -> dict[str, list[dict]]:
-    """D1 school -> its rows with a season range (seasons in another division, or with no team)."""
+    """College -> its rows with a season range (seasons in another division, or with no team)."""
     hist: dict[str, list[dict]] = {}
     if Path(path).exists():
         rows = _rows(path)
-        d1 = {r["school"] for r in rows if r["division"].strip() in D1 and not _spans(r)}
+        scraped = {r["school"] for r in rows if r["division"].strip() in SCRAPED}
         for r in rows:
-            if r["school"] in d1 and _spans(r):
+            if r["school"] in scraped and _spans(r) and r["division"].strip() != "HS":
                 hist.setdefault(r["school"], []).append(r)
     return hist
 
 
 def division_for(school: dict, season: int, history: dict[str, list[dict]]) -> str:
+    """The college's division that season. Outside every range: its usual division, or "none" (no
+    team) for a college that only has ranges (Mount Mercy before 2026, St. Cloud State after 2019)."""
     for r in history.get(school["school"], []):
         lo = int(r["first_season"]) if r["first_season"] else 0
         hi = int(r["last_season"]) if r["last_season"] else 9999
         if lo <= season <= hi:
             return r["division"]
-    return school.get("division", "")
+    return school.get("division", "") if school.get("has_plain_row", True) else "none"

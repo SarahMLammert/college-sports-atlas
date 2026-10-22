@@ -1,4 +1,4 @@
-# college-sports-map
+# college-sports-atlas
 
 Where college players come from, sport by sport, scraped from each school's official athletics site
 and put on a map. Football is live: the hometown of every FBS and FCS player on a roster since 2016.
@@ -6,7 +6,7 @@ and put on a map. Football is live: the hometown of every FBS and FCS player on 
 - **264 schools**, about **137,000 player records** and about **11,000 hometowns**
 - Seasons 2016–2019 and 2021–2026 (there's no 2020 data)
 - About 40,700 transfers (30% of player records), 19,350 of them between two D1 schools in this data (so the school he left is known);
-  the other 21,350 are sorted by the level of the school they came from (junior college, Division II, Division III, NAIA,
+  the other 21,300 are sorted by the level of the school they came from (junior college, Division II, Division III, NAIA,
   a D1 school he wasn't matched to, or unknown)
 - One record per player per school, so a transfer appears once for each school he played for
 
@@ -22,6 +22,25 @@ on a sport picker (`index.html`), and each sport has its own folder. Football's 
 
 Page names start with `players-` or `staff-` and say what kind of map they are, so every sport's
 folder can use the same names.
+
+## In progress: every division of football
+
+D2, D3, NAIA and junior-college (NJCAA and California's CCCAA) football are being added to the same
+map, with a division filter of FBS, FCS, D2, D3, NAIA and JUCO. The full plan and its progress log
+are in the plan file, `football-all-divisions-plan.txt`. Where things stand:
+
+- **Done:** `config/football_schools.csv` has an athletics site for 865 colleges across all six levels
+  (the 264 D1 schools, 411 D2 and D3 schools and most NAIA and junior-college programs). Another 77
+  have no site, mostly closed or dropped programs, and are skipped.
+  Colors and campuses for the new schools are in `school_colors.csv` and `school_locations.csv`
+  (most junior colleges have no colors and draw gray). The scripts handle every division (see
+  How the scraper works and The schools file), and all tests pass.
+- **Next:** finish the sample scrape (`--retry-failed`, then `--render` for sites like Tyler JC),
+  add last seasons for closed programs and rows for new NAIA programs (Bismarck State, Calumet
+  College of St. Joseph, Midway, Stillman, Wilberforce, Manchester), run the full scrape, then
+  update the pages: titles become "College Football Recruiting Map", "College Football Recruiting
+  Footprints" and "College Football Transfer Map", and the division filter gets all six levels.
+- Until that build runs, the map and the numbers above are still D1 only.
 
 ## The sport picker
 
@@ -119,7 +138,7 @@ Every school shows as a dot on its campus, sized by how many players moved in an
 - Only transfers whose previous D1 school is known can be drawn: about 19,350 of them. The rest are
   counted as "other transfers" with no line, and the panel beside the map splits them by the level of
   the school the roster names: junior college (about 7,800), Division II (2,000), Division III (540),
-  NAIA (400), "D1 school, not matched" (6,000) and unknown (4,600). The split follows the filters and
+  NAIA (400), "D1 school, not matched" (6,000) and unknown (4,500). The split follows the filters and
   the picked school. See How transfer levels are decided.
 - The lines need `docs/football/school_locations.json`; without it the page says so and the lists
   still work. Big one-season moves are often a coach taking players with him (Iowa State → Penn
@@ -189,7 +208,7 @@ scripts/                 the data pipeline; every script takes --sport (default:
   check_geocoder.py        checks the geocoder has its fixes and looks up a few towns that once failed
   paths.py                 shared: where a sport's files are, and its settings from config/<sport>.json
   fetch.py                 shared: downloading pages: retries, pacing per site, the page cache
-  sidearm.py               shared: reading Sidearm/WMT pages: roster URLs, season check, the five parsers,
+  sidearm.py               shared: reading Sidearm/WMT and PrestoSports pages: roster URLs, season check, the five parsers,
                            cleaning names, telling a college from a high school
   hometowns.py             shared: cleaning hometowns, class years, heights and weights
   levels.py                shared: the level of a transfer's previous school (D1, D2, D3, NAIA, JUCO, unknown)
@@ -223,7 +242,8 @@ still answers older imports like `from scrape_rosters import parse_hometown`.
 1. Add two files to `config/`, named for the sport the way the athletics sites name it
    (`mens-basketball`, `baseball`):
    - `<sport>.json`: copy `football.json` and change `label`, `roster_paths` (the roster page's path
-     on the sites, e.g. `/sports/mens-basketball/roster`), `min_players` (fewer players than this on a
+     on the sites, e.g. `/sports/mens-basketball/roster`), `presto_paths` (the same for PrestoSports
+     sites, with `{season}` and `{next_yy}`, e.g. `/sports/mbkb/{season}-{next_yy}/roster`), `min_players` (fewer players than this on a
      page means a bad scrape), `junior_colleges`, and the position settings (`position_groups`,
      the roster abbreviations in each, words a spelled-out position starts with, and
      `position_fallback` for anything else).
@@ -242,7 +262,7 @@ Each sport's pages remember their own last view in the browser (the key starts w
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 
-python scripts/scrape_rosters.py --seasons 2016-2019,2021-2026                 # about 1-2 hours
+python scripts/scrape_rosters.py --seasons 2016-2019,2021-2026                 # about 1-2 hours for D1 alone
 python scripts/scrape_rosters.py --seasons 2016-2019,2021-2026 --retry-failed  # second pass on failures
 python scripts/geocode_hometowns.py                                    # reads rosters/football/players_unique.csv
 #   check the "review" rows in config/football_hometown_corrections.csv, change any you agree with to "fixed",
@@ -259,10 +279,20 @@ season file in place and rebuilds `rosters_all_seasons.csv` and `players_unique.
 anything (a minute instead of hours); then run `geocode_hometowns.py`, `check_frozen_classes.py` and
 `build_map_data.py` as usual.
 
-Quick test on a few schools: `python scripts/scrape_rosters.py --only "Alabama,Clemson,North Dakota State"`.
+To scrape one level at a time, add `--division` with `FBS`, `FCS`, `D2`, `D3`, `NAIA`, `JUCO` or `all`
+(the scraper also lists the colleges it skips because they have no athletics site).
+
+Quick test on a few schools: `python scripts/scrape_rosters.py --only "Alabama,Clemson,North Dakota State"`
+(add `--out /tmp/roster_test` to keep a test's files out of `rosters/`).
 For another sport, add `--sport <sport>` to every command.
 For sites that only show the roster after JavaScript runs, add `--render` (needs
-`pip install playwright && playwright install chromium`).
+`pip install playwright && playwright install chromium`). For rosters that list the players but not their
+hometowns (Morehouse), add `--bios`: it reads each player's own page for his hometown, high school and
+previous school (one request per player, so slow; it stops after 5 pages if those have nothing either).
+The usual second pass is `--retry-failed --render --bios`.
+
+Pressing Ctrl-C saves the schools that finished; the ones still running keep their earlier results,
+and `--retry-failed` picks them up next time.
 
 ## The rosters folder (not committed)
 `rosters/` and `.cache/` are in `.gitignore`: they're large and can be rebuilt. Each sport has one
@@ -282,7 +312,8 @@ downloading) applies it everywhere.
 | `rosters_all_seasons.csv` | every season stacked |
 | `players_unique.csv` | one row per player per school, with first and last season |
 | `players_unique_geocoded.csv` | the above plus latitude and longitude, with each hometown's corrected city, state and country |
-| `scrape_report_<season>.csv` | per school: ok / partial / failed, players found, URL used, errors |
+| `scrape_report_<season>.csv` | per school: ok / partial / failed, players found, URL used, errors (the first 3 and last 5) |
+| `MISSING_ROSTERS.md` | the schools whose roster failed or is partial, by division, each with its seasons and the reason in words, plus the colleges skipped for having no site; rewritten after every run (see Fixing a school that fails) |
 | `hometowns.csv` | the geocoder's table of every hometown it has placed; re-runs reuse it |
 | `unmatched_hometowns.csv` | hometowns that still couldn't be placed |
 | `frozen_class_seasons.csv` | school-seasons whose class years can't be trusted; the build skips its class-year rule for them |
@@ -304,21 +335,28 @@ For past seasons it tries each site's archive URL styles (`/roster/2019`, `/rost
 `/roster/2019-20`, ...) or a `roster_url` template from `config/football_schools.csv`. Every archive page
 is checked for its year so a site quietly showing this year's roster isn't saved as 2019.
 
+Many D2, D3, NAIA and junior-college sites use **PrestoSports** instead, whose roster pages look like
+`/sports/fball/2023-24/roster` (the `presto_paths` setting in `config/football.json`). These are tried
+after the Sidearm/WMT URLs, with the list view (`?view=list`) first, since some sites (Morningside) only
+have the roster table there, and on `www.` as well as the bare domain, since some sites (Hutchinson,
+Iowa Western, Kilgore, Riverside) only answer on `www.`. The table parser drops phone-only cells
+(class `d-md-none`, as on Avila's site) that would shift the columns, and reads combined columns like
+"High School/HS City" in either order.
+
 ## How transfers are recognized
 Roster sites label a player's old school in different ways: "Previous School", "Last School" (a
 high school for freshmen, a college for transfers), "College", or one field like "Lamar HS / Texas
 Tech". The scraper sorts every school field it finds: a college goes to `previous_school`, a high
-school to `high_school`. It knows a college by words like University, College, CC or JC, or by its
-name in `config/football_schools.csv` or the junior colleges listed in `config/football.json`. A lone "previous school" that
+school to `high_school`. It knows a college by words like University, College, CC or JC, or by the
+name of a D1 school in `config/football_schools.csv` or a junior college listed in `config/football.json`. A lone "previous school" that
 isn't recognizably a college is treated as the high school (Ohio State's site, for one, files every
 high school there), and "Menard" next to "Menard HS" is one school, not a transfer.
 `build_map_data.py` uses the same rules (it imports them from `sidearm.py`, so both steps agree), and also counts players it finds on an earlier
 D1 roster, and newcomers who arrive as juniors or older (see Known issues).
 
 `build_map_data.py` prints any "thin rosters" (a school-season with fewer than 40 players). The ones
-in the data now are seasons the schools' sites simply don't have: Ohio State 2016, Jackson State
-2016–17, Samford 2016–17, Alabama A&M 2019, LIU 2016–18 and 2021, Yale 2016, UAB 2016 (no team) and
-Saint Francis (PA) 2026. Re-scraping won't fill them. The build skips its "arrived as a junior or
+in the D1 data now are seasons the schools' sites simply don't have: Ohio State 2016, Samford
+2016–17 and Yale 2016. Re-scraping won't fill them. The build skips its "arrived as a junior or
 older" transfer rule for the season after each one, so a missing roster can't make returning players
 look like transfers.
 
@@ -342,16 +380,21 @@ and season range):
 | `school` | the name used everywhere (a D1 school's name must match `school_colors.csv` and `school_locations.csv`) |
 | `division` | `FBS`, `FCS`, `D2`, `D3`, `NAIA`, `JUCO`, `HS` (a high school whose name looks like a college) or `none` (no team) |
 | `conference` | its conference in 2026, for current programs |
-| `domain`, `roster_url` | the athletics site, for D1 schools the scraper downloads |
+| `domain`, `roster_url` | the athletics site, for every college the scraper downloads |
 | `first_season`, `last_season` | the seasons the row covers; blank means open-ended |
 | `aliases` | other spellings rosters use, separated by `\|` |
-| `note` | anything worth knowing (when a school moved, closed or merged) |
+| `note` | anything worth knowing (when a school moved, closed or merged, or a season its site doesn't have); shown in `MISSING_ROSTERS.md`, and a note starting with "left out" makes the scraper skip the school |
 
-The scraper downloads the FBS and FCS rows with no season range (the 264 D1 schools). A D1 school's
-rows with a season range are its seasons in another division ("Tarleton State, D2, last_season 2019"),
-which the scraper records as that season's division and `none` skips. Every other row is a non-D1
-college, used only to sort transfers by level. A program that moved has a row for each level with its
-seasons (Thomas More: D3 through 2018, NAIA 2019–2022, D2 from 2023).
+The scraper downloads every FBS, FCS, D2, D3, NAIA and JUCO college with a `domain` or `roster_url`
+(865 of them; `load_schools()` in `scripts/paths.py`, while `d1_schools()` returns just the 264 D1
+schools). A program that moved has a row for each level with its seasons (Thomas More: D3 through 2018,
+NAIA 2019–2022, D2 from 2023; "Tarleton State, D2, last_season 2019"), and the scraper records each
+season under the division its row gives. For scraping it picks one row per college: the row with no
+season range, else its open-ended range, else its latest range, borrowing the domain from the college's
+other rows. A season outside every range of a college that only has ranged rows counts as `none` and is
+skipped (Mount Mercy before 2026, a program that closed); a `none` row skips seasons a team sat out.
+Colleges without a site are still used to sort transfers by level. Rows with division `HS` are only
+used for that.
 
 ## How transfer levels are decided
 `build_map_data.py` gives every transfer without a line the level of the school his roster names
@@ -380,12 +423,23 @@ spelling of his name or hometown); some are high schools with a D1 school's name
 Dame HS). They aren't drawn as lines yet.
 
 ## Fixing a school that fails
-Check `rosters/football/scrape_report_*.csv`, then fix its `domain` or paste its exact roster page
-into `roster_url` in `config/football_schools.csv` (it may contain `{season}`), and run again with
-`--retry-failed`.
+Every run ends with a short "Failed or partial" list, one line per school with the reason in a few words.
+`--problems` prints it again from the saved reports without scraping, and `rosters/football/MISSING_ROSTERS.md`
+has the same schools by division with the reasons written out. The full errors, with web addresses, are in
+`rosters/football/scrape_report_*.csv`.
+
+- Wrong or dead site: fix its `domain`, or paste its exact roster page into `roster_url` in
+  `config/football_schools.csv` (it may contain `{season}`), and run again with `--retry-failed`.
+- A season before the program started or after it ended: set `first_season` or `last_season`, and it
+  counts as "no program" instead of a failure.
+- A season the school's own site doesn't have (old archives are often missing): add a `note` saying so.
+  `MISSING_ROSTERS.md` shows it as that school's note, so the gap is explained.
+- A site that refuses automated visitors: give it a `note` starting with "left out". The school stays in
+  the list and the counts, but the scraper never contacts it and records it as failed, with the note as
+  the reason (Indianapolis).
 
 ## Known issues
-- A few school-seasons have no roster on the school's site (listed under "Rebuild the data"), so
+- A few school-seasons have no roster on the school's site (listed under How transfers are recognized), so
   those seasons undercount that school's players.
 - Transfers: many roster pages never list a previous school (Notre Dame, SMU, Arkansas State, Sam
   Houston and others), so `build_map_data.py` also counts a player as a transfer when he was on
@@ -414,4 +468,18 @@ into `roster_url` in `config/football_schools.csv` (it may contain `{season}`), 
 - About 6,000 transfers name a D1 school but weren't matched to its roster, so they have no line on the
   Transfer Map (see How transfer levels are decided). Drawing them needs a guard against high schools
   with a D1 school's name.
+- Lower divisions: see `rosters/football/MISSING_ROSTERS.md` for every school-season that failed and why.
+  Some PrestoSports sites answer simple scripts with a bot check (HTTP 202) and only work with `--render`;
+  a site whose bot check turns the browser away too is left out, never worked around. The NJCAA's app
+  (Tyler JC) only shows its roster after JavaScript runs, and lists hometowns for few players. De Anza
+  leaves every hometown blank. About 21 colleges have no known athletics
+  site (Keiser, Concordia (NE), several Minnesota and California junior colleges); some post rosters
+  only as PDFs, and conference sites or njcaa.org's stats pages
+  (`njcaa.org/sports/fball/<season>/teams/<team>/roster.html`) may be the way to get them.
+- Recognizing a college in a "previous school" field still uses D1 names only, since lower-division
+  names like "Central", "Union" or "Franklin" are also high schools.
+- The "arrived as a junior or older" transfer rule hasn't been checked on junior-college rosters,
+  which only have freshmen and sophomores.
+- `map_data.json` is 6.8 MB with D1 only and could pass 15 MB with every division; if it loads
+  slowly, it may need one file per division.
 - `scrape_staff.py` (coaches and staff pages) is planned but not written; it should reuse the shared modules in `scripts/`.
