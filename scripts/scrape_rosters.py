@@ -33,7 +33,7 @@ import sys
 import threading
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 
 import fetch, hometowns, sidearm
 from fetch import Fetcher, current_season
@@ -154,8 +154,15 @@ def scrape_school_season(school: dict, fetcher: Fetcher, season: int, division: 
     loaded: list[int] = []         # URLs that answered with a page (the ones worth rendering)
     blocked: list[int] = []        # URLs that answered with a bot check (HTTP 202) or a certificate error
     app_shell = False              # the site is a script-built app (empty <div id="root">), like Tyler's
+    # Hosts that answered with a bot check. Their other addresses would get the same answer, so they
+    # aren't asked again this season: a site that says no gets one request, not a dozen. Kept per
+    # host, not per site, because some sites block the bare domain but answer on www. (Riverside).
+    blocked_hosts: set[str] = set()
     for idx in order:
         url = urls[idx]
+        host = urlparse(url).netloc.lower()
+        if host in blocked_hosts:
+            continue
         try:
             status, final_url, html = fetcher.get(url)
         except Exception as exc:
@@ -165,8 +172,9 @@ def scrape_school_season(school: dict, fetcher: Fetcher, season: int, division: 
             continue
         if status != 200:
             errors.append(f"{url}: HTTP {status}")
-            if status == 202:                 # Sidearm's bot check: the page only appears in a browser
+            if status == 202:                 # a bot check: the page only appears in a browser, if at all
                 blocked.append(idx)
+                blocked_hosts.add(host)
             continue
         if len(html) < 5000 and 'id="root"></div>' in html.replace(" ", ""):
             app_shell = True
