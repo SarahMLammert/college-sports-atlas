@@ -1,0 +1,18 @@
+{
+  "label": "Lacrosse (Men's)",
+  "spring_season": true,
+  "roster_paths": ["/sports/mens-lacrosse/roster", "/sports/mlax/roster", "/sports/m-lacros/roster", "/sports/m-lacrosse/roster"],
+  "presto_paths": ["/sports/mlax/{prev_season}-{yy}/roster"],
+  "min_players": 20,
+  "junior_colleges": ["Nassau", "Onondaga", "Herkimer", "Mohawk Valley", "Hudson Valley", "Finger Lakes", "Genesee", "Anne Arundel", "Harford", "CCBC Essex", "Tompkins Cortland", "TC3", "Fulton-Montgomery", "Niagara County", "Suffolk County", "Monroe Community", "Erie Community"],
+  "position_groups": ["A", "M", "FO", "LSM", "D", "G", "UNK"],
+  "position_abbreviations": {"A": "a at att atk f a/m", "M": "m mf mid md ssdm sdm dm m/a m/fo m/d", "FO": "fo fogo x fo/m f/o", "LSM": "lsm lsm/d", "D": "d def dp ds d/lsm", "G": "g gk gl"},
+  "position_words": [["attack", "A"], ["forward", "A"], ["long", "LSM"], ["short", "M"], ["defensive mid", "M"], ["midfield", "M"], ["middie", "M"], ["face", "FO"], ["faceoff", "FO"], ["fogo", "FO"], ["defense", "D"], ["defender", "D"], ["goal", "G"]],
+  "position_fallback": "UNK",
+  "d1_divisions": ["D1"],
+  "other_divisions": ["D2", "D3", "NAIA", "JUCO"],
+  "division_labels": {"D1": "Division I", "D2": "Division II", "D3": "Division III", "NAIA": "NAIA", "JUCO": "Junior college (NJCAA)"},
+  "position_labels": {"A": "Attack", "M": "Midfield", "FO": "Faceoff", "LSM": "Long-stick mid", "D": "Defense", "G": "Goalie", "UNK": "Other"},
+  "thin_roster": 25,
+  "frozen_min_pairs": 20
+}

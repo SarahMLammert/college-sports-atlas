@@ -462,7 +462,7 @@ Saint Augustine's,D2,,,,,2023,,
 St. Cloud State,D2,,scsuhuskies.com,,,2019,,
 Simon Fraser,D2,,athletics.sfu.ca,,,2022,,
 Urbana,D2,,,,,2019,,
-Oklahoma Panhandle State,D2,,,,,2016,Panhandle State|OPSU,
+Oklahoma Panhandle State,D2,,,,,2016,Panhandle State|OPSU,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
 Brevard,D2,,bctornados.com,,,2016,,
 Saint Joseph's (IN),D2,,,,,2016,Saint Joseph's College (IN),
 LIU Post,D2,,,,,2018,C.W. Post|LIU-Post,
@@ -734,7 +734,7 @@ Ave Maria,NAIA,Sun,avemariagyrenes.com,,,,,
 Avila,NAIA,KCAC,avilaathletics.com,,,,,
 Baker,NAIA,HAAC,bakerwildcats.com,,,,,
 Benedictine (KS),NAIA,HAAC,ravenathletics.com,,,,Benedictine College,
-Bethany (KS),NAIA,KCAC,bethanyswedes.com,,,,,
+Bethany (KS),NAIA,KCAC,bethanyswedes.com,,,,,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
 Bethel (TN),NAIA,Mid-South,bethelathletics.com,,,,,
 Bethel (KS),NAIA,KCAC,bethelthreshers.com,,,,,
 Bluefield,NAIA,Appalachian,burams.com,,,,Bluefield University|Bluefield College,
@@ -751,7 +751,7 @@ Dakota State,NAIA,Frontier,dsuathletics.com,,,,,
 Dakota Wesleyan,NAIA,GPAC,dwu.prestosports.com,,,,,
 Defiance,NAIA,MSFA,defianceathletics.com,,2024,,,
 Dickinson State,NAIA,Frontier,dsubluehawks.com,,,,,
-Doane,NAIA,GPAC,doaneathletics.com,,,,,
+Doane,NAIA,GPAC,doaneathletics.com,,,,,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
 Dordt,NAIA,GPAC,godordt.com,,,,,
 Eastern Oregon,NAIA,Frontier,eousports.com,,,,,
 Evangel,NAIA,KCAC,evangelathletics.com,,,,,
@@ -759,7 +759,7 @@ Faulkner,NAIA,Independent (NAIA),faulknereagles.com,,,,,
 Florida Memorial,NAIA,Sun,athletics.fmu.edu,,2020,,,
 Friends,NAIA,KCAC,friendsathletics.com,,,,,
 Georgetown (KY),NAIA,Mid-South,georgetowncollegeathletics.com,,,,Georgetown College,
-Graceland,NAIA,HAAC,gujackets.com,,,,,
+Graceland,NAIA,HAAC,gujackets.com,,,,,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
 Grand View,NAIA,HAAC,gvvikings.com,,,,,
 Hastings,NAIA,GPAC,hastingsbroncos.com,,,,,
 College of Idaho,NAIA,Frontier,yoteathletics.com,,,,,
@@ -783,12 +783,12 @@ Missouri Valley,NAIA,HAAC,valleywillroll.com,,,,,
 Montana State-Northern,NAIA,Frontier,golightsgo.com,,,,MSU-Northern|Montana State Northern,
 Montana Tech,NAIA,Frontier,godiggers.com,,,,Montana Technological,
 Montana Western,NAIA,Frontier,umwbulldogs.com,,,,UM Western|Montana-Western,
-Morningside,NAIA,GPAC,msidemustangs.com,,,,,
+Morningside,NAIA,GPAC,msidemustangs.com,,,,,"2018 page refuses automated access (HTTP 202 bot check), Oct 2026"
 Mount Marty,NAIA,GPAC,mountmartyathletics.com,,2021,,,
 Mount Mercy,NAIA,HAAC,mountmercymustangs.com,,2026,,,
 Nelson,NAIA,Sooner,nelsonlions.com,,,,Southwestern Assemblies of God|SAGU,site has no 2018 roster; old seasons show the 2024 roster (checked Oct 2026)
 Northwestern (IA),NAIA,GPAC,nwcraiders.com,,,,Northwestern College (IA)|Northwestern College,
-Oklahoma Panhandle State,NAIA,Sooner,opsuaggies.com,,2017,,Panhandle State|OPSU,
+Oklahoma Panhandle State,NAIA,Sooner,opsuaggies.com,,2017,,Panhandle State|OPSU,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
 Olivet Nazarene,NAIA,MSFA,onutigers.com,,,,,
 Ottawa (KS),NAIA,KCAC,ottawabraves.com,,,,Ottawa,
 Ottawa (AZ),NAIA,Sooner,,,2018,,Ottawa University Arizona,no athletics roster site found (searched Oct 2026)
@@ -809,10 +809,10 @@ Simpson (CA),NAIA,Frontier,simpsonredhawks.com,,2023,,,
 Southeastern (FL),NAIA,Sun,fire.seu.edu,,,,Southeastern University,
 Southern Oregon,NAIA,Frontier,souraiders.com,,,,,
 Southwestern (KS),NAIA,KCAC,buildersports.com,,,,Southwestern College (KS),
-Sterling,NAIA,KCAC,scwarriors.com,,,,,
+Sterling,NAIA,KCAC,scwarriors.com,,,,,"2018 page refuses automated access (HTTP 202 bot check), Oct 2026"
 Tabor,NAIA,KCAC,taborbluejays.com,,,,,
 Taylor,NAIA,MSFA,taylortrojans.com,,,,,
-Texas College,NAIA,Sooner,tcsteersathletics.com,,,,,
+Texas College,NAIA,Sooner,tcsteersathletics.com,,,,,"2024 page refuses automated access (HTTP 202 bot check), Oct 2026"
 Texas Wesleyan,NAIA,Sooner,ramsports.net,,2017,,,
 Thomas (GA),NAIA,Sun,tunighthawks.com,,2022,,Thomas University,
 Union Commonwealth,NAIA,Appalachian,gounionbulldogs.com,,,,Union College (KY)|Union (KY),
@@ -862,12 +862,12 @@ Iowa Western CC,JUCO,ICCAC,goreivers.com,,,,Iowa Western,
 Itasca CC,JUCO,MCAC,,,,,Itasca,
 Itawamba CC,JUCO,MACJC,letsgoicc.com,,,,Itawamba,
 Jones College,JUCO,MACJC,jcbobcats.com,,,,Jones County JC|Jones JC|Jones,
-Kilgore College,JUCO,SWJCFC,kcrangernation.com,,,,Kilgore,
+Kilgore College,JUCO,SWJCFC,kcrangernation.com,,,,Kilgore,"2018 page refuses automated access (HTTP 202 bot check), Oct 2026"
 Lackawanna College,JUCO,NEFC,lackawannafalcons.com,,,2026,Lackawanna,site has no 2018 roster; old seasons redirect or are not found (checked Oct 2026)
 Louisburg College,JUCO,Independent (NJCAA),lchurricanes.com,,,,Louisburg,
 Mesabi Range,JUCO,MCAC,,,,,,
-Minnesota State CTC,JUCO,MCAC,athletics.minnesota.edu,,,,Minnesota State Community and Technical College,
-Minnesota West CTC,JUCO,MCAC,mnwestathletics.com,,,,Minnesota West,
+Minnesota State CTC,JUCO,MCAC,athletics.minnesota.edu,,,,Minnesota State Community and Technical College,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
+Minnesota West CTC,JUCO,MCAC,mnwestathletics.com,,,,Minnesota West,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
 Mississippi Delta CC,JUCO,MACJC,mdcctrojans.com,,,,Mississippi Delta,
 Mississippi Gulf Coast CC,JUCO,MACJC,mgcccbulldogs.com,,,,Mississippi Gulf Coast|Gulf Coast CC|MGCCC,
 Monroe College,JUCO,NEFC,monroeumustangs.com,,,2026,Monroe University,
@@ -899,73 +899,73 @@ Joliet JC,JUCO,,,,,,,
 Harper College,JUCO,,,,,,,
 Dakota College at Bottineau,JUCO,,,,,,Dakota College,
 Ridgewater,JUCO,,,,,,,
-De Anza College,JUCO,CCCAA Bay 6,deanza.prestosports.com,,,,De Anza|DeAnza,
-Foothill College,JUCO,CCCAA Bay 6,foothill.prestosports.com,,,,Foothill,
-Santa Rosa JC,JUCO,CCCAA Bay 6,santarosa.prestosports.com,,,,Santa Rosa Junior College|Santa Rosa,
+De Anza College,JUCO,CCCAA Bay 6,deanza.prestosports.com,,,,De Anza|DeAnza,site has no 2018 roster (checked Oct 2026)
+Foothill College,JUCO,CCCAA Bay 6,foothill.prestosports.com,,,,Foothill,site has no 2018 or 2024 roster; 2025 roster exists (checked Oct 2026)
+Santa Rosa JC,JUCO,CCCAA Bay 6,santarosa.prestosports.com,,,,Santa Rosa Junior College|Santa Rosa,roster pages list no hometowns; High School/City column is empty (checked Oct 2026)
 City College of San Francisco,JUCO,CCCAA Bay 6,ccsf.prestosports.com,,,,CCSF|San Francisco City College|College of San Francisco,
 College of San Mateo,JUCO,CCCAA Bay 6,sanmateo.prestosports.com,,,,San Mateo,
-San Jose City College,JUCO,CCCAA Bay 6,sjcc.prestosports.com,,,,,
-American River College,JUCO,CCCAA NorCal,arcbeavers.com,,,,American River,
-Butte College,JUCO,CCCAA NorCal,buttecollege.prestosports.com,,,,Butte,
-Diablo Valley College,JUCO,CCCAA NorCal,dvcvikings.com,,,,Diablo Valley|DVC,
+San Jose City College,JUCO,CCCAA Bay 6,sjccjaguars.com,,,,,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
+American River College,JUCO,CCCAA NorCal,arcbeavers.com,,,,American River,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
+Butte College,JUCO,CCCAA NorCal,butteroadrunners.com,,,,Butte,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
+Diablo Valley College,JUCO,CCCAA NorCal,dvcvikings.com,,,,Diablo Valley|DVC,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
 Laney College,JUCO,CCCAA NorCal,laneyathletics.com,,,,Laney,"left out: rosters are PDFs only (2025, 2026), no web roster pages, Oct 2026"
 Sierra College,JUCO,CCCAA NorCal,athletics.sierracollege.edu,,,,,
 College of the Redwoods,JUCO,CCCAA NorCal,,,,,Redwoods,no athletics roster site found (searched Oct 2026)
-Fresno City College,JUCO,CCCAA Valley,fccrams.com,,,,Fresno City,
-Modesto JC,JUCO,CCCAA Valley,athletics.mjc.edu,,,,Modesto Junior College|Modesto,
+Fresno City College,JUCO,CCCAA Valley,fccrams.com,,,,Fresno City,"2024 page refuses automated access (HTTP 202 bot check), Oct 2026"
+Modesto JC,JUCO,CCCAA Valley,athletics.mjc.edu,,,,Modesto Junior College|Modesto,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
 Monterey Peninsula College,JUCO,CCCAA Valley,,,,,Monterey Peninsula,
-Reedley College,JUCO,CCCAA Valley,rctigers.com,,,,Reedley,
+Reedley College,JUCO,CCCAA Valley,rctigers.com,,,,Reedley,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
 College of the Sequoias,JUCO,CCCAA Valley,cosgiants.com,,,,Sequoias,
-Sacramento City College,JUCO,CCCAA Valley,sccpanthers.com,,,,Sacramento City,
-Gavilan College,JUCO,CCCAA Golden Coast,gavilan.prestosports.com,,,,Gavilan,
-Hartnell College,JUCO,CCCAA Golden Coast,hartnellpanthers.com,,,,Hartnell,
+Sacramento City College,JUCO,CCCAA Valley,sccpanthers.com,,,,Sacramento City,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
+Gavilan College,JUCO,CCCAA Golden Coast,gavilan.prestosports.com,,,,Gavilan,site has no 2018 roster (checked Oct 2026)
+Hartnell College,JUCO,CCCAA Golden Coast,hartnellpanthers.com,,,,Hartnell,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
 Merced College,JUCO,CCCAA Golden Coast,,,,,Merced,
-Cabrillo College,JUCO,CCCAA Golden Coast,athletics.cabrillo.edu,,,,Cabrillo,
-Coalinga College,JUCO,CCCAA Golden Coast,westhillsfalcons.prestosports.com,,,,West Hills Coalinga|West Hills College,
-Shasta College,JUCO,CCCAA Golden Coast,shastacollegeathletics.com,,,,Shasta,
+Cabrillo College,JUCO,CCCAA Golden Coast,athletics.cabrillo.edu,,,,Cabrillo,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
+Coalinga College,JUCO,CCCAA Golden Coast,westhillsfalcons.com,,,,West Hills Coalinga|West Hills College,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
+Shasta College,JUCO,CCCAA Golden Coast,shastacollegeathletics.com,,,,Shasta,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
 Chabot College,JUCO,CCCAA Pacific 7,athletics.chabotcollege.edu,,,,Chabot,
 Contra Costa College,JUCO,CCCAA Pacific 7,,,,,Contra Costa,no 2024 season (sat out)
-Feather River College,JUCO,CCCAA Pacific 7,athletics.frc.edu,,,,Feather River,
-College of the Siskiyous,JUCO,CCCAA Pacific 7,coseagles.com,,,,Siskiyous,
+Feather River College,JUCO,CCCAA Pacific 7,athletics.frc.edu,,,,Feather River,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
+College of the Siskiyous,JUCO,CCCAA Pacific 7,coseagles.com,,,,Siskiyous,"2018 page refuses automated access (HTTP 202 bot check), Oct 2026"
 Los Medanos College,JUCO,CCCAA Pacific 7,,,,,Los Medanos,
-San Joaquin Delta College,JUCO,CCCAA Pacific 7,deltacollegeathletics.com,,,,San Joaquin Delta|Delta College,
-Chaffey College,JUCO,CCCAA Central,chaffeypanthers.com,,,,Chaffey,
+San Joaquin Delta College,JUCO,CCCAA Pacific 7,deltacollegeathletics.com,,,,San Joaquin Delta|Delta College,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
+Chaffey College,JUCO,CCCAA Central,chaffeypanthers.com,,,,Chaffey,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
 El Camino College,JUCO,CCCAA Central,eccwarriors.com,,,,El Camino,
-Long Beach City College,JUCO,CCCAA Central,lbccvikings.com,,,,Long Beach City|LBCC,
-Los Angeles Harbor College,JUCO,CCCAA Central,lahc.prestosports.com,,,,LA Harbor,
+Long Beach City College,JUCO,CCCAA Central,lbccvikings.com,,,,Long Beach City|LBCC,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
+Los Angeles Harbor College,JUCO,CCCAA Central,lahc.prestosports.com,,,,LA Harbor,left out: athletics site has no football pages (checked Oct 2026)
 Mt. San Antonio College,JUCO,CCCAA Central,mtsacathletics.com,,,,Mt. SAC|Mt. San Antonio|Mt SAC,
 Riverside City College,JUCO,CCCAA Central,rccathletics.com,,,,Riverside City|Riverside CC,
 Bakersfield College,JUCO,CCCAA Northern,gogades.prestosports.com,,,,Bakersfield,
-College of the Canyons,JUCO,CCCAA Northern,cocathletics.com,,,,Canyons,
+College of the Canyons,JUCO,CCCAA Northern,cocathletics.com,,,,Canyons,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
 Cerritos College,JUCO,CCCAA Northern,cerritosfalcons.com,,,,Cerritos,
 Moorpark College,JUCO,CCCAA Northern,moorparkcollegeathletics.com,,,,Moorpark,
 Santa Monica College,JUCO,CCCAA Northern,smccorsairs.com,,,,Santa Monica,
 Ventura College,JUCO,CCCAA Northern,vcweplayhard.com,,,,Ventura,
-Fullerton College,JUCO,CCCAA Southern,fchornets.com,,,,Fullerton,
-Golden West College,JUCO,CCCAA Southern,gwcathletics.com,,,,Golden West,
+Fullerton College,JUCO,CCCAA Southern,fchornets.com,,,,Fullerton,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
+Golden West College,JUCO,CCCAA Southern,gwcathletics.com,,,,Golden West,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
 Grossmont College,JUCO,CCCAA Southern,grossmontgriffins.com,,,,Grossmont,
 Orange Coast College,JUCO,CCCAA Southern,occpirateathletics.com,,,,Orange Coast|OCC,
-Palomar College,JUCO,CCCAA Southern,palomar.prestosports.com,,,,Palomar,
-Saddleback College,JUCO,CCCAA Southern,saddlebackbobcats.com,,,,Saddleback,
-College of the Desert,JUCO,CCCAA Mountain,codathletics.com,,,,,
-Mt. San Jacinto College,JUCO,CCCAA Mountain,msjcathletics.com,,,,Mt. San Jacinto,
-San Bernardino Valley College,JUCO,CCCAA Mountain,sbvcathletics.com,,,,San Bernardino Valley,
-San Diego Mesa College,JUCO,CCCAA Mountain,gosdmesa.com,,,,San Diego Mesa|Mesa College,
+Palomar College,JUCO,CCCAA Southern,palomarathletics.com,,,,Palomar,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
+Saddleback College,JUCO,CCCAA Southern,saddlebackbobcats.com,,,,Saddleback,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
+College of the Desert,JUCO,CCCAA Mountain,codathletics.com,,,,,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
+Mt. San Jacinto College,JUCO,CCCAA Mountain,msjcathletics.com,,,,Mt. San Jacinto,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
+San Bernardino Valley College,JUCO,CCCAA Mountain,sbvcathletics.com,,,,San Bernardino Valley,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
+San Diego Mesa College,JUCO,CCCAA Mountain,gosdmesa.com,,,,San Diego Mesa|Mesa College,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
 Southwestern College (CA),JUCO,CCCAA Mountain,,,,,,
 Victor Valley College,JUCO,CCCAA Mountain,athletics.vvc.edu,,,,Victor Valley,
-Compton College,JUCO,CCCAA Metro,compton.prestosports.com,,,,El Camino Compton,
-East Los Angeles College,JUCO,CCCAA Metro,elacathletics.com,,,,East LA College|ELAC,
+Compton College,JUCO,CCCAA Metro,compton.prestosports.com,,,,El Camino Compton,site has no 2018 roster (checked Oct 2026)
+East Los Angeles College,JUCO,CCCAA Metro,elacathletics.com,,,,East LA College|ELAC,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
 Glendale CC (CA),JUCO,CCCAA Metro,gccathletics.com,,,,Glendale Community College,
 Los Angeles Southwest College,JUCO,CCCAA Metro,,,,,LA Southwest,
-Pasadena City College,JUCO,CCCAA Metro,pcclancers.com,,,,Pasadena City,
-Santa Ana College,JUCO,CCCAA Metro,sacdons.com,,,,Santa Ana,
+Pasadena City College,JUCO,CCCAA Metro,pcclancers.com,,,,Pasadena City,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
+Santa Ana College,JUCO,CCCAA Metro,sacdons.com,,,,Santa Ana,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
 West Los Angeles College,JUCO,CCCAA Metro,,,,,West LA College,
-Antelope Valley College,JUCO,CCCAA Pacific,gomarauders.avc.edu,,,,Antelope Valley,
+Antelope Valley College,JUCO,CCCAA Pacific,gomarauders.avc.edu,,,,Antelope Valley,"left out: site refuses automated access (HTTP 202 bot check; browser got no roster), Oct 2026"
 Citrus College,JUCO,CCCAA Pacific,citrusowls.com,,,,Citrus,
 Allan Hancock College,JUCO,CCCAA Pacific,athletics.hancockcollege.edu,,,,Allan Hancock|Hancock College,
-Los Angeles Pierce College,JUCO,CCCAA Pacific,lapc.prestosports.com,,,,Pierce College|LA Pierce,
+Los Angeles Pierce College,JUCO,CCCAA Pacific,lapc.prestosports.com,,,,Pierce College|LA Pierce,site has no 2018 roster (checked Oct 2026)
 Los Angeles Valley College,JUCO,CCCAA Pacific,,,,,LA Valley College|LA Valley,
-Santa Barbara City College,JUCO,CCCAA Pacific,sbccvaqueros.com,,,,Santa Barbara City,
+Santa Barbara City College,JUCO,CCCAA Pacific,sbccvaqueros.com,,,,Santa Barbara City,"2024 page refuses automated access (HTTP 202 bot check), Oct 2026"
 Community Christian (CA),JUCO,CCCAA Independent,,,,,,
 College of Marin,JUCO,,,,,,,
 Mendocino College,JUCO,,,,,,,

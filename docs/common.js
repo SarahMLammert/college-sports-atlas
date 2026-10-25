@@ -3,7 +3,14 @@
 // Load after d3.
 (function () {
   const $ = (id) => document.getElementById(id);
+  // Each sport's map_data.json says how it writes its positions and divisions (from config/<sport>.json):
+  //   data.posLabels  position group -> chip text ("FO" -> "Faceoff")
+  //   data.d1         the divisions that make up D1 (football: FBS and FCS; lacrosse: D1)
+  //   data.divLabels  division -> its full name ("D2" -> "Division II")
+  // Data built before these existed gets football's, so older map_data.json files still work.
   const POS_LABEL = { DEF: "Def (unlisted)", ST: "K/P/LS", ATH: "ATH/other" };
+  const D1_DIVS = ["FBS", "FCS"];
+  const DIV_TITLE = { FBS: "FBS (Division I)", FCS: "FCS (Division I)", D2: "Division II", D3: "Division III", NAIA: "NAIA", JUCO: "Junior college (NJCAA and California CCCAA)" };
   const STATE_ABBR = {"Alabama":"AL","Alaska":"AK","Arizona":"AZ","Arkansas":"AR","California":"CA","Colorado":"CO","Connecticut":"CT","Delaware":"DE","District of Columbia":"DC","Florida":"FL","Georgia":"GA","Hawaii":"HI","Idaho":"ID","Illinois":"IL","Indiana":"IN","Iowa":"IA","Kansas":"KS","Kentucky":"KY","Louisiana":"LA","Maine":"ME","Maryland":"MD","Massachusetts":"MA","Michigan":"MI","Minnesota":"MN","Mississippi":"MS","Missouri":"MO","Montana":"MT","Nebraska":"NE","Nevada":"NV","New Hampshire":"NH","New Jersey":"NJ","New Mexico":"NM","New York":"NY","North Carolina":"NC","North Dakota":"ND","Ohio":"OH","Oklahoma":"OK","Oregon":"OR","Pennsylvania":"PA","Rhode Island":"RI","South Carolina":"SC","South Dakota":"SD","Tennessee":"TN","Texas":"TX","Utah":"UT","Vermont":"VT","Virginia":"VA","Washington":"WA","West Virginia":"WV","Wisconsin":"WI","Wyoming":"WY","Puerto Rico":"PR"};
   const ABBR_STATE = Object.fromEntries(Object.entries(STATE_ABBR).map(([k, v]) => [v, k]));
   const fmt = d3.format(",");
@@ -20,6 +27,10 @@
     data.SEASONS = [...new Set([...P.f, ...P.l])].map((f) => f + 2000).sort((a, b) => a - b);   // every season anyone was on a roster
     data.FIRST = data.SEASONS[0]; data.LAST = data.SEASONS[data.SEASONS.length - 1];
     data.nameList = data.names.split("\n");
+    data.posLabel = data.posLabels || POS_LABEL;
+    data.d1 = data.d1 || D1_DIVS;
+    data.divLabel = data.divLabels || DIV_TITLE;
+    data.posName = (p) => data.posLabel[p] || p;
     data.tState = data.towns.map((t) => { const parts = t[2].split(", "); return parts[parts.length - 1]; });   // state abbr, or a country
     data.schoolIndex = new Map(data.schools.map((s, i) => [s[0].toLowerCase(), i]));
     // campus city, state and coordinates (built from config/school_locations.csv); the pages work without it
@@ -63,6 +74,22 @@
     const allPos = () => new Set(data.pos.map((_, i) => i));
     const state = { school: -1, allSchools: false, conf: "", div: "", from: data.FIRST, to: data.LAST, entry: "", pos: allPos() };
     const hasSchool = !!$("school"), hasConf = !!$("conf");
+    // Division choices: "" = all, "D1" = every D1 division together (football: FBS + FCS), otherwise an
+    // index into data.divs. The "D1" group is only offered when D1 is split (football) and the data has
+    // other divisions too; a sport whose D1 is one division already has a "D1" button.
+    // Only divisions with players get a button (a D1-only sport shows no NAIA or JUCO button).
+    const isD1 = (d) => data.d1.includes(data.divs[d]);
+    const present = new Set(P.d);
+    const shownDivs = data.divs.map((n, i) => i).filter((i) => present.has(i));
+    const d1Group = data.d1.length > 1 && shownDivs.some((i) => isD1(i)) && shownDivs.some((i) => !isD1(i));
+    const titleOf = (v) => v === "" ? "" : v === "D1" && d1Group ? `Division I (${data.d1.join(" and ")})` : data.divLabel[divName(v)] || "";
+    const divChoices = [["", "All"], ...(d1Group ? [["D1", "D1"]] : []), ...shownDivs.map((i) => [String(i), data.divs[i]])];
+    const divName = (v) => v === "D1" ? "D1" : data.divs[+v];
+    const divOk = (v, d) => v === "" || (v === "D1" ? isD1(d) : d === +v);
+    // the buttons come from the data, so new divisions show up as soon as map_data.json has them
+    $("div").className = "chips divs";
+    $("div").innerHTML = divChoices.map(([v, label]) =>
+      `<button type="button" class="chip" data-v="${v}" aria-pressed="${v === ""}"${titleOf(v) ? ` title="${esc(titleOf(v))}"` : ""}>${esc(label)}</button>`).join("");
 
     if (hasSchool) {
       $("schoolList").innerHTML = data.schools.map((s) => `<option value="${esc(s[0])}">`).join("");
@@ -82,7 +109,7 @@
     $("to").addEventListener("change", (e) => { state.to = +e.target.value; if (state.to < state.from) state.from = state.to; sync(); changed(); });
     data.pos.forEach((p, i) => {
       const b = document.createElement("button");
-      b.type = "button"; b.className = "chip"; b.textContent = POS_LABEL[p] || p; b.dataset.i = i; b.setAttribute("aria-pressed", "true");
+      b.type = "button"; b.className = "chip"; b.textContent = data.posName(p); b.dataset.i = i; b.setAttribute("aria-pressed", "true");
       b.addEventListener("click", () => {
         if (state.pos.size === data.pos.length) state.pos = new Set([i]);      // first click isolates one group
         else if (state.pos.has(i)) { state.pos.delete(i); if (!state.pos.size) state.pos = allPos(); }
@@ -124,7 +151,7 @@
     function passes(k, skipSchool, skipConf) {
       if (!skipSchool && state.school >= 0 && P.s[k] !== state.school) return false;
       if (P.f[k] + 2000 > state.to || P.l[k] + 2000 < state.from) return false;   // on a roster in at least one season of the range
-      if (state.div !== "" && P.d[k] !== +state.div) return false;
+      if (!divOk(state.div, P.d[k])) return false;
       if (state.entry !== "" && P.x[k] !== +state.entry) return false;
       if (!state.pos.has(P.p[k])) return false;
       if (!skipConf && state.conf !== "" && data.schools[P.s[k]][1] !== +state.conf) return false;
@@ -133,10 +160,10 @@
     // A short description of the player filters, e.g. "FCS · 2019–2024 · transfers · QB, WR"
     function summary() {
       const parts = [];
-      if (state.div !== "") parts.push(data.divs[+state.div]);
+      if (state.div !== "") parts.push(divName(state.div));
       if (state.from !== data.FIRST || state.to !== data.LAST) parts.push(state.from === state.to ? `${state.from}` : `${state.from}–${state.to}`);
       if (state.entry !== "") parts.push(state.entry === "1" ? "transfers" : "high school recruits");
-      if (state.pos.size !== data.pos.length) parts.push([...state.pos].sort((a, b) => a - b).map((i) => POS_LABEL[data.pos[i]] || data.pos[i]).join(", "));
+      if (state.pos.size !== data.pos.length) parts.push([...state.pos].sort((a, b) => a - b).map((i) => data.posName(data.pos[i])).join(", "));
       return parts.join(" · ");
     }
     // Link format (see README): school, conf, div, from, to, arrived, pos
@@ -146,7 +173,7 @@
         else if (state.allSchools) q.set("school", "all");
       }
       if (state.conf !== "") q.set("conf", data.confs[+state.conf]);
-      if (state.div !== "") q.set("div", data.divs[+state.div]);
+      if (state.div !== "") q.set("div", divName(state.div));
       if (state.from !== data.FIRST) q.set("from", state.from);
       if (state.to !== data.LAST) q.set("to", state.to);
       if (state.entry !== "") q.set("arrived", state.entry === "1" ? "transfer" : "hs");
@@ -160,7 +187,8 @@
       if (sc && data.schoolIndex.has(sc)) state.school = data.schoolIndex.get(sc);
       else if (sc === "all") state.allSchools = true;
       const ci = data.confs.indexOf(v("conf")); if (ci >= 0) state.conf = String(ci);
-      const di = data.divs.indexOf(v("div").toUpperCase()); if (di === 0 || di === 1) state.div = String(di);
+      const dv = v("div").toUpperCase(), di = data.divs.indexOf(dv);
+      if (dv === "D1" && d1Group) state.div = "D1"; else if (di >= 0) state.div = String(di);
       if (data.SEASONS.includes(+v("from"))) state.from = +v("from");
       if (data.SEASONS.includes(+v("to"))) state.to = +v("to");
       if (state.from > state.to) [state.from, state.to] = [state.to, state.from];
@@ -189,7 +217,7 @@
     addEventListener("resize", () => { if (isOpen()) place(); });
     document.addEventListener("pointerdown", (e) => { if (isOpen() && !e.target.closest(".fwrap")) setOpen(false); });
 
-    return { state, passes, sync, reset, activeCount, summary, toParams, fromParams, setOpen, isOpen, updateBadge };
+    return { state, passes, sync, reset, activeCount, summary, toParams, fromParams, setOpen, isOpen, updateBadge, divName, isD1 };
   }
 
   // Straight-line distance in miles between two lat/lon points.

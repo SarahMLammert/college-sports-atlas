@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Information About the Data</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Barlow:wght@400;500;600&display=swap">
+<style>
+  /* Same paper atlas as the sport picker */
+  :root {
+    --paper: #EFE5CF;
+    --paper-hi: #F7F0DF;
+    --panel: #F9F3E4;
+    --ink: #3A2E22;
+    --dim: #4F4132;
+    --muted: #6E5E4A;
+    --line: rgba(58, 46, 34, 0.32);
+    --edge: rgba(58, 46, 34, 0.2);
+    --sea: #B7CEC5;
+    --accent: #A8461C;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; color: var(--ink); font-family: 'Barlow', system-ui, sans-serif; }
+  html {
+    background-color: var(--paper);
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .23 0 0 0 0 .18 0 0 0 0 .13 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+      radial-gradient(ellipse at 50% 30%, var(--paper-hi) 0%, var(--paper) 55%, #E2D4B5 100%);
+    background-attachment: fixed;
+  }
+  body { min-height: 100vh; position: relative; }
+  body::before {
+    content: ""; position: fixed; inset: 10px; pointer-events: none; z-index: 0;
+    border: 1px solid var(--line); outline: 1px solid var(--edge); outline-offset: 4px;
+  }
+  .cond { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; }
+
+  main { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding: 40px 28px 56px; }
+  .back { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 18px; border-radius: 999px; border: 1.5px solid var(--ink); color: var(--ink); background: var(--panel); text-decoration: none;
+    font: 700 14px/1 'Cormorant Garamond', Georgia, serif; text-transform: uppercase; letter-spacing: 0.14em; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+  .back:hover { background: var(--accent); border-color: var(--accent); color: var(--paper-hi); }
+  .back:focus-visible, a:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+  header { text-align: center; margin: 34px 0 30px; }
+  .kicker { font-size: 13px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim); }
+  h1 { font-size: clamp(36px, 7vw, 54px); line-height: 0.98; margin: 10px 0 14px; }
+  h1 span { color: var(--accent); font-style: italic; text-transform: none; letter-spacing: 0.02em; font-size: 1.1em; }
+  .source-line { font: italic 600 22px/1.4 'Cormorant Garamond', Georgia, serif; color: var(--accent); margin: 0 0 12px; }
+  .lede { font-size: 19px; line-height: 1.55; color: var(--dim); max-width: 600px; margin: 0 auto; }
+
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 30px 0 8px; }
+  .stat { border: 1px solid var(--line); border-radius: 12px; background: rgba(249, 243, 228, 0.7); padding: 16px 12px; text-align: center; }
+  .stat b { display: block; font: 700 34px/1 'Cormorant Garamond', Georgia, serif; color: var(--accent); }
+  .stat span { display: block; margin-top: 6px; font-size: 14px; color: var(--muted); line-height: 1.3; }
+
+  section { margin-top: 40px; }
+  h2 { font-size: 24px; margin: 0 0 12px; padding-bottom: 8px; border-bottom: 1px solid var(--edge); display: flex; align-items: baseline; gap: 12px; }
+  h2 .num { font: italic 600 22px/1 'Cormorant Garamond', Georgia, serif; color: var(--accent); letter-spacing: 0; text-transform: none; }
+  p, li { font-size: 17px; line-height: 1.6; color: var(--ink); }
+  p { margin: 0 0 12px; }
+  ul { margin: 0 0 12px; padding-left: 22px; }
+  li { margin-bottom: 6px; }
+  li::marker { color: var(--accent); }
+  strong { font-weight: 600; }
+  .note { font-size: 15px; color: var(--muted); }
+
+  .sports { display: grid; gap: 12px; margin-top: 4px; }
+  .sport { border: 1px solid var(--line); border-radius: 12px; background: rgba(249, 243, 228, 0.7); padding: 16px 18px; }
+  .sport h3 { font-size: 21px; margin: 0 0 6px; }
+  .sport h3 em { font: italic 600 18px 'Cormorant Garamond', Georgia, serif; color: var(--muted); text-transform: none; letter-spacing: 0.02em; margin-left: 6px; }
+  .sport p { margin: 0; font-size: 16px; }
+
+  footer { position: relative; z-index: 1; margin: 0 18px; padding: 18px 24px 28px; border-top: 1px solid var(--edge); text-align: center;
+    font: italic 600 16px/1.5 'Cormorant Garamond', Georgia, serif; color: var(--muted); }
+
+  @media (max-width: 560px) {
+    main { padding: 28px 18px 40px; }
+    .stats { gap: 8px; }
+    .stat { padding: 12px 6px; }
+    .stat b { font-size: 26px; }
+    .stat span { font-size: 12px; }
+    .lede { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="index.html"><span aria-hidden="true">←</span> All sports</a>
+
+  <header>
+    <div class="kicker">College sports</div>
+    <h1 class="cond">About the <span>data</span></h1>
+    <p class="source-line">Rosters scraped from each school’s official athletics site.</p>
+    <p class="lede">Every dot on these maps is a player on a real college roster. Here’s how those rosters were collected, what’s counted, and where the gaps are.</p>
+  </header>
+
+  <div class="stats" aria-label="Football at a glance">
+    <div class="stat"><b>264</b><span>Division I football schools</span></div>
+    <div class="stat"><b>137K</b><span>football player records</span></div>
+    <div class="stat"><b>11K</b><span>hometowns on the map</span></div>
+  </div>
+
+  <section>
+    <h2 class="cond"><span class="num">i.</span>The rosters</h2>
+    <p>Every player comes from a <strong>school’s own official athletics website</strong>, the roster page each team posts every season. Nothing comes from recruiting services, star ratings or paid databases.</p>
+    <p>Each roster page gives a player’s name, position, class year, hometown and, usually, high school and previous college. A program collects those pages for every school and every season, including each site’s archived rosters from past years.</p>
+    <ul>
+      <li>Each archived page is checked to make sure it really is that season. Some sites quietly show this year’s roster for every year, and those pages aren’t used.</li>
+      <li>Pages are downloaded slowly, with pauses between requests, so no school’s site gets overloaded.</li>
+      <li>Sites that turn away automated visitors are left out, not worked around.</li>
+      <li>Coaches and staff are removed. Names are cleaned of jersey numbers and captain marks.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 class="cond"><span class="num">ii.</span>What’s covered</h2>
+    <div class="sports">
+      <div class="sport">
+        <h3 class="cond">Football</h3>
+        <p>All 264 FBS and FCS schools, for the 2016–2019 and 2021–2026 seasons. There’s no 2020 data. Division II, Division III, NAIA and junior-college football are being added.</p>
+      </div>
+      <div class="sport">
+        <h3 class="cond">Lacrosse <em>Men’s</em></h3>
+        <p>457 college programs.</p>
+      </div>
+      <div class="sport">
+        <h3 class="cond">Lacrosse <em>Women’s</em></h3>
+        <p>609 programs across Division I, II and III, NAIA and junior college, for the 2016–2026 seasons. Junior colleges stop in 2024, when the NJCAA dropped women’s lacrosse.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="cond"><span class="num">iii.</span>Putting hometowns on the map</h2>
+    <p>Each hometown as listed on the roster (“Bastrop, TX”) is matched to a place and given a latitude and longitude. A dot is drawn for each town, sized by how many players came from there.</p>
+    <ul>
+      <li>An <strong>outlined dot</strong> means the location is approximate: the town could only be matched to its county, or to a town with the same name.</li>
+      <li>Misspelled hometowns are fixed by hand from a checked list, so “Douglasvillle” lands on Douglasville.</li>
+      <li>Players from outside the U.S. appear on the world map.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 class="cond"><span class="num">iv.</span>Counting transfers</h2>
+    <p>A player counts as a transfer when any of these is true:</p>
+    <ul>
+      <li>His roster names a previous college.</li>
+      <li>He appears on another school’s roster in an earlier season, with the same name and hometown.</li>
+      <li>He’s new to a team but already a junior, senior or graduate student.</li>
+    </ul>
+    <p>The Transfer Map only draws lines when both schools are in the data, so the school he left is known. Transfers from other levels are counted by the kind of school they came from: junior college, Division II, Division III, NAIA or unknown.</p>
+    <p class="note">A player who transfers appears once for each school he played for.</p>
+  </section>
+
+  <section>
+    <h2 class="cond"><span class="num">v.</span>Known gaps</h2>
+    <ul>
+      <li><strong>Missing seasons.</strong> A few schools’ sites don’t have every old roster (Ohio State 2016, Samford 2016–17 and Yale 2016, for example), so those seasons undercount.</li>
+      <li><strong>Wrong class years.</strong> Some archives show each player’s final class instead of that season’s. Those seasons are found and handled so freshmen aren’t counted as transfers.</li>
+      <li><strong>Unlisted previous schools.</strong> Many rosters never name a player’s previous college, so a few transfers from outside Division I are missed.</li>
+      <li><strong>Unmatched moves.</strong> About 6,000 football transfers name a Division I school but couldn’t be matched to its roster, usually because a name or hometown is spelled differently. They’re counted but don’t have a line on the Transfer Map yet.</li>
+      <li><strong>Same-name high schools.</strong> Schools like “Central” are told apart only by the player’s home state.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 class="cond"><span class="num">vi.</span>Maps</h2>
+    <p>Country and state outlines come from Natural Earth and the U.S. Census Bureau, through the open-source <em>world-atlas</em> and <em>us-atlas</em> packages. The maps are drawn with <em>D3</em>.</p>
+  </section>
+</main>
+
+<footer><a class="back" href="index.html"><span aria-hidden="true">←</span> All sports</a></footer>
+</body>
+</html>

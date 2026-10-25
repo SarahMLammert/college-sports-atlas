@@ -1,7 +1,7 @@
 """Where each sport's files live, and its settings from config/<sport>.json.
 
     config/school_colors.csv, config/school_locations.csv   shared by every sport
-    config/<sport>.json                                      a sport's settings (football.json, ...)
+    config/<sport>.json                                      a sport's settings (football.json, lacrosse-mens.json, ...)
     config/<sport>_schools.csv                               its colleges: D1, their seasons in another
                                                              division, and D2/D3/NAIA/JUCO
     config/<sport>_hometown_corrections.csv                  hometown fixes (yours and the geocoder's suggestions)
@@ -29,7 +29,9 @@ DEFAULT_SPORT = "football"
 
 @dataclass
 class Sport:
-    name: str                                   # folder name: football, mens-basketball, ...
+    # Folder name: the sport, then the sex when the sport has both (football, lacrosse-mens,
+    # lacrosse-womens, basketball-mens). Used for config/<name>.json, rosters/<name>/, docs/<name>/.
+    name: str
     label: str = ""
     roster_paths: list[str] = field(default_factory=list)
     presto_paths: list[str] = field(default_factory=list)   # PrestoSports season pages: /sports/fball/{season}-{next_yy}/roster
@@ -39,6 +41,27 @@ class Sport:
     position_abbreviations: dict[str, str] = field(default_factory=dict)
     position_words: list[list[str]] = field(default_factory=list)
     position_fallback: str = ""
+    # A spring sport's season is named for the spring it ends in: lacrosse's 2024 season is spring
+    # 2024, which sites label "2024" or "2023-24". Football (a fall sport) labels 2024 as "2024-25".
+    spring_season: bool = False
+    # How the sport splits its colleges into divisions, as written in the schools file's "division"
+    # column. d1_divisions are the top-level divisions whose schools the maps are about (football:
+    # FBS and FCS; lacrosse, basketball, baseball: just D1). other_divisions are the other college
+    # levels (used to sort transfers, and scraped if a row has a domain). division_labels is how
+    # each one is written on the pages ("D1" -> "Division I").
+    d1_divisions: list[str] = field(default_factory=lambda: ["FBS", "FCS"])
+    other_divisions: list[str] = field(default_factory=lambda: ["D2", "D3", "NAIA", "JUCO"])
+    division_labels: dict[str, str] = field(default_factory=dict)
+    # How each position group is written on the pages' chips ("FO" -> "Faceoff"); unlisted groups show as is.
+    position_labels: dict[str, str] = field(default_factory=dict)
+    # Roster size checks, which depend on the sport: a school-season with fewer players than
+    # thin_roster is "thin" (build_map_data.py skips its class-year transfer rule for the season
+    # after), and check_frozen_classes.py needs frozen_min_pairs returning players to judge a season.
+    thin_roster: int = 40
+    frozen_min_pairs: int = 30
+
+    def division_label(self, division: str) -> str:
+        return self.division_labels.get(division, division)
 
     # ---- this sport's folders and files ----
     @property
@@ -94,7 +117,22 @@ def load_sport(name: str = DEFAULT_SPORT) -> Sport:
     unknown = sorted(set(settings) - known)
     if unknown:
         raise SystemExit(f"{path}: unknown settings {', '.join(unknown)}")
-    return Sport(name=name, **settings)
+    sport = Sport(name=name, **settings)
+    use_divisions(sport)
+    return sport
+
+
+def use_divisions(sport: Sport) -> None:
+    """Point D1 and SCRAPED at this sport's divisions. The sets are changed in place, so code that
+    did `from paths import D1` sees the sport's divisions too."""
+    clash = set(sport.d1_divisions) & set(sport.other_divisions)
+    if clash or not sport.d1_divisions:
+        raise SystemExit(f"{sport.settings_json}: d1_divisions must be set and not repeat other_divisions "
+                         f"({', '.join(sorted(clash))})")
+    D1.clear()
+    D1.update(sport.d1_divisions)
+    SCRAPED.clear()
+    SCRAPED.update(sport.d1_divisions, sport.other_divisions)
 
 
 def add_sport_argument(ap: argparse.ArgumentParser) -> None:
@@ -104,6 +142,8 @@ def add_sport_argument(ap: argparse.ArgumentParser) -> None:
 
 # ---- reading a sport's school lists ----
 
+# The current sport's divisions, set by load_sport() from its settings (d1_divisions,
+# other_divisions). These starting values are football's, for code that never loads a sport.
 D1 = {"FBS", "FCS"}
 SCRAPED = {"FBS", "FCS", "D2", "D3", "NAIA", "JUCO"}     # divisions the scraper downloads (not HS or "none")
 
@@ -167,7 +207,7 @@ def load_schools(path: Path, divisions: set[str] | None = None) -> list[dict]:
 
 
 def d1_schools(path: Path) -> list[dict]:
-    """FBS/FCS rows with no season range: the D1 schools. The scraper's "is this a college?" check
+    """Rows in the sport's D1 divisions (football: FBS/FCS) with no season range: the D1 schools. The scraper's "is this a college?" check
     (sidearm.load_known_colleges) uses only these names, since many smaller colleges share a name
     with high schools ("Central", "Union", "Franklin")."""
     return [r for r in _rows(path) if r["division"].strip() in D1 and not _spans(r)]

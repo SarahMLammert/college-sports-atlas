@@ -1,0 +1,20 @@
+hometown_raw,city,state,country,query,status,note,players
+"Jackson Hole, Wyo.",Jackson Hole,,,Jackson Hole,review,unknown state/country 'Wyo.',2
+Kahnawake Mohawk Territory,Kahnawake Mohawk,,,Kahnawake Mohawk,review,unknown state/country 'Territory',1
+"East Hempstead, N.H.",East Hempstead,,,East Hempstead,review,unknown state/country 'N.H.',1
+"Ponte Verda Beach, Florida",Ponte Verda Beach,FL,USA,"Ponte Verda Beach, FL, USA",fixed,state 'Florida' -> FL,1
+"Ponte Verda, Florida",Ponte Verda,FL,USA,"Ponte Verda, FL, USA",fixed,state 'Florida' -> FL,1
+"Cherry Hills, Colorado",Cherry Hills,CO,USA,"Cherry Hills, CO, USA",fixed,state 'Colorado' -> CO,1
+"Rosell, Ga.",Rosell,GA,USA,"Rosell, GA, USA",fixed,state 'Ga.' -> GA,1
+"Neshanie Station, N.J.",Neshanie Station,NJ,USA,"Neshanie Station, NJ, USA",fixed,state 'N.J.' -> NJ,1
+"Cortlandt Manor, NY",Cortlandt Manor,NY,USA,"Cortlandt Manor, NY, USA",fixed,,1
+"Wesfield, NJ",Wesfield,NJ,USA,"Wesfield, NJ, USA",fixed,,1
+"Upper Saddle, N.J.",Upper Saddle,NJ,USA,"Upper Saddle, NJ, USA",fixed,state 'N.J.' -> NJ,1
+"Jamesville-Dewitt, N.Y.",Jamesville-Dewitt,NY,USA,"Jamesville-Dewitt, NY, USA",fixed,state 'N.Y.' -> NY,1
+"Etters, Pa.",Etters,PA,USA,"Etters, PA, USA",fixed,state 'Pa.' -> PA,1
+"Park Hill, Colo.",Park Hill,CO,USA,"Park Hill, CO, USA",fixed,state 'Colo.' -> CO,1
+"San Francisco, Cailf.",San Francisco,CA,USA,"San Francisco, CA, USA",fixed,state 'Cailf.' -> CA,1
+Hopkinton Massachusetts,Hopkinton,MA,USA,"Hopkinton, MA, USA",fixed,state 'Massachusetts' -> MA,1
+"Floral Park, Florida",Floral Park,FL,USA,"Floral Park, FL, USA",fixed,state 'Florida' -> FL,1
+"Wappinger Falls, NY",Wappinger Falls,NY,USA,"Wappinger Falls, NY, USA",fixed,,1
+"Newton Square, Pa.",Newton Square,PA,USA,"Newton Square, PA, USA",fixed,state 'Pa.' -> PA,1

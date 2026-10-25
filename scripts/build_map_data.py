@@ -2,12 +2,12 @@
 """Pack players_unique_geocoded.csv into the JSON a sport's pages (docs/<sport>/) load.
 
     python scripts/build_map_data.py                # rosters/football/players_unique_geocoded.csv -> docs/football/map_data.json
-    python scripts/build_map_data.py --sport mens-basketball
+    python scripts/build_map_data.py --sport lacrosse-mens
     python scripts/build_map_data.py <input.csv> <output.json>
 
 Run it again whenever you re-scrape or re-geocode, then commit docs/<sport>/map_data.json.
 Dot colors come from config/school_colors.csv (school, primary, secondary hex colors), shared by every
-sport; position groups from config/<sport>.json.
+sport; position groups, divisions and their labels from config/<sport>.json.
 
 Transfers: many roster pages never list a previous school, so a player counts as a transfer if
   1. the roster lists a college as his previous school, or
@@ -155,13 +155,13 @@ def load_frozen_class_seasons(path) -> set[tuple[str, int]]:
 
 
 def arrived_as_upperclassman(r: dict, size: Counter, prev_season: dict[int, int],
-                             frozen: set[tuple[str, int]] = frozenset()) -> bool:
+                             frozen: set[tuple[str, int]] = frozenset(), thin: int = 40) -> bool:
     """New to this roster, and already a junior/senior/grad: almost always a transfer (junior college,
     Division II, or a D1 school this data doesn't cover). Only trusted when this school's roster for the
-    season before is in the data and close to full: a failed or partial scrape (Ohio State 2016 has 3
-    players) would make every returning junior look new. Also skipped for seasons whose class labels
-    can't be trusted: some archives show each player's later class (Ohio State 2017-2022), which makes
-    freshmen look like juniors."""
+    season before is in the data and close to full (at least `thin` players, the sport's thin_roster): a
+    failed or partial scrape (Ohio State 2016 has 3 players) would make every returning junior look new.
+    Also skipped for seasons whose class labels can't be trusted: some archives show each player's later
+    class (Ohio State 2017-2022), which makes freshmen look like juniors."""
     code = (r.get("first_class") or "").upper().replace("R-", "")
     if code not in UPPERCLASS:
         return False
@@ -172,7 +172,7 @@ def arrived_as_upperclassman(r: dict, size: Counter, prev_season: dict[int, int]
     if before is None:
         return False
     n_before, n_now = size[(r["school"], before)], size[(r["school"], first)]
-    return n_before >= 40 and n_before >= 0.6 * n_now
+    return n_before >= thin and n_before >= 0.6 * n_now
 
 
 HEX = re.compile(r"^#[0-9A-Fa-f]{6}$")
@@ -213,7 +213,11 @@ def main(src, dst, sport):
         if fs >= div_now.get(r["school"], (0, ""))[0]:
             div_now[r["school"]] = (fs, r["division_first_season"])
     confs = sorted(set(conf.values()))
-    divs = ["FBS", "FCS", "D2", "D3", "NAIA", "JUCO"]
+    # The sport's divisions, as its schools file writes them (football: FBS, FCS, D2, ...; lacrosse: D1, D2, ...)
+    divs = list(sport.d1_divisions) + [d for d in sport.other_divisions if d not in sport.d1_divisions]
+    odd = sorted({r["division_first_season"] for r in rows if r["division_first_season"] not in divs})
+    if odd:
+        print(f"divisions not in config/{sport.name}.json (shown as {divs[0]}):", ", ".join(o or "(blank)" for o in odd))
     colors = load_colors(sport.colors_csv)
     missing = [x for x in schools if x not in colors]
     if missing:
@@ -223,10 +227,11 @@ def main(src, dst, sport):
     came_from = find_moves(rows)
     have = roster_seasons(rows)
     all_seasons = sorted({y for _, y in have})
-    thin = sorted(f"{s} {y}" for (s, y), n in have.items() if n < 40)
+    thin = sorted(f"{s} {y}" for (s, y), n in have.items() if n < sport.thin_roster)
     if thin:
-        print("thin rosters (fewer than 40 players; the class-year transfer rule skips the season after each):", ", ".join(thin))
-    prev_season = dict(zip(all_seasons[1:], all_seasons))   # 2021 -> 2019: there's no 2020 data
+        print(f"thin rosters (fewer than {sport.thin_roster} players; the class-year transfer rule skips the season after each):",
+              ", ".join(thin))
+    prev_season = dict(zip(all_seasons[1:], all_seasons))   # a season missing from the data is skipped (football: 2021 -> 2019)
     frozen = load_frozen_class_seasons(sport.rosters_dir / "frozen_class_seasons.csv")
     if frozen:
         print(f"{len(frozen)} school-seasons with untrustworthy class years (the class-year transfer rule skips them)")
@@ -261,13 +266,13 @@ def main(src, dst, sport):
             hs_tab.append(hs)
         prev = previous_college(r["previous_school"], r["high_school"])
         listed, moved, upper = (int(bool(prev)), i in came_from,
-                                arrived_as_upperclassman(r, have, prev_season, frozen))
+                                arrived_as_upperclassman(r, have, prev_season, frozen, sport.thin_roster))
         transfer = int(listed or moved or upper)
         how["previous school on the roster"] += listed
         how["found on an earlier roster in the data"] += moved and not listed
         how["arrived as a junior/senior/grad"] += upper and not (listed or moved)
         if (not transfer and frozen and (r["school"], int(r["first_season"])) in frozen
-                and arrived_as_upperclassman(r, have, prev_season)):
+                and arrived_as_upperclassman(r, have, prev_season, thin=sport.thin_roster)):
             how["not counted: class year untrustworthy that season"] += 1
         P["s"].append(sidx[r["school"]])
         P["t"].append(t)
@@ -290,6 +295,9 @@ def main(src, dst, sport):
         "schools": [[s, confs.index(conf[s]), divs.index(div_now[s][1]) if div_now[s][1] in divs else 0,
                      *colors.get(s, ("#777777", "#FFFFFF"))] for s in schools],
         "confs": confs, "divs": divs, "pos": POS_GROUPS, "towns": towns, "hs": hs_tab, "levels": LEVELS,
+        # For the pages: the sport's name, which divisions are D1, and how divisions and positions are written
+        "sport": sport.label or sport.name, "d1": list(sport.d1_divisions),
+        "divLabels": {d: sport.division_label(d) for d in divs}, "posLabels": dict(sport.position_labels),
         "players": {k: v for k, v in P.items() if k != "n"}, "names": "\n".join(P["n"]),
     }
     Path(dst).parent.mkdir(parents=True, exist_ok=True)

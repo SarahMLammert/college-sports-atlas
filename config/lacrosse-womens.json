@@ -1,0 +1,18 @@
+{
+  "label": "Lacrosse (Women's)",
+  "spring_season": true,
+  "roster_paths": ["/sports/womens-lacrosse/roster", "/sports/wlax/roster", "/sports/w-lacros/roster", "/sports/w-lacrosse/roster"],
+  "presto_paths": ["/sports/wlax/{prev_season}-{yy}/roster"],
+  "min_players": 12,
+  "junior_colleges": ["Onondaga", "Anne Arundel", "Monroe Community", "Monroe CC", "Genesee", "Harford", "Finger Lakes", "CCBC Essex", "Potomac State", "Herkimer", "Erie Community", "Southern Maryland", "Nassau", "Mohawk Valley", "Hudson Valley", "Tompkins Cortland", "TC3", "Suffolk County", "Niagara County", "Fulton-Montgomery"],
+  "position_groups": ["A", "M", "D", "G", "UNK"],
+  "position_abbreviations": {"A": "a at att atk f a/m", "M": "m mf mid md m/a m/d dc dm", "D": "d def dp ds d/m", "G": "g gk gl"},
+  "position_words": [["attack", "A"], ["forward", "A"], ["defensive mid", "M"], ["midfield", "M"], ["middie", "M"], ["draw", "M"], ["defense", "D"], ["defender", "D"], ["goal", "G"]],
+  "position_fallback": "UNK",
+  "d1_divisions": ["D1"],
+  "other_divisions": ["D2", "D3", "NAIA", "JUCO"],
+  "division_labels": {"D1": "Division I", "D2": "Division II", "D3": "Division III", "NAIA": "NAIA", "JUCO": "Junior college (NJCAA)"},
+  "position_labels": {"A": "Attack", "M": "Midfield", "D": "Defense", "G": "Goalie", "UNK": "Other"},
+  "thin_roster": 18,
+  "frozen_min_pairs": 15
+}

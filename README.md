@@ -52,6 +52,12 @@ exist: set a sport's `players` or `staff` to a page and its button starts workin
 
 Every page's title bar has a round button (a ring of dots) that goes back to the picker.
 
+The picker's footer has an **Information about the data** button that opens `sources.html`, a plain-language
+page for visitors. It opens with the line "Rosters scraped from each school's official athletics site" and covers where the rosters come from (each school's own athletics site), which sports, schools
+and seasons are covered, how hometowns are placed on the map, how transfers are counted, the known gaps,
+and where the map outlines come from. It's written by hand, so update it when a sport goes live or the
+numbers change (its "What's covered" list and the football numbers at the top).
+
 ## Using the map
 
 The map fills the whole screen and opens zoomed to the U.S. Scroll or pinch to zoom out to the
@@ -189,6 +195,7 @@ places.
 ```
 docs/                    the website (this is what GitHub Pages serves)
   index.html             the sport picker: every sport on a ring, with players and staff buttons
+  sources.html           Information about the data: the visitor-facing page linked from the picker's footer
   common.js              shared by every sport's pages: data loading, school colors, the Filters dropdown and its link keys
   common.css             shared by every sport's pages: colors, type, title bar, buttons, the Filters dropdown
   .nojekyll              tells GitHub Pages to serve the files as they are
@@ -254,6 +261,7 @@ still answers older imports like `from scrape_rosters import parse_hometown`.
 3. Run the steps under Rebuild the data with `--sport <sport>`.
 4. Copy football's three pages from `docs/football/` to `docs/<sport>/` (not its `.json` files), change the page titles, and set the
    sport's `players` page in the `SPORTS` list in `docs/index.html`.
+5. Add the sport to "What's covered" in `docs/sources.html`, with its schools and seasons.
 
 Each sport's pages remember their own last view in the browser (the key starts with the sport).
 
@@ -264,6 +272,7 @@ pip install -r requirements.txt
 
 python scripts/scrape_rosters.py --seasons 2016-2019,2021-2026                 # about 1-2 hours for D1 alone
 python scripts/scrape_rosters.py --seasons 2016-2019,2021-2026 --retry-failed  # second pass on failures
+#   add --report to either line to also save the scrape reports and MISSING_ROSTERS.md (see Fixing a school that fails)
 python scripts/geocode_hometowns.py                                    # reads rosters/football/players_unique.csv
 #   check the "review" rows in config/football_hometown_corrections.csv, change any you agree with to "fixed",
 #   then run the geocode line again (or add --use-review to accept them all)
@@ -312,8 +321,8 @@ downloading) applies it everywhere.
 | `rosters_all_seasons.csv` | every season stacked |
 | `players_unique.csv` | one row per player per school, with first and last season |
 | `players_unique_geocoded.csv` | the above plus latitude and longitude, with each hometown's corrected city, state and country |
-| `scrape_report_<season>.csv` | per school: ok / partial / failed, players found, URL used, errors (the first 3 and last 5) |
-| `MISSING_ROSTERS.md` | the schools whose roster failed or is partial, by division, each with its seasons and the reason in words, plus the colleges skipped for having no site; rewritten after every run (see Fixing a school that fails) |
+| `scrape_report_<season>.csv` | only with `--report`: per school: ok / partial / failed, players found, URL used, errors (the first 3 and last 5) |
+| `MISSING_ROSTERS.md` | only with `--report`: the schools whose roster failed or is partial, by division, each with its seasons and the reason in words, plus the colleges skipped for having no site; rewritten after every `--report` run (see Fixing a school that fails) |
 | `hometowns.csv` | the geocoder's table of every hometown it has placed; re-runs reuse it |
 | `unmatched_hometowns.csv` | hometowns that still couldn't be placed |
 | `frozen_class_seasons.csv` | school-seasons whose class years can't be trusted; the build skips its class-year rule for them |
@@ -424,9 +433,11 @@ Dame HS). They aren't drawn as lines yet.
 
 ## Fixing a school that fails
 Every run ends with a short "Failed or partial" list, one line per school with the reason in a few words.
-`--problems` prints it again from the saved reports without scraping, and `rosters/football/MISSING_ROSTERS.md`
-has the same schools by division with the reasons written out. The full errors, with web addresses, are in
-`rosters/football/scrape_report_*.csv`.
+The report files are only written when you add `--report`: then `rosters/football/scrape_report_*.csv` has
+the full errors, with web addresses, `rosters/football/MISSING_ROSTERS.md` has the same schools by division
+with the reasons written out, and `--problems` prints the list again from the saved reports without scraping.
+Without `--report` only the roster files are written. `--retry-failed` doesn't need the reports: it tells
+which school-seasons are done from the saved rosters (enough players, most with a hometown).
 
 - Wrong or dead site: fix its `domain`, or paste its exact roster page into `roster_url` in
   `config/football_schools.csv` (it may contain `{season}`), and run again with `--retry-failed`.
@@ -468,7 +479,7 @@ has the same schools by division with the reasons written out. The full errors, 
 - About 6,000 transfers name a D1 school but weren't matched to its roster, so they have no line on the
   Transfer Map (see How transfer levels are decided). Drawing them needs a guard against high schools
   with a D1 school's name.
-- Lower divisions: see `rosters/football/MISSING_ROSTERS.md` for every school-season that failed and why.
+- Lower divisions: see `rosters/football/MISSING_ROSTERS.md` (from a `--report` run) for every school-season that failed and why.
   Some PrestoSports sites answer simple scripts with a bot check (HTTP 202) and only work with `--render`;
   a site whose bot check turns the browser away too is left out, never worked around. The NJCAA's app
   (Tyler JC) only shows its roster after JavaScript runs, and lists hometowns for few players. De Anza

@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>D1 College Football Recruiting Map</title>
-<meta name="description" content="Where every D1 (FBS and FCS) college football player since 2016 comes from, mapped.">
+<title>College Football Recruiting Map</title>
+<meta name="description" content="Where every college football player since 2016 comes from, mapped: FBS, FCS, Division II, Division III, NAIA and junior college.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Barlow:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="../common.css">
@@ -112,8 +112,8 @@ body { background: var(--sea); }
 
 <header class="bar" id="bar">
   <div class="brand card">
-    <h1>D1 College Football <span>Recruiting Map</span></h1>
-    <p class="sub" id="sub">Hometowns of every FBS and FCS player since 2016</p>
+    <h1>College Football <span>Recruiting Map</span></h1>
+    <p class="sub" id="sub">Hometowns of every college football player since 2016</p>
     <button type="button" class="scope" id="scopeChip" hidden><span id="scopeName"></span><span class="scope-x" aria-hidden="true">×</span></button>
   </div>
   <div class="tools">
@@ -145,11 +145,7 @@ body { background: var(--sea); }
           </div>
           <div class="group">
             <span class="label" id="divLabel">Division</span>
-            <div class="seg" id="div" role="group" aria-labelledby="divLabel">
-              <button type="button" data-v="" aria-pressed="true">All</button>
-              <button type="button" data-v="0" aria-pressed="false">FBS</button>
-              <button type="button" data-v="1" aria-pressed="false">FCS</button>
-            </div>
+            <div class="chips" id="div" role="group" aria-labelledby="divLabel"></div>   <!-- buttons built by common.js from the data's divisions -->
           </div>
           <div class="group">
             <label class="label" for="conf">Conference (2026)</label>
@@ -594,7 +590,7 @@ body { background: var(--sea); }
     const townSet = new Set();
     for (const k of sel) { const t = P.t[k]; if (t >= 0) townSet.add(t); }
     const schoolsIn = new Set(sel.map((k) => P.s[k]));
-    const scope = state.school >= 0 ? data.schools[state.school][0] : state.conf !== "" ? data.confs[+state.conf] : "All D1 schools";
+    const scope = state.school >= 0 ? data.schools[state.school][0] : state.conf !== "" ? data.confs[+state.conf] : state.div !== "" ? `All ${F.divName(state.div)} schools` : "All schools";
     const years = state.from === state.to ? state.from : state.from + "–" + state.to;
     $("sub").textContent = `${fmt(sel.length)} players from ${fmt(townSet.size)} hometowns · ${scope} · on rosters ${years}`;
 
@@ -672,7 +668,7 @@ body { background: var(--sea); }
     $("statsBody").innerHTML = out.join("");
     scheduleUrl();
   }
-  // Where the picked school ranks among all D1 schools (or within the filtered conference), under the same filters.
+  // Where the picked school ranks within its division (FBS and FCS together count as D1), or within the filtered conference, under the same filters.
   function schoolRanks() {
     const me = state.school, name = data.schools[me][0];
     const tot = new Float64Array(S), hs = new Float64Array(S), tr = new Float64Array(S), fromSt = new Float64Array(S), home = new Float64Array(S);
@@ -687,8 +683,9 @@ body { background: var(--sea); }
     }
     const homeShare = Float64Array.from(home, (h, i) => tot[i] ? h / tot[i] : -1);
     const dist = Float64Array.from(dists, (a) => { const m = GP.median(a); return m == null ? -1 : m; });
-    const pool = data.schools.map((_, i) => i).filter((i) => state.conf === "" || data.schools[i][1] === +state.conf);
-    const of = state.conf !== "" ? `of ${pool.length} ${data.confs[+state.conf]} schools` : `of ${pool.length} schools`;
+    const level = (i) => F.isD1(data.schools[i][2]) ? "D1" : data.divs[data.schools[i][2]];
+    const pool = data.schools.map((_, i) => i).filter((i) => state.conf !== "" ? data.schools[i][1] === +state.conf : level(i) === level(me));
+    const of = state.conf !== "" ? `of ${pool.length} ${data.confs[+state.conf]} schools` : `of ${pool.length} ${level(me)} schools`;
     const rankIn = (arr, low) => 1 + pool.filter((i) => arr[i] >= 0 && (low ? arr[i] < arr[me] : arr[i] > arr[me])).length;
     const row = (label, arr) => `<li><span class="nm">${label}</span><span class="v"><b>${fmt(arr[me])}</b></span><span class="rk">#${rankIn(arr)}</span></li>`;
     const stName = state.focusState ? (ABBR_STATE[state.focusState] || state.focusState) : "";

@@ -30,8 +30,8 @@ from pathlib import Path
 from paths import add_sport_argument, load_sport
 
 CUTOFF = 0.6        # flag a pair of seasons when this share of players didn't advance
-MIN_PAIRS = 30      # need at least this many returning players to judge
-WATCH = ("Ohio State", "Alabama", "Georgia", "Miami (FL)", "Florida", "Penn State")
+MIN_PAIRS = 30      # need at least this many returning players to judge (the sport's frozen_min_pairs replaces it)
+WATCH = ("Ohio State", "Alabama", "Georgia", "Miami (FL)", "Florida", "Penn State")   # football examples; other sports print none
 
 _RANKS = [(("FR", "FY", "FIRST", "1"), 1), (("SO", "2"), 2), (("JR", "JU", "3"), 3),
           (("SR", "SE", "4"), 4), (("GR", "5", "6", "7", "8"), 5)]
@@ -65,6 +65,8 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     add_sport_argument(ap)
     sport = load_sport(ap.parse_args(argv).sport)
+    global MIN_PAIRS
+    MIN_PAIRS = sport.frozen_min_pairs
     out = sport.rosters_dir / "frozen_class_seasons.csv"
     by = defaultdict(dict)          # (school, season) -> {(name, hometown): rank}
     unreadable = defaultdict(int)

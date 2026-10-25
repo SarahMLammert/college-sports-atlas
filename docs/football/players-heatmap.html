@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>D1 College Football Recruiting Footprints</title>
-<meta name="description" content="Compare where up to four D1 college football programs find their players, state by state.">
+<title>College Football Recruiting Footprints</title>
+<meta name="description" content="Compare where up to four college football programs, from FBS to junior college, find their players, state by state.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Barlow:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="../common.css">
@@ -113,7 +113,7 @@ table.st td.best { font-weight: 700; }
 
 <header class="bar" id="bar">
   <div class="brand card">
-    <h1>D1 College Football <span>Recruiting Footprints</span></h1>
+    <h1>College Football <span>Recruiting Footprints</span></h1>
     <p class="sub">Where up to four schools find their players, state by state</p>
   </div>
   <div class="tools">
@@ -134,11 +134,7 @@ table.st td.best { font-weight: 700; }
           <p class="note" style="margin:0">Each map picks its own school; these narrow which of its players count.</p>
           <div class="group">
             <span class="label" id="divLabel">Division</span>
-            <div class="seg" id="div" role="group" aria-labelledby="divLabel">
-              <button type="button" data-v="" aria-pressed="true">All</button>
-              <button type="button" data-v="0" aria-pressed="false">FBS</button>
-              <button type="button" data-v="1" aria-pressed="false">FCS</button>
-            </div>
+            <div class="chips" id="div" role="group" aria-labelledby="divLabel"></div>   <!-- buttons built by common.js from the data's divisions -->
           </div>
           <div class="group">
             <span class="label">Season on roster</span>
@@ -521,7 +517,7 @@ table.st td.best { font-weight: 700; }
     el.innerHTML = `<div class="trend-top"><h3>Footprint over time</h3>
         <div class="seg" id="trendMetric" role="group" aria-label="Measure">${Object.entries(METRICS).map(([k, m]) => `<button type="button" data-v="${k}" aria-pressed="${k === trendMetric}">${m.label}</button>`).join("")}</div></div>
       <p class="note why">${METRICS[trendMetric].why}
-        No 2020 data; the dashed line marks 2021, the first full transfer-portal recruiting cycle.</p>
+        ${data.SEASONS.includes(2020) ? "The" : "No 2020 data; the"} dashed line marks 2021, the first full transfer-portal recruiting cycle.</p>
       <div class="legend-row" id="trendLegend"></div><div class="chart" id="trendChart"></div>`;
     $("trendMetric").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) { trendMetric = b.dataset.v; renderTrend(picked()); } });
     if (seasons.length < 2) { $("trendChart").innerHTML = `<p class="note">Pick a range of at least two seasons to see a trend.</p>`; return; }
@@ -580,7 +576,7 @@ table.st td.best { font-weight: 700; }
     };
     $("pipes").innerHTML = `<h3>Position pipelines</h3><p class="note why">Each school's top home state for every position group, with how many of that group came from there.</p>
       <div class="tscroll"><table class="st pipe"><thead><tr><th scope="col">Position</th>${ds.map((d) => `<th scope="col">${swatch(d.si)}${schoolName(d)}</th>`).join("")}</tr></thead>
-      <tbody>${pos.map((p) => `<tr><th scope="row">${esc(GP.POS_LABEL[data.pos[p]] || data.pos[p])}</th>${ds.map((d) => cell(d, p)).join("")}</tr>`).join("")}</tbody></table></div>`;
+      <tbody>${pos.map((p) => `<tr><th scope="row">${esc(data.posName(data.pos[p]))}</th>${ds.map((d) => cell(d, p)).join("")}</tr>`).join("")}</tbody></table></div>`;
   }
   addEventListener("resize", () => { if (!$("h2h").hidden) renderTrend(picked()); });
   // the jump link scrolls instead of changing the address (the address holds the picked schools)

@@ -117,8 +117,52 @@ def split_hometown_highschool(value: str) -> tuple[str, str]:
     return value, ""
 
 
+# A roster's column label saved in front of the value: "Hometown/Prev. School: Wilson, NC / Beddingfield".
+_LABEL = re.compile(r"^(?P<label>[^:]{2,60}?)\s*\.?\s*:\s*(?P<value>.*)$")
+_LABEL_WORDS = re.compile(r"\b(hometown|home town|hs|city|high school|prev|previous|last school|college|grad)\b", re.I)
+_HOME_WORDS = re.compile(r"hometown|home town|city", re.I)
+
+
+def split_labeled_hometown(value: str) -> tuple[str, str]:
+    """Take a column label off a hometown field and split off the school that shares it.
+    Returns (hometown, school). A field without such a label comes back unchanged, with no school.
+
+        'Hometown/Prev. School: Wilson, NC / Beddingfield'  -> ('Wilson, NC', 'Beddingfield')
+        'Hometown/Previous School(s): Omaha, Neb.'          -> ('Omaha, Neb.', '')
+        'HS City (State): Mayfair HS / Lakewood (CA)'       -> ('Lakewood, CA', 'Mayfair HS')
+        'HS City (State): Mayfair'                          -> ('', 'Mayfair')   (a school, no town)
+        'HS Hometown/High School: Santa Ana'                -> ('Santa Ana', '')
+        'ICC Grad Date:'                                    -> ('', '')          (no hometown in it)
+    """
+    v = clean(value)
+    m = _LABEL.match(v)
+    if not m or not _LABEL_WORDS.search(m.group("label")):
+        return v, ""
+    label, val = m.group("label").strip(), m.group("value").strip()
+    if not _HOME_WORDS.search(label):
+        return "", ""
+    labels = ["HS", "City"] if re.match(r"hs city", label, re.I) else [p.strip() for p in label.split("/")]
+    vals = [p.strip() for p in re.split(r"\s*/\s*", val)] if val else []
+    home_idx = next(i for i, part in enumerate(labels) if _HOME_WORDS.search(part))
+    if len(vals) < len(labels) and home_idx > 0:
+        # Fewer values than the label names, and the town isn't first: "HS City (State): Mayfair"
+        # holds only the high school.
+        home, schools = "", vals
+    elif vals:
+        i = min(home_idx, len(vals) - 1) if len(vals) >= len(labels) else 0
+        home, schools = vals[i], vals[:i] + vals[i + 1:]
+    else:
+        home, schools = "", []
+    if re.search(r"\b(college|university|univ|cc|jc)\b", home, re.I):
+        # "HS City (State): Lakewood/University of Nevada": a high school and a college, no town
+        home, schools = "", schools + [home]
+    home = re.sub(r"\s*\(([A-Za-z]{2})\)$", r", \1", home)   # "Lakewood (CA)" -> "Lakewood, CA"
+    return home.strip(" ,"), " / ".join(s for s in schools if s)
+
+
 def parse_hometown(raw: str) -> dict:
     """Return {'city','state','country'} from strings like 'Mobile, Ala.' or 'Sydney, Australia'."""
+    raw = split_labeled_hometown(raw)[0]
     raw = clean(raw).replace("’", "'").replace("‘", "'").replace("ʻ", "'")
     out = {"city": "", "state": "", "country": ""}
     if not raw or raw.lower().strip(" .") in _PLACEHOLDERS:

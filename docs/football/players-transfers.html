@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>D1 College Football Transfer Map</title>
-<meta name="description" content="Where D1 college football players transferred, school to school, since 2016.">
+<title>College Football Transfer Map</title>
+<meta name="description" content="Where college football players transferred, school to school, since 2016.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Barlow:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="../common.css">
@@ -72,8 +72,8 @@ body { background: var(--panel) var(--paper-grain); }
 
 <header class="bar" id="bar">
   <div class="brand card">
-    <h1>D1 College Football <span>Transfer Map</span></h1>
-    <p class="sub" id="sub">Where players moved between D1 schools since 2016</p>
+    <h1>College Football <span>Transfer Map</span></h1>
+    <p class="sub" id="sub">Where players moved from school to school since 2016</p>
   </div>
   <div class="tools">
     <a class="btn icon" id="homeLink" href="../index.html" aria-label="All sports" title="All sports">
@@ -98,11 +98,7 @@ body { background: var(--panel) var(--paper-grain); }
           </div>
           <div class="group">
             <span class="label" id="divLabel">Division joined</span>
-            <div class="seg" id="div" role="group" aria-labelledby="divLabel">
-              <button type="button" data-v="" aria-pressed="true">All</button>
-              <button type="button" data-v="0" aria-pressed="false">FBS</button>
-              <button type="button" data-v="1" aria-pressed="false">FCS</button>
-            </div>
+            <div class="chips" id="div" role="group" aria-labelledby="divLabel"></div>   <!-- buttons built by common.js from the data's divisions -->
           </div>
           <div class="group">
             <label class="label" for="conf">Conference (2026)</label>
@@ -155,7 +151,7 @@ body { background: var(--panel) var(--paper-grain); }
   </div>
   <div class="tgrid">
     <div class="tmap" id="tmap">
-      <canvas id="cv" aria-label="Map of transfers between D1 schools. The lists beside it give the same numbers."></canvas>
+      <canvas id="cv" aria-label="Map of transfers between schools. The lists beside it give the same numbers."></canvas>
       <div class="ttip" id="ttip" hidden></div>
       <div class="msg" id="msg" hidden></div>
     </div>
@@ -183,10 +179,10 @@ body { background: var(--panel) var(--paper-grain); }
   const name = (i) => esc(data.schools[i][0]);
   // Where transfers with no line came from (P.v = index in data.levels + 1; 0 = not one of those).
   const LEVELS = data.levels || [], HAS_LEVELS = LEVELS.length > 0 && Array.isArray(P.v);
-  const LEVEL_LABEL = { D1: "D1 school, not matched", D2: "Division II", D3: "Division III", NAIA: "NAIA", JUCO: "Junior college", unknown: "Unknown" };
+  const LEVEL_LABEL = { D1: "D1 school, not matched", D2: "Division II", D3: "Division III", NAIA: "NAIA", JUCO: "Junior college", CLUB: "Club team (not varsity)", unknown: "Unknown" };
 
   // ---------- counting ----------
-  // A move is one player record that's a transfer with a known D1 previous school (P.o >= 0): from P.o to P.s.
+  // A move is one player record that's a transfer whose previous school is in this data (P.o >= 0): from P.o to P.s.
   // Every other transfer is counted in M.others, and by the level of the school he came from in M.lv.
   // Filters apply to the new school's roster: seasons on it, division when he joined, position.
   // The conference filter keeps moves to or from a school in that conference.
@@ -200,7 +196,7 @@ body { background: var(--panel) var(--paper-grain); }
       if (!P.x[k] || !F.passes(k, true, true)) continue;
       const to = P.s[k], from = P.o[k];
       if (conf >= 0 && data.schools[to][1] !== conf && !(from >= 0 && data.schools[from][1] === conf)) continue;
-      if (from < 0) {   // a transfer from outside D1, or from a school this data can't name
+      if (from < 0) {   // a transfer from a school that isn't in this data, or one the roster doesn't name
         if (sel < 0 || to === sel) { other[to]++; others++; if (HAS_LEVELS && P.v[k] > 0) lv[P.v[k] - 1]++; }
         continue;
       }
@@ -364,21 +360,21 @@ body { background: var(--panel) var(--paper-grain); }
     const max = Math.max(1, ...rows.map((r) => r.n));
     return `<div class="group"><h2>${title}</h2><p class="note">The level of the school the roster names; no line is drawn for these</p>
       ${list(rows.map((r) => ({ label: `${esc(LEVEL_LABEL[r.l] || r.l)}<span class="pct">${Math.round(r.n / M.others * 100)}%</span>`, n: r.n, from: -1, to: -1 })), "lv", max)}
-      ${M.lv[LEVELS.indexOf("D1")] ? `<p class="note">D1 school, not matched: the roster names a D1 school, but he isn't on that school's roster in this data (a different spelling, a stint before 2016, or a high school with the same name).</p>` : ""}</div>`;
+      ${M.lv[LEVELS.indexOf("D1")] ? `<p class="note">D1 school, not matched: the roster names a D1 school, but he isn't on that school's roster in this data (a different spelling, a stint before ${data.FIRST}, or a high school with the same name).</p>` : ""}</div>`;
   }
   function renderSide() {
     const side = $("side"), sel = M.sel;
-    const fine = `<p class="fine">A move is one player found on two D1 rosters in turn, or whose roster names his old D1 school. Transfers from junior colleges, Division II, Division III, NAIA and other schools have no known previous D1 school, so they're counted, by level, but not drawn. "Unknown" means the roster names no school (he was counted as a transfer because he arrived as a junior or older), or a name that fits schools at two levels ("Bethel", "Concordia").${hasCampus ? "" : " Campus locations (school_locations.json) didn't load, so the map can't place the schools."}</p>`;
+    const fine = `<p class="fine">A move is one player found on two rosters in this data in turn, or whose roster names his old school. Transfers from schools that aren't in this data have no line, so they're counted, by the level of the school they came from, but not drawn. "Unknown" means the roster names no school (he was counted as a transfer because he arrived as a junior or older), or a name that fits schools at two levels ("Bethel", "Concordia").${hasCampus ? "" : " Campus locations (school_locations.json) didn't load, so the map can't place the schools."}</p>`;
     if (sel < 0) {
       const dest = top(M.inD1), src = top(M.out), routes = M.routes.slice(0, 12);
       side.innerHTML = `<div class="big">
-          <div><b>${fmt(M.moves)}</b><small>moves between D1 schools</small></div>
+          <div><b>${fmt(M.moves)}</b><small>school-to-school moves</small></div>
           <div><b>${fmt(M.others)}</b><small>other transfers, no line drawn</small></div>
         </div>
         ${levelGroup("Where the other transfers came from")}
-        <div class="group"><h2>Biggest destinations</h2><p class="note">Most players arriving from another D1 school</p>
+        <div class="group"><h2>Biggest destinations</h2><p class="note">Most players arriving from another school on the map</p>
           ${list(dest.map((x) => ({ label: pickBtn(x.i), n: x.n, from: -1, to: x.i })), "in", dest.length ? dest[0].n : 1)}</div>
-        <div class="group"><h2>Biggest sources</h2><p class="note">Most players leaving for another D1 school</p>
+        <div class="group"><h2>Biggest sources</h2><p class="note">Most players leaving for another school on the map</p>
           ${list(src.map((x) => ({ label: pickBtn(x.i), n: x.n, from: x.i, to: -1 })), "out", src.length ? src[0].n : 1)}</div>
         <div class="group"><h2>Most common moves</h2><p class="note">Hover one to find it on the map</p>
           ${list(routes.map((r) => ({ label: `${pickBtn(r.from)}<span class="arrow">→</span>${pickBtn(r.to)}`, n: r.n, from: r.from, to: r.to })), "", routes.length ? routes[0].n : 1)}</div>
@@ -390,9 +386,9 @@ body { background: var(--panel) var(--paper-grain); }
           <p class="note">${camp ? `${esc(camp.city)}, ${esc(camp.state)} · ` : ""}${esc(data.confs[data.schools[sel][1]])}</p></div>
           <button type="button" class="link" id="clearSel">All schools</button></div>
         <div class="big">
-          <div><b class="in">${fmt(nIn)}</b><small>came in from D1 schools</small></div>
-          <div><b class="out">${fmt(nOut)}</b><small>left for D1 schools</small></div>
-          <div><b>${net > 0 ? "+" : ""}${fmt(net)}</b><small>net, D1 to D1</small></div>
+          <div><b class="in">${fmt(nIn)}</b><small>came in from schools on the map</small></div>
+          <div><b class="out">${fmt(nOut)}</b><small>left for schools on the map</small></div>
+          <div><b>${net > 0 ? "+" : ""}${fmt(net)}</b><small>net, school to school</small></div>
           <div><b>${fmt(M.other[sel])}</b><small>other transfers in, no line drawn</small></div>
         </div>
         ${levelGroup("Other transfers came from")}

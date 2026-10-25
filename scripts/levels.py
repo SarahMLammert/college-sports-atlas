@@ -1,10 +1,11 @@
-"""Which level a transfer's previous school was at: D1, D2, D3, NAIA, JUCO or unknown.
+"""Which level a transfer's previous school was at: D1, D2, D3, NAIA, JUCO, club or unknown.
 
 Every college is a row in config/<sport>_schools.csv: the D1 schools, the seasons some of them spent in
 another division, and the D2, D3, NAIA and junior colleges, with other spellings in its aliases column
 (separated by "|"). A row can be limited to a range of seasons, so "Tarleton State" means Division II
 for a player who left before 2020 and D1 after. Rows with division HS are high schools whose name looks
-like a college ("St. John's College"), so they stay unknown.
+like a college ("St. John's College"), so they stay unknown. Rows with division CLUB are club (non-varsity)
+teams, such as lacrosse's MCLA teams: never scraped, only a level for transfers.
 
     levels = Levels.load(sport)
     levels.level("Valdosta St.", 2018)        -> ("D2", "Valdosta State")
@@ -20,9 +21,9 @@ import csv
 import re
 from pathlib import Path
 
-LEVELS = ["D1", "D2", "D3", "NAIA", "JUCO", "unknown"]
+LEVELS = ["D1", "D2", "D3", "NAIA", "JUCO", "CLUB", "unknown"]
 LEVEL_NAMES = {"D1": "Division I", "D2": "Division II", "D3": "Division III", "NAIA": "NAIA",
-               "JUCO": "Junior college", "unknown": "Unknown"}
+               "JUCO": "Junior college", "CLUB": "Club team", "unknown": "Unknown"}
 
 _DROP = {"the", "of", "at", "university", "univ", "suny", "in"}
 _EXPAND = {"mt": "mount", "uw": "wisconsin", "wis": "wisconsin", "unc": "north carolina",
@@ -213,8 +214,10 @@ class Levels:
             by_school.setdefault(name, []).append(
                 (_int(r.get("first_season")), _int(r.get("last_season")), (r.get("division") or "").strip()))
             aliases.setdefault(name, []).extend(a.strip() for a in (r.get("aliases") or "").split("|") if a.strip())
+        # The sport's own D1 divisions (football: FBS, FCS; most sports: D1) all count as D1.
+        level_of = {**_LEVEL_OF, **{d.upper(): "D1" for d in getattr(sport, "d1_divisions", [])}}
         for name, rows in sorted(by_school.items()):
-            for first, last, level in _spans(rows):
+            for first, last, level in _spans(rows, level_of):
                 if level:                                  # "none": no team those seasons
                     lv.add(name, level, first, last, aliases[name])
         for n in getattr(sport, "junior_colleges", []):
@@ -227,16 +230,18 @@ def _int(v):
     return int(v) if v else None
 
 
-# A division in schools.csv -> its level here. "none" (no team) has no level.
-_LEVEL_OF = {"FBS": "D1", "FCS": "D1", "D1": "D1", "D2": "D2", "D3": "D3", "NAIA": "NAIA", "JUCO": "JUCO",
-             "HS": "unknown"}
+# A division in schools.csv -> its level here. "none" (no team) has no level. Levels.load() adds the
+# sport's own D1 divisions (d1_divisions in config/<sport>.json), so FBS and FCS are D1 for football.
+_LEVEL_OF = {"D1": "D1", "D2": "D2", "D3": "D3", "NAIA": "NAIA", "JUCO": "JUCO", "CLUB": "CLUB", "HS": "unknown"}
 
 
-def _spans(rows):
+def _spans(rows, level_of=None):
     """One college's (first, last, division) rows -> (first, last, level) for its seasons: each row with a
     season range as given, and the row without one (the school's usual level) filling the seasons between."""
+    level_of = level_of or _LEVEL_OF
+
     def level(d):
-        return _LEVEL_OF.get(d.upper(), "")
+        return level_of.get(d.upper(), "")
     usual = next((level(d) for f, l, d in rows if f is None and l is None), None)
     ranged = sorted(((f, l, level(d)) for f, l, d in rows if f is not None or l is not None),
                     key=lambda r: -1 if r[0] is None else r[0])

@@ -129,11 +129,11 @@
   .disc:focus-visible, .sat:focus-visible, .btn:focus-visible, .pick:focus-visible, .switch button:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 
   /* Names sit outside the ring like place names on a map; the summary appears when the sport is lit */
-  .label { position: absolute; left: 0; top: 0; width: 176px; display: flex; flex-direction: column; align-items: center; text-align: center; pointer-events: none; gap: 1px; transition: opacity 0.18s; }
-  .label .n { font-size: 19px; line-height: 1.05; color: var(--dim); }
+  .label { position: absolute; left: 0; top: 0; width: 240px; display: flex; flex-direction: column; align-items: center; text-align: center; pointer-events: none; gap: 1px; transition: opacity 0.18s; }
+  .label .n { font-size: 27px; line-height: 1.05; color: var(--dim); letter-spacing: 0.1em; }
   .label.live .n, .label.lit .n { color: var(--ink); }
-  .label .s { font: italic 600 15px/1.2 'Cormorant Garamond', Georgia, serif; color: var(--muted); min-height: 17px; }
-  .label .sum { font-size: 13px; font-weight: 600; line-height: 1.25; color: var(--accent); opacity: 0; transform: translateY(-3px); transition: opacity 0.18s, transform 0.18s; }
+  .label .s { font: italic 600 21px/1.2 'Cormorant Garamond', Georgia, serif; color: var(--muted); min-height: 24px; }
+  .label .sum { font-size: 17px; font-weight: 600; line-height: 1.25; color: var(--accent); opacity: 0; transform: translateY(-3px); transition: opacity 0.18s, transform 0.18s; }
   .label.lit .sum { opacity: 1; transform: none; }
 
   .legend { display: flex; gap: 28px; align-items: center; font-size: 14px; color: var(--muted); min-height: 20px; }
@@ -149,16 +149,16 @@
   .rows.has-lit .row:not(.lit) { opacity: 0.55; }
   .row.lit { border-color: var(--accent); box-shadow: 0 0 0 3px var(--glow); }
   .pick { display: flex; align-items: center; gap: 12px; min-height: 60px; padding: 8px 12px; background: none; border: 0; color: var(--ink); font: inherit; text-align: left; cursor: pointer; border-radius: 12px; }
-  .badge { width: 40px; height: 40px; flex: 0 0 40px; transition: background 0.18s, color 0.18s, border-color 0.18s; }
+  .badge { width: 48px; height: 48px; flex: 0 0 48px; transition: background 0.18s, color 0.18s, border-color 0.18s; }
   .live > .pick > .badge { box-shadow: none; }
   .row.lit .badge { border-color: var(--accent); color: var(--accent); }
   .row.live.lit .badge { background: var(--accent); color: var(--paper-hi); }
-  .row .n { font-size: 19px; line-height: 1.05; color: var(--dim); }
+  .row .n { font-size: 26px; line-height: 1.05; color: var(--dim); }
   .row.live .n, .row.lit .n { color: var(--ink); }
-  .row .s { display: block; font-size: 12px; color: var(--muted); margin-top: 2px; }
-  .more { display: none; flex-direction: column; gap: 10px; padding: 0 12px 14px 64px; }
+  .row .s { display: block; font-size: 15px; color: var(--muted); margin-top: 2px; }
+  .more { display: none; flex-direction: column; gap: 10px; padding: 0 12px 14px 72px; }
   .row.lit .more { display: flex; }
-  .more .sum { font-size: 14px; font-weight: 600; color: var(--accent); }
+  .more .sum { font-size: 17px; font-weight: 600; color: var(--accent); }
   .actions { display: flex; flex-wrap: wrap; gap: 8px; }
   .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 22px; font-weight: 600; font-size: 15px; text-decoration: none; color: var(--paper-hi); background: var(--accent); border: 1.5px solid var(--accent); }
   .btn.ghost { background: none; color: var(--ink); border-color: var(--ink); }
@@ -178,6 +178,12 @@
   }
 
   footer { padding: 18px 24px 26px; border-top: 1px solid var(--edge); margin: 0 18px; font: italic 600 16px/1.5 'Cormorant Garamond', Georgia, serif; color: var(--muted); text-align: center; }
+  footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 18px; }
+  .src-btn { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 18px; border-radius: 999px; border: 1.5px solid var(--ink); color: var(--ink); text-decoration: none; white-space: nowrap;
+    font: 700 14px/1 'Cormorant Garamond', Georgia, serif; text-transform: uppercase; letter-spacing: 0.14em; font-style: normal; background: var(--panel); transition: background 0.2s, color 0.2s, border-color 0.2s; }
+  @media (max-width: 420px) { .src-btn { font-size: 13px; letter-spacing: 0.1em; padding: 0 14px; } }
+  .src-btn:hover { background: var(--accent); border-color: var(--accent); color: var(--paper-hi); }
+  .src-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
 </head>
@@ -225,10 +231,11 @@
 
 <div class="vh" id="say" aria-live="polite"></div>
 
-<footer>Rosters scraped from each school’s official athletics site.</footer>
+<footer><a class="src-btn" href="sources.html">Information about the data <span aria-hidden="true">→</span></a></footer>
 
 <script>
   // ---- Edit this list as sports come online. ----
+  // id: the sport's folder name, sport first and then sex when the sport has both (lacrosse-mens).
   // players / staff / learn: the page to open, or null for "coming soon".
   // stats: the recruiting summary shown under the sport's name when it lights up.
   // learnSum: the learning summary, once its learn page exists.
@@ -236,21 +243,27 @@
     { id: 'football',   name: 'Football',   sub: '',        icon: 'football',
       players: 'football/players-dotmap.html', staff: null, learn: null,
       stats: [['264', 'schools'], ['137K', 'players']] },
-    { id: 'mhockey',    name: 'Hockey',     sub: "Men's",   icon: 'hockey',     players: null, staff: null,
+    { id: 'lacrosse-mens',   name: 'Lacrosse', sub: "Men's",   icon: 'lacrosse',
+      players: 'lacrosse-mens/players-dotmap.html', staff: null, learn: null,
+      stats: [['457', 'schools']] },                                   // add ['…K', 'players'] after the build
+    { id: 'lacrosse-womens', name: 'Lacrosse', sub: "Women's", icon: 'lacrosse',
+      players: 'lacrosse-womens/players-dotmap.html', staff: null, learn: null,
+      stats: [['609', 'schools']] },                                   // add ['…K', 'players'] after the build
+    { id: 'hockey-mens',    name: 'Hockey',     sub: "Men's",   icon: 'hockey',     players: null, staff: null,
       learn: null, learnSum: 'Rink · positions · systems' },          // set learn: 'hockey/learn.html' once it's built
-    { id: 'whockey',    name: 'Hockey',     sub: "Women's", icon: 'hockey',     players: null, staff: null,
+    { id: 'hockey-womens',  name: 'Hockey',     sub: "Women's", icon: 'hockey',     players: null, staff: null,
       learn: null, learnSum: 'Rink · positions · systems' },          // same page as men's
-    { id: 'mbb',        name: 'Basketball', sub: "Men's",   icon: 'basketball', players: null, staff: null, learn: null },
-    { id: 'wbb',        name: 'Basketball', sub: "Women's", icon: 'basketball', players: null, staff: null, learn: null },
+    { id: 'basketball-mens',   name: 'Basketball', sub: "Men's",   icon: 'basketball', players: null, staff: null, learn: null },
+    { id: 'basketball-womens', name: 'Basketball', sub: "Women's", icon: 'basketball', players: null, staff: null, learn: null },
     { id: 'baseball',   name: 'Baseball',   sub: '',        icon: 'baseball',   players: null, staff: null, learn: null },
     { id: 'softball',   name: 'Softball',   sub: '',        icon: 'softball',   players: null, staff: null, learn: null },
-    { id: 'volleyball', name: 'Volleyball', sub: "Women's", icon: 'volleyball', players: null, staff: null, learn: null },
-    { id: 'msoc',       name: 'Soccer',     sub: "Men's",   icon: 'soccer',     players: null, staff: null, learn: null },
-    { id: 'wsoc',       name: 'Soccer',     sub: "Women's", icon: 'soccer',     players: null, staff: null, learn: null },
+    { id: 'volleyball-womens', name: 'Volleyball', sub: "Women's", icon: 'volleyball', players: null, staff: null, learn: null },
+    { id: 'soccer-mens',    name: 'Soccer',     sub: "Men's",   icon: 'soccer',     players: null, staff: null, learn: null },
+    { id: 'soccer-womens',  name: 'Soccer',     sub: "Women's", icon: 'soccer',     players: null, staff: null, learn: null },
   ];
 
   const MODES = {
-    recruiting: { title: 'Recruiting <span>maps</span>', hint: 'Where every college player comes from. Hover or tap a sport.', doc: 'Recruiting Maps' },
+    recruiting: { title: 'Recruiting <span>maps</span>', hint: 'Hover or tap a sport.', doc: 'Recruiting Maps' },
     learn:      { title: 'Learn the <span>game</span>',   hint: 'Positions, plays and systems, drawn out. Hover or tap a sport.', doc: 'Learn the Game' },
   };
 
@@ -262,7 +275,8 @@
     baseball: '<circle cx="20" cy="20" r="16"/><path d="M10.5 7.5C15.5 13 15.5 27 10.5 32.5"/><path d="M29.5 7.5C24.5 13 24.5 27 29.5 32.5"/><path d="M11.8 12.2l2.8-.8M12.8 20h2.8M11.8 27.8l2.8.8M28.2 12.2l-2.8-.8M27.2 20h-2.8M28.2 27.8l-2.8.8"/>',
     softball: '<circle cx="20" cy="20" r="16"/><path d="M11 7C17 13 17 27 11 33"/><path d="M29 7C23 13 23 27 29 33"/>',
     volleyball: '<circle cx="20" cy="20" r="16"/><path d="M20 20C20 12 24 7 30 6.5"/><path d="M20 20C13 24 10 29 10.5 33"/><path d="M20 20C27 24 33 23 36 19"/>',
-    soccer: '<circle cx="20" cy="20" r="16"/><polygon points="20,15 24.8,18.5 22.9,24 17.1,24 15.2,18.5"/><path d="M20 15V4M24.8 18.5l10.4-3.4M22.9 24l6.5 8.9M17.1 24l-6.5 8.9M15.2 18.5L4.8 15.1"/>',
+    lacrosse: '<path d="M6 35L22.5 18.5"/><path d="M22.5 18.5C19.5 13 21.5 5.5 28.5 4.5C35 3.5 38.5 10 35.5 15.5C33.3 19.5 27.5 21 22.5 18.5Z"/><path d="M25 8.5L33.5 16.5M24 13L30.5 19M29 6L35.5 12.5M27 9.5L23 15.5M31.5 8.5L25.5 18.5M35 10L29.5 19"/><circle cx="12" cy="17" r="3.2"/>',
+    soccer: '<circle cx="20" cy="20" r="16"/><g stroke-width="1.5"><path d="M20.00 14.60L25.14 18.33L23.17 24.37L16.83 24.37L14.86 18.33Z" fill="currentColor"/><path d="M20.00 14.60L20.00 9.00"/><path d="M20.00 9.00L16.90 6.55L15.32 4.70A16 16 0 0 1 24.68 4.70L23.10 6.55Z" fill="currentColor"/><path d="M23.10 6.55L27.76 6.01M31.83 12.89L30.91 8.30"/><path d="M25.14 18.33L30.46 16.60"/><path d="M30.46 16.60L31.83 12.89L33.11 10.82A16 16 0 0 1 36.00 19.72L33.75 18.80Z" fill="currentColor"/><path d="M33.75 18.80L35.71 23.05M30.41 29.05L34.50 26.76"/><path d="M23.17 24.37L26.47 28.90"/><path d="M26.47 28.90L30.41 29.05L32.78 29.63A16 16 0 0 1 25.21 35.13L25.39 32.70Z" fill="currentColor"/><path d="M25.39 32.70L21.95 35.88M14.61 32.70L18.05 35.88"/><path d="M16.83 24.37L13.53 28.90"/><path d="M13.53 28.90L14.61 32.70L14.79 35.13A16 16 0 0 1 7.22 29.63L9.59 29.05Z" fill="currentColor"/><path d="M9.59 29.05L5.50 26.76M6.25 18.80L4.29 23.05"/><path d="M14.86 18.33L9.54 16.60"/><path d="M9.54 16.60L6.25 18.80L4.00 19.72A16 16 0 0 1 6.89 10.82L8.17 12.89Z" fill="currentColor"/><path d="M8.17 12.89L9.09 8.30M16.90 6.55L12.24 6.01"/></g>',
   };
   const JERSEY = '<path d="M8 3L4 5.5L2.5 10L5.5 11L6 9.5V21H18V9.5L18.5 11L21.5 10L20 5.5L16 3C15.3 4.6 13.8 5.5 12 5.5C10.2 5.5 8.7 4.6 8 3Z"/>';
   const WHISTLE = '<path d="M10 8H21V12H15.6A6 6 0 1 1 10 8Z"/><circle cx="10" cy="14" r="1.6"/><path d="M6.2 9.4L4.2 6.6"/><circle cx="3.4" cy="5.3" r="1.5"/>';
@@ -275,7 +289,7 @@
   };
 
   function sportSvg(name, size) {
-    return `<svg width="${size}" height="${size}" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="${size > 30 ? 2 : 2.4}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${SPORT_ICONS[name]}</svg>`;
+    return `<svg width="${size}" height="${size}" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="${size > 50 ? 1.8 : size > 30 ? 2 : 2.4}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${SPORT_ICONS[name]}</svg>`;
   }
   function smallSvg(paths, size) {
     return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg>`;
@@ -286,7 +300,7 @@
   let lit = null, pinned = null, leaveTimer = null;
 
   const byId = (id) => SPORTS.find((s) => s.id === id);
-  const fullName = (s) => (s.sub ? s.sub + ' ' : '') + s.name.toLowerCase();
+  const fullName = (s) => s.name.toLowerCase() + (s.sub ? ` (${s.sub.toLowerCase()})` : '');   // sport first: "lacrosse (men's)"
   const kindsFor = () => (mode === 'learn' ? ['learn'] : ['players', 'staff']);
   const pagesOf = (s) => kindsFor().filter((k) => s[k]).map((k) => s[k]);
   const isLive = (s) => pagesOf(s).length > 0;
@@ -319,7 +333,7 @@
   const STEP = 360 / SPORTS.length;
   const items = SPORTS.map((s, i) => {
     ring.insertAdjacentHTML('beforeend', `
-      <button type="button" class="disc" data-id="${s.id}" aria-pressed="false">${sportSvg(s.icon, 40)}</button>
+      <button type="button" class="disc" data-id="${s.id}" aria-pressed="false">${sportSvg(s.icon, 58)}</button>
       ${satHTML(s, 'players')}
       ${satHTML(s, 'staff')}
       ${satHTML(s, 'learn')}
@@ -427,7 +441,7 @@
     rowsEl.innerHTML = SPORTS.map((s) => `
       <div class="row${isLive(s) ? ' live' : ''}" data-id="${s.id}">
         <button type="button" class="pick" data-id="${s.id}" aria-expanded="false">
-          <span class="badge">${sportSvg(s.icon, 24)}</span>
+          <span class="badge">${sportSvg(s.icon, 32)}</span>
           <span><span class="n cond">${s.name}</span><span class="s">${s.sub ? s.sub + ' · ' : ''}${isLive(s) ? 'Live' : 'Coming soon'}</span></span>
         </button>
         <div class="more"><div class="sum">${summary(s)}</div>${actionsHTML(s)}</div>

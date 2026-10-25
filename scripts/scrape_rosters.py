@@ -7,7 +7,8 @@ Examples
     python scripts/scrape_rosters.py --seasons 2019 --only "Alabama,Clemson"
     python scripts/scrape_rosters.py --seasons 2016-2019,2021-2026 --retry-failed --render
     python scripts/scrape_rosters.py --recombine                       # no downloads: re-clean saved seasons, rebuild the combined files
-    python scripts/scrape_rosters.py --sport mens-basketball           # another sport (needs config/mens-basketball.json)
+    python scripts/scrape_rosters.py --sport lacrosse-mens             # another sport (needs config/lacrosse-mens.json)
+    python scripts/scrape_rosters.py --seasons 2016-2026 --report      # also write the scrape reports and MISSING_ROSTERS.md
 
 Reads config/<sport>.json and config/<sport>_schools.csv (default sport: football).
 
@@ -16,7 +17,11 @@ marks in names, hometowns split into city/state/country, high school and previou
     rosters_<season>.csv          every player that season, one row each
     rosters_all_seasons.csv       every saved season stacked (one row per player per season)
     players_unique.csv            one row per player per school, with first/last season on the roster
+Only with --report:
     scrape_report_<season>.csv    per school: status, strategy, player counts, URL, errors
+    MISSING_ROSTERS.md            the failed and partial schools by division, with reasons (always in rosters/<sport>/)
+
+--retry-failed doesn't need the reports: it tells which school-seasons are done from the saved rosters.
 
 Fetching, page parsing and field cleaning live in fetch.py, sidearm.py and hometowns.py next to this script.
 """
@@ -378,6 +383,7 @@ def print_problems(reports: list[dict]) -> None:
 # ---------------------------------------------------------------------------
 # MISSING_ROSTERS.md: the failed and partial schools of a sport, by division, with the reason in words
 
+# Football's order; write_missing_rosters() is given the sport's own (d1_divisions, then other_divisions).
 DIVISION_ORDER = ["FBS", "FCS", "D2", "D3", "NAIA", "JUCO"]
 MISSING_FILE = "MISSING_ROSTERS.md"
 
@@ -432,7 +438,8 @@ def plain_reason(report: dict) -> str:
 
 
 def write_missing_rosters(report_dir: Path, schools_csv: Path, sport_label: str, no_site: list[str],
-                          out_dir: Path | None = None) -> Path:
+                          out_dir: Path | None = None, division_order: list[str] | None = None,
+                          division_labels: dict[str, str] | None = None) -> Path:
     """Write MISSING_ROSTERS.md from every scrape report in report_dir, into out_dir (the sport's
     rosters/<sport>/ folder, so it's always in the same place, even for a test run with --out).
 
@@ -440,8 +447,10 @@ def write_missing_rosters(report_dir: Path, schools_csv: Path, sport_label: str,
     (saved, but most players without a hometown), each with its seasons and why. The reason is the
     school's note in the schools file when it has one (a person checked it), else the scraper's own
     short reason. Then the colleges skipped because they have no athletics site."""
+    order = list(division_order or DIVISION_ORDER)
+    labels = division_labels or {}
     notes = _school_notes(schools_csv)
-    division_of = {r["school"]: r["division"] for r in read_csv(schools_csv) if r["division"] in DIVISION_ORDER}
+    division_of = {r["school"]: r["division"] for r in read_csv(schools_csv) if r["division"] in order}
     reports = []
     for path in sorted(report_dir.glob("scrape_report_*.csv")):
         reports += read_csv(path)
@@ -471,7 +480,7 @@ def write_missing_rosters(report_dir: Path, schools_csv: Path, sport_label: str,
            "- **Partial**: the roster was saved, but most players have no hometown, so they get no dot on the map.",
            "- Seasons before a program started or after it ended aren't listed: they're not failures.", "",
            "| division | ok | partial | failed |", "|---|---|---|---|"]
-    divs = [d for d in DIVISION_ORDER if d in counts] + sorted(d for d in counts if d not in DIVISION_ORDER)
+    divs = [d for d in order if d in counts] + sorted(d for d in counts if d not in order)
     for d in divs:
         c = counts[d]
         out.append(f"| {d or '?'} | {c.get('ok', 0)} | {c.get('partial', 0)} | {c.get('failed', 0)} |")
@@ -480,7 +489,7 @@ def write_missing_rosters(report_dir: Path, schools_csv: Path, sport_label: str,
         failed, partial = groups.get((d, "failed"), {}), groups.get((d, "partial"), {})
         if not (failed or partial):
             continue
-        out += [f"## {d or 'Unknown division'}", ""]
+        out += [f"## {labels.get(d, d) or 'Unknown division'}", ""]
         for status, title in (("failed", "Failed"), ("partial", "Partial")):
             schools_here = groups.get((d, status), {})
             if not schools_here:
@@ -549,6 +558,27 @@ def write_csv(path: Path, fields: list[str], rows: list[dict]) -> None:
         w = csv.DictWriter(fh, fieldnames=fields, extrasaction="ignore")
         w.writeheader()
         w.writerows(rows)
+
+
+def saved_reports(rows: list[dict]) -> dict[str, dict]:
+    """school -> a report row worked out from one season's saved roster rows, for runs without
+    scrape reports: 'ok' with enough players and most of them with a hometown, the same rule
+    scrape_school_season() uses, else 'partial'. A school with no rows isn't listed (failed, or
+    no program that season)."""
+    by_school: dict[str, list[dict]] = {}
+    for r in rows:
+        by_school.setdefault(r["school"], []).append(r)
+    out = {}
+    for school, grp in by_school.items():
+        first = grp[0]
+        with_home = sum(1 for r in grp if r.get("hometown"))
+        ok = len(grp) >= sidearm.MIN_PLAYERS and with_home >= 0.5 * len(grp)
+        out[school] = {"season": first.get("season", ""), "school": school, "division": first.get("division", ""),
+                       "current_conference": first.get("current_conference", ""),
+                       "status": "ok" if ok else "partial", "season_check": "", "strategy": first.get("strategy", ""),
+                       "players": len(grp), "with_hometown": with_home, "url": first.get("roster_url", ""),
+                       "error": ""}
+    return out
 
 
 _SUFFIX = re.compile(r"\b(jr|sr|ii|iii|iv|v)\b\.?", re.I)
@@ -622,6 +652,14 @@ def clean_row(r: dict) -> dict:
     """Clean one saved roster row with the current rules, so parser fixes (names, hometowns, high school
     vs. previous school) reach seasons scraped earlier too."""
     r["name"] = clean_name(r.get("name", ""))
+    # A roster label saved with the hometown ("Hometown/Prev. School: Wilson, NC / Beddingfield"):
+    # keep the town, and move the school to the high school field when that's empty (sort_schools
+    # below moves it on to previous_school if it's a college).
+    town, school = split_labeled_hometown(r.get("hometown", ""))
+    if town != clean(r.get("hometown", "")) or school:
+        r["hometown"] = town
+        if school and not r.get("high_school") and not r.get("previous_school"):
+            r["high_school"] = school
     home = parse_hometown(r.get("hometown", ""))
     r["home_city"], r["home_state"], r["home_country"] = home["city"], home["state"], home["country"]
     r["class_norm"] = normalize_class(r.get("class_year", "")) or r.get("class_norm", "")
@@ -668,8 +706,9 @@ def main(argv=None) -> int:
     ap.add_argument("--division-history", type=Path, help="default: config/<sport>_schools.csv (its rows with a season range)")
     ap.add_argument("--seasons", help="e.g. 2016-2019,2021-2026 (default: current season)")
     ap.add_argument("--season", type=int, help="single season (same as --seasons N)")
-    ap.add_argument("--division", choices=["FBS", "FCS", "D2", "D3", "NAIA", "JUCO", "all"], default="all",
-                    help="by current division")
+    ap.add_argument("--division", default="all",
+                    help="only schools in this current division, as the sport's settings name it "
+                         "(football: FBS, FCS, D2, D3, NAIA, JUCO; lacrosse-mens: D1, D2, ...)")
     ap.add_argument("--conference", help="only this current conference (as in schools.csv)")
     ap.add_argument("--only", help="comma-separated school names")
     ap.add_argument("--out", type=Path, help="where the rosters go (default: rosters/<sport>/)")
@@ -682,16 +721,23 @@ def main(argv=None) -> int:
                     help="for rosters with players but mostly no hometowns, read each player's own page (slow: one request per player)")
     ap.add_argument("--save-pages", type=Path, metavar="DIR",
                     help="also copy each roster page used into DIR as <school>_<season>.html (for checking by hand)")
-    ap.add_argument("--retry-failed", action="store_true", help="skip school-seasons already 'ok' in the reports")
+    ap.add_argument("--retry-failed", action="store_true",
+                    help="skip school-seasons already saved with enough players and hometowns ('ok')")
+    ap.add_argument("--report", action="store_true",
+                    help="also write scrape_report_<season>.csv (per school: status, URL, errors) and MISSING_ROSTERS.md")
     ap.add_argument("--recombine", action="store_true",
                     help="don't download anything: re-clean every saved season and rebuild the combined files")
     ap.add_argument("--problems", action="store_true",
                     help="don't scrape: list the failed and partial schools in the saved reports "
-                         "(for --seasons, and --division / --only if given)")
+                         "(for --seasons, and --division / --only if given; needs reports from a --report run)")
     ap.add_argument("-v", "--verbose", action="store_true")
     args = ap.parse_args(argv)
     sport = load_sport(args.sport)
     sidearm.configure(sport)
+    divisions = list(sport.d1_divisions) + [d for d in sport.other_divisions if d not in sport.d1_divisions]
+    args.division = args.division.upper() if args.division.lower() != "all" else "all"
+    if args.division != "all" and args.division not in divisions:
+        ap.error(f"--division {args.division}: {args.sport} has {', '.join(divisions)} (or all)")
     args.schools = args.schools or sport.schools_csv
     args.division_history = args.division_history or sport.division_history_csv
     args.out = args.out or sport.rosters_dir
@@ -708,8 +754,7 @@ def main(argv=None) -> int:
 
     seasons = parse_seasons(args.seasons) if args.seasons else [args.season or current_season()]
     season_dir = report_dir = args.out
-    for d in (season_dir, report_dir):
-        d.mkdir(parents=True, exist_ok=True)
+    season_dir.mkdir(parents=True, exist_ok=True)
     restore_season_files(season_dir)
     all_schools = load_schools(args.schools)
     history = load_division_history(args.division_history)
@@ -721,9 +766,12 @@ def main(argv=None) -> int:
                  len(no_site), args.schools.name, " (-v lists them)" if not args.verbose else "")
         log.debug("Skipped (closed programs, or sites still to find): %s", ", ".join(no_site))
     def write_missing() -> None:
-        # Always in rosters/<sport>/, even when --out sends the rosters somewhere else
+        # Only with --report. Always in rosters/<sport>/, even when --out sends the rosters somewhere else
+        if not args.report:
+            return
         path = write_missing_rosters(report_dir, args.schools, getattr(sport, "label", args.sport), no_site,
-                                     out_dir=sport.rosters_dir)
+                                     out_dir=sport.rosters_dir, division_order=divisions,
+                                     division_labels={d: sport.division_label(d) for d in divisions})
         log.info("Failing and partial schools, with reasons -> %s", path)
 
     if args.recombine:
@@ -744,6 +792,10 @@ def main(argv=None) -> int:
         return 1
     selected = {s["school"] for s in schools}
     if args.problems:
+        if not any((report_dir / f"scrape_report_{season}.csv").exists() for season in seasons):
+            log.error("No scrape reports saved for %s in %s. Scrape with --report to keep them.",
+                      ", ".join(map(str, seasons)), report_dir)
+            return 1
         print_problems([r for season in seasons for r in read_csv(report_dir / f"scrape_report_{season}.csv")
                         if r["school"] in selected])
         write_missing()
@@ -757,12 +809,18 @@ def main(argv=None) -> int:
     prev_reports_all: dict[int, dict[str, dict]] = {}
     skip: set[tuple[str, int]] = set()
     for season in seasons:
-        prev_reports = {r["school"]: r for r in read_csv(report_dir / f"scrape_report_{season}.csv")}
-        done = {k for k, r in prev_reports.items() if r.get("status") in ("ok", "no_program")} if args.retry_failed else set()
+        prev_rows_all[season] = read_csv(season_dir / f"rosters_{season}.csv")
+        # What's done comes from the saved rosters, so --retry-failed works without report files. A saved
+        # report (from a --report run) adds the details (errors, season check) for schools it still matches.
+        from_rows = saved_reports(prev_rows_all[season])
+        old = {r["school"]: r for r in read_csv(report_dir / f"scrape_report_{season}.csv")} if args.report else {}
+        prev_reports = {k: (old[k] if k in old and old[k].get("status") == r["status"] else r) for k, r in from_rows.items()}
+        # Failed and no-program rows have no roster to come from; keep them from the saved report.
+        prev_reports.update({k: r for k, r in old.items() if k not in prev_reports and r.get("status") in ("failed", "no_program")})
+        done = {k for k, r in prev_reports.items() if r["status"] == "ok"} if args.retry_failed else set()
         keep_schools = {k for k in prev_reports if k not in selected} | done
         skip.update((k, season) for k in done)
         prev_reports_all[season] = prev_reports
-        prev_rows_all[season] = read_csv(season_dir / f"rosters_{season}.csv")
         kept_reports[season] = {k: r for k, r in prev_reports.items() if k in keep_schools}
         kept_rows[season] = [r for r in prev_rows_all[season] if r["school"] in keep_schools]
 
@@ -834,8 +892,9 @@ def main(argv=None) -> int:
         rows.sort(key=lambda r: (order.get(r["school"], 9999), r["school"]))
         reports = {**kept_reports[season], **new_reports[season]}
         write_csv(season_dir / f"rosters_{season}.csv", OUT_FIELDS, rows)
-        write_csv(report_dir / f"scrape_report_{season}.csv", REPORT_FIELDS,
-                  sorted(reports.values(), key=lambda r: order.get(r["school"], 9999)))
+        if args.report:
+            write_csv(report_dir / f"scrape_report_{season}.csv", REPORT_FIELDS,
+                      sorted(reports.values(), key=lambda r: order.get(r["school"], 9999)))
         st = [r.get("status") for r in reports.values()]
         totals.append((season, len(rows), st.count("ok"), st.count("partial"), st.count("failed")))
 
@@ -847,8 +906,12 @@ def main(argv=None) -> int:
     if any(t[3] or t[4] for t in totals):
         # The schools scraped in this run that still failed or came back partial, in a few words.
         print_problems([r for season in seasons for r in new_reports[season].values()])
-        log.info("Details (with web addresses) are in scrape_report_<season>.csv in %s. "
-                 "--problems lists all of them again without scraping.", report_dir)
+        if args.report:
+            log.info("Details (with web addresses) are in scrape_report_<season>.csv in %s. "
+                     "--problems lists all of them again without scraping.", report_dir)
+        else:
+            log.info("Add --report to save these with their web addresses (scrape_report_<season>.csv "
+                     "and MISSING_ROSTERS.md).")
     if interrupted:
         # Everything is saved. Leave now instead of waiting for the schools still downloading.
         log.info("Saved. Re-run with --retry-failed to finish the schools that were cut off.")

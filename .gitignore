@@ -2,6 +2,8 @@
 .venv/
 __pycache__/
 *.pyc
+scrape_report_*.csv
+rosters_all_seasons.csv
 
 # Downloaded pages and Census/USGS files (large; rebuilt by the scripts)
 .cache/
@@ -12,3 +14,5 @@ __pycache__/
 
 # macOS
 .DS_Store
+rosters/football/rosters_all_seasons.csv
+rosters/football/rosters_all_seasons.csv

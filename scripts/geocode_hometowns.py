@@ -49,7 +49,7 @@ from pathlib import Path
 import requests
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from hometowns import US_STATES, parse_hometown  # noqa: E402
+from hometowns import US_STATES, parse_hometown, split_labeled_hometown  # noqa: E402
 from paths import add_sport_argument, load_sport  # noqa: E402
 
 # In the repo folder (this script lives in scripts/), not the folder it's run from, so every run
@@ -621,6 +621,12 @@ def suggest_correction(raw: str) -> tuple:
     if s in OVERRIDE:
         return OVERRIDE[s]
     notes = []
+    town, _ = split_labeled_hometown(s)   # "Hometown/Previous School(s): Omaha, Neb." -> "Omaha, Neb."
+    if town != s:
+        if not town:
+            return ("", "", "", "unfixable", "roster label with no hometown after it")
+        s = town
+        notes.append("label text removed")
     if PREFIX.match(s):
         s = PREFIX.sub("", s)
         notes.append("stripped 'Hometown/Last School:' prefix")

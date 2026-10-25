@@ -25,19 +25,32 @@ ROSTER_PATHS = ["/sports/football/roster"]
 PRESTO_PATHS = ["/sports/fball/{season}-{next_yy}/roster"]
 MIN_PLAYERS = 25  # fewer players than this on a page is suspicious
 JUCO_NAMES: list[str] = []
+# A spring sport (lacrosse, baseball): season 2024 is spring 2024, labeled "2024" or "2023-24".
+SPRING = False
 
 
 def configure(sport) -> None:
-    """Use a sport's roster URL paths, minimum roster size and junior-college names."""
-    global ROSTER_PATHS, PRESTO_PATHS, MIN_PLAYERS, JUCO_NAMES
+    """Use a sport's roster URL paths, minimum roster size, junior-college names and season naming."""
+    global ROSTER_PATHS, PRESTO_PATHS, MIN_PLAYERS, JUCO_NAMES, SPRING
     ROSTER_PATHS = list(sport.roster_paths)
     PRESTO_PATHS = list(getattr(sport, "presto_paths", []))
     MIN_PLAYERS = sport.min_players
     JUCO_NAMES = list(sport.junior_colleges)
+    SPRING = bool(getattr(sport, "spring_season", False))
 
 
 def _fill(template: str, season: int) -> str:
-    return template.format(season=season, next_season=season + 1, next_yy=f"{(season + 1) % 100:02d}")
+    """Template keys: {season}, {next_season}, {next_yy} (fall: 2024-25), and {prev_season}, {yy}
+    (spring: season 2024 is 2023-24)."""
+    return template.format(season=season, next_season=season + 1, next_yy=f"{(season + 1) % 100:02d}",
+                           prev_season=season - 1, yy=f"{season % 100:02d}")
+
+
+def _span(season: int) -> str:
+    """The two-year label for a season: 2024-25 for a fall sport, 2023-24 for a spring sport."""
+    if SPRING:
+        return f"{season - 1}-{season % 100:02d}"
+    return f"{season}-{(season + 1) % 100:02d}"
 
 
 def candidate_urls(domain: str, override: str = "", season: int | None = None) -> list[str]:
@@ -55,17 +68,17 @@ def candidate_urls(domain: str, override: str = "", season: int | None = None) -
         elif "{season}" in override:
             urls.append(_fill(override, season))
         else:  # plain URL: try the Sidearm and WMT archive conventions on it
-            o, yy = override.rstrip("/"), f"{(season + 1) % 100:02d}"
-            urls += [f"{o}/{season}", f"{o}/season/{season}/", f"{o}/{season}-{yy}", f"{o}/season/{season}-{yy}/"]
+            o, span = override.rstrip("/"), _span(season)
+            urls += [f"{o}/{season}", f"{o}/season/{season}/", f"{o}/{span}", f"{o}/season/{span}/"]
     base = f"https://{domain.strip().strip('/')}"
     for path in ROSTER_PATHS:
         path = path.rstrip("/")
         if season:
-            yy = f"{(season + 1) % 100:02d}"
+            span = _span(season)                                 # 2019-20 (fall) or 2018-19 (spring)
             urls.append(f"{base}{path}/{season}")                # Sidearm:  /roster/2019
             urls.append(f"{base}{path}/season/{season}/")        # WMT:      /roster/season/2019/
-            urls.append(f"{base}{path}/{season}-{yy}")           # Sidearm:  /roster/2019-20 (Cornell, Ohio State)
-            urls.append(f"{base}{path}/season/{season}-{yy}/")   # WMT:      /roster/season/2019-20/ (Notre Dame, Georgia Tech)
+            urls.append(f"{base}{path}/{span}")                  # Sidearm:  /roster/2019-20 (Cornell, Ohio State)
+            urls.append(f"{base}{path}/season/{span}/")          # WMT:      /roster/season/2019-20/ (Notre Dame, Georgia Tech)
         else:
             urls.append(f"{base}{path}")
     # PrestoSports: /sports/fball/2019-20/roster. The list view first: some sites (Morningside) only
@@ -111,6 +124,9 @@ def detect_season(html: str) -> int | None:
     for text in candidates:
         m = _YEAR.search(text or "")
         if m:
+            # "2023-24" is season 2023 for a fall sport, but season 2024 (that spring) for a spring one.
+            if SPRING and m.group(2):
+                return int(m.group(1)) + 1
             return int(m.group(1))
     return None
 
@@ -425,9 +441,39 @@ def parse_sidearm_classic(html: str, soup: BeautifulSoup) -> list[dict]:
         # Position text often runs into height/weight ("Wide Receiver 6'2\" 195 lbs"); cut at the
         # first number instead of the first space, so "Wide Receiver" doesn't become "Wide".
         rec["position"] = re.split(r"\s+(?=\d)", rec["position"])[0].strip() if rec["position"] else ""
+        rec["_player_id"] = li.get("data-player-id", "")
         if rec["name"]:
             out.append(rec)
+    _years_from_card_view(soup, out)
+    for rec in out:
+        rec.pop("_player_id", None)
     return out
+
+
+def _years_from_card_view(soup: BeautifulSoup, players: list[dict]) -> None:
+    """Fill blank class years from the page's card view.
+
+    Some Sidearm pages (Lamar, Linfield, Bates, Hamilton, Puget Sound) hold the roster twice: the
+    classic list read above, which has no class year, and a card view further down
+    (li.sidearm-list-card-item) that has it. The two are matched by Sidearm's player id, or by the
+    player's page link."""
+    if not any(not p["class_year"] for p in players):
+        return
+    by_id, by_url = {}, {}
+    for card in soup.select("li.sidearm-list-card-item"):
+        year = _sel_text(card, ".sidearm-roster-player-academic-year")
+        if not year:
+            continue
+        if card.get("data-player-id"):
+            by_id[card["data-player-id"]] = year
+        link = card.select_one("a.sidearm-roster-player-name[href], a.sidearm-roster-player-bio-link[href]")
+        if link is not None:
+            by_url[link["href"].rstrip("/")] = year
+    if not (by_id or by_url):
+        return
+    for p in players:
+        if not p["class_year"]:
+            p["class_year"] = by_id.get(p.get("_player_id", "")) or by_url.get(p["bio_url"].rstrip("/"), "")
 
 
 # ---------------------------------------------------------------------------

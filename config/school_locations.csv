@@ -424,6 +424,7 @@ Los Medanos College,Pittsburg,CA,38.0060,-121.8600
 Louisburg College,Louisburg,NC,36.1047,-78.3000
 Louisiana,Lafayette,LA,30.2056,-92.0281
 Louisiana Christian,Pineville,LA,31.3253,-92.4267
+Louisiana College,Pineville,LA,31.3253,-92.4267
 Louisiana Tech,Ruston,LA,32.533,-92.6353
 Louisiana-Monroe,Monroe,LA,32.519,-92.0772
 Louisville,Louisville,KY,38.1654,-85.6474
@@ -890,3 +891,262 @@ Worcester State,Worcester,MA,42.2676,-71.8438
 Wyoming,Laramie,WY,41.306,-105.6086
 Yale,New Haven,CT,41.3108,-72.925
 Youngstown State,Youngstown,OH,41.0991,-80.6459
+Bellarmine,Louisville,KY,38.2186,-85.7022
+Binghamton,Vestal,NY,42.0894,-75.9697
+Boston University,Boston,MA,42.3505,-71.1054
+Canisius,Buffalo,NY,42.9336,-78.8530
+Cleveland State,Cleveland,OH,41.5022,-81.6750
+Denver,Denver,CO,39.6766,-104.9619
+Detroit Mercy,Detroit,MI,42.4142,-83.1394
+Drexel,Philadelphia,PA,39.9566,-75.1899
+Fairfield,Fairfield,CT,41.1584,-73.2551
+High Point,High Point,NC,35.9727,-79.9967
+Hofstra,Hempstead,NY,40.7146,-73.6004
+Iona,New Rochelle,NY,40.9257,-73.7849
+Jacksonville,Jacksonville,FL,30.3510,-81.6043
+Le Moyne,Syracuse,NY,43.0487,-76.0855
+Loyola Maryland,Baltimore,MD,39.3466,-76.6226
+Manhattan,Riverdale,NY,40.8898,-73.9020
+Marquette,Milwaukee,WI,43.0389,-87.9298
+UMBC,Catonsville,MD,39.2556,-76.7110
+UMass Lowell,Lowell,MA,42.6545,-71.3260
+Mount St. Mary's,Emmitsburg,MD,39.6828,-77.3536
+NJIT,Newark,NJ,40.7424,-74.1784
+Providence,Providence,RI,41.8443,-71.4351
+Queens (NC),Charlotte,NC,35.1888,-80.8317
+Quinnipiac,Hamden,CT,41.4189,-72.8936
+St. Bonaventure,St. Bonaventure,NY,42.0795,-78.4835
+St. John's (NY),Queens,NY,40.7223,-73.7949
+Saint Joseph's,Philadelphia,PA,39.9952,-75.2393
+Siena,Loudonville,NY,42.7193,-73.7525
+Vermont,Burlington,VT,44.4779,-73.1965
+Hartford,West Hartford,CT,41.7979,-72.7139
+Adelphi,Garden City,NY,40.7245,-73.6487
+Alabama-Huntsville,Huntsville,AL,34.7250,-86.6400
+Albertus Magnus,New Haven,CT,41.3324,-72.9239
+Anne Arundel CC,Arnold,MD,39.0523,-76.5114
+Arcadia,Cheltenham Township,PA,40.0920,-75.1655
+Babson,Wellesley,MA,42.2982,-71.2612
+Bard,Annandale-on-Hudson,NY,42.0203,-73.9100
+Barry,Miami Shores,FL,25.8788,-80.1973
+Batten,Virginia Beach,VA,36.8680,-76.1876
+Belmont Abbey,Belmont,NC,35.2596,-81.0410
+Bridgeport,Bridgeport,CT,41.1648,-73.1907
+CCBC Essex,Essex,MD,39.3086,-76.4533
+CCNY,New York,NY,40.7484,-73.9967
+Cairn,Langhorne Manor,PA,40.1665,-74.9089
+Caldwell,Caldwell,NJ,40.8340,-74.2730
+Centenary (NJ),Hackettstown,NJ,40.8529,-74.8343
+Chatham,Pittsburgh,PA,40.4492,-79.9258
+Chestnut Hill,Philadelphia,PA,40.0871,-75.2278
+Clark (MA),Worcester,MA,42.2510,-71.8232
+Clarkson,Potsdam,NY,44.6640,-74.9980
+Coker,Hartsville,SC,34.3756,-80.0842
+Colby-Sawyer,New London,NH,43.4145,-71.9857
+Colorado College,Colorado Springs,CO,38.8335,-104.8206
+Columbia (MO),Columbia,MO,38.9576,-92.3266
+Columbia (SC),Columbia,SC,34.0450,-81.0314
+Concordia (MI),Ann Arbor,MI,42.3072,-83.6941
+Concordia Irvine,Irvine,CA,33.6536,-117.8114
+Connecticut College,New London,CT,41.3507,-72.1062
+D'Youville,Buffalo,NY,42.9025,-78.8908
+Dallas,Irving,TX,32.8451,-96.9258
+Davis & Elkins,Elkins,WV,38.9253,-79.8471
+DeSales,Center Valley,PA,40.5396,-75.4242
+Dominican (CA),San Rafael,CA,37.9797,-122.5133
+Dominican (NY),Orangeburg,NY,41.0442,-73.9609
+Drew,Madison,NJ,40.7599,-74.4179
+Eastern Connecticut State,Willimantic,CT,41.7149,-72.2134
+Edgewood,Madison,WI,43.0579,-89.4229
+Elizabethtown,Elizabethtown,PA,40.1500,-76.5919
+Elmira,Elmira,NY,42.0966,-76.8160
+Elms,Chicopee,MA,42.1423,-72.6014
+Embry-Riddle (FL),Daytona Beach,FL,29.2012,-81.0371
+Emerson,Boston,MA,42.3518,-71.0660
+Emmanuel (GA),Franklin Springs,GA,34.2820,-83.1480
+Emmanuel (MA),Boston,MA,42.3417,-71.1033
+Farmingdale State,East Farmingdale,NY,40.7529,-73.4266
+Felician,Rutherford,NJ,40.8292,-74.1121
+Flagler,St. Augustine,FL,29.8924,-81.3152
+Florida Southern,Lakeland,FL,28.0314,-81.9475
+Franciscan,Steubenville,OH,40.3773,-80.6205
+Genesee CC,Batavia,NY,43.0159,-78.1404
+Geneseo,Geneseo,NY,42.7957,-77.8195
+Georgian Court,Lakewood Township,NJ,40.0989,-74.2289
+Gordon,Wenham,MA,42.6017,-70.8786
+Goucher,Towson,MD,39.4078,-76.5922
+Gwynedd Mercy,Gwynedd Valley,PA,40.1842,-75.2567
+Harford CC,Bel Air,MD,39.5606,-76.2839
+Haverford,Haverford,PA,40.0097,-75.3121
+Herkimer,Herkimer,NY,43.0307,-74.9876
+Holy Family,Philadelphia,PA,40.0600,-74.9880
+Hood,Frederick,MD,39.4082,-77.4009
+Houghton,Houghton,NY,42.4261,-78.1553
+Illinois Tech,Chicago,IL,41.8858,-87.6181
+Immaculata,Immaculata,PA,40.0439,-75.5269
+Indiana Tech,Fort Wayne,IN,41.0778,-85.1172
+Jefferson CC (NY),Watertown,NY,43.9884,-75.9390
+Johnson & Wales (RI),Providence,RI,41.8255,-71.4114
+Keene State,Keene,NH,42.9431,-72.2895
+Keuka,Keuka Park,NY,42.6010,-77.1052
+La Roche,McCandless Township,PA,40.5680,-80.0140
+Lander,Greenwood,SC,34.2003,-82.1656
+Lasell,Newton,MA,42.3413,-71.2434
+Lees-McRae,Banner Elk,NC,36.1621,-81.8757
+Lewis,Romeoville,IL,41.6048,-88.0805
+Life,Marietta,GA,33.9325,-84.5145
+Lincoln Memorial,Harrogate,TN,36.5808,-83.6566
+Lourdes,Sylvania,OH,41.7098,-83.7061
+Lynchburg,Lynchburg,VA,37.3985,-79.1810
+Lynn,Boca Raton,FL,26.3840,-80.1250
+MSOE,Milwaukee,WI,43.0343,-87.9151
+Maine-Farmington,Farmington,ME,44.6667,-70.1472
+Manhattanville,Purchase,NY,41.0321,-73.7156
+Marian (WI),Fond du Lac,WI,43.7775,-88.4214
+Mary Washington,Fredericksburg,VA,38.3019,-77.4750
+Marymount (VA),Arlington County,VA,38.9050,-77.1290
+Maryville (MO),Town,MO,38.6459,-90.5038
+Marywood,Scranton,PA,41.4337,-75.6342
+Mass. Liberal Arts,North Adams,MA,42.6987,-73.1100
+Mercy,Dobbs Ferry,NY,41.0221,-73.8746
+Messiah,near Mechanicsburg,PA,40.1553,-76.9933
+Michigan-Dearborn,Dearborn,MI,42.3053,-83.1605
+Mitchell,New London,CT,41.3507,-72.1062
+Mohawk Valley CC,Utica,NY,43.0775,-75.2175
+Molloy,Rockville Centre,NY,40.6858,-73.6264
+Montevallo,Montevallo,AL,33.1248,-86.8622
+Montreat,Montreat,NC,35.6442,-82.3031
+Mount Olive,Mount Olive,NC,35.2084,-78.0688
+Mount Saint Mary (NY),Newburgh,NY,41.5117,-74.0131
+Mount Saint Vincent,Riverdale,NY,40.9135,-73.9085
+Nazareth,Rochester,NY,43.1683,-77.6026
+Neumann,Aston,PA,39.8643,-75.4332
+New College of Florida,Sarasota,FL,27.3853,-82.5622
+New Paltz,New Paltz,NY,41.7433,-74.0839
+North Central (MN),Minneapolis,MN,44.9616,-93.2626
+Northwest Nazarene,Nampa,ID,43.5620,-116.5650
+Notre Dame (MD),Baltimore,MD,39.1718,-76.6483
+Oglethorpe,Brookhaven,GA,33.8752,-84.3333
+Oneonta,Oneonta,NY,42.4695,-75.0640
+Onondaga CC,Syracuse,NY,43.0459,-76.1528
+Oswego,Oswego,NY,43.4438,-76.4975
+Palm Beach Atlantic,West Palm Beach,FL,26.7036,-80.0514
+Penn College,University Park,PA,40.7983,-77.8600
+Penn State Harrisburg,Lower Swatara Township,PA,40.2055,-76.7464
+Pfeiffer,Misenheimer,NC,35.4844,-80.2825
+Piedmont,Demorest & Athens,GA,34.5660,-83.5420
+Pitt-Bradford,Bradford address,PA,41.9442,-78.6729
+Plattsburgh,Plattsburgh,NY,44.6933,-73.4664
+Point Park,Pittsburgh,PA,40.4745,-79.9525
+Potsdam,Potsdam,NY,44.6625,-74.9742
+Purchase,Purchase,NY,41.0470,-73.7020
+RIT,Henrietta,NY,43.0847,-77.6761
+Randolph,Lynchburg,VA,37.4368,-79.1718
+Regis (MA),Weston,MA,42.3506,-71.3092
+Rivier,Nashua,NH,42.7389,-71.4553
+Roberts Wesleyan,Rochester,NY,43.1683,-77.6026
+Rockhurst,Kansas City,MO,39.1632,-94.5699
+Roger Williams,Bristol,RI,41.6494,-71.2606
+Rollins,Winter Park,FL,28.5978,-81.3534
+Russell Sage,Albany,NY,42.7285,-73.6928
+SCAD Savannah,Savannah,GA,32.0676,-81.1024
+SUNY Canton,Canton,NY,44.6033,-75.1833
+SUNY Cobleskill,Cobleskill,NY,42.6840,-74.4939
+SUNY Delhi,Delhi,NY,42.2879,-74.9228
+SUNY Poly,Marcy,NY,43.1340,-75.2290
+Saint Joseph (CT),West Hartford,CT,41.7811,-72.7306
+Saint Joseph's (ME),Standish,ME,43.8255,-70.4821
+Saint Leo,St. Leo,FL,28.3356,-82.2517
+Saint Michael's,Colchester,VT,44.4947,-73.1653
+Salem State,Salem,MA,42.5034,-70.8911
+Scranton,Scranton,PA,41.3731,-75.6841
+Siena Heights,Adrian,MI,41.9005,-84.0446
+Skidmore,Saratoga Springs,NY,43.0978,-73.7853
+Southern Maine,Gorham,ME,43.6625,-70.2761
+Southern New Hampshire,Manchester,NH,42.9929,-71.4633
+Spalding,Louisville,KY,38.2415,-85.7589
+St. Joseph's (L.I.),Patchogue,NY,40.7698,-73.0112
+St. Mary's (MD),St. Mary's City,MD,38.1867,-76.4309
+St. Thomas Aquinas,Sparkill,NY,41.0422,-73.9358
+Stevens,Hoboken,NJ,40.7449,-74.0239
+Stockton,Galloway,NJ,39.4920,-74.5297
+Swarthmore,Swarthmore,PA,39.8967,-75.3474
+Tampa,Tampa,FL,27.9472,-82.4654
+Tennessee Wesleyan,Athens,TN,35.4453,-84.5944
+Thomas (ME),Waterville,ME,44.5480,-69.6359
+Tompkins Cortland CC,Dryden,NY,42.5037,-76.2908
+Transylvania,Lexington,KY,38.0174,-84.4854
+UDC,Washington,DC,38.9122,-77.0177
+UMass Boston,Dorchester,MA,42.3134,-71.0384
+Vassar,Poughkeepsie,NY,41.7021,-73.9218
+Vermont State Johnson,Johnson,VT,44.6350,-72.6801
+Vermont State Lyndon,Lyndonville,VT,44.5340,-72.0110
+Warren Wilson,Swannanoa,NC,35.6048,-82.4065
+Washington College,Chestertown,MD,39.2181,-76.0694
+Wentworth,Boston,MA,42.3366,-71.0950
+Westcliff,Irvine,CA,33.7357,-117.7672
+Westminster (UT),Salt Lake City,UT,40.7318,-111.8550
+Wheaton (MA),Norton,MA,41.9683,-71.1845
+William Peace,Raleigh,NC,35.7887,-78.6377
+Wilmington (DE),New Castle,DE,39.6770,-75.5899
+York (PA),Spring Garden Township,PA,39.9467,-76.7295
+Young Harris,Young Harris,GA,34.9328,-83.8468
+Mount Vernon Nazarene,Mount Vernon,OH,40.3737,-82.4748
+American,Washington,DC,38.9371,-77.0869
+Asbury,Wilmore,KY,37.8636,-84.6649
+Bethel (IN),Mishawaka,IN,41.6777,-86.1932
+Brenau,Gainesville,GA,34.3040,-83.8190
+Bryn Mawr,Bryn Mawr,PA,40.0264,-75.3136
+Cedar Crest,Allentown,PA,40.5870,-75.5190
+Converse,Spartanburg,SC,34.9568,-81.9227
+Daemen,Amherst,NY,42.9654,-78.7888
+Eastern Mennonite,Harrisonburg,VA,38.4710,-78.8795
+FDU,Teaneck,NJ,40.9177,-74.0300
+Finger Lakes CC,Canandaigua,NY,42.8724,-77.2429
+Fredonia,Fredonia,NY,42.4534,-79.3370
+George Mason,Fairfax,VA,38.8310,-77.3080
+George Washington,Washington,DC,38.8997,-77.0486
+Hollins,Roanoke,VA,37.3549,-79.9418
+Jefferson,Philadelphia,PA,40.0225,-75.1925
+La Salle,Philadelphia,PA,40.0393,-75.1532
+Lancaster Bible,Lancaster,PA,40.0750,-76.2881
+Lee,Cleveland,TN,35.1658,-84.8711
+Longwood,Farmville,VA,37.3016,-78.3942
+Meredith,Raleigh,NC,35.7981,-78.6883
+Monroe CC,Rochester,NY,43.1019,-77.6144
+Mount Aloysius,Cresson,PA,40.4595,-78.6016
+Mount Holyoke,South Hadley,MA,42.2556,-72.5745
+Niagara,Lewiston,NY,43.1380,-79.0370
+Nova Southeastern,Davie,FL,26.0778,-80.2419
+Old Westbury,Old Westbury,NY,40.7993,-73.5741
+Penn State Abington,Abington,PA,40.1175,-75.1091
+Potomac State,Keyser,WV,39.4386,-78.9822
+Queens (NY),Flushing,NY,40.7370,-73.8170
+Radford,Radford,VA,37.1383,-80.5512
+Ramapo,Mahwah,NJ,41.0828,-74.1781
+Regis (CO),Denver,CO,39.7893,-105.0333
+Rhode Island College,Providence,RI,41.8422,-71.4612
+Rider,Lawrenceville,NJ,40.2800,-74.7380
+Rochester Christian,Rochester,MI,42.6672,-83.1453
+Rutgers-Camden,Camden,NJ,39.9490,-75.1240
+Saint Benedict,St. Joseph,MN,45.5611,-94.3219
+Saint Elizabeth,Madison,NJ,40.7810,-74.4380
+Saint Mary's (CA),Moraga,CA,37.8414,-122.1092
+Saint Mary's (IN),Notre Dame,IN,41.7067,-86.2570
+Salem (NC),Winston-Salem,NC,36.0875,-80.2400
+Simmons,Boston,MA,42.3398,-71.1002
+Smith,Northampton,MA,42.3175,-72.6375
+Southern Maryland,La Plata,MD,38.5594,-77.0092
+Southern Wesleyan,Central,SC,34.7254,-82.7790
+Suffolk,Boston,MA,42.3579,-71.0610
+Sweet Briar,Sweet Briar,VA,37.5556,-79.0806
+Truett McConnell,Cleveland,GA,34.5960,-83.7480
+UCCS,Colorado Springs,CO,38.8940,-104.8030
+Ursuline,Pepper Pike,OH,41.4950,-81.4667
+VCU,Richmond,VA,37.5466,-77.4533
+Wellesley,Wellesley,MA,42.2925,-71.3075
+Whitman,Walla Walla,WA,46.0707,-118.3289
+Wilson,Chambersburg,PA,39.9480,-77.6530
+Winthrop,Rock Hill,SC,34.9389,-81.0306
+Wisconsin-Superior,Superior,WI,46.7181,-92.0900
+Xavier,Cincinnati,OH,39.1487,-84.4780

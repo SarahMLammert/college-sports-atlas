@@ -1,0 +1,1256 @@
+school,division,conference,domain,roster_url,first_season,last_season,aliases,note
+Albany,D1,America East,ualbanysports.com,,,,UAlbany|SUNY Albany,
+Binghamton,D1,America East,bubearcats.com,,,,Binghamton University|SUNY Binghamton,
+Bryant,D1,America East,bryantbulldogs.com,,,,,
+NJIT,D1,America East,njithighlanders.com,,,,New Jersey Institute of Technology|New Jersey Tech,
+UMBC,D1,America East,umbcretrievers.com,,,,Maryland-Baltimore County|UMBC Retrievers,
+UMass Lowell,D1,America East,goriverhawks.com,,,,Massachusetts-Lowell|UMass-Lowell,
+Vermont,D1,America East,uvmathletics.com,,,,UVM|University of Vermont,
+Air Force,D1,ASUN,goairforcefalcons.com,,,,Air Force Academy|United States Air Force Academy|U.S. Air Force Academy,
+Bellarmine,D1,ASUN,athletics.bellarmine.edu,,,,Bellarmine University,
+Jacksonville,D1,ASUN,judolphins.com,,,,Jacksonville University,
+Mercer,D1,ASUN,mercerbears.com,,,,,
+Queens (NC),D1,ASUN,queensathletics.com,,,,Queens University of Charlotte|Queens (N.C.)|Queens Charlotte,
+Utah,D1,ASUN,utahutes.com,,,,,
+Army,D1,Patriot,goarmywestpoint.com,,,,Army West Point|West Point|United States Military Academy|U.S. Military Academy,
+Boston University,D1,Patriot,goterriers.com,,,,BU|Boston U.,
+Bucknell,D1,Patriot,bucknellbison.com,,,,,
+Colgate,D1,Patriot,colgateathletics.com,,,,,
+Holy Cross,D1,Patriot,goholycross.com,,,,,
+Lafayette,D1,Patriot,goleopards.com,,,,,
+Lehigh,D1,Patriot,lehighsports.com,,,,,
+Loyola Maryland,D1,Patriot,loyolagreyhounds.com,,,,Loyola|Loyola (MD)|Loyola (Md.)|Loyola University Maryland,
+Navy,D1,Patriot,navysports.com,,,,Naval Academy|United States Naval Academy|U.S. Naval Academy,
+Brown,D1,Ivy,brownbears.com,,,,,
+Cornell,D1,Ivy,cornellbigred.com,,,,,
+Dartmouth,D1,Ivy,dartmouthsports.com,,,,,
+Harvard,D1,Ivy,gocrimson.com,,,,,"left out: gocrimson.com blocks automated access (Incapsula bot check), Oct 2026"
+Penn,D1,Ivy,pennathletics.com,,,,Pennsylvania,
+Princeton,D1,Ivy,goprincetontigers.com,,,,,
+Yale,D1,Ivy,yalebulldogs.com,,,,,
+Canisius,D1,MAAC,gogriffs.com,,,,Canisius College|Canisius University,
+Iona,D1,MAAC,ionagaels.com,,,,Iona College|Iona University,
+Manhattan,D1,MAAC,gojaspers.com,,,,Manhattan College|Manhattan University,
+Marist,D1,MAAC,goredfoxes.com,,,,,
+Merrimack,D1,MAAC,merrimackathletics.com,,,,,
+Mount St. Mary's,D1,MAAC,mountathletics.com,,,,Mount Saint Mary's|Mount St. Mary's (MD),
+Quinnipiac,D1,MAAC,gobobcats.com,,,,Quinnipiac University,
+Sacred Heart,D1,MAAC,sacredheartpioneers.com,,,,,
+Siena,D1,MAAC,sienasaints.com,,,,Siena College|Siena University,
+Cleveland State,D1,NEC,csuvikings.com,,,,Cleveland St.,
+Detroit Mercy,D1,NEC,detroittitans.com,,,,Detroit|University of Detroit Mercy,
+LIU,D1,NEC,liuathletics.com,,,,Long Island|Long Island University,
+Le Moyne,D1,NEC,lemoynedolphins.com,,,,LeMoyne|Le Moyne College,
+Mercyhurst,D1,NEC,hurstathletics.com,,,,,
+Robert Morris,D1,NEC,rmucolonials.com,,,,,
+VMI,D1,NEC,vmikeydets.com,,,,Virginia Military Institute,
+Wagner,D1,NEC,wagnerathletics.com,,,,,
+Delaware,D1,Atlantic 10,bluehens.com,,,,,
+High Point,D1,Atlantic 10,highpointpanthers.com,,,,High Point University,
+Hobart,D1,Atlantic 10,hwsathletics.com,,,,,
+Richmond,D1,Atlantic 10,richmondspiders.com,,,,,
+Saint Joseph's,D1,Atlantic 10,sjuhawks.com,,,,St. Joseph's|Saint Joseph's (PA)|St. Joseph's (PA)|Saint Joseph's University,
+St. Bonaventure,D1,Atlantic 10,gobonnies.com,,,,Saint Bonaventure|St. Bonaventure University,
+UMass,D1,Atlantic 10,umassathletics.com,,,,Massachusetts,
+Denver,D1,Big East,denverpioneers.com,,,,University of Denver,
+Georgetown,D1,Big East,guhoyas.com,,,,,
+Marquette,D1,Big East,gomarquette.com,,,,Marquette University,
+Providence,D1,Big East,friars.com,,,,Providence College,
+St. John's (NY),D1,Big East,redstormsports.com,,,,St. John's|Saint John's (NY)|St. John's University,
+Villanova,D1,Big East,villanova.com,,,,,
+Drexel,D1,CAA,drexeldragons.com,,,,Drexel University,
+Fairfield,D1,CAA,fairfieldstags.com,,,,Fairfield University,
+Hampton,D1,CAA,hamptonpirates.com,,,,,
+Hofstra,D1,CAA,gohofstra.com,,,,Hofstra University,
+Monmouth,D1,CAA,monmouthhawks.com,,,,,
+Stony Brook,D1,CAA,stonybrookathletics.com,,,,,
+Towson,D1,CAA,towsontigers.com,,,,,
+Duke,D1,ACC,goduke.com,,,,,
+North Carolina,D1,ACC,goheels.com,,,,UNC,
+Notre Dame,D1,ACC,fightingirish.com,,,,,
+Syracuse,D1,ACC,cuse.com,,,,,
+Virginia,D1,ACC,virginiasports.com,,,,,
+Johns Hopkins,D1,Big Ten,hopkinssports.com,,,,,
+Maryland,D1,Big Ten,umterps.com,,,,,
+Michigan,D1,Big Ten,mgoblue.com,,,,,
+Ohio State,D1,Big Ten,ohiostatebuckeyes.com,,,,,
+Penn State,D1,Big Ten,gopsusports.com,,,,,
+Rutgers,D1,Big Ten,scarletknights.com,,,,,
+Cleveland State,none,,,,,2016,,men's lacrosse began in 2017
+Utah,none,,,,,2018,,men's lacrosse began in 2019 (MCLA club before)
+St. Bonaventure,none,,,,,2018,,men's lacrosse began in 2019
+Iona,none,,,,,2024,,"men's lacrosse began in 2025 (first game Feb 1, 2025)"
+Merrimack,D2,,,,,2019,,D1 from 2020
+LIU,D2,,,,,2019,,LIU Post's D2 team until the 2019 merger; D1 as LIU from 2020
+Queens (NC),D2,,,,,2022,,D1 from 2023
+Le Moyne,D2,,,,,2023,,D1 from 2024
+Mercyhurst,D2,,,,,2024,,D1 from 2025
+Furman,D1,,furmanpaladins.com,,,,,
+Furman,none,,,,2021,,,dropped men's lacrosse in May 2020; not scraped from then on
+Hartford,D1,,hartfordhawks.com,,,2023,University of Hartford,"roster really has 18 players in 2023, the last Division I season; Division III (CNE) from 2024"
+LIU Post,D2,,,,,2019,C.W. Post|LIU-Post,merged into LIU after the 2019 season
+Adams State,D2,Rocky Mountain Athletic Conference,asugrizzlies.com,,,,Adams St.,
+Adelphi,D2,Northeast 10 Conference,aupanthers.com,,,,,
+Alabama-Huntsville,D2,Peach Belt Conference,uahchargers.com,,,,UAH|Alabama Huntsville,
+American International,D2,Northeast 10 Conference,aicyellowjackets.com,,,,AIC,
+Anderson (SC),D2,South Atlantic Conference,autrojans.com,,,,,
+Assumption,D2,Northeast 10 Conference,assumptiongreyhounds.com,,,,,
+Barry,D2,Sunshine State Conference,gobarrybucs.com,,,,,
+Barton,D2,Conference Carolinas,bartonbulldogs.com,,,,,
+Belmont Abbey,D2,Conference Carolinas,abbeyathletics.com,,,,,
+Bentley,D2,Northeast 10 Conference,bentleyfalcons.com,,,,,
+Bridgeport,D2,Central Atlantic Collegiate Conference,ubknights.com,,,,,
+Caldwell,D2,Central Atlantic Collegiate Conference,caldwellathletics.com,,,,,
+Catawba,D2,South Atlantic Conference,catawbaathletics.com,,,,,
+Chestnut Hill,D2,Central Atlantic Collegiate Conference,griffinathletics.com,,,,,
+Chowan,D2,Conference Carolinas,gocuhawks.com,,,,,
+Coker,D2,South Atlantic Conference,cokercobras.com,,,,,
+Colorado Mesa,D2,Rocky Mountain Athletic Conference,cmumavericks.com,,,,,
+Concordia Irvine,D2,Rocky Mountain Athletic Conference,cuigoldeneagles.com,,,,Concordia (CA)|Concordia University Irvine,
+D'Youville,D2,East Coast Conference,athletics.dyc.edu,,,,,
+Davenport,D2,Great Midwest Athletic Conference,dupanthers.com,,,,,
+Davis & Elkins,D2,Great Midwest Athletic Conference,senatornation.com,,,,,
+UDC,D2,East Coast Conference,udcfirebirds.com,,,,District of Columbia,
+Dominican (CA),D2,Rocky Mountain Athletic Conference,dominicanathletics.com,,,,Dominican University of California,
+Dominican (NY),D2,Central Atlantic Collegiate Conference,chargerathletics.com,,,,Dominican College|Dominican University New York,
+Embry-Riddle (FL),D2,Sunshine State Conference,erauathletics.com,,,,Embry-Riddle|Embry-Riddle Aeronautical,
+Emmanuel (GA),D2,Conference Carolinas,goeclions.com,,,,Emmanuel College (GA),
+Emory & Henry,D2,South Atlantic Conference,gowasps.com,,,,,
+Felician,D2,Central Atlantic Collegiate Conference,felicianuathletics.com,,,,,
+Flagler,D2,Peach Belt Conference,flaglerathletics.com,,,,,
+Florida Tech,D2,Sunshine State Conference,floridatechsports.com,,,,,
+Florida Southern,D2,Sunshine State Conference,fscmocs.com,,,,,
+Franklin Pierce,D2,Northeast 10 Conference,fpuravens.com,,,,,
+Frostburg State,D2,East Coast Conference,frostburgsports.com,,,,,
+Georgian Court,D2,Central Atlantic Collegiate Conference,gculions.com,,,,,
+Holy Family,D2,Central Atlantic Collegiate Conference,athletics.holyfamily.edu,,,,,
+Indianapolis,D2,Great Lakes Valley Conference,uindyathletics.com,,,,UIndy,"left out: uindyathletics.com refuses automated access (robots.txt, certificate errors), Oct 2026"
+Lake Erie,D2,Great Midwest Athletic Conference,lakeeriestorm.com,,,,,
+Lander,D2,Peach Belt Conference,landerbearcats.com,,,,,
+Lees-McRae,D2,Conference Carolinas,lmcbobcats.com,,,,,
+Lenoir-Rhyne,D2,South Atlantic Conference,lrbears.com,,,,,
+Lewis,D2,Great Lakes Valley Conference,lewisflyers.com,,,,,
+Lincoln Memorial,D2,South Atlantic Conference,lmurailsplitters.com,,,,LMU (TN),
+Lynn,D2,Sunshine State Conference,lynnfightingknights.com,,,,,
+Malone,D2,Great Midwest Athletic Conference,malonepioneers.com,,,,,
+Mars Hill,D2,South Atlantic Conference,marshilllions.com,,,,,
+Maryville (MO),D2,Great Lakes Valley Conference,maryvillesaints.com,,,,Maryville University,
+Mercy,D2,East Coast Conference,mercyathletics.com,,,,,
+Molloy,D2,East Coast Conference,molloylions.com,,,,,
+Montevallo,D2,Peach Belt Conference,montevallofalcons.com,,,,,
+Mount Olive,D2,Conference Carolinas,umotrojans.com,,,,,
+Newberry,D2,South Atlantic Conference,newberrywolves.com,,,,,
+North Greenville,D2,Conference Carolinas,nguathletics.com,,,,,
+Northwest Nazarene,D2,Rocky Mountain Athletic Conference,nnusports.com,,,,,
+Northwood,D2,Great Midwest Athletic Conference,gonorthwood.com,,,,,
+Pace,D2,Northeast 10 Conference,paceuathletics.com,,,,,
+Palm Beach Atlantic,D2,Sunshine State Conference,pbasailfish.com,,,,,
+Point Park,D2,Great Midwest Athletic Conference,pointparksports.com,,,,,
+Post,D2,Central Atlantic Collegiate Conference,posteagles.com,,,,,
+Quincy,D2,Great Lakes Valley Conference,quhawks.com,,,,,
+Roberts Wesleyan,D2,East Coast Conference,robertsredhawks.com,,,,,
+Rockhurst,D2,Great Lakes Valley Conference,rockhursthawks.com,,,,,
+Rollins,D2,Sunshine State Conference,rollinssports.com,,,,,
+Seton Hill,D2,Great Midwest Athletic Conference,athletics.setonhill.edu,,,,,
+Shorter,D2,Conference Carolinas,goshorterhawks.com,,,,,
+Southern New Hampshire,D2,Northeast 10 Conference,snhupenmen.com,,,,SNHU,
+Saint Anselm,D2,Northeast 10 Conference,saintanselmhawks.com,,,,,
+Saint Leo,D2,Sunshine State Conference,saintleolions.com,,,,,
+Saint Michael's,D2,Northeast 10 Conference,smcathletics.com,,,,St. Michael's,
+St. Thomas Aquinas,D2,East Coast Conference,stacathletics.com,,,,STAC,
+Tampa,D2,Sunshine State Conference,tampaspartans.com,,,,,
+Thomas More,D2,Great Midwest Athletic Conference,thomasmoresaints.com,,,,,
+Tiffin,D2,Great Midwest Athletic Conference,gotiffindragons.com,,,,,
+Tusculum,D2,South Atlantic Conference,tusculumpioneers.com,,,,,
+Virginia State,D2,Peach Belt Conference,govsutrojans.com,,,,,
+Walsh,D2,Great Midwest Athletic Conference,athletics.walsh.edu,,,,,
+Westminster (UT),D2,Rocky Mountain Athletic Conference,westminstergriffins.com,,,,Westminster College (UT),
+Wheeling,D2,Great Midwest Athletic Conference,wucardinals.com,,,,Wheeling Jesuit,
+William Jewell,D2,Great Lakes Valley Conference,jewellcardinals.com,,,,,
+Wilmington (DE),D2,Central Atlantic Collegiate Conference,athletics.wilmu.edu,,,,Wilmington University,
+Wingate,D2,South Atlantic Conference,wingatebulldogs.com,,,,,
+Young Harris,D2,Conference Carolinas,yhcathletics.com,,,,,
+Adrian,D3,Michigan Intercollegiate Athletic Association,adrianbulldogs.com,,,,,
+Albertus Magnus,D3,Great Northeast Athletic Conference,albertusfalcons.com,,,,,
+Albion,D3,Michigan Intercollegiate Athletic Association,gobrits.com,,,,,
+Albright,D3,Middle Atlantic Conference Commonwealth,albrightathletics.com,,,,,
+Alfred State,D3,State University of New York Athletic Conference,alfredstateathletics.com,,,,,
+Alfred,D3,Empire 8,gosaxons.com,,,,,
+Allegheny,D3,Presidents' Athletic Conference,alleghenygators.com,,,,,
+Alma,D3,Michigan Intercollegiate Athletic Association,almascots.com,,,,,
+Alvernia,D3,Middle Atlantic Conference Commonwealth,athletics.alvernia.edu,,,,,
+Amherst,D3,New England Small College Athletic Conference,athletics.amherst.edu,,,,,
+Arcadia,D3,Middle Atlantic Conference Freedom,arcadiaknights.com,,,,,
+Augustana (IL),D3,College Conference of Illinois & Wisconsin,athletics.augustana.edu,,,,Augustana College,
+Aurora,D3,Northern Athletics Collegiate Conference,athletics.aurora.edu,,,,,
+Averett,D3,Old Dominion Athletic Conf.,averettcougars.com,,,,,
+Babson,D3,New England Women's and Men's Athletic Conference,babsonathletics.com,,,,,
+Baldwin Wallace,D3,Ohio Athletic Conference,bwyellowjackets.com,,,,Baldwin-Wallace,
+Bates,D3,New England Small College Athletic Conference,gobatesbobcats.com,,,,,
+Batten,D3,Old Dominion Athletic Conf.,vwuathletics.com,,,,Virginia Wesleyan,
+Beloit,D3,Northern Athletics Collegiate Conference,beloitcollegeathletics.com,,,,,
+Benedictine (IL),D3,Northern Athletics Collegiate Conference,benueagles.com,,,,,
+Berry,D3,Southern Athletic Association,berryvikings.com,,,,,
+Bethany (WV),D3,Presidents' Athletic Conference,bethanybison.com,,,,,
+Bowdoin,D3,New England Small College Athletic Conference,athletics.bowdoin.edu,,,,,
+Brevard,D3,USA South Athletic Conference,bctornados.com,,,,,
+Bridgewater (VA),D3,Old Dominion Athletic Conf.,bridgewatereagles.com,,,,Bridgewater College,
+Brockport,D3,Empire 8,gobrockport.com,,,,SUNY Brockport|College at Brockport,
+Cairn,D3,Atlantic East Conference,cairnhighlanders.com,,,,,
+Calvin,D3,Michigan Intercollegiate Athletic Association,calvinknights.com,,,,,
+SUNY Canton,D3,State University of New York Athletic Conference,rooathletics.com,,,,Canton,
+Capital,D3,Ohio Athletic Conference,athletics.capital.edu,,,,,
+Carroll (WI),D3,College Conference of Illinois & Wisconsin,gopios.com,,,,,
+Carthage,D3,College Conference of Illinois & Wisconsin,athletics.carthage.edu,,,,,
+Catholic,D3,Landmark Conference,catholicathletics.com,,,,Catholic University,
+Centenary,D3,New Jersey Athletic Conference,gocentenary.com,,,,,
+Centenary (NJ),D3,Atlantic East Conference,centenarycyclones.com,,,,Centenary University,
+Centre,D3,Southern Athletic Association,centrecolonels.com,,,,,
+Chatham,D3,Presidents' Athletic Conference,gochathamcougars.com,,,,,
+Christopher Newport,D3,Coastal Lacrosse Conference,cnusports.com,,,,CNU,
+CCNY,D3,City University of New York Athletic Conference,ccnyathletics.com,,,,City College of New York,
+Clark (MA),D3,New England Women's and Men's Athletic Conference,clarkathletics.com,,,,Clark University,
+Clarkson,D3,Liberty League,clarksonathletics.com,,,,,
+SUNY Cobleskill,D3,State University of New York Athletic Conference,fightingtigers.cobleskill.edu,,,,Cobleskill,
+Colby,D3,New England Small College Athletic Conference,colbyathletics.com,,,,,
+Colby-Sawyer,D3,Great Northeast Athletic Conference,colby-sawyerathletics.com,,,,,
+Colorado College,D3,New Jersey Athletic Conference,cctigers.com,,,,,
+Concordia (WI),D3,Northern Athletics Collegiate Conference,cuwfalcons.com,,,,Concordia Wisconsin,
+Connecticut College,D3,New England Small College Athletic Conference,camelathletics.com,,,,Conn College,
+Cornell College,D3,Northern Athletics Collegiate Conference,cornellrams.com,,,,Cornell (IA),
+Cortland,D3,State University of New York Athletic Conference,cortlandreddragons.com,,,,SUNY Cortland|Cortland State,
+Curry,D3,Conference of New England,curryathletics.com,,,,,
+Dean,D3,Great Northeast Athletic Conference,deanbulldogs.com,,,,,
+Delaware Valley,D3,Middle Atlantic Conference Freedom,athletics.delval.edu,,,,Del Val,
+SUNY Delhi,D3,State University of New York Athletic Conference,delhibroncos.com,,,,Delhi,
+Denison,D3,North Coast Athletic Conference,denisonbigred.com,,,,,
+DePauw,D3,North Coast Athletic Conference,depauwtigers.com,,,,,
+DeSales,D3,Middle Atlantic Conference Freedom,athletics.desales.edu,,,,,
+Dickinson,D3,Centennial Conference,dickinsonathletics.com,,,,,
+Drew,D3,Landmark Conference,drewrangers.com,,,,,
+Dubuque,D3,Northern Athletics Collegiate Conference,udspartans.com,,,,,
+Eastern Connecticut State,D3,Little East Conference,gowarriorathletics.com,,,,,
+Eastern,D3,Middle Atlantic Conference Commonwealth,goeasterneagles.com,,,,Eastern University,
+Edgewood,D3,Northern Athletics Collegiate Conference,edgewoodeagles.com,,,,,
+Elizabethtown,D3,Landmark Conference,etownbluejays.com,,,,,
+Elmhurst,D3,College Conference of Illinois & Wisconsin,elmhurstbluejays.com,,,,,
+Elmira,D3,Empire 8,athletics.elmira.edu,,,,,
+Elms,D3,Great Northeast Athletic Conference,ecblazers.com,,,,,
+Emerson,D3,New England Women's and Men's Athletic Conference,emersonlions.com,,,,,
+Emmanuel (MA),D3,Great Northeast Athletic Conference,goecsaints.com,,,,Emmanuel College,
+Endicott,D3,Conference of New England,ecgulls.com,,,,,
+FDU-Florham,D3,Middle Atlantic Conference Freedom,fdudevils.com,,,,Fairleigh Dickinson-Florham|Fairleigh Dickinson Florham,
+Farmingdale State,D3,Skyline Conference,farmingdalesports.com,,,,Farmingdale|SUNY Farmingdale,
+Fitchburg State,D3,Massachusetts State Collegiate Athletic Conference,fitchburgfalcons.com,,,,,
+Franciscan,D3,Presidents' Athletic Conference,franciscanathletics.com,,,,Franciscan Steubenville,
+Franklin & Marshall,D3,Centennial Conference,godiplomats.com,,,,,
+Geneseo,D3,Empire 8,geneseoknights.com,,,,SUNY Geneseo,
+Gettysburg,D3,Centennial Conference,gettysburgsports.com,,,,,
+Gordon,D3,Conference of New England,athletics.gordon.edu,,,,,
+Goucher,D3,Landmark Conference,athletics.goucher.edu,,,,,
+Greensboro,D3,USA South Athletic Conference,greensborocollegesports.com,,,,,
+Grove City,D3,Presidents' Athletic Conference,athletics.gcc.edu,,,,,
+Guilford,D3,Old Dominion Athletic Conf.,guilfordquakers.com,,,,,
+Gwynedd Mercy,D3,Atlantic East Conference,gwyneddathletics.com,,,,,
+Hamilton,D3,New England Small College Athletic Conference,athletics.hamilton.edu,,,,,
+Hampden-Sydney,D3,Old Dominion Athletic Conf.,hscathletics.com,,,,,
+Hanover,D3,Heartland Collegiate Men's Lacrosse Conference,athletics.hanover.edu,,,,,
+Hartford,D3,Conference of New England,hartfordhawks.com,,,,,
+Hartwick,D3,Empire 8,hartwickhawks.com,,,,,
+Haverford,D3,Centennial Conference,haverfordathletics.com,,,,,
+Heidelberg,D3,Ohio Athletic Conference,bergathletics.com,,,,,
+Hendrix,D3,Southern Athletic Association,hendrixwarriors.com,,,,,
+Hilbert,D3,Heartland Collegiate Men's Lacrosse Conference,hilberthawks.com,,,,,
+Hiram,D3,Presidents' Athletic Conference,hiramterriers.com,,,,,
+Hood,D3,Middle Atlantic Conference Commonwealth,hoodathletics.com,,,,,
+Hope,D3,Michigan Intercollegiate Athletic Association,athletics.hope.edu,,,,,
+Huntingdon,D3,USA South Athletic Conference,huntingdonhawks.com,,,,,
+Husson,D3,Massachusetts State Collegiate Athletic Conference,hussoneagles.com,,,,,
+Illinois Tech,D3,Northern Athletics Collegiate Conference,illinoistechathletics.com,,,,Illinois Institute of Technology,
+Illinois Wesleyan,D3,College Conference of Illinois & Wisconsin,iwusports.com,,,,,
+Immaculata,D3,Atlantic East Conference,gomightymacs.com,,,,,
+Ithaca,D3,Liberty League,athletics.ithaca.edu,,,,,
+John Carroll,D3,North Coast Athletic Conference,jcusports.com,,,,,
+Johnson & Wales (RI),D3,Conference of New England,providence.jwuathletics.com,,,,Johnson & Wales,
+Juniata,D3,Landmark Conference,juniatasports.net,,,,,
+Kalamazoo,D3,Michigan Intercollegiate Athletic Association,hornets.kzoo.edu,,,,,
+Kean,D3,New Jersey Athletic Conference,keanathletics.com,,,,,
+Keene State,D3,Little East Conference,keeneowls.com,,,,,
+Kenyon,D3,North Coast Athletic Conference,athletics.kenyon.edu,,,,,
+Keuka,D3,Empire 8,keukaathletics.com,,,,,
+King's (PA),D3,Middle Atlantic Conference Freedom,kingscollegeathletics.com,,,,Kings College (PA),
+La Roche,D3,Heartland Collegiate Men's Lacrosse Conference,larochesports.com,,,,,
+LaGrange,D3,USA South Athletic Conference,lagrangepanthers.com,,,,,
+Lake Forest,D3,Northern Athletics Collegiate Conference,goforesters.com,,,,,
+Lasell,D3,Great Northeast Athletic Conference,laserpride.lasell.edu,,,,,
+Lawrence,D3,Northern Athletics Collegiate Conference,vikings.lawrence.edu,,,,,
+Lebanon Valley,D3,Middle Atlantic Conference Freedom,godutchmen.com,,,,,
+Lycoming,D3,Landmark Conference,lycomingathletics.com,,,,,
+Lynchburg,D3,Old Dominion Athletic Conf.,lynchburgsports.com,,,,,
+Maine Maritime,D3,Massachusetts State Collegiate Athletic Conference,marinersports.org,,,,,
+Manhattanville,D3,Skyline Conference,govaliants.com,,,,,
+Marietta,D3,Ohio Athletic Conference,pioneers.marietta.edu,,,,,
+SUNY Maritime,D3,Skyline Conference,maritimeathletics.com,,,,Maritime College,
+Mary Washington,D3,Coastal Lacrosse Conference,umweagles.com,,,,,
+Marymount (VA),D3,Atlantic East Conference,marymountsaints.com,,,,Marymount University,
+Marywood,D3,Middle Atlantic Conference Freedom,marywoodpacers.com,,,,,
+Mass. Liberal Arts,D3,Massachusetts State Collegiate Athletic Conference,athletics.mcla.edu,,,,Massachusetts College of Liberal Arts|MCLA Trailblazers,
+MIT,D3,New England Women's and Men's Athletic Conference,mitathletics.com,,,,Massachusetts Institute of Technology,
+Massachusetts Maritime,D3,Massachusetts State Collegiate Athletic Conference,mmabucs.com,,,,Mass Maritime,
+UMass Boston,D3,Little East Conference,beaconsathletics.com,,,,Massachusetts Boston|UMass-Boston,
+UMass Dartmouth,D3,Little East Conference,corsairathletics.com,,,,Massachusetts-Dartmouth,
+McDaniel,D3,Centennial Conference,mcdanielathletics.com,,,,,
+Messiah,D3,Middle Atlantic Conference Commonwealth,gomessiah.com,,,,,
+Methodist,D3,USA South Athletic Conference,mumonarchs.com,,,,,
+Middlebury,D3,New England Small College Athletic Conference,athletics.middlebury.edu,,,,,
+MSOE,D3,Northern Athletics Collegiate Conference,go-raiders.com,,,,Milwaukee School of Engineering,
+Misericordia,D3,Middle Atlantic Conference Freedom,athletics.misericordia.edu,,,,,
+Mitchell,D3,Great Northeast Athletic Conference,mitchellathletics.com,,,,,
+Montclair State,D3,New Jersey Athletic Conference,montclairathletics.com,,,,,
+Moravian,D3,Landmark Conference,moraviansports.com,,,,,
+Morrisville,D3,State University of New York Athletic Conference,morrisvillemustangs.com,,,,Morrisville State,
+Mount Saint Vincent,D3,Skyline Conference,umsvathletics.com,,,,Mount St. Vincent,
+Mount Saint Mary (NY),D3,Skyline Conference,msmcknights.com,,,,Mount Saint Mary College|Mount St. Mary College,
+Mount Union,D3,Ohio Athletic Conference,athletics.mountunion.edu,,,,,
+Muhlenberg,D3,Centennial Conference,muhlenbergsports.com,,,,,
+Muskingum,D3,Ohio Athletic Conference,fightingmuskies.com,,,,,
+Nazareth,D3,Empire 8,nazathletics.com,,,,,
+Neumann,D3,Middle Atlantic Conference Commonwealth,neumannathletics.com,,,,,
+University of New England,D3,Conference of New England,athletics.une.edu,,,,New England (ME),
+New England College,D3,Great Northeast Athletic Conference,athletics.nec.edu,,,,,
+New Paltz,D3,New Jersey Athletic Conference,nphawks.com,,,,SUNY New Paltz,
+Nichols,D3,Conference of New England,nicholsathletics.com,,,,,
+North Central (IL),D3,College Conference of Illinois & Wisconsin,northcentralcardinals.com,,,,North Central College,
+Norwich,D3,Great Northeast Athletic Conference,norwichathletics.com,,,,,
+Notre Dame (MD),D3,Atlantic East Conference,notredamegators.com,,,,Notre Dame of Maryland,
+Oberlin,D3,North Coast Athletic Conference,goyeo.com,,,,,
+Oglethorpe,D3,Southern Athletic Association,gopetrels.com,,,,,
+Ohio Northern,D3,Ohio Athletic Conference,onusports.com,,,,,
+Ohio Wesleyan,D3,North Coast Athletic Conference,battlingbishops.com,,,,,
+Oneonta,D3,State University of New York Athletic Conference,oneontaathletics.com,,,,SUNY Oneonta,
+Oswego,D3,State University of New York Athletic Conference,oswegolakers.com,,,,SUNY Oswego|Oswego State,
+Otterbein,D3,Ohio Athletic Conference,otterbeincardinals.com,,,,,
+Penn College,D3,Atlantic East Conference,athletics.pct.edu,,,,Penn College of Technology|Pennsylvania College of Technology,
+Penn State Harrisburg,D3,Atlantic East Conference,athletics.hbg.psu.edu,,,,,
+Pfeiffer,D3,USA South Athletic Conference,gofalconsports.com,,,,,
+Piedmont,D3,USA South Athletic Conference,piedmontlions.com,,,,,
+Pitt-Bradford,D3,Heartland Collegiate Men's Lacrosse Conference,athletics.pittbradford.org,,,,Pittsburgh-Bradford,
+Plattsburgh,D3,State University of New York Athletic Conference,gocardinalsports.com,,,,SUNY Plattsburgh|Plattsburgh State,
+Plymouth State,D3,Little East Conference,athletics.plymouth.edu,,,,,
+SUNY Poly,D3,Empire 8,wildcats.sunypoly.edu,,,,SUNY Polytechnic,
+Potsdam,D3,State University of New York Athletic Conference,potsdambears.com,,,,SUNY Potsdam,
+Purchase,D3,Skyline Conference,purchasecollegeathletics.com,,,,SUNY Purchase|Purchase College,
+Randolph,D3,Old Dominion Athletic Conf.,randolphwildcats.com,,,,,
+Randolph-Macon,D3,Old Dominion Athletic Conf.,rmcathletics.com,,,,,
+Regis (MA),D3,Great Northeast Athletic Conference,goregispride.com,,,,Regis College,
+RPI,D3,Liberty League,rpiathletics.com,,,,Rensselaer|Rensselaer Polytechnic Institute,
+Rhodes,D3,Southern Athletic Association,rhodeslynx.com,,,,,
+Rivier,D3,Great Northeast Athletic Conference,rivierathletics.com,,,,,
+Roanoke,D3,Old Dominion Athletic Conf.,maroons.roanoke.edu,,,,,
+RIT,D3,Liberty League,ritathletics.com,,,,Rochester Institute of Technology|Rochester Tech,
+Roger Williams,D3,Conference of New England,rwuhawks.com,,,,,
+Russell Sage,D3,Empire 8,sagegators.com,,,,,
+Saint Joseph (CT),D3,Great Northeast Athletic Conference,usjbluejays.com,,,,University of Saint Joseph,
+Saint Joseph's (ME),D3,Great Northeast Athletic Conference,gomonks.com,,,,Saint Joseph's College of Maine,
+Salem State,D3,Massachusetts State Collegiate Athletic Conference,salemstatevikings.com,,,,,
+Salisbury,D3,Coastal Lacrosse Conference,suseagulls.com,,,,,
+Salve Regina,D3,New England Women's and Men's Athletic Conference,salveathletics.com,,,,,
+Scranton,D3,Landmark Conference,athletics.scranton.edu,,,,,
+Sewanee,D3,Southern Athletic Association,sewaneetigers.com,,,,University of the South,
+Shenandoah,D3,Old Dominion Athletic Conf.,suhornets.com,,,,,
+Skidmore,D3,Liberty League,skidmoreathletics.com,,,,,
+Southern Maine,D3,Little East Conference,southernmainehuskies.com,,,,,
+Southern Virginia,D3,USA South Athletic Conference,knightathletics.com,,,,,
+Southwestern (TX),D3,Southern Athletic Association,southwesternpirates.com,,,,Southwestern University,
+Springfield,D3,New England Women's and Men's Athletic Conference,springfieldcollegepride.com,,,,,
+St. John Fisher,D3,Empire 8,sjfathletics.com,,,,,
+St. Joseph's (L.I.),D3,Skyline Conference,sjliathletics.com,,,,St. Joseph's (NY)|St. Joseph's College Long Island,
+St. Lawrence,D3,Liberty League,saintsathletics.com,,,,,
+St. Mary's (MD),D3,Atlantic East Conference,smcmathletics.com,,,,St. Mary's College of Maryland,
+Saint Vincent,D3,Presidents' Athletic Conference,athletics.stvincent.edu,,,,St. Vincent,
+Stevens,D3,Middle Atlantic Conference Freedom,stevensducks.com,,,,,
+Stevenson,D3,Middle Atlantic Conference Commonwealth,gomustangsports.com,,,,,
+Stockton,D3,New Jersey Athletic Conference,stocktonathletics.com,,,,,
+Susquehanna,D3,Landmark Conference,suriverhawks.com,,,,,
+Swarthmore,D3,Centennial Conference,swarthmoreathletics.com,,,,,
+Thiel,D3,Presidents' Athletic Conference,thielathletics.com,,,,,
+Thomas (ME),D3,Massachusetts State Collegiate Athletic Conference,thomasathletics.com,,,,Thomas College,
+Transylvania,D3,Heartland Collegiate Men's Lacrosse Conference,transysports.com,,,,,
+Trine,D3,Michigan Intercollegiate Athletic Association,trinethunder.com,,,,,
+Trinity (CT),D3,New England Small College Athletic Conference,bantamsports.com,,,,Trinity College,
+Tufts,D3,New England Small College Athletic Conference,gotuftsjumbos.com,,,,,
+Coast Guard,D3,New England Women's and Men's Athletic Conference,coastguardathletics.com,,,,Coast Guard Academy|USCGA|U.S. Coast Guard Academy,
+Merchant Marine,D3,Skyline Conference,usmmasports.com,,,,Merchant Marine Academy|USMMA,
+Union (NY),D3,Liberty League,unionathletics.com,,,,Union College,
+Ursinus,D3,Centennial Conference,ursinusathletics.com,,,,,
+Utica,D3,Empire 8,uticapioneers.com,,,,,
+Vassar,D3,Liberty League,vassarathletics.com,,,,,
+Castleton,D3,Little East Conference,castletonsports.com,,,,Vermont State Castleton,
+Wabash,D3,North Coast Athletic Conference,sports.wabash.edu,,,,,
+Warren Wilson,D3,Coastal Lacrosse Conference,warrenwilsonowls.com,,,,,
+Washington & Lee,D3,Old Dominion Athletic Conf.,generalssports.com,,,,W&L,
+Washington & Jefferson,D3,Presidents' Athletic Conference,gopresidents.com,,,,W&J,
+Washington College,D3,Centennial Conference,washingtoncollegesports.com,,,,Washington College (MD),
+Wentworth,D3,Conference of New England,wentworthathletics.com,,,,,
+Wesleyan (CT),D3,New England Small College Athletic Conference,athletics.wesleyan.edu,,,,Wesleyan University,
+Western Connecticut,D3,Little East Conference,westconnathletics.com,,,,Western Connecticut State,
+Western New England,D3,Conference of New England,wnegoldenbears.com,,,,,
+Westminster (PA),D3,Presidents' Athletic Conference,athletics.westminster.edu,,,,,
+Wheaton (MA),D3,New England Women's and Men's Athletic Conference,wheatoncollegelyons.com,,,,Wheaton College (MA),
+Widener,D3,Middle Atlantic Conference Commonwealth,widenerpride.com,,,,,
+Wilkes,D3,Landmark Conference,gowilkesu.com,,,,,
+William Peace,D3,USA South Athletic Conference,gopeacepacers.com,,,,,
+Williams,D3,New England Small College Athletic Conference,ephsports.williams.edu,,,,,
+Wilmington (OH),D3,Ohio Athletic Conference,wilmingtonquakers.com,,,,Wilmington College,
+Wittenberg,D3,North Coast Athletic Conference,wittenbergtigers.com,,,,,
+Wooster,D3,North Coast Athletic Conference,woosterathletics.com,,,,College of Wooster,
+York (PA),D3,Middle Atlantic Conference Commonwealth,ycpspartans.com,,,,York College of Pennsylvania,
+Aquinas (MI),NAIA,WHAC,,,,,Aquinas College,no athletics roster site found yet (checked Oct 2026)
+Benedictine (KS),NAIA,HAAC,ravenathletics.com,,,,Benedictine College,
+Clarke,NAIA,HAAC,,,,,,no athletics roster site found yet (checked Oct 2026)
+Columbia (SC),NAIA,Appalachian,gokoalas.com,,,,Columbia College (SC),
+Columbia (MO),NAIA,American Midwest,columbiacougars.com,,,,Columbia College (MO),
+Concordia (MI),NAIA,WHAC,concordiacardinals.com,,,,Concordia Ann Arbor|Concordia University Ann Arbor,
+Indiana Tech,NAIA,WHAC,indianatechwarriors.com,,,,Indiana Institute of Technology,
+Keiser,NAIA,Sun,,,,,,no athletics roster site found yet (checked Oct 2026)
+Lawrence Tech,NAIA,WHAC,ltuathletics.com,,,,,
+Life,NAIA,SSAC,liferunningeagles.com,,,,Life University,
+Lourdes,NAIA,WHAC,lourdesathletics.com,,,,Lourdes University,
+Madonna,NAIA,WHAC,mucrusaders.com,,,,,
+Midland,NAIA,GPAC,midlandathletics.com,,,,,
+Missouri Baptist,NAIA,HAAC,mbuspartans.com,,,,,
+Missouri Valley,NAIA,HAAC,valleywillroll.com,,,,,
+Montreat,NAIA,Appalachian,montreatcavaliers.com,,,,Montreat College,
+Mount Vernon Nazarene,NAIA,Crossroads,mvnucougars.com,,,,MVNU,
+New College of Florida,NAIA,Sun,gomightybanyans.com,,,,New College,
+Ottawa (KS),NAIA,KCAC,ottawabraves.com,,,,Ottawa,
+Point,NAIA,Appalachian,skyhawkathletics.com,,,,,
+Reinhardt,NAIA,Appalachian,reinhardteagles.com,,,,,
+St. Ambrose,NAIA,HAAC,saubees.com,,,,,
+SCAD Savannah,NAIA,Appalachian,savannah.scadathletics.com,,,,SCAD|Savannah College of Art and Design,
+Siena Heights,NAIA,WHAC,shusaints.com,,,,,
+Taylor,NAIA,Crossroads,taylortrojans.com,,,,,
+Tennessee Wesleyan,NAIA,Appalachian,twbulldogs.com,,,,,
+College of Idaho,NAIA,Cascade,yoteathletics.com,,,,,
+UHSP,NAIA,American Midwest,,,,,Health Sciences and Pharmacy,no athletics roster site found yet (checked Oct 2026)
+Michigan-Dearborn,NAIA,WHAC,athletics.umdearborn.edu,,,,UM-Dearborn|Michigan Dearborn,
+Saint Mary (KS),NAIA,KCAC,gospires.com,,,,University of Saint Mary,
+Cumberlands,NAIA,Mid-South,cumberlandspatriots.com,,,,University of the Cumberlands,
+Webber International,NAIA,Sun,webberathletics.com,,,,,
+Westcliff,NAIA,Cal Pac,westcliff.prestosports.com,,,,Westcliff University,
+William Penn,NAIA,HAAC,statesmenathletics.com,,,,,
+William Woods,NAIA,HAAC,,,,,,no athletics roster site found yet (checked Oct 2026)
+Onondaga CC,JUCO,NJCAA,onondagalazers.com,,,,Onondaga|OCC,
+Herkimer,JUCO,NJCAA,herkimer.prestosports.com,,,,Herkimer College|Herkimer County CC|Herkimer County Community College,
+Nassau CC,JUCO,NJCAA,nassaulions.com,,,,,
+Jefferson CC (NY),JUCO,NJCAA,jeffersoncc.prestosports.com,,,,Jefferson (NY)|Jefferson Community College,
+Harford CC,JUCO,NJCAA,harfordathletics.com,,,,Harford|Harford Community College,
+CCBC Essex,JUCO,NJCAA,ccbcessexknights.com,,,,CCBC-Essex|Essex CC,
+Tompkins Cortland CC,JUCO,NJCAA,tcpanthers.com,,,,Tompkins Cortland|Tompkins-Cortland|TC3,
+Mohawk Valley CC,JUCO,NJCAA,mohawkvalley.prestosports.com,,,,Mohawk Valley|MVCC,
+Hudson Valley CC,JUCO,NJCAA,hvccathletics.com,,,,Hudson Valley|HVCC,
+Genesee CC,JUCO,NJCAA,geneseeathletics.com,,,,Genesee|GCC,
+Anne Arundel CC,JUCO,NJCAA,aaccathletics.com,,,,Anne Arundel|AACC,
+College of DuPage,JUCO,NJCAA,gochapsgo.com,,,,DuPage,
+Howard CC,JUCO,NJCAA,,,,,Howard Community College (MD),no athletics roster site found yet (checked Oct 2026)
+Mercer County CC,JUCO,NJCAA,,,,,Mercer County|MCCC,no athletics roster site found yet (checked Oct 2026)
+Sussex County CC,JUCO,NJCAA,,,,,Sussex County|SCCC,no athletics roster site found yet (checked Oct 2026)
+Life,none,,,,2016,2023,,men's lacrosse began in 2024
+New College of Florida,none,,,,2016,2024,,athletics began in 2024-25
+Westcliff,none,,,,2025,2026,,men's lacrosse discontinued after 2024 (site lists it under discontinued sports)
+Anderson (SC),none,,,,2016,2020,,no men's lacrosse team before 2021 (NCAA directory)
+Anderson (SC),D2,SAC,,,2024,,Anderson University (SC),
+Barry,none,,,,2016,2026,,no men's lacrosse team before 2027 (NCAA directory)
+Barton,none,,,,2016,2018,,no men's lacrosse team before 2019 (NCAA directory)
+Barton,D2,Carolinas,,,2020,,,
+Bridgeport,none,,,,2016,2022,,no men's lacrosse team before 2023 (NCAA directory)
+Caldwell,none,,,,2016,2019,,no men's lacrosse team before 2020 (NCAA directory)
+Chowan,none,,,,2016,2016,,no men's lacrosse team before 2017 (NCAA directory)
+Concordia Irvine,none,,,,2016,2023,,no men's lacrosse team before 2024 (NCAA directory)
+D'Youville,none,,,,2016,2021,,no men's lacrosse team before 2022 (NCAA directory)
+Davenport,none,,,,2016,2019,,no men's lacrosse team before 2020 (NCAA directory)
+Dominican (CA),none,,,,2016,2023,,no men's lacrosse team before 2024 (NCAA directory)
+Embry-Riddle (FL),none,,,,2016,2017,,no men's lacrosse team before 2018 (NCAA directory)
+Emory & Henry,none,,,,2016,2024,,no men's lacrosse team before 2025 (NCAA directory)
+Felician,none,,,,2016,2017,,no men's lacrosse team before 2018 (NCAA directory)
+Flagler,none,,,,2016,2021,,no men's lacrosse team before 2022 (NCAA directory)
+Florida Tech,D2,,,,,2019,Florida Institute of Technology,football ended after 2019; site no longer has football pages
+Franklin Pierce,D2,NE-10,,,2023,,,
+Frostburg State,D2,MEC,,,2019,,,
+Frostburg State,D3,,,,,2018,,
+Holy Family,none,,,,2016,2023,,no men's lacrosse team before 2024 (NCAA directory)
+Lander,none,,,,2016,2019,,no men's lacrosse team before 2020 (NCAA directory)
+Lewis,none,,,,2016,2019,,no men's lacrosse team before 2020 (NCAA directory)
+Malone,none,,,,2016,2022,,no men's lacrosse team before 2023 (NCAA directory)
+Malone,D2,,,,,2018,,
+Maryville (MO),none,,,,2016,2016,,no men's lacrosse team before 2017 (NCAA directory)
+Montevallo,none,,,,2016,2017,,no men's lacrosse team before 2018 (NCAA directory)
+Newberry,none,,,,2016,2017,,no men's lacrosse team before 2018 (NCAA directory)
+Northwest Nazarene,none,,,,2016,2025,,no men's lacrosse team before 2026 (NCAA directory)
+Northwood,none,,,,2016,2024,,no men's lacrosse team before 2025 (NCAA directory)
+Palm Beach Atlantic,none,,,,2016,2017,,no men's lacrosse team before 2018 (NCAA directory)
+Point Park,none,,,,2016,2025,,no men's lacrosse team before 2026 (NCAA directory)
+Post,D2,NE-10,,,2021,,,
+Quincy,none,,,,2016,2019,,no men's lacrosse team before 2020 (NCAA directory)
+Thomas More,none,,,,2016,2022,,no men's lacrosse team before 2023 (NCAA directory)
+Thomas More,D2,G-MAC,,,2023,,,
+Thomas More,D3,,,,,2018,,
+Thomas More,NAIA,,,,2019,2022,,
+Tiffin,none,,,,2016,2023,,no men's lacrosse team before 2024 (NCAA directory)
+Virginia State,none,,,,2016,2023,,no men's lacrosse team before 2024 (NCAA directory)
+William Jewell,none,,,,2016,2023,,no men's lacrosse team before 2024 (NCAA directory)
+Wilmington (DE),none,,,,2016,2017,,no men's lacrosse team before 2018 (NCAA directory)
+Alfred State,none,,,,2021,2024,,no men's lacrosse team 2021-2024 (NCAA directory)
+Allegheny,none,,,,2016,2019,,no men's lacrosse team before 2020 (NCAA directory)
+Averett,none,,,,2016,2017,,no men's lacrosse team before 2018 (NCAA directory)
+Brevard,D2,,,,,2016,,
+Brevard,D3,USA South,,,2017,,,
+Cairn,none,,,,2016,2020,,no men's lacrosse team before 2021 (NCAA directory)
+Calvin,D3,MIAA (D3),,,2024,,,
+Centenary,none,,,,2017,2018,,no men's lacrosse team 2017-2018 (NCAA directory)
+Centenary,D3,SCAC,,,2024,,,
+Chatham,none,,,,2016,2017,,no men's lacrosse team before 2018 (NCAA directory)
+CCNY,none,,,,2016,2026,,no men's lacrosse team before 2027 (NCAA directory)
+Colby-Sawyer,none,,,,2016,2025,,no men's lacrosse team before 2026 (NCAA directory)
+Dean,none,,,,2016,2017,,no men's lacrosse team before 2018 (NCAA directory)
+SUNY Delhi,none,,,,2016,2018,,no men's lacrosse team before 2019 (NCAA directory)
+Edgewood,none,,,,2016,2020,,no men's lacrosse team before 2021 (NCAA directory)
+Elmira,none,,,,2022,2024,,no men's lacrosse team 2022-2024 (NCAA directory)
+Elms,none,,,,2016,2023,,no men's lacrosse team before 2024 (NCAA directory)
+Fitchburg State,none,,,,2016,2026,,no men's lacrosse team before 2027 (NCAA directory)
+Grove City,none,,,,2016,2017,,no men's lacrosse team before 2018 (NCAA directory)
+Heidelberg,none,,,,2016,2016,,no men's lacrosse team before 2017 (NCAA directory)
+Hilbert,D3,Liberty League,,,2022,,,
+Illinois Tech,none,,,,2016,2019,,no men's lacrosse team before 2020 (NCAA directory)
+Juniata,none,,,,2016,2021,,no men's lacrosse team before 2022 (NCAA directory)
+LaGrange,none,,,,2016,2019,,no men's lacrosse team before 2020 (NCAA directory)
+Lake Forest,none,,,,2016,2021,,no men's lacrosse team before 2022 (NCAA directory)
+Lawrence,none,,,,2016,2024,,no men's lacrosse team before 2025 (NCAA directory)
+Marietta,none,,,,2016,2018,,no men's lacrosse team before 2019 (NCAA directory)
+Mass. Liberal Arts,none,,,,2016,2019,,no men's lacrosse team before 2020 (NCAA directory)
+UMass Dartmouth,none,,,,2021,2026,,no men's lacrosse team from 2021 (NCAA directory)
+New England College,D3,CNE,,,2024,,,
+New Paltz,none,,,,2016,2019,,no men's lacrosse team before 2020 (NCAA directory)
+North Central (IL),none,,,,2016,2016,,no men's lacrosse team before 2017 (NCAA directory)
+Notre Dame (MD),none,,,,2016,2025,,no men's lacrosse team before 2026 (NCAA directory)
+Penn College,none,,,,2016,2020,,no men's lacrosse team before 2021 (NCAA directory)
+Penn State Harrisburg,none,,,,2016,2026,,no men's lacrosse team before 2027 (NCAA directory)
+Pitt-Bradford,none,,,,2016,2024,,no men's lacrosse team before 2025 (NCAA directory)
+Roanoke,D3,ODAC,,,2024,,,
+Russell Sage,none,,,,2016,2018,,no men's lacrosse team before 2019 (NCAA directory)
+Saint Joseph (CT),none,,,,2016,2019,,no men's lacrosse team before 2020 (NCAA directory)
+St. Joseph's (L.I.),none,,,,2016,2016,,no men's lacrosse team before 2017 (NCAA directory)
+Warren Wilson,none,,,,2016,2020,,no men's lacrosse team before 2021 (NCAA directory)
+William Peace,none,,,,2016,2017,,no men's lacrosse team before 2018 (NCAA directory)
+Clarke,NAIA,HAAC,,,2019,,,
+Keiser,NAIA,Sun,,,2018,,,"athletics pages are on keiseruniversity.edu, not Sidearm/PrestoSports; no roster page found"
+Lawrence Tech,NAIA,MSFA,,,2018,,Lawrence Technological,
+Madonna,NAIA,MSFA,,,2020,,,
+William Woods,NAIA,HAAC,,,2024,,,
+Colorado State-Pueblo,D2,,gothunderwolves.com,,,,CSU Pueblo|CSU-Pueblo|Colorado State Pueblo,dropped men's lacrosse after 2024
+Colorado State-Pueblo,none,,,,2025,2026,,no men's lacrosse team from 2025 (NCAA directory)
+Ferrum,D3,,ferrumpanthers.com,,,,,dropped men's lacrosse after 2024
+Ferrum,none,,,,2025,2026,,no men's lacrosse team from 2025 (NCAA directory)
+Ferrum,D2,Carolinas,,,2025,,,
+Ferrum,D3,,,,,2024,,
+Anderson (IN),D3,,athletics.anderson.edu,,,,,dropped men's lacrosse after 2025
+Anderson (IN),none,,,,2016,2018,,no men's lacrosse team before 2019 (NCAA directory)
+Anderson (IN),none,,,,2026,2026,,no men's lacrosse team from 2026 (NCAA directory)
+Bard,D3,,bardathletics.com,,,,,dropped men's lacrosse after 2021
+Bard,none,,,,2022,2026,,no men's lacrosse team from 2022 (NCAA directory)
+Concordia (IL),D3,,cucougars.com,,,,Concordia Chicago|Concordia University Chicago|Concordia College Chicago,dropped men's lacrosse after 2023
+Concordia (IL),none,,,,2024,2026,,no men's lacrosse team from 2024 (NCAA directory)
+Dallas,D3,,udallasathletics.com,,,,University of Dallas,dropped men's lacrosse after 2022
+Dallas,none,,,,2023,2026,,no men's lacrosse team from 2023 (NCAA directory)
+Earlham,D3,,goearlham.com,,,,,dropped men's lacrosse after 2026
+Earlham,none,,,,2016,2017,,no men's lacrosse team before 2018 (NCAA directory)
+Earlham,D3,,,,,2018,,
+Houghton,D3,,athletics.houghton.edu,,,,,dropped men's lacrosse after 2021
+Houghton,none,,,,2022,2026,,no men's lacrosse team from 2022 (NCAA directory)
+Keystone,D3,,gokcgiants.com,,,,,dropped men's lacrosse after 2024
+Keystone,none,,,,2025,2026,,no men's lacrosse team from 2025 (NCAA directory)
+Keystone,D3,Independent (D3),,,2019,,,
+Maine-Farmington,D3,,goumfbeavers.com,,,,UMaine Farmington|Maine Farmington,dropped men's lacrosse after 2016
+Maine-Farmington,none,,,,2017,2026,,no men's lacrosse team from 2017 (NCAA directory)
+Marian (WI),D3,,sabreathletics.com,,,,Marian University (WI),dropped men's lacrosse after 2026
+Marian (WI),none,,,,2016,2017,,no men's lacrosse team before 2018 (NCAA directory)
+Millsaps,D3,,gomajors.com,,,,,dropped men's lacrosse after 2017
+Millsaps,none,,,,2018,2026,,no men's lacrosse team from 2018 (NCAA directory)
+Monmouth (IL),D3,,monmouthscots.com,,,,Monmouth College,dropped men's lacrosse after 2023
+Monmouth (IL),none,,,,2016,2016,,no men's lacrosse team before 2017 (NCAA directory)
+Monmouth (IL),none,,,,2024,2026,,no men's lacrosse team from 2024 (NCAA directory)
+Mount St. Joseph,D3,,msjlions.com,,,,,dropped men's lacrosse after 2025
+Mount St. Joseph,none,,,,2016,2016,,no men's lacrosse team before 2017 (NCAA directory)
+Mount St. Joseph,none,,,,2026,2026,,no men's lacrosse team from 2026 (NCAA directory)
+North Central (MN),D3,,ncurams.com,,,,North Central University,dropped men's lacrosse after 2022
+North Central (MN),none,,,,2016,2016,,no men's lacrosse team before 2017 (NCAA directory)
+North Central (MN),none,,,,2023,2026,,no men's lacrosse team from 2023 (NCAA directory)
+Northwestern (MN),D3,,unweagles.com,,,,Northwestern-St. Paul|University of Northwestern-St. Paul,dropped men's lacrosse after 2024
+Northwestern (MN),none,,,,2016,2016,,no men's lacrosse team before 2017 (NCAA directory)
+Northwestern (MN),none,,,,2025,2026,,no men's lacrosse team from 2025 (NCAA directory)
+Olivet,D3,,olivetcomets.com,,,,,dropped men's lacrosse after 2018
+Olivet,none,,,,2019,2026,,no men's lacrosse team from 2019 (NCAA directory)
+Spalding,D3,,spaldingathletics.com,,,,,dropped men's lacrosse after 2026
+Spalding,none,,,,2016,2021,,no men's lacrosse team before 2022 (NCAA directory)
+Vermont State Lyndon,D3,,lyndonhornets.com,,,,Lyndon State|Northern Vermont-Lyndon,dropped men's lacrosse after 2025
+Vermont State Lyndon,none,,,,2026,2026,,no men's lacrosse team from 2026 (NCAA directory)
+Vermont State Johnson,D3,,nvubadgers.com,,,,Johnson State|Northern Vermont-Johnson,dropped men's lacrosse after 2020
+Vermont State Johnson,none,,,,2021,2026,,no men's lacrosse team from 2021 (NCAA directory)
+Whittier,D3,,wcpoets.com,,,,,dropped men's lacrosse after 2023
+Whittier,none,,,,2024,2026,,no men's lacrosse team from 2024 (NCAA directory)
+Whittier,D3,SCIAC,,,,2022,,
+Cabrini,none,,,,,,,closed 2024; listed only so transfers from it get a level
+Cabrini,D3,,,,2016,2025,Cabrini University,closed 2024
+Wells,none,,,,,,,closed 2024; listed only so transfers from it get a level
+Wells,D3,,,,2016,2025,Wells College,closed 2024
+Saint Rose,none,,,,,,,closed 2024; listed only so transfers from it get a level
+Saint Rose,D2,,,,2016,2025,College of Saint Rose|St. Rose,closed 2024
+Notre Dame College,none,,,,,,,closed 2024; listed only so transfers from it get a level
+Notre Dame College,D2,,,,2016,2025,Notre Dame (OH)|Notre Dame College (Ohio),closed 2024
+Medaille,none,,,,,,,closed 2023; listed only so transfers from it get a level
+Medaille,D3,,,,2016,2025,Medaille College|Medaille University,closed 2023
+Alderson Broaddus,none,,,,,,,closed 2023; listed only so transfers from it get a level
+Alderson Broaddus,D2,,,,2016,2025,Alderson-Broaddus,closed 2023
+Cazenovia,none,,,,,,,closed 2023; listed only so transfers from it get a level
+Cazenovia,D3,,,,2016,2025,Cazenovia College,closed 2023
+Concordia (NY),none,,,,,,,closed 2021; listed only so transfers from it get a level
+Concordia (NY),D2,,,,2016,2025,Concordia College (NY)|Concordia College New York,closed 2021
+Urbana,none,,,,,,,closed 2020; listed only so transfers from it get a level
+Urbana,D2,,,,2016,2025,Urbana University,closed 2020
+Wesley (DE),none,,,,,,,merged into Delaware State 2021; listed only so transfers from it get a level
+Wesley (DE),D3,,,,2016,2025,Wesley College,merged into Delaware State 2021
+Newbury,none,,,,,,,closed 2019; listed only so transfers from it get a level
+Newbury,D3,,,,2016,2025,Newbury College,closed 2019
+Southern Vermont,none,,,,,,,closed 2019; listed only so transfers from it get a level
+Southern Vermont,D3,,,,2016,2025,Southern Vermont College,closed 2019
+Green Mountain,none,,,,,,,closed 2019; listed only so transfers from it get a level
+Green Mountain,D3,,,,2016,2025,Green Mountain College,closed 2019
+Lincoln College (IL),none,,,,,,,closed 2022; listed only so transfers from it get a level
+Lincoln College (IL),NAIA,,,,2016,2025,Lincoln College,closed 2022
+Cardinal Stritch,none,,,,,,,closed 2023; listed only so transfers from it get a level
+Cardinal Stritch,NAIA,,,,2016,2025,Cardinal Stritch University,closed 2023
+North Alabama,D2,,,,,2017,,FCS from 2018
+Tarleton State,D2,,,,,2019,,FCS from 2020-21
+Utah Tech,D2,,,,,2019,,FCS from 2020-21 (Dixie State)
+St. Thomas (MN),D3,,,,,2020,,FCS from 2021
+Lindenwood,D2,,,,,2021,,FCS from 2022
+Stonehill,D2,,,,,2021,,FCS from 2022
+East Texas A&M,D2,,,,,2021,,FCS from 2022 (Texas A&M-Commerce)
+West Georgia,D2,,,,,2023,,FCS from 2024
+New Haven,D2,,,,,2024,,FCS from 2025
+Albany State (GA),D2,SIAC,,,,,Albany State|Albany St.,
+Allen,D2,SIAC,,,,,,
+Angelo State,D2,LSC,,,,,,
+Arkansas Tech,D2,GAC,,,,,,
+Arkansas-Monticello,D2,GAC,,,,,UAM|Arkansas Monticello,
+Ashland,D2,G-MAC,,,,,,
+Augustana (SD),D2,NSIC,,,,,,
+Bemidji State,D2,NSIC,,,,,,
+Benedict,D2,SIAC,,,,,Benedict College,
+Black Hills State,D2,RMAC,,,,,,
+Bluefield State,D2,CIAA,,,2021,,,
+Bowie State,D2,CIAA,,,,,,
+California (PA),D2,PSAC,,,,,Cal U|California University of Pennsylvania|PennWest California|Cal (PA)|California University (PA)|Cal U (PA),
+Carson-Newman,D2,SAC,,,,,,
+Central Missouri,D2,MIAA (D2),,,,,UCM,
+Central Oklahoma,D2,MIAA (D2),,,,,UCO,
+Central State (OH),D2,SIAC,,,,,Central State,
+Central Washington,D2,LSC,,,,,CWU,
+Chadron State,D2,RMAC,,,,,,
+Charleston (WV),D2,MEC,,,,,University of Charleston,
+Clarion,D2,PSAC,,,,,PennWest Clarion,
+Clark Atlanta,D2,SIAC,,,,,,
+Colorado School of Mines,D2,RMAC,,,,,Colorado Mines,
+Bloomsburg,D2,PSAC,,,,,Commonwealth University-Bloomsburg,
+Lock Haven,D2,PSAC,,,,,Commonwealth University-Lock Haven,
+Concord,D2,MEC,,,,,,
+Concordia-St. Paul,D2,NSIC,,,,,Concordia University St. Paul|Concordia St. Paul|CSP|Concordia University Saint Paul,
+Delta State,D2,GSC,,,,,,
+East Central (OK),D2,GAC,,,,,East Central University,
+East Stroudsburg,D2,PSAC,,,,,,
+Eastern New Mexico,D2,LSC,,,,,ENMU,
+Edinboro,D2,PSAC,,,,,PennWest Edinboro,
+Edward Waters,D2,SIAC,,,2021,,,
+Elizabeth City State,D2,CIAA,,,,,,
+Emporia State,D2,MIAA (D2),,,,,,
+Erskine,D2,Carolinas,,,2020,,,
+Fairmont State,D2,MEC,,,,,,
+Fayetteville State,D2,CIAA,,,,,,
+Ferris State,D2,GLIAC,,,,,,
+Findlay,D2,G-MAC,,,,,,
+Fort Hays State,D2,MIAA (D2),,,,,,
+Fort Lewis,D2,RMAC,,,,,,
+Fort Valley State,D2,SIAC,,,,,,
+Gannon,D2,PSAC,,,,,,
+Glenville State,D2,MEC,,,,,,
+Grand Valley State,D2,GLIAC,,,,,GVSU,
+Harding,D2,GAC,,,,,,
+Henderson State,D2,GAC,,,,,,
+Hillsdale,D2,G-MAC,,,,,,
+IUP,D2,PSAC,,,,,Indiana (PA)|Indiana University of Pennsylvania|Indiana University (PA),
+Jamestown,D2,NSIC,,,,,University of Jamestown,
+Johnson C. Smith,D2,CIAA,,,,,JCSU,
+Kentucky State,D2,SIAC,,,,,,
+Kentucky Wesleyan,D2,G-MAC,,,,,,
+Kutztown,D2,PSAC,,,,,,
+Lane,D2,SIAC,,,,,,
+Lincoln (MO),D2,GLVC,,,,,Lincoln University,
+Lincoln (PA),D2,CIAA,,,,,,
+Livingstone,D2,CIAA,,,,,,
+Mary,D2,NSIC,,,,,University of Mary,
+McKendree,D2,GLVC,,,,,,
+Michigan Tech,D2,GLIAC,,,,,Michigan Technological,
+Midwestern State,D2,LSC,,,,,,
+Miles,D2,SIAC,,,,,,
+Millersville,D2,PSAC,,,,,,
+Minnesota Duluth,D2,NSIC,,,,,UMD|Minnesota-Duluth,
+Minnesota State,D2,NSIC,,,,,"Minnesota State Mankato|Minnesota State-Mankato|MSU Mankato|Minnesota State, Mankato",
+Minnesota State Moorhead,D2,NSIC,,,,,MSUM|Minnesota State-Moorhead,
+Minot State,D2,NSIC,,,,,,
+Missouri S&T,D2,GLVC,,,,,Missouri University of Science and Technology|Missouri Science and Technology,
+Missouri Southern,D2,MIAA (D2),,,,,Missouri Southern State,
+Missouri Western,D2,MIAA (D2),,,,,Missouri Western State,
+Morehouse,D2,SIAC,,,,,,
+Nebraska-Kearney,D2,MIAA (D2),,,,,UNK|Nebraska Kearney,
+New Mexico Highlands,D2,RMAC,,,,,,
+UNC Pembroke,D2,Carolinas,,,,,North Carolina-Pembroke|UNCP,
+Northeastern State,D2,Independent (D2),,,,,,
+Northern Michigan,D2,GLIAC,,,,,,
+Northern State,D2,NSIC,,,,,,
+Northwest Missouri State,D2,MIAA (D2),,,,,Northwest Missouri,
+Northwestern Oklahoma State,D2,GAC,,,,,,
+Ohio Dominican,D2,G-MAC,,,,,,
+Oklahoma Baptist,D2,GAC,,,,,,
+Ouachita Baptist,D2,GAC,,,,,,
+Pittsburg State,D2,MIAA (D2),,,,,,
+Roosevelt,D2,GLIAC,,,2023,,,
+Saginaw Valley State,D2,GLIAC,,,,,SVSU|Saginaw Valley,
+Savannah State,D2,SIAC,,,2019,,,
+Shaw,D2,CIAA,,,,,,
+Shepherd,D2,PSAC,,,,,,
+Shippensburg,D2,PSAC,,,,,,
+Sioux Falls,D2,NSIC,,,,,,
+Slippery Rock,D2,PSAC,,,,,,
+South Dakota Mines,D2,RMAC,,,,,South Dakota School of Mines|SD Mines|South Dakota School of Mines and Technology,
+Southeastern Oklahoma State,D2,GAC,,,,,Southeastern Oklahoma|Southeast Oklahoma State,
+Southern Arkansas,D2,GAC,,,,,,
+Southern Connecticut State,D2,NE-10,,,,,Southern Connecticut,
+Southern Nazarene,D2,GAC,,,,,,
+Southwest Baptist,D2,GLVC,,,,,,
+Southwest Minnesota State,D2,NSIC,,,,,,
+Southwestern Oklahoma State,D2,GAC,,,,,,
+Sul Ross State,D2,LSC,,,2024,,Sul Ross,
+Texas A&M-Kingsville,D2,LSC,,,,,Texas A&M Kingsville,
+Truman State,D2,GLVC,,,,,Truman,
+Tuskegee,D2,SIAC,,,,,,
+Upper Iowa,D2,GLVC,,,,,,
+UT Permian Basin,D2,LSC,,,,,UTPB|Texas-Permian Basin,
+UVA Wise,D2,SAC,,,,,Virginia-Wise|UVa-Wise,
+Valdosta State,D2,GSC,,,,,,
+Virginia Union,D2,CIAA,,,,,,
+Washburn,D2,MIAA (D2),,,,,,
+Wayne State (MI),D2,GLIAC,,,,,Wayne State,
+Wayne State (NE),D2,NSIC,,,,,,
+West Alabama,D2,GSC,,,,,UWA,
+West Chester,D2,PSAC,,,,,,
+West Florida,D2,,,,,2025,UWF,
+West Liberty,D2,MEC,,,,,,
+West Texas A&M,D2,LSC,,,,,,
+West Virginia State,D2,MEC,,,,,,
+West Virginia Wesleyan,D2,MEC,,,,,,
+Western Colorado,D2,RMAC,,,,,Western State Colorado|Western State,
+Western New Mexico,D2,LSC,,,,,,
+Western Oregon,D2,LSC,,,,,,
+Winona State,D2,NSIC,,,,,,
+Winston-Salem State,D2,CIAA,,,,,,
+Azusa Pacific,D2,,,,,2019,,
+Cheyney,D2,,,,,2017,,
+Humboldt State,D2,,,,,2018,Cal Poly Humboldt,
+Limestone,D2,,,,,2024,,
+Minnesota Crookston,D2,,,,,2019,Minnesota-Crookston,
+Mississippi College,D2,,,,,2024,,
+Saint Augustine's,D2,,,,,2023,,
+St. Cloud State,D2,,,,,2019,,
+Simon Fraser,D2,,,,,2022,,
+Oklahoma Panhandle State,D2,,,,,2016,Panhandle State|OPSU,
+Saint Joseph's (IN),D2,,,,,2016,Saint Joseph's College (IN),
+Augsburg,D3,MIAC,,,,,,
+Austin,D3,SCAC,,,,,Austin College,
+Azusa Pacific,D3,SCIAC,,,2026,,,
+Belhaven,D3,USA South,,,,,,
+Bethel (MN),D3,MIAC,,,,,,
+Bluffton,D3,HCAC,,,,,,
+Bridgewater State,D3,MASCAC,,,,,,
+Buena Vista,D3,ARC,,,,,,
+Buffalo State,D3,Liberty League,,,,,,
+Cal Lutheran,D3,SCIAC,,,,,California Lutheran,
+Carleton,D3,MIAC,,,,,,
+Carnegie Mellon,D3,Centennial,,,,,,
+Case Western Reserve,D3,PAC,,,,,Case Western,
+Central (IA),D3,ARC,,,,,Central College,
+Chapman,D3,SCIAC,,,,,,
+Chicago,D3,MWC,,,,,University of Chicago,
+Claremont-Mudd-Scripps,D3,SCIAC,,,,,Claremont Mudd Scripps|CMS,
+Coe,D3,ARC,,,,,,
+TCNJ,D3,NJAC,,,,,The College of New Jersey,
+Concordia (Moorhead),D3,MIAC,,,,,Concordia-Moorhead|Concordia College,
+Crown,D3,UMAC,,,,,,
+East Texas Baptist,D3,ASC,,,,,,
+Eureka,D3,NACC,,,,,,
+Framingham State,D3,MASCAC,,,,,,
+Franklin,D3,HCAC,,,,,,
+Gallaudet,D3,SCAC,,,,,,
+Geneva,D3,PAC,,,,,,
+George Fox,D3,NWC,,,,,,
+Greenville,D3,UMAC,,,,,,
+Grinnell,D3,MWC,,,,,,
+Gustavus Adolphus,D3,MIAC,,,,,,
+Hamline,D3,MIAC,,,,,,
+Hardin-Simmons,D3,ASC,,,,,,
+Howard Payne,D3,ASC,,,,,,
+Illinois College,D3,MWC,,,,,,
+Knox,D3,MWC,,,,,,
+La Verne,D3,SCIAC,,,,,,
+Lakeland,D3,NACC,,,,,,
+Lewis & Clark,D3,NWC,,,,,,
+Linfield,D3,NWC,,,,,,
+Loras,D3,ARC,,,,,,
+Luther,D3,MWC,,,,,,
+Lyon,D3,SCAC,,,,,,
+Macalester,D3,MIAC,,,,,,
+Manchester,D3,HCAC,,,,,,
+Martin Luther,D3,UMAC,,,,,,
+Mary Hardin-Baylor,D3,ASC,,,,,UMHB,
+Maryville (TN),D3,SAA,,,,,,
+McMurry,D3,ASC,,,,,,
+Millikin,D3,CCIW,,,,,,
+Minnesota Morris,D3,UMAC,,,,,Minnesota-Morris,
+Nebraska Wesleyan,D3,ARC,,,,,,
+North Carolina Wesleyan,D3,USA South,,,,,NC Wesleyan,
+North Park,D3,CCIW,,,,,,
+Pacific (OR),D3,NWC,,,,,Pacific University,
+Pacific Lutheran,D3,NWC,,,,,PLU,
+Pomona-Pitzer,D3,SCIAC,,,,,,
+Puget Sound,D3,NWC,,,,,,
+Redlands,D3,SCIAC,,,,,,
+Ripon,D3,MWC,,,,,,
+Rochester,D3,Liberty League,,,,,University of Rochester,
+Rockford,D3,NACC,,,,,,
+Rose-Hulman,D3,HCAC,,,,,,
+Rowan,D3,NJAC,,,,,,
+Saint John's (MN),D3,MIAC,,,,,St. John's (MN)|Saint John's University (MN),
+St. Norbert,D3,NACC,,,,,,
+St. Olaf,D3,MIAC,,,,,,
+St. Scholastica,D3,MIAC,,,,,,
+Schreiner,D3,ASC,,,2025,,,
+Simpson (IA),D3,ARC,,,,,Simpson College,
+Texas Lutheran,D3,SCAC,,,,,,
+Trinity (TX),D3,SAA,,,,,Trinity University,
+Wartburg,D3,ARC,,,,,,
+Washington (MO),D3,NCAC,,,,,WashU|Washington University in St. Louis,
+Waynesburg,D3,PAC,,,,,,
+Westfield State,D3,MASCAC,,,,,,
+Westminster (MO),D3,UMAC,,,,,,
+Wheaton (IL),D3,CCIW,,,,,Wheaton College,
+Whitworth,D3,NWC,,,,,,
+Willamette,D3,NWC,,,,,,
+William Paterson,D3,NJAC,,,,,,
+Wisconsin Lutheran,D3,NACC,,,,,,
+Wisconsin-Eau Claire,D3,WIAC,,,,,,
+Wisconsin-La Crosse,D3,WIAC,,,,,,
+Wisconsin-Oshkosh,D3,WIAC,,,,,,
+Wisconsin-Platteville,D3,WIAC,,,,,,
+Wisconsin-River Falls,D3,WIAC,,,,,,
+Wisconsin-Stevens Point,D3,WIAC,,,,,,
+Wisconsin-Stout,D3,WIAC,,,,,,
+Wisconsin-Whitewater,D3,WIAC,,,,,,
+WPI,D3,NEWMAC,,,,,Worcester Polytechnic|Worcester Polytechnic Institute,
+Worcester State,D3,MASCAC,,,,,,
+Sul Ross State,D3,,,,,2023,Sul Ross,
+Defiance,D3,,,,,2023,,
+Louisiana College,D3,,,,,2020,Louisiana Christian,
+Anna Maria,D3,,,,,,,
+Becker,D3,,,,,,,
+Birmingham-Southern,D3,,,,,,,
+Finlandia,D3,,,,,,,
+Iowa Wesleyan,D3,,,,,,,
+MacMurray,D3,,,,,,,
+Maranatha Baptist,D3,,,,,2016,,
+Mount Ida,D3,,,,,,,
+Occidental,D3,,,,,2018,,
+Wesley,D3,,,,,,Wesley College,
+Andrew,NAIA,Independent (NAIA),,,2024,,,
+Arizona Christian,NAIA,Frontier,,,,,,
+Arkansas Baptist,JUCO,,,,,2020,,NJCAA through 2020-21
+Arkansas Baptist,NAIA,Sooner,,,2021,,,
+Ave Maria,NAIA,Sun,,,,,,
+Avila,NAIA,KCAC,,,,,,
+Baker,NAIA,HAAC,,,,,,
+Bethany (KS),NAIA,KCAC,,,,,,
+Bethel (TN),NAIA,Mid-South,,,,,,
+Bethel (KS),NAIA,KCAC,,,,,,
+Bluefield,NAIA,Appalachian,,,,,Bluefield University|Bluefield College,
+Briar Cliff,NAIA,GPAC,,,,,,
+Campbellsville,NAIA,Mid-South,,,,,,
+Carroll (MT),NAIA,Frontier,,,,,,
+Central Methodist,NAIA,HAAC,,,,,,
+Concordia (NE),NAIA,GPAC,,,,,Concordia Nebraska|Concordia University Nebraska,
+Culver-Stockton,NAIA,HAAC,,,,,,
+Cumberland (TN),NAIA,Mid-South,,,,,Cumberland,
+Dakota State,NAIA,Frontier,,,,,,
+Dakota Wesleyan,NAIA,GPAC,,,,,,
+Defiance,NAIA,MSFA,,,2024,,,
+Dickinson State,NAIA,Frontier,,,,,,
+Doane,NAIA,GPAC,,,,,,
+Dordt,NAIA,GPAC,,,,,,
+Eastern Oregon,NAIA,Frontier,,,,,,
+Evangel,NAIA,KCAC,,,,,,
+Faulkner,NAIA,Independent (NAIA),,,,,,
+Florida Memorial,NAIA,Sun,,,2020,,,
+Friends,NAIA,KCAC,,,,,,
+Georgetown (KY),NAIA,Mid-South,,,,,Georgetown College,
+Graceland,NAIA,HAAC,,,,,,
+Grand View,NAIA,HAAC,,,,,,
+Hastings,NAIA,GPAC,,,,,,
+Indiana Wesleyan,NAIA,MSFA,,,2018,,,
+Judson,NAIA,MSFA,,,2021,,,
+Kansas Wesleyan,NAIA,KCAC,,,,,,
+Kentucky Christian,NAIA,Appalachian,,,,,,
+Langston,NAIA,Sooner,,,,,,
+Lindsey Wilson,NAIA,Mid-South,,,,,,
+Louisiana Christian,NAIA,Sooner,,,2021,,Louisiana College,
+Marian (IN),NAIA,MSFA,,,,,Marian,
+Mayville State,NAIA,Frontier,,,,,,
+McPherson,NAIA,KCAC,,,,,,
+MidAmerica Nazarene,NAIA,HAAC,,,,,MNU,
+Montana State-Northern,NAIA,Frontier,,,,,MSU-Northern|Montana State Northern,
+Montana Tech,NAIA,Frontier,,,,,Montana Technological,
+Montana Western,NAIA,Frontier,,,,,UM Western|Montana-Western,
+Morningside,NAIA,GPAC,,,,,,
+Mount Marty,NAIA,GPAC,,,2021,,,
+Mount Mercy,NAIA,HAAC,,,2026,,,
+Nelson,NAIA,Sooner,,,,,Southwestern Assemblies of God|SAGU,
+Northwestern (IA),NAIA,GPAC,,,,,Northwestern College (IA)|Northwestern College,
+Oklahoma Panhandle State,NAIA,Sooner,,,2017,,Panhandle State|OPSU,
+Olivet Nazarene,NAIA,MSFA,,,,,,
+Ottawa (AZ),NAIA,Sooner,,,2018,,Ottawa University Arizona,
+Peru State,NAIA,HAAC,,,,,,
+Pikeville,NAIA,Appalachian,,,,,,
+Rio Grande,NAIA,Appalachian,,,2025,,,
+Rocky Mountain,NAIA,Frontier,,,,,,
+St. Francis (IL),NAIA,MSFA,,,,,University of St. Francis,
+Saint Francis (IN),NAIA,MSFA,,,,,,
+Saint Mary-of-the-Woods,NAIA,MSFA,,,2026,,,"football starts 2026 (MSFA); its sprint football team (2022-) is a different sport, not scraped"
+St. Thomas (FL),NAIA,Sun,,,2019,,St. Thomas University,
+Saint Xavier,NAIA,MSFA,,,,,,
+Simpson (CA),NAIA,Frontier,,,2023,,,
+Southeastern (FL),NAIA,Sun,,,,,Southeastern University,
+Southern Oregon,NAIA,Frontier,,,,,,
+Southwestern (KS),NAIA,KCAC,,,,,Southwestern College (KS),
+Sterling,NAIA,KCAC,,,,,,
+Tabor,NAIA,KCAC,,,,,,
+Texas College,NAIA,Sooner,,,,,,
+Texas Wesleyan,NAIA,Sooner,,,2017,,,
+Thomas (GA),NAIA,Sun,,,2022,,Thomas University,
+Union Commonwealth,NAIA,Appalachian,,,,,Union College (KY)|Union (KY),
+Valley City State,NAIA,Frontier,,,,,,
+Waldorf,NAIA,GPAC,,,,,,
+Warner,NAIA,Sun,,,,,,
+Wayland Baptist,NAIA,Sooner,,,,,,
+Edward Waters,NAIA,,,,,2020,,
+Roosevelt,NAIA,,,,2020,2022,,
+Haskell,NAIA,,,,,,Haskell Indian Nations,
+Lindenwood-Belleville,NAIA,,,,,,Lindenwood Belleville,
+Robert Morris (IL),NAIA,,,,,2019,Robert Morris-Chicago,football moved to Roosevelt in 2020
+Trinity International,NAIA,,,,,,,
+Trinity Bible,NAIA,,,,,,,
+Bacone,NAIA,,,,,,,
+Blinn,JUCO,SWJCFC,,,,,Blinn College,
+Butler CC,JUCO,KJCCC,,,,,Butler Community College|Butler County CC,
+Central Lakes,JUCO,MCAC,,,,,,
+Cisco,JUCO,SWJCFC,,,,,Cisco College,
+Coahoma CC,JUCO,MACJC,,,,,Coahoma,
+Coffeyville CC,JUCO,KJCCC,,,,,Coffeyville,
+Community Christian (MI),JUCO,Independent (NJCAA),,,,,,
+Copiah-Lincoln CC,JUCO,MACJC,,,,,Copiah-Lincoln|Co-Lin,
+Dodge City CC,JUCO,KJCCC,,,,,Dodge City,
+East Central CC,JUCO,MACJC,,,,,East Central Community College,
+East Mississippi CC,JUCO,MACJC,,,,,East Mississippi|EMCC,
+Ellsworth CC,JUCO,ICCAC,,,,,Ellsworth,
+Erie CC,JUCO,Independent (NJCAA),,,,,,
+Fond du Lac,JUCO,MCAC,,,,,,
+Garden City CC,JUCO,KJCCC,,,,,Garden City,
+Georgia Military College,JUCO,Independent (NJCAA),,,,,Georgia Military|GMC,
+Highland CC,JUCO,KJCCC,,,,,Highland Community College,
+Hinds CC,JUCO,MACJC,,,,,Hinds,
+Holmes CC,JUCO,MACJC,,,,,Holmes,
+Hutchinson CC,JUCO,KJCCC,,,,,Hutchinson,
+Independence CC,JUCO,KJCCC,,,,,Independence Community College,
+Iowa Central CC,JUCO,ICCAC,,,,,Iowa Central,
+Iowa Western CC,JUCO,ICCAC,,,,,Iowa Western,
+Itasca CC,JUCO,MCAC,,,,,Itasca,
+Itawamba CC,JUCO,MACJC,,,,,Itawamba,
+Jones College,JUCO,MACJC,,,,,Jones County JC|Jones JC|Jones,
+Kilgore College,JUCO,SWJCFC,,,,,Kilgore,
+Lackawanna College,JUCO,NEFC,,,,2026,Lackawanna,
+Louisburg College,JUCO,Independent (NJCAA),,,,,Louisburg,
+Mesabi Range,JUCO,MCAC,,,,,,
+Minnesota State CTC,JUCO,MCAC,,,,,Minnesota State Community and Technical College,
+Minnesota West CTC,JUCO,MCAC,,,,,Minnesota West,
+Mississippi Delta CC,JUCO,MACJC,,,,,Mississippi Delta,
+Mississippi Gulf Coast CC,JUCO,MACJC,,,,,Mississippi Gulf Coast|Gulf Coast CC|MGCCC,
+Monroe College,JUCO,NEFC,,,,2026,Monroe University,
+Navarro College,JUCO,SWJCFC,,,,,Navarro,
+New Mexico Military Institute,JUCO,SWJCFC,,,,,NMMI|New Mexico Military,
+North Dakota State College of Science,JUCO,MCAC,,,,,NDSCS|ND College of Science|North Dakota State School of Science,
+Northeast Mississippi CC,JUCO,MACJC,,,,,Northeast Mississippi,
+Northeastern Oklahoma A&M,JUCO,SWJCFC,,,,,NEO|Northeast Oklahoma A&M|Northeastern Oklahoma|NEO A&M|Northeast Oklahoma|NE Oklahoma,
+Northwest Mississippi CC,JUCO,MACJC,,,,,Northwest Mississippi|Northwest Miss.,
+Pearl River CC,JUCO,MACJC,,,,,Pearl River,
+Rochester CTC,JUCO,MCAC,,,,,Rochester Community and Technical College,
+Snow College,JUCO,Independent (NJCAA),,,,,Snow,
+Southwest Mississippi CC,JUCO,MACJC,,,,,Southwest Mississippi,
+Trinity Valley CC,JUCO,SWJCFC,,,,,Trinity Valley|TVCC,
+Tyler JC,JUCO,SWJCFC,,,,,Tyler Junior College|Tyler,
+Vermilion CC,JUCO,MCAC,,,,,,
+Fort Scott CC,JUCO,,,,,,Fort Scott,
+Arizona Western College,JUCO,,,,,,Arizona Western,
+Eastern Arizona College,JUCO,,,,,,Eastern Arizona,
+Glendale CC (AZ),JUCO,,,,,,,
+Mesa CC,JUCO,,,,,,,
+Phoenix College,JUCO,,,,,,,
+Pima CC,JUCO,,,,,,Pima Community College|Pima,
+Scottsdale CC,JUCO,,,,,,,
+ASA College,JUCO,,,,,,ASA,
+Grand Rapids CC,JUCO,,,,,,,
+Joliet JC,JUCO,,,,,,,
+Harper College,JUCO,,,,,,,
+Dakota College at Bottineau,JUCO,,,,,,Dakota College,
+Ridgewater,JUCO,,,,,,,
+De Anza College,JUCO,CCCAA Bay 6,,,,,De Anza|DeAnza,
+Foothill College,JUCO,CCCAA Bay 6,,,,,Foothill,
+Santa Rosa JC,JUCO,CCCAA Bay 6,,,,,Santa Rosa Junior College|Santa Rosa,
+City College of San Francisco,JUCO,CCCAA Bay 6,,,,,CCSF|San Francisco City College|College of San Francisco,
+College of San Mateo,JUCO,CCCAA Bay 6,,,,,San Mateo,
+San Jose City College,JUCO,CCCAA Bay 6,,,,,,
+American River College,JUCO,CCCAA NorCal,,,,,American River,
+Butte College,JUCO,CCCAA NorCal,,,,,Butte,
+Diablo Valley College,JUCO,CCCAA NorCal,,,,,Diablo Valley|DVC,
+Laney College,JUCO,CCCAA NorCal,,,,,Laney,
+Sierra College,JUCO,CCCAA NorCal,,,,,,
+College of the Redwoods,JUCO,CCCAA NorCal,,,,,Redwoods,
+Fresno City College,JUCO,CCCAA Valley,,,,,Fresno City,
+Modesto JC,JUCO,CCCAA Valley,,,,,Modesto Junior College|Modesto,
+Monterey Peninsula College,JUCO,CCCAA Valley,,,,,Monterey Peninsula,
+Reedley College,JUCO,CCCAA Valley,,,,,Reedley,
+College of the Sequoias,JUCO,CCCAA Valley,,,,,Sequoias,
+Sacramento City College,JUCO,CCCAA Valley,,,,,Sacramento City,
+Gavilan College,JUCO,CCCAA Golden Coast,,,,,Gavilan,
+Hartnell College,JUCO,CCCAA Golden Coast,,,,,Hartnell,
+Merced College,JUCO,CCCAA Golden Coast,,,,,Merced,
+Cabrillo College,JUCO,CCCAA Golden Coast,,,,,Cabrillo,
+Coalinga College,JUCO,CCCAA Golden Coast,,,,,West Hills Coalinga|West Hills College,
+Shasta College,JUCO,CCCAA Golden Coast,,,,,Shasta,
+Chabot College,JUCO,CCCAA Pacific 7,,,,,Chabot,
+Contra Costa College,JUCO,CCCAA Pacific 7,,,,,Contra Costa,no 2024 season (sat out)
+Feather River College,JUCO,CCCAA Pacific 7,,,,,Feather River,
+College of the Siskiyous,JUCO,CCCAA Pacific 7,,,,,Siskiyous,
+Los Medanos College,JUCO,CCCAA Pacific 7,,,,,Los Medanos,
+San Joaquin Delta College,JUCO,CCCAA Pacific 7,,,,,San Joaquin Delta|Delta College,
+Chaffey College,JUCO,CCCAA Central,,,,,Chaffey,
+El Camino College,JUCO,CCCAA Central,,,,,El Camino,
+Long Beach City College,JUCO,CCCAA Central,,,,,Long Beach City|LBCC,
+Los Angeles Harbor College,JUCO,CCCAA Central,,,,,LA Harbor,
+Mt. San Antonio College,JUCO,CCCAA Central,,,,,Mt. SAC|Mt. San Antonio|Mt SAC,
+Riverside City College,JUCO,CCCAA Central,,,,,Riverside City|Riverside CC,
+Bakersfield College,JUCO,CCCAA Northern,,,,,Bakersfield,
+College of the Canyons,JUCO,CCCAA Northern,,,,,Canyons,
+Cerritos College,JUCO,CCCAA Northern,,,,,Cerritos,
+Moorpark College,JUCO,CCCAA Northern,,,,,Moorpark,
+Santa Monica College,JUCO,CCCAA Northern,,,,,Santa Monica,
+Ventura College,JUCO,CCCAA Northern,,,,,Ventura,
+Fullerton College,JUCO,CCCAA Southern,,,,,Fullerton,
+Golden West College,JUCO,CCCAA Southern,,,,,Golden West,
+Grossmont College,JUCO,CCCAA Southern,,,,,Grossmont,
+Orange Coast College,JUCO,CCCAA Southern,,,,,Orange Coast|OCC,
+Palomar College,JUCO,CCCAA Southern,,,,,Palomar,
+Saddleback College,JUCO,CCCAA Southern,,,,,Saddleback,
+College of the Desert,JUCO,CCCAA Mountain,,,,,,
+Mt. San Jacinto College,JUCO,CCCAA Mountain,,,,,Mt. San Jacinto,
+San Bernardino Valley College,JUCO,CCCAA Mountain,,,,,San Bernardino Valley,
+San Diego Mesa College,JUCO,CCCAA Mountain,,,,,San Diego Mesa|Mesa College,
+Southwestern College (CA),JUCO,CCCAA Mountain,,,,,,
+Victor Valley College,JUCO,CCCAA Mountain,,,,,Victor Valley,
+Compton College,JUCO,CCCAA Metro,,,,,El Camino Compton,
+East Los Angeles College,JUCO,CCCAA Metro,,,,,East LA College|ELAC,
+Glendale CC (CA),JUCO,CCCAA Metro,,,,,Glendale Community College,
+Los Angeles Southwest College,JUCO,CCCAA Metro,,,,,LA Southwest,
+Pasadena City College,JUCO,CCCAA Metro,,,,,Pasadena City,
+Santa Ana College,JUCO,CCCAA Metro,,,,,Santa Ana,
+West Los Angeles College,JUCO,CCCAA Metro,,,,,West LA College,
+Antelope Valley College,JUCO,CCCAA Pacific,,,,,Antelope Valley,
+Citrus College,JUCO,CCCAA Pacific,,,,,Citrus,
+Allan Hancock College,JUCO,CCCAA Pacific,,,,,Allan Hancock|Hancock College,
+Los Angeles Pierce College,JUCO,CCCAA Pacific,,,,,Pierce College|LA Pierce,
+Los Angeles Valley College,JUCO,CCCAA Pacific,,,,,LA Valley College|LA Valley,
+Santa Barbara City College,JUCO,CCCAA Pacific,,,,,Santa Barbara City,
+Community Christian (CA),JUCO,CCCAA Independent,,,,,,
+College of Marin,JUCO,,,,,,,
+Mendocino College,JUCO,,,,,,,
+Yuba College,JUCO,,,,,,Yuba,
+San Antonio College,JUCO,,,,,,,
+LSU-Eunice,JUCO,,,,,,LSU Eunice,
+Valley Forge Military College,JUCO,,,,,,Valley Forge Military,
+ASA College Miami,JUCO,,,,,,ASA Miami|ASA College of Miami,
+St. John's College,HS,,,,,,Saint John's College|St. John’s College,a high school whose name looks like a college; never read as a transfer's college
+Gonzaga College,HS,,,,,,,a high school whose name looks like a college; never read as a transfer's college
+La Salle College,HS,,,,,,LaSalle College,a high school whose name looks like a college; never read as a transfer's college
+Christian Brothers College,HS,,,,,,,a high school whose name looks like a college; never read as a transfer's college
+Calvert Hall College,HS,,,,,,,a high school whose name looks like a college; never read as a transfer's college
+Boston College High,HS,,,,,,,a high school whose name looks like a college; never read as a transfer's college
+St. Joseph's College,HS,,,,,,,a high school whose name looks like a college; never read as a transfer's college
+Xavier College,HS,,,,,,,a high school whose name looks like a college; never read as a transfer's college
+Montmorency College,HS,,,,,,,a high school whose name looks like a college; never read as a transfer's college
+Marcellin College,HS,,,,,,,a high school whose name looks like a college; never read as a transfer's college
+Barker College,HS,,,,,,,a high school whose name looks like a college; never read as a transfer's college
+Haileybury College,HS,,,,,,,a high school whose name looks like a college; never read as a transfer's college
+Whitefriars College,HS,,,,,,,a high school whose name looks like a college; never read as a transfer's college
+Somerset College,HS,,,,,,,a high school whose name looks like a college; never read as a transfer's college
+The Scots College,HS,,,,,,Scotch College,a high school whose name looks like a college; never read as a transfer's college
+St. Bedes College,HS,,,,,,,a high school whose name looks like a college; never read as a transfer's college
+Newington College,HS,,,,,,,a high school whose name looks like a college; never read as a transfer's college
+Upper Coomera State College,HS,,,,,,,a high school whose name looks like a college; never read as a transfer's college
+University School,HS,,,,,,University Christian|University Lab|University City|University High,a high school whose name looks like a college; never read as a transfer's college
+Clemson,CLUB,MCLA,,,,,Clemson University,"club team (MCLA), not varsity: a level for transfers only"
+James Madison,CLUB,MCLA,,,,,James Madison University,"club team (MCLA), not varsity: a level for transfers only"
+Kentucky,CLUB,MCLA,,,,,University of Kentucky,"club team (MCLA), not varsity: a level for transfers only"
+Liberty,CLUB,MCLA,,,,,Liberty University,"club team (MCLA), not varsity: a level for transfers only"
+NC State,CLUB,MCLA,,,,,North Carolina State University,"club team (MCLA), not varsity: a level for transfers only"
+Tennessee,CLUB,MCLA,,,,,University of Tennessee,"club team (MCLA), not varsity: a level for transfers only"
+Virginia Tech,CLUB,MCLA,,,,,,"club team (MCLA), not varsity: a level for transfers only"
+West Virginia,CLUB,MCLA,,,,,West Virginia University,"club team (MCLA), not varsity: a level for transfers only"
+Appalachian State,CLUB,MCLA,,,,,,"club team (MCLA), not varsity: a level for transfers only"
+The Citadel,CLUB,MCLA,,,,,,"club team (MCLA), not varsity: a level for transfers only"
+Charlotte,CLUB,MCLA,,,,,University of North Carolina at Charlotte|North Carolina at Charlotte,"club team (MCLA), not varsity: a level for transfers only"
+Coastal Carolina,CLUB,MCLA,,,,,Coastal Carolina University,"club team (MCLA), not varsity: a level for transfers only"
+Davidson,CLUB,MCLA,,,,,Davidson College,"club team (MCLA), not varsity: a level for transfers only"
+East Carolina,CLUB,MCLA,,,,,East Carolina University,"club team (MCLA), not varsity: a level for transfers only"
+Elon,CLUB,MCLA,,,,,Elon University,"club team (MCLA), not varsity: a level for transfers only"
+North Carolina-Wilmington,CLUB,MCLA,,,,,University of North Carolina at Wilmington|North Carolina at Wilmington,"club team (MCLA), not varsity: a level for transfers only"
+Wake Forest,CLUB,MCLA,,,,,Wake Forest University,"club team (MCLA), not varsity: a level for transfers only"
+William & Mary,CLUB,MCLA,,,,,College of William & Mary,"club team (MCLA), not varsity: a level for transfers only"
+Boston College,CLUB,MCLA,,,,,,"club team (MCLA), not varsity: a level for transfers only"
+Buffalo,CLUB,MCLA,,,,,University at Buffalo,"club team (MCLA), not varsity: a level for transfers only"
+UConn,CLUB,MCLA,,,,,University of Connecticut|Connecticut,"club team (MCLA), not varsity: a level for transfers only"
+New Hampshire,CLUB,MCLA,,,,,University of New Hampshire,"club team (MCLA), not varsity: a level for transfers only"
+Northeastern University,CLUB,MCLA,,,,,,"club team (MCLA), not varsity: a level for transfers only"
+Pittsburgh,CLUB,MCLA,,,,,University of Pittsburgh,"club team (MCLA), not varsity: a level for transfers only"
+Temple,CLUB,MCLA,,,,,Temple University,"club team (MCLA), not varsity: a level for transfers only"
+Central Connecticut,CLUB,MCLA,,,,,Central Connecticut State University,"club team (MCLA), not varsity: a level for transfers only"
+Columbia,CLUB,MCLA,,,,,Columbia University,"club team (MCLA), not varsity: a level for transfers only"
+Maine,CLUB,MCLA,,,,,University of Maine,"club team (MCLA), not varsity: a level for transfers only"
+Rhode Island,CLUB,MCLA,,,,,University of Rhode Island,"club team (MCLA), not varsity: a level for transfers only"
+Stonehill College,CLUB,MCLA,,,,,,"club team (MCLA), not varsity: a level for transfers only"
+Baylor,CLUB,MCLA,,,,,Baylor University,"club team (MCLA), not varsity: a level for transfers only"
+Kansas,CLUB,MCLA,,,,,University of Kansas,"club team (MCLA), not varsity: a level for transfers only"
+LSU,CLUB,MCLA,,,,,Louisiana State University,"club team (MCLA), not varsity: a level for transfers only"
+Missouri,CLUB,MCLA,,,,,University of Missouri,"club team (MCLA), not varsity: a level for transfers only"
+Oklahoma,CLUB,MCLA,,,,,University of Oklahoma,"club team (MCLA), not varsity: a level for transfers only"
+Ole Miss,CLUB,MCLA,,,,,University of Mississippi|Mississippi,"club team (MCLA), not varsity: a level for transfers only"
+SMU,CLUB,MCLA,,,,,Southern Methodist University,"club team (MCLA), not varsity: a level for transfers only"
+Texas,CLUB,MCLA,,,,,University of Texas at Austin|Texas at Austin,"club team (MCLA), not varsity: a level for transfers only"
+Texas A&M,CLUB,MCLA,,,,,Texas A&M University,"club team (MCLA), not varsity: a level for transfers only"
+TCU,CLUB,MCLA,,,,,Texas Christian University,"club team (MCLA), not varsity: a level for transfers only"
+Arkansas,CLUB,MCLA,,,,,University of Arkansas,"club team (MCLA), not varsity: a level for transfers only"
+Creighton University,CLUB,MCLA,,,,,,"club team (MCLA), not varsity: a level for transfers only"
+Dallas Baptist,CLUB,MCLA,,,,,Dallas Baptist University,"club team (MCLA), not varsity: a level for transfers only"
+Drury,CLUB,MCLA,,,,,Drury University,"club team (MCLA), not varsity: a level for transfers only"
+Houston,CLUB,MCLA,,,,,University of Houston,"club team (MCLA), not varsity: a level for transfers only"
+Missouri State,CLUB,MCLA,,,,,Missouri State University,"club team (MCLA), not varsity: a level for transfers only"
+Nebraska,CLUB,MCLA,,,,,University of Nebraska–Lincoln|Nebraska–Lincoln,"club team (MCLA), not varsity: a level for transfers only"
+North Texas,CLUB,MCLA,,,,,University of North Texas,"club team (MCLA), not varsity: a level for transfers only"
+Oklahoma State,CLUB,MCLA,,,,,Oklahoma State University,"club team (MCLA), not varsity: a level for transfers only"
+Rice,CLUB,MCLA,,,,,Rice University,"club team (MCLA), not varsity: a level for transfers only"
+UTSA,CLUB,MCLA,,,,,University of Texas at San Antonio|Texas at San Antonio,"club team (MCLA), not varsity: a level for transfers only"
+Texas State,CLUB,MCLA,,,,,Texas State University,"club team (MCLA), not varsity: a level for transfers only"
+Texas Tech,CLUB,MCLA,,,,,Texas Tech University,"club team (MCLA), not varsity: a level for transfers only"
+Tulane,CLUB,MCLA,,,,,Tulane University,"club team (MCLA), not varsity: a level for transfers only"
+Kansas State,CLUB,MCLA,,,,,Kansas State University,"club team (MCLA), not varsity: a level for transfers only"
+Louisiana,CLUB,MCLA,,,,,University of Louisiana at Lafayette|Louisiana at Lafayette,"club team (MCLA), not varsity: a level for transfers only"
+St. Edward's,CLUB,MCLA,,,,,St. Edward's University,"club team (MCLA), not varsity: a level for transfers only"
+TAMU-Galveston,CLUB,MCLA,,,,,Texas A&M University at Galveston,"club team (MCLA), not varsity: a level for transfers only"
+Boise State,CLUB,MCLA,,,,,Boise State University,"club team (MCLA), not varsity: a level for transfers only"
+Oregon,CLUB,MCLA,,,,,University of Oregon,"club team (MCLA), not varsity: a level for transfers only"
+Oregon State,CLUB,MCLA,,,,,Oregon State University,"club team (MCLA), not varsity: a level for transfers only"
+Washington,CLUB,MCLA,,,,,University of Washington,"club team (MCLA), not varsity: a level for transfers only"
+Washington State,CLUB,MCLA,,,,,Washington State University,"club team (MCLA), not varsity: a level for transfers only"
+Gonzaga University,CLUB,MCLA,,,,,,"club team (MCLA), not varsity: a level for transfers only"
+Idaho,CLUB,MCLA,,,,,University of Idaho,"club team (MCLA), not varsity: a level for transfers only"
+Montana,CLUB,MCLA,,,,,University of Montana,"club team (MCLA), not varsity: a level for transfers only"
+Western Washington University,CLUB,MCLA,,,,,,"club team (MCLA), not varsity: a level for transfers only"
+BYU,CLUB,MCLA,,,,,Brigham Young University,"club team (MCLA), not varsity: a level for transfers only"
+Colorado,CLUB,MCLA,,,,,University of Colorado Boulder|Colorado Boulder,"club team (MCLA), not varsity: a level for transfers only"
+Colorado State,CLUB,MCLA,,,,,Colorado State University,"club team (MCLA), not varsity: a level for transfers only"
+Utah Valley University,CLUB,MCLA,,,,,,"club team (MCLA), not varsity: a level for transfers only"
+Metropolitan State University of Denver,CLUB,MCLA,,,,,,"club team (MCLA), not varsity: a level for transfers only"
+Montana State,CLUB,MCLA,,,,,Montana State University,"club team (MCLA), not varsity: a level for transfers only"
+Southern Utah,CLUB,MCLA,,,,,Southern Utah University,"club team (MCLA), not varsity: a level for transfers only"
+Utah State,CLUB,MCLA,,,,,Utah State University,"club team (MCLA), not varsity: a level for transfers only"
+Wyoming,CLUB,MCLA,,,,,University of Wyoming,"club team (MCLA), not varsity: a level for transfers only"
+Fort Lewis College,CLUB,MCLA,,,,,,"club team (MCLA), not varsity: a level for transfers only"
+New Mexico,CLUB,MCLA,,,,,University of New Mexico,"club team (MCLA), not varsity: a level for transfers only"
+Northern Colorado,CLUB,MCLA,,,,,University of Northern Colorado,"club team (MCLA), not varsity: a level for transfers only"
+Alabama,CLUB,MCLA,,,,,University of Alabama,"club team (MCLA), not varsity: a level for transfers only"
+Auburn,CLUB,MCLA,,,,,Auburn University,"club team (MCLA), not varsity: a level for transfers only"
+UCF,CLUB,MCLA,,,,,University of Central Florida|Central Florida,"club team (MCLA), not varsity: a level for transfers only"
+Florida,CLUB,MCLA,,,,,University of Florida,"club team (MCLA), not varsity: a level for transfers only"
+Florida State,CLUB,MCLA,,,,,Florida State University,"club team (MCLA), not varsity: a level for transfers only"
+Georgia,CLUB,MCLA,,,,,University of Georgia,"club team (MCLA), not varsity: a level for transfers only"
+Georgia Tech,CLUB,MCLA,,,,,Georgia Institute of Technology,"club team (MCLA), not varsity: a level for transfers only"
+South Carolina,CLUB,MCLA,,,,,University of South Carolina,"club team (MCLA), not varsity: a level for transfers only"
+Florida Atlantic,CLUB,MCLA,,,,,Florida Atlantic University,"club team (MCLA), not varsity: a level for transfers only"
+Florida Gulf Coast University,CLUB,MCLA,,,,,,"club team (MCLA), not varsity: a level for transfers only"
+Georgia Southern,CLUB,MCLA,,,,,Georgia Southern University,"club team (MCLA), not varsity: a level for transfers only"
+Kennesaw State,CLUB,MCLA,,,,,Kennesaw State University,"club team (MCLA), not varsity: a level for transfers only"
+Miami (FL),CLUB,MCLA,,,,,University of Miami|Miami,"club team (MCLA), not varsity: a level for transfers only"
+University of North Florida,CLUB,MCLA,,,,,North Florida,"club team (MCLA), not varsity: a level for transfers only"
+South Florida,CLUB,MCLA,,,,,University of South Florida,"club team (MCLA), not varsity: a level for transfers only"
+Arizona,CLUB,MCLA,,,,,University of Arizona,"club team (MCLA), not varsity: a level for transfers only"
+Arizona State,CLUB,MCLA,,,,,Arizona State University,"club team (MCLA), not varsity: a level for transfers only"
+"University of California, Los Angeles",CLUB,MCLA,,,,,"California, Los Angeles","club team (MCLA), not varsity: a level for transfers only"
+Grand Canyon University,CLUB,MCLA,,,,,,"club team (MCLA), not varsity: a level for transfers only"
+San Diego State,CLUB,MCLA,,,,,San Diego State University,"club team (MCLA), not varsity: a level for transfers only"
+USC,CLUB,MCLA,,,,,University of Southern California|Southern California,"club team (MCLA), not varsity: a level for transfers only"
+California State University–San Marcos,CLUB,MCLA,,,,,California State University San Marcos,"club team (MCLA), not varsity: a level for transfers only"
+University of California–San Diego,CLUB,MCLA,,,,,"University of California, San Diego|California, San Diego","club team (MCLA), not varsity: a level for transfers only"
+Loyola Marymount University,CLUB,MCLA,,,,,,"club team (MCLA), not varsity: a level for transfers only"
+Northern Arizona,CLUB,MCLA,,,,,Northern Arizona University,"club team (MCLA), not varsity: a level for transfers only"
+San Diego,CLUB,MCLA,,,,,University of San Diego,"club team (MCLA), not varsity: a level for transfers only"
+Whittier College,CLUB,MCLA,,,,,,"club team (MCLA), not varsity: a level for transfers only"
+Biola University,CLUB,MCLA,,,,,,"club team (MCLA), not varsity: a level for transfers only"
+California State University–Fullerton,CLUB,MCLA,,,,,"California State University, Fullerton","club team (MCLA), not varsity: a level for transfers only"
+University of California–Irvine,CLUB,MCLA,,,,,"University of California, Irvine|California, Irvine","club team (MCLA), not varsity: a level for transfers only"
+Claremont Colleges,CLUB,MCLA,,,,,,"club team (MCLA), not varsity: a level for transfers only"
+Long Beach State University,CLUB,MCLA,,,,,"California State University, Long Beach","club team (MCLA), not varsity: a level for transfers only"
+Illinois,CLUB,MCLA,,,,,University of Illinois at Urbana–Champaign|Illinois at Urbana–Champaign,"club team (MCLA), not varsity: a level for transfers only"
+Indiana,CLUB,MCLA,,,,,Indiana University Bloomington,"club team (MCLA), not varsity: a level for transfers only"
+Iowa State,CLUB,MCLA,,,,,Iowa State University,"club team (MCLA), not varsity: a level for transfers only"
+Michigan State,CLUB,MCLA,,,,,Michigan State University,"club team (MCLA), not varsity: a level for transfers only"
+Minnesota,CLUB,MCLA,,,,,University of Minnesota,"club team (MCLA), not varsity: a level for transfers only"
+Purdue,CLUB,MCLA,,,,,Purdue University,"club team (MCLA), not varsity: a level for transfers only"
+Western Michigan,CLUB,MCLA,,,,,Western Michigan University,"club team (MCLA), not varsity: a level for transfers only"
+Central Michigan,CLUB,MCLA,,,,,Central Michigan University,"club team (MCLA), not varsity: a level for transfers only"
+Dayton,CLUB,MCLA,,,,,University of Dayton,"club team (MCLA), not varsity: a level for transfers only"
+North Dakota State,CLUB,MCLA,,,,,North Dakota State University,"club team (MCLA), not varsity: a level for transfers only"
+California,CLUB,MCLA,,,,,"University of California, Berkeley|California, Berkeley","club team (MCLA), not varsity: a level for transfers only"
+"University of California, Santa Barbara",CLUB,MCLA,,,,,"California, Santa Barbara","club team (MCLA), not varsity: a level for transfers only"
+California Polytechnic State University,CLUB,MCLA,,,,,,"club team (MCLA), not varsity: a level for transfers only"
+Nevada,CLUB,MCLA,,,,,"University of Nevada, Reno|Nevada, Reno","club team (MCLA), not varsity: a level for transfers only"
+Santa Clara University,CLUB,MCLA,,,,,,"club team (MCLA), not varsity: a level for transfers only"
+Sonoma State University,CLUB,MCLA,,,,,,"club team (MCLA), not varsity: a level for transfers only"
+Stanford,CLUB,MCLA,,,,,Stanford University,"club team (MCLA), not varsity: a level for transfers only"
+"California State University, Chico",CLUB,MCLA,,,,,,"club team (MCLA), not varsity: a level for transfers only"
+UC Davis,CLUB,MCLA,,,,,"University of California, Davis|California, Davis","club team (MCLA), not varsity: a level for transfers only"
+University of California–Santa Cruz,CLUB,MCLA,,,,,"University of California, Santa Cruz|California, Santa Cruz","club team (MCLA), not varsity: a level for transfers only"
+Saint Mary's College,CLUB,MCLA,,,,,Saint Mary's College of California,"club team (MCLA), not varsity: a level for transfers only"
+San Jose State,CLUB,MCLA,,,,,San Jose State University,"club team (MCLA), not varsity: a level for transfers only"
