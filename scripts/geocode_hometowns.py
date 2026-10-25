@@ -10,7 +10,7 @@ Offline sources (downloaded once into .cache/):
 Optional online source (--online): OpenStreetMap Nominatim for whatever is left
 (foreign cities, typos), 1 request/second, cached in .cache/nominatim.json.
 
-    python scripts/geocode_hometowns.py                       # rosters/football/players_unique.csv
+    python scripts/geocode_hometowns.py                       # the season files in rosters/football/
     python scripts/geocode_hometowns.py --online --contact you@example.com
     python scripts/geocode_hometowns.py --sport mens-basketball
 
@@ -19,16 +19,20 @@ Suggestions marked "fixed" are applied in the same run; "review" ones are applie
 --use-review. All suggestions are saved to config/<sport>_hometown_corrections.csv, where your
 hand edits are kept from run to run and win over the built-in rules.
 
+Reads every player from the season files (rosters_<season>.csv), one row per player per school
+(built in memory, the same way scrape_rosters.py --combined writes players_unique.csv).
+
 Writes config/<sport>_hometown_corrections.csv (the fix table: status fixed / review / unfixable),
 and in rosters/<sport>/:
-  <input>_geocoded.csv        the rows + home_lat, home_lon, geo_source, geo_precision, with each
-                              hometown's corrected city/state/country
   hometowns.csv               one row per hometown: what the roster said, the town it was read as,
                               lat/lon, where the answer came from, and how many players. Open it
                               to look anything up. Re-runs reuse it, so only new hometowns are
                               looked up. To move a dot by hand, change its lat/lon and set its
-                              source to "manual"; manual rows are always kept.
+                              source to "manual"; manual rows are always kept. build_map_data.py
+                              reads each player's dot from here.
   unmatched_hometowns.csv     what still couldn't be placed, most common first
+Given a CSV instead (geocode_hometowns.py some.csv), it also writes some_geocoded.csv next to it: the
+rows + home_lat, home_lon, geo_source, geo_precision, with each hometown's corrected city/state/country.
 
 After changing the parser or this script, run with --refresh to look every hometown up again.
 """
@@ -51,6 +55,7 @@ import requests
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from hometowns import US_STATES, parse_hometown, split_labeled_hometown  # noqa: E402
 from paths import add_sport_argument, load_sport  # noqa: E402
+from seasons import players  # noqa: E402
 
 # In the repo folder (this script lives in scripts/), not the folder it's run from, so every run
 # finds the same downloads and the same saved online answers.
@@ -730,7 +735,8 @@ def load_lookup(path: Path, refresh: bool) -> dict[tuple, dict]:
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("rosters", type=Path, nargs="?",
-                    help="CSV from scrape_rosters.py (default: rosters/<sport>/players_unique.csv)")
+                    help="a CSV of players to geocode, also written out as <name>_geocoded.csv "
+                         "(default: every player in the season files in rosters/<sport>/, with no extra file)")
     add_sport_argument(ap)
     ap.add_argument("--online", action="store_true", help="look up leftovers with OpenStreetMap Nominatim")
     ap.add_argument("--contact", default="anonymous", help="email for the Nominatim User-Agent (their policy)")
@@ -741,15 +747,17 @@ def main(argv=None) -> int:
                     help="look every hometown up again instead of reusing hometowns.csv (keeps rows marked 'manual')")
     args = ap.parse_args(argv)
     sport = load_sport(args.sport)
-    args.rosters = args.rosters or sport.rosters_dir / "players_unique.csv"
     statuses = {"fixed", "review"} if args.use_review else {"fixed"}
     corr_path = args.corrections or sport.hometown_corrections_csv
     table = load_corrections(corr_path)
     lookup_path = sport.rosters_dir / "hometowns.csv"
     known = load_lookup(lookup_path, args.refresh)
 
-    with open(args.rosters, newline="", encoding="utf-8") as fh:
-        rows = list(csv.DictReader(fh))
+    if args.rosters:
+        with open(args.rosters, newline="", encoding="utf-8") as fh:
+            rows = list(csv.DictReader(fh))
+    else:
+        rows = players(sport.rosters_dir)
     players_per_raw: dict[str, int] = {}
     players_per_key: dict[tuple, int] = {}
     for r in rows:
@@ -838,18 +846,20 @@ def main(argv=None) -> int:
             h["state"], h["country"] = src.rsplit("_", 1)[1], "USA"  # so the map can label and filter it
         return h
 
-    out_path = args.rosters.with_name(args.rosters.stem + "_geocoded.csv")
-    extra = ["home_city", "home_state", "home_country", "home_lat", "home_lon", "geo_source", "geo_precision"]
-    fields = ([f for f in rows[0].keys() if f not in extra] if rows else []) + extra
-    with open(out_path, "w", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=fields)
-        w.writeheader()
-        for r in rows:
-            raw = r.get("hometown", "")
-            lat, lon, src, prec = per_school.get((raw, r["school"]), resolved[raw])
-            h = with_guessed_state(homes[raw], src)
-            w.writerow({**r, "home_city": h["city"], "home_state": h["state"], "home_country": h["country"],
-                        "home_lat": lat, "home_lon": lon, "geo_source": src, "geo_precision": prec})
+    out_path = None
+    if args.rosters:   # only for a CSV given by hand; the map build reads hometowns.csv
+        out_path = args.rosters.with_name(args.rosters.stem + "_geocoded.csv")
+        extra = ["home_city", "home_state", "home_country", "home_lat", "home_lon", "geo_source", "geo_precision"]
+        fields = ([f for f in rows[0].keys() if f not in extra] if rows else []) + extra
+        with open(out_path, "w", newline="", encoding="utf-8") as fh:
+            w = csv.DictWriter(fh, fieldnames=fields)
+            w.writeheader()
+            for r in rows:
+                raw = r.get("hometown", "")
+                lat, lon, src, prec = per_school.get((raw, r["school"]), resolved[raw])
+                h = with_guessed_state(homes[raw], src)
+                w.writerow({**r, "home_city": h["city"], "home_state": h["state"], "home_country": h["country"],
+                            "home_lat": lat, "home_lon": lon, "geo_source": src, "geo_precision": prec})
 
     # hometowns.csv: one row per hometown string, plus one per school for towns given without a state.
     lookup_rows = []
@@ -891,7 +901,8 @@ def main(argv=None) -> int:
 
     total = len(rows) - no_hometown          # players with a hometown to place
     placed = total - counts.get("unmatched", 0)
-    print(f"Geocoded {placed}/{total} players with a hometown ({placed / max(total, 1):.1%}) -> {out_path}")
+    print(f"Geocoded {placed}/{total} players with a hometown ({placed / max(total, 1):.1%})"
+          + (f" -> {out_path}" if out_path else ""))
     for prec in ("city", "city_guess", "county", "region", "country", "unmatched"):
         if counts.get(prec):
             print(f"  {prec:11s} {counts[prec]:7d}")

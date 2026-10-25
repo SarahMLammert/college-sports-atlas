@@ -6,7 +6,7 @@ Examples
     python scripts/scrape_rosters.py --seasons 2016-2019,2021-2026     # last 10 seasons, skipping 2020
     python scripts/scrape_rosters.py --seasons 2019 --only "Alabama,Clemson"
     python scripts/scrape_rosters.py --seasons 2016-2019,2021-2026 --retry-failed --render
-    python scripts/scrape_rosters.py --recombine                       # no downloads: re-clean saved seasons, rebuild the combined files
+    python scripts/scrape_rosters.py --recombine                       # no downloads: re-clean the saved season files
     python scripts/scrape_rosters.py --sport lacrosse-mens             # another sport (needs config/lacrosse-mens.json)
     python scripts/scrape_rosters.py --seasons 2016-2026 --report      # also write the scrape reports and MISSING_ROSTERS.md
 
@@ -14,7 +14,8 @@ Reads config/<sport>.json and config/<sport>_schools.csv (default sport: footbal
 
 Outputs (in rosters/<sport>/, or --out). The rosters are all cleaned: no jersey numbers or captain
 marks in names, hometowns split into city/state/country, high school and previous school sorted out.
-    rosters_<season>.csv          every player that season, one row each
+    rosters_<season>.csv          every player that season, one row each (the later steps read these)
+Only with --combined (for opening in a spreadsheet; nothing else needs them):
     rosters_all_seasons.csv       every saved season stacked (one row per player per season)
     players_unique.csv            one row per player per school, with first/last season on the roster
 Only with --report:
@@ -43,6 +44,7 @@ from urllib.parse import urljoin, urlparse
 import fetch, hometowns, sidearm
 from fetch import Fetcher, current_season
 from hometowns import *            # noqa: F401,F403
+from seasons import UNIQUE_FIELDS, build_unique, person_key, read_csv, season_files   # shared with the later steps
 from paths import (ROOT, SCRAPED, add_sport_argument, d1_schools, division_for, load_all_colleges,
                    load_division_history, load_schools, load_sport)
 from sidearm import *              # noqa: F401,F403
@@ -68,9 +70,6 @@ OUT_FIELDS = (
 )
 REPORT_FIELDS = ["season", "school", "division", "current_conference", "status", "season_check",
                  "strategy", "players", "with_hometown", "url", "error"]
-UNIQUE_FIELDS = ["school", "name", "position", "hometown", "home_city", "home_state", "home_country",
-                 "high_school", "previous_school", "first_season", "last_season", "n_seasons", "seasons",
-                 "first_class", "division_first_season", "current_conference"]
 
 
 # ---------------------------------------------------------------------------
@@ -542,17 +541,6 @@ def write_missing_rosters(report_dir: Path, schools_csv: Path, sport_label: str,
 # ---------------------------------------------------------------------------
 # outputs
 
-def read_csv(path: Path) -> list[dict]:
-    if not path.exists():
-        return []
-    with open(path, newline="", encoding="utf-8") as fh:
-        rows = list(csv.DictReader(fh))
-    for r in rows:  # files written by the first version used "conference"
-        if "current_conference" not in r and "conference" in r:
-            r["current_conference"] = r.pop("conference")
-    return rows
-
-
 def write_csv(path: Path, fields: list[str], rows: list[dict]) -> None:
     with open(path, "w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=fields, extrasaction="ignore")
@@ -579,59 +567,6 @@ def saved_reports(rows: list[dict]) -> dict[str, dict]:
                        "players": len(grp), "with_hometown": with_home, "url": first.get("roster_url", ""),
                        "error": ""}
     return out
-
-
-_SUFFIX = re.compile(r"\b(jr|sr|ii|iii|iv|v)\b\.?", re.I)
-
-
-def person_key(row: dict) -> tuple:
-    name = _SUFFIX.sub("", clean(row["name"]).lower())
-    name = re.sub(r"[^a-z]", "", name)
-    city = re.sub(r"[^a-z]", "", (row.get("home_city") or "").lower())
-    return (row["school"], name, city, row.get("home_state") or row.get("home_country") or "")
-
-
-def build_unique(rows: list[dict]) -> list[dict]:
-    groups: dict[tuple, list[dict]] = {}
-    for r in rows:
-        groups.setdefault(person_key(r), []).append(r)
-    # A season where the site left the hometown blank would otherwise count as a second player.
-    # Fold it into the one group with the same school + name, if there is exactly one.
-    by_name: dict[tuple, list[tuple]] = {}
-    for k in groups:
-        if k[2] or k[3]:
-            by_name.setdefault(k[:2], []).append(k)
-    for k in [k for k in groups if not (k[2] or k[3])]:
-        homes = by_name.get(k[:2], [])
-        if len(homes) == 1:
-            groups[homes[0]].extend(groups.pop(k))
-    out = []
-    for grp in groups.values():
-        grp.sort(key=lambda r: int(r["season"]))
-        first, last = grp[0], grp[-1]
-        seasons = sorted({int(r["season"]) for r in grp})
-        out.append({
-            "school": first["school"], "name": last["name"], "position": last["position"],
-            **{f: next((r[f] for r in grp if r["hometown"]), first[f])
-               for f in ("hometown", "home_city", "home_state", "home_country")},
-            "high_school": next((r["high_school"] for r in grp if r["high_school"]), ""),
-            "previous_school": next((r["previous_school"] for r in grp if r["previous_school"]), ""),
-            "first_season": seasons[0], "last_season": seasons[-1], "n_seasons": len(seasons),
-            "seasons": " ".join(map(str, seasons)), "first_class": first["class_norm"],
-            "division_first_season": first["division"], "current_conference": first["current_conference"],
-        })
-    out.sort(key=lambda r: (r["school"], r["first_season"], r["name"]))
-    return out
-
-
-def season_files(out_dir: Path) -> dict[int, Path]:
-    """season -> rosters_<season>.csv for every season saved in the folder."""
-    out = {}
-    for path in out_dir.glob("rosters_*.csv"):
-        m = re.fullmatch(r"rosters_(\d{4})\.csv", path.name)
-        if m:
-            out[int(m.group(1))] = path
-    return dict(sorted(out.items()))
 
 
 def restore_season_files(out_dir: Path) -> None:
@@ -671,9 +606,10 @@ def clean_rows(rows: list[dict]) -> list[dict]:
     return [clean_row(r) for r in rows if not is_staff(r)]
 
 
-def write_combined(out_dir: Path) -> tuple[list[int], list[dict], list[dict]]:
-    """Clean every saved season file in place, then rebuild rosters_all_seasons.csv and players_unique.csv
-    from them. Every roster file holds only the cleaned version."""
+def write_combined(out_dir: Path, combined_files: bool = False) -> tuple[list[int], list[dict], list[dict]]:
+    """Clean every saved season file in place. With combined_files (--combined), also write
+    rosters_all_seasons.csv and players_unique.csv from them, for opening in a spreadsheet; the later
+    steps read the season files themselves. Every roster file holds only the cleaned version."""
     # Combined outputs cover every season saved so far, not just this run.
     combined = []
     all_saved = []
@@ -687,13 +623,14 @@ def write_combined(out_dir: Path) -> tuple[list[int], list[dict], list[dict]]:
         combined.extend(rows)
     if n_before != len(combined):
         log.info("Dropped %d coach/staff rows from the saved rosters", n_before - len(combined))
-    write_csv(out_dir / "rosters_all_seasons.csv", OUT_FIELDS, combined)
     unique = build_unique(combined)
-    write_csv(out_dir / "players_unique.csv", UNIQUE_FIELDS, unique)
-
+    if combined_files:
+        write_csv(out_dir / "rosters_all_seasons.csv", OUT_FIELDS, combined)
+        write_csv(out_dir / "players_unique.csv", UNIQUE_FIELDS, unique)
     n_prev = sum(1 for r in unique if r["previous_school"])
-    log.info("Combined files cover seasons %s: %d player-season rows, %d unique players (%d with a previous school) -> %s",
-             ", ".join(map(str, all_saved)), len(combined), len(unique), n_prev, out_dir)
+    log.info("Saved seasons %s: %d player-season rows, %d unique players (%d with a previous school)%s",
+             ", ".join(map(str, all_saved)), len(combined), len(unique), n_prev,
+             f" -> rosters_all_seasons.csv and players_unique.csv in {out_dir}" if combined_files else "")
     return all_saved, combined, unique
 
 
@@ -726,7 +663,10 @@ def main(argv=None) -> int:
     ap.add_argument("--report", action="store_true",
                     help="also write scrape_report_<season>.csv (per school: status, URL, errors) and MISSING_ROSTERS.md")
     ap.add_argument("--recombine", action="store_true",
-                    help="don't download anything: re-clean every saved season and rebuild the combined files")
+                    help="don't download anything: re-clean every saved season file (and, with --combined, rewrite the combined files)")
+    ap.add_argument("--combined", action="store_true",
+                    help="also write rosters_all_seasons.csv and players_unique.csv (every season in one file, for a spreadsheet); "
+                         "the later steps don't need them")
     ap.add_argument("--problems", action="store_true",
                     help="don't scrape: list the failed and partial schools in the saved reports "
                          "(for --seasons, and --division / --only if given; needs reports from a --report run)")
@@ -775,7 +715,7 @@ def main(argv=None) -> int:
         log.info("Failing and partial schools, with reasons -> %s", path)
 
     if args.recombine:
-        write_combined(season_dir)
+        write_combined(season_dir, args.combined)
         write_missing()
         return 0
 
@@ -898,7 +838,7 @@ def main(argv=None) -> int:
         st = [r.get("status") for r in reports.values()]
         totals.append((season, len(rows), st.count("ok"), st.count("partial"), st.count("failed")))
 
-    all_saved, combined, unique = write_combined(season_dir)
+    all_saved, combined, unique = write_combined(season_dir, args.combined)
     write_missing()
     log.info("season  players   ok  partial  failed")
     for season, n, ok, part, fail in totals:

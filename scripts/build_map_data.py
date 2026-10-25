@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
-"""Pack players_unique_geocoded.csv into the JSON a sport's pages (docs/<sport>/) load.
+"""Pack a sport's players into the JSON its pages (docs/<sport>/) load.
 
-    python scripts/build_map_data.py                # rosters/football/players_unique_geocoded.csv -> docs/football/map_data.json
+    python scripts/build_map_data.py                # rosters/football/ -> docs/football/map_data.json
     python scripts/build_map_data.py --sport lacrosse-mens
-    python scripts/build_map_data.py <input.csv> <output.json>
+    python scripts/build_map_data.py <input.csv> <output.json>   # a geocoded CSV instead (older runs)
+
+By default it reads the season files (rosters_<season>.csv), makes one row per player per school from
+them, and places each hometown with hometowns.csv from geocode_hometowns.py, so run the geocoder first.
 
 Run it again whenever you re-scrape or re-geocode, then commit docs/<sport>/map_data.json.
 Dot colors come from config/school_colors.csv (school, primary, secondary hex colors), shared by every
@@ -33,6 +36,7 @@ from collections import Counter
 import sidearm
 from levels import LEVELS, Levels, is_major
 from paths import add_sport_argument, d1_schools, load_sport
+from seasons import players
 from sidearm import clean_name, load_known_colleges, sort_schools
 
 # Position groups come from the sport's settings (config/<sport>.json): the groups, the roster
@@ -195,11 +199,42 @@ def load_colors(path):
     return out
 
 
+def placed_players(sport) -> list[dict]:
+    """One row per player per school from the season files, with each hometown placed from hometowns.csv
+    (geocode_hometowns.py): its corrected city/state/country, lat/lon and precision. A town given without
+    a state is looked up for the player's school first, since the geocoder guesses those per school."""
+    path = sport.rosters_dir / "hometowns.csv"
+    if not path.exists():
+        sys.exit(f"{path} not found: run geocode_hometowns.py first.")
+    with open(path, newline="", encoding="utf-8") as fh:
+        places = {(r.get("hometown", ""), r.get("school", "")): r for r in csv.DictReader(fh)}
+    rows, unplaced = players(sport.rosters_dir), 0
+    for r in rows:
+        raw = r.get("hometown", "")
+        p = places.get((raw, r["school"])) or places.get((raw, ""))
+        if p is None:
+            unplaced += bool(raw.strip())
+            p = {}
+        else:
+            r["home_city"], r["home_state"], r["home_country"] = p.get("city", ""), p.get("state", ""), p.get("country", "")
+            src = p.get("source", "")
+            if src.startswith("census_guess_") and not r["home_state"]:   # as the geocoder labels a guessed state
+                r["home_state"], r["home_country"] = src.rsplit("_", 1)[1], "USA"
+        r["home_lat"], r["home_lon"] = p.get("lat", ""), p.get("lon", "")
+        r["geo_source"], r["geo_precision"] = p.get("source", ""), p.get("precision", "")
+    if unplaced:
+        print(f"{unplaced} players have a hometown that isn't in {path.name} yet: run geocode_hometowns.py again")
+    return rows
+
+
 def main(src, dst, sport):
     sidearm.configure(sport)     # the sport's junior colleges, for telling a college from a high school
     use_positions(sport)
-    with open(src, newline="", encoding="utf-8") as fh:
-        rows = list(csv.DictReader(fh))
+    if src:
+        with open(src, newline="", encoding="utf-8") as fh:
+            rows = list(csv.DictReader(fh))
+    else:
+        rows = placed_players(sport)
     if sport.schools_csv.exists():
         load_known_colleges(d1_schools(sport.schools_csv))   # so "Wake Forest" counts as a college
     levels = Levels.load(sport)
@@ -330,11 +365,11 @@ def write_levels_report(matched: Counter, path) -> None:
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("files", nargs="*", type=Path, metavar="input.csv output.json",
-                    help="default: rosters/<sport>/players_unique_geocoded.csv docs/<sport>/map_data.json")
+                    help="default: the season files and hometowns.csv in rosters/<sport>/ -> docs/<sport>/map_data.json")
     add_sport_argument(ap)
     args = ap.parse_args()
     sport = load_sport(args.sport)
     if len(args.files) not in (0, 2):
         sys.exit(__doc__)
-    src, dst = args.files or (sport.rosters_dir / "players_unique_geocoded.csv", sport.site_dir / "map_data.json")
+    src, dst = args.files or (None, sport.site_dir / "map_data.json")
     main(src, dst, sport)

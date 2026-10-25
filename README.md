@@ -218,6 +218,7 @@ scripts/                 the data pipeline; every script takes --sport (default:
   sidearm.py               shared: reading Sidearm/WMT and PrestoSports pages: roster URLs, season check, the five parsers,
                            cleaning names, telling a college from a high school
   hometowns.py             shared: cleaning hometowns, class years, heights and weights
+  seasons.py               shared: reading the season files and making one row per player per school from them
   levels.py                shared: the level of a transfer's previous school (D1, D2, D3, NAIA, JUCO, unknown)
 rosters/<sport>/         the cleaned rosters and the scripts' other working files, not committed (see The rosters folder)
 config/
@@ -273,20 +274,26 @@ pip install -r requirements.txt
 python scripts/scrape_rosters.py --seasons 2016-2019,2021-2026                 # about 1-2 hours for D1 alone
 python scripts/scrape_rosters.py --seasons 2016-2019,2021-2026 --retry-failed  # second pass on failures
 #   add --report to either line to also save the scrape reports and MISSING_ROSTERS.md (see Fixing a school that fails)
-python scripts/geocode_hometowns.py                                    # reads rosters/football/players_unique.csv
+python scripts/geocode_hometowns.py                                    # reads the season files, writes rosters/football/hometowns.csv
 #   check the "review" rows in config/football_hometown_corrections.csv, change any you agree with to "fixed",
 #   then run the geocode line again (or add --use-review to accept them all)
 python scripts/check_frozen_classes.py                                 # writes rosters/football/frozen_class_seasons.csv
 python scripts/build_map_data.py                                       # writes docs/football/map_data.json
 ```
+Every step after the scraper reads the season files (`rosters_<season>.csv`) directly and makes the
+one-row-per-player list from them in memory (`scripts/seasons.py`), so there's no combined file to keep up
+to date. The map build places each player's hometown from `hometowns.csv`, so run the geocoder before it
+whenever new seasons or schools come in.
 Run `check_frozen_classes.py` before `build_map_data.py`: the build reads the list it writes, and
 without it trusts every season's class years (it prints a warning).
 Then commit `docs/football/map_data.json` and push; the live map updates on its own.
 
 After changing the scraper's cleaning rules, `python scripts/scrape_rosters.py --recombine` re-cleans every saved
-season file in place and rebuilds `rosters_all_seasons.csv` and `players_unique.csv` without downloading
-anything (a minute instead of hours); then run `geocode_hometowns.py`, `check_frozen_classes.py` and
+season file in place without downloading anything (a minute instead of hours); then run `geocode_hometowns.py`, `check_frozen_classes.py` and
 `build_map_data.py` as usual.
+
+To get every season in one file for a spreadsheet, add `--combined` to a scrape or to `--recombine`: it also
+writes `rosters_all_seasons.csv` and `players_unique.csv`. Nothing else needs them.
 
 To scrape one level at a time, add `--division` with `FBS`, `FCS`, `D2`, `D3`, `NAIA`, `JUCO` or `all`
 (the scraper also lists the colleges it skips because they have no athletics site).
@@ -317,18 +324,17 @@ downloading) applies it everywhere.
 
 | file | contents |
 |---|---|
-| `rosters_<season>.csv` | one row per player that season |
-| `rosters_all_seasons.csv` | every season stacked |
-| `players_unique.csv` | one row per player per school, with first and last season |
-| `players_unique_geocoded.csv` | the above plus latitude and longitude, with each hometown's corrected city, state and country |
+| `rosters_<season>.csv` | one row per player that season; every later step reads these |
+| `rosters_all_seasons.csv` | only with `--combined`: every season stacked |
+| `players_unique.csv` | only with `--combined`: one row per player per school, with first and last season |
 | `scrape_report_<season>.csv` | only with `--report`: per school: ok / partial / failed, players found, URL used, errors (the first 3 and last 5) |
 | `MISSING_ROSTERS.md` | only with `--report`: the schools whose roster failed or is partial, by division, each with its seasons and the reason in words, plus the colleges skipped for having no site; rewritten after every `--report` run (see Fixing a school that fails) |
-| `hometowns.csv` | the geocoder's table of every hometown it has placed; re-runs reuse it |
+| `hometowns.csv` | the geocoder's table of every hometown it has placed, with its corrected city, state and country; re-runs reuse it, and the map build reads each player's dot from it |
 | `unmatched_hometowns.csv` | hometowns that still couldn't be placed |
 | `frozen_class_seasons.csv` | school-seasons whose class years can't be trusted; the build skips its class-year rule for them |
 | `transfer_levels.csv` | every previous-school name of a transfer with no line, the level it got and how many players; made by `build_map_data.py` for checking |
 
-If the season files are missing but `rosters_all_seasons.csv` is there, the scraper splits it back
+If the season files are missing but a `rosters_all_seasons.csv` is there (from `--combined`), the scraper splits it back
 into season files before it does anything else, so a partial run (`--only`) can't wipe the other schools.
 
 Your hometown fixes live in `config/football_hometown_corrections.csv`, so they're committed with the
