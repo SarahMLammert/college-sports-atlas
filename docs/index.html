@@ -52,8 +52,8 @@
   /* ---------- Mode switch (center of the globe, top of the phone list) ---------- */
   .switch { display: inline-flex; padding: 3px; gap: 3px; border-radius: 999px; border: 1px solid var(--line); background: var(--panel); }
   .switch button {
-    min-height: 38px; padding: 0 18px; border: 0; border-radius: 999px; background: none; color: var(--muted); cursor: pointer;
-    font: 700 15px/1 'Cormorant Garamond', Georgia, serif; text-transform: uppercase; letter-spacing: 0.14em;
+    min-height: 46px; padding: 0 22px; border: 0; border-radius: 999px; background: none; color: var(--muted); cursor: pointer;
+    font: 700 18px/1 'Cormorant Garamond', Georgia, serif; text-transform: uppercase; letter-spacing: 0.14em;
     transition: background 0.2s, color 0.2s;
   }
   .switch button:hover { color: var(--ink); }
@@ -74,7 +74,7 @@
     position: absolute; left: 400px; top: 290px; width: 400px; height: 400px; border-radius: 50%;
     background: radial-gradient(circle at 36% 30%, var(--sea-hi) 0%, var(--sea) 52%, var(--sea-lo) 100%);
     box-shadow: 0 0 0 1.5px var(--ink), 0 0 0 6px var(--paper), 0 0 0 7px var(--line), 0 18px 50px -24px rgba(58, 46, 34, 0.55), 0 0 60px -10px var(--glow);
-    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 48px; gap: 10px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 26px; gap: 12px;
     overflow: hidden; transition: box-shadow 0.3s;
   }
   .center > :not(.earth):not(.shade) { position: relative; }
@@ -94,10 +94,11 @@
   .scale .pin { fill: var(--paper-hi); stroke: var(--ink); stroke-width: 2; }
   .scale .pin-dot { fill: var(--ink); }
   .scale .pole { font: 700 17px/1 'Cormorant Garamond', Georgia, serif; fill: var(--ink); text-anchor: middle; dominant-baseline: central; }
-  .kicker { font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim); }
-  .center .title { font-size: 46px; line-height: 0.95; margin: 0; }
+  .kicker { font-size: 15px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim); }
+  .center .title { font-size: 58px; line-height: 0.95; margin: 0; letter-spacing: 0.08em; white-space: nowrap; align-self: stretch; }
   .center .title span, .list-head .title span { color: var(--accent); font-style: italic; text-transform: none; letter-spacing: 0.02em; font-size: 1.12em; transition: color 0.2s; }
-  .hint { margin: 0 0 14px; font-size: 15px; line-height: 1.45; color: var(--dim); max-width: 260px; }
+  .hint { margin: 0 0 14px; font-size: 21px; line-height: 1.35; color: var(--dim); max-width: 320px; }
+  .center .hint { color: var(--ink); font-weight: 500; }
 
   /* Sport discs: dashed when the sport has nothing on this side yet */
   .disc, .badge { border-radius: 50%; border: 1.5px dashed rgba(58, 46, 34, 0.42); background: var(--paper-hi); color: var(--muted); display: flex; align-items: center; justify-content: center; }
@@ -133,6 +134,7 @@
   .label .n { font-size: 27px; line-height: 1.05; color: var(--dim); letter-spacing: 0.1em; }
   .label.live .n, .label.lit .n { color: var(--ink); }
   .label .s { font: italic 600 21px/1.2 'Cormorant Garamond', Georgia, serif; color: var(--muted); min-height: 24px; }
+  .label .s:empty { display: none; }   /* no Men's/Women's line (Football, Baseball, Softball): no blank gap */
   .label .sum { font-size: 17px; font-weight: 600; line-height: 1.25; color: var(--accent); opacity: 0; transform: translateY(-3px); transition: opacity 0.18s, transform 0.18s; }
   .label.lit .sum { opacity: 1; transform: none; }
 
@@ -142,8 +144,8 @@
   /* ---------- List (phones) ---------- */
   #list-view { display: none; flex: 1; flex-direction: column; gap: 14px; padding: 28px 22px 24px; width: 100%; max-width: 520px; margin: 0 auto; }
   .list-head { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; padding-bottom: 4px; }
-  .list-head .title { font-size: 34px; line-height: 1; margin: 0; }
-  .list-head .hint { margin: 0 0 4px; max-width: 320px; color: var(--muted); }
+  .list-head .title { font-size: 42px; line-height: 1; margin: 0; }
+  .list-head .hint { margin: 0 0 4px; max-width: 320px; color: var(--muted); font-size: 18px; }
   .rows { display: flex; flex-direction: column; gap: 8px; }
   .row { display: flex; flex-direction: column; border-radius: 12px; border: 1px solid var(--line); background: rgba(249, 243, 228, 0.6); transition: border-color 0.18s, box-shadow 0.18s, opacity 0.18s; }
   .rows.has-lit .row:not(.lit) { opacity: 0.55; }
@@ -245,10 +247,10 @@
       stats: [['264', 'schools'], ['137K', 'players']] },
     { id: 'lacrosse-mens',   name: 'Lacrosse', sub: "Men's",   icon: 'lacrosse',
       players: 'lacrosse-mens/players-dotmap.html', staff: null, learn: null,
-      stats: [['457', 'schools']] },                                   // add ['…K', 'players'] after the build
+      stats: [['457', 'schools'], ['73K', 'players']] },
     { id: 'lacrosse-womens', name: 'Lacrosse', sub: "Women's", icon: 'lacrosse',
       players: 'lacrosse-womens/players-dotmap.html', staff: null, learn: null,
-      stats: [['609', 'schools']] },                                   // add ['…K', 'players'] after the build
+      stats: [['609', 'schools'], ['64K', 'players']] },
     { id: 'hockey-mens',    name: 'Hockey',     sub: "Men's",   icon: 'hockey',     players: null, staff: null,
       learn: null, learnSum: 'Rink · positions · systems' },          // set learn: 'hockey/learn.html' once it's built
     { id: 'hockey-womens',  name: 'Hockey',     sub: "Women's", icon: 'hockey',     players: null, staff: null,
@@ -263,8 +265,8 @@
   ];
 
   const MODES = {
-    recruiting: { title: 'Recruiting <span>maps</span>', hint: 'Hover or tap a sport.', doc: 'Recruiting Maps' },
-    learn:      { title: 'Learn the <span>game</span>',   hint: 'Positions, plays and systems, drawn out. Hover or tap a sport.', doc: 'Learn the Game' },
+    recruiting: { title: 'Recruiting<br><span>maps</span>', hint: 'Hover or tap a sport.', doc: 'Recruiting Maps' },
+    learn:      { title: 'Learn the<br><span>game</span>',   hint: 'Positions, plays and systems, drawn out. Hover or tap a sport.', doc: 'Learn the Game' },
   };
 
   // ---- Icons (40×40 for sports, 24×24 for the page buttons) ----
@@ -447,9 +449,20 @@
         <div class="more"><div class="sum">${summary(s)}</div>${actionsHTML(s)}</div>
       </div>`).join('');
 
+    fitTitle();
     document.getElementById('legend').innerHTML = kindsFor().map((k) => `<span>${smallSvg(KINDS[k].icon, 18)}${KINDS[k].label}</span>`).join('');
     light(lit, true);
   }
+
+  // The globe's title: as big as fits across the globe (58px at most), whichever font has loaded.
+  function fitTitle() {
+    const el = document.querySelector('.center .title');
+    if (!el) return;
+    let size = 58;
+    el.style.fontSize = size + 'px';
+    while (el.scrollWidth > el.clientWidth && size > 36) el.style.fontSize = (size -= 2) + 'px';
+  }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitTitle);
 
   // ---- Lighting ----
   function light(id, quiet) {

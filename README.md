@@ -1,7 +1,19 @@
 # college-sports-atlas
 
 Where college players come from, sport by sport, scraped from each school's official athletics site
-and put on a map. Football is live: the hometown of every FBS and FCS player on a roster since 2016.
+and put on a map. Every sport goes through the same scripts (`--sport <name>`) and gets the same three
+pages in its own folder of `docs/`.
+
+| sport | folder | schools | seasons | status |
+|---|---|---|---|---|
+| Football | `football` | 264 (FBS and FCS) | 2016–2019, 2021–2026 (no 2020) | live; D2, D3, NAIA and JUCO in progress |
+| Lacrosse (Men's) | `lacrosse-mens` | 457 (D1, D2, D3, NAIA, JUCO; no club teams) | 2016–2026 (2020 included) | live |
+| Lacrosse (Women's) | `lacrosse-womens` | 609 (D1, D2, D3, NAIA, JUCO to 2024) | 2016–2026 | live |
+
+Hockey, basketball, baseball, softball, volleyball and soccer show as "coming soon" on the picker.
+Lacrosse is a spring sport: its season is named for the spring it's played in (2024 = the 2023-24 school year).
+
+### Football in numbers
 
 - **264 schools**, about **137,000 player records** and about **11,000 hometowns**
 - Seasons 2016–2019 and 2021–2026 (there's no 2020 data)
@@ -11,14 +23,18 @@ and put on a map. Football is live: the hometown of every FBS and FCS player on 
 - One record per player per school, so a transfer appears once for each school he played for
 
 The site lives in `docs/` and is plain static files, so GitHub Pages can host it for free. It opens
-on a sport picker (`index.html`), and each sport has its own folder. Football's three pages are in
-`docs/football/`, linked from each other's title bars:
+on a sport picker (`index.html`), and each sport has its own folder (`docs/football/`,
+`docs/lacrosse-mens/`, `docs/lacrosse-womens/`) with the same three pages, linked from each other's title bars:
 
-- **Recruiting Map** (`football/players-dotmap.html`): a world map with a dot for every hometown.
-- **Recruiting Footprints** (`football/players-heatmap.html`): up to four schools side by side on
+- **Recruiting Map** (`<sport>/players-dotmap.html`): a world map with a dot for every hometown.
+- **Recruiting Footprints** (`<sport>/players-heatmap.html`): up to four schools side by side on
   U.S. maps, each state shaded by its share of that school's roster.
-- **Transfer Map** (`football/players-transfers.html`): lines from campus to campus for every player
-  who moved between two D1 schools.
+- **Transfer Map** (`<sport>/players-transfers.html`): lines from campus to campus for every player
+  who moved between two schools in that sport's data.
+
+The rest of this README uses football for its examples and numbers; the other sports work the same way
+with `--sport <name>` and their own files (`config/<name>.json`, `config/<name>_schools.csv`,
+`rosters/<name>/`, `docs/<name>/`).
 
 Page names start with `players-` or `staff-` and say what kind of map they are, so every sport's
 folder can use the same names.
@@ -53,10 +69,12 @@ exist: set a sport's `players` or `staff` to a page and its button starts workin
 Every page's title bar has a round button (a ring of dots) that goes back to the picker.
 
 The picker's footer has an **Information about the data** button that opens `sources.html`, a plain-language
-page for visitors. It opens with the line "Rosters scraped from each school's official athletics site" and covers where the rosters come from (each school's own athletics site), which sports, schools
-and seasons are covered, how hometowns are placed on the map, how transfers are counted, the known gaps,
-and where the map outlines come from. It's written by hand, so update it when a sport goes live or the
-numbers change (its "What's covered" list and the football numbers at the top).
+page for visitors that covers every sport. It opens with the line "Rosters scraped from each school's official
+athletics site", then: how the rosters are collected, what's covered (one card per live sport with its divisions,
+seasons and numbers), how hometowns are placed on the map, how transfers are counted, the known gaps, and where
+the map outlines come from. Only "What's covered" is sport by sport; the other sections apply to every sport,
+with football numbers given as examples. It's written by hand, so when a sport goes live or its numbers change,
+update its card (and the picker's `SPORTS` list).
 
 ## Using the map
 
@@ -199,7 +217,7 @@ docs/                    the website (this is what GitHub Pages serves)
   common.js              shared by every sport's pages: data loading, school colors, the Filters dropdown and its link keys
   common.css             shared by every sport's pages: colors, type, title bar, buttons, the Filters dropdown
   .nojekyll              tells GitHub Pages to serve the files as they are
-  football/
+  football/              one folder per sport, all alike (also lacrosse-mens/, lacrosse-womens/)
     players-dotmap.html      Recruiting Map: the dot map, search, players panel and school stats
     players-heatmap.html     Recruiting Footprints: four schools on state-shaded U.S. maps
     players-transfers.html   Transfer Map: school-to-school moves on a U.S. map, with source and destination lists
@@ -247,8 +265,9 @@ still answers older imports like `from scrape_rosters import parse_hometown`.
 
 ## Adding a sport
 
-1. Add two files to `config/`, named for the sport the way the athletics sites name it
-   (`mens-basketball`, `baseball`):
+1. Add two files to `config/`, named sport first and then sex (`lacrosse-mens`, `basketball-womens`);
+   a sport with only one version keeps its plain name (`football`, `baseball`). The same name is used
+   for `rosters/<name>/`, `docs/<name>/` and `--sport <name>`:
    - `<sport>.json`: copy `football.json` and change `label`, `roster_paths` (the roster page's path
      on the sites, e.g. `/sports/mens-basketball/roster`), `presto_paths` (the same for PrestoSports
      sites, with `{season}` and `{next_yy}`, e.g. `/sports/mbkb/{season}-{next_yy}/roster`), `min_players` (fewer players than this on a
@@ -262,7 +281,8 @@ still answers older imports like `from scrape_rosters import parse_hometown`.
 3. Run the steps under Rebuild the data with `--sport <sport>`.
 4. Copy football's three pages from `docs/football/` to `docs/<sport>/` (not its `.json` files), change the page titles, and set the
    sport's `players` page in the `SPORTS` list in `docs/index.html`.
-5. Add the sport to "What's covered" in `docs/sources.html`, with its schools and seasons.
+5. Add a card for the sport to "What's covered" in `docs/sources.html` (copy one of the others): its divisions,
+   seasons and numbers. Add it to the sports table at the top of this README too.
 
 Each sport's pages remember their own last view in the browser (the key starts with the sport).
 

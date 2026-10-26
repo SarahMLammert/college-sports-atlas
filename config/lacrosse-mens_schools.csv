@@ -110,9 +110,9 @@ Concordia Irvine,D2,Rocky Mountain Athletic Conference,cuigoldeneagles.com,,,,Co
 D'Youville,D2,East Coast Conference,athletics.dyc.edu,,,,,
 Davenport,D2,Great Midwest Athletic Conference,dupanthers.com,,,,,
 Davis & Elkins,D2,Great Midwest Athletic Conference,senatornation.com,,,,,
-UDC,D2,East Coast Conference,udcfirebirds.com,,,,District of Columbia,
+UDC,D2,East Coast Conference,udcfirebirds.com,,,,District of Columbia,"the site refuses automated visitors for some seasons, even in a browser (bot check, Oct 2026)"
 Dominican (CA),D2,Rocky Mountain Athletic Conference,dominicanathletics.com,,,,Dominican University of California,
-Dominican (NY),D2,Central Atlantic Collegiate Conference,chargerathletics.com,,,,Dominican College|Dominican University New York,
+Dominican (NY),D2,Central Atlantic Collegiate Conference,chargerathletics.com,,,,Dominican College|Dominican University New York,"the site refuses automated visitors for some seasons, even in a browser (bot check, Oct 2026)"
 Embry-Riddle (FL),D2,Sunshine State Conference,erauathletics.com,,,,Embry-Riddle|Embry-Riddle Aeronautical,
 Emmanuel (GA),D2,Conference Carolinas,goeclions.com,,,,Emmanuel College (GA),
 Emory & Henry,D2,South Atlantic Conference,gowasps.com,,,,,
@@ -133,7 +133,7 @@ Lewis,D2,Great Lakes Valley Conference,lewisflyers.com,,,,,
 Lincoln Memorial,D2,South Atlantic Conference,lmurailsplitters.com,,,,LMU (TN),
 Lynn,D2,Sunshine State Conference,lynnfightingknights.com,,,,,
 Malone,D2,Great Midwest Athletic Conference,malonepioneers.com,,,,,
-Mars Hill,D2,South Atlantic Conference,marshilllions.com,,,,,
+Mars Hill,D2,South Atlantic Conference,marshilllions.com,,,,,"the site refuses automated visitors for some seasons, even in a browser (bot check, Oct 2026)"
 Maryville (MO),D2,Great Lakes Valley Conference,maryvillesaints.com,,,,Maryville University,
 Mercy,D2,East Coast Conference,mercyathletics.com,,,,,
 Molloy,D2,East Coast Conference,molloylions.com,,,,,
@@ -157,21 +157,21 @@ Southern New Hampshire,D2,Northeast 10 Conference,snhupenmen.com,,,,SNHU,
 Saint Anselm,D2,Northeast 10 Conference,saintanselmhawks.com,,,,,
 Saint Leo,D2,Sunshine State Conference,saintleolions.com,,,,,
 Saint Michael's,D2,Northeast 10 Conference,smcathletics.com,,,,St. Michael's,
-St. Thomas Aquinas,D2,East Coast Conference,stacathletics.com,,,,STAC,
+St. Thomas Aquinas,D2,East Coast Conference,stacathletics.com,,,,STAC,"the site refuses automated visitors for some seasons, even in a browser (bot check, Oct 2026)"
 Tampa,D2,Sunshine State Conference,tampaspartans.com,,,,,
 Thomas More,D2,Great Midwest Athletic Conference,thomasmoresaints.com,,,,,
 Tiffin,D2,Great Midwest Athletic Conference,gotiffindragons.com,,,,,
-Tusculum,D2,South Atlantic Conference,tusculumpioneers.com,,,,,
+Tusculum,D2,South Atlantic Conference,tusculumpioneers.com,,,,,"the site refuses automated visitors for some seasons, even in a browser (bot check, Oct 2026)"
 Virginia State,D2,Peach Belt Conference,govsutrojans.com,,,,,
 Walsh,D2,Great Midwest Athletic Conference,athletics.walsh.edu,,,,,
 Westminster (UT),D2,Rocky Mountain Athletic Conference,westminstergriffins.com,,,,Westminster College (UT),
 Wheeling,D2,Great Midwest Athletic Conference,wucardinals.com,,,,Wheeling Jesuit,
 William Jewell,D2,Great Lakes Valley Conference,jewellcardinals.com,,,,,
-Wilmington (DE),D2,Central Atlantic Collegiate Conference,athletics.wilmu.edu,,,,Wilmington University,
+Wilmington (DE),D2,Central Atlantic Collegiate Conference,athletics.wilmu.edu,,,,Wilmington University,"the site refuses automated visitors for some seasons, even in a browser (bot check, Oct 2026)"
 Wingate,D2,South Atlantic Conference,wingatebulldogs.com,,,,,
 Young Harris,D2,Conference Carolinas,yhcathletics.com,,,,,
 Adrian,D3,Michigan Intercollegiate Athletic Association,adrianbulldogs.com,,,,,
-Albertus Magnus,D3,Great Northeast Athletic Conference,albertusfalcons.com,,,,,
+Albertus Magnus,D3,Great Northeast Athletic Conference,albertusfalcons.com,,,,,"left out: the site refuses automated visitors for every season, even in a browser (bot check, Oct 2026)"
 Albion,D3,Michigan Intercollegiate Athletic Association,gobrits.com,,,,,
 Albright,D3,Middle Atlantic Conference Commonwealth,albrightathletics.com,,,,,
 Alfred State,D3,State University of New York Athletic Conference,alfredstateathletics.com,,,,,
@@ -203,7 +203,7 @@ Capital,D3,Ohio Athletic Conference,athletics.capital.edu,,,,,
 Carroll (WI),D3,College Conference of Illinois & Wisconsin,gopios.com,,,,,
 Carthage,D3,College Conference of Illinois & Wisconsin,athletics.carthage.edu,,,,,
 Catholic,D3,Landmark Conference,catholicathletics.com,,,,Catholic University,
-Centenary,D3,New Jersey Athletic Conference,gocentenary.com,,,,,
+Centenary,D3,New Jersey Athletic Conference,gocentenary.com,,,,,"the site refuses automated visitors for some seasons, even in a browser (bot check, Oct 2026)"
 Centenary (NJ),D3,Atlantic East Conference,centenarycyclones.com,,,,Centenary University,
 Centre,D3,Southern Athletic Association,centrecolonels.com,,,,,
 Chatham,D3,Presidents' Athletic Conference,gochathamcougars.com,,,,,
@@ -235,7 +235,7 @@ Edgewood,D3,Northern Athletics Collegiate Conference,edgewoodeagles.com,,,,,
 Elizabethtown,D3,Landmark Conference,etownbluejays.com,,,,,
 Elmhurst,D3,College Conference of Illinois & Wisconsin,elmhurstbluejays.com,,,,,
 Elmira,D3,Empire 8,athletics.elmira.edu,,,,,
-Elms,D3,Great Northeast Athletic Conference,ecblazers.com,,,,,
+Elms,D3,Great Northeast Athletic Conference,ecblazers.com,,,,,"left out: the site refuses automated visitors for every season, even in a browser (bot check, Oct 2026)"
 Emerson,D3,New England Women's and Men's Athletic Conference,emersonlions.com,,,,,
 Emmanuel (MA),D3,Great Northeast Athletic Conference,goecsaints.com,,,,Emmanuel College,
 Endicott,D3,Conference of New England,ecgulls.com,,,,,
@@ -247,7 +247,7 @@ Franklin & Marshall,D3,Centennial Conference,godiplomats.com,,,,,
 Geneseo,D3,Empire 8,geneseoknights.com,,,,SUNY Geneseo,
 Gettysburg,D3,Centennial Conference,gettysburgsports.com,,,,,
 Gordon,D3,Conference of New England,athletics.gordon.edu,,,,,
-Goucher,D3,Landmark Conference,athletics.goucher.edu,,,,,
+Goucher,D3,Landmark Conference,athletics.goucher.edu,,,,,"left out: the site refuses automated visitors for every season, even in a browser (bot check, Oct 2026)"
 Greensboro,D3,USA South Athletic Conference,greensborocollegesports.com,,,,,
 Grove City,D3,Presidents' Athletic Conference,athletics.gcc.edu,,,,,
 Guilford,D3,Old Dominion Athletic Conf.,guilfordquakers.com,,,,,
@@ -264,7 +264,7 @@ Hilbert,D3,Heartland Collegiate Men's Lacrosse Conference,hilberthawks.com,,,,,
 Hiram,D3,Presidents' Athletic Conference,hiramterriers.com,,,,,
 Hood,D3,Middle Atlantic Conference Commonwealth,hoodathletics.com,,,,,
 Hope,D3,Michigan Intercollegiate Athletic Association,athletics.hope.edu,,,,,
-Huntingdon,D3,USA South Athletic Conference,huntingdonhawks.com,,,,,
+Huntingdon,D3,USA South Athletic Conference,huntingdonhawks.com,,,,,"the site refuses automated visitors for some seasons, even in a browser (bot check, Oct 2026)"
 Husson,D3,Massachusetts State Collegiate Athletic Conference,hussoneagles.com,,,,,
 Illinois Tech,D3,Northern Athletics Collegiate Conference,illinoistechathletics.com,,,,Illinois Institute of Technology,
 Illinois Wesleyan,D3,College Conference of Illinois & Wisconsin,iwusports.com,,,,,
@@ -279,7 +279,7 @@ Keene State,D3,Little East Conference,keeneowls.com,,,,,
 Kenyon,D3,North Coast Athletic Conference,athletics.kenyon.edu,,,,,
 Keuka,D3,Empire 8,keukaathletics.com,,,,,
 King's (PA),D3,Middle Atlantic Conference Freedom,kingscollegeathletics.com,,,,Kings College (PA),
-La Roche,D3,Heartland Collegiate Men's Lacrosse Conference,larochesports.com,,,,,
+La Roche,D3,Heartland Collegiate Men's Lacrosse Conference,larochesports.com,,,,,"left out: the site refuses automated visitors for every season, even in a browser (bot check, Oct 2026)"
 LaGrange,D3,USA South Athletic Conference,lagrangepanthers.com,,,,,
 Lake Forest,D3,Northern Athletics Collegiate Conference,goforesters.com,,,,,
 Lasell,D3,Great Northeast Athletic Conference,laserpride.lasell.edu,,,,,
@@ -294,7 +294,7 @@ SUNY Maritime,D3,Skyline Conference,maritimeathletics.com,,,,Maritime College,
 Mary Washington,D3,Coastal Lacrosse Conference,umweagles.com,,,,,
 Marymount (VA),D3,Atlantic East Conference,marymountsaints.com,,,,Marymount University,
 Marywood,D3,Middle Atlantic Conference Freedom,marywoodpacers.com,,,,,
-Mass. Liberal Arts,D3,Massachusetts State Collegiate Athletic Conference,athletics.mcla.edu,,,,Massachusetts College of Liberal Arts|MCLA Trailblazers,
+Mass. Liberal Arts,D3,Massachusetts State Collegiate Athletic Conference,mcla.prestosports.com,,,,Massachusetts College of Liberal Arts|MCLA Trailblazers,
 MIT,D3,New England Women's and Men's Athletic Conference,mitathletics.com,,,,Massachusetts Institute of Technology,
 Massachusetts Maritime,D3,Massachusetts State Collegiate Athletic Conference,mmabucs.com,,,,Mass Maritime,
 UMass Boston,D3,Little East Conference,beaconsathletics.com,,,,Massachusetts Boston|UMass-Boston,
@@ -305,7 +305,7 @@ Methodist,D3,USA South Athletic Conference,mumonarchs.com,,,,,
 Middlebury,D3,New England Small College Athletic Conference,athletics.middlebury.edu,,,,,
 MSOE,D3,Northern Athletics Collegiate Conference,go-raiders.com,,,,Milwaukee School of Engineering,
 Misericordia,D3,Middle Atlantic Conference Freedom,athletics.misericordia.edu,,,,,
-Mitchell,D3,Great Northeast Athletic Conference,mitchellathletics.com,,,,,
+Mitchell,D3,Great Northeast Athletic Conference,mitchellathletics.com,,,,,"left out: the site refuses automated visitors for every season, even in a browser (bot check, Oct 2026)"
 Montclair State,D3,New Jersey Athletic Conference,montclairathletics.com,,,,,
 Moravian,D3,Landmark Conference,moraviansports.com,,,,,
 Morrisville,D3,State University of New York Athletic Conference,morrisvillemustangs.com,,,,Morrisville State,
@@ -342,7 +342,7 @@ Potsdam,D3,State University of New York Athletic Conference,potsdambears.com,,,,
 Purchase,D3,Skyline Conference,purchasecollegeathletics.com,,,,SUNY Purchase|Purchase College,
 Randolph,D3,Old Dominion Athletic Conf.,randolphwildcats.com,,,,,
 Randolph-Macon,D3,Old Dominion Athletic Conf.,rmcathletics.com,,,,,
-Regis (MA),D3,Great Northeast Athletic Conference,goregispride.com,,,,Regis College,
+Regis (MA),D3,Great Northeast Athletic Conference,goregispride.com,,,,Regis College,"left out: the site refuses automated visitors for every season, even in a browser (bot check, Oct 2026)"
 RPI,D3,Liberty League,rpiathletics.com,,,,Rensselaer|Rensselaer Polytechnic Institute,
 Rhodes,D3,Southern Athletic Association,rhodeslynx.com,,,,,
 Rivier,D3,Great Northeast Athletic Conference,rivierathletics.com,,,,,
@@ -350,9 +350,9 @@ Roanoke,D3,Old Dominion Athletic Conf.,maroons.roanoke.edu,,,,,
 RIT,D3,Liberty League,ritathletics.com,,,,Rochester Institute of Technology|Rochester Tech,
 Roger Williams,D3,Conference of New England,rwuhawks.com,,,,,
 Russell Sage,D3,Empire 8,sagegators.com,,,,,
-Saint Joseph (CT),D3,Great Northeast Athletic Conference,usjbluejays.com,,,,University of Saint Joseph,
+Saint Joseph (CT),D3,Great Northeast Athletic Conference,usjbluejays.com,,,,University of Saint Joseph,"left out: the site refuses automated visitors for every season, even in a browser (bot check, Oct 2026)"
 Saint Joseph's (ME),D3,Great Northeast Athletic Conference,gomonks.com,,,,Saint Joseph's College of Maine,
-Salem State,D3,Massachusetts State Collegiate Athletic Conference,salemstatevikings.com,,,,,
+Salem State,D3,Massachusetts State Collegiate Athletic Conference,salemstatevikings.com,,,,,"the site refuses automated visitors for some seasons, even in a browser (bot check, Oct 2026)"
 Salisbury,D3,Coastal Lacrosse Conference,suseagulls.com,,,,,
 Salve Regina,D3,New England Women's and Men's Athletic Conference,salveathletics.com,,,,,
 Scranton,D3,Landmark Conference,athletics.scranton.edu,,,,,
@@ -391,7 +391,7 @@ Warren Wilson,D3,Coastal Lacrosse Conference,warrenwilsonowls.com,,,,,
 Washington & Lee,D3,Old Dominion Athletic Conf.,generalssports.com,,,,W&L,
 Washington & Jefferson,D3,Presidents' Athletic Conference,gopresidents.com,,,,W&J,
 Washington College,D3,Centennial Conference,washingtoncollegesports.com,,,,Washington College (MD),
-Wentworth,D3,Conference of New England,wentworthathletics.com,,,,,
+Wentworth,D3,Conference of New England,wentworthathletics.com,,,,,"the site refuses automated visitors for some seasons, even in a browser (bot check, Oct 2026)"
 Wesleyan (CT),D3,New England Small College Athletic Conference,athletics.wesleyan.edu,,,,Wesleyan University,
 Western Connecticut,D3,Little East Conference,westconnathletics.com,,,,Western Connecticut State,
 Western New England,D3,Conference of New England,wnegoldenbears.com,,,,,
@@ -402,55 +402,55 @@ Wilkes,D3,Landmark Conference,gowilkesu.com,,,,,
 William Peace,D3,USA South Athletic Conference,gopeacepacers.com,,,,,
 Williams,D3,New England Small College Athletic Conference,ephsports.williams.edu,,,,,
 Wilmington (OH),D3,Ohio Athletic Conference,wilmingtonquakers.com,,,,Wilmington College,
-Wittenberg,D3,North Coast Athletic Conference,wittenbergtigers.com,,,,,
+Wittenberg,D3,North Coast Athletic Conference,wittenbergtigers.com,,,,,"the site refuses automated visitors for some seasons, even in a browser (bot check, Oct 2026)"
 Wooster,D3,North Coast Athletic Conference,woosterathletics.com,,,,College of Wooster,
 York (PA),D3,Middle Atlantic Conference Commonwealth,ycpspartans.com,,,,York College of Pennsylvania,
 Aquinas (MI),NAIA,WHAC,,,,,Aquinas College,no athletics roster site found yet (checked Oct 2026)
 Benedictine (KS),NAIA,HAAC,ravenathletics.com,,,,Benedictine College,
 Clarke,NAIA,HAAC,,,,,,no athletics roster site found yet (checked Oct 2026)
-Columbia (SC),NAIA,Appalachian,gokoalas.com,,,,Columbia College (SC),
+Columbia (SC),NAIA,Appalachian,gokoalas.com,,,,Columbia College (SC),"the site refuses automated visitors for some seasons, even in a browser (bot check, Oct 2026)"
 Columbia (MO),NAIA,American Midwest,columbiacougars.com,,,,Columbia College (MO),
-Concordia (MI),NAIA,WHAC,concordiacardinals.com,,,,Concordia Ann Arbor|Concordia University Ann Arbor,
+Concordia (MI),NAIA,WHAC,concordiacardinals.com,,,,Concordia Ann Arbor|Concordia University Ann Arbor,"left out: the site refuses automated visitors for every season, even in a browser (bot check, Oct 2026)"
 Indiana Tech,NAIA,WHAC,indianatechwarriors.com,,,,Indiana Institute of Technology,
 Keiser,NAIA,Sun,,,,,,no athletics roster site found yet (checked Oct 2026)
 Lawrence Tech,NAIA,WHAC,ltuathletics.com,,,,,
 Life,NAIA,SSAC,liferunningeagles.com,,,,Life University,
 Lourdes,NAIA,WHAC,lourdesathletics.com,,,,Lourdes University,
 Madonna,NAIA,WHAC,mucrusaders.com,,,,,
-Midland,NAIA,GPAC,midlandathletics.com,,,,,
+Midland,NAIA,GPAC,midlandathletics.com,,,,,"the site refuses automated visitors for some seasons, even in a browser (bot check, Oct 2026)"
 Missouri Baptist,NAIA,HAAC,mbuspartans.com,,,,,
-Missouri Valley,NAIA,HAAC,valleywillroll.com,,,,,
+Missouri Valley,NAIA,HAAC,valleywillroll.com,,,,,"the site refuses automated visitors for some seasons, even in a browser (bot check, Oct 2026)"
 Montreat,NAIA,Appalachian,montreatcavaliers.com,,,,Montreat College,
-Mount Vernon Nazarene,NAIA,Crossroads,mvnucougars.com,,,,MVNU,
+Mount Vernon Nazarene,NAIA,Crossroads,mvnucougars.com,,,,MVNU,"left out: the site refuses automated visitors for every season, even in a browser (bot check, Oct 2026)"
 New College of Florida,NAIA,Sun,gomightybanyans.com,,,,New College,
 Ottawa (KS),NAIA,KCAC,ottawabraves.com,,,,Ottawa,
-Point,NAIA,Appalachian,skyhawkathletics.com,,,,,
-Reinhardt,NAIA,Appalachian,reinhardteagles.com,,,,,
-St. Ambrose,NAIA,HAAC,saubees.com,,,,,
+Point,NAIA,Appalachian,skyhawkathletics.com,,,,,"the site refuses automated visitors for some seasons, even in a browser (bot check, Oct 2026)"
+Reinhardt,NAIA,Appalachian,reinhardteagles.com,,,,,"the site refuses automated visitors for some seasons, even in a browser (bot check, Oct 2026)"
+St. Ambrose,NAIA,HAAC,saubees.com,,,,,"left out: the site refuses automated visitors for every season, even in a browser (bot check, Oct 2026)"
 SCAD Savannah,NAIA,Appalachian,savannah.scadathletics.com,,,,SCAD|Savannah College of Art and Design,
-Siena Heights,NAIA,WHAC,shusaints.com,,,,,
-Taylor,NAIA,Crossroads,taylortrojans.com,,,,,
-Tennessee Wesleyan,NAIA,Appalachian,twbulldogs.com,,,,,
+Siena Heights,NAIA,WHAC,shusaints.com,,,,,"the site refuses automated visitors for some seasons, even in a browser (bot check, Oct 2026)"
+Taylor,NAIA,Crossroads,taylortrojans.com,,,,,"the site refuses automated visitors for some seasons, even in a browser (bot check, Oct 2026)"
+Tennessee Wesleyan,NAIA,Appalachian,twbulldogs.com,,,,,"left out: the site refuses automated visitors for every season, even in a browser (bot check, Oct 2026)"
 College of Idaho,NAIA,Cascade,yoteathletics.com,,,,,
 UHSP,NAIA,American Midwest,,,,,Health Sciences and Pharmacy,no athletics roster site found yet (checked Oct 2026)
-Michigan-Dearborn,NAIA,WHAC,athletics.umdearborn.edu,,,,UM-Dearborn|Michigan Dearborn,
-Saint Mary (KS),NAIA,KCAC,gospires.com,,,,University of Saint Mary,
+Michigan-Dearborn,NAIA,WHAC,umdearborn.prestosports.com,,,,UM-Dearborn|Michigan Dearborn,
+Saint Mary (KS),NAIA,KCAC,gospires.com,,,,University of Saint Mary,no men's lacrosse roster pages found on the site for any season (checked Oct 2026)
 Cumberlands,NAIA,Mid-South,cumberlandspatriots.com,,,,University of the Cumberlands,
 Webber International,NAIA,Sun,webberathletics.com,,,,,
 Westcliff,NAIA,Cal Pac,westcliff.prestosports.com,,,,Westcliff University,
-William Penn,NAIA,HAAC,statesmenathletics.com,,,,,
+William Penn,NAIA,HAAC,statesmenathletics.com,,,,,"left out: the site refuses automated visitors for every season, even in a browser (bot check, Oct 2026)"
 William Woods,NAIA,HAAC,,,,,,no athletics roster site found yet (checked Oct 2026)
 Onondaga CC,JUCO,NJCAA,onondagalazers.com,,,,Onondaga|OCC,
 Herkimer,JUCO,NJCAA,herkimer.prestosports.com,,,,Herkimer College|Herkimer County CC|Herkimer County Community College,
 Nassau CC,JUCO,NJCAA,nassaulions.com,,,,,
 Jefferson CC (NY),JUCO,NJCAA,jeffersoncc.prestosports.com,,,,Jefferson (NY)|Jefferson Community College,
 Harford CC,JUCO,NJCAA,harfordathletics.com,,,,Harford|Harford Community College,
-CCBC Essex,JUCO,NJCAA,ccbcessexknights.com,,,,CCBC-Essex|Essex CC,
-Tompkins Cortland CC,JUCO,NJCAA,tcpanthers.com,,,,Tompkins Cortland|Tompkins-Cortland|TC3,
+CCBC Essex,JUCO,NJCAA,ccbcessexknights.com,,,,CCBC-Essex|Essex CC,"left out: the site refuses automated visitors for every season, even in a browser (bot check, Oct 2026)"
+Tompkins Cortland CC,JUCO,NJCAA,tcpanthers.com,,,,Tompkins Cortland|Tompkins-Cortland|TC3,"left out: the site refuses automated visitors for every season, even in a browser (bot check, Oct 2026)"
 Mohawk Valley CC,JUCO,NJCAA,mohawkvalley.prestosports.com,,,,Mohawk Valley|MVCC,
-Hudson Valley CC,JUCO,NJCAA,hvccathletics.com,,,,Hudson Valley|HVCC,
-Genesee CC,JUCO,NJCAA,geneseeathletics.com,,,,Genesee|GCC,
-Anne Arundel CC,JUCO,NJCAA,aaccathletics.com,,,,Anne Arundel|AACC,
+Hudson Valley CC,JUCO,NJCAA,hvccathletics.com,,,,Hudson Valley|HVCC,"the site refuses automated visitors for some seasons, even in a browser (bot check, Oct 2026)"
+Genesee CC,JUCO,NJCAA,geneseeathletics.com,,,,Genesee|GCC,"left out: the site refuses automated visitors for every season, even in a browser (bot check, Oct 2026)"
+Anne Arundel CC,JUCO,NJCAA,aaccathletics.com,,,,Anne Arundel|AACC,"left out: the site refuses automated visitors for every season, even in a browser (bot check, Oct 2026)"
 College of DuPage,JUCO,NJCAA,gochapsgo.com,,,,DuPage,
 Howard CC,JUCO,NJCAA,,,,,Howard Community College (MD),no athletics roster site found yet (checked Oct 2026)
 Mercer County CC,JUCO,NJCAA,,,,,Mercer County|MCCC,no athletics roster site found yet (checked Oct 2026)
@@ -553,7 +553,7 @@ Ferrum,D3,,ferrumpanthers.com,,,,,dropped men's lacrosse after 2024
 Ferrum,none,,,,2025,2026,,no men's lacrosse team from 2025 (NCAA directory)
 Ferrum,D2,Carolinas,,,2025,,,
 Ferrum,D3,,,,,2024,,
-Anderson (IN),D3,,athletics.anderson.edu,,,,,dropped men's lacrosse after 2025
+Anderson (IN),D3,,aua.prestosports.com,,,,,dropped men's lacrosse after 2025
 Anderson (IN),none,,,,2016,2018,,no men's lacrosse team before 2019 (NCAA directory)
 Anderson (IN),none,,,,2026,2026,,no men's lacrosse team from 2026 (NCAA directory)
 Bard,D3,,bardathletics.com,,,,,dropped men's lacrosse after 2021
