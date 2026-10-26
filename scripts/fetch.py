@@ -96,7 +96,7 @@ class Fetcher:
             path.with_suffix(".url").write_text(resp.url)
         return resp.status_code, resp.url, resp.text
 
-    RENDER_LIMIT = 90         # seconds for one whole browser load, start to finish
+    RENDER_LIMIT = 45         # seconds for one whole browser load, start to finish
     DOWNLOAD_LIMIT = 90       # seconds for one whole page download, retries included
 
     # Sites that timed out once in this run. Their other addresses are skipped straight away, so a

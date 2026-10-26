@@ -1,0 +1,19 @@
+{
+  "label": "Softball",
+  "spring_season": true,
+  "roster_paths": ["/sports/softball/roster", "/sports/sball/roster", "/sports/w-softbl/roster", "/sports/wsoft/roster"],
+  "presto_paths": ["/sports/sball/{prev_season}-{yy}/roster"],
+  "min_players": 10,
+  "max_players": 55,
+  "junior_colleges": ["San Jac", "TJC", "LSUE", "LSU-Eunice", "MGCCC", "IWCC", "JCCC", "SCF", "FSW", "IRSC", "JUCO"],
+  "position_groups": ["P", "C", "IF", "OF", "UT", "UNK"],
+  "position_abbreviations": {"P": "p rhp lhp rp hp p/inf p/of p/ut p/1b p/dp", "C": "c cat", "IF": "if inf 1b 2b 3b ss mif cif 1b/of", "OF": "of lf cf rf", "UT": "ut utl util uti dp dh flex ut/of inf/of"},
+  "position_words": [["right-handed", "P"], ["left-handed", "P"], ["pitcher", "P"], ["catcher", "C"], ["infield", "IF"], ["first base", "IF"], ["second base", "IF"], ["third base", "IF"], ["shortstop", "IF"], ["outfield", "OF"], ["utility", "UT"], ["designated", "UT"], ["flex", "UT"], ["two-way", "UT"]],
+  "position_fallback": "UNK",
+  "d1_divisions": ["D1"],
+  "other_divisions": ["D2", "D3", "NAIA", "JUCO"],
+  "division_labels": {"D1": "Division I", "D2": "Division II", "D3": "Division III", "NAIA": "NAIA", "JUCO": "Junior college (NJCAA, CCCAA, NWAC)"},
+  "position_labels": {"P": "Pitcher", "C": "Catcher", "IF": "Infield", "OF": "Outfield", "UT": "Utility/DP", "UNK": "Other"},
+  "thin_roster": 16,
+  "frozen_min_pairs": 12
+}

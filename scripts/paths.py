@@ -35,7 +35,10 @@ class Sport:
     label: str = ""
     roster_paths: list[str] = field(default_factory=list)
     presto_paths: list[str] = field(default_factory=list)   # PrestoSports season pages: /sports/fball/{season}-{next_yy}/roster
+    # A normal roster for this sport has min_players to max_players players. Outside that, a scraped page is
+    # flagged as partial (cut off, or the wrong page). max_players 0 = no upper limit.
     min_players: int = 25
+    max_players: int = 0
     junior_colleges: list[str] = field(default_factory=list)
     position_groups: list[str] = field(default_factory=list)
     position_abbreviations: dict[str, str] = field(default_factory=dict)

@@ -9,9 +9,11 @@ pages in its own folder of `docs/`.
 | Football | `football` | 264 (FBS and FCS) | 2016–2019, 2021–2026 (no 2020) | live; D2, D3, NAIA and JUCO in progress |
 | Lacrosse (Men's) | `lacrosse-mens` | 457 (D1, D2, D3, NAIA, JUCO; no club teams) | 2016–2026 (2020 included) | live |
 | Lacrosse (Women's) | `lacrosse-womens` | 609 (D1, D2, D3, NAIA, JUCO to 2024) | 2016–2026 | live |
+| Baseball | `baseball` | 1,088 (D1, D2, D3, NAIA, JUCO; club teams as a transfer level); about 210,000 player records | 2016–2026 | live |
+| Softball | `softball` | 1,129 (D1, D2, D3, NAIA, JUCO; club teams as a transfer level) | 2016–2026 | set up, not scraped yet |
 
-Hockey, basketball, baseball, softball, volleyball and soccer show as "coming soon" on the picker.
-Lacrosse is a spring sport: its season is named for the spring it's played in (2024 = the 2023-24 school year).
+Hockey, basketball, volleyball and soccer show as "coming soon" on the picker.
+Lacrosse, baseball and softball are spring sports: a season is named for the spring it's played in (2024 = the 2023-24 school year).
 
 ### Football in numbers
 
@@ -24,7 +26,7 @@ Lacrosse is a spring sport: its season is named for the spring it's played in (2
 
 The site lives in `docs/` and is plain static files, so GitHub Pages can host it for free. It opens
 on a sport picker (`index.html`), and each sport has its own folder (`docs/football/`,
-`docs/lacrosse-mens/`, `docs/lacrosse-womens/`) with the same three pages, linked from each other's title bars:
+`docs/lacrosse-mens/`, `docs/lacrosse-womens/`, `docs/baseball/`, `docs/softball/`) with the same three pages, linked from each other's title bars:
 
 - **Recruiting Map** (`<sport>/players-dotmap.html`): a world map with a dot for every hometown.
 - **Recruiting Footprints** (`<sport>/players-heatmap.html`): up to four schools side by side on
@@ -217,7 +219,7 @@ docs/                    the website (this is what GitHub Pages serves)
   common.js              shared by every sport's pages: data loading, school colors, the Filters dropdown and its link keys
   common.css             shared by every sport's pages: colors, type, title bar, buttons, the Filters dropdown
   .nojekyll              tells GitHub Pages to serve the files as they are
-  football/              one folder per sport, all alike (also lacrosse-mens/, lacrosse-womens/)
+  football/              one folder per sport, all alike (also lacrosse-mens/, lacrosse-womens/, baseball/, softball/)
     players-dotmap.html      Recruiting Map: the dot map, search, players panel and school stats
     players-heatmap.html     Recruiting Footprints: four schools on state-shaded U.S. maps
     players-transfers.html   Transfer Map: school-to-school moves on a U.S. map, with source and destination lists
@@ -270,8 +272,8 @@ still answers older imports like `from scrape_rosters import parse_hometown`.
    for `rosters/<name>/`, `docs/<name>/` and `--sport <name>`:
    - `<sport>.json`: copy `football.json` and change `label`, `roster_paths` (the roster page's path
      on the sites, e.g. `/sports/mens-basketball/roster`), `presto_paths` (the same for PrestoSports
-     sites, with `{season}` and `{next_yy}`, e.g. `/sports/mbkb/{season}-{next_yy}/roster`), `min_players` (fewer players than this on a
-     page means a bad scrape), `junior_colleges`, and the position settings (`position_groups`,
+     sites, with `{season}` and `{next_yy}`, e.g. `/sports/mbkb/{season}-{next_yy}/roster`), `min_players` and `max_players` (a normal roster for the
+     sport: a page with fewer or more players is flagged as partial, usually a page cut off or the wrong page), `junior_colleges`, and the position settings (`position_groups`,
      the roster abbreviations in each, words a spelled-out position starts with, and
      `position_fallback` for anything else).
    - `<sport>_schools.csv`, as for football (see The schools file): the D1 schools to scrape, their
@@ -463,7 +465,13 @@ The report files are only written when you add `--report`: then `rosters/footbal
 the full errors, with web addresses, `rosters/football/MISSING_ROSTERS.md` has the same schools by division
 with the reasons written out, and `--problems` prints the list again from the saved reports without scraping.
 Without `--report` only the roster files are written. `--retry-failed` doesn't need the reports: it tells
-which school-seasons are done from the saved rosters (enough players, most with a hometown).
+which school-seasons are done from the saved rosters (a normal number of players for the sport, most with a
+hometown). Normal sizes, rough: football 40-200, men's lacrosse 12-90, women's lacrosse 12-60, baseball 12-100,
+softball 10-55 (`min_players` / `max_players` in each sport's json).
+
+Slow sites: a school stops after `--school-minutes` (default 3) and its remaining seasons are left for the next
+`--retry-failed`; one page gets `--timeout` seconds (default 15) and one browser load 45 seconds. While the last
+schools run, a "still working on: ..." line every minute names them.
 
 - Wrong or dead site: fix its `domain`, or paste its exact roster page into `roster_url` in
   `config/football_schools.csv` (it may contain `{season}`), and run again with `--retry-failed`.

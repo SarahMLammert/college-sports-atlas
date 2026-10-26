@@ -24,19 +24,26 @@ ROSTER_PATHS = ["/sports/football/roster"]
 # templates with {season}, {next_season} and {next_yy}, filled in for each season.
 PRESTO_PATHS = ["/sports/fball/{season}-{next_yy}/roster"]
 MIN_PLAYERS = 25  # fewer players than this on a page is suspicious
+MAX_PLAYERS = 0   # more than this (0 = no limit) is suspicious too: probably the wrong page
 JUCO_NAMES: list[str] = []
 # A spring sport (lacrosse, baseball): season 2024 is spring 2024, labeled "2024" or "2023-24".
 SPRING = False
 
 
 def configure(sport) -> None:
-    """Use a sport's roster URL paths, minimum roster size, junior-college names and season naming."""
-    global ROSTER_PATHS, PRESTO_PATHS, MIN_PLAYERS, JUCO_NAMES, SPRING
+    """Use a sport's roster URL paths, normal roster size, junior-college names and season naming."""
+    global ROSTER_PATHS, PRESTO_PATHS, MIN_PLAYERS, MAX_PLAYERS, JUCO_NAMES, SPRING
     ROSTER_PATHS = list(sport.roster_paths)
     PRESTO_PATHS = list(getattr(sport, "presto_paths", []))
     MIN_PLAYERS = sport.min_players
+    MAX_PLAYERS = getattr(sport, "max_players", 0)
     JUCO_NAMES = list(sport.junior_colleges)
     SPRING = bool(getattr(sport, "spring_season", False))
+
+
+def normal_size(n: int) -> bool:
+    """True when n players is a normal roster for the sport (min_players to max_players)."""
+    return n >= MIN_PLAYERS and (not MAX_PLAYERS or n <= MAX_PLAYERS)
 
 
 def _fill(template: str, season: int) -> str:
@@ -81,6 +88,13 @@ def candidate_urls(domain: str, override: str = "", season: int | None = None) -
             urls.append(f"{base}{path}/season/{span}/")          # WMT:      /roster/season/2019-20/ (Notre Dame, Georgia Tech)
         else:
             urls.append(f"{base}{path}")
+    if season and SPRING:
+        # Some sites file a spring season under the fall year it starts in: Clemson's /roster/2023 is the
+        # 2023-24 roster (spring 2024). Tried after the usual addresses; the season check confirms the year.
+        for path in ROSTER_PATHS:
+            path = path.rstrip("/")
+            urls.append(f"{base}{path}/{season - 1}")
+            urls.append(f"{base}{path}/season/{season - 1}/")
     # PrestoSports: /sports/fball/2019-20/roster. The list view first: some sites (Morningside) only
     # put the roster table there. Then the same on www.: some sites (Hutchinson, Iowa Western,
     # Kilgore) only answer there. Hosts with a subdomain (deanza.prestosports.com) get no www. copy.

@@ -4,6 +4,7 @@
   "roster_paths": ["/sports/mens-lacrosse/roster", "/sports/mlax/roster", "/sports/m-lacros/roster", "/sports/m-lacrosse/roster", "/sports/lacrosse/roster"],
   "presto_paths": ["/sports/mlax/{prev_season}-{yy}/roster"],
   "min_players": 12,
+  "max_players": 90,
   "junior_colleges": ["Nassau", "Onondaga", "Herkimer", "Mohawk Valley", "Hudson Valley", "Finger Lakes", "Genesee", "Anne Arundel", "Harford", "CCBC Essex", "Tompkins Cortland", "TC3", "Fulton-Montgomery", "Niagara County", "Suffolk County", "Monroe Community", "Erie Community"],
   "position_groups": ["A", "M", "FO", "LSM", "D", "G", "UNK"],
   "position_abbreviations": {"A": "a at att atk f a/m", "M": "m mf mid md ssdm sdm dm m/a m/fo m/d", "FO": "fo fogo x fo/m f/o", "LSM": "lsm lsm/d", "D": "d def dp ds d/lsm", "G": "g gk gl"},
