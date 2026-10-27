@@ -9,7 +9,7 @@ Alcorn State,D1,SWAC,alcornsports.com,,,,,
 Appalachian State,D1,Sun Belt,appstatesports.com,,,,App State,
 Arizona,D1,Big 12,arizonawildcats.com,,,,,
 Arizona State,D1,Big 12,thesundevils.com,,,,,
-Arkansas,D1,SEC,arkansasrazorbacks.com,,,,"University of Arkansas, Fayetteville",
+Arkansas,D1,SEC,arkansasrazorbacks.com,https://arkansasrazorbacks.com/sport/w-softbl/roster/?season={prev_season}-{yy},,,"University of Arkansas, Fayetteville",roster address from a browser (WordPress site; season 2023 is ?season=2022-23; Oct 2026)
 Arkansas-Pine Bluff,D1,SWAC,uapblionsroar.com,,,,UAPB,
 Army,D1,Patriot,goarmywestpoint.com,,,,Army West Point|U.S. Military Academy|United States Military Academy|West Point,
 Auburn,D1,SEC,auburntigers.com,,,,,
@@ -73,7 +73,7 @@ Evansville,D1,Missouri Valley,gopurpleaces.com,,,,,
 Fairfield,D1,MAAC,fairfieldstags.com,,,,,
 FDU,D1,NEC,fduknights.com,,,,"FDU-Metropolitan|Fairleigh Dickinson|Fairleigh Dickinson University|Fairleigh Dickinson University, Metropolitan Campus",
 FIU,D1,Conference USA,fiusports.com,,,,Florida International|Florida International University,
-Florida,D1,SEC,floridagators.com,,,,,
+Florida,D1,SEC,floridagators.com,,,,,"2016: the page is a normal roster, but the scraper saved several times too many people; scripts/fix_wrong_pages.py keeps the real ones (checked in a browser, Oct 2026)"
 Florida A&M,D1,SWAC,famuathletics.com,,,,,
 Florida Atlantic,D1,American,fausports.com,,,,FAU,
 Florida Gulf Coast,D1,ASUN,fgcuathletics.com,,,,,
@@ -81,7 +81,7 @@ Florida State,D1,ACC,seminoles.com,,,,,
 Fordham,D1,Atlantic 10,fordhamsports.com,,,,,
 Fresno State,D1,Pac-12,gobulldogs.com,,,,"Cal State Fresno|California State University, Fresno",
 Furman,D1,SoCon,furmanpaladins.com,,,,,
-Gardner-Webb,D1,Big South,gwusports.com,,,,,
+Gardner-Webb,D1,Big South,gwusports.com,,,,,"2016 and 2017: the page is a normal roster, but the scraper saved several times too many people; scripts/fix_wrong_pages.py keeps the real ones (checked in a browser, Oct 2026)"
 George Mason,D1,Atlantic 10,gomason.com,,,,GMU,
 George Washington,D1,Atlantic 10,gwsports.com,,,,GW|GWU,
 Georgetown,D1,Big East,guhoyas.com,,,,,
@@ -135,12 +135,12 @@ Louisiana-Monroe,D1,Sun Belt,ulmwarhawks.com,,,,Northeast Louisiana|UL Monroe|UL
 Louisville,D1,ACC,gocards.com,,,,,
 Loyola Chicago,D1,Atlantic 10,loyolaramblers.com,,,,,
 Loyola Marymount,D1,WCC,lmulions.com,,,,,
-LSU,D1,SEC,lsusports.net,,,,Louisiana State|Louisiana State University,
+LSU,D1,SEC,lsusports.net,https://lsusports.net/sports/sb/roster/season/{season},,,Louisiana State|Louisiana State University,roster address from a browser (/sports/sb/roster/season/2024; Oct 2026)
 Maine,D1,America East,goblackbears.com,,,,,
 Manhattan,D1,MAAC,gojaspers.com,,,,Manhattan College,
 Marist,D1,MAAC,goredfoxes.com,,,,,
 Marshall,D1,Sun Belt,herdzone.com,,,,,
-Maryland,D1,Big Ten,umterps.com,,,,"University of Maryland, College Park",
+Maryland,D1,Big Ten,umterps.com,,,,"University of Maryland, College Park","2016: the page is a normal roster, but the scraper saved several times too many people; scripts/fix_wrong_pages.py keeps the real ones (checked in a browser, Oct 2026)"
 Maryland Eastern Shore,D1,MEAC,umeshawksports.com,,,,,
 McNeese,D1,Southland,mcneesesports.com,,,,McNeese State|McNeese State University,
 Memphis,D1,American,gotigersgo.com,,,,,
@@ -148,7 +148,7 @@ Mercer,D1,SoCon,mercerbears.com,,,,,
 Mercyhurst,D1,NEC,hurstathletics.com,,,,,
 Merrimack,D1,MAAC,merrimackathletics.com,,,,Merrimack College,
 Miami (OH),D1,MAC,miamiredhawks.com,,,,Miami University|Miami of Ohio|Miami-Ohio,
-Michigan,D1,Big Ten,mgoblue.com,,,,,
+Michigan,D1,Big Ten,mgoblue.com,,,,,"2018: the page is a normal roster, but the scraper saved several times too many people; scripts/fix_wrong_pages.py keeps the real ones (checked in a browser, Oct 2026)"
 Michigan State,D1,Big Ten,msuspartans.com,,,,,
 Middle Tennessee,D1,Conference USA,goblueraiders.com,,,,MTSU|Middle Tennessee State|Middle Tennessee State University,
 Minnesota,D1,Big Ten,gophersports.com,,,,"University of Minnesota, Twin Cities",
@@ -191,7 +191,7 @@ Ohio,D1,MAC,ohiobobcats.com,,,,,
 Ohio State,D1,Big Ten,ohiostatebuckeyes.com,,,,,
 Oklahoma,D1,SEC,soonersports.com,,,,,
 Oklahoma State,D1,Big 12,okstate.com,,,,,
-Ole Miss,D1,SEC,olemisssports.com,,,,Mississippi|University of Mississippi,
+Ole Miss,D1,SEC,olemisssports.com,,,,Mississippi|University of Mississippi,"2021 and 2023: the page is a normal roster, but the scraper saved several times too many people; scripts/fix_wrong_pages.py keeps the real ones (checked in a browser, Oct 2026)"
 Omaha,D1,Summit,omavs.com,,,,University of Nebraska at Omaha,
 Oregon,D1,Big Ten,goducks.com,,,,,
 Oregon State,D1,Pac-12,osubeavers.com,,,,,
@@ -912,7 +912,7 @@ Suffolk,D3,Conference of New England,gosuffolkrams.com,,,,,
 SUNY Canton,D3,State University of New York Athletic Conference,rooathletics.com,,,,State University of New York at Canton,
 SUNY Cobleskill,D3,State University of New York Athletic Conference,fightingtigers.cobleskill.edu,,,,State University of New York at Cobleskill,
 SUNY Cortland,D3,State University of New York Athletic Conference,cortlandreddragons.com,,,,State University of New York at Cortland,
-SUNY Delhi,D3,State University of New York Athletic Conference,delhibroncos.com,,,,State University of New York at Delhi,
+SUNY Delhi,D3,State University of New York Athletic Conference,delhibroncos.com,,,,State University of New York at Delhi,"left out: the site refuses automated visitors for every season, even in a browser (bot check; Oct 2026)"
 SUNY Poly,D3,Empire 8,wildcats.sunypoly.edu,,,,SUNY Polytechnic|State University of New York Polytechnic Institute,
 Susquehanna,D3,Landmark Conference,suriverhawks.com,,,,,
 Swarthmore,D3,Centennial Conference,swarthmoreathletics.com,,,,Swarthmore College,
@@ -1270,7 +1270,7 @@ Chattanooga State CC,JUCO,NJCAA D2,,,,,Chattanooga State Community College,no at
 Chemeketa CC,JUCO,NWAC,,,,,Chemeketa Community College,no athletics roster site known yet
 Chesapeake College,JUCO,NJCAA D2,,,,,,no athletics roster site known yet
 Chipola College,JUCO,NJCAA D1,,,,,,no athletics roster site known yet
-Cisco,JUCO,NJCAA D1,wranglersports.net,,,,Cisco College,
+Cisco,JUCO,NJCAA D1,wranglersports.net,,,,Cisco College,"the site refuses automated visitors for some seasons, even in a browser (bot check; Oct 2026)"
 Citrus College,JUCO,CCCAA,citrusowls.com,,,,Citrus,
 Clackamas CC,JUCO,NWAC,,,,,Clackamas Community College,no athletics roster site known yet
 Clarendon College,JUCO,NJCAA D1,,,,,,no athletics roster site known yet
@@ -1373,7 +1373,7 @@ Grand Rapids CC,JUCO,NJCAA D2,,,,,Grand Rapids Community College,no athletics ro
 Grays Harbor College,JUCO,NWAC,,,,,,no athletics roster site known yet
 Grayson College,JUCO,NJCAA D1,,,,,,no athletics roster site known yet
 Great Bay CC,JUCO,USCAA,,,,,Great Bay Community College,no athletics roster site known yet
-Grossmont College,JUCO,CCCAA,grossmontgriffins.com,,,,Grossmont,
+Grossmont College,JUCO,CCCAA,grossmontgriffins.com,,,,Grossmont,"left out: the site refuses automated visitors for every season, even in a browser (bot check; Oct 2026)"
 Gulf Coast State College,JUCO,NJCAA D1,,,,,,no athletics roster site known yet
 Hagerstown CC,JUCO,NJCAA D2,,,,,Hagerstown Community College,no athletics roster site known yet
 Harford CC,JUCO,NJCAA D1,harfordathletics.com,,,,Harford|Harford Community College,
@@ -1729,6 +1729,13 @@ Johnson & Wales (NC),none,,,,2016,2024,,"softball began in 2025 (web search, Oct
 Westcliff,none,,,,2016,2021,,"softball began in 2022 (web search, Oct 2026)"
 Regent,none,,,,2016,2025,,"softball began in 2026 (first coach hired July 2025) (web search, Oct 2026)"
 Mississippi University for Women,none,,,,2016,2017,,"athletics (NCAA D3) began in 2018 (web search, Oct 2026)"
+Baruch,none,,,,2021,2021,,"CUNYAC cancelled all spring 2021 competition (conference announcement, Feb 2021)"
+Brooklyn,none,,,,2021,2021,,"CUNYAC cancelled all spring 2021 competition (conference announcement, Feb 2021)"
+Hunter,none,,,,2021,2021,,"CUNYAC cancelled all spring 2021 competition (conference announcement, Feb 2021)"
+John Jay,none,,,,2021,2021,,"CUNYAC cancelled all spring 2021 competition (conference announcement, Feb 2021)"
+Lehman,none,,,,2021,2021,,"CUNYAC cancelled all spring 2021 competition (conference announcement, Feb 2021)"
+York (NY),none,,,,2021,2021,,"CUNYAC cancelled all spring 2021 competition (conference announcement, Feb 2021)"
+New College of Florida,none,,,,2016,2023,,"softball began in 2024 (first hit in program history in Feb 2024, gomightybanyans.com; Oct 2026)"
 Central State (OH),D2,SIAC,,,,,Central State,level only (no softball team found in the softball lists; copied from football_schools.csv)
 Daemen,D2,East Coast Conference,,,,,Daemen University|Daemen College,level only (no softball team found in the softball lists; copied from lacrosse-womens_schools.csv)
 Michigan Tech,D2,GLIAC,,,,,Michigan Technological,level only (no softball team found in the softball lists; copied from football_schools.csv)
@@ -1806,7 +1813,7 @@ Shasta College,JUCO,CCCAA Golden Coast,,,,,Shasta,"left out: the athletics site 
 Valley Forge Military College,JUCO,,,,,,Valley Forge Military,level only (no softball team found in the softball lists; copied from football_schools.csv)
 Vermilion CC,JUCO,MCAC,,,,,,level only (no softball team found in the softball lists; copied from football_schools.csv)
 West Los Angeles College,JUCO,CCCAA Metro,,,,,West LA College,level only (no softball team found in the softball lists; copied from football_schools.csv)
-Howard College,JUCO,NJCAA D1,hchawk.com,,,,Howard College|Howard (TX)|Howard College (TX),
+Howard College,JUCO,NJCAA D1,hchawk.com,,,,Howard College|Howard (TX)|Howard College (TX),"the site refuses automated visitors for some seasons, even in a browser (bot check; Oct 2026)"
 St. John's College,HS,,,,,,Saint John's College|St. John’s College,a high school whose name looks like a college; never read as a transfer's college
 Gonzaga College,HS,,,,,,,a high school whose name looks like a college; never read as a transfer's college
 La Salle College,HS,,,,,,LaSalle College,a high school whose name looks like a college; never read as a transfer's college

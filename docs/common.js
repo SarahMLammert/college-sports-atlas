@@ -109,11 +109,13 @@
     $("to").addEventListener("change", (e) => { state.to = +e.target.value; if (state.to < state.from) state.from = state.to; sync(); changed(); });
     data.pos.forEach((p, i) => {
       const b = document.createElement("button");
-      b.type = "button"; b.className = "chip"; b.textContent = data.posName(p); b.dataset.i = i; b.setAttribute("aria-pressed", "true");
+      b.type = "button"; b.className = "chip"; b.textContent = data.posName(p); b.dataset.i = i; b.setAttribute("aria-pressed", "false");
+      // each chip is an on/off switch: click to show only the lit groups, click again to turn it off;
+      // turning off the last lit chip (or lighting every one) means every position again
       b.addEventListener("click", () => {
-        if (state.pos.size === data.pos.length) state.pos = new Set([i]);      // first click isolates one group
+        if (state.pos.size === data.pos.length) state.pos = new Set([i]);
         else if (state.pos.has(i)) { state.pos.delete(i); if (!state.pos.size) state.pos = allPos(); }
-        else state.pos.add(i);
+        else { state.pos.add(i); }
         sync(); changed();
       });
       $("pos").appendChild(b);
@@ -121,7 +123,8 @@
     $("posAll").addEventListener("click", () => { state.pos = allPos(); sync(); changed(); });
     for (const key of ["div", "entry"]) $(key).addEventListener("click", (e) => {
       const b = e.target.closest("button"); if (!b) return;
-      state[key] = b.dataset.v; sync(); changed();
+      // clicking the button that's already on turns it off (back to All)
+      state[key] = state[key] === b.dataset.v ? "" : b.dataset.v; sync(); changed();
     });
     $("resetAll").addEventListener("click", () => { reset(); sync(); changed(); });
 
@@ -132,7 +135,9 @@
       if (hasConf) $("conf").value = state.conf;
       $("from").value = state.from; $("to").value = state.to;
       setSeg("div", state.div); setSeg("entry", state.entry);
-      $("pos").querySelectorAll(".chip").forEach((b) => b.setAttribute("aria-pressed", state.pos.has(+b.dataset.i)));
+      // no position chip lit = every position; a lit chip is one you turned on
+      const allOn = state.pos.size === data.pos.length;
+      $("pos").querySelectorAll(".chip").forEach((b) => b.setAttribute("aria-pressed", !allOn && state.pos.has(+b.dataset.i)));
       updateBadge();
     }
     function reset() {

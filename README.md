@@ -10,7 +10,7 @@ pages in its own folder of `docs/`.
 | Lacrosse (Men's) | `lacrosse-mens` | 457 (D1, D2, D3, NAIA, JUCO; no club teams) | 2016–2026 (2020 included) | live |
 | Lacrosse (Women's) | `lacrosse-womens` | 609 (D1, D2, D3, NAIA, JUCO to 2024) | 2016–2026 | live |
 | Baseball | `baseball` | 1,088 (D1, D2, D3, NAIA, JUCO; club teams as a transfer level); about 210,000 player records | 2016–2026 | live |
-| Softball | `softball` | 1,129 (D1, D2, D3, NAIA, JUCO; club teams as a transfer level) | 2016–2026 | set up, not scraped yet |
+| Softball | `softball` | 1,129 (D1, D2, D3, NAIA, JUCO; club teams as a transfer level); about 110,000 player records | 2016–2026 | live |
 
 Hockey, basketball, volleyball and soccer show as "coming soon" on the picker.
 Lacrosse, baseball and softball are spring sports: a season is named for the spring it's played in (2024 = the 2023-24 school year).

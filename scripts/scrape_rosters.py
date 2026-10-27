@@ -852,6 +852,15 @@ def main(argv=None) -> int:
             with lock:
                 summary = []
                 for season, rows, report in results:
+                    # A retry that fails (timed out, site down, bot check) mustn't erase a roster an
+                    # earlier run saved: keep the saved one and its report. Not when this run found the
+                    # saved roster was really a newer season's ("page looks like the 2026 roster").
+                    err = report.get("error", "") or ""
+                    if not rows and report.get("status") == "failed" and "page looks like the" not in err:
+                        old = [r for r in prev_rows_all[season] if r["school"] == school["school"]]
+                        if old:
+                            rows = old
+                            report = prev_reports_all[season].get(school["school"], report)
                     new_rows[season].extend(rows)
                     new_reports[season][school["school"]] = report
                     summary.append(f"{season}:{report['players'] if report['status'] in ('ok', 'partial') else report['status'][:4]}")
