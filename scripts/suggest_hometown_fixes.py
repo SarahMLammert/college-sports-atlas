@@ -8,9 +8,16 @@ from github.com/kelvins/US-Cities-Database):
     fixed       a misspelled town with one close match in its own state ("Tuscon, AZ" -> Tucson)
                 a state spelled oddly ("Dallas, T.X.", "Galena, Illinios", "Oconomowoc. Wis.")
                 a town with no state that is the only US town of that name ("Ballston Lake" -> NY)
-    review      a likely misspelling with more than one possible town, or a town name found in
-                several states; the note names the candidates, nothing is changed
-    unfixable   a state with no town ("MN", "Alabama"), or a high school name ("Gateway HS")
+    review      a likely misspelling with more than one possible town, a town name found in
+                several states, or a town missing from its state whose name (7+ letters) is in just one
+                other state ("Murrieta, GA": CA?); the note names the candidates, nothing is changed
+                a place abroad the parser now reads ("Winnipeg, MB", "Brandon, Manitoba, CA" -> Canada,
+                not California; "Willemstad, Curacao")
+    review      a likely misspelling with more than one possible town, a town name found in
+                several states, or a town missing from its state whose name (7+ letters) is in just one
+                other state ("Murrieta, GA": CA?); the note names the candidates, nothing is changed
+    unfixable   a state with no town ("MN", "Alabama"), a high school name ("Gateway HS"), or text from
+                another column ("R/R", "5-7", "Manager")
 
 Only hometowns on the unmatched list are touched, so towns the geocoder already places are never
 "corrected" to a neighbour just because the town list lacks them. Rows already marked unfixable, and
@@ -32,6 +39,7 @@ import sys
 import urllib.request
 from pathlib import Path
 
+from hometowns import _region, not_a_place, parse_hometown
 from paths import ROOT, add_sport_argument, load_sport
 
 TOWNS_URL = "https://raw.githubusercontent.com/kelvins/US-Cities-Database/main/csv/us_cities.csv"
@@ -61,7 +69,22 @@ ABBREV = {
 FULL_NAMES = {name.lower(): code for code, name in STATE_NAMES.items()}
 STATE_ONLY = set(FULL_NAMES) | {code.lower() for code in STATE_NAMES}
 FOREIGN = re.compile(r"australia|england|canada|ontario|alberta|mexico|japan|germany|nigeria|samoa|guam|"
-                     r"bahamas|jamaica|\buk$|new zealand|france|brazil", re.I)
+                     r"bahamas|jamaica|\buk$|new zealand|france|brazil|manitoba|saskatchewan|quebec|"
+                     r"british columbia", re.I)
+# Countries and provinces the geocoder can put a dot on (its centroid list), filled in by load_places()
+PLACES_ABROAD: set[str] = {"Canada"}
+
+
+def load_places() -> None:
+    try:
+        from geocode_hometowns import COUNTRIES
+        PLACES_ABROAD.update(COUNTRIES)
+    except Exception:            # requests missing, say: Canada alone still works
+        pass
+
+
+def known_abroad(home: dict) -> bool:
+    return home["country"] not in ("", "USA") and home["country"] in PLACES_ABROAD
 SCHOOL = re.compile(r"\b(HS|H\.S\.|High School|Academy|Prep|Preparatory|Charter|Christian|Catholic|Cathedral)\b", re.I)
 # Hand-checked exceptions to the rules below
 MANUAL = {
@@ -89,11 +112,51 @@ def load_towns() -> tuple[dict, dict]:
         TOWNS_CSV.parent.mkdir(parents=True, exist_ok=True)
         urllib.request.urlretrieve(TOWNS_URL, TOWNS_CSV)
     towns, states_of = collections.defaultdict(dict), collections.defaultdict(set)
+
+    def add(state: str, city: str) -> None:
+        if state in STATE_NAMES and city:
+            towns[state].setdefault(norm(city), city)
+            states_of[norm(city)].add(state)
     with open(TOWNS_CSV, newline="", encoding="utf-8") as fh:
         for r in csv.DictReader(fh):
-            towns[r["STATE_CODE"]].setdefault(norm(r["CITY"]), r["CITY"])
-            states_of[norm(r["CITY"])].add(r["STATE_CODE"])
+            add(r["STATE_CODE"], r["CITY"])
+    # The list above (~30,000 towns, by ZIP code) misses big places such as Thornton CO, so a
+    # misspelling of one ("Thorton") found nothing. Add the geocoder's own Census and USGS lists
+    # when it has downloaded them (it does on its first run).
+    for state, city in geocoder_place_names():
+        add(state, city)
     return towns, states_of
+
+
+def geocoder_place_names():
+    """(state, town) from the Census places and county subdivisions and the USGS populated places
+    in .cache/, if geocode_hometowns.py has downloaded them. Nothing is downloaded here."""
+    try:
+        import geocode_hometowns as geo
+    except Exception:
+        return
+    files = [(geo.CACHE / geo.GAZ_PLACES, "\t", "usps", "name"), (geo.CACHE / geo.GAZ_COUSUBS, "\t", "usps", "name"),
+             (geo.CACHE / "PopulatedPlaces_National_Text.zip", "|", None, None)]
+    for path, delim, st_col, name_col in files:
+        if not path.exists():
+            continue
+        try:
+            col, rows = geo._read_zip_table(path, delim)
+        except Exception:
+            continue
+        if st_col is None:     # USGS: its column names vary between releases
+            name_col = next((h for h in col if h in ("feature_name", "featurename")), None)
+            st_col = next((h for h in col if h in ("state_alpha", "state_name")), None)
+            if name_col is None or st_col is None:
+                continue
+        by_name = {v.lower(): k for k, v in STATE_NAMES.items()}
+        for row in rows:
+            try:
+                name = geo._SUFFIXES.sub("", re.sub(r"\s*\(balance\)$", "", row[col[name_col]]))
+                st = row[col[st_col]]
+                yield by_name.get(st.lower(), st), re.sub(r"\s*\(.*\)$", "", name)
+            except IndexError:
+                continue
 
 
 def state_code(text: str) -> str | None:
@@ -108,6 +171,9 @@ def state_code(text: str) -> str | None:
         return ABBREV[key]
     if t.lower().rstrip(".") in FULL_NAMES:
         return FULL_NAMES[t.lower().rstrip(".")]
+    region = _region(t)              # the parser's longer list: "Illi.", "III.", "Virg.", "West Va.", ...
+    if region and region["country"] == "USA" and region["state"] in STATE_NAMES:
+        return region["state"]
     close = difflib.get_close_matches(t.lower(), list(FULL_NAMES), n=1, cutoff=0.8)   # "Illnois", "Coloradso"
     return FULL_NAMES[close[0]] if close else None
 
@@ -168,6 +234,17 @@ def suggest(row: dict, towns: dict, states_of: dict) -> tuple[str, dict] | None:
     raw = row["hometown_raw"]
     if raw in MANUAL:
         return "manual", MANUAL[raw]
+    if not_a_place(raw):
+        return "unfixable: not a hometown", dict(city="", state="", country="", query="", status="unfixable",
+                                                 note="not a hometown: bats/throws, a height or a role from another column")
+    home = parse_hometown(raw)
+    if known_abroad(home):
+        new = dict(city=home["city"], state=home["state"], country=home["country"],
+                   query=", ".join(x for x in (home["city"], home["state"], home["country"]) if x),
+                   status="fixed", note=f"read as {home['country']}")
+        if all(row.get(k) == v for k, v in new.items() if k not in ("note", "query")):
+            return None
+        return "fixed: place abroad", new
     town, code, has_tail = split_hometown(raw, towns)
     if not town:
         return None
@@ -185,6 +262,15 @@ def suggest(row: dict, towns: dict, states_of: dict) -> tuple[str, dict] | None:
         if best:
             alt = f" or {other}" if other != best else ""
             return "review: spelling unsure", dict(status="review", note=f"spelling? '{town}' -> {best}{alt}")
+        # Not in that state, and the name is distinctive and in just one other state: the roster has
+        # the state wrong ("Murrieta, GA", "Kankakee, Iowa", "Wappinger Falls, N.J.")
+        states = states_of.get(norm(town), set()) - {code}
+        if len(states) == 1 and len(norm(town)) >= 7 and not states_of.get(norm(town), set()) & {code}:
+            st = next(iter(states))
+            # Only a suggestion: many such towns are real neighbourhoods the town list lacks
+            # (Rockaway NY, Cardiff CA), so a person decides.
+            return "review: wrong state?", dict(status="review", note=f"state? no {towns[st][norm(town)]} in "
+                                                f"{code}; the only US town with this name is in {st}")
         return None
     if has_tail:                     # something after the town that isn't a US state: foreign or garbled
         return None
@@ -212,16 +298,20 @@ def main(argv=None):
     args = ap.parse_args(argv)
     sport = load_sport(args.sport)
     unmatched_csv, corrections_csv = sport.rosters_dir / "unmatched_hometowns.csv", sport.hometown_corrections_csv
-    for p in (unmatched_csv, corrections_csv):
-        if not p.exists():
-            sys.exit(f"{p} not found. Run geocode_hometowns.py first.")
+    if not unmatched_csv.exists():
+        sys.exit(f"{unmatched_csv} not found. Run geocode_hometowns.py first.")
 
     with open(unmatched_csv, newline="", encoding="utf-8") as fh:
         unmatched = {r["hometown_raw"]: r for r in csv.DictReader(fh)}
-    with open(corrections_csv, newline="", encoding="utf-8") as fh:
-        reader = csv.DictReader(fh)
-        fields = reader.fieldnames or FIELDS
-        rows = list(reader)
+    if not unmatched:
+        print("Every hometown is placed: nothing to suggest.")
+        return
+    fields, rows = FIELDS, []
+    if corrections_csv.exists():   # the geocoder only writes it once it has a suggestion of its own
+        with open(corrections_csv, newline="", encoding="utf-8") as fh:
+            reader = csv.DictReader(fh)
+            fields = reader.fieldnames or FIELDS
+            rows = list(reader)
     by_raw = {r["hometown_raw"]: r for r in rows}
     for raw, u in unmatched.items():          # an unmatched hometown with no corrections row yet gets one
         if raw not in by_raw:
@@ -230,14 +320,21 @@ def main(argv=None):
             rows.append(row)
             by_raw[raw] = row
 
-    towns, states_of = load_towns()
+    load_places()
+    try:
+        towns, states_of = load_towns()
+    except OSError as exc:   # no internet the first time: skip this step, the map build still works
+        TOWNS_CSV.unlink(missing_ok=True)
+        print(f"Couldn't download the US town list ({exc}); no suggestions this time.")
+        return
     counts, players = collections.Counter(), collections.Counter()
     for row in rows:
         raw = row["hometown_raw"]
         if raw not in unmatched or row["status"] == "unfixable":
             continue
-        if row.get("country") and row["country"] != "USA":
-            continue
+        if row.get("country") and row["country"] != "USA" and row["country"] in PLACES_ABROAD \
+                and row["status"] == "fixed":
+            continue                 # a place abroad already read: the geocoder just has no closer dot for it
         result = suggest(row, towns, states_of)
         if not result:
             continue

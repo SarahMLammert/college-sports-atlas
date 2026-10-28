@@ -16,8 +16,11 @@ which folder a script is run from.
 from __future__ import annotations
 
 import argparse
+import contextlib
 import csv
 import json
+import os
+import time
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -62,9 +65,17 @@ class Sport:
     # after), and check_frozen_classes.py needs frozen_min_pairs returning players to judge a season.
     thin_roster: int = 40
     frozen_min_pairs: int = 30
+    # The seasons scripts/pipeline.py scrapes when none are given, e.g. "2016-2026". Blank: football's
+    # "2016-2019,2021-2026" for football, "2016-2026" for every other sport (default_seasons()).
+    seasons: str = ""
 
     def division_label(self, division: str) -> str:
         return self.division_labels.get(division, division)
+
+    def default_seasons(self) -> str:
+        if self.seasons:
+            return self.seasons
+        return "2016-2019,2021-2026" if self.name == "football" else "2016-2026"
 
     # ---- this sport's folders and files ----
     @property
@@ -136,6 +147,46 @@ def use_divisions(sport: Sport) -> None:
     D1.update(sport.d1_divisions)
     SCRAPED.clear()
     SCRAPED.update(sport.d1_divisions, sport.other_divisions)
+
+
+class SportBusy(SystemExit):
+    pass
+
+
+LOCK_ENV = "COLLEGE_SPORTS_LOCK_HELD"   # set by pipeline.py for the steps it runs, which share its lock
+
+
+@contextlib.contextmanager
+def sport_lock(sport: Sport, what: str = "a scrape"):
+    """Refuse to start when another scrape or pipeline of the same sport is running: both would write
+    the same season files. The lock is the OS's (flock), so it ends with the process, even after a
+    crash or Ctrl-C; there's no stale lock file to delete. Steps run by pipeline.py skip it, since the
+    pipeline already holds it for them."""
+    if os.environ.get(LOCK_ENV) == sport.name:
+        yield
+        return
+    path = sport.rosters_dir / ".lock"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fh = open(path, "a+", encoding="utf-8")
+    try:
+        import fcntl
+        try:
+            fcntl.flock(fh, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except OSError:
+            fh.seek(0)
+            who = fh.read().strip() or "another run"
+            fh.close()
+            raise SportBusy(f"{sport.name} is busy: {who}. Wait for it to finish (or stop it) and run this again.")
+    except ImportError:            # Windows: no flock; carry on without the check
+        fcntl = None
+    fh.seek(0)
+    fh.truncate()
+    fh.write(f"{what} started {time.strftime('%H:%M')} (process {os.getpid()})")
+    fh.flush()
+    try:
+        yield
+    finally:
+        fh.close()
 
 
 def add_sport_argument(ap: argparse.ArgumentParser) -> None:

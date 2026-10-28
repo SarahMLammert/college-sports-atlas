@@ -72,24 +72,66 @@
   function makeFilters(data, { onChange, onSchool, onOpen } = {}) {
     const P = data.players;
     const allPos = () => new Set(data.pos.map((_, i) => i));
-    const state = { school: -1, allSchools: false, conf: "", div: "", from: data.FIRST, to: data.LAST, entry: "", pos: allPos() };
+    // groups: the set of picked school groups (see below); empty = every school.
+    // conf and div are read by the pages: conf is a conference index when exactly one conference is picked,
+    // div a division choice when exactly one whole division is picked; otherwise "".
+    const state = { school: -1, allSchools: false, groups: new Set(), conf: "", div: "", from: data.FIRST, to: data.LAST, entry: "", pos: allPos() };
     const hasSchool = !!$("school"), hasConf = !!$("conf");
-    // Division choices: "" = all, "D1" = every D1 division together (football: FBS + FCS), otherwise an
-    // index into data.divs. The "D1" group is only offered when D1 is split (football) and the data has
-    // other divisions too; a sport whose D1 is one division already has a "D1" button.
-    // Only divisions with players get a button (a D1-only sport shows no NAIA or JUCO button).
+    const confs = data.confs || [];
     const isD1 = (d) => data.d1.includes(data.divs[d]);
-    const present = new Set(P.d);
-    const shownDivs = data.divs.map((n, i) => i).filter((i) => present.has(i));
-    const d1Group = data.d1.length > 1 && shownDivs.some((i) => isD1(i)) && shownDivs.some((i) => !isD1(i));
-    const titleOf = (v) => v === "" ? "" : v === "D1" && d1Group ? `Division I (${data.d1.join(" and ")})` : data.divLabel[divName(v)] || "";
-    const divChoices = [["", "All"], ...(d1Group ? [["D1", "D1"]] : []), ...shownDivs.map((i) => [String(i), data.divs[i]])];
     const divName = (v) => v === "D1" ? "D1" : data.divs[+v];
-    const divOk = (v, d) => v === "" || (v === "D1" ? isD1(d) : d === +v);
-    // the buttons come from the data, so new divisions show up as soon as map_data.json has them
+
+    // ---- Schools sorted into groups: one per division and conference (today's, 2026), e.g. "D2 · GLIAC" ----
+    // The Division chips and the Conference list both pick groups, so a chip is "every school in that division"
+    // and the list can narrow it to some conferences. Only schools with players count.
+    const confOf = (i) => { const c = data.schools[i][1]; return Number.isInteger(c) && c >= 0 && c < confs.length ? c : -1; };
+    const confLabel = (c) => (c >= 0 && confs[c]) || "No conference";
+    const hasPlayers = new Uint8Array(data.schools.length); P.s.forEach((s) => { hasPlayers[s] = 1; });
+    const groups = [], gKey = new Map(), schoolGroup = new Int32Array(data.schools.length).fill(-1);
+    data.schools.forEach((s, i) => {
+      if (!hasPlayers[i]) return;
+      const div = s[2], conf = confOf(i), key = div + ":" + conf;
+      if (!gKey.has(key)) { gKey.set(key, groups.length); groups.push({ div, conf, name: confLabel(conf), n: 0 }); }
+      const g = gKey.get(key); groups[g].n++; schoolGroup[i] = g;
+    });
+    const shownDivs = [...new Set(groups.map((g) => g.div))].sort((a, b) => a - b);
+    const groupsOfDiv = new Map(shownDivs.map((d) => [d, groups.map((g, i) => i).filter((i) => groups[i].div === d)
+      .sort((a, b) => (groups[a].conf < 0) - (groups[b].conf < 0) || groups[a].name.localeCompare(groups[b].name))]));
+    // a name used by more than one division (only "No conference" today) goes in links as "DIV~name"
+    const nameCount = new Map(); groups.forEach((g) => nameCount.set(g.name, (nameCount.get(g.name) || 0) + 1));
+
+    // Division chips: one per division with players, plus "D1" when D1 is split (football: FBS + FCS) and other
+    // divisions are there too. Each chip is on (all its schools), part on (some of its conferences) or off.
+    const d1Group = shownDivs.filter(isD1).length > 1 && shownDivs.some((d) => !isD1(d));
+    const chipVals = [...(d1Group ? ["D1"] : []), ...shownDivs.map(String)];
+    const chipGroups = (v) => v === "D1" ? shownDivs.filter(isD1).flatMap((d) => groupsOfDiv.get(d)) : groupsOfDiv.get(+v) || [];
+    const titleOf = (v) => v === "D1" ? `Division I (${data.d1.join(" and ")})` : data.divLabel[divName(v)] || divName(v);
+    const covered = (gs) => gs.length > 0 && gs.every((g) => state.groups.has(g));
+    function setGroups(gs, on) {
+      gs.forEach((g) => on ? state.groups.add(g) : state.groups.delete(g));
+      if (state.groups.size === groups.length) state.groups.clear();   // everything picked = no filter
+    }
+    // flip a set of groups: from "every school" it starts a pick of just these; otherwise all on, or all off
+    function toggleGroups(gs) {
+      if (!state.groups.size) { state.groups = new Set(gs); if (state.groups.size === groups.length) state.groups.clear(); }
+      else setGroups(gs, !covered(gs));
+    }
+    // keep the pages' single-choice fields in step with the groups
+    function deriveLegacy() {
+      state.div = ""; state.conf = "";
+      if (!state.groups.size) return;
+      const exact = (gs) => gs.length === state.groups.size && covered(gs);
+      const v = chipVals.find((x) => exact(chipGroups(x)));
+      if (v !== undefined) state.div = v;
+      if (state.groups.size === 1) { const g = groups[[...state.groups][0]]; if (g.conf >= 0 && nameCount.get(g.name) === 1) state.conf = String(g.conf); }
+    }
     $("div").className = "chips divs";
-    $("div").innerHTML = divChoices.map(([v, label]) =>
-      `<button type="button" class="chip" data-v="${v}" aria-pressed="${v === ""}"${titleOf(v) ? ` title="${esc(titleOf(v))}"` : ""}>${esc(label)}</button>`).join("");
+    $("div").innerHTML = chipVals.map((v) =>
+      `<button type="button" class="chip" data-v="${v}" aria-pressed="false" title="${esc(titleOf(v))}: every school">${esc(divName(v))}</button>`).join("");
+    $("div").addEventListener("click", (e) => {
+      const b = e.target.closest("button"); if (!b) return;
+      toggleGroups(chipGroups(b.dataset.v)); sync(); changed();
+    });
 
     if (hasSchool) {
       $("schoolList").innerHTML = data.schools.map((s) => `<option value="${esc(s[0])}">`).join("");
@@ -100,9 +142,61 @@
         else if (data.schoolIndex.has(v)) onSchool && onSchool(data.schoolIndex.get(v));
       });
     }
+    // Conference: a box like the season boxes (with the arrow) that opens a checklist below it, grouped by
+    // division, with a search box. It replaces whatever control the page has with id="conf".
+    let confBtn = null, confPop = null, confSearch = null;
     if (hasConf) {
-      data.confs.forEach((c, i) => { const o = document.createElement("option"); o.value = i; o.textContent = c; $("conf").appendChild(o); });
-      $("conf").addEventListener("change", (e) => { state.conf = e.target.value; changed(); });
+      injectStyles();
+      const old = $("conf"), wrap = document.createElement("div");
+      wrap.className = "cpick";
+      wrap.innerHTML = `
+        <button type="button" class="field cpick-btn" id="conf" aria-expanded="false" aria-controls="confPop">
+          <span class="cpick-text">All conferences</span>
+          <svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="cpick-pop" id="confPop" hidden>
+          <div class="cpick-top">
+            <input class="cpick-search" type="search" placeholder="Search conferences" aria-label="Search conferences" autocomplete="off">
+            <button type="button" class="link cpick-clear">All</button>
+          </div>
+          <div class="cpick-scroll">${shownDivs.map((d) => `
+            <div class="cpick-div" data-d="${d}">
+              <label class="cpick-head"><input type="checkbox" data-d="${d}"><span>${esc(data.divLabel[data.divs[d]] || data.divs[d])}</span></label>
+              ${groupsOfDiv.get(d).map((g) => `<label class="cpick-row" data-name="${esc(groups[g].name.toLowerCase())}"><input type="checkbox" data-g="${g}"><span>${esc(groups[g].name)}</span><span class="cpick-n">${groups[g].n}</span></label>`).join("")}
+            </div>`).join("")}
+            <p class="cpick-none" hidden>No conference matches.</p>
+          </div>
+        </div>`;
+      old.replaceWith(wrap);
+      confBtn = wrap.querySelector(".cpick-btn"); confPop = wrap.querySelector(".cpick-pop"); confSearch = wrap.querySelector(".cpick-search");
+      const openConf = (open) => { confPop.hidden = !open; confBtn.setAttribute("aria-expanded", open); if (open && !narrow()) confSearch.focus(); };
+      confBtn.addEventListener("click", () => openConf(confPop.hidden));
+      wrap.addEventListener("keydown", (e) => { if (e.key === "Escape" && !confPop.hidden) { e.stopPropagation(); openConf(false); confBtn.focus(); } });
+      document.addEventListener("pointerdown", (e) => { if (!confPop.hidden && !e.target.closest(".cpick")) openConf(false); });
+      confPop.addEventListener("change", (e) => {
+        const t = e.target; if (t.type !== "checkbox") return;
+        if (t.dataset.d !== undefined) toggleGroups(groupsOfDiv.get(+t.dataset.d));
+        else { const g = +t.dataset.g; if (!state.groups.size) state.groups = new Set([g]); else setGroups([g], t.checked); }
+        sync(); changed();
+      });
+      wrap.querySelector(".cpick-clear").addEventListener("click", () => { state.groups.clear(); sync(); changed(); });
+      confSearch.addEventListener("input", () => {
+        const q = confSearch.value.trim().toLowerCase(); let any = false;
+        confPop.querySelectorAll(".cpick-div").forEach((box) => {
+          let shown = 0;
+          box.querySelectorAll(".cpick-row").forEach((r) => { const ok = !q || r.dataset.name.includes(q); r.hidden = !ok; shown += ok; });
+          box.hidden = !shown; any = any || shown > 0;
+        });
+        confPop.querySelector(".cpick-none").hidden = any;
+      });
+    }
+    // What the closed box says: "All conferences", "D2", "GLIAC", "D2, SEC", or "12 conferences"
+    function confText() {
+      if (!state.groups.size) return "All conferences";
+      const left = new Set(state.groups), parts = [];
+      for (const v of chipVals) { const gs = chipGroups(v); if (gs.every((g) => left.has(g))) { parts.push(divName(v)); gs.forEach((g) => left.delete(g)); } }
+      left.forEach((g) => parts.push(nameCount.get(groups[g].name) > 1 ? `${groups[g].name} (${data.divs[groups[g].div]})` : groups[g].name));
+      return parts.length <= 2 ? parts.join(", ") : `${state.groups.size} conferences`;
     }
     for (const id of ["from", "to"]) data.SEASONS.forEach((y) => { const o = document.createElement("option"); o.value = y; o.textContent = y; $(id).appendChild(o); });
     $("from").addEventListener("change", (e) => { state.from = +e.target.value; if (state.from > state.to) state.to = state.from; sync(); changed(); });
@@ -121,30 +215,44 @@
       $("pos").appendChild(b);
     });
     $("posAll").addEventListener("click", () => { state.pos = allPos(); sync(); changed(); });
-    for (const key of ["div", "entry"]) $(key).addEventListener("click", (e) => {
+    $("entry").addEventListener("click", (e) => {
       const b = e.target.closest("button"); if (!b) return;
       // clicking the button that's already on turns it off (back to All)
-      state[key] = state[key] === b.dataset.v ? "" : b.dataset.v; sync(); changed();
+      state.entry = state.entry === b.dataset.v ? "" : b.dataset.v; sync(); changed();
     });
     $("resetAll").addEventListener("click", () => { reset(); sync(); changed(); });
 
     function changed() { updateBadge(); onChange && onChange(); }
     function setSeg(id, v) { $(id).querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", x.dataset.v === v)); }
     function sync() {
+      deriveLegacy();
       if (hasSchool) $("school").value = state.school >= 0 ? data.schools[state.school][0] : "";
-      if (hasConf) $("conf").value = state.conf;
       $("from").value = state.from; $("to").value = state.to;
-      setSeg("div", state.div); setSeg("entry", state.entry);
+      setSeg("entry", state.entry);
+      // division chips: lit = every school in it, "mixed" = some of its conferences, none lit = every school
+      $("div").querySelectorAll("button").forEach((b) => {
+        const gs = chipGroups(b.dataset.v), n = gs.filter((g) => state.groups.has(g)).length;
+        b.setAttribute("aria-pressed", n && n === gs.length ? "true" : n ? "mixed" : "false");
+      });
+      if (confBtn) {
+        confBtn.querySelector(".cpick-text").textContent = confText();
+        confBtn.classList.toggle("on", state.groups.size > 0);
+        confPop.querySelectorAll("input[data-g]").forEach((c) => { c.checked = state.groups.has(+c.dataset.g); });
+        confPop.querySelectorAll("input[data-d]").forEach((c) => {
+          const gs = groupsOfDiv.get(+c.dataset.d), n = gs.filter((g) => state.groups.has(g)).length;
+          c.checked = n > 0 && n === gs.length; c.indeterminate = n > 0 && n < gs.length;
+        });
+      }
       // no position chip lit = every position; a lit chip is one you turned on
       const allOn = state.pos.size === data.pos.length;
       $("pos").querySelectorAll(".chip").forEach((b) => b.setAttribute("aria-pressed", !allOn && state.pos.has(+b.dataset.i)));
       updateBadge();
     }
     function reset() {
-      Object.assign(state, { school: -1, allSchools: false, conf: "", div: "", from: data.FIRST, to: data.LAST, entry: "", pos: allPos() });
+      Object.assign(state, { school: -1, allSchools: false, groups: new Set(), conf: "", div: "", from: data.FIRST, to: data.LAST, entry: "", pos: allPos() });
     }
     function activeCount() {
-      return (hasSchool && state.school >= 0) + (hasConf && state.conf !== "") + (state.div !== "") + (state.from !== data.FIRST || state.to !== data.LAST)
+      return (hasSchool && state.school >= 0) + (state.groups.size > 0) + (state.from !== data.FIRST || state.to !== data.LAST)
         + (state.entry !== "") + (state.pos.size !== data.pos.length);
     }
     function updateBadge() {
@@ -156,16 +264,19 @@
     function passes(k, skipSchool, skipConf) {
       if (!skipSchool && state.school >= 0 && P.s[k] !== state.school) return false;
       if (P.f[k] + 2000 > state.to || P.l[k] + 2000 < state.from) return false;   // on a roster in at least one season of the range
-      if (!divOk(state.div, P.d[k])) return false;
       if (state.entry !== "" && P.x[k] !== +state.entry) return false;
       if (!state.pos.has(P.p[k])) return false;
-      if (!skipConf && state.conf !== "" && data.schools[P.s[k]][1] !== +state.conf) return false;
+      // division and conference: the school's (2026), picked as groups
+      if (!skipConf && state.groups.size && !state.groups.has(schoolGroup[P.s[k]])) return false;
       return true;
     }
+    // is this school inside the picked divisions and conferences?
+    const schoolOk = (i) => !state.groups.size || state.groups.has(schoolGroup[i]);
     // A short description of the player filters, e.g. "FCS · 2019–2024 · transfers · QB, WR"
     function summary() {
       const parts = [];
-      if (state.div !== "") parts.push(divName(state.div));
+      // a single conference is named by the page itself (its scope line), so only say the rest here
+      if (state.groups.size && state.conf === "") parts.push(confText());
       if (state.from !== data.FIRST || state.to !== data.LAST) parts.push(state.from === state.to ? `${state.from}` : `${state.from}–${state.to}`);
       if (state.entry !== "") parts.push(state.entry === "1" ? "transfers" : "high school recruits");
       if (state.pos.size !== data.pos.length) parts.push([...state.pos].sort((a, b) => a - b).map((i) => data.posName(data.pos[i])).join(", "));
@@ -177,8 +288,14 @@
         if (state.school >= 0) q.set("school", data.schools[state.school][0]);
         else if (state.allSchools) q.set("school", "all");
       }
-      if (state.conf !== "") q.set("conf", data.confs[+state.conf]);
-      if (state.div !== "") q.set("div", divName(state.div));
+      // div=D2,NAIA (whole divisions) and conf=SEC|GLIAC (single conferences; D2~No conference when a name repeats)
+      if (state.groups.size) {
+        const left = new Set(state.groups), divs = [], cs = [];
+        for (const v of chipVals) { const gs = chipGroups(v); if (gs.every((g) => left.has(g))) { divs.push(divName(v)); gs.forEach((g) => left.delete(g)); } }
+        left.forEach((g) => cs.push(nameCount.get(groups[g].name) > 1 ? `${data.divs[groups[g].div]}~${groups[g].name}` : groups[g].name));
+        if (divs.length) q.set("div", divs.join(","));
+        if (cs.length) q.set("conf", cs.join("|"));
+      }
       if (state.from !== data.FIRST) q.set("from", state.from);
       if (state.to !== data.LAST) q.set("to", state.to);
       if (state.entry !== "") q.set("arrived", state.entry === "1" ? "transfer" : "hs");
@@ -191,9 +308,17 @@
       const sc = v("school").toLowerCase();
       if (sc && data.schoolIndex.has(sc)) state.school = data.schoolIndex.get(sc);
       else if (sc === "all") state.allSchools = true;
-      const ci = data.confs.indexOf(v("conf")); if (ci >= 0) state.conf = String(ci);
-      const dv = v("div").toUpperCase(), di = data.divs.indexOf(dv);
-      if (dv === "D1" && d1Group) state.div = "D1"; else if (di >= 0) state.div = String(di);
+      // (an empty conf used to match the blank conference name and pick it on every load: skip empty pieces)
+      for (const dv of v("div").toUpperCase().split(",").map((x) => x.trim()).filter(Boolean)) {
+        const val = dv === "D1" && d1Group ? "D1" : String(data.divs.indexOf(dv));
+        if (chipVals.includes(val)) chipGroups(val).forEach((g) => state.groups.add(g));
+      }
+      for (const tok of v("conf").split("|").map((x) => x.trim()).filter(Boolean)) {
+        const [dn, name] = tok.includes("~") ? tok.split("~") : [null, tok];
+        groups.forEach((g, i) => { if (g.name === name && (dn === null || data.divs[g.div] === dn)) state.groups.add(i); });
+      }
+      if (state.groups.size === groups.length) state.groups.clear();
+      deriveLegacy();
       if (data.SEASONS.includes(+v("from"))) state.from = +v("from");
       if (data.SEASONS.includes(+v("to"))) state.to = +v("to");
       if (state.from > state.to) [state.from, state.to] = [state.to, state.from];
@@ -222,7 +347,37 @@
     addEventListener("resize", () => { if (isOpen()) place(); });
     document.addEventListener("pointerdown", (e) => { if (isOpen() && !e.target.closest(".fwrap")) setOpen(false); });
 
-    return { state, passes, sync, reset, activeCount, summary, toParams, fromParams, setOpen, isOpen, updateBadge, divName, isD1 };
+    return { state, passes, schoolOk, confText, sync, reset, activeCount, summary, toParams, fromParams, setOpen, isOpen, updateBadge, divName, isD1 };
+  }
+
+  // Styles for the conference checklist and the part-on division chip, so no page needs its own copy.
+  function injectStyles() {
+    if ($("cpickStyles")) return;
+    const s = document.createElement("style"); s.id = "cpickStyles";
+    s.textContent = `
+      .chip[aria-pressed="mixed"] { border-style: dashed; border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+      .cpick { position: relative; }
+      .cpick-btn { display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; text-align: left; cursor: pointer; }
+      .cpick-btn .cpick-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .cpick-btn svg { flex: none; transition: transform .15s; }
+      .cpick-btn[aria-expanded="true"] svg { transform: rotate(180deg); }
+      .cpick-btn[aria-expanded="true"], .cpick-btn.on { border-color: var(--accent); }
+      .cpick-pop { margin-top: 6px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); overflow: hidden; }
+      .cpick-pop[hidden] { display: none; }
+      .cpick-top { display: flex; align-items: center; gap: 8px; padding: 8px; border-bottom: 1px solid var(--line); }
+      .cpick-search { flex: 1; min-width: 0; font: inherit; font-size: 14px; color: inherit; padding: 6px 9px; border: 1px solid var(--line); border-radius: 6px; background: transparent; }
+      .cpick-search:focus { outline: none; border-color: var(--accent); }
+      .cpick-scroll { max-height: 280px; overflow: auto; overscroll-behavior: contain; padding: 4px 0 6px; }
+      .cpick-div[hidden], .cpick-row[hidden] { display: none; }
+      .cpick-head, .cpick-row { display: flex; align-items: center; gap: 8px; padding: 4px 10px; cursor: pointer; font-size: 14px; }
+      .cpick-head { margin-top: 4px; font-weight: 700; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted, inherit); }
+      .cpick-row { padding-left: 30px; }
+      .cpick-head:hover, .cpick-row:hover { background: var(--accent-soft); }
+      .cpick-row span:first-of-type { flex: 1; }
+      .cpick-n { font-size: 12px; opacity: .65; font-variant-numeric: tabular-nums; }
+      .cpick input[type="checkbox"] { accent-color: var(--accent); margin: 0; width: 15px; height: 15px; flex: none; }
+      .cpick-none { margin: 8px 10px; font-size: 13px; opacity: .7; }`;
+    document.head.appendChild(s);
   }
 
   // Straight-line distance in miles between two lat/lon points.

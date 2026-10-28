@@ -53,7 +53,7 @@ from pathlib import Path
 import requests
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from hometowns import US_STATES, parse_hometown, split_labeled_hometown  # noqa: E402
+from hometowns import US_STATES, _region, not_a_place, parse_hometown, split_labeled_hometown  # noqa: E402
 from paths import add_sport_argument, load_sport  # noqa: E402
 from seasons import players  # noqa: E402
 
@@ -66,9 +66,13 @@ GAZ_PLACES = f"{GAZ_YEAR}_Gaz_place_national.zip"
 GAZ_COUSUBS = f"{GAZ_YEAR}_Gaz_cousubs_national.zip"
 GAZ_COUNTIES = f"{GAZ_YEAR}_Gaz_counties_national.zip"
 GNIS_URL = "https://prd-tnm.s3.amazonaws.com/StagedProducts/GeographicNames/Topical/PopulatedPlaces_National_Text.zip"
+# A third, smaller list of ~30,000 US towns with lat/lon (the one suggest_hometown_fixes.py uses), tried
+# after the Census and USGS lists: it has towns those miss, and it still places the common unincorporated
+# towns (Ellenwood GA, Loxahatchee FL, Cortlandt Manor NY) when the USGS file couldn't be downloaded.
+US_TOWNS_URL = "https://raw.githubusercontent.com/kelvins/US-Cities-Database/main/csv/us_cities.csv"
 
 _SUFFIXES = re.compile(
-    r"\s+(city and borough|consolidated government|metro(politan)? government|unified government|"
+    r"\s+(city and borough|consolidated government|metro(politan)? government|metro township|unified government|"
     r"urban county|municipality|charter township|city|town|township|village|borough|CDP|"
     r"comunidad|zona urbana|plantation)$",
     re.I,
@@ -123,11 +127,76 @@ ALIASES = {
     ("lake highlands", "TX"): "dallas", ("kingwood park", "TX"): "houston",
     ("green valley ranch", "CO"): "denver", ("liliha", "HI"): "honolulu", ("papakolea", "HI"): "honolulu",
     ("p.g. county", "MD"): "prince george's", ("pg county", "MD"): "prince george's",
+    # Oct 28: left unplaced after the Oct 27 runs (several sports)
+    ("woodlands", "TX"): "the woodlands", ("castleton", "NY"): "castleton-on-hudson",
+    ("briarcliff", "NY"): "briarcliff manor", ("ny mills", "NY"): "new york mills",
+    ("huntington", "CA"): "huntington beach", ("north richland", "TX"): "north richland hills",
+    ("pompano", "FL"): "pompano beach", ("altamonte", "FL"): "altamonte springs", ("slc", "UT"): "salt lake city",
+    ("south hayward", "CA"): "hayward", ("south buffalo", "NY"): "buffalo", ("east irondequoit", "NY"): "irondequoit",
+    ("point pleasant boro", "NJ"): "point pleasant", ("hopewell valley", "NJ"): "hopewell",
+    ("shoreham-wading river", "NY"): "shoreham", ("monroe-woodbury", "NY"): "monroe", ("haddam neck", "CT"): "haddam",
+    ("brandon valley", "SD"): "brandon", ("sauk prairie", "WI"): "prairie du sac", ("west muskingum", "OH"): "zanesville",
+    ("rehoboth", "DE"): "rehoboth beach", ("dr. phillips", "FL"): "doctor phillips", ("dr phillips", "FL"): "doctor phillips",
+    ("kaneohe 'oahu", "HI"): "kaneohe", ("manoa", "HI"): "urban honolulu", ("venice beach", "CA"): "los angeles",
+    ("arleta", "CA"): "los angeles", ("rockaway beach", "NY"): "new york", ("north rockland", "NY"): "stony point",
+    ("virgina beach", "VA"): "virginia beach", ("tuscon", "AZ"): "tucson", ("pittsburg", "PA"): "pittsburgh",
+    ("hillard", "OH"): "hilliard", ("bayton", "TX"): "baytown", ("coatsville", "PA"): "coatesville",
+    ("mainville", "OH"): "maineville", ("landenburg", "PA"): "landenberg", ("chillocothe", "OH"): "chillicothe",
+    ("pleasonton", "CA"): "pleasanton", ("vaccaville", "CA"): "vacaville", ("fredricksburg", "TX"): "fredericksburg",
+    ("carrolton", "OH"): "carrollton", ("san jaun", "PR"): "san juan",
+    ("cardiff", "CA"): "encinitas", ("cardiff by the sea", "CA"): "encinitas", ("lake travis", "TX"): "lakeway",
+    ("indian land", "SC"): "fort mill", ("armwood", "FL"): "seffner", ("chichester", "PA"): "marcus hook",
+    ("milmont park", "PA"): "folsom", ("north dinwiddie", "VA"): "dinwiddie", ("north prince george", "VA"): "prince george",
+    ("onondaga nation", "NY"): "nedrow", ("imperial valley", "CA"): "el centro", ("tri-cities", "WA"): "kennewick",
+    ("tri cities", "WA"): "kennewick", ("topsail island", "NC"): "surf city", ("smoky mountain", "NC"): "sylva",
+    # school districts written as the hometown -> the district's main town
+    ("sachem", "NY"): "holbrook", ("gates chili", "NY"): "gates", ("gates-chili", "NY"): "gates",
+    ("harborfields", "NY"): "greenlawn", ("minisink valley", "NY"): "slate hill", ("shoreham wading river", "NY"): "shoreham",
+    ("honeoye falls-lima", "NY"): "honeoye falls", ("maine-endwell", "NY"): "endwell", ("niagara wheatfield", "NY"): "sanborn",
+    ("bayport bluepoint", "NY"): "bayport", ("bayport-blue point", "NY"): "bayport", ("west irondequoit", "NY"): "irondequoit",
+    ("strath haven", "PA"): "wallingford", ("wallenpaupack", "PA"): "hawley", ("st. michael-albertville", "MN"): "st. michael",
+    ("liberty eylau", "TX"): "texarkana", ("liberty-eylau", "TX"): "texarkana", ("north harford", "MD"): "pylesville",
+    ("pocono mountains", "PA"): "pocono", ("poconos", "PA"): "pocono", ("north minneapolis", "MN"): "minneapolis",
+    ("south jamaica", "NY"): "new york", ("tampa bay", "FL"): "tampa", ("syosset, long island", "NY"): "syosset",
+    # misspellings and short names
+    ("nobelsville", "IN"): "noblesville", ("westboro", "MA"): "westborough", ("marlboro", "MD"): "upper marlboro",
+    ("watervilet", "NY"): "watervliet", ("fuquay-varnia", "NC"): "fuquay-varina", ("forrest hill", "MD"): "forest hill",
+    ("stanford", "CT"): "stamford", ("inver grove", "MN"): "inver grove heights", ("lasuer", "MN"): "le sueur",
+    ("romona", "CA"): "ramona", ("no. scituate", "RI"): "north scituate", ("alex city", "AL"): "alexander city",
+    ("sandy spring", "GA"): "sandy springs", ("st. mckinney", "TX"): "mckinney", ("phillips ranch", "CA"): "pomona",
+    ("weston ranch", "CA"): "stockton", ("lake view terrace", "CA"): "los angeles", ("manitou", "CO"): "manitou springs",
+    ("oaha", "HI"): "urban honolulu", ("village of lakewood", "IL"): "lakewood",
+    # Haudenosaunee and other nations on lacrosse rosters -> the community's town
+    ("akwesasne", "NY"): "hogansburg", ("akwesasne reservation", "NY"): "hogansburg", ("st. regis mohawk", "NY"): "hogansburg",
+    ("onondaga", "NY"): "nedrow", ("seneca nation", "NY"): "salamanca", ("the seneca nation", "NY"): "salamanca",
+    ("oneida nation", "WI"): "oneida", ("tuscarora nation", "NY"): "lewiston", ("tonawanda seneca nation", "NY"): "basom",
+}
+# First Nations communities across the border, as lacrosse rosters write them ("Kahnawake Mohawk Territory")
+NATIONS_ABROAD = {"kahnawake": ("Kahnawake", "QC", "Canada"), "tyendinaga": ("Deseronto", "ON", "Canada"),
+                  "six nations": ("Ohsweken", "ON", "Canada"), "six nations of the grand river": ("Ohsweken", "ON", "Canada"),
+                  "kanesatake": ("Oka", "QC", "Canada"), "wahta": ("Bala", "ON", "Canada"),
+                  "akwesasne": ("Akwesasne", "ON", "Canada")}
+
+# Islands and areas with no town of that name: a dot in the middle of where people live (precision "region")
+AREAS = {
+    ("longisland", "NY"): (40.80, -73.20), ("kentisland", "MD"): (38.95, -76.32), ("whidbeyisland", "WA"): (48.10, -122.60),
+    ("oahu", "HI"): (21.40, -157.90), ("maui", "HI"): (20.83, -156.40), ("bigisland", "HI"): (19.60, -155.50),
+    ("kauai", "HI"): (22.05, -159.50), ("cape cod", "MA"): (41.70, -70.30),
+    ("marthasvineyard", "MA"): (41.40, -70.62), ("outerbanks", "NC"): (35.90, -75.60), ("eastshore", "MD"): (38.80, -76.00),
+    ("southbay", "CA"): (33.85, -118.35), ("inlandempire", "CA"): (34.00, -117.40), ("bayarea", "CA"): (37.70, -122.20),
+    ("southjersey", "NJ"): (39.75, -75.00), ("northshore", "MA"): (42.55, -70.90), ("westchester", "NY"): (41.12, -73.79),
+    ("hamptons", "NY"): (40.93, -72.30), ("thehamptons", "NY"): (40.93, -72.30), ("lowcountry", "SC"): (32.70, -80.20),
 }
 
 # Coarse fallbacks (geo_precision = "region"/"country").
 TERRITORIES = {"AS": (-14.2756, -170.7020), "GU": (13.4443, 144.7937), "VI": (18.3358, -64.8963),
-               "MP": (15.1850, 145.7467)}
+               "MP": (15.1850, 145.7467), "PR": (18.2208, -66.5901)}
+# Canadian provinces, for a town the offline lists can't place (they're US only): better than the middle
+# of Canada. Roughly where most people in each province live.
+PROVINCES = {"AB": (52.27, -113.81), "BC": (49.89, -122.0), "MB": (49.90, -98.0), "SK": (51.5, -105.5),
+             "ON": (44.0, -79.5), "QC": (46.5, -72.5), "NS": (45.0, -63.5), "NB": (46.0, -66.0),
+             "PE": (46.25, -63.13), "NL": (47.6, -53.0), "YT": (60.72, -135.06), "NT": (62.45, -114.37),
+             "NU": (63.75, -68.52)}
 COUNTRIES = {
     "Australia": (-25.27, 133.78), "Canada": (56.13, -106.35), "New Zealand": (-40.90, 174.89),
     "England": (52.36, -1.17), "United Kingdom": (55.38, -3.44), "Germany": (51.17, 10.45),
@@ -165,6 +234,8 @@ COUNTRIES = {
     "Peru": (-9.19, -75.02), "Ecuador": (-1.83, -78.18), "Vietnam": (14.06, 108.28), "Thailand": (15.87, 100.99),
     "Taiwan": (23.70, 120.96), "Singapore": (1.35, 103.82), "Papua New Guinea": (-6.31, 143.96),
     "French Polynesia": (-17.68, -149.41), "Cook Islands": (-21.24, -159.78),
+    "Curacao": (12.17, -68.99), "Suriname": (3.92, -56.03), "Qatar": (25.35, 51.18), "Hong Kong": (22.32, 114.17),
+    "British Virgin Islands": (18.42, -64.64), "Aruba": (12.52, -69.97), "Rwanda": (-1.94, 29.87),
 }
 
 
@@ -177,6 +248,13 @@ def norm_city(name: str) -> str:
     n = re.sub(r"^mt(\.\s*|\s+)", "mount ", n)
     n = re.sub(r"^n\.\s+", "north ", n)
     n = re.sub(r"^s\.\s+", "south ", n)
+    n = re.sub(r"^e\.\s*", "east ", n)        # Oct 28: "E. Setauket", "W. Bloomfield"
+    n = re.sub(r"^w\.\s*", "west ", n)
+    n = re.sub(r"\bmtn\b\.?", "mountain", n)    # "Stone Mtn"; the same words in the Census names are spelled out
+    n = re.sub(r"\bjct\b\.?", "junction", n)    # "Essex Jct."
+    n = re.sub(r"\bhts\b\.?", "heights", n)
+    n = re.sub(r"\bspgs?\b\.?", "springs", n)
+    n = re.sub(r"\bpt\.\s*", "point ", n)
     return re.sub(r"[^a-z0-9]", "", n)
 
 
@@ -219,6 +297,15 @@ class Gazetteer:
         self._load_census(GAZ_COUSUBS, priority=1)
         self._load_counties()
         self._load_gnis()
+        self.towns: dict[tuple, tuple] = {}        # (norm name, ST) -> (lat, lon), the smaller US town list
+        self._load_us_towns()
+        # Each state's middle, as the average of its towns (so roughly where people live), for a hometown
+        # that gives only a state ("MN", "Maryland"): a dot in the state, marked "region" like a province
+        sums: dict[str, list] = {}
+        for (_, st), (lat, lon, _) in self.places.items():
+            t = sums.setdefault(st, [0.0, 0.0, 0])
+            t[0] += lat; t[1] += lon; t[2] += 1
+        self.state_center = {st: (a / n, b / n) for st, (a, b, n) in sums.items() if n}
 
     def _add_place(self, key, lat, lon, rank):
         if key not in self.places or rank < self.places[key][2]:
@@ -239,10 +326,12 @@ class Gazetteer:
                 names |= {paren.group(1), paren.group(2)}
             for n in names:
                 self._add_place((norm_city(n), state), lat, lon, rank)
-            if priority == 0:
-                aland = float(row[col["aland"]]) if "aland" in col and row[col["aland"]] else 0.0
-                for n in names:  # incorporated places rank above CDPs of the same name
-                    self.by_name.setdefault(norm_city(n), []).append((0 if is_cdp else 1, aland, state, lat, lon))
+            aland = float(row[col["aland"]]) if "aland" in col and row[col["aland"]] else 0.0
+            for n in names:  # incorporated places rank above CDPs of the same name, and both above towns
+                # and townships (county subdivisions, Oct 28: so "Southington", "Glastonbury" and "Vestal",
+                # New England and New York towns given with no state, can be guessed too)
+                rank_here = (0 if is_cdp else 1) if priority == 0 else -1
+                self.by_name.setdefault(norm_city(n), []).append((rank_here, aland, state, lat, lon))
 
     def _load_counties(self) -> None:
         path = _download(GAZ_BASE + GAZ_COUNTIES, CACHE / GAZ_COUNTIES, "county centroids from the Census Bureau")
@@ -289,6 +378,21 @@ class Gazetteer:
             self.gnis.setdefault(key, (lat, lon))
         print(f"  USGS populated places loaded: {len(self.gnis):,} names")
 
+    def _load_us_towns(self) -> None:
+        local = CACHE / "us_cities.csv"
+        try:
+            _download(US_TOWNS_URL, local, "the US town list (one time, ~2 MB)")
+            with open(local, newline="", encoding="utf-8") as fh:
+                for r in csv.DictReader(fh):
+                    try:
+                        self.towns.setdefault((norm_city(r["CITY"]), r["STATE_CODE"]),
+                                              (float(r["LATITUDE"]), float(r["LONGITUDE"])))
+                    except (KeyError, ValueError):
+                        continue
+        except Exception as exc:   # optional: the Census and USGS lists place nearly everything
+            local.unlink(missing_ok=True)
+            print(f"  (couldn't load the US town list: {exc}; carrying on without it)")
+
     # -----------------------------------------------------------------------
     def lookup_us(self, city: str, state: str) -> tuple | None:
         """Return (lat, lon, source, precision) for a US city/state, or None."""
@@ -296,7 +400,7 @@ class Gazetteer:
             return None
         c = city.lower().strip()
         candidates = [ALIASES.get((c, state)), city]
-        stripped = re.sub(r"\s+(township|twp\.?|village|borough)$", "", city, flags=re.I)
+        stripped = re.sub(r"\s+(township|twp\.?|village|borough|boro)$", "", city, flags=re.I)
         if stripped != city:
             candidates.append(stripped)
         for cand in filter(None, candidates):
@@ -308,9 +412,15 @@ class Gazetteer:
             if k in self.gnis:
                 return (*self.gnis[k], "usgs", "city")
         for cand in filter(None, candidates):
-            county = norm_city(_COUNTY_SUFFIX.sub("", cand))
+            if (norm_city(cand), state) in self.towns:
+                return (*self.towns[(norm_city(cand), state)], "us_towns", "city")
+        for cand in filter(None, candidates):
+            county = norm_city(_COUNTY_SUFFIX.sub("", re.sub(r"\s+co\.?$", " county", cand, flags=re.I)))
             if (county, state) in self.counties:
                 return (*self.counties[(county, state)], "census_county", "county")
+        for cand in filter(None, candidates):
+            if (norm_city(cand), state) in AREAS:
+                return (*AREAS[(norm_city(cand), state)], "area", "region")
         return None
 
     def lookup_no_state(self, city: str, prefer: list[str] | tuple = ()) -> tuple | None:
@@ -318,16 +428,91 @@ class Gazetteer:
         the player's school recruits most) that has one, otherwise the largest one in the country."""
         if city.lower().strip() in ("honolulu", "urban honolulu"):
             city = "urban honolulu"
+        city = re.sub(r"\s+(township|twp\.?)$", "", city.strip(), flags=re.I)   # "Liberty Township"
         options = self.by_name.get(norm_city(city))
         if not options:
+            # A known other name in some state ("La Canada" -> La Canada Flintridge CA, "Queens" -> New York,
+            # "Seneca Nation" -> Salamanca NY)
+            c = city.lower()
+            for (alias, st), real in ALIASES.items():
+                if alias == c:
+                    hit = self.lookup_us(real, st)
+                    if hit:
+                        return (hit[0], hit[1], f"census_guess_{st}", "city_guess")
             return None
-        for st in prefer:
-            here = [o for o in options if o[2] == st]
-            if here:
-                _, _, st, lat, lon = max(here)
-                return (lat, lon, f"census_guess_{st}", "city_guess")
-        _, _, st, lat, lon = max(options)
+        # A town or CDP in the first preferred state that has one; then a township there (Oct 28: so a
+        # Muskingum player's "Columbus" is Columbus OH, not Columbus Township PA); then the largest town anywhere.
+        towns = [o for o in options if o[0] >= 0]
+        for group in (towns, options):
+            for st in prefer:
+                here = [o for o in group if o[2] == st]
+                if here:
+                    _, _, st, lat, lon = max(here)
+                    return (lat, lon, f"census_guess_{st}", "city_guess")
+        _, _, st, lat, lon = max(towns or options)
         return (lat, lon, f"census_guess_{st}", "city_guess")
+
+
+class WorldCities:
+    """Towns outside the US, from GeoNames' list of every place with 500+ people (the geonamescache
+    package: pip install geonamescache). Without it, places abroad get their province's or country's dot."""
+
+    # The geocoder's country names -> ISO codes, where GeoNames calls the country something else
+    EXTRA = {"England": "GB", "Scotland": "GB", "Wales": "GB", "Northern Ireland": "GB", "United Kingdom": "GB",
+             "South Korea": "KR", "Czech Republic": "CZ", "Ivory Coast": "CI", "Democratic Republic of the Congo": "CD",
+             "Congo": "CG", "Bahamas": "BS", "Russia": "RU", "Vietnam": "VN", "Taiwan": "TW", "Iran": "IR",
+             "Syria": "SY", "Curacao": "CW", "Hong Kong": "HK", "Samoa": "WS", "American Samoa": "AS",
+             "Trinidad and Tobago": "TT", "British Virgin Islands": "VG", "Macedonia": "MK", "North Macedonia": "MK",
+             "Bosnia and Herzegovina": "BA", "Saint Lucia": "LC", "Antigua and Barbuda": "AG", "Laos": "LA",
+             "Micronesia": "FM", "Palestine": "PS", "Cape Verde": "CV", "Eswatini": "SZ", "Swaziland": "SZ"}
+    # GeoNames' codes for the Canadian provinces -> the postal codes the parser gives
+    CA_ADMIN1 = {"01": "AB", "02": "BC", "03": "MB", "04": "NB", "05": "NL", "07": "NS", "08": "ON", "09": "PE",
+                 "10": "QC", "11": "SK", "12": "YT", "13": "NT", "14": "NU"}
+    BIG = 100_000      # a town given with no state or country is only looked up abroad if it's this big (Tokyo)
+
+    def __init__(self):
+        self.by_key: dict[tuple, list] = {}      # (norm name, ISO) -> [(population, admin1, lat, lon)]
+        self.big: dict[str, tuple] = {}          # norm name -> the largest town of that name, if it is big
+        self.iso: dict[str, str] = {}
+        self.ok = False
+        try:
+            import geonamescache
+        except ImportError:
+            print("  (no world town list: pip install geonamescache to place towns abroad on their own dots)")
+            return
+        gc = geonamescache.GeonamesCache(min_city_population=500)
+        for code, c in gc.get_countries().items():
+            self.iso[c["name"].lower()] = code
+            self.iso[re.sub(r"^the\s+", "", c["name"].lower())] = code     # "The Netherlands"
+        for name, code in self.EXTRA.items():
+            self.iso[name.lower()] = code
+        for c in gc.get_cities().values():
+            entry = (int(c.get("population") or 0), c.get("admin1code", ""), float(c["latitude"]), float(c["longitude"]))
+            names = {norm_city(c["name"])} | {norm_city(a) for a in (c.get("alternatenames") or []) if a}
+            for n in filter(None, names):
+                self.by_key.setdefault((n, c["countrycode"]), []).append(entry)
+            n = norm_city(c["name"])
+            if entry[0] >= self.BIG and entry[0] > self.big.get(n, (0,))[0]:
+                self.big[n] = entry
+        self.ok = True
+        print(f"  GeoNames towns abroad loaded: {len(self.by_key):,} names")
+
+    def lookup(self, city: str, country: str, state: str = "") -> tuple | None:
+        if not (self.ok and city):
+            return None
+        code = self.iso.get(country.lower())
+        options = self.by_key.get((norm_city(city), code)) if code else None
+        if not options:
+            return None
+        if code == "CA" and state:
+            here = [o for o in options if self.CA_ADMIN1.get(o[1]) == state]
+            options = here or options
+        _, _, lat, lon = max(options)
+        return (lat, lon, "geonames", "city")
+
+    def lookup_big(self, city: str) -> tuple | None:
+        hit = self.big.get(norm_city(city)) if self.ok and city else None
+        return (hit[2], hit[3], "geonames", "city") if hit else None
 
 
 class Nominatim:
@@ -617,7 +802,15 @@ def norm_state(tok):
         return STATE_ALIASES[key], "USA"
     if key in COUNTRY_ALIASES and COUNTRY_ALIASES[key]:
         return "", COUNTRY_ALIASES[key]
+    region = _region(t)             # the parser's tables: "Illi.", "Virg.", "MB", "B.C. Canada", "Curacao", ...
+    if region and (region["country"] in ("USA", "Canada") or region["country"] in COUNTRIES):
+        return region["state"], region["country"]
     return None, None
+
+
+def _known_place(home: dict) -> bool:
+    """The parser read a region the geocoder can at least put a coarse dot on (a country or province)."""
+    return home["country"] == "Canada" or home["country"] in COUNTRIES
 
 
 def suggest_correction(raw: str) -> tuple:
@@ -625,6 +818,13 @@ def suggest_correction(raw: str) -> tuple:
     s = html.unescape(raw).strip()
     if s in OVERRIDE:
         return OVERRIDE[s]
+    if not_a_place(s):
+        return ("", "", "", "unfixable", "not a hometown: bats/throws, a height or a role from another column")
+    home = parse_hometown(s)
+    if home["country"] not in ("", "USA") and _known_place(home):
+        # Abroad, and the parser knows where: "Winnipeg, MB", "Brandon, Manitoba, CA" (Canada, not
+        # California), "Bolton, Ontario Canada", "Willemstad, Curacao"
+        return (home["city"], home["state"], home["country"], "fixed", f"read as {home['country']}")
     notes = []
     town, _ = split_labeled_hometown(s)   # "Hometown/Previous School(s): Omaha, Neb." -> "Omaha, Neb."
     if town != s:
@@ -666,16 +866,51 @@ def query_for(city, state, country):
 
 # ---------------------------------------------------------------------------
 
+_WORLD: WorldCities | None = None
+
+
+def world() -> WorldCities:
+    global _WORLD
+    if _WORLD is None:
+        _WORLD = WorldCities()
+    return _WORLD
+
+
 def resolve(home: dict, gaz: Gazetteer, nom: Nominatim | None) -> tuple:
     city, state, country = home["city"], home["state"], home["country"]
     if not (city or state or country):
         return ("", "", "", "")
+    if not country and not state and city and _STATE_BY_NAME.get(city.lower().strip(" .")) \
+            and city.lower().strip(" .") not in ("washington", "georgia", "new york"):
+        state, country, city = _STATE_BY_NAME[city.lower().strip(" .")], "USA", ""   # "Maryland" alone: the state
+    if country == "USA" and state and not city and state in gaz.state_center and state not in TERRITORIES:
+        return (*gaz.state_center[state], "state", "region")
     if country == "USA":
         hit = gaz.lookup_us(city, state)
         if hit:
             return hit
+        if state in ("PR", "AS", "GU", "VI", "MP"):      # territories: GeoNames has their towns
+            hit = world().lookup(city, {"PR": "Puerto Rico", "AS": "American Samoa", "GU": "Guam",
+                                        "VI": "U.S. Virgin Islands", "MP": "Northern Mariana Islands"}[state])
+            if hit:
+                return hit
     elif not country and not state and city:
-        hit = gaz.lookup_no_state(city)
+        key = re.sub(r"[\s,]+(mohawk territory|first nation|reservation|reserve|territory|nation)$", "", city.lower()).strip()
+        if key in NATIONS_ABROAD:
+            c, st, co = NATIONS_ABROAD[key]
+            hit = world().lookup(c, co, st)
+            if hit:
+                return hit
+        hit = gaz.lookup_no_state(city) or world().lookup_big(city)
+        if not hit:      # "Pago Pago", "Hagatna": a town in a US territory
+            for terr in ("American Samoa", "Puerto Rico", "Guam", "U.S. Virgin Islands", "Northern Mariana Islands"):
+                hit = world().lookup(city, terr)
+                if hit:
+                    break
+        if hit:
+            return hit
+    elif country and city:
+        hit = world().lookup(city, country, state)       # Toronto ON, Santo Domingo, Sydney: the town's own dot
         if hit:
             return hit
     if nom and (city or country):
@@ -686,10 +921,24 @@ def resolve(home: dict, gaz: Gazetteer, nom: Nominatim | None) -> tuple:
             return (*hit, "nominatim", "city")
     if country == "USA" and state in TERRITORIES:
         return (*TERRITORIES[state], "territory", "region")
+    if country == "Canada" and state in PROVINCES:
+        return (*PROVINCES[state], "province", "region")
     if country in COUNTRIES:
         return (*COUNTRIES[country], "country_centroid", "country")
     return ("", "", "", "")
 
+
+def campus_states() -> dict[str, str]:
+    """school -> its campus's state, from config/school_locations.csv (shared by every sport)."""
+    import paths
+    path = paths.CONFIG / "school_locations.csv"
+    if not path.exists():
+        return {}
+    with open(path, newline="", encoding="utf-8") as fh:
+        return {r["school"]: r["state"] for r in csv.DictReader(fh) if r.get("state") in US_STATES}
+
+
+_FINENESS = {"city": 0, "city_guess": 1, "county": 2, "region": 3, "country": 4, "": 5}
 
 CORR_FIELDS = ["hometown_raw", "city", "state", "country", "query", "status", "note", "players"]
 
@@ -773,29 +1022,54 @@ def main(argv=None) -> int:
     for raw in players_per_raw:
         k = known.get((raw, ""))
         fix = corrected_home(table.get(raw), statuses)
-        if k is not None:
-            tried = {"city": k.get("city", ""), "state": k.get("state", ""), "country": k.get("country", "")}
-            if k.get("lat") or not fix or fix == tried:
-                homes[raw] = tried
-                resolved[raw] = (k.get("lat", ""), k.get("lon", ""), k.get("source", ""), k.get("precision", ""))
-                continue
+        if k is not None and k.get("source") == "manual":
+            # Moved by hand: kept as it is
+            homes[raw] = {"city": k.get("city", ""), "state": k.get("state", ""), "country": k.get("country", "")}
+            resolved[raw] = (k.get("lat", ""), k.get("lon", ""), k.get("source", ""), k.get("precision", ""))
+            continue
+        # Everything else is looked up again on every run (Oct 28). The lookups are quick, and before, a
+        # hometown kept whatever it got the first time: towns the US town list or a parser fix could now
+        # place stayed unplaced, and Toronto, Ontario stayed on the dot in the middle of Canada.
         todo.append(raw)
     guess_missing = any(resolved[raw][3] == "city_guess" and (raw, sch) not in known
                         for (raw, sch) in players_per_key if raw in resolved)
-    print(f"{len(players_per_raw) - len(todo):,} hometowns reused from {lookup_path}, {len(todo):,} to look up")
+    print(f"{len(todo):,} hometowns to look up ({len(players_per_raw) - len(todo):,} moved by hand, kept)")
 
     gaz = Gazetteer() if (todo or guess_missing) else None
     nom = Nominatim(args.contact) if (args.online and todo) else None
 
     # Pass 1: new hometowns. Existing corrections first, otherwise the normal parser.
+    kept_old = 0
     for raw in todo:
         homes[raw] = corrected_home(table.get(raw), statuses) or parse_hometown(raw)
         resolved[raw] = resolve(homes[raw], gaz, nom)
+        if not resolved[raw][0] and homes[raw] != parse_hometown(raw):
+            # A correction that places nothing (many were written by an older, simpler reading: "Maui" as a
+            # town with no state) doesn't stop the parser's own reading from being tried
+            alt = parse_hometown(raw)
+            hit = resolve(alt, gaz, nom)
+            if hit[0]:
+                homes[raw], resolved[raw] = alt, hit
+        old = known.get((raw, ""))
+        if old is not None and old.get("lat") and old.get("source") == "nominatim" and \
+                _FINENESS.get(old.get("precision", ""), 5) < _FINENESS.get(resolved[raw][3], 5):
+            # An online answer (--online) finer than what the offline lists give: keep it
+            homes[raw] = {"city": old.get("city", ""), "state": old.get("state", ""), "country": old.get("country", "")}
+            resolved[raw] = (old["lat"], old["lon"], old["source"], old.get("precision", ""))
+            continue
+        if not resolved[raw][0] and old is not None and old.get("lat"):
+            # Placed by an earlier run (an older version guessed close spellings: "Wauwautosa" -> Wauwatosa),
+            # and nothing places it now: keep that dot rather than lose it
+            homes[raw] = {"city": old.get("city", ""), "state": old.get("state", ""), "country": old.get("country", "")}
+            resolved[raw] = (old["lat"], old["lon"], old.get("source", ""), old.get("precision", ""))
+            kept_old += 1
+    if kept_old:
+        print(f"  {kept_old} hometowns nothing places now kept the dot an earlier run gave them")
 
     # Pass 2: suggest a fix for each new string that didn't place, and use it right away if confident.
     suggested = applied = 0
     for raw in todo:
-        if resolved[raw][0] or raw in table or not raw.strip():   # a blank hometown has nothing to fix
+        if resolved[raw][0] or raw in table or not raw.strip() or not_a_place(raw):   # nothing to fix
             continue
         city, state, country, status, note = suggest_correction(raw)
         if status != "unfixable" and not (city or state or country):
@@ -823,6 +1097,10 @@ def main(argv=None) -> int:
             c[h["state"]] = c.get(h["state"], 0) + n
     top_states = {sch: [st for st, _ in sorted(c.items(), key=lambda kv: -kv[1])[:5]]
                   for sch, c in school_states.items()}
+    # The campus's own state comes first (Oct 28): players who give only a town are mostly from near the
+    # school, and a school whose listed players come mostly from elsewhere put Ohio towns in Pennsylvania.
+    for sch, st in campus_states().items():
+        top_states[sch] = [st] + [x for x in top_states.get(sch, []) if x != st]
     per_school: dict[tuple, tuple] = {}
     for (raw, sch) in players_per_key:
         h = homes[raw]
@@ -832,6 +1110,7 @@ def main(argv=None) -> int:
         if k is not None and raw not in todo and k.get("lat"):
             per_school[(raw, sch)] = (k["lat"], k["lon"], k.get("source", ""), k.get("precision", ""))
         else:
+            gaz = gaz or Gazetteer()   # not loaded yet when every hometown was reused from hometowns.csv
             per_school[(raw, sch)] = gaz.lookup_no_state(h["city"], top_states.get(sch, ())) or resolved[raw]
 
     for raw, row in table.items():  # keep hand edits, refresh the counts
@@ -884,7 +1163,7 @@ def main(argv=None) -> int:
     unmatched: dict[str, int] = {}
     no_hometown = 0
     for raw, n in players_per_raw.items():
-        if not raw.strip():
+        if not raw.strip() or not_a_place(raw):      # "R/R", "5-7": another column, not a town
             no_hometown += n
             continue
         prec = resolved[raw][3] or "unmatched"

@@ -5,3 +5,5 @@ lxml>=5.0
 pytest>=8.0
 # optional, only for --render:
 # playwright>=1.45
+# for placing hometowns abroad on their own towns (geocode_hometowns.py; optional but recommended)
+geonamescache>=2.0

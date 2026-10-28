@@ -39,6 +39,8 @@ def configure(sport) -> None:
     MAX_PLAYERS = getattr(sport, "max_players", 0)
     JUCO_NAMES = list(sport.junior_colleges)
     SPRING = bool(getattr(sport, "spring_season", False))
+    import fetch
+    fetch.SPRING_SEASON = SPRING      # so fetch.current_season() names the season the spring way
 
 
 def normal_size(n: int) -> bool:
@@ -105,8 +107,12 @@ def candidate_urls(domain: str, override: str = "", season: int | None = None) -
         for template in PRESTO_PATHS:
             path = _fill(template, season if season else current_season())
             urls += [f"{host}{path}?view=list", f"{host}{path}"]
-    if domain and not domain.startswith("www."):
-        urls.append(f"https://www.{domain}{ROSTER_PATHS[0]}" + (f"/{season}" if season else ""))
+    # The same on www., for a bare domain only: a host that already has a subdomain
+    # (athletics.cabrillo.edu) has no www. copy, and trying one only added a misleading
+    # "couldn't connect" to the report.
+    bare = domain.strip().strip("/") if domain else ""
+    if bare and bare.count(".") == 1:
+        urls.append(f"https://www.{bare}{ROSTER_PATHS[0]}" + (f"/{season}" if season else ""))
     seen, out = set(), []
     for u in urls:
         if u not in seen:
@@ -428,6 +434,35 @@ def _sel_text(node: Tag, selector: str) -> str:
     return clean(el.get_text(" ")) if el else ""
 
 
+# Bats/throws ("R/R", "L/R", "S/R"; "R?R" on Bluefield's page). Sidearm sites often show it as custom field 1
+# inside the position box, and some type it into the position field itself (Jackson State's "OF R/R").
+_BATS_THROWS = re.compile(r"(?<![\w/])[LRSB]\s*[/?]\s*[LRSB](?![\w/])", re.I)
+
+
+def strip_bats_throws(position: str) -> str:
+    """'OF R/R' -> 'OF'; 'R/R' -> ''. For any parser's position, and positions saved before Oct 27."""
+    return clean(_BATS_THROWS.sub(" ", position or ""))
+
+
+def _classic_position(li: Tag) -> str:
+    """The position from a classic Sidearm roster entry, without the height or bats/throws that share its
+    box. The long and short spellings are tried in turn ("R/R" long, "P/OF" short -> "P/OF"); a box with
+    nothing but bats/throws in it (Asbury 2024) has no position."""
+    box = li.select_one(".sidearm-roster-player-position")
+    spans = li.select(".sidearm-roster-player-position-long-short")
+    if box is not None and not spans:
+        box = BeautifulSoup(str(box), "lxml")
+        for junk in box.select('.sidearm-roster-player-height, .sidearm-roster-player-weight, [class*="custom"]'):
+            junk.decompose()
+        first = box.select_one(".sidearm-roster-player-position > span")
+        spans = [first] if first is not None else [box]
+    for el in spans:
+        text = clean(_BATS_THROWS.sub(" ", el.get_text(" ")))
+        if text:
+            return text
+    return ""
+
+
 def parse_sidearm_classic(html: str, soup: BeautifulSoup) -> list[dict]:
     out = []
     for li in soup.select("li.sidearm-roster-player"):
@@ -443,7 +478,7 @@ def parse_sidearm_classic(html: str, soup: BeautifulSoup) -> list[dict]:
         if link is not None:
             rec["bio_url"] = link.get("href", "")
         rec["jersey"] = _sel_text(li, ".sidearm-roster-player-jersey-number")
-        rec["position"] = _sel_text(li, ".sidearm-roster-player-position-long-short, .sidearm-roster-player-position > span:first-child, .sidearm-roster-player-position")
+        rec["position"] = _classic_position(li)
         rec["class_year"] = _sel_text(li, ".sidearm-roster-player-academic-year")
         rec["height"] = format_height(raw=_sel_text(li, ".sidearm-roster-player-height"))
         rec["weight"] = clean_weight(_sel_text(li, ".sidearm-roster-player-weight"))
@@ -1026,9 +1061,12 @@ def tidy_players(players: list[dict]) -> list[dict]:
         for f in ("position", "class_year", "hometown", "high_school", "previous_school", "height", "weight", "jersey"):
             if p.get(f):
                 p[f] = _CELL_LABEL.sub("", p[f]).strip()
-        # A class year is never a hometown ("R-Fr.", "Sophomore", "Gr.")
-        if p.get("hometown") and _CLASS_ONLY.fullmatch(p["hometown"].strip()):
+        # A class year is never a hometown ("R-Fr.", "Sophomore", "Gr."), and neither is bats/throws,
+        # a height or "Manager" read from the wrong column
+        if p.get("hometown") and (_CLASS_ONLY.fullmatch(p["hometown"].strip()) or not_a_place(p["hometown"])):
             p["hometown"] = ""
+        if p.get("position"):
+            p["position"] = strip_bats_throws(p["position"])
         # "25 Jalyn Williams", "C Mason Thomas", "Mason Thomas (C)" -> the bare name
         p["name"] = clean_name(p.get("name", ""))
         # Hometown sitting in a school column: "Clinton, Md. / Glen Burnie HS"
@@ -1050,21 +1088,66 @@ def tidy_players(players: list[dict]) -> list[dict]:
     return players
 
 
+# Strategies that read what the page shows (its list, cards or table), as opposed to a data payload.
+_VISIBLE = ("sidearm_classic", "sidearm_cards", "html_table")
+
+
+def _name_key(name: str) -> str:
+    return re.sub(r"[^a-z]", "", (name or "").lower())
+
+
+def _visible_backbone(visible: list[dict], data: list[dict]) -> list[dict]:
+    """The players the page shows, each filled in from the payload's record of the same name.
+
+    A Sidearm page's Nuxt payload can hold far more people than its roster (Michigan softball 2018:
+    237 in the saved payload, 21 on the page; Florida 2016, Maryland 2016, Ole Miss 2021 and 2023,
+    Gardner-Webb 2016-17, Hampton 2024 the same way). The page's own list is the roster; the payload
+    only adds fields the list leaves blank."""
+    by_name: dict[str, dict] = {}
+    for r in data:
+        by_name.setdefault(_name_key(r["name"]), r)
+    out = []
+    for v in visible:
+        rec = dict(v)
+        extra = by_name.get(_name_key(v["name"]))
+        if extra:
+            _merge_into(rec, extra)
+        out.append(rec)
+    return out
+
+
 def parse_roster(html: str) -> tuple[str, list[dict]]:
-    """Run every strategy; return (strategy_name, players) for the best result."""
+    """Run every strategy; return (strategy_name, players) for the best result.
+
+    When the Nuxt payload has more players than the page visibly lists, and the visible list is a
+    roster in its own right (at least min_players), the visible list wins, filled in from the payload."""
     soup = BeautifulSoup(html, "lxml")
     best_name, best = "", []
+    results: dict[str, list[dict]] = {}
+    payload_good = False
     for name, fn in STRATEGIES:
+        if payload_good and name not in _VISIBLE:
+            continue   # a good payload was found: only the visible list is still worth reading
         try:
             players = tidy_players(drop_staff(fn(html, soup)))
         except Exception:  # one broken strategy shouldn't sink the page
             players = []
+        results[name] = players
         with_home = sum(1 for p in players if p["hometown"])
         best_home = sum(1 for p in best if p["hometown"])
         if with_home > best_home or (with_home == best_home and len(players) > len(best)):
             best_name, best = name, players
-        if len(players) >= MIN_PLAYERS and with_home >= 0.8 * len(players):
-            break  # good enough, skip slower strategies
+        if name == "nuxt_data":
+            payload_good = len(players) >= MIN_PLAYERS and with_home >= 0.8 * len(players)
+        # Good enough, skip slower strategies; but never stop at the payload, which has to be
+        # checked against what the page shows.
+        elif len(players) >= MIN_PLAYERS and with_home >= 0.8 * len(players) \
+                and normal_size(len(players)):
+            break
+    if best_name == "nuxt_data":
+        shown = max((results.get(n, []) for n in _VISIBLE), key=len)
+        if len(shown) >= MIN_PLAYERS and len(_dedupe(shown)) < len(_dedupe(best)):
+            best_name, best = "nuxt_data:visible", _visible_backbone(shown, best)
     for p in best:
         p.pop("staff_title", None)
         if p["hometown"].strip().lower().rstrip(":. ") in _PLACEHOLDERS:

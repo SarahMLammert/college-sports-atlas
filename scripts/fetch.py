@@ -20,9 +20,22 @@ USER_AGENT = (
 )
 
 
-def current_season() -> int:
+# Set by sidearm.configure() from the sport's settings.
+SPRING_SEASON = False
+
+
+def current_season(today=None) -> int:
+    """The season a school's main roster page shows today.
+
+    Fall sport (football): the season is the fall it's played in, so 2026 from March 2026 (when the
+    new roster goes up) to February 2027. Spring sport (lacrosse, baseball, softball): the season is the
+    spring it ends in, and sites put up next spring's roster when school starts, so from August 2026 the
+    main page is the 2027 roster. (This used to answer 2026 all autumn for spring sports, so a main page
+    with no year on it was saved as 2026 while it already showed 2027.)"""
     from datetime import date
-    today = date.today()
+    today = today or date.today()
+    if SPRING_SEASON:
+        return today.year + 1 if today.month >= 8 else today.year
     return today.year if today.month >= 3 else today.year - 1
 
 
@@ -36,8 +49,17 @@ class _Retry(Retry):
         return None if wait is None else min(wait, self.MAX_WAIT)
 
 
+# A past season's address that answered "not found" is remembered for this many days (a .miss file next to
+# the cached pages), so later runs don't ask for it again: Ohio State's 2016 season has 21 addresses to try,
+# 8 of them missing, and those 8 used to be downloaded again (1.5 s apart) on every run.
+MISS_DAYS = 60
+MISS_STATUSES = (404, 410)
+
+
 class Fetcher:
-    def __init__(self, cache_dir: Path, delay: float = 1.5, refresh: bool = False, timeout: int = 30):
+    def __init__(self, cache_dir: Path, delay: float = 1.5, refresh: bool = False, timeout: int = 30,
+                 forget_misses: bool = False):
+        self.forget_misses = forget_misses    # --forget-misses: ask again for addresses that were "not found"
         self.cache_dir = Path(cache_dir)
         self.cache_dir.mkdir(parents=True, exist_ok=True)
         self.delay = delay
@@ -47,6 +69,10 @@ class Fetcher:
         self._host_lock = threading.Lock()
         self._last_hit: dict[str, float] = {}
         self._slow_sites: set[str] = set()
+        # Hosts that couldn't be reached at all this run (no such name, connection refused). Their other
+        # addresses are skipped straight away: a dead host costs one failed connection, not one (with
+        # retries, ~13 s) per address and season. Kept per host, since www. and the bare domain can differ.
+        self._dead_hosts: set[str] = set()
 
     @property
     def session(self) -> requests.Session:
@@ -78,22 +104,53 @@ class Fetcher:
         if wait > 0:
             time.sleep(wait)
 
-    def get(self, url: str) -> tuple[int, str, str]:
-        """Return (status, final_url, html). Cached responses come back with status 200."""
+    def _known_miss(self, path: Path) -> int | None:
+        """The status (404, 410) a past "not found" for this address was saved with, if still fresh."""
+        miss = path.with_suffix(".miss")
+        if self.forget_misses or not miss.exists():
+            return None
+        try:
+            if time.time() - miss.stat().st_mtime > MISS_DAYS * 86400:
+                return None
+            return int(miss.read_text().split()[0])
+        except (OSError, ValueError, IndexError):
+            return None
+
+    def get(self, url: str, remember_miss: bool = True) -> tuple[int, str, str]:
+        """Return (status, final_url, html). Cached responses come back with status 200.
+
+        remember_miss: a 404/410 is saved and answered from disk on later runs, even with --refresh (a
+        missing archive page from 2017 doesn't appear later). Not for the current season's addresses,
+        which can go up any day: the scraper passes False for those."""
         path = self._cache_path(url, rendered=False)
         if path.exists() and not self.refresh:
             final = path.with_suffix(".url")
             return 200, final.read_text() if final.exists() else url, path.read_text(encoding="utf-8", errors="replace")
+        if remember_miss:
+            status = self._known_miss(path)
+            if status is not None:
+                return status, url, ""
         self._skip_if_slow(url)
+        host = urlparse(url).netloc.lower()
+        if host in self._dead_hosts:
+            raise requests.exceptions.ConnectionError(f"{host} couldn't be reached earlier in this run; skipped")
         self._pace(url)
         try:
             resp = self._download(url)
         except (TimeoutError, requests.exceptions.Timeout):
             self._mark_slow(url)
             raise
+        except requests.exceptions.ConnectionError as exc:
+            if unreachable(exc):
+                with self._host_lock:
+                    self._dead_hosts.add(host)
+            raise
         if resp.status_code == 200 and resp.text:
             path.write_text(resp.text, encoding="utf-8")
             path.with_suffix(".url").write_text(resp.url)
+            path.with_suffix(".miss").unlink(missing_ok=True)
+        elif resp.status_code in MISS_STATUSES and remember_miss:
+            path.with_suffix(".miss").write_text(f"{resp.status_code} {url}\n")
         return resp.status_code, resp.url, resp.text
 
     RENDER_LIMIT = 45         # seconds for one whole browser load, start to finish
@@ -176,6 +233,18 @@ class Fetcher:
             raise RuntimeError("bot check not passed")
         tmp.replace(path)
         return html
+
+
+_UNREACHABLE = ("NameResolutionError", "Failed to resolve", "nodename nor servname", "Name or service not known",
+                "getaddrinfo failed", "NewConnectionError", "Connection refused", "No route to host",
+                "Unable to connect to proxy")
+
+
+def unreachable(exc: Exception) -> bool:
+    """True when the host itself can't be reached (no such name, refused), as opposed to a connection that
+    broke halfway (reset, cut off), which may work on the next address."""
+    text = repr(exc)
+    return any(m in text for m in _UNREACHABLE)
 
 
 _BOT_CHECK = ("awswaf.com", "AwsWafIntegration", "challenge-container", "cf-challenge", "Just a moment...",

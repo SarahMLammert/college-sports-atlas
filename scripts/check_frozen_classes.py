@@ -93,18 +93,24 @@ def main(argv=None):
             results.append((school, prev, cur, share(pairs), len(pairs), sy, len(young)))
 
     if not results:
-        raise SystemExit("No season pairs had enough returning players to compare.")
+        # Not an error: a new or small sport may have no pair to judge yet. Write an empty list, so the
+        # build knows this step ran and trusts every season's class years.
+        print("No season pairs had enough returning players to compare; no seasons flagged.")
 
     print(f"{len(results)} season pairs compared")
-    print(f"median stuck share, all players: {statistics.median(r[3] for r in results):.0%}")
-    print(f"median stuck share, no SR/GR:    "
-          f"{statistics.median(r[5] for r in results if r[5] is not None):.0%}")
+    if results:
+        print(f"median stuck share, all players: {statistics.median(r[3] for r in results):.0%}")
+    young_shares = [r[5] for r in results if r[5] is not None]
+    if young_shares:   # none when every school has fewer than frozen_min_pairs returning underclassmen
+        print(f"median stuck share, no SR/GR:    {statistics.median(young_shares):.0%}")
     if unreadable:
         top = sorted(unreadable.items(), key=lambda kv: -kv[1])[:10]
         print("class labels it couldn't read (ignored):", top)
 
-    print("\nReference schools (prev -> season: all / no SR-GR):")
-    for school, prev, cur, sa, na, sy, ny in sorted(results, key=lambda r: (r[0], r[2])):
+    watched = [r for r in results if r[0] in WATCH]
+    if watched:
+        print("\nReference schools (prev -> season: all / no SR-GR):")
+    for school, prev, cur, sa, na, sy, ny in sorted(watched, key=lambda r: (r[0], r[2])):
         if school in WATCH:
             young_txt = f"{sy:4.0%} of {ny:3}" if sy is not None else f"  -- only {ny} underclassmen"
             print(f"  {school:12} {prev}->{cur}  {sa:4.0%} of {na:3}  /  {young_txt}")

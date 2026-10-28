@@ -149,7 +149,7 @@ body { background: var(--sea); }
           </div>
           <div class="group">
             <label class="label" for="conf">Conference (2026)</label>
-            <select class="field" id="conf"><option value="">All conferences</option></select>
+            <select class="field" id="conf"></select>   <!-- replaced by common.js with the conference checklist -->
           </div>
           <div class="group">
             <span class="label">Season on roster</span>
@@ -590,7 +590,7 @@ body { background: var(--sea); }
     const townSet = new Set();
     for (const k of sel) { const t = P.t[k]; if (t >= 0) townSet.add(t); }
     const schoolsIn = new Set(sel.map((k) => P.s[k]));
-    const scope = state.school >= 0 ? data.schools[state.school][0] : state.conf !== "" ? data.confs[+state.conf] : state.div !== "" ? `All ${F.divName(state.div)} schools` : "All schools";
+    const scope = state.school >= 0 ? data.schools[state.school][0] : state.conf !== "" ? data.confs[+state.conf] : state.div !== "" ? `All ${F.divName(state.div)} schools` : state.groups.size ? `Schools in ${F.confText()}` : "All schools";
     const years = state.from === state.to ? state.from : state.from + "–" + state.to;
     $("sub").textContent = `${fmt(sel.length)} players from ${fmt(townSet.size)} hometowns · ${scope} · on rosters ${years}`;
 
@@ -633,7 +633,7 @@ body { background: var(--sea); }
     // the right-hand panel is only for players: hometown, player and high-school lists
     $("findings").innerHTML = selection.join("");
     if (!selection.length) setPanel("details", false);
-    $("statsLabel").textContent = state.school >= 0 ? `${data.schools[state.school][0]} stats` : state.conf !== "" ? `${data.confs[+state.conf]} stats` : "All-school stats";
+    $("statsLabel").textContent = state.school >= 0 ? `${data.schools[state.school][0]} stats` : state.conf !== "" ? `${data.confs[+state.conf]} stats` : state.groups.size ? `${F.confText()} stats` : "All-school stats";
 
     if (state.focusState) {
       const stName = ABBR_STATE[state.focusState] || state.focusState;
@@ -684,8 +684,8 @@ body { background: var(--sea); }
     const homeShare = Float64Array.from(home, (h, i) => tot[i] ? h / tot[i] : -1);
     const dist = Float64Array.from(dists, (a) => { const m = GP.median(a); return m == null ? -1 : m; });
     const level = (i) => F.isD1(data.schools[i][2]) ? "D1" : data.divs[data.schools[i][2]];
-    const pool = data.schools.map((_, i) => i).filter((i) => state.conf !== "" ? data.schools[i][1] === +state.conf : level(i) === level(me));
-    const of = state.conf !== "" ? `of ${pool.length} ${data.confs[+state.conf]} schools` : `of ${pool.length} ${level(me)} schools`;
+    const pool = data.schools.map((_, i) => i).filter((i) => state.conf !== "" ? data.schools[i][1] === +state.conf : state.groups.size ? F.schoolOk(i) || i === me : level(i) === level(me));
+    const of = state.conf !== "" ? `of ${pool.length} ${data.confs[+state.conf]} schools` : state.groups.size ? `of ${pool.length} schools in ${esc(F.confText())}` : `of ${pool.length} ${level(me)} schools`;
     const rankIn = (arr, low) => 1 + pool.filter((i) => arr[i] >= 0 && (low ? arr[i] < arr[me] : arr[i] > arr[me])).length;
     const row = (label, arr) => `<li><span class="nm">${label}</span><span class="v"><b>${fmt(arr[me])}</b></span><span class="rk">#${rankIn(arr)}</span></li>`;
     const stName = state.focusState ? (ABBR_STATE[state.focusState] || state.focusState) : "";

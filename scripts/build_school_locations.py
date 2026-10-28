@@ -20,11 +20,16 @@ def main(argv=None):
     add_sport_argument(ap)
     sport = load_sport(ap.parse_args(argv).sport)
     wanted = {s["school"] for s in load_schools(sport.schools_csv)} if sport.schools_csv.exists() else None
-    schools = {}
+    schools, bad = {}, []
     with sport.locations_csv.open(newline="", encoding="utf-8") as f:
         for row in csv.DictReader(f):
             if wanted is None or row["school"] in wanted:
-                schools[row["school"]] = [row["city"], row["state"], float(row["lat"]), float(row["lon"])]
+                try:
+                    schools[row["school"]] = [row["city"], row["state"], float(row["lat"]), float(row["lon"])]
+                except (TypeError, ValueError):     # a blank or typed-wrong lat/lon: skip that school, not the file
+                    bad.append(row["school"])
+    if bad:
+        print(f"lat/lon not a number in {sport.locations_csv.name} (left out):", ", ".join(bad))
     out = sport.site_dir / "school_locations.json"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps({"fields": ["city", "state", "lat", "lon"], "schools": schools}, separators=(",", ":")), encoding="utf-8")
