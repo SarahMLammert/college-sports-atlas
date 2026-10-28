@@ -324,7 +324,9 @@ body { background: var(--sea); }
   let transform = d3.zoomIdentity, statePaths = [], userMoved = false;
   let size = { w: 0, h: 0, k0: 1, cx: 0, cy: 0, dpr: 1 };
   const view = () => ({ k: size.k0 * transform.k, ox: size.cx * transform.k + transform.x, oy: size.cy * transform.k + transform.y });
-  const radius = (c) => Math.max(1.6, Math.sqrt(c) * 1.9);
+  // Dot size grows with the players from that town up to 40, the legend's largest size ("40+"). Without the cap,
+  // the all-schools map had circles the size of states for Houston or Atlanta (thousands of players).
+  const radius = (c) => Math.max(1.6, Math.sqrt(Math.min(c, 40)) * 1.9);
   // Sparse maps (one school: a few hundred hometowns) get bigger dots and bigger click targets;
   // the all-schools map (~10,000 hometowns) keeps them small so dense areas stay readable.
   let sparse = 1;   // 1 = dense … 2.2 = very sparse
@@ -789,6 +791,12 @@ body { background: var(--sea); }
     return String(text).split(re).map((p, i) => i % 2 ? `<mark>${esc(p)}</mark>` : esc(p)).join("");
   }
   const qEl = $("q"), resEl = $("results");
+  // The box is narrow (about 25 letters on a laptop, 5 on a phone), so the full wording is its tooltip
+  qEl.title = "Find a school, player, hometown or high school";
+  if (!qEl.getAttribute("aria-label")) qEl.setAttribute("aria-label", qEl.title);
+  const fitPlaceholder = () => { qEl.placeholder = narrow() ? "" : "School, player or town"; };   // a phone's box shows the icon only
+  fitPlaceholder();
+  matchMedia("(max-width: 760px)").addEventListener("change", fitPlaceholder);
   let opts = [], active = -1;
   function openResults(open) { resEl.hidden = !open; qEl.setAttribute("aria-expanded", open); if (!open) { active = -1; qEl.removeAttribute("aria-activedescendant"); } }
   function renderResults() {
@@ -886,6 +894,7 @@ body { background: var(--sea); }
     if (!hash && firstLoad) { hash = GP.readSaved("recruiting-map:last"); }   // opened plainly: pick up where you left off
     const q = new URLSearchParams(hash);
     F.fromParams(q); Object.assign(state, { focusState: null, town: -1, player: -1, hs: null });
+    if (firstLoad && !hash) state.allSchools = true;   // a first visit opens on every school's dots, not an empty map
     const v = (key) => (q.get(key) || "").trim();
     if (ABBR_STATE[v("state").toUpperCase()]) state.focusState = v("state").toUpperCase();
     if (townIndex.has(v("town"))) state.town = townIndex.get(v("town"));
@@ -934,6 +943,8 @@ body { background: var(--sea); }
       : "Dot color: the school with the most players from that town";
   }
 
+  const startHash = location.hash.slice(1) || GP.readSaved("recruiting-map:last");
+  if (/(^|&)player=/.test(startHash)) { try { await data.loadNames(); } catch (e) { /* the player just isn't found */ } }
   let pendingMap = readUrl(true);
   syncControls();
   if (hasPeople() && !narrow()) setPanel("details", true);
@@ -949,6 +960,9 @@ body { background: var(--sea); }
   new MutationObserver(update).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
   $("loading").remove();
   update();
+  // Players' names arrive after the map is drawn (names.txt): then player search and the lists have them
+  data.loadNames().then(() => { ix = null; if (qEl.value.trim()) renderResults(); renderFindings(); })
+    .catch(() => { qEl.title = "Find a school, hometown or high school (player names didn't load)"; });
 })();
 </script>
 </body>

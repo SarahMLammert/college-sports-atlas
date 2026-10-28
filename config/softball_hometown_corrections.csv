@@ -85,7 +85,6 @@ West De Pere,West De,,,West De,review,unknown state/country 'Pere',2
 "Carollton, Ga.",Carollton,GA,USA,"Carollton, GA, USA",review,spelling? 'Carollton' -> Carrollton or Carlton,2
 "Folkstown, Ga.",Folkstown,GA,USA,"Folkstown, GA, USA",review,spelling? 'Folkstown' -> Folkston or Fowlstown,2
 "St. Thomas, USVI",St. Thomas,,,St. Thomas,review,unknown state/country 'USVI',2
-"Moscow, Russia",Moscow,,,Moscow,review,unknown state/country 'Russia',2
 "Hillard, Ohio",Hillard,OH,USA,"Hillard, OH, USA",review,spelling? 'Hillard' -> Hilliard or Willard,2
 Puerto Rico,Puerto,,,Puerto,review,unknown state/country 'Rico',2
 "No. Scituate, R.I.",No. Scituate,,,No. Scituate,review,unknown state/country 'R.I.',2
@@ -93,6 +92,7 @@ Puerto Rico,Puerto,,,Puerto,review,unknown state/country 'Rico',2
 "Cardiff, Calif.",Cardiff,CA,USA,"Cardiff, CA, USA",review,state? no Cardiff in CA; the only US town with this name is in AL,2
 "Rockaway, N.Y.",Rockaway,NY,USA,"Rockaway, NY, USA",review,state? no Rockaway in NY; the only US town with this name is in NJ,2
 "Imperial Valley, CA",Imperial Valley,CA,USA,"Imperial Valley, CA, USA",review,state? no Imperial Valley in CA; the only US town with this name is in TX,2
+"Moscow, Russia",Moscow,,,Moscow,review,unknown state/country 'Russia',1
 "Shanghai, China",Shanghai,,,Shanghai,review,unknown state/country 'China',1
 Liberty Township,Liberty,,,Liberty,review,unknown state/country 'Township',1
 Alta Loma,Alta,,,Alta,review,unknown state/country 'Loma',1
@@ -937,7 +937,7 @@ Three Hills School,Three Hills,,,Three Hills,review,unknown state/country 'Schoo
 "Imperial Valley, Ca",Imperial Valley,CA,USA,"Imperial Valley, CA, USA",review,state? no Imperial Valley in CA; the only US town with this name is in TX,1
 "North Ontario, Ohio",North Ontario,OH,USA,"North Ontario, OH, USA",review,state? no North Ontario in OH; the only US town with this name is in CA,1
 "Brandon Valley, SD",Brandon Valley,SD,USA,"Brandon Valley, SD, USA",review,state? no Brandon Valley in SD; the only US town with this name is in FL,1
-,,,,,unfixable,blank hometown,1370
+,,,,,unfixable,blank hometown,1359
 Hometown/ Previous School,,,,,unfixable,column header scraped as data,861
 Hometown,,,,,unfixable,column header scraped as data,524
 HS Hometown/High School:,,,,,unfixable,label with no hometown after it,145
@@ -10882,3 +10882,4 @@ Franksville,Franksville,WI,USA,"Franksville, WI, USA",fixed,state from the only 
 Seaford NY,Seaford,NY,USA,"Seaford, NY, USA",fixed,,1
 "Midloathian, Ill.",Midlothian,IL,USA,"Midlothian, IL, USA",fixed,spelling 'Midloathian' -> Midlothian,1
 null,null,,,null,fixed,,1
+"Smithsville, Texas",Smithville,TX,USA,"Smithville, TX, USA",fixed,spelling 'Smithsville' -> Smithville,1

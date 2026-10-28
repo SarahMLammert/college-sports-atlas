@@ -26,7 +26,15 @@
     data.N = P.s.length;
     data.SEASONS = [...new Set([...P.f, ...P.l])].map((f) => f + 2000).sort((a, b) => a - b);   // every season anyone was on a roster
     data.FIRST = data.SEASONS[0]; data.LAST = data.SEASONS[data.SEASONS.length - 1];
-    data.nameList = data.names.split("\n");
+    // Players' names: in names.txt since Oct 28 (only the dot map needs them, and it draws before they arrive).
+    // data.nameList is filled in place when they load, so code holding it sees them; data.loadNames() fetches
+    // them once and resolves when they're in. Data built before then still has them in map_data.json.
+    data.nameList = new Array(data.N).fill("");
+    let namesLoad = null;
+    data.loadNames = () => namesLoad || (namesLoad = (typeof data.names === "string" ? Promise.resolve(data.names)
+      : fetch("names.txt").then((r) => { if (!r.ok) throw new Error(r.status); return r.text(); }))
+      .then((text) => { const a = text.split("\n"); for (let i = 0; i < data.N; i++) data.nameList[i] = a[i] || ""; data.namesLoaded = true; delete data.names; }));
+    if (typeof data.names === "string") data.loadNames();
     data.posLabel = data.posLabels || POS_LABEL;
     data.d1 = data.d1 || D1_DIVS;
     data.divLabel = data.divLabels || DIV_TITLE;

@@ -962,7 +962,7 @@ Farmington Hllls,Farmington,,,Farmington,review,unknown state/country 'Hllls',1
 "Coupville, Wash.",Coupville,WA,USA,"Coupville, WA, USA",review,spelling? 'Coupville' -> Coupeville or Colville,1
 "Atascadero, Texas",Atascadero,TX,USA,"Atascadero, TX, USA",review,state? no Atascadero in TX; the only US town with this name is in CA,1
 "Marysville, KY",Marysville,KY,USA,"Marysville, KY, USA",review,spelling? 'Marysville' -> Maysville or Mannsville,1
-,,,,,unfixable,blank hometown,11506
+,,,,,unfixable,blank hometown,11479
 Hometown/ Previous School,,,,,unfixable,column header scraped as data,861
 Hometown,,,,,unfixable,column header scraped as data,524
 HS Hometown/High School:,,,,,unfixable,label with no hometown after it,145
@@ -9537,3 +9537,4 @@ Boyton Beach. FL,Boyton Beach.,FL,USA,"Boyton Beach., FL, USA",fixed,,1
 "East Saint Louis, IL",East St. Louis,IL,USA,"East St. Louis, IL, USA",fixed,spelling 'East Saint Louis' -> East St. Louis,1
 "Port Saint Lucie, FL",Port St. Lucie,FL,USA,"Port St. Lucie, FL, USA",fixed,spelling 'Port Saint Lucie' -> Port St. Lucie,1
 "Port Saint Lucie,Fla.",Port St. Lucie,FL,USA,"Port St. Lucie, FL, USA",fixed,spelling 'Port Saint Lucie' -> Port St. Lucie,1
+"New Matmoras, OH",New Matamoras,OH,USA,"New Matamoras, OH, USA",fixed,spelling 'New Matmoras' -> New Matamoras,1

@@ -61,6 +61,8 @@ for _mod in (fetch, hometowns, sidearm):
 # =============================================================================
 
 log = logging.getLogger("rosters")
+SEASON_PAGES: dict[tuple[str, int], str] = {}    # config/<sport>_season_pages.csv: the one page to use
+WRONG_SEASONS: dict[tuple[str, int], str] = {}   # config/<sport>_wrong_seasons.csv, set by run() and the workers
 RENDER_TRIES = 2   # most addresses rendered per school-season with --render (each takes a few seconds)
 SCHOOL_MINUTES = 3.0   # a school that takes longer stops starting new seasons (--school-minutes)
 # A site's own link to a season roster in PrestoSports style: /sports/fball/2026-27/roster (Mars Hill),
@@ -159,7 +161,11 @@ def scrape_school_season(school: dict, fetcher: Fetcher, season: int, division: 
               "current_conference": school.get("conference", ""), "status": "failed",
               "season_check": "", "strategy": "", "players": 0, "with_hometown": 0, "url": "", "error": ""}
     urls = candidate_urls(school.get("domain", ""), school.get("roster_url", ""), None if is_current else season)
-    if is_current:
+    fixed_page = SEASON_PAGES.get((school["school"], season))
+    if fixed_page:
+        # Listed in config/<sport>_season_pages.csv: this page holds the season, whatever year it shows
+        urls = [fixed_page]
+    if is_current and not fixed_page:
         # A school's main roster page can still show last season for weeks (New Haven 2026 came
         # back identical to 2025). Its year is checked like any archive page's, and this season's
         # archive URLs are tried after it in case the main page hasn't switched over.
@@ -199,6 +205,19 @@ def scrape_school_season(school: dict, fetcher: Fetcher, season: int, division: 
             continue
         if len(html) < 5000 and 'id="root"></div>' in html.replace(" ", ""):
             app_shell = True
+        if fixed_page:
+            shown = None
+            loaded.append(idx)
+            check = "verified"
+            strategy, players = parse_roster(html)
+            if not players:
+                errors.append(f"{url}: no players found")
+            best = (strategy, players, url, idx, check)    # saved under the listed address, redirect or not
+            break
+        other = sidearm.other_sport_page(final_url)
+        if other:
+            errors.append(f"{url}: another sport's page ({other})")
+            continue
         if not is_current and str(season) in url and str(season) not in final_url:
             # e.g. liuathletics.com/.../roster/2019 quietly redirects to the current roster
             errors.append(f"{url}: redirected to {final_url}")
@@ -241,6 +260,8 @@ def scrape_school_season(school: dict, fetcher: Fetcher, season: int, division: 
             idx = tries[n]
             n += 1
             url = urls[idx]
+            if sidearm.other_sport_page(url):
+                continue
             try:
                 html = fetcher.render(url)
             except Exception as exc:
@@ -280,9 +301,9 @@ def scrape_school_season(school: dict, fetcher: Fetcher, season: int, division: 
     strategy, players, url, win_idx, check = best
     if save_dir and win_idx is not None:  # --save-pages: keep a copy of the page these players came from
         page = fetcher._cache_path(urls[win_idx], rendered=strategy.startswith("rendered:"))
-        if page.exists():
+        if Fetcher.is_cached(page):
             safe = re.sub(r"[^A-Za-z0-9]+", "_", school["school"]).strip("_")
-            shutil.copy(page, save_dir / f"{safe}_{season}.html")
+            (save_dir / f"{safe}_{season}.html").write_text(Fetcher.read_cached(page), encoding="utf-8")
     if bios and url:
         filled = fill_from_bios(players, url, fetcher, errors)
         if filled:
@@ -342,6 +363,14 @@ def scrape_school_all(school: dict, seasons: list[int], fetcher: Fetcher, histor
                                          "current_conference": school.get("conference", ""), "status": "left_out",
                                          "season_check": "", "strategy": "", "players": 0, "with_hometown": 0,
                                          "url": "", "error": note}))
+            continue
+        wrong = WRONG_SEASONS.get((school["school"], season))
+        if wrong is not None:
+            # Its only roster page is another season's (config/<sport>_wrong_seasons.csv): not fetched
+            results.append((season, [], {"season": season, "school": school["school"], "division": division,
+                                         "current_conference": school.get("conference", ""), "status": "left_out",
+                                         "season_check": "", "strategy": "", "players": 0, "with_hometown": 0,
+                                         "url": "", "error": "left out: " + (wrong or "its roster page is another season's")}))
             continue
         if time.monotonic() > deadline:
             results.append((season, [], {"season": season, "school": school["school"], "division": division,
@@ -448,6 +477,10 @@ def _init_worker(sport_name: str, schools_csv: str, history_csv: str, school_min
         log.setLevel(logging.INFO)
     logging.getLogger("urllib3").setLevel(logging.ERROR)
     sidearm.configure(load_sport(sport_name))
+    WRONG_SEASONS.clear()
+    WRONG_SEASONS.update(load_sport(sport_name).wrong_seasons())
+    SEASON_PAGES.clear()
+    SEASON_PAGES.update(load_sport(sport_name).season_pages())
     load_known_colleges(d1_schools(Path(schools_csv)))
     SCHOOL_MINUTES = school_minutes
     _WORKER["history"] = load_division_history(Path(history_csv))
@@ -574,6 +607,8 @@ def plain_reason(report: dict) -> str:
         return err[0].upper() + err[1:] if err else "Left out"
     if err.startswith("timed out"):
         return "skipped: the school's other seasons took too long (--retry-failed tries it again)"
+    if "another sport's page" in err and not re.search(r"no players found|bot check", short):
+        return "the only roster pages found were another sport's (the site may not list this team's roster)"
     if "page looks like the" in err:
         return "the archive page shows a newer season's roster, so there's no roster for this season"
     if "bot check not passed" in err:
@@ -694,12 +729,17 @@ def write_missing_rosters(report_dir: Path, schools_csv: Path, sport_label: str,
     if left:
         n_left = len({school for _, school in left})   # a school that changed division is listed under both
         out += [f"## Left out on purpose ({n_left} school{'' if n_left == 1 else 's'})", "",
-                "Never contacted by the scraper, because of the note in the schools file. To try one "
-                "again, change its note so it doesn't start with \"left out\".", ""]
+                "Never contacted by the scraper, because of the note in the schools file (to try one again, change "
+                "its note so it doesn't start with \"left out\"), or, for single seasons, because the season is in "
+                "`config/<sport>_wrong_seasons.csv` (its only roster page shows another season's roster).", ""]
         for d, school in left:
             items = groups[(d, "left_out")][school]
-            reason = notes.get(school) or plain_reason(items[0][1])
-            out.append(f"- **{school}** ({labels.get(d, d) or '?'}): {reason}")
+            if school in left_out_now:
+                reason = notes.get(school) or plain_reason(items[0][1])
+                out.append(f"- **{school}** ({labels.get(d, d) or '?'}): {reason}")
+            else:      # single seasons, from config/<sport>_wrong_seasons.csv
+                why = "; ".join(f"{y}: {plain_reason(r)}" for y, r in sorted(items, key=lambda x: x[0]))
+                out.append(f"- **{school}** ({labels.get(d, d) or '?'}, seasons {_seasons_text([y for y, _ in items])}): {why}")
         out.append("")
     if no_site:
         # Current = some row of the school has a 2026 conference and no last season; the rest closed
@@ -707,6 +747,11 @@ def write_missing_rosters(report_dir: Path, schools_csv: Path, sport_label: str,
         rows_of: dict[str, list[dict]] = {}
         for r in read_csv(schools_csv):
             rows_of.setdefault(r["school"], []).append(r)
+        def level_only(s):    # listed only so transfers from it get a level (no team in this sport)
+            text = " ".join((r.get("note") or "").lower() for r in rows_of.get(s, []))
+            return bool(re.search(r"level only|listed only so transfers|no (men's |women's )?[a-z' ]*team in the", text))
+        levels_only = [s for s in no_site if level_only(s)]
+        no_site = [s for s in no_site if s not in levels_only]
         current = [s for s in no_site if any((r.get("conference") or r.get("current_conference")) and not r.get("last_season")
                                              for r in rows_of.get(s, []))]
         closed = [s for s in no_site if s not in current]
@@ -721,6 +766,9 @@ def write_missing_rosters(report_dir: Path, schools_csv: Path, sport_label: str,
                 note = notes.get(school)
                 out.append(f"- {school} ({division_of.get(school, '?')})" + (f": {note}" if note else ""))
             out.append("")
+        if levels_only:
+            out += [f"Not listed: {len(levels_only)} colleges with no team in this sport, in the schools file only so "
+                    "transfers from them get a level (their note says so).", ""]
     out_dir.mkdir(parents=True, exist_ok=True)
     path = out_dir / MISSING_FILE
     path.write_text("\n".join(out), encoding="utf-8")
@@ -793,9 +841,22 @@ def clean_row(r: dict) -> dict:
     return sort_schools(r)
 
 
+def from_other_sport(row: dict) -> bool:
+    """Saved from another sport's page (a lacrosse season taken from the school's football roster), or a
+    school-season listed in config/<sport>_wrong_seasons.csv (another season's roster)."""
+    if (WRONG_SEASONS or SEASON_PAGES) and str(row.get("season", "")).isdigit():
+        key = (row.get("school", ""), int(row["season"]))
+        if key in WRONG_SEASONS:
+            return True
+        page = SEASON_PAGES.get(key)
+        if page and row.get("roster_url", "").rstrip("/") != page.rstrip("/"):
+            return True          # saved from another page than the one listed for this season
+    return bool(sidearm.other_sport_page(row.get("roster_url", "")))
+
+
 def clean_rows(rows: list[dict]) -> list[dict]:
-    """Drop coaches and staff, and clean every remaining row."""
-    return [clean_row(r) for r in rows if not is_staff(r)]
+    """Drop coaches and staff and rows saved from another sport's page, and clean every remaining row."""
+    return [clean_row(r) for r in rows if not is_staff(r) and not from_other_sport(r)]
 
 
 def write_combined(out_dir: Path, combined_files: bool = False) -> tuple[list[int], list[dict], list[dict]]:
@@ -814,7 +875,8 @@ def write_combined(out_dir: Path, combined_files: bool = False) -> tuple[list[in
         all_saved.append(season)
         combined.extend(rows)
     if n_before != len(combined):
-        log.info("Dropped %d coach/staff rows from the saved rosters", n_before - len(combined))
+        log.info("Dropped %d rows from the saved rosters: coaches and staff, or players from another sport's "
+                 "page", n_before - len(combined))
     unique = build_unique(combined)
     if combined_files:
         write_csv(out_dir / "rosters_all_seasons.csv", OUT_FIELDS, combined)
@@ -894,6 +956,10 @@ def build_parser() -> argparse.ArgumentParser:
 def run(ap: argparse.ArgumentParser, args, sport) -> int:
     global SCHOOL_MINUTES
     sidearm.configure(sport)
+    WRONG_SEASONS.clear()
+    WRONG_SEASONS.update(sport.wrong_seasons())
+    SEASON_PAGES.clear()
+    SEASON_PAGES.update(sport.season_pages())
     divisions = list(sport.d1_divisions) + [d for d in sport.other_divisions if d not in sport.d1_divisions]
     args.division = args.division.upper() if args.division.lower() != "all" else "all"
     if args.division != "all" and args.division not in divisions:
@@ -976,7 +1042,8 @@ def run(ap: argparse.ArgumentParser, args, sport) -> int:
     # The current season is always tried: its roster can go up any day
     stop = {(k, y) for k, y in stop if k in selected and y in seasons and y != current_season()}
     for season in seasons:
-        prev_rows_all[season] = read_csv(season_dir / f"rosters_{season}.csv")
+        # Rows from another sport's page don't count as saved: those school-seasons are scraped again
+        prev_rows_all[season] = [r for r in read_csv(season_dir / f"rosters_{season}.csv") if not from_other_sport(r)]
         # What's done comes from the saved rosters, so --retry-failed works without report files. A saved
         # report (from a --report run) adds the details (errors, season check) for schools it still matches.
         from_rows = saved_reports(prev_rows_all[season])

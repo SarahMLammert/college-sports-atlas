@@ -95,6 +95,38 @@ class Sport:
         return CONFIG / f"{self.name}_schools.csv"
 
     @property
+    def wrong_seasons_csv(self) -> Path:
+        """School-seasons whose only roster page is another season's (a site's archive page that shows the
+        year before, or its main page for every old season). Never scraped; rows saved from them are dropped."""
+        return CONFIG / f"{self.name}_wrong_seasons.csv"
+
+    def wrong_seasons(self) -> dict[tuple[str, int], str]:
+        """(school, season) -> why, from config/<sport>_wrong_seasons.csv (school, season, reason)."""
+        path = self.wrong_seasons_csv
+        if not path.exists():
+            return {}
+        import csv
+        with open(path, newline="", encoding="utf-8") as fh:
+            return {(r["school"].strip(), int(r["season"])): (r.get("reason") or "").strip()
+                    for r in csv.DictReader(fh) if r.get("school") and str(r.get("season", "")).strip().isdigit()}
+
+    @property
+    def season_pages_csv(self) -> Path:
+        """School-seasons whose roster is on a page the usual addresses get wrong (Albany women's lacrosse filed
+        spring 2017-2020 under the year before: its "2019" page is the 2020 team). The page given is used as is."""
+        return CONFIG / f"{self.name}_season_pages.csv"
+
+    def season_pages(self) -> dict[tuple[str, int], str]:
+        """(school, season) -> the roster page to use, from config/<sport>_season_pages.csv (school, season, url, note)."""
+        path = self.season_pages_csv
+        if not path.exists():
+            return {}
+        import csv
+        with open(path, newline="", encoding="utf-8") as fh:
+            return {(r["school"].strip(), int(r["season"])): r["url"].strip()
+                    for r in csv.DictReader(fh) if r.get("url") and str(r.get("season", "")).strip().isdigit()}
+
+    @property
     def hometown_corrections_csv(self) -> Path:
         return CONFIG / f"{self.name}_hometown_corrections.csv"
 

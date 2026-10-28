@@ -39,8 +39,57 @@ def configure(sport) -> None:
     MAX_PLAYERS = getattr(sport, "max_players", 0)
     JUCO_NAMES = list(sport.junior_colleges)
     SPRING = bool(getattr(sport, "spring_season", False))
+    OWN_CODES.clear()
+    OWN_CODES.update(sport_codes(ROSTER_PATHS + PRESTO_PATHS))
     import fetch
     fetch.SPRING_SEASON = SPRING      # so fetch.current_season() names the season the spring way
+
+
+# ---- whose roster is this page? ---------------------------------------------------------------------------
+# Sport names in roster addresses: /sports/<code>/roster (Sidearm, WMT), /sports/<code>/2024-25/roster (Presto),
+# roster.aspx?path=<code> (old Sidearm). Before Oct 28 a lacrosse scrape could follow a site's menu to its
+# football roster (/sports/fball/...) and save 90 football players as the lacrosse team; and a failed retry kept
+# them. A page whose address names another sport is never used, and rows saved from one are dropped.
+_CODE_IN_URL = re.compile(r"/sports/([^/?#]+)/|[?&]path=([^&#]+)", re.I)
+# Codes of the sports set up here (from their settings) and of other college sports, as sites spell them.
+# A code missing from this list is never treated as another sport's ("sb" for softball on some sites).
+OTHER_SPORT_CODES = {
+    "football", "fball", "m-footbl", "fb", "flag-football", "flagfball", "womens-flag-football", "wflagfb",
+    "baseball", "bsb", "m-basebl", "mbase", "softball", "sball", "w-softbl", "wsoft",
+    "mens-lacrosse", "mlax", "m-lacros", "m-lacrosse", "womens-lacrosse", "wlax", "w-lacros", "w-lacrosse",
+    "mens-soccer", "womens-soccer", "msoc", "wsoc", "m-soccer", "w-soccer", "msoccer", "wsoccer",
+    "mens-basketball", "womens-basketball", "mbkb", "wbkb", "m-baskbl", "w-baskbl", "mbball", "wbball",
+    "womens-volleyball", "mens-volleyball", "wvball", "mvball", "w-volley", "m-volley", "wvb", "mvb",
+    "beach-volleyball", "wbvball", "sand-volleyball",
+    "mens-cross-country", "womens-cross-country", "cross-country", "xc", "mxc", "wxc", "m-xc", "w-xc",
+    "mens-track-and-field", "womens-track-and-field", "track-and-field", "mtrack", "wtrack", "m-track", "w-track",
+    "mens-ice-hockey", "womens-ice-hockey", "mhockey", "whockey", "m-hockey", "w-hockey", "mens-hockey",
+    "wrestling", "wrest", "m-wrestl", "womens-wrestling", "wwrest",
+    "mens-tennis", "womens-tennis", "mten", "wten", "m-tennis", "w-tennis",
+    "mens-golf", "womens-golf", "mgolf", "wgolf", "m-golf", "w-golf",
+    "field-hockey", "fhockey", "fh", "w-fieldh",
+    "mens-swimming-and-diving", "womens-swimming-and-diving", "swimming-and-diving", "swim", "mswim", "wswim",
+    "womens-rowing", "rowing", "wrowing", "cheerleading", "cheer", "dance", "esports", "bowling", "womens-bowling",
+    "acrobatics-and-tumbling", "stunt", "womens-rugby", "mens-rugby", "rugby", "womens-water-polo", "mens-water-polo",
+    "equestrian", "rifle", "fencing", "gymnastics", "wgym", "triathlon", "womens-triathlon",
+}
+OWN_CODES: set[str] = set()
+
+
+def sport_codes(paths: list[str]) -> set[str]:
+    """'/sports/womens-lacrosse/roster', '/sports/wlax/{prev_season}-{yy}/roster' -> {'womens-lacrosse', 'wlax'}"""
+    return {m.group(1).lower() for p in paths for m in [re.search(r"/sports/([^/{]+)/", p)] if m}
+
+
+def other_sport_page(url: str) -> str:
+    """The other sport's code when a roster address is another sport's page ('fball' on a lacrosse scrape), else ''."""
+    if not url or not OWN_CODES:
+        return ""
+    for m in _CODE_IN_URL.finditer(url):
+        code = (m.group(1) or m.group(2) or "").lower()
+        if code in OTHER_SPORT_CODES and code not in OWN_CODES:
+            return code
+    return ""
 
 
 def normal_size(n: int) -> bool:

@@ -303,6 +303,14 @@
 
   // ---- State: which side we're on, which sport is lit, which one a click pinned ----
   let mode = location.hash === '#learn' ? 'learn' : 'recruiting';
+  // The numbers come from each sport's summary.json, written by build_map_data.py with its map data (Oct 28);
+  // the stats typed in above are only a fallback for when it can't load.
+  const short = (n) => n >= 10000 ? `${Math.round(n / 1000)}K` : n.toLocaleString('en-US');
+  SPORTS.filter((s) => s.players).forEach((s) => {
+    fetch(`${s.players.split('/')[0]}/summary.json`).then((r) => r.ok ? r.json() : null).then((j) => {
+      if (j && j.players && j.schools) s.stats = [[j.schools.toLocaleString('en-US'), 'schools'], [short(j.players), 'players']];
+    }).catch(() => {});
+  });
   let lit = null, pinned = null, leaveTimer = null;
 
   const byId = (id) => SPORTS.find((s) => s.id === id);

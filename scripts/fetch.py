@@ -2,7 +2,9 @@ from __future__ import annotations
 
 """Downloading roster and staff pages: retries, polite pacing per site, an on-disk cache, and an
 optional headless-browser fallback. Shared by every sport."""
+import gzip
 import hashlib
+import os
 import subprocess
 import sys
 import threading
@@ -92,9 +94,49 @@ class Fetcher:
         return s
 
     def _cache_path(self, url: str, rendered: bool) -> Path:
+        """The page's name in the cache, as <host>_<hash>.html. Since Oct 28 it is saved compressed, next to
+        that name as .html.gz (pages shrink ~14x: the cache went from 64 GB to ~5 GB); read_cached() reads
+        either."""
         host = urlparse(url).netloc.replace(":", "_")
         digest = hashlib.sha1(url.encode()).hexdigest()[:10]
         return self.cache_dir / f"{host}_{digest}{'_r' if rendered else ''}.html"
+
+    @staticmethod
+    def gz_path(path: Path) -> Path:
+        return path.with_name(path.name + ".gz")
+
+    @classmethod
+    def is_cached(cls, path: Path) -> bool:
+        return cls.gz_path(path).exists() or path.exists()
+
+    @classmethod
+    def read_cached(cls, path: Path) -> str:
+        """A cached page's text. A page saved before Oct 28 (plain .html) is compressed the first time it's read."""
+        gz = cls.gz_path(path)
+        if gz.exists():
+            with gzip.open(gz, "rt", encoding="utf-8", errors="replace") as fh:
+                return fh.read()
+        text = path.read_text(encoding="utf-8", errors="replace")
+        try:
+            cls.write_cached(path, text)
+        except OSError:
+            pass
+        return text
+
+    @classmethod
+    def write_cached(cls, path: Path, text: str) -> None:
+        """Save a page compressed (written to a temporary name first, so a stopped run never leaves half a file)."""
+        gz = cls.gz_path(path)
+        tmp = gz.with_name(gz.name + f".{os.getpid()}.tmp")
+        with gzip.open(tmp, "wt", encoding="utf-8", compresslevel=6) as fh:
+            fh.write(text)
+        tmp.replace(gz)
+        path.unlink(missing_ok=True)
+
+    @classmethod
+    def drop_cached(cls, path: Path) -> None:
+        cls.gz_path(path).unlink(missing_ok=True)
+        path.unlink(missing_ok=True)
 
     def _pace(self, url: str) -> None:
         host = urlparse(url).netloc
@@ -123,9 +165,9 @@ class Fetcher:
         missing archive page from 2017 doesn't appear later). Not for the current season's addresses,
         which can go up any day: the scraper passes False for those."""
         path = self._cache_path(url, rendered=False)
-        if path.exists() and not self.refresh:
+        if not self.refresh and self.is_cached(path):
             final = path.with_suffix(".url")
-            return 200, final.read_text() if final.exists() else url, path.read_text(encoding="utf-8", errors="replace")
+            return 200, final.read_text() if final.exists() else url, self.read_cached(path)
         if remember_miss:
             status = self._known_miss(path)
             if status is not None:
@@ -146,7 +188,7 @@ class Fetcher:
                     self._dead_hosts.add(host)
             raise
         if resp.status_code == 200 and resp.text:
-            path.write_text(resp.text, encoding="utf-8")
+            self.write_cached(path, resp.text)
             path.with_suffix(".url").write_text(resp.url)
             path.with_suffix(".miss").unlink(missing_ok=True)
         elif resp.status_code in MISS_STATUSES and remember_miss:
@@ -200,11 +242,11 @@ class Fetcher:
         The browser runs in its own process with a hard time limit: a page or browser that hangs
         (one D2 site stalled a whole run) is killed and reported as an error instead."""
         path = self._cache_path(url, rendered=True)
-        if path.exists() and not self.refresh:
-            html = path.read_text(encoding="utf-8", errors="replace")
+        if not self.refresh and self.is_cached(path):
+            html = self.read_cached(path)
             if not is_bot_check(html):         # a check page saved by an older version: try again
                 return html
-            path.unlink(missing_ok=True)
+            self.drop_cached(path)
         try:
             import playwright  # noqa: F401
         except ImportError as exc:
@@ -231,7 +273,8 @@ class Fetcher:
             # try again; never worked around: a site that keeps refusing is left out.
             tmp.unlink(missing_ok=True)
             raise RuntimeError("bot check not passed")
-        tmp.replace(path)
+        self.write_cached(path, html)
+        tmp.unlink(missing_ok=True)
         return html
 
 

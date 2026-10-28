@@ -1,7 +1,7 @@
 hometown_raw,city,state,country,query,status,note,players
-Clifton Park,Clifton,,,Clifton,review,"town name in several states: FL, MD, NY, OH",8
 "Calgary, Alb.",Calgary,,,Calgary,review,unknown state/country 'Alb.',6
 Liberty Township,Liberty,,,Liberty,review,unknown state/country 'Township',6
+Clifton Park,Clifton,,,Clifton,review,"town name in several states: FL, MD, NY, OH",5
 "Okotoks, Alberta Canada",Okotoks,,,Okotoks,review,unknown state/country 'Alberta Canada',4
 "Coatsville, Pa.",Coatsville,PA,USA,"Coatsville, PA, USA",review,spelling? 'Coatsville' -> Coatesville or Cassville,4
 Kahnawake Mohawk Territory,Kahnawake Mohawk,,,Kahnawake Mohawk,review,unknown state/country 'Territory',3
@@ -32,8 +32,8 @@ Kahnawake Reservation,Kahnawake,,,Kahnawake,review,unknown state/country 'Reserv
 "Shamong, N.Y.",Shamong,NY,USA,"Shamong, NY, USA",review,state? no Shamong in NY; the only US town with this name is in NJ,2
 "Forrest Hill, Md.",Forrest Hill,MD,USA,"Forrest Hill, MD, USA",review,spelling? 'Forrest Hill' -> Forest Hill or Forest Hills,2
 "Fuquay-Varnia, N.C.",Fuquay-Varnia,NC,USA,"Fuquay-Varnia, NC, USA",review,spelling? 'Fuquay-Varnia' -> Fuquay-Varina or Fuquay Varina,2
-"Sewanee, Ga.",Sewanee,GA,USA,"Sewanee, GA, USA",review,spelling? 'Sewanee' -> Suwanee or Kewanee,2
 "Watervilet, N.Y.",Watervilet,NY,USA,"Watervilet, NY, USA",review,spelling? 'Watervilet' -> Watervliet or Waterville,2
+"Sewanee, Ga.",Sewanee,GA,USA,"Sewanee, GA, USA",review,spelling? 'Sewanee' -> Suwanee or Kewanee,1
 Sagamore Hills,Sagamore,,,Sagamore,review,"town name in several states: GA, OH",1
 Rapid City South,Rapid City,,,Rapid City,review,unknown state/country 'South',1
 "Paramaribo, Sherborne",Paramaribo,,,Paramaribo,review,unknown state/country 'Sherborne',1
@@ -262,7 +262,7 @@ Hometown/ Previous School,Hometown,,,Hometown,fixed,dropped school text,232
 Delaware,Delaware,,,Delaware,fixed,,17
 "Cortlandt Manor, NY",Cortlandt Manor,NY,USA,"Cortlandt Manor, NY, USA",fixed,,12
 "Cortlandt Manor, N.Y.",Cortlandt Manor,NY,USA,"Cortlandt Manor, NY, USA",fixed,state 'N.Y.' -> NY,12
-"Tyngsboro, Mass.",Tyngsborough,MA,USA,"Tyngsborough, MA, USA",fixed,spelling 'Tyngsboro' -> Tyngsborough,9
+"Tyngsboro, Mass.",Tyngsborough,MA,USA,"Tyngsborough, MA, USA",fixed,spelling 'Tyngsboro' -> Tyngsborough,8
 "Long Island, NY",Long Island,NY,USA,"Long Island, NY, USA",fixed,,8
 "Rockville Center, N.Y.",Rockville Centre,NY,USA,"Rockville Centre, NY, USA",fixed,spelling 'Rockville Center' -> Rockville Centre,8
 "Kent Island, Md.",Kent Island,MD,USA,"Kent Island, MD, USA",fixed,state 'Md.' -> MD,8
@@ -278,7 +278,6 @@ Vestal,Vestal,,,Vestal,fixed,,6
 "Southboro, Mass.",Southborough,MA,USA,"Southborough, MA, USA",fixed,spelling 'Southboro' -> Southborough,5
 Brooklyn NY,Brooklyn,NY,USA,"Brooklyn, NY, USA",fixed,,5
 Lewis Center,Lewis Center,OH,USA,"Lewis Center, OH, USA",fixed,state from the only US town with this name,4
-Burnt Hills,Burnt Hills,NY,USA,"Burnt Hills, NY, USA",fixed,state from the only US town with this name,4
 "Lutherville Timonium, MD",Lutherville Timonium,MD,USA,"Lutherville Timonium, MD, USA",fixed,,4
 "Reistertown, Md.",Reisterstown,MD,USA,"Reisterstown, MD, USA",fixed,spelling Reistertown -> Reisterstown; state 'Md.' -> MD,4
 "Milmont Park, Pa.",Milmont Park,PA,USA,"Milmont Park, PA, USA",fixed,state 'Pa.' -> PA,4
@@ -289,9 +288,10 @@ Queensbury,Queensbury,NY,USA,"Queensbury, NY, USA",fixed,state from the only US 
 Syracuse NY,Syracuse,NY,USA,"Syracuse, NY, USA",fixed,,4
 Rochester NY,Rochester,NY,USA,"Rochester, NY, USA",fixed,,4
 "Akwasasne, NY",Akwesasne,NY,USA,"Akwesasne, NY, USA",fixed,spelling 'Akwasasne' -> Akwesasne,4
-"Indian Land, S.C.",Indian Land,SC,USA,"Indian Land, SC, USA",fixed,state 'S.C.' -> SC,4
 "Ellenwood, Ga.",Ellenwood,GA,USA,"Ellenwood, GA, USA",fixed,state 'Ga.' -> GA,4
 "Lake Saint Louis, Mo.",Lake St. Louis,MO,USA,"Lake St. Louis, MO, USA",fixed,spelling 'Lake Saint Louis' -> Lake St. Louis,4
+Burnt Hills,Burnt Hills,NY,USA,"Burnt Hills, NY, USA",fixed,state from the only US town with this name,3
+"Indian Land, S.C.",Indian Land,SC,USA,"Indian Land, SC, USA",fixed,state 'S.C.' -> SC,3
 "Jackson Hole, Wyo.",Jackson Hole CCD,WY,USA,"Jackson Hole CCD, WY, USA",fixed,spelling 'Jackson Hole' -> Jackson Hole CCD,3
 "Hookset, N.H.",Hooksett,NH,USA,"Hooksett, NH, USA",fixed,spelling 'Hookset' -> Hooksett,3
 Putnam Valley,Putnam Valley,NY,USA,"Putnam Valley, NY, USA",fixed,state from the only US town with this name,3
@@ -311,11 +311,9 @@ Fayetteville. N.C.,Fayetteville.,NC,USA,"Fayetteville., NC, USA",fixed,state 'N.
 Gansevoort,Gansevoort,NY,USA,"Gansevoort, NY, USA",fixed,state from the only US town with this name,3
 "Mount Vernon, N.H.",Mont Vernon,NH,USA,"Mont Vernon, NH, USA",fixed,spelling 'Mount Vernon' -> Mont Vernon,2
 East Lyme,East Lyme,CT,USA,"East Lyme, CT, USA",fixed,state from the only US town with this name,2
-Staten Island,Staten Island,NY,USA,"Staten Island, NY, USA",fixed,state from the only US town with this name,2
 Harrison Township,Harrison Township,MI,USA,"Harrison Township, MI, USA",fixed,state from the only US town with this name,2
 "Rehobeth Beach, Del.",Rehoboth Beach,DE,USA,"Rehoboth Beach, DE, USA",fixed,spelling 'Rehobeth Beach' -> Rehoboth Beach,2
 Ballston Lake,Ballston Lake,NY,USA,"Ballston Lake, NY, USA",fixed,state from the only US town with this name,2
-"Loxahatchee, Fla.",Loxahatchee,FL,USA,"Loxahatchee, FL, USA",fixed,state 'Fla.' -> FL,2
 Lansingburgh,Lansingburgh,NY,USA,"Lansingburgh, NY, USA",fixed,state from the only US town with this name,2
 "Rosell, Ga.",Roswell,GA,USA,"Roswell, GA, USA",fixed,spelling 'Rosell' -> Roswell,2
 "Wappinger Falls, NY",Wappingers Falls,NY,USA,"Wappingers Falls, NY, USA",fixed,spelling 'Wappinger Falls' -> Wappingers Falls,2
@@ -354,13 +352,11 @@ Southbury,Southbury,,,Southbury,fixed,,2
 "Manakin-Sabot, Va.",Manakin Sabot,VA,USA,"Manakin Sabot, VA, USA",fixed,spelling 'Manakin-Sabot' -> Manakin Sabot,2
 "Plastow, NH",Plaistow,NH,USA,"Plaistow, NH, USA",fixed,spelling 'Plastow' -> Plaistow,2
 "Canandiagua, NY",Canandaigua,NY,USA,"Canandaigua, NY, USA",fixed,spelling 'Canandiagua' -> Canandaigua,2
-"Tampa Bay, Fla.",Tampa Bay,FL,USA,"Tampa Bay, FL, USA",fixed,state 'Fla.' -> FL,2
 Nashua NH,Nashua,NH,USA,"Nashua, NH, USA",fixed,,2
 West New York NJ,West New York,NJ,USA,"West New York, NJ, USA",fixed,,2
 Union City NJ,Union City,NJ,USA,"Union City, NJ, USA",fixed,,2
 Troy NY,Troy,NY,USA,"Troy, NY, USA",fixed,,2
 Schenectady NY,Schenectady,NY,USA,"Schenectady, NY, USA",fixed,,2
-Baldwinsville NY,Baldwinsville,NY,USA,"Baldwinsville, NY, USA",fixed,,2
 "Fort Walton, Florida",Fort Walton,FL,USA,"Fort Walton, FL, USA",fixed,state 'Florida' -> FL,2
 "Chichester, Pa.",Chichester,PA,USA,"Chichester, PA, USA",fixed,state 'Pa.' -> PA,2
 "Northboro, Mass.",Northborough,MA,USA,"Northborough, MA, USA",fixed,spelling 'Northboro' -> Northborough,2
@@ -385,6 +381,14 @@ Oregon,Oregon,,,Oregon,fixed,,2
 "Wawautosa, Wisc.",Wauwatosa,WI,USA,"Wauwatosa, WI, USA",fixed,spelling 'Wawautosa' -> Wauwatosa,2
 "Sun City Central, FL",Sun City Central,FL,USA,"Sun City Central, FL, USA",fixed,,2
 "Prince Fredrick, MD",Prince Frederick,MD,USA,"Prince Frederick, MD, USA",fixed,spelling 'Prince Fredrick' -> Prince Frederick,2
+Poestenskill,Poestenskill,,,Poestenskill,fixed,,2
+"Canandiagua, N.Y.",Canandaigua,NY,USA,"Canandaigua, NY, USA",fixed,spelling 'Canandiagua' -> Canandaigua,2
+Sykesville MD,Sykesville,MD,USA,"Sykesville, MD, USA",fixed,,2
+"North Huntington, Pa.",North Huntingdon,PA,USA,"North Huntingdon, PA, USA",fixed,spelling 'North Huntington' -> North Huntingdon,2
+Staten Island,Staten Island,NY,USA,"Staten Island, NY, USA",fixed,state from the only US town with this name,1
+"Loxahatchee, Fla.",Loxahatchee,FL,USA,"Loxahatchee, FL, USA",fixed,state 'Fla.' -> FL,1
+"Tampa Bay, Fla.",Tampa Bay,FL,USA,"Tampa Bay, FL, USA",fixed,state 'Fla.' -> FL,1
+Baldwinsville NY,Baldwinsville,NY,USA,"Baldwinsville, NY, USA",fixed,,1
 Harrison Twp.,Harrison Township,MI,USA,"Harrison Township, MI, USA",fixed,state from the only US town with this name,1
 "East Hempstead, N.H.",East Hampstead,NH,USA,"East Hampstead, NH, USA",fixed,spelling 'East Hempstead' -> East Hampstead,1
 "Portsmith, N.H.",Portsmouth,NH,USA,"Portsmouth, NH, USA",fixed,spelling 'Portsmith' -> Portsmouth,1
@@ -684,7 +688,6 @@ Wheaton Ill.,Wheaton,IL,USA,"Wheaton, IL, USA",fixed,state 'Ill.' -> IL,1
 "Ft. Deposit, MD",Port Deposit,MD,USA,"Port Deposit, MD, USA",fixed,spelling 'Ft. Deposit' -> Port Deposit,1
 "South Glastonburg, CT",South Glastonbury,CT,USA,"South Glastonbury, CT, USA",fixed,spelling 'South Glastonburg' -> South Glastonbury,1
 "E Northport, NY",Northport,NY,USA,"Northport, NY, USA",fixed,spelling 'E Northport' -> Northport,1
-Poestenskill,Poestenskill,,,Poestenskill,fixed,,1
 Chicago IL,Chicago,IL,USA,"Chicago, IL, USA",fixed,,1
 New Rochelle NY,New Rochelle,NY,USA,"New Rochelle, NY, USA",fixed,,1
 Saratoga Springs NY,Saratoga Springs,NY,USA,"Saratoga Springs, NY, USA",fixed,,1
@@ -1003,7 +1006,6 @@ Montgomery N.J.,Montgomery,NJ,USA,"Montgomery, NJ, USA",fixed,state 'N.J.' -> NJ
 "Necsonset, N.Y.",Nesconset,NY,USA,"Nesconset, NY, USA",fixed,spelling 'Necsonset' -> Nesconset,1
 "Union-Endicott, N.Y.",Union-Endicott,NY,USA,"Union-Endicott, NY, USA",fixed,state 'N.Y.' -> NY,1
 "East Cobb, Ga.",East Cobb,GA,USA,"East Cobb, GA, USA",fixed,state 'Ga.' -> GA,1
-"Canandiagua, N.Y.",Canandaigua,NY,USA,"Canandaigua, NY, USA",fixed,spelling 'Canandiagua' -> Canandaigua,1
 Exeter NH,Exeter,NH,USA,"Exeter, NH, USA",fixed,,1
 "Big Cypress, Fla.",Big Cypress,FL,USA,"Big Cypress, FL, USA",fixed,state 'Fla.' -> FL,1
 "San Diego, Cali.",San Diego,CA,USA,"San Diego, CA, USA",fixed,state 'Cali.' -> CA,1
@@ -1206,7 +1208,6 @@ Rochester Ny.,Rochester,NY,USA,"Rochester, NY, USA",fixed,state 'Ny.' -> NY,1
 Garfield NJ,Garfield,NJ,USA,"Garfield, NJ, USA",fixed,,1
 Bennington VT,Bennington,VT,USA,"Bennington, VT, USA",fixed,,1
 Afghanistan,Afghanistan,,,Afghanistan,fixed,,1
-Sykesville MD,Sykesville,MD,USA,"Sykesville, MD, USA",fixed,,1
 Palmer MA,Palmer,MA,USA,"Palmer, MA, USA",fixed,,1
 Pittsfield MA,Pittsfield,MA,USA,"Pittsfield, MA, USA",fixed,,1
 West Springfield MA,West Springfield,MA,USA,"West Springfield, MA, USA",fixed,,1
@@ -1227,3 +1228,4 @@ Suwanee GA,Suwanee,GA,USA,"Suwanee, GA, USA",fixed,,1
 "Reistertown, MD",Reisterstown,MD,USA,"Reisterstown, MD, USA",fixed,spelling Reistertown -> Reisterstown,1
 "Snyrna, Del.",Smyrna,DE,USA,"Smyrna, DE, USA",fixed,spelling 'Snyrna' -> Smyrna,1
 "Lake Saint Louis, MO",Lake St. Louis,MO,USA,"Lake St. Louis, MO, USA",fixed,spelling 'Lake Saint Louis' -> Lake St. Louis,1
+Southampton Mass,Southampton,MA,USA,"Southampton, MA, USA",fixed,state 'Mass' -> MA,1

@@ -1,12 +1,11 @@
 hometown_raw,city,state,country,query,status,note,players
-"Santo Domingo, DR",Santo Domingo,,,Santo Domingo,review,unknown state/country 'DR',65
-"Santo Domingo, D.R.",Santo Domingo,,,Santo Domingo,review,unknown state/country 'D.R.',60
+"Santo Domingo, DR",Santo Domingo,,,Santo Domingo,review,unknown state/country 'DR',63
+"Santo Domingo, D.R.",Santo Domingo,,,Santo Domingo,review,unknown state/country 'D.R.',59
 "Valencia, Venezuela",Valencia,,,Valencia,review,unknown state/country 'Venezuela',19
 "Seoul, South Korea",Seoul,,,Seoul,review,unknown state/country 'South Korea',18
 "Beijing, China",Beijing,,,Beijing,review,unknown state/country 'China',10
 "Taipei, Taiwan",Taipei,,,Taipei,review,unknown state/country 'Taiwan',9
 "Saskatoon, SK",Saskatoon,,,Saskatoon,review,unknown state/country 'SK',8
-"Santo Domingo, Dominican Repub",Santo Domingo,,,Santo Domingo,review,unknown state/country 'Dominican Repub',7
 "Baltimore, M.D.",Baltimore,,,Baltimore,review,unknown state/country 'M.D.',6
 Pago Pago. AS,Pago Pago.,,,Pago Pago.,review,unknown state/country 'AS',6
 "Mililani, Hawai‘i",Mililani,,,Mililani,review,unknown state/country 'Hawai‘i',6
@@ -18,6 +17,7 @@ Leone American Samoa,Leone American,,,Leone American,review,unknown state/countr
 "Caracas, VZ",Caracas,,,Caracas,review,unknown state/country 'VZ',5
 Clovis West/Fresno /,Clovis,,,Clovis,review,unknown state/country 'West',5
 "Woodlands, Texas",Woodlands,TX,USA,"Woodlands, TX, USA",review,spelling? 'Woodlands' -> Woodland or Goodland,5
+"Santo Domingo, Dominican Repub",Santo Domingo,,,Santo Domingo,review,unknown state/country 'Dominican Repub',4
 "Cairo, Egypt",Cairo,,,Cairo,review,unknown state/country 'Egypt',4
 "Guangzhou, China",Guangzhou,,,Guangzhou,review,unknown state/country 'China',4
 "Freetown, Sierra Leone",Freetown,,,Freetown,review,unknown state/country 'Sierra Leone',4
@@ -55,8 +55,6 @@ Lake View Terrace,Lake View,,,Lake View,review,"town name in several states: CA,
 "Landenburg, Pa.",Landenburg,PA,USA,"Landenburg, PA, USA",review,spelling? 'Landenburg' -> Landenberg or Landisburg,3
 "Trujillo, P.R.",Trujillo,,,Trujillo,review,unknown state/country 'P.R.',3
 "Toa Alto, Puerto Rico",Toa Alto,,,Toa Alto,review,unknown state/country 'Puerto Rico',3
-Cidra PR,Cidra,,,Cidra,review,unknown state/country 'PR',3
-Santo Domingo DR,Santo Domingo,,,Santo Domingo,review,unknown state/country 'DR',3
 "Santo Domingo, Domincan Republic",Santo Domingo,,,Santo Domingo,review,unknown state/country 'Domincan Republic',3
 Newark Memorial /,Newark,,,Newark,review,unknown state/country 'Memorial',3
 San Ramon Valley /,San Ramon,,,San Ramon,review,unknown state/country 'Valley',3
@@ -67,6 +65,8 @@ James Logan /,James,,,James,review,unknown state/country 'Logan',3
 La Cañada,La,,,La,review,unknown state/country 'Cañada',3
 "Bonao, D.R.",Bonao,,,Bonao,review,unknown state/country 'D.R.',3
 "Brandon Valley, SD",Brandon Valley,SD,USA,"Brandon Valley, SD, USA",review,state? no Brandon Valley in SD; the only US town with this name is in FL,3
+Cidra PR,Cidra,,,Cidra,review,unknown state/country 'PR',2
+Santo Domingo DR,Santo Domingo,,,Santo Domingo,review,unknown state/country 'DR',2
 "London, Ontario Canada",London,,,London,review,unknown state/country 'Ontario Canada',2
 West Bloomfield,West,,,West,review,"town name in several states: MI, NY, WI",2
 "Perth, Western Australia",Perth,,,Perth,review,unknown state/country 'Western Australia',2
@@ -121,7 +121,6 @@ Anaheim Hills,Anaheim,,,Anaheim,review,unknown state/country 'Hills',2
 "Brisbane, Queensland",Brisbane,,,Brisbane,review,unknown state/country 'Queensland',2
 "Seoul, Republic of Korea",Seoul,,,Seoul,review,unknown state/country 'Republic of Korea',2
 "Albuquerque, New Mex.",Albuquerque,,,Albuquerque,review,unknown state/country 'New Mex.',2
-San Juan Puerto Rico,San Juan Puerto,,,San Juan Puerto,review,unknown state/country 'Rico',2
 Carolina PR,Carolina,,,Carolina,review,unknown state/country 'PR',2
 "Muntinlupa City, Phillipines",Muntinlupa City,,,Muntinlupa City,review,unknown state/country 'Phillipines',2
 Chitre Panama,Chitre,,,Chitre,review,unknown state/country 'Panama',2
@@ -145,7 +144,6 @@ West Ranch,West,,,West,review,unknown state/country 'Ranch',2
 "Lequillo, P.R.",Lequillo,,,Lequillo,review,unknown state/country 'P.R.',2
 "Maracaibo, VE",Maracaibo,,,Maracaibo,review,unknown state/country 'VE',2
 "Caugus, Puerto Rico",Caugus,,,Caugus,review,unknown state/country 'Puerto Rico',2
-"Santo Domingo, Dom. Republic",Santo Domingo,,,Santo Domingo,review,unknown state/country 'Dom. Republic',2
 San Diego State U. / R/R,San Diego State,,,San Diego State,review,unknown state/country 'U.',2
 U. Redlands / R/R,U.,,,U.,review,unknown state/country 'Redlands',2
 "Santo Domingo, Dominic Republic",Santo Domingo,,,Santo Domingo,review,unknown state/country 'Dominic Republic',2
@@ -153,9 +151,11 @@ U. Redlands / R/R,U.,,,U.,review,unknown state/country 'Redlands',2
 "Chicago, lll.",Chicago,,,Chicago,review,unknown state/country 'lll.',2
 "Mainville, OH",Mainville,OH,USA,"Mainville, OH, USA",review,spelling? 'Mainville' -> Maineville or Mainsville,2
 "Mellville, NY",Mellville,NY,USA,"Mellville, NY, USA",review,spelling? 'Mellville' -> Melville or Millville,2
-"Bogota, Columbia",Bogota,,,Bogota,review,unknown state/country 'Columbia',2
 "Woodlands, TX",Woodlands,TX,USA,"Woodlands, TX, USA",review,spelling? 'Woodlands' -> Woodland or Goodland,2
 "Imperial Valley, CA",Imperial Valley,CA,USA,"Imperial Valley, CA, USA",review,state? no Imperial Valley in CA; the only US town with this name is in TX,2
+San Juan Puerto Rico,San Juan Puerto,,,San Juan Puerto,review,unknown state/country 'Rico',1
+"Santo Domingo, Dom. Republic",Santo Domingo,,,Santo Domingo,review,unknown state/country 'Dom. Republic',1
+"Bogota, Columbia",Bogota,,,Bogota,review,unknown state/country 'Columbia',1
 "Ajax, Ont. Canada",Ajax,,,Ajax,review,unknown state/country 'Ont. Canada',1
 "Pittsburg, PA",Pittsburg,PA,USA,"Pittsburg, PA, USA",review,spelling? 'Pittsburg' -> Pittsburgh or Wattsburg,1
 "Budapest, Hungary",Budapest,,,Budapest,review,unknown state/country 'Hungary',1
@@ -1480,7 +1480,7 @@ Domincan Republic,Domincan,,,Domincan,review,unknown state/country 'Republic',1
 "North Oak, Minn.",North Oak,MN,USA,"North Oak, MN, USA",review,spelling? 'North Oak' -> North Oaks or North Fork,1
 "Pine Canyon, Utah",Pine Canyon,UT,USA,"Pine Canyon, UT, USA",review,state? no Pine Canyon in UT; the only US town with this name is in CA,1
 "Fort Mill, N.C.",Fort Mill,NC,USA,"Fort Mill, NC, USA",review,state? no Fort Mill in NC; the only US town with this name is in SC,1
-,,,,,unfixable,blank hometown,2731
+,,,,,unfixable,blank hometown,2701
 Hometown/ Previous School,,,,,unfixable,column header scraped as data,861
 Hometown,,,,,unfixable,column header scraped as data,524
 HS Hometown/High School:,,,,,unfixable,label with no hometown after it,145
@@ -2040,7 +2040,7 @@ Arizona,,,,,unfixable,"state only, no town",1
 Texas,,,,,unfixable,"state only, no town",1
 "Hometown/Previous School(s): Omaha, Neb.",Omaha,NE,USA,"Omaha, NE, USA",fixed,label text removed,127
 BAKERSFIELD CA,BAKERSFIELD,CA,USA,"BAKERSFIELD, CA, USA",fixed,,74
-"Panama City, Panama",Panama City,,Panama,"Panama City, Panama",fixed,state spelling read,65
+"Panama City, Panama",Panama City,,Panama,"Panama City, Panama",fixed,state spelling read,64
 Bakersfield CA,Bakersfield,CA,USA,"Bakersfield, CA, USA",fixed,,57
 "Hometown/Previous School(s): Lincoln, Neb.",Lincoln,NE,USA,"Lincoln, NE, USA",fixed,label text removed,41
 "Mililani, Hawaii",Mililani,HI,USA,"Mililani, HI, USA",fixed,state 'Hawaii' -> HI,36
@@ -2084,8 +2084,8 @@ HS Hometown/High School: Huntington Beach,Huntington Beach,CA,USA,"Huntington Be
 "La Canada, Calif.",La Canada,CA,USA,"La Canada, CA, USA",fixed,state 'Calif.' -> CA,13
 "Morgantown, W. Va.",Morgantown,WV,USA,"Morgantown, WV, USA",fixed,state spelling read,13
 "Porter Ranch, Calif.",Porter Ranch,CA,USA,"Porter Ranch, CA, USA",fixed,state 'Calif.' -> CA,13
+"New York City, N.Y.",New York City,NY,USA,"New York City, NY, USA",fixed,state 'N.Y.' -> NY,13
 San Francisco CA,San Francisco,CA,USA,"San Francisco, CA, USA",fixed,,12
-"New York City, N.Y.",New York City,NY,USA,"New York City, NY, USA",fixed,state 'N.Y.' -> NY,12
 HS Hometown/High School: Irvine,Irvine,CA,USA,"Irvine, CA, USA",fixed,label text removed; state CA from the California roster,12
 "Hometown/High School/Previous College: Olathe, KS",Olathe,KS,USA,"Olathe, KS, USA",fixed,label text removed,12
 "Hometown/High School/Previous College: Goddard, KS",Goddard,KS,USA,"Goddard, KS, USA",fixed,label text removed,12
@@ -2239,9 +2239,9 @@ WOODLAND HILLS CA,WOODLAND HILLS,CA,USA,"WOODLAND HILLS, CA, USA",fixed,,6
 Sunland,Sunland,CA,USA,"Sunland, CA, USA",fixed,state from the only US town with this name,6
 "Dubai, UAE",Dubai,,United Arab Emirates,"Dubai, United Arab Emirates",fixed,state 'UAE' -> United Arab Emirates,6
 Vestal,Vestal,NY,USA,"Vestal, NY, USA",fixed,state from the only US town with this name,6
-"Daniel Island, S.C.",Daniel Island,SC,USA,"Daniel Island, SC, USA",fixed,state 'S.C.' -> SC,6
 Delano CA,Delano,CA,USA,"Delano, CA, USA",fixed,,6
 "Cardiff, Calif.",Cardiff,CA,USA,"Cardiff, CA, USA",fixed,state 'Calif.' -> CA,6
+"Daniel Island, S.C.",Daniel Island,SC,USA,"Daniel Island, SC, USA",fixed,state 'S.C.' -> SC,5
 "Indian Land, S.C.",Indian Land,SC,USA,"Indian Land, SC, USA",fixed,state 'S.C.' -> SC,5
 Sylmar,Sylmar,CA,USA,"Sylmar, CA, USA",fixed,state from the only US town with this name,5
 "Charleston, W. Va.",Charleston,WV,USA,"Charleston, WV, USA",fixed,state spelling read,5
@@ -3724,8 +3724,8 @@ Georgetown. Texas,Georgetown.,TX,USA,"Georgetown., TX, USA",fixed,state 'Texas' 
 Chesterfield. Va.,Chesterfield.,VA,USA,"Chesterfield., VA, USA",fixed,state 'Va.' -> VA,2
 "Tappahanock, VA",Tappahannock,VA,USA,"Tappahannock, VA, USA",fixed,spelling 'Tappahanock' -> Tappahannock,2
 "Beaux Arts, Wash.",Beaux Arts,WA,USA,"Beaux Arts, WA, USA",fixed,state 'Wash.' -> WA,2
-"Altamonte, Fla.",Altamonte,FL,USA,"Altamonte, FL, USA",fixed,state 'Fla.' -> FL,2
 null,null,,,null,fixed,,2
+"Altamonte, Fla.",Altamonte,FL,USA,"Altamonte, FL, USA",fixed,state 'Fla.' -> FL,1
 "Williamstad, Curacao",Williamstad,,Curacao,"Williamstad, Curacao",fixed,read as Curacao,1
 "Montaga, Curacao",Montaga,,Curacao,"Montaga, Curacao",fixed,read as Curacao,1
 "Mundo Nobo, Curacao",Mundo Nobo,,Curacao,"Mundo Nobo, Curacao",fixed,read as Curacao,1
@@ -11283,7 +11283,7 @@ St. Albert Alberta Canada,St. Albert Alberta,,Canada,"St. Albert Alberta, Canada
 "Payton, CO",Peyton,CO,USA,"Peyton, CO, USA",fixed,spelling 'Payton' -> Peyton,1
 "Tightsqueeze, Va.",Tightsqueeze,VA,USA,"Tightsqueeze, VA, USA",fixed,state 'Va.' -> VA,1
 "Esthersville, Iowa",Estherville,IA,USA,"Estherville, IA, USA",fixed,spelling 'Esthersville' -> Estherville,1
-"Cypress Woods, Texas",Cypress Woods,TX,USA,"Cypress Woods, TX, USA",fixed,state 'Texas' -> TX,1
+"Cypress Woods, Texas",Cypresswood,TX,USA,"Cypresswood, TX, USA",fixed,spelling 'Cypress Woods' -> Cypresswood,1
 Gilory,Gilory,,,Gilory,fixed,,1
 Lanai City HI,Lanai City,HI,USA,"Lanai City, HI, USA",fixed,,1
 Chula Vista CA,Chula Vista,CA,USA,"Chula Vista, CA, USA",fixed,,1

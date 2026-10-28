@@ -333,11 +333,20 @@ def main(src, dst, sport):
         # For the pages: the sport's name, which divisions are D1, and how divisions and positions are written
         "sport": sport.label or sport.name, "d1": list(sport.d1_divisions),
         "divLabels": {d: sport.division_label(d) for d in divs}, "posLabels": dict(sport.position_labels),
-        "players": {k: v for k, v in P.items() if k != "n"}, "names": "\n".join(P["n"]),
+        "players": {k: v for k, v in P.items() if k != "n"},
     }
     Path(dst).parent.mkdir(parents=True, exist_ok=True)
     with open(dst, "w", encoding="utf-8") as fh:
         json.dump(out, fh, separators=(",", ":"), ensure_ascii=False)
+    # The players' names, one per line in the same order (Oct 28: a file of their own, since only the dot map
+    # uses them; the heatmap and transfer pages no longer download them, and the dot map draws before they arrive)
+    Path(dst).with_name("names.txt").write_text("\n".join(n.replace("\n", " ") for n in P["n"]), encoding="utf-8")
+    # The numbers on the front page (docs/index.html reads these instead of figures typed in by hand)
+    seasons = sorted({f for f in P["f"]} | {l for l in P["l"]})
+    summary = {"sport": sport.label or sport.name, "players": len(P["s"]), "schools": len(schools),
+               "hometowns": len(towns), "first": 2000 + seasons[0] if seasons else None,
+               "last": 2000 + seasons[-1] if seasons else None}
+    Path(dst).with_name("summary.json").write_text(json.dumps(summary), encoding="utf-8")
     print(f"{len(rows)} players, {len(towns)} hometowns, {len(schools)} schools -> {dst}")
     print("position groups:", Counter(POS_GROUPS[i] for i in P["p"]).most_common())
     skipped = how.pop("not counted: class year untrustworthy that season", 0)
