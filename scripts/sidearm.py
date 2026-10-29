@@ -5,7 +5,7 @@ shows, and pulling players out of it (five parsers, best result kept). Also the 
 previous college from a high school.
 
 Sport-specific settings (roster URL paths, minimum roster size, junior-college names) come from
-config/<sport>.json through configure(), which the scripts call at startup."""
+config/<sport>/settings.json through configure(), which the scripts call at startup."""
 import json
 import re
 from itertools import zip_longest
@@ -14,9 +14,9 @@ from urllib.parse import urljoin
 
 from bs4 import BeautifulSoup, Tag
 
-from fetch import current_season
-from hometowns import *            # noqa: F401,F403  clean, parse_hometown, normalize_class, ...
-from hometowns import _PLACEHOLDERS, _key, _lookup   # noqa: F401
+from core import current_season
+from geocode import *            # noqa: F401,F403  clean, parse_hometown, normalize_class, ...
+from geocode import _PLACEHOLDERS, _key, _lookup   # noqa: F401
 
 # Set by configure() from the sport's settings; these defaults are football's.
 ROSTER_PATHS = ["/sports/football/roster"]
@@ -41,8 +41,8 @@ def configure(sport) -> None:
     SPRING = bool(getattr(sport, "spring_season", False))
     OWN_CODES.clear()
     OWN_CODES.update(sport_codes(ROSTER_PATHS + PRESTO_PATHS))
-    import fetch
-    fetch.SPRING_SEASON = SPRING      # so fetch.current_season() names the season the spring way
+    import core
+    core.SPRING_SEASON = SPRING      # so core.current_season() names the season the spring way
 
 
 # ---- whose roster is this page? ---------------------------------------------------------------------------
@@ -63,7 +63,8 @@ OTHER_SPORT_CODES = {
     "beach-volleyball", "wbvball", "sand-volleyball",
     "mens-cross-country", "womens-cross-country", "cross-country", "xc", "mxc", "wxc", "m-xc", "w-xc",
     "mens-track-and-field", "womens-track-and-field", "track-and-field", "mtrack", "wtrack", "m-track", "w-track",
-    "mens-ice-hockey", "womens-ice-hockey", "mhockey", "whockey", "m-hockey", "w-hockey", "mens-hockey",
+    "mens-ice-hockey", "womens-ice-hockey", "mhockey", "whockey", "m-hockey", "w-hockey", "mens-hockey", "womens-hockey",
+    "mice", "wice", "ice-hockey", "hockey", "m-ihockey", "w-ihockey",
     "wrestling", "wrest", "m-wrestl", "womens-wrestling", "wwrest",
     "mens-tennis", "womens-tennis", "mten", "wten", "m-tennis", "w-tennis",
     "mens-golf", "womens-golf", "mgolf", "wgolf", "m-golf", "w-golf",
@@ -1003,11 +1004,18 @@ def load_known_colleges(schools: list[dict]) -> None:
     KNOWN_COLLEGES.update(_college_key(n) for n in JUCO_NAMES)
 
 
+# A hockey player's "Last School" is usually a junior or prep team named with its league: "Omaha Lancers (USHL)",
+# "Penticton Vees (BCHL)", "Dubuque Fighting Saints (USHL)". Never a college, even when the city is a college's name.
+_JUNIOR_HOCKEY = re.compile(r"\((?:[^)]*\b)?(?:USHL|NAHL|NA3HL|BCHL|AJHL|SJHL|MJHL|OJHL|CCHL|NOJHL|SIJHL|KIJHL|VIJHL|PJHL|GOJHL|"
+                            r"MHL|CJHL|NCDC|USPHL|EHL|EJHL|QMJHL|QJHL|LHJMQ|OHL|WHL|CHL|NTDP|USNTDP|NAPHL|U18|U17|U16|18U|16U|"
+                            r"AAA|Midget|Liiga|SHL|HockeyAllsvenskan|J20|SuperElit|DEL|KHL|VHL|Mestis|NLA|NLB)\b", re.I)
+
+
 def looks_like_college(value: str) -> bool:
     """'Texas Tech', 'Wake Forest', 'Blinn College', 'Butler CC', 'Univ. of Iowa' -> True.
     'Lamar HS', 'IMG Academy', 'Mater Dei', 'College Park High School', 'Fork Union Military Academy' -> False."""
     v = clean(value)
-    if not v or _HS_STRONG.search(v):
+    if not v or _HS_STRONG.search(v) or _JUNIOR_HOCKEY.search(v):
         return False
     if re.search(r"\b(university|college|naval academy|air force academy|military academy at|west point)\b", v, re.I) \
             and not re.search(r"\bmilitary academy\b(?! at)", v, re.I):

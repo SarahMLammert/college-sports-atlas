@@ -2,6 +2,7 @@
 .venv/
 __pycache__/
 *.pyc
+.pytest_cache/
 scrape_report_*.csv
 rosters_all_seasons.csv
 
@@ -14,5 +15,7 @@ rosters_all_seasons.csv
 
 # macOS
 .DS_Store
-rosters/football/rosters_all_seasons.csv
-rosters/football/rosters_all_seasons.csv
+
+# The scripts' working folder: season files, reports, geocoder tables (rebuilt by the scripts; the site
+# only needs docs/). Kept out of git from Oct 28; earlier commits still have the old copies.
+rosters/

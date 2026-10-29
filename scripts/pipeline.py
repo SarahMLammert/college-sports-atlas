@@ -18,13 +18,15 @@ The steps, in order (--steps, --from and --skip use these names):
     retry          what's still failed or partial, slowly: 3 minutes per school (--school-minutes),
                    --refresh --render --bios, --workers 8
     redo-current   only with --redo-current (spring sports): scrape again the seasons that came from a
-                   main roster page with no year on it (check_rosters.py says when there are any)
+                   main roster page with no year on it (build.py check says when there are any)
     geocode        place the hometowns
-    fix-hometowns  suggest_hometown_fixes.py and fix_hometown_spellings.py, then geocode again
-    frozen         check_frozen_classes.py
-    build          build_map_data.py -> docs/<sport>/map_data.json
-    locations      build_school_locations.py -> docs/<sport>/school_locations.json
-    check          check_rosters.py: players, ok/partial/failed, oversized and repeated rosters
+    fix-hometowns  hometown_fixes.py suggest and hometown_fixes.py spellings, then geocode again
+    frozen         build.py frozen
+    build          build.py map -> docs/<sport>/map_data.json
+    locations      build.py locations -> docs/<sport>/school_locations.json
+    staff          staff.py scrape (the coaches listed with each saved roster, plus the coaches page when
+                   the roster page has none) and staff.py build -> docs/<sport>/staff_data.json
+    check          build.py check: players, ok/partial/failed, oversized and repeated rosters
 
 Both scrape steps always write the reports (--report) and MISSING_ROSTERS.md. When the sport already has
 saved rosters, the first pass only fills in what's missing or partial (--retry-failed), like a second
@@ -36,8 +38,10 @@ rosters/<sport>/attempts.csv) isn't tried again; --retry-given-up tries them all
 the 3, and deleting a row from attempts.csv retries one. The current season is always tried. Schools named
 with --only are always tried.
 
-Seasons come from the sport's settings ("seasons" in config/<sport>.json; if it isn't there, football is
-2016-2019,2021-2026 and every other sport 2016-2026). --seasons overrides them.
+Seasons come from the sport's settings ("seasons" in config/<sport>/settings.json). If it isn't there: 2016 to the
+current season, skipping 2020 for football. Spring sports name a season by the spring it ends in and post next
+spring's roster when school starts, so from August their current season is next year's (in October 2026: 2027,
+the 2026-27 team; a school that hasn't posted it yet is tried again on the next run). --seasons overrides them.
 
 Several sports run one after the other. A sport that fails at a step stops there and the next sport
 goes on; the table at the end says what ran. Everything printed is also saved to
@@ -60,12 +64,12 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from paths import LOCK_ENV, ROOT, SportBusy, available_sports, load_sport, sport_lock  # noqa: E402
-from seasons import read_csv, season_files  # noqa: E402
+from core import LOCK_ENV, ROOT, SportBusy, available_sports, load_sport, sport_lock  # noqa: E402
+from core import read_csv, season_files  # noqa: E402
 
 SCRIPTS = Path(__file__).resolve().parent
 STEPS = ["test", "scrape", "retry", "redo-current", "geocode", "fix-hometowns", "frozen", "build",
-         "locations", "check"]
+         "locations", "staff", "check"]
 OPTIONAL = {"test", "redo-current"}          # only run when asked (--test, --redo-current or --steps)
 
 
@@ -162,14 +166,16 @@ def plan_for(sport, args) -> Plan:
     if not redo:
         plan.notes["redo-current"] = "no seasons from a main page without a year"
 
-    geocode = py("geocode_hometowns.py", *common, *(["--use-review"] if args.use_review else []))
+    geocode = py("geocode.py", *common, *(["--use-review"] if args.use_review else []))
     plan.commands["geocode"] = [geocode]
-    plan.commands["fix-hometowns"] = [py("suggest_hometown_fixes.py", *common),
-                                      py("fix_hometown_spellings.py", *common), geocode]
-    plan.commands["frozen"] = [py("check_frozen_classes.py", *common)]
-    plan.commands["build"] = [py("build_map_data.py", *common)]
-    plan.commands["locations"] = [py("build_school_locations.py", *common)]
-    plan.commands["check"] = [py("check_rosters.py", *common)]
+    plan.commands["fix-hometowns"] = [py("hometown_fixes.py", "suggest", *common),
+                                      py("hometown_fixes.py", "spellings", *common), geocode]
+    plan.commands["frozen"] = [py("build.py", "frozen", *common)]
+    plan.commands["build"] = [py("build.py", "map", *common)]
+    plan.commands["locations"] = [py("build.py", "locations", *common)]
+    plan.commands["staff"] = [py("staff.py", "scrape", *common, "--seasons", seasons),
+                              py("staff.py", "build", *common)]
+    plan.commands["check"] = [py("build.py", "check", *common)]
     return plan
 
 
@@ -346,7 +352,7 @@ def main(argv=None) -> int:
     sports = have if [s.lower() for s in args.sports] == ["all"] else args.sports
     unknown = [s for s in sports if s not in have]
     if unknown:
-        ap.error(f"no config/<sport>.json for {', '.join(unknown)}; sports set up: {', '.join(have)}")
+        ap.error(f"no config/<sport>/settings.json for {', '.join(unknown)}; sports set up: {', '.join(have)}")
     if len(set(sports)) != len(sports):
         ap.error("a sport is listed twice")
     if args.only and len(sports) > 1:

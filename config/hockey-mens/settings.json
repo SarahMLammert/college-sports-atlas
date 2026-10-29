@@ -1,0 +1,87 @@
+{
+  "label": "Hockey (Men's)",
+  "spring_season": true,
+  "roster_paths": [
+    "/sports/mens-ice-hockey/roster",
+    "/sports/mhockey/roster",
+    "/sports/m-hockey/roster",
+    "/sports/mens-hockey/roster",
+    "/sports/m-ihockey/roster",
+    "/sports/ice-hockey/roster",
+    "/sports/hockey/roster"
+  ],
+  "presto_paths": [
+    "/sports/mice/{prev_season}-{yy}/roster",
+    "/sports/mhockey/{prev_season}-{yy}/roster"
+  ],
+  "min_players": 15,
+  "max_players": 50,
+  "junior_colleges": [],
+  "position_groups": [
+    "F",
+    "D",
+    "G",
+    "UNK"
+  ],
+  "position_abbreviations": {
+    "F": "f fw fwd c lw rw w c/w w/c c/lw c/rw lw/rw rw/lw lw/c rw/c f/d",
+    "D": "d def d/f dman",
+    "G": "g gk gt"
+  },
+  "position_words": [
+    [
+      "forward",
+      "F"
+    ],
+    [
+      "center",
+      "F"
+    ],
+    [
+      "centre",
+      "F"
+    ],
+    [
+      "wing",
+      "F"
+    ],
+    [
+      "defense",
+      "D"
+    ],
+    [
+      "defence",
+      "D"
+    ],
+    [
+      "defenseman",
+      "D"
+    ],
+    [
+      "goal",
+      "G"
+    ]
+  ],
+  "position_fallback": "UNK",
+  "d1_divisions": [
+    "D1"
+  ],
+  "other_divisions": [
+    "D2",
+    "D3"
+  ],
+  "division_labels": {
+    "D1": "Division I",
+    "D2": "Division II",
+    "D3": "Division III"
+  },
+  "position_labels": {
+    "F": "Forward",
+    "D": "Defense",
+    "G": "Goalie",
+    "UNK": "Other"
+  },
+  "thin_roster": 18,
+  "frozen_min_pairs": 15,
+  "transfer_needs_known_college": true
+}

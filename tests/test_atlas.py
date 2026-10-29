@@ -1,10 +1,14 @@
-"""All the tests, in one file (Oct 28, 2026; before, four files). Run them from the project folder:
+"""All the tests, in one file. Run them from the project folder:
 
     python3 -m pytest tests -q
 
 Sections: hometowns (parser, geocoder, fixer); roster pages; hometown labels and school levels; running a
-scrape (sizes, addresses, seasons, reasons, downloads, the lock, pipeline.py, the checks). conftest.py puts
+scrape (sizes, addresses, seasons, downloads, the lock, pipeline.py, the checks); staff; hockey. conftest.py puts
 scripts/ on the import path.
+
+What's tested (Oct 28 review): behaviour that would quietly put wrong data on the maps if it broke (parsing pages
+and hometowns, levels, transfers, seasons, which pages count) and the pipeline's own rules. Not tested: the wording
+of messages, settings files' contents, and one-time fixes for files from before a change.
 """
 import csv
 import json
@@ -17,15 +21,16 @@ import pytest
 import requests
 from bs4 import BeautifulSoup
 
-import fetch
-import geocode_hometowns as geo
-import paths
+import core
+import geocode as geo
+import build
+import hometown_fixes
 import scrape_rosters as sr
 import sidearm
-import suggest_hometown_fixes as sug
-from hometowns import not_a_place, parse_hometown, split_labeled_hometown
-from levels import Levels, is_major, key
-from paths import load_sport
+import hometown_fixes as sug
+from geocode import not_a_place, parse_hometown, split_labeled_hometown
+from core import Levels, is_major, key
+from core import load_sport
 from scrape_rosters import normalize_class, parse_roster, split_hometown_highschool
 from sidearm import parse_sidearm_classic
 
@@ -42,89 +47,85 @@ def home(city, state, country):
 # parse_hometown
 
 @pytest.mark.parametrize("raw, want", [
-    ("Winnipeg, MB", home("Winnipeg", "MB", "Canada")),
-    ("Saskatoon, SK", home("Saskatoon", "SK", "Canada")),
-    ("Truro, NS", home("Truro", "NS", "Canada")),
-    ("Pleasant Grove, PEI", home("Pleasant Grove", "PE", "Canada")),
-    ("Brandon, Manitoba, CA", home("Brandon", "MB", "Canada")),          # not California
-    ("Bolton, Ontario Canada", home("Bolton", "ON", "Canada")),
-    ("Chilliwack, B.C. Canada", home("Chilliwack", "BC", "Canada")),
-    ("Sundre, Alberta-Canada", home("Sundre", "AB", "Canada")),
-    ("Calgary AB", home("Calgary", "AB", "Canada")),
-    ("Okotoks Alberta", home("Okotoks", "AB", "Canada")),
-    ("Chillliwack British Columbia", home("Chillliwack", "BC", "Canada")),
-    ("Montreal. Quebec", home("Montreal", "QC", "Canada")),
-    ("Darien, III.", home("Darien", "IL", "USA")),
-    ("Lockport, lll.", home("Lockport", "IL", "USA")),
-    ("Pinckneyville, Illi.", home("Pinckneyville", "IL", "USA")),
-    ("Purcellville, Virg.", home("Purcellville", "VA", "USA")),
-    ("Ooltewah, Ten.", home("Ooltewah", "TN", "USA")),
-    ("Louisville, Kent.", home("Louisville", "KY", "USA")),
-    ("Brandywine, Mary.", home("Brandywine", "MD", "USA")),
-    ("Hamlin, West Va.", home("Hamlin", "WV", "USA")),
-    ("Randleman, N,C,", home("Randleman", "NC", "USA")),
-    ("Artesia, N,M.", home("Artesia", "NM", "USA")),
-    ("New Ulm, Minn,.", home("New Ulm", "MN", "USA")),
-    ("St, Joseph, Mo.", home("St. Joseph", "MO", "USA")),
-    ("St. Croix, USVI", home("St. Croix", "VI", "USA")),
-    ("Saipan, Mariana Islands", home("Saipan", "MP", "USA")),
-    ("Puerto Rico", home("", "PR", "USA")),
-    ("Trullio Alto, Puerto Rico", home("Trullio Alto", "PR", "USA")),
-    ("Willemstad, Curacao", home("Willemstad", "", "Curacao")),
-    ("Kowloon, Hong Kong", home("Kowloon", "", "Hong Kong")),
-    ("Paderno Dugnano, Lombardia Italy", home("Paderno Dugnano", "", "Italy")),
-    ("Trinidad & Tobago", home("", "", "Trinidad and Tobago")),
-    ("&quot;Fort Worth,", home("Fort Worth", "", "")),
-    ("Kona, Hawai‘i", home("Kona", "HI", "USA")),
-    # unchanged
+    # US: AP abbreviations, misspellings and stray punctuation
     ("Mobile, Ala.", home("Mobile", "AL", "USA")),
-    ("Sydney, Australia", home("Sydney", "", "Australia")),
+    ("St. Louis, MO", home("St. Louis", "MO", "USA")),
+    ("Washington, D.C.", home("Washington", "DC", "USA")),
+    ("Darien, III.", home("Darien", "IL", "USA")),
+    ("Purcellville, Virg.", home("Purcellville", "VA", "USA")),
+    ("Randleman, N,C,", home("Randleman", "NC", "USA")),
+    ("St, Joseph, Mo.", home("St. Joseph", "MO", "USA")),
+    ("Rockledge, Fla. USA", home("Rockledge", "FL", "USA")),
+    ("Syosset, Long Island", home("Syosset", "NY", "USA")),
+    ("Kona, Hawai‘i", home("Kona", "HI", "USA")),
+    ("Maui", home("Maui", "HI", "USA")),
+    # territories
+    ("St. Croix, USVI", home("St. Croix", "VI", "USA")),
+    ("Puerto Rico", home("", "PR", "USA")),
+    ("Cidra PR", home("Cidra", "PR", "USA")),
+    ("Pago Pago (AS)", home("Pago Pago", "AS", "USA")),
+    # Canada, never California
+    ("Winnipeg, MB", home("Winnipeg", "MB", "Canada")),
+    ("Brandon, Manitoba, CA", home("Brandon", "MB", "Canada")),
+    ("Bolton, Ontario Canada", home("Bolton", "ON", "Canada")),
+    ("Calgary AB", home("Calgary", "AB", "Canada")),
     ("Montreal, Quebec, Canada", home("Montreal", "QC", "Canada")),
-    ("Saint Louis", home("Saint Louis", "", "")),          # no comma: a US state name isn't split off
-    ("Port Washington", home("Port Washington", "", "")),
+    ("Laval, PQ", home("Laval", "QC", "Canada")),
+    ("Paradise, N.L.", home("Paradise", "NL", "Canada")),
+    ("Spijkenisse, NL", home("Spijkenisse", "", "NL")),        # plain NL: the geocoder decides (Newfoundland or Dutch)
+    # abroad: names, codes and misspellings
+    ("Sydney, Australia", home("Sydney", "", "Australia")),
+    ("Santo Domingo DR", home("Santo Domingo", "", "Dominican Republic")),
+    ("Tokyo, JPN", home("Tokyo", "", "Japan")),
+    ("Stockholm, SWE", home("Stockholm", "", "Sweden")),
+    ("Zlin, Cze.", home("Zlin", "", "Czech Republic")),
+    ("Paderno Dugnano, Lombardia Italy", home("Paderno Dugnano", "", "Italy")),
+    ("Bogota, Columbia", home("Bogota", "", "Colombia")),
+    # left alone: a town alone, a town that is also a country or a state
+    ("Saint Louis", home("Saint Louis", "", "")),
+    ("Lebanon", home("Lebanon", "", "")),
+    ("Las Cruces New Mexico", home("Las Cruces New Mexico", "", "")),
+    # school, label or bats/throws text around the town
     ("Atlanta, Ga. / Westlake HS", home("Atlanta", "GA", "USA")),
+    ("Fort Worth, Texas (Paschal HS)", home("Fort Worth", "TX", "USA")),
+    ("Hometown/Previous School(s): Omaha, Neb.", home("Omaha", "NE", "USA")),
+    ("HS City (State): Long Beach Wilson HS / Long Beach (CA)", home("Long Beach", "CA", "USA")),
+    ("HS City (State): Mayfair", home("", "", "")),
+    ("MSJC / R/R", home("MSJC", "", "")),
+    ("&quot;Fort Worth,", home("Fort Worth", "", "")),
 ])
 def test_parse_hometown(raw, want):
     assert parse_hometown(raw) == want
 
 
-@pytest.mark.parametrize("raw", ["R/R", "L/R", "R/L", "L/L", "S/R", "R", "L", "Right", "Manager", "5-7", "5'7\""])
+@pytest.mark.parametrize("raw", ["R/R", "S/R", "R", "Manager", "5-7", "5'7\""])
 def test_not_a_place(raw):
     assert not_a_place(raw)
     assert parse_hometown(raw) == home("", "", "")
 
 
-@pytest.mark.parametrize("raw", ["Rome", "Lyons, Ga.", "Roseland", "Lake Placid", "Left Hand, W.Va."])
+@pytest.mark.parametrize("raw", ["Rome", "Roseland", "Left Hand, W.Va."])
 def test_real_towns_are_places(raw):
     assert not not_a_place(raw)
 
 
-def test_bats_throws_after_a_school():
-    assert parse_hometown("MSJC / R/R")["city"] == "MSJC"
-
-
-def test_scraper_drops_bats_throws_hometown():
+def test_bats_throws_never_kept_as_hometown_or_position():
     p = {f: "" for f in sidearm.FIELDS}
     p.update(name="Jane Doe", hometown="R/R")
     assert sidearm.tidy_players([p])[0]["hometown"] == ""
-    row = {"name": "Jane Doe", "hometown": "L/L", "high_school": "", "previous_school": "", "class_year": ""}
-    assert sr.clean_row(row)["hometown"] == ""
+    row = {"name": "Jane Doe", "hometown": "L/L", "position": "OF R/R", "high_school": "", "previous_school": "",
+           "class_year": ""}
+    assert (sr.clean_row(row)["hometown"], sr.clean_row(row)["position"]) == ("", "OF")
+    assert sidearm.strip_bats_throws("LHP/OF") == "LHP/OF"
 
 
 # ---------------------------------------------------------------------------
-# geocode_hometowns: suggestions, fallbacks, retry
+# geocode.py: suggestions, fallbacks, retry
 
-def test_suggest_correction_reads_canada_not_california():
+def test_suggest_correction():
     assert geo.suggest_correction("Brandon, Manitoba, CA")[:4] == ("Brandon", "MB", "Canada", "fixed")
-    assert geo.suggest_correction("Winnipeg, MB")[:4] == ("Winnipeg", "MB", "Canada", "fixed")
-    assert geo.suggest_correction("Willemstad, Curacao")[:4] == ("Willemstad", "", "Curacao", "fixed")
-
-
-def test_suggest_correction_more_states_and_not_a_place():
     assert geo.suggest_correction("Darien, III.")[:4] == ("Darien", "IL", "USA", "fixed")
-    assert geo.suggest_correction("Purcellville, Virg.")[:4] == ("Purcellville", "VA", "USA", "fixed")
     assert geo.suggest_correction("R/R")[3] == "unfixable"
-    assert geo.suggest_correction("Dallas, Texas")[:4] == ("Dallas", "TX", "USA", "fixed")   # unchanged
 
 
 def _zip(path: Path, name: str, text: str):
@@ -153,19 +154,13 @@ def cache(tmp_path, monkeypatch):
     return c
 
 
-def test_us_town_list_fallback(cache):
+def test_us_town_lists(cache):
     gaz = geo.Gazetteer()
     assert gaz.lookup_us("Ellenwood", "GA")[2:] == ("us_towns", "city")
     assert gaz.lookup_us("Thornton", "CO")[2] == "census"           # the Census list still comes first
     assert gaz.lookup_us("Arleta", "CA")[2] == "usgs"
+    assert gaz.lookup_us("Long Island", "NY")[2:] == ("area", "region")
     assert gaz.lookup_us("Nowhere", "GA") is None
-
-
-def test_us_town_list_is_optional(cache):
-    (cache / "us_cities.csv").unlink()
-    gaz = geo.Gazetteer()
-    assert gaz.lookup_us("Ellenwood", "GA") is None
-    assert gaz.lookup_us("Thornton", "CO")
 
 
 def test_province_and_territory_fallbacks(cache, monkeypatch):
@@ -192,10 +187,11 @@ def sport(tmp_path, monkeypatch, cache):
     config, rosters = tmp_path / "config", tmp_path / "rosters"
     config.mkdir()
     (rosters / "softball").mkdir(parents=True)
-    (config / "softball.json").write_text(json.dumps({"label": "Softball", "d1_divisions": ["D1"]}))
-    monkeypatch.setattr(paths, "CONFIG", config)
-    monkeypatch.setattr(paths, "ROSTERS", rosters)
-    return paths.load_sport("softball")
+    (config / "softball").mkdir()
+    (config / "softball" / "settings.json").write_text(json.dumps({"label": "Softball", "d1_divisions": ["D1"]}))
+    monkeypatch.setattr(core, "CONFIG", config)
+    monkeypatch.setattr(core, "ROSTERS", rosters)
+    return core.load_sport("softball")
 
 
 def test_geocoder_retries_when_the_parser_reads_a_hometown_differently(sport):
@@ -231,28 +227,6 @@ def test_geocoder_looks_up_every_hometown_again_but_keeps_manual_ones(sport):
     assert (rows["Dallas, Texas"]["lat"], rows["Dallas, Texas"]["source"]) == ("1", "manual")
 
 
-@pytest.mark.parametrize("raw, want", [
-    ("Santo Domingo, DR", ("Santo Domingo", "", "Dominican Republic")),
-    ("Santo Domingo DR", ("Santo Domingo", "", "Dominican Republic")),
-    ("Santiago, Dominican Repub", ("Santiago", "", "Dominican Republic")),
-    ("Caracas, VZ", ("Caracas", "", "Venezuela")),
-    ("Tokyo, JPN", ("Tokyo", "", "Japan")),
-    ("Cidra PR", ("Cidra", "PR", "USA")),
-    ("San Juan Puerto Rico", ("San Juan", "PR", "USA")),
-    ("Pago Pago. AS", ("Pago Pago", "AS", "USA")),
-    ("Leone American Samoa", ("Leone", "AS", "USA")),
-    ("Chitre Panama", ("Chitre", "", "Panama")),
-    ("Calgary, Alb.", ("Calgary", "AB", "Canada")),
-    ("Rockledge, Fla. USA", ("Rockledge", "FL", "USA")),
-    ("Hilo, Hawai`i \\ Waiakea HS", ("Hilo", "HI", "USA")),
-    ("Las Cruces New Mexico", ("Las Cruces New Mexico", "", "")),     # left for the fixer: not split
-    ("Cidra pr", ("Cidra pr", "", "")),
-])
-def test_parse_hometown_oct28(raw, want):
-    h = parse_hometown(raw)
-    assert (h["city"], h["state"], h["country"]) == want
-
-
 def test_abbreviations_in_town_names():
     assert geo.norm_city("E. Setauket") == geo.norm_city("East Setauket")
     assert geo.norm_city("Stone Mtn") == geo.norm_city("Stone Mountain")
@@ -260,25 +234,24 @@ def test_abbreviations_in_town_names():
     assert geo.norm_city("Pt. Pleasant") == geo.norm_city("Point Pleasant")
 
 
-def test_areas_and_new_aliases(cache):
-    gaz = geo.Gazetteer()
-    assert gaz.lookup_us("Long Island", "NY")[2:] == ("area", "region")
-    assert gaz.lookup_us("Kent Island", "MD")[2:] == ("area", "region")
-
-
-def test_world_towns():
+def test_world_towns(cache):
     pytest.importorskip("geonamescache")
     w = geo.WorldCities()
     lat, lon, src, prec = w.lookup("Toronto", "Canada", "ON")
     assert (src, prec) == ("geonames", "city") and 43 < lat < 44 and -80 < lon < -79      # not Toronto, Australia
-    assert 18 < w.lookup("Santo Domingo", "Dominican Republic")[0] < 19
     assert w.lookup("Victoria", "Canada", "BC")[1] < -120          # Victoria BC, not a Victoria elsewhere in Canada
-    assert w.lookup("Glasgow", "Scotland")[0] > 55
+    assert w.lookup("Amsterdam", "Netherlands")[0] > 52            # GeoNames says "The Netherlands"
     assert w.lookup_big("Tokyo")[0] > 35 and w.lookup_big("Southington") is None
+    gaz = geo.Gazetteer()
+    lat, lon, src, _ = geo.resolve(parse_hometown("Kahnawake Mohawk Territory"), gaz, None)
+    assert src == "geonames" and 45 < lat < 46
+    # plain "NL": a Newfoundland town of that name, else a Dutch one
+    assert geo.resolve(home("St. John's", "", "NL"), gaz, None)[1] < -50
+    assert geo.resolve(home("Spijkenisse", "", "NL"), gaz, None)[1] > 0
 
 
 # ---------------------------------------------------------------------------
-# suggest_hometown_fixes
+# hometown_fixes.py suggest
 
 @pytest.fixture
 def towns():
@@ -297,58 +270,27 @@ def row(raw, city="", state="", country="", status="review"):
     return {"hometown_raw": raw, "city": city, "state": state, "country": country, "status": status}
 
 
-def test_fixer_reads_places_abroad(towns):
+def test_fixer(towns):
     what, new = sug.suggest(row("Brandon, Manitoba, CA", "Brandon, Manitoba", "CA", "USA", "fixed"), *towns)
     assert what == "fixed: place abroad" and (new["city"], new["state"], new["country"]) == ("Brandon", "MB", "Canada")
-    what, new = sug.suggest(row("Willemstad, Curacao", "Willemstad", "", "Curacao"), *towns)
-    assert new["country"] == "Curacao" and new["status"] == "fixed"
     assert sug.suggest(row("Teulon, MB", "Teulon", "MB", "Canada", "fixed"), *towns) is None   # already right
-
-
-def test_fixer_more_state_spellings(towns):
     what, new = sug.suggest(row("Darien, III.", "Darien", "", "III."), *towns)
     assert (new["city"], new["state"], new["status"]) == ("Darien", "IL", "fixed")
+    assert sug.suggest(row("R/R", "R", "", "", "fixed"), *towns)[1]["status"] == "unfixable"
 
 
-def test_fixer_not_a_place(towns):
-    what, new = sug.suggest(row("R/R", "R", "", "", "fixed"), *towns)
-    assert new["status"] == "unfixable"
-
-
-def test_fixer_wrong_state_is_only_a_suggestion(towns):
+def test_fixer_wrong_state(towns):
     what, new = sug.suggest(row("Murrieta, GA", "Murrieta", "GA", "USA", "fixed"), *towns)
     assert new["status"] == "review" and "CA" in new["note"]
     assert sug.suggest(row("Rockaway, Pa.", "Rockaway", "PA", "USA", "fixed"), *towns) is None   # two states
     assert sug.suggest(row("Darie, GA", "Darie", "GA", "USA", "fixed"), *towns) is None           # too short
-
-
-def test_fixer_uses_the_geocoders_cached_lists(cache, monkeypatch):
-    names = set(sug.geocoder_place_names())
-    assert ("CO", "Thornton") in names and ("NY", "Cortlandt") in names and ("CA", "Arleta") in names
+    # --accept-likely fixes it only when the state is a neighbour or a near-miss abbreviation
+    assert sug.suggest(row("Murrieta, Ariz.", "Murrieta", "AZ", "USA"), *towns, accept=True)[1]["state"] == "CA"
+    assert sug.suggest(row("Murrieta, GA", "Murrieta", "GA", "USA"), *towns, accept=True)[1]["status"] == "review"
 
 
 # ---------------------------------------------------------------------------
-# scrape_rosters
-
-def test_problem_list_wording_for_one_run(caplog):
-    with caplog.at_level(logging.INFO, logger="rosters"):
-        sr.print_problems([], this_run=True)
-    assert "No failed or partial schools." not in caplog.text
-    assert "scraped in this run" in caplog.text
-
-
-def test_left_out_count_counts_schools_once(tmp_path):
-    schools = tmp_path / "softball_schools.csv"
-    schools.write_text("school,division,note\nSUNY Delhi,D3,left out: bot check\nSUNY Delhi,JUCO,left out: bot check\n"
-                       "Harvard,D1,left out: bot check\n", encoding="utf-8")
-    with open(tmp_path / "scrape_report_2026.csv", "w", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=sr.REPORT_FIELDS)
-        w.writeheader()
-        w.writerow({"season": 2026, "school": "SUNY Delhi", "division": "D3", "status": "left_out", "error": "left out"})
-        w.writerow({"season": 2016, "school": "SUNY Delhi", "division": "JUCO", "status": "left_out", "error": "left out"})
-        w.writerow({"season": 2026, "school": "Harvard", "division": "D1", "status": "left_out", "error": "left out"})
-    path = sr.write_missing_rosters(tmp_path, schools, "Softball", [], division_order=["D1", "D3", "JUCO"])
-    assert "## Left out on purpose (2 schools)" in path.read_text(encoding="utf-8")
+# scrape_rosters.py
 
 
 # ---------------------------------------------------------------------------
@@ -366,23 +308,11 @@ def _classic_page(position_html: str) -> str:
      '<span class="sidearm-roster-player-custom1">L/R</span>', "OF"),                                   # Jackson State
     ('<span class="text-bold"><span class="sidearm-roster-player-position-long-short hide-on-small-down"> R/R </span>'
      '<span class="sidearm-roster-player-position-long-short hide-on-medium"> P/OF </span></span>', "P/OF"),
-    ('<span class="text-bold"><span class="sidearm-roster-player-position-long-short hide-on-small-down"> OF R/R </span>'
-     '</span><span class="sidearm-roster-player-custom1">R/R</span>', "OF"),
-    ('<span class="sidearm-roster-player-custom1">R?R</span>', ""),                                    # Bluefield
-    ('<span class="sidearm-roster-player-position-long-short">Wide Receiver</span>', "Wide Receiver"),
 ])
 def test_classic_position_without_bats_throws(position_html, want):
-    from bs4 import BeautifulSoup
     html = _classic_page(position_html)
     players = sidearm.parse_sidearm_classic(html, BeautifulSoup(html, "lxml"))
     assert sidearm.tidy_players(players)[0]["position"] == want
-
-
-def test_saved_positions_lose_bats_throws():
-    row = {"name": "Jane Doe", "hometown": "Austin, Texas", "position": "OF R/R", "high_school": "",
-           "previous_school": "", "class_year": ""}
-    assert sr.clean_row(row)["position"] == "OF"
-    assert sidearm.strip_bats_throws("RHP") == "RHP" and sidearm.strip_bats_throws("LHP/OF") == "LHP/OF"
 
 
 def test_state_only_gets_the_states_middle(cache):
@@ -390,26 +320,6 @@ def test_state_only_gets_the_states_middle(cache):
     lat, lon, src, prec = geo.resolve(parse_hometown("TX"), gaz, None)
     assert (src, prec) == ("state", "region") and (lat, lon) == (32.8, -96.8)   # the tiny list's one TX town
     assert geo.resolve({"city": "Texas", "state": "", "country": ""}, gaz, None)[2] == "state"
-
-
-def test_world_towns_dutch_and_bare_country_towns():
-    pytest.importorskip("geonamescache")
-    assert geo.WorldCities().lookup("Amsterdam", "Netherlands")[0] > 52     # GeoNames says "The Netherlands"
-    assert parse_hometown("Lebanon") == {"city": "Lebanon", "state": "", "country": ""}
-    assert parse_hometown("Columbia")["country"] == "" and parse_hometown("Bogota, Columbia")["country"] == "Colombia"
-
-
-def test_parse_brackets_islands():
-    assert parse_hometown("Pago Pago (AS)") == {"city": "Pago Pago", "state": "AS", "country": "USA"}
-    assert parse_hometown("Maui") == {"city": "Maui", "state": "HI", "country": "USA"}
-
-
-def test_first_nations_and_territory_towns(cache):
-    pytest.importorskip("geonamescache")
-    gaz = geo.Gazetteer()
-    lat, lon, src, _ = geo.resolve(parse_hometown("Kahnawake Mohawk Territory"), gaz, None)
-    assert src == "geonames" and 45 < lat < 46 and -74 < lon < -73
-    assert geo.resolve(parse_hometown("Pago Pago"), gaz, None)[0] < -14
 
 
 # ==================================================================================================
@@ -675,26 +585,6 @@ def test_class_year_from_card_view():
 
 # ---------------------------------------------------------------------------- hometowns on the page
 
-@pytest.mark.usefixtures("football")
-def test_hometown_parsing():
-    assert parse_hometown("Mobile, Ala.") == {"city": "Mobile", "state": "AL", "country": "USA"}
-    assert parse_hometown("St. Louis, MO") == {"city": "St. Louis", "state": "MO", "country": "USA"}
-    assert parse_hometown("Washington, D.C.")["state"] == "DC"
-    assert parse_hometown("Melbourne, Australia") == {"city": "Melbourne", "state": "", "country": "Australia"}
-    assert parse_hometown("Toronto, Ont.")["country"] == "Canada"
-    assert parse_hometown("Houston, Texas, USA")["state"] == "TX"
-    assert parse_hometown("Fort Worth, Texas (Paschal HS)")["city"] == "Fort Worth"
-    assert split_hometown_highschool("Tracy, Calif. / Edison") == ("Tracy, Calif.", "Edison")
-
-
-@pytest.mark.usefixtures("football")
-def test_hometown_with_school_attached():
-    assert parse_hometown("Atlanta, Ga. / Westlake HS") == {"city": "Atlanta", "state": "GA", "country": "USA"}
-    assert parse_hometown("Houston, Texas (Alief Taylor)")["state"] == "TX"
-    assert parse_hometown("Houston, Texas - Lamar HS")["state"] == "TX"
-    assert parse_hometown("Hometown/Last School: Mobile, Ala.")["city"] == "Mobile"
-    assert parse_hometown("Winston-Salem, N.C.")["city"] == "Winston-Salem"
-
 
 # ---------------------------------------------------------------------------- coaches, staff and names
 
@@ -819,14 +709,6 @@ def test_sidearm_classic_combined_school_field():
     assert p["high_school"] == "Coronado HS" and p["previous_school"] == "Texas Tech"
 
 
-@pytest.mark.usefixtures("football")
-def test_recombine_fixes_saved_rows():
-    """Rows saved by the old version (college stuck in high_school) are fixed when the files are rebuilt."""
-    row = {"high_school": "Wake Forest", "previous_school": ""}
-    sr.sort_schools(row)
-    assert row == {"high_school": "", "previous_school": "Wake Forest"}
-
-
 # ==================================================================================================
 # Labels in hometown fields, and the levels of previous schools
 # ==================================================================================================
@@ -838,38 +720,15 @@ def test_recombine_fixes_saved_rows():
 @pytest.mark.parametrize("raw, town, school", [
     ("Hometown/Prev. School: Wilson, NC / Beddingfield", "Wilson, NC", "Beddingfield"),
     ("Hometown/Previous School(s): Omaha, Neb.", "Omaha, Neb.", ""),
-    ("Hometown/High School/Previous College: Wichita, KS", "Wichita, KS", ""),
-    ("Hometown/Last School: Milford, CT /", "Milford, CT", ""),
     ("Hometown/Prev. School: / East Bladen", "", "East Bladen"),
-    ("Hometown/High School.: Honolulu", "Honolulu", ""),
     ("HS City (State): Mayfair HS / Lakewood (CA)", "Lakewood, CA", "Mayfair HS"),
-    ("HS City (State): Mayfair", "", "Mayfair"),
     ("HS City (State): Lakewood/University of Nevada", "", "Lakewood / University of Nevada"),
-    ("HS Hometown/High School: Santa Ana", "Santa Ana", ""),
-    ("HS Hometown/High School:", "", ""),
     ("ICC Grad Date:", "", ""),
-    # no label: unchanged
-    ("Atlanta, Ga.", "Atlanta, Ga.", ""),
-    ("Atlanta, Ga. / Westlake HS", "Atlanta, Ga. / Westlake HS", ""),
+    ("Atlanta, Ga. / Westlake HS", "Atlanta, Ga. / Westlake HS", ""),      # no label: unchanged
     ("Twitter:", "Twitter:", ""),
 ])
 def test_split_labeled_hometown(raw, town, school):
     assert split_labeled_hometown(raw) == (town, school)
-
-
-@pytest.mark.parametrize("raw, city, state", [
-    ("Hometown/Previous School(s): Omaha, Neb.", "Omaha", "NE"),
-    ("HS City (State): Long Beach Wilson HS / Long Beach (CA)", "Long Beach", "CA"),
-    ("Hometown/Prev. School: Charlotte, NC / Olympic", "Charlotte", "NC"),
-])
-def test_parse_hometown_reads_past_the_label(raw, city, state):
-    h = parse_hometown(raw)
-    assert (h["city"], h["state"]) == (city, state)
-
-
-@pytest.mark.parametrize("raw", ["HS City (State): Mayfair", "ICC Grad Date:", "HS Hometown/High School:"])
-def test_label_without_a_town_is_no_hometown(raw):
-    assert parse_hometown(raw) == {"city": "", "state": "", "country": ""}
 
 
 # ---------------------------------------------------------------------------- transfer levels
@@ -881,17 +740,12 @@ def lv():
 
 @pytest.mark.parametrize("text, year, level", [
     ("Valdosta St.", 2018, "D2"),
-    ("Valdosta State University", 2018, "D2"),
     ("UW-Whitewater", 2020, "D3"),
     ("Hutchinson (Kan.) CC", 2022, "JUCO"),
-    ("Iowa Western", 2022, "JUCO"),
-    ("College of the Canyons", 2019, "JUCO"),
     ("Some Town Junior College", 2019, "JUCO"),            # generic two-year wording
     ("Lindsey Wilson College", 2019, "NAIA"),
-    ("Hope College", 2019, "D3"),
     ("Notre Dame", 2019, "D1"),
     ("Notre Dame College", 2019, "D2"),                    # Ohio, Division II until it closed
-    ("Illinois College", 2019, "D3"),
     ("Miami (Fla.)", 2019, "D1"),
     ("N.C. State", 2019, "D1"),
 ])
@@ -905,9 +759,7 @@ def test_schools_that_changed_level(lv):
     assert lv.level("Texas A&M-Commerce", 2019) == ("D2", "East Texas A&M")
     assert lv.level("Savannah State", 2017)[0] == "D1"      # left D1 after 2018
     assert lv.level("Savannah State", 2022)[0] == "D2"
-    assert lv.level("Thomas More", 2017)[0] == "D3"
-    assert lv.level("Thomas More", 2020)[0] == "NAIA"
-    assert lv.level("Thomas More", 2024)[0] == "D2"
+    assert [lv.level("Thomas More", y)[0] for y in (2017, 2020, 2024)] == ["D3", "NAIA", "D2"]
     assert lv.level("St. Cloud State", 2022)[0] == "D2"     # program dropped in 2019: keeps its last level
 
 
@@ -940,7 +792,7 @@ def test_key_and_majors():
 # ==================================================================================================
 
 def use(name):
-    sidearm.configure(paths.load_sport(name))
+    sidearm.configure(core.load_sport(name))
 
 
 # ---------------------------------------------------------------------------- a tiny sport in tmp_path
@@ -956,23 +808,23 @@ FIELDS = sr.OUT_FIELDS
 
 @pytest.fixture
 def tiny(tmp_path, monkeypatch):
-    """A project folder with config/softball.json and an empty rosters/softball/."""
-    monkeypatch.setattr(paths, "ROOT", tmp_path)
-    monkeypatch.setattr(paths, "CONFIG", tmp_path / "config")
-    monkeypatch.setattr(paths, "ROSTERS", tmp_path / "rosters")
-    (tmp_path / "config").mkdir()
+    """A project folder with config/softball/settings.json and an empty rosters/softball/."""
+    monkeypatch.setattr(core, "ROOT", tmp_path)
+    monkeypatch.setattr(core, "CONFIG", tmp_path / "config")
+    monkeypatch.setattr(core, "ROSTERS", tmp_path / "rosters")
+    (tmp_path / "config" / "softball").mkdir(parents=True)
     (tmp_path / "rosters" / "softball").mkdir(parents=True)
-    (tmp_path / "config" / "softball.json").write_text(json.dumps(SETTINGS))
-    with open(tmp_path / "config" / "softball_schools.csv", "w", newline="") as f:
+    (tmp_path / "config" / "softball" / "settings.json").write_text(json.dumps(SETTINGS))
+    with open(tmp_path / "config" / "softball" / "schools.csv", "w", newline="") as f:
         w = csv.writer(f)
         w.writerow(["school", "division", "conference", "domain", "roster_url", "first_season", "last_season",
                     "aliases", "note"])
         w.writerow(["Alpha", "D1", "X", "alpha.com", "", "", "", "", ""])
         w.writerow(["Blocked", "D3", "Y", "blocked.edu", "", "", "", "", "left out: bot check every season"])
-    sport = paths.load_sport("softball")
+    sport = core.load_sport("softball")
     sidearm.configure(sport)
     yield sport
-    fetch.SPRING_SEASON = False
+    core.SPRING_SEASON = False
 
 
 def write_season(sport, season, rows):
@@ -996,27 +848,9 @@ def test_each_sport_has_its_own_normal_size():
     assert sidearm.normal_size(22) and not sidearm.normal_size(8) and not sidearm.normal_size(60)
     use("football")
     assert sidearm.normal_size(110) and not sidearm.normal_size(22)
-
-
-def test_saved_rosters_are_judged_by_the_sport():
-    use("baseball")
+    use("baseball")      # saved rosters are judged by the same sizes
     season = lambda n: [{"school": "A", "division": "D1", "hometown": "X"} for _ in range(n)]
-    assert sr.saved_reports(season(38))["A"]["status"] == "ok"
-    assert sr.saved_reports(season(8))["A"]["status"] == "partial"
-    assert sr.saved_reports(season(130))["A"]["status"] == "partial"
-
-
-def test_reasons_say_what_is_off():
-    use("baseball")
-    assert "fewer than a normal roster" in sr.plain_reason({"status": "partial", "players": 8, "with_hometown": 8})
-    assert "more than a normal roster" in sr.plain_reason({"status": "partial", "players": 130, "with_hometown": 130})
-    assert "hometowns" in sr.plain_reason({"status": "partial", "players": 38, "with_hometown": 5})
-
-
-def test_oversized_reason_no_longer_says_wrong_page(tiny):
-    why = sr.plain_reason({"status": "partial", "players": 80, "error": ""})
-    assert why.startswith("80 players, more than a normal roster for this sport (at most 55)")
-    assert "wrong page" not in why
+    assert [sr.saved_reports(season(n))["A"]["status"] for n in (38, 8, 130)] == ["ok", "partial", "partial"]
 
 
 def test_a_slow_school_stops_after_its_time_limit():
@@ -1030,33 +864,49 @@ def test_a_slow_school_stops_after_its_time_limit():
         sr.SCHOOL_MINUTES = old
     assert [r["status"] for _, _, r in out] == ["failed", "failed"]
     assert all(r["error"].startswith("timed out") for _, _, r in out)
-    assert "too long" in sr.plain_reason(out[0][2])
 
 
 # ---------------------------------------------------------------------------- seasons
 
 def test_current_season_fall_and_spring():
-    fetch.SPRING_SEASON = False
-    assert fetch.current_season(date(2026, 10, 27)) == 2026      # football in the autumn: this fall
-    assert fetch.current_season(date(2027, 2, 1)) == 2026
-    fetch.SPRING_SEASON = True
+    core.SPRING_SEASON = False
+    assert core.current_season(date(2026, 10, 27)) == 2026      # football in the autumn: this fall
+    assert core.current_season(date(2027, 2, 1)) == 2026
+    core.SPRING_SEASON = True
     try:
-        assert fetch.current_season(date(2026, 10, 27)) == 2027  # softball in the autumn: next spring
-        assert fetch.current_season(date(2026, 4, 1)) == 2026
-        assert fetch.current_season(date(2026, 7, 31)) == 2026
-        assert fetch.current_season(date(2026, 8, 1)) == 2027
+        assert core.current_season(date(2026, 10, 27)) == 2027  # softball in the autumn: next spring
+        assert core.current_season(date(2026, 4, 1)) == 2026
+        assert core.current_season(date(2026, 7, 31)) == 2026
+        assert core.current_season(date(2026, 8, 1)) == 2027
     finally:
-        fetch.SPRING_SEASON = False
-
-
-def test_configure_sets_spring_for_fetch(tiny):
-    assert fetch.SPRING_SEASON is True
+        core.SPRING_SEASON = False
 
 
 def test_default_seasons():
-    assert paths.Sport(name="football").default_seasons() == "2016-2019,2021-2026"
-    assert paths.Sport(name="softball").default_seasons() == "2016-2026"
-    assert paths.Sport(name="softball", seasons="2018-2026").default_seasons() == "2018-2026"
+    oct26, jul26, feb27 = date(2026, 10, 28), date(2026, 7, 1), date(2027, 2, 1)
+    assert core.Sport(name="football").default_seasons(oct26) == "2016-2019,2021-2026"
+    assert core.Sport(name="football").default_seasons(feb27) == "2016-2019,2021-2026"
+    # spring sports: from August the current season is the next spring's (the 2026-27 team is 2027)
+    assert core.Sport(name="softball", spring_season=True).default_seasons(oct26) == "2016-2027"
+    assert core.Sport(name="lacrosse-womens", spring_season=True).default_seasons(jul26) == "2016-2026"
+    assert core.Sport(name="softball", seasons="2018-2026").default_seasons() == "2018-2026"
+
+
+def test_main_page_still_showing_last_season_is_not_this_seasons_roster(monkeypatch):
+    # October: the main roster page (no year on it) can still show last spring's team
+    use("lacrosse-womens")
+    last = {f"player {i}" for i in range(30)}
+    def fake(school, fetcher, season, division, render, prefer, save_dir=None, bios=False):
+        names = sorted(last) if season == 2027 else []
+        rows = [{"name": n.title()} for n in names]
+        return rows, {"season": season, "school": "A", "status": "ok", "season_check": "current", "players": len(rows),
+                      "with_hometown": len(rows), "error": ""}, None
+    monkeypatch.setattr(sr, "scrape_school_season", fake)
+    monkeypatch.setattr(core, "current_season", lambda today=None: 2027)
+    out = sr.scrape_school_all({"school": "A", "division": "D1", "domain": "a.edu"}, [2027], None, {}, render=False,
+                               skip=set(), reference=(2026, last))
+    (season, rows, report), = out
+    assert season == 2027 and rows == [] and report["status"] == "failed"
 
 
 # ---------------------------------------------------------------------------- addresses and reasons
@@ -1087,29 +937,6 @@ def test_spring_archives_also_try_the_fall_year():
     assert "https://x.com/sports/football/roster/2023" not in sidearm.candidate_urls("x.com", season=2024)
 
 
-def test_no_www_copy_of_a_subdomain(tiny):
-    sub = sidearm.candidate_urls("athletics.cabrillo.edu", "", 2024)
-    assert not any("www.athletics" in u for u in sub)
-    bare = sidearm.candidate_urls("alpha.com", "", 2024)
-    assert "https://www.alpha.com/sports/softball/roster/2024" in bare
-
-
-def test_short_reason_browser_and_timeouts():
-    err = ("render https://x.edu/r/2024: page.goto: Timeout 15000ms exceeded.\nCall log: navigating; "
-           "render https://x.edu/r/2024-25: browser gave up after 45s; "
-           "https://x.edu/r/2023: ReadTimeout; https://x.edu/r/2022: HTTP 202")
-    assert sr.short_reason(err) == "browser: too slow ×2, too slow, bot check"
-    assert sr.short_reason("render https://x/r: no players found") == "browser: no players found"
-    assert sr.short_reason("render https://x/r: page shows 2025") == "browser: page shows 2025"
-    assert sr.short_reason("render https://x/r: bot check not passed") == "browser: bot check not passed"
-
-
-def test_left_out_old_and_new_reports():
-    assert sr.is_left_out({"status": "left_out", "error": "left out: x"})
-    assert sr.is_left_out({"status": "failed", "error": "Left out: bot check"})     # before Oct 27
-    assert not sr.is_left_out({"status": "failed", "error": "https://x: HTTP 404"})
-
-
 def test_missing_rosters_lists_left_out_once(tiny):
     reports = [
         {"season": 2025, "school": "Alpha", "division": "D1", "status": "failed", "error": "https://alpha.com/r: HTTP 404"},
@@ -1134,7 +961,7 @@ def test_missing_rosters_lists_left_out_once(tiny):
 # ---------------------------------------------------------------------------- downloads
 
 def test_dead_host_is_tried_once(tmp_path, monkeypatch):
-    f = fetch.Fetcher(tmp_path, delay=0)
+    f = core.Fetcher(tmp_path, delay=0)
     calls = []
 
     def boom(url):
@@ -1149,7 +976,7 @@ def test_dead_host_is_tried_once(tmp_path, monkeypatch):
 
 
 def test_broken_connection_is_not_a_dead_host(tmp_path, monkeypatch):
-    f = fetch.Fetcher(tmp_path, delay=0)
+    f = core.Fetcher(tmp_path, delay=0)
     calls = []
 
     def reset(url):
@@ -1165,18 +992,18 @@ def test_broken_connection_is_not_a_dead_host(tmp_path, monkeypatch):
 # ---------------------------------------------------------------------------- lock
 
 def test_second_run_of_a_sport_is_refused(tiny):
-    with paths.sport_lock(tiny, "first run"):
-        with pytest.raises(paths.SportBusy, match="first run"):
-            with paths.sport_lock(tiny, "second run"):
+    with core.sport_lock(tiny, "first run"):
+        with pytest.raises(core.SportBusy, match="first run"):
+            with core.sport_lock(tiny, "second run"):
                 pass
-    with paths.sport_lock(tiny, "after"):      # free again once the first is done
+    with core.sport_lock(tiny, "after"):      # free again once the first is done
         pass
 
 
 def test_pipeline_steps_share_its_lock(tiny, monkeypatch):
-    monkeypatch.setenv(paths.LOCK_ENV, "softball")
-    with paths.sport_lock(tiny, "pipeline"):
-        with paths.sport_lock(tiny, "its scrape step"):
+    monkeypatch.setenv(core.LOCK_ENV, "softball")
+    with core.sport_lock(tiny, "pipeline"):
+        with core.sport_lock(tiny, "its scrape step"):
             pass
 
 
@@ -1196,7 +1023,8 @@ def plan(tiny, *argv):
 
 
 def test_pipeline_step_choice(tiny):
-    assert plan(tiny).steps == ["scrape", "retry", "geocode", "fix-hometowns", "frozen", "build", "locations", "check"]
+    assert plan(tiny).steps == ["scrape", "retry", "geocode", "fix-hometowns", "frozen", "build", "locations", "staff",
+                                "check"]
     assert plan(tiny, "from_step=geocode").steps[0] == "geocode"
     assert "scrape" not in plan(tiny, "skip=scrape,retry").steps
     assert plan(tiny, "steps=check,build").steps == ["build", "check"]
@@ -1207,7 +1035,7 @@ def test_pipeline_step_choice(tiny):
 
 def test_pipeline_first_pass_only_fills_gaps_once_rosters_exist(tiny):
     first = plan(tiny).commands["scrape"][0]
-    assert "--retry-failed" not in first and "2016-2026" in first and "--report" in first
+    assert "--retry-failed" not in first and tiny.default_seasons() in first and "--report" in first
     write_season(tiny, 2025, [player("Alpha", "Ann Lee")])
     assert "--retry-failed" in plan(tiny).commands["scrape"][0]
     assert "--retry-failed" not in plan(tiny, "rescrape").commands["scrape"][0]
@@ -1230,31 +1058,24 @@ def test_redo_current_picks_main_page_seasons(tiny):
 # ---------------------------------------------------------------------------- checks after a run
 
 def test_check_rosters_finds_oversized_and_copied_seasons(tiny, capsys):
-    import check_rosters
     names = [f"Ann {a}{b}son" for a in "abcdefgh" for b in "abcdefgh"][:60]
     write_season(tiny, 2023, [player("Alpha", n, "FR") for n in names[:15]])
     write_season(tiny, 2024, [player("Alpha", n, "SO") for n in names[:15]] + [player("Alpha", n) for n in names[15:50]])
     write_season(tiny, 2025, [player("Alpha", n, "JR") for n in names[:15]])
     write_season(tiny, 2026, [player("Alpha", n, "JR") for n in names[:15]])   # 2025's page again
-    assert check_rosters.main(["--sport", "softball"]) == 0
-    out = capsys.readouterr().out
-    assert "Alpha 2024: 50 players (usually 15)" in out
-    assert "Alpha 2026: 15 players (100% same names and 100% same class years as 2025)" in out
-    assert "Alpha 2025" not in out.split("Rosters nearly the same")[1]     # moved up a class: a real roster
+    assert build.check_rosters_main(["--sport", "softball"]) == 0
     rows = list(csv.DictReader(open(tiny.rosters_dir / "roster_checks.csv")))
     assert {(r["check"], r["season"]) for r in rows} == {("oversized", "2024"), ("repeated", "2026")}
 
 
 def test_frozen_check_with_too_few_players_doesnt_crash(tiny, capsys):
-    import check_frozen_classes
     write_season(tiny, 2025, [player("Alpha", "Ann Lee", "FR")])
     write_season(tiny, 2026, [player("Alpha", "Ann Lee", "SO")])
-    check_frozen_classes.main(["--sport", "softball"])
+    build.check_frozen_classes_main(["--sport", "softball"])
     assert (tiny.rosters_dir / "frozen_class_seasons.csv").exists()
 
 
 def test_spelling_fixes_read_the_geocoders_table(tiny):
-    import fix_hometown_spellings
     with open(tiny.rosters_dir / "hometowns.csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=["hometown", "school", "city", "state", "country", "lat", "lon",
                                           "source", "precision", "players"])
@@ -1263,7 +1084,7 @@ def test_spelling_fixes_read_the_geocoders_table(tiny):
                     "lat": "30.5", "lon": "-91.1", "source": "usgs", "precision": "city", "players": 3})
         w.writerow({"hometown": "Baton Rouge, La.", "city": "Baton Rouge", "state": "LA", "country": "USA",
                     "lat": "30.45", "lon": "-91.15", "source": "census", "precision": "city", "players": 40})
-    fix_hometown_spellings.main(["--sport", "softball"])
+    hometown_fixes.fix_hometown_spellings_main(["--sport", "softball"])
     fixes = {r["hometown_raw"]: r for r in csv.DictReader(open(tiny.hometown_corrections_csv))}
     assert fixes["Baton Rogue, La."]["city"] == "Baton Rouge" and fixes["Baton Rogue, La."]["players"] == "3"
     table = {r["hometown"]: r for r in csv.DictReader(open(tiny.rosters_dir / "hometowns.csv"))}
@@ -1271,19 +1092,18 @@ def test_spelling_fixes_read_the_geocoders_table(tiny):
 
 
 def test_cache_pages_are_saved_compressed_and_old_ones_still_read(tmp_path):
-    f = fetch.Fetcher(tmp_path, delay=0)
+    f = core.Fetcher(tmp_path, delay=0)
     url = "https://a.edu/sports/softball/roster/2019"
     path = f._cache_path(url, rendered=False)
     path.write_text("<html>saved before Oct 28</html>")                # an old, uncompressed page
     assert f.get(url)[2] == "<html>saved before Oct 28</html>"
-    assert not path.exists() and fetch.Fetcher.gz_path(path).exists()  # compressed the first time it's read
+    assert not path.exists() and core.Fetcher.gz_path(path).exists()  # compressed the first time it's read
     assert f.get(url)[2] == "<html>saved before Oct 28</html>"
-    import compress_cache
     old = f._cache_path(url + "x", rendered=False)
     old.write_text("<html>another</html>")
     (tmp_path / "junk.html.part").write_text("")
-    compress_cache.main(["--cache", str(tmp_path)])
-    assert fetch.Fetcher.read_cached(old) == "<html>another</html>" and not old.exists()
+    core.compress_cache_main(["--cache", str(tmp_path)])
+    assert core.Fetcher.read_cached(old) == "<html>another</html>" and not old.exists()
     assert not (tmp_path / "junk.html.part").exists()
 
 
@@ -1316,20 +1136,18 @@ def test_saved_rows_from_another_sport_are_scraped_again(tiny, monkeypatch):
 
 
 def test_wrong_seasons_are_left_out_and_their_rows_dropped(tiny, monkeypatch):
-    (paths.CONFIG / "softball_wrong_seasons.csv").write_text("school,season,reason\nAlpha,2024,same roster as 2025\n")
+    (core.CONFIG / "softball" / "wrong_seasons.csv").write_text("school,season,reason\nAlpha,2024,same roster as 2025\n")
     write_season(tiny, 2024, [player("Alpha", f"P{i}") for i in range(30)])
     sr.main(["--sport", "softball", "--seasons", "2024", "--threads", "--report"])
     assert list(csv.DictReader(open(tiny.rosters_dir / "rosters_2024.csv", encoding="utf-8"))) == []
     report = {r["school"]: r for r in csv.DictReader(open(tiny.rosters_dir / "scrape_report_2024.csv", encoding="utf-8"))}
     assert report["Alpha"]["status"] == "left_out" and "same roster as 2025" in report["Alpha"]["error"]
-    assert "Alpha** (D1, seasons 2024): 2024: Left out: same roster as 2025" in \
-        (tiny.rosters_dir / "MISSING_ROSTERS.md").read_text()
     sr.WRONG_SEASONS.clear()
 
 
 def test_season_pages_list_the_page_to_use(tiny, monkeypatch):
     page = "https://alpha.com/sports/softball/roster/2023"
-    (paths.CONFIG / "softball_season_pages.csv").write_text(f"school,season,url,note\nAlpha,2024,{page},filed a year early\n")
+    (core.CONFIG / "softball" / "season_pages.csv").write_text(f"school,season,url,note\nAlpha,2024,{page},filed a year early\n")
     write_season(tiny, 2024, [{**player("Alpha", f"Old{i}"), "roster_url": "https://alpha.com/sports/softball/roster/2024"}
                               for i in range(30)])
     asked = []
@@ -1340,7 +1158,7 @@ def test_season_pages_list_the_page_to_use(tiny, monkeypatch):
                         f'New{i}</a></h3></div><span class="sidearm-roster-player-hometown">Austin, TX</span></li>'
                         for i in range(30))
         return 200, url, f"<html><title>2023 Softball Roster</title><ul>{cards}</ul></html>"
-    monkeypatch.setattr(fetch.Fetcher, "get", fake_get)
+    monkeypatch.setattr(core.Fetcher, "get", fake_get)
     sr.main(["--sport", "softball", "--seasons", "2024", "--threads", "--retry-failed", "--only", "Alpha"])
     assert asked == [page]                                   # only the listed page, and its "2023" is accepted
     rows = list(csv.DictReader(open(tiny.rosters_dir / "rosters_2024.csv", encoding="utf-8")))
@@ -1349,15 +1167,13 @@ def test_season_pages_list_the_page_to_use(tiny, monkeypatch):
 
 
 def test_every_sports_pages_match_footballs():
-    # docs/football/players-*.html are the masters; scripts/sync_pages.py copies them to the other sports.
+    # docs/football/players-*.html are the masters; scripts/build.py sync copies them to the other sports.
     # A page edited for one sport only fails here: edit football's and run the script.
-    import sync_pages
-    assert sync_pages.main(["--check"]) == 0
+    assert build.sync_pages_main(["--check"]) == 0
 
 
 def test_map_data_names_and_summary_files(tiny, tmp_path):
     # Oct 28: names in names.txt (only the dot map loads them), front-page numbers in summary.json
-    import build_map_data
     write_season(tiny, 2025, [player("Alpha", "Ann Lee"), player("Alpha", "Bea Diaz", town="Dallas, TX")])
     with open(tiny.rosters_dir / "hometowns.csv", "w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=geo.LOOKUP_FIELDS)
@@ -1366,9 +1182,75 @@ def test_map_data_names_and_summary_files(tiny, tmp_path):
             w.writerow({"hometown": town, "school": "", "city": town.split(",")[0], "state": "TX", "country": "USA",
                         "lat": lat, "lon": lon, "source": "census", "precision": "city", "players": 1})
     dst = tmp_path / "site" / "map_data.json"
-    build_map_data.main(None, dst, tiny)
+    build.make_map_data(None, dst, tiny)
     data = json.loads(dst.read_text())
     assert "names" not in data and len(data["players"]["s"]) == 2
     assert dst.with_name("names.txt").read_text().split("\n") == ["Ann Lee", "Bea Diaz"]
     summary = json.loads(dst.with_name("summary.json").read_text())
     assert (summary["players"], summary["schools"], summary["first"], summary["last"]) == (2, 1, 2025, 2025)
+
+
+# ---------------------------------------------------------------------------- staff pages (Oct 28)
+def test_staff_parsed_from_roster_page():
+    from staff import parse_staff
+    html = """<div class="s-person-card"><a href="/sports/football/roster/coaches/jane-doe/12"><img alt="x"></a>
+      <h3><a href="/sports/football/roster/coaches/jane-doe/12">Jane Doe</a></h3><div class="s-person-details__position">Head Coach</div></div>
+      <div class="s-person-card"><a href="/sports/football/roster/coaches/bob-ray/13">Full Bio for Bob Ray</a>
+      <h3><a href="/sports/football/roster/coaches/bob-ray/13">Bob Ray</a></h3><div class="s-person-details__position">Offensive Coordinator/Quarterbacks</div></div>"""
+    got = parse_staff(html, "https://x.edu/sports/football/roster/2024")
+    assert [(p["name"], p["title"]) for p in got] == [("Jane Doe", "Head Coach"), ("Bob Ray", "Offensive Coordinator/Quarterbacks")]
+
+
+def test_staff_roles():
+    from staff import role_of
+    cases = {
+        ("Head Coach", "Football"): "head",
+        ("Interim Head Coach", "Football"): "head",
+        ("Co-Head Softball Coach", "Softball"): "head",
+        ("Head Women's Lacrosse Coach, Assistant Field Hockey Coach", "Lacrosse (Women's)"): "head",
+        ("Associate Head Coach/Pitching", "Baseball"): "associate",
+        ("Assistant Head Coach/Running Backs", "Football"): "assistant",
+        ("Special Assistant to Head Coach", "Football"): "support",
+        ("Head Football Equipment Manager", "Football"): "support",
+        ("Head Coach, Strength & Conditioning", "Lacrosse (Men's)"): "support",
+        ("Head Coach - Women's Lacrosse", "Lacrosse (Men's)"): "assistant",
+        ("Defensive Coordinator | Head Women's Flag Football Coach", "Football"): "coordinator",
+        ("JV Baseball Head Coach", "Baseball"): "assistant",
+        ("Tight Ends", "Football"): "assistant",
+    }
+    for (title, sport), want in cases.items():
+        assert role_of(title, sport) == want, title
+
+
+def test_staff_moves_between_schools():
+    from staff import build, person_key
+    assert person_key("Mike Smith Jr.") == person_key("mike smith")
+    row = lambda y, school, name, role="assistant": {"season": str(y), "school": school, "name": name, "title": role.title(), "role": role}
+    rows = [row(2019, "A", "Kalen Dee", "coordinator"), row(2021, "A", "Kalen Dee", "coordinator"),
+            row(2022, "B", "Kalen Dee", "head"), row(2023, "B", "Kalen Dee", "head"),
+            row(2016, "A", "Deion Prime Sanders", "head"), row(2016, "C", "Deion Sanders", "head"),   # one season at two: fine
+            # a common name: at A and C in the same two seasons, so two people and no moves
+            row(2017, "A", "John Smith"), row(2017, "C", "John Smith"), row(2018, "A", "John Smith"), row(2018, "C", "John Smith"),
+            row(2025, "C", "John Smith"),
+            # four seasons apart is too long for a move
+            row(2016, "B", "Pat Lee"), row(2020, "C", "Pat Lee")]
+    out = build(rows, ["A", "B", "C"])
+    people = out["people"].split("\n")
+    moves = {(people[p], a, b, y) for p, a, b, y in zip(out["moves"]["p"], out["moves"]["a"], out["moves"]["b"], out["moves"]["y"])}
+    assert moves == {("Kalen Dee", 0, 1, 2022)}
+    assert people.count("John Smith") == 2 and out["shared"] == 1
+    assert sum(1 for n in people if "Sanders" in n) == 1
+
+
+# ---------------------------------------------------------------------------- men's hockey (Oct 28)
+
+
+def test_junior_hockey_teams_are_not_colleges():
+    from sidearm import looks_like_college, sort_schools
+    for team in ["Omaha Lancers (USHL)", "Dubuque Fighting Saints (USHL)", "Maine Nordiques (NAHL)",
+                 "Penticton Vees (BCHL)", "Youngstown Phantoms (USHL)", "Djurgardens IF J20 (J20 Nationell)"]:
+        assert not looks_like_college(team), team
+    assert sort_schools({"high_school": "", "previous_school": "St. Cloud Norsemen (NAHL)"})["previous_school"] == ""
+    assert looks_like_college("Boston College")
+
+

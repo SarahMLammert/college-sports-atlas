@@ -1,0 +1,83 @@
+{
+  "label": "Hockey (Women's)",
+  "spring_season": true,
+  "roster_paths": [
+    "/sports/womens-ice-hockey/roster",
+    "/sports/whockey/roster",
+    "/sports/w-hockey/roster",
+    "/sports/womens-hockey/roster",
+    "/sports/w-ihockey/roster"
+  ],
+  "presto_paths": [
+    "/sports/wice/{prev_season}-{yy}/roster",
+    "/sports/whockey/{prev_season}-{yy}/roster"
+  ],
+  "min_players": 12,
+  "max_players": 40,
+  "junior_colleges": [],
+  "position_groups": [
+    "F",
+    "D",
+    "G",
+    "UNK"
+  ],
+  "position_abbreviations": {
+    "F": "f fw fwd c lw rw w c/w w/c c/lw c/rw lw/rw rw/lw lw/c rw/c f/d",
+    "D": "d def d/f dman",
+    "G": "g gk gt"
+  },
+  "position_words": [
+    [
+      "forward",
+      "F"
+    ],
+    [
+      "center",
+      "F"
+    ],
+    [
+      "centre",
+      "F"
+    ],
+    [
+      "wing",
+      "F"
+    ],
+    [
+      "defense",
+      "D"
+    ],
+    [
+      "defence",
+      "D"
+    ],
+    [
+      "defenseman",
+      "D"
+    ],
+    [
+      "goal",
+      "G"
+    ]
+  ],
+  "position_fallback": "UNK",
+  "d1_divisions": [
+    "D1"
+  ],
+  "other_divisions": [
+    "D3"
+  ],
+  "division_labels": {
+    "D1": "National Collegiate (Division I and II)",
+    "D3": "Division III"
+  },
+  "position_labels": {
+    "F": "Forward",
+    "D": "Defense",
+    "G": "Goalie",
+    "UNK": "Other"
+  },
+  "thin_roster": 15,
+  "frozen_min_pairs": 12,
+  "transfer_needs_known_college": true
+}

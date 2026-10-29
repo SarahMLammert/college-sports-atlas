@@ -11,6 +11,8 @@ pages in its own folder of `docs/`.
 | Lacrosse (Women's) | `lacrosse-womens` | 609 (D1, D2, D3, NAIA, JUCO to 2024) | 2016–2026 | live |
 | Baseball | `baseball` | 1,088 (D1, D2, D3, NAIA, JUCO; club teams as a transfer level); about 210,000 player records | 2016–2026 | live |
 | Softball | `softball` | 1,129 (D1, D2, D3, NAIA, JUCO; club teams as a transfer level); about 110,000 player records | 2016–2026 | live |
+| Hockey (Men's) | `hockey-mens` | 166 (64 D1, 7 D2, 95 D3 programs, including ones started, dropped or closed since 2016); NCAA only, no ACHA club teams | 2016–2027 (season named by the spring it ends in: 2025-26 is 2026) | set up Oct 28; not scraped yet |
+| Hockey (Women's) | `hockey-womens` | 130 (45 National Collegiate, which joins D1 and D2 schools in one division, and 85 D3); NCAA only | 2016–2027 | set up Oct 28; not scraped yet |
 
 Hockey, basketball, volleyball and soccer show as "coming soon" on the picker.
 Lacrosse, baseball and softball are spring sports: a season is named for the spring it's played in (2024 = the 2023-24 school year).
@@ -35,7 +37,7 @@ on a sport picker (`index.html`), and each sport has its own folder (`docs/footb
   who moved between two schools in that sport's data.
 
 The rest of this README uses football for its examples and numbers; the other sports work the same way
-with `--sport <name>` and their own files (`config/<name>.json`, `config/<name>_schools.csv`,
+with `--sport <name>` and their own files (`config/<name>/settings.json`, `config/<name>/schools.csv`,
 `rosters/<name>/`, `docs/<name>/`).
 
 Page names start with `players-` or `staff-` and say what kind of map they are, so every sport's
@@ -47,7 +49,7 @@ D2, D3, NAIA and junior-college (NJCAA and California's CCCAA) football are bein
 map, with a division filter of FBS, FCS, D2, D3, NAIA and JUCO. The full plan and its progress log
 are in the plan file, `football-all-divisions-plan.txt`. Where things stand:
 
-- **Done:** `config/football_schools.csv` has an athletics site for 865 colleges across all six levels
+- **Done:** `config/football/schools.csv` has an athletics site for 865 colleges across all six levels
   (the 264 D1 schools, 411 D2 and D3 schools and most NAIA and junior-college programs). Another 77
   have no site, mostly closed or dropped programs, and are skipped.
   Colors and campuses for the new schools are in `school_colors.csv` and `school_locations.csv`
@@ -197,6 +199,34 @@ Transfer Map links use the `school`, `conf`, `div`, `from`, `to` and `pos` keys:
 `football/players-transfers.html#school=Penn State&from=2024`. Like the other pages, it reopens
 with the last view you used when opened without a link.
 
+## Coaches and staff (Oct 28)
+
+Each sport has two staff pages, opened from the whistle button on the front page:
+
+- **Coaching Moves** (`docs/<sport>/staff-moves.html`): a map of coaches going from one school to another, like
+  the Transfer Map. Pick a school to see who it hired and who left, with their titles before and after. "Moves
+  into" switches between head coach jobs, all coaching jobs and any staff job.
+- **Staff Directory** (`docs/<sport>/staff-directory.html`): a school's coaches for any season, its head coaches
+  over the years, and any person's seasons school by school (click a name, or type one).
+
+Most schools list the coaches on the roster page, so `scripts/staff.py scrape` reads them from the roster pages
+already saved in `.cache`. When a roster page has no coaches, it downloads the school's coaches page.
+`scripts/staff.py build` then matches people by name across schools and seasons and writes
+`docs/<sport>/staff_data.json`. The pipeline's `staff` step runs both:
+
+    python3 scripts/pipeline.py football --steps staff
+    python3 scripts/staff.py scrape --sport football --offline   # only pages already saved; nothing downloaded
+    python3 scripts/staff.py build --sport football
+
+Titles become roles in `scripts/staff.py` (`role_of`): head, associate head, assistant, coordinator, graduate
+assistant, volunteer, support. "Special Assistant to the Head Coach", "Head Football Equipment Manager" and a
+head coach of another sport aren't head coaches. The pages are football's files copied as they are, so edit
+`docs/football/staff-*.html` and run `scripts/build.py sync`.
+
+Limits: people are matched by name, so two coaches with the same name can be mixed up (a name at two schools in
+two or more of the same seasons is kept as two people). A season a school didn't post is a gap, and a move needs
+the two schools' seasons to be at most two apart.
+
 ## Publish the map on GitHub Pages
 1. Push this repo to GitHub.
 2. On GitHub: **Settings → Pages → Build and deployment → Deploy from a branch**,
@@ -223,31 +253,33 @@ docs/                    the website (this is what GitHub Pages serves)
     players-dotmap.html      Recruiting Map: the dot map, search, players panel and school stats
     players-heatmap.html     Recruiting Footprints: four schools on state-shaded U.S. maps
     players-transfers.html   Transfer Map: school-to-school moves on a U.S. map, with source and destination lists
-    map_data.json            every player, packed small; made by build_map_data.py
-    school_locations.json    each school's campus; made by build_school_locations.py
-scripts/                 the data pipeline; every script takes --sport (default: football)
-  scrape_rosters.py        step 1: scrape rosters
-  geocode_hometowns.py     step 2: hometown -> lat/lon, plus suggested fixes for hometowns it can't place
-  check_frozen_classes.py  step 3: find seasons whose class years can't be trusted (see How transfers are recognized)
-  build_map_data.py        step 4: pack everything into docs/<sport>/map_data.json
-  build_school_locations.py  packs config/school_locations.csv for a sport's pages
-  fix_hometown_spellings.py  adds checked fixes for misspelled hometowns to config/<sport>_hometown_corrections.csv
-  check_geocoder.py        checks the geocoder has its fixes and looks up a few towns that once failed
-  paths.py                 shared: where a sport's files are, and its settings from config/<sport>.json
-  fetch.py                 shared: downloading pages: retries, pacing per site, the page cache
-  sidearm.py               shared: reading Sidearm/WMT and PrestoSports pages: roster URLs, season check, the five parsers,
+    map_data.json            every player, packed small; made by build.py map
+    school_locations.json    each school's campus; made by build.py locations
+scripts/                 the data pipeline, in seven files (Oct 28: merged from 23); --sport picks the sport (default: football)
+  pipeline.py              runs the steps below for one or more sports: python3 scripts/pipeline.py all
+  core.py                  shared: paths and settings, downloading pages, the season files, transfer levels
+                           command: compress-cache
+  sidearm.py               shared: reading Sidearm/WMT and PrestoSports pages: roster URLs, season check, the parsers,
                            cleaning names, telling a college from a high school
-  hometowns.py             shared: cleaning hometowns, class years, heights and weights
-  seasons.py               shared: reading the season files and making one row per player per school from them
-  levels.py                shared: the level of a transfer's previous school (D1, D2, D3, NAIA, JUCO, unknown)
+  scrape_rosters.py        step 1: scrape rosters   (command find-domains: a one-time helper for football domains)
+  geocode.py               step 2: reading hometowns, and placing them (lat/lon) with suggested fixes for the rest
+  hometown_fixes.py        commands: suggest (fixes for unplaced hometowns), spellings (misspelled towns),
+                           check (look up a few towns)
+  build.py                 commands: frozen (seasons whose class years can't be trusted), map (docs/<sport>/map_data.json),
+                           locations (school_locations.json), check (the roster check), sync (copy football's pages)
+  staff.py                 commands: scrape (coaches from the roster pages), build (docs/<sport>/staff_data.json)
 rosters/<sport>/         the cleaned rosters and the scripts' other working files, not committed (see The rosters folder)
-config/
-  school_colors.csv      each school's primary and secondary color, for the map dots (every sport)
-  school_locations.csv   each school's campus city, state, latitude and longitude (every sport)
-  football.json          football's settings (see Adding a sport)
-  football_schools.csv   every college: school, division, conference, domain, roster_url, first_season,
-                         last_season, aliases, note (see The schools file)
-  football_hometown_corrections.csv   hometown fixes: the geocoder's suggestions and your edits
+config/                  (The config folder: one folder per sport since Oct 28)
+  shared/
+    school_colors.csv      each school's primary and secondary color, for the map dots (every sport)
+    school_locations.csv   each school's campus city, state, latitude and longitude (every sport)
+  football/                one folder per sport, the same name as rosters/<sport>/ and docs/<sport>/
+    settings.json          football's settings (see Adding a sport)
+    schools.csv            every college: school, division, conference, domain, roster_url, first_season,
+                           last_season, aliases, note (see The schools file)
+    hometown_corrections.csv   hometown fixes: the geocoder's suggestions and your edits
+    wrong_seasons.csv      optional: school-seasons whose only roster page is another season's
+    season_pages.csv       optional: the page to use for a school-season the usual addresses get wrong
 tests/                   parser tests: python -m pytest tests -q (conftest.py lets them import from scripts/)
   sidearm_classic.html, sidearm_nextgen_table.html   saved roster pages the tests read
 requirements.txt
@@ -255,31 +287,31 @@ requirements.txt
 The pages in a sport's folder load `../common.js` and `../common.css`, and `common.js` loads
 `map_data.json` next to the page, so each sport reads its own data.
 
-`config/school_locations.csv` holds each school's campus city, state and coordinates; after editing
-it, run `python scripts/build_school_locations.py` to rebuild `docs/football/school_locations.json`
+`config/shared/school_locations.csv` holds each school's campus city, state and coordinates; after editing
+it, run `python scripts/build.py locations` to rebuild `docs/football/school_locations.json`
 (only that sport's schools; the pages use it for the campus star, home-state share and distance from
 campus, and still work without it).
 
-Each script finds `config/`, `rosters/` and `docs/` from its own location (`scripts/paths.py`), so it
+Each script finds `config/`, `rosters/` and `docs/` from its own location (`scripts/core.py`), so it
 doesn't matter which folder you run it from. Code more than one script needs lives in the shared modules
-next to them (`paths.py`, `fetch.py`, `sidearm.py`, `hometowns.py`, `levels.py`); `scrape_rosters.py`
+next to them (`core.py`, `sidearm.py`, `geocode.py`); `scrape_rosters.py`
 still answers older imports like `from scrape_rosters import parse_hometown`.
 
 ## Adding a sport
 
-1. Add two files to `config/`, named sport first and then sex (`lacrosse-mens`, `basketball-womens`);
+1. Make a folder in `config/`, named sport first and then sex (`lacrosse-mens`, `basketball-womens`);
    a sport with only one version keeps its plain name (`football`, `baseball`). The same name is used
    for `rosters/<name>/`, `docs/<name>/` and `--sport <name>`:
-   - `<sport>.json`: copy `football.json` and change `label`, `roster_paths` (the roster page's path
+   - `settings.json`: copy `config/football/settings.json` and change `label`, `roster_paths` (the roster page's path
      on the sites, e.g. `/sports/mens-basketball/roster`), `presto_paths` (the same for PrestoSports
      sites, with `{season}` and `{next_yy}`, e.g. `/sports/mbkb/{season}-{next_yy}/roster`), `min_players` and `max_players` (a normal roster for the
      sport: a page with fewer or more players is flagged as partial, usually a page cut off or the wrong page), `junior_colleges`, and the position settings (`position_groups`,
      the roster abbreviations in each, words a spelled-out position starts with, and
      `position_fallback` for anything else).
-   - `<sport>_schools.csv`, as for football (see The schools file): the D1 schools to scrape, their
+   - `schools.csv`, as for football (see The schools file): the D1 schools to scrape, their
      seasons in another division, and the sport's non-D1 colleges so its other transfers get a level.
-   The geocoder makes `<sport>_hometown_corrections.csv` on its first run.
-2. Add any new schools' colors and campuses to `config/school_colors.csv` and `school_locations.csv`.
+   The geocoder makes `hometown_corrections.csv` in that folder on its first run.
+2. Add any new schools' colors and campuses to `config/shared/school_colors.csv` and `school_locations.csv`.
 3. Run the steps under Rebuild the data with `--sport <sport>`.
 4. Copy football's three pages from `docs/football/` to `docs/<sport>/` (not its `.json` files), change the page titles, and set the
    sport's `players` page in the `SPORTS` list in `docs/index.html`.
@@ -296,23 +328,23 @@ pip install -r requirements.txt
 python scripts/scrape_rosters.py --seasons 2016-2019,2021-2026                 # about 1-2 hours for D1 alone
 python scripts/scrape_rosters.py --seasons 2016-2019,2021-2026 --retry-failed  # second pass on failures
 #   add --report to either line to also save the scrape reports and MISSING_ROSTERS.md (see Fixing a school that fails)
-python scripts/geocode_hometowns.py                                    # reads the season files, writes rosters/football/hometowns.csv
-#   check the "review" rows in config/football_hometown_corrections.csv, change any you agree with to "fixed",
+python scripts/geocode.py                                    # reads the season files, writes rosters/football/hometowns.csv
+#   check the "review" rows in config/football/hometown_corrections.csv, change any you agree with to "fixed",
 #   then run the geocode line again (or add --use-review to accept them all)
-python scripts/check_frozen_classes.py                                 # writes rosters/football/frozen_class_seasons.csv
-python scripts/build_map_data.py                                       # writes docs/football/map_data.json
+python scripts/build.py frozen                                 # writes rosters/football/frozen_class_seasons.csv
+python scripts/build.py map                                       # writes docs/football/map_data.json
 ```
 Every step after the scraper reads the season files (`rosters_<season>.csv`) directly and makes the
-one-row-per-player list from them in memory (`scripts/seasons.py`), so there's no combined file to keep up
+one-row-per-player list from them in memory (`scripts/core.py`), so there's no combined file to keep up
 to date. The map build places each player's hometown from `hometowns.csv`, so run the geocoder before it
 whenever new seasons or schools come in.
-Run `check_frozen_classes.py` before `build_map_data.py`: the build reads the list it writes, and
+Run `build.py frozen` before `build.py map`: the build reads the list it writes, and
 without it trusts every season's class years (it prints a warning).
 Then commit `docs/football/map_data.json` and push; the live map updates on its own.
 
 After changing the scraper's cleaning rules, `python scripts/scrape_rosters.py --recombine` re-cleans every saved
-season file in place without downloading anything (a minute instead of hours); then run `geocode_hometowns.py`, `check_frozen_classes.py` and
-`build_map_data.py` as usual.
+season file in place without downloading anything (a minute instead of hours); then run `geocode.py`, `build.py frozen` and
+`build.py map` as usual.
 
 To get every season in one file for a spreadsheet, add `--combined` to a scrape or to `--recombine`: it also
 writes `rosters_all_seasons.csv` and `players_unique.csv`. Nothing else needs them.
@@ -354,12 +386,12 @@ downloading) applies it everywhere.
 | `hometowns.csv` | the geocoder's table of every hometown it has placed, with its corrected city, state and country; re-runs reuse it, and the map build reads each player's dot from it |
 | `unmatched_hometowns.csv` | hometowns that still couldn't be placed |
 | `frozen_class_seasons.csv` | school-seasons whose class years can't be trusted; the build skips its class-year rule for them |
-| `transfer_levels.csv` | every previous-school name of a transfer with no line, the level it got and how many players; made by `build_map_data.py` for checking |
+| `transfer_levels.csv` | every previous-school name of a transfer with no line, the level it got and how many players; made by `build.py map` for checking |
 
 If the season files are missing but a `rosters_all_seasons.csv` is there (from `--combined`), the scraper splits it back
 into season files before it does anything else, so a partial run (`--only`) can't wipe the other schools.
 
-Your hometown fixes live in `config/football_hometown_corrections.csv`, so they're committed with the
+Your hometown fixes live in `config/football/hometown_corrections.csv`, so they're committed with the
 rest of the config and kept safe.
 
 ## How the scraper works
@@ -369,11 +401,11 @@ Sidearm markup, Sidearm cards, HTML tables, other embedded JSON) and the best re
 Requests to one site are spaced 1.5 seconds apart, and raw pages are cached in `.cache/html/`.
 
 For past seasons it tries each site's archive URL styles (`/roster/2019`, `/roster/season/2019/`,
-`/roster/2019-20`, ...) or a `roster_url` template from `config/football_schools.csv`. Every archive page
+`/roster/2019-20`, ...) or a `roster_url` template from `config/football/schools.csv`. Every archive page
 is checked for its year so a site quietly showing this year's roster isn't saved as 2019.
 
 Many D2, D3, NAIA and junior-college sites use **PrestoSports** instead, whose roster pages look like
-`/sports/fball/2023-24/roster` (the `presto_paths` setting in `config/football.json`). These are tried
+`/sports/fball/2023-24/roster` (the `presto_paths` setting in `config/football/settings.json`). These are tried
 after the Sidearm/WMT URLs, with the list view (`?view=list`) first, since some sites (Morningside) only
 have the roster table there, and on `www.` as well as the bare domain, since some sites (Hutchinson,
 Iowa Western, Kilgore, Riverside) only answer on `www.`. The table parser drops phone-only cells
@@ -385,13 +417,13 @@ Roster sites label a player's old school in different ways: "Previous School", "
 high school for freshmen, a college for transfers), "College", or one field like "Lamar HS / Texas
 Tech". The scraper sorts every school field it finds: a college goes to `previous_school`, a high
 school to `high_school`. It knows a college by words like University, College, CC or JC, or by the
-name of a D1 school in `config/football_schools.csv` or a junior college listed in `config/football.json`. A lone "previous school" that
+name of a D1 school in `config/football/schools.csv` or a junior college listed in `config/football/settings.json`. A lone "previous school" that
 isn't recognizably a college is treated as the high school (Ohio State's site, for one, files every
 high school there), and "Menard" next to "Menard HS" is one school, not a transfer.
-`build_map_data.py` uses the same rules (it imports them from `sidearm.py`, so both steps agree), and also counts players it finds on an earlier
+`build.py map` uses the same rules (it imports them from `sidearm.py`, so both steps agree), and also counts players it finds on an earlier
 D1 roster, and newcomers who arrive as juniors or older (see Known issues).
 
-`build_map_data.py` prints any "thin rosters" (a school-season with fewer than 40 players). The ones
+`build.py map` prints any "thin rosters" (a school-season with fewer than 40 players). The ones
 in the D1 data now are seasons the schools' sites simply don't have: Ohio State 2016, Samford
 2016–17 and Yale 2016. Re-scraping won't fill them. The build skips its "arrived as a junior or
 older" transfer rule for the season after each one, so a missing roster can't make returning players
@@ -399,17 +431,17 @@ look like transfers.
 
 Some schools' archive pages also show the wrong class year: each player appears with a later class
 (often his final one) instead of that season's, so freshmen look like juniors. Ohio State 2017–2022
-is the clearest case; the rule had counted 40% of its players as transfers. `check_frozen_classes.py`
+is the clearest case; the rule had counted 40% of its players as transfers. `build.py frozen`
 finds these seasons by following returning players from one season to the next: normally about a
 quarter don't move up a class (mostly redshirt years), but on a frozen archive nearly all of them
 stay put. It counts only players who were freshmen, sophomores or juniors the season before, so
 seniors repeating a year (the COVID free year) don't count, unless too few of those remain to judge.
 When 60% or more don't advance, both seasons of the pair go into `rosters/football/frozen_class_seasons.csv`,
-and `build_map_data.py` skips its class-year rule for them. Players there still count as transfers
+and `build.py map` skips its class-year rule for them. Players there still count as transfers
 when the roster lists a previous college or they were on an earlier D1 roster.
 
 ## The schools file
-`config/football_schools.csv` holds every college the project knows, one row per school (or per school
+`config/football/schools.csv` holds every college the project knows, one row per school (or per school
 and season range):
 
 | column | meaning |
@@ -423,7 +455,7 @@ and season range):
 | `note` | anything worth knowing (when a school moved, closed or merged, or a season its site doesn't have); shown in `MISSING_ROSTERS.md`, and a note starting with "left out" makes the scraper skip the school |
 
 The scraper downloads every FBS, FCS, D2, D3, NAIA and JUCO college with a `domain` or `roster_url`
-(865 of them; `load_schools()` in `scripts/paths.py`, while `d1_schools()` returns just the 264 D1
+(865 of them; `load_schools()` in `scripts/core.py`, while `d1_schools()` returns just the 264 D1
 schools). A program that moved has a row for each level with its seasons (Thomas More: D3 through 2018,
 NAIA 2019–2022, D2 from 2023; "Tarleton State, D2, last_season 2019"), and the scraper records each
 season under the division its row gives. For scraping it picks one row per college: the row with no
@@ -434,11 +466,11 @@ Colleges without a site are still used to sort transfers by level. Rows with div
 used for that.
 
 ## How transfer levels are decided
-`build_map_data.py` gives every transfer without a line the level of the school his roster names
-(`scripts/levels.py`), in the season before he joined, so "Tarleton State" is Division II for a
+`build.py map` gives every transfer without a line the level of the school his roster names
+(`scripts/core.py`), in the season before he joined, so "Tarleton State" is Division II for a
 player who left before 2020 and D1 after. It checks, in order:
 
-1. A name in `config/football_schools.csv` (or one of its aliases), compared loosely: "Valdosta St.",
+1. A name in `config/football/schools.csv` (or one of its aliases), compared loosely: "Valdosta St.",
    "Valdosta State University" and "valdosta state" are one name; "UW-Whitewater" is "Wisconsin-Whitewater";
    "(Kan.)" or "(MO)" after a name is read as a state. Rows can have a season range, so a school that moved
    (Thomas More: D3, then NAIA, then D2) or closed (Notre Dame College, D2 until 2023) has the right level.
@@ -450,7 +482,7 @@ A name that fits schools at two levels ("Bethel", "Concordia", "Butler", "Saint 
 unknown rather than guessed, and so does a high school whose name looks like a college; those are rows
 with division `HS` ("St. John's College", "Gonzaga College"). Unknown also covers transfers whose roster
 names no school (counted because they arrived as juniors or older). To fix a name, add it to the
-`aliases` of the right row (separated by `|`), or add a row; then run `build_map_data.py` and look at
+`aliases` of the right row (separated by `|`), or add a row; then run `build.py map` and look at
 `rosters/football/transfer_levels.csv`.
 
 "D1 school, not matched" means the roster names a D1 school but the player wasn't found on that
@@ -474,7 +506,7 @@ Slow sites: a school stops after `--school-minutes` (default 3) and its remainin
 schools run, a "still working on: ..." line every minute names them.
 
 - Wrong or dead site: fix its `domain`, or paste its exact roster page into `roster_url` in
-  `config/football_schools.csv` (it may contain `{season}`), and run again with `--retry-failed`.
+  `config/football/schools.csv` (it may contain `{season}`), and run again with `--retry-failed`.
 - A season before the program started or after it ended: set `first_season` or `last_season`, and it
   counts as "no program" instead of a failure.
 - A season the school's own site doesn't have (old archives are often missing): add a `note` saying so.
@@ -487,7 +519,7 @@ schools run, a "still working on: ..." line every minute names them.
 - A few school-seasons have no roster on the school's site (listed under How transfers are recognized), so
   those seasons undercount that school's players.
 - Transfers: many roster pages never list a previous school (Notre Dame, SMU, Arkansas State, Sam
-  Houston and others), so `build_map_data.py` also counts a player as a transfer when he was on
+  Houston and others), so `build.py map` also counts a player as a transfer when he was on
   another D1 roster earlier with the same name and hometown, or when he's new to a roster whose
   previous season is also in the data and he's already a junior, senior or grad (so a season that
   failed to scrape doesn't make returning players look like transfers). The class-year rule is
@@ -496,19 +528,19 @@ schools run, a "still working on: ..." line every minute names them.
   misses a transfer from outside D1 whose class year looks like a freshman's or sophomore's, and two different players with the same name and hometown on two
   rosters in different years would be read as one transfer (rare; same-season pairs are skipped).
 - Valparaiso's roster puts each player's major ("Business", "Sport Management") in the previous-school
-  field. `build_map_data.py` doesn't count a major as a previous school (`is_major()` in
-  `scripts/levels.py`), so those players aren't transfers unless another rule says so.
+  field. `build.py map` doesn't count a major as a previous school (`is_major()` in
+  `scripts/core.py`), so those players aren't transfers unless another rule says so.
 - Some roster pages put the jersey number or a captain mark in the name field ("89 Mason Thomas", "13d Drew
   Melaragno", "Mason Thomas (C)"); the scraper removes them (`clean_name()` in `scripts/sidearm.py`) before
   anything is saved.
 - High-school names that differ only in "HS", "High School" or "H.S." (and punctuation) are merged
-  by `build_map_data.py` and shown under the most common spelling. Names that differ in other ways
+  by `build.py map` and shown under the most common spelling. Names that differ in other ways
   ("Cedar Park" and "Cedar Park HS") stay separate, since they could be different schools.
 - Misspelled hometowns ("Douglasvillle, GA") show up as an extra dot next to the real town.
-  `fix_hometown_spellings.py` holds a checked list of them; after running it, geocode and build again.
+  `hometown_fixes.py spellings` holds a checked list of them; after running it, geocode and build again.
 - The same high-school name can belong to schools in different towns; the map can't tell them
   apart beyond the player's hometown state.
-- `check_frozen_classes.py` needs 30 returning players per school-season to judge one, which fits
+- `build.py frozen` needs 30 returning players per school-season to judge one, which fits
   football rosters; small-roster sports (basketball) will need that lowered.
 - About 6,000 transfers name a D1 school but weren't matched to its roster, so they have no line on the
   Transfer Map (see How transfer levels are decided). Drawing them needs a guard against high schools
@@ -527,4 +559,3 @@ schools run, a "still working on: ..." line every minute names them.
   which only have freshmen and sophomores.
 - `map_data.json` is 6.8 MB with D1 only and could pass 15 MB with every division; if it loads
   slowly, it may need one file per division.
-- `scrape_staff.py` (coaches and staff pages) is planned but not written; it should reuse the shared modules in `scripts/`.

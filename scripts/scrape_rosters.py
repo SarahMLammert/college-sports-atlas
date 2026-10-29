@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Scrape a sport's rosters into CSV, for one season or many.
 
 To run every step for a sport at once (scrape, retry, geocode, build, check), use scripts/pipeline.py:
@@ -10,10 +9,10 @@ Examples
     python scripts/scrape_rosters.py --seasons 2019 --only "Alabama,Clemson"
     python scripts/scrape_rosters.py --seasons 2016-2019,2021-2026 --retry-failed --render
     python scripts/scrape_rosters.py --recombine                       # no downloads: re-clean the saved season files
-    python scripts/scrape_rosters.py --sport lacrosse-mens             # another sport (needs config/lacrosse-mens.json)
+    python scripts/scrape_rosters.py --sport lacrosse-mens             # another sport (needs config/lacrosse-mens/settings.json)
     python scripts/scrape_rosters.py --seasons 2016-2026 --report      # also write the scrape reports and MISSING_ROSTERS.md
 
-Reads config/<sport>.json and config/<sport>_schools.csv (default sport: football).
+Reads config/<sport>/settings.json and config/<sport>/schools.csv (default sport: football).
 
 Outputs (in rosters/<sport>/, or --out). The rosters are all cleaned: no jersey numbers or captain
 marks in names, hometowns split into city/state/country, high school and previous school sorted out.
@@ -27,10 +26,28 @@ Only with --report:
 
 --retry-failed doesn't need the reports: it tells which school-seasons are done from the saved rosters.
 
-Fetching, page parsing and field cleaning live in fetch.py, sidearm.py and hometowns.py next to this script.
+Fetching, page parsing and field cleaning live in core.py, sidearm.py and geocode.py next to this script.
+
+This file holds, in order:
+    Scraping rosters
+    Finding athletics domains (find-domains)
+
+Commands:
+    python3 scripts/scrape_rosters.py find-domains --sport football   # finding athletics domains
 """
 from __future__ import annotations
 
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+
+# ==============================================================================================================
+# Scraping rosters   (was scripts/scrape_rosters.py)
+# ==============================================================================================================
+
+SCRAPE_ROSTERS_DOC = 'Scrape a sport\'s rosters into CSV, for one season or many.\n\nTo run every step for a sport at once (scrape, retry, geocode, build, check), use scripts/pipeline.py:\n    python3 scripts/pipeline.py softball\n\nExamples\n    python scripts/scrape_rosters.py                                   # current season, every school\n    python scripts/scrape_rosters.py --seasons 2016-2019,2021-2026     # last 10 seasons, skipping 2020\n    python scripts/scrape_rosters.py --seasons 2019 --only "Alabama,Clemson"\n    python scripts/scrape_rosters.py --seasons 2016-2019,2021-2026 --retry-failed --render\n    python scripts/scrape_rosters.py --recombine                       # no downloads: re-clean the saved season files\n    python scripts/scrape_rosters.py --sport lacrosse-mens             # another sport (needs config/lacrosse-mens/settings.json)\n    python scripts/scrape_rosters.py --seasons 2016-2026 --report      # also write the scrape reports and MISSING_ROSTERS.md\n\nReads config/<sport>/settings.json and config/<sport>/schools.csv (default sport: football).\n\nOutputs (in rosters/<sport>/, or --out). The rosters are all cleaned: no jersey numbers or captain\nmarks in names, hometowns split into city/state/country, high school and previous school sorted out.\n    rosters_<season>.csv          every player that season, one row each (the later steps read these)\nOnly with --combined (for opening in a spreadsheet; nothing else needs them):\n    rosters_all_seasons.csv       every saved season stacked (one row per player per season)\n    players_unique.csv            one row per player per school, with first/last season on the roster\nOnly with --report:\n    scrape_report_<season>.csv    per school: status, strategy, player counts, URL, errors\n    MISSING_ROSTERS.md            the failed and partial schools by division, with reasons (always in rosters/<sport>/)\n\n--retry-failed doesn\'t need the reports: it tells which school-seasons are done from the saved rosters.\n\nFetching, page parsing and field cleaning live in core.py, sidearm.py and geocode.py next to this script.\n'
 import argparse
 import os
 import warnings
@@ -44,25 +61,24 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
 
-import fetch, hometowns, sidearm
-from fetch import Fetcher, current_season
-from hometowns import *            # noqa: F401,F403
-from seasons import UNIQUE_FIELDS, build_unique, person_key, read_csv, season_files   # shared with the later steps
-from paths import (ROOT, SCRAPED, add_sport_argument, d1_schools, division_for, load_all_colleges,
-                   load_division_history, load_schools, load_sport, sport_lock)
+import core, geocode, sidearm
+from core import Fetcher, current_season
+from geocode import *            # noqa: F401,F403
+from core import UNIQUE_FIELDS, build_unique, person_key, read_csv, season_files   # shared with the later steps
+from core import ROOT, SCRAPED, add_sport_argument, d1_schools, division_for, load_all_colleges, load_division_history, load_schools, load_sport, sport_lock
 from sidearm import *              # noqa: F401,F403
 
 # Older code imported everything from this file (`from scrape_rosters import parse_hometown`); keep
 # those names here, including the underscored helpers, so it still works.
-for _mod in (fetch, hometowns, sidearm):
+for _mod in (core, geocode, sidearm):
     globals().update({k: v for k, v in vars(_mod).items() if not k.startswith("__") and k not in globals()})
 # =============================================================================
 # Scraping and output
 # =============================================================================
 
 log = logging.getLogger("rosters")
-SEASON_PAGES: dict[tuple[str, int], str] = {}    # config/<sport>_season_pages.csv: the one page to use
-WRONG_SEASONS: dict[tuple[str, int], str] = {}   # config/<sport>_wrong_seasons.csv, set by run() and the workers
+SEASON_PAGES: dict[tuple[str, int], str] = {}    # config/<sport>/season_pages.csv: the one page to use
+WRONG_SEASONS: dict[tuple[str, int], str] = {}   # config/<sport>/wrong_seasons.csv, set by run() and the workers
 RENDER_TRIES = 2   # most addresses rendered per school-season with --render (each takes a few seconds)
 SCHOOL_MINUTES = 3.0   # a school that takes longer stops starting new seasons (--school-minutes)
 # A site's own link to a season roster in PrestoSports style: /sports/fball/2026-27/roster (Mars Hill),
@@ -163,7 +179,7 @@ def scrape_school_season(school: dict, fetcher: Fetcher, season: int, division: 
     urls = candidate_urls(school.get("domain", ""), school.get("roster_url", ""), None if is_current else season)
     fixed_page = SEASON_PAGES.get((school["school"], season))
     if fixed_page:
-        # Listed in config/<sport>_season_pages.csv: this page holds the season, whatever year it shows
+        # Listed in config/<sport>/season_pages.csv: this page holds the season, whatever year it shows
         urls = [fixed_page]
     if is_current and not fixed_page:
         # A school's main roster page can still show last season for weeks (New Haven 2026 came
@@ -366,7 +382,7 @@ def scrape_school_all(school: dict, seasons: list[int], fetcher: Fetcher, histor
             continue
         wrong = WRONG_SEASONS.get((school["school"], season))
         if wrong is not None:
-            # Its only roster page is another season's (config/<sport>_wrong_seasons.csv): not fetched
+            # Its only roster page is another season's (config/<sport>/wrong_seasons.csv): not fetched
             results.append((season, [], {"season": season, "school": school["school"], "division": division,
                                          "current_conference": school.get("conference", ""), "status": "left_out",
                                          "season_check": "", "strategy": "", "players": 0, "with_hometown": 0,
@@ -386,6 +402,15 @@ def scrape_school_all(school: dict, seasons: list[int], fetcher: Fetcher, histor
                 and names and len(names & newest_names) / len(names) > 0.8):
             report.update(status="failed", players=0, with_hometown=0,
                           error=f"page looks like the {newest_season} roster; " + report.get("error", ""))
+            rows = []
+        elif (report["season_check"] == "current" and newest_names and newest_season == season - 1
+              and names and len(names & newest_names) / len(names) >= 0.9):
+            # The main page with no year on it still shows last season's team (spring sports in the autumn,
+            # before next spring's roster goes up): not this season's roster yet. A new season's roster keeps
+            # about three in four of its players, not nine in ten.
+            report.update(status="failed", players=0, with_hometown=0,
+                          error=f"the main roster page still shows the {newest_season} roster (not posted yet); "
+                          + report.get("error", ""))
             rows = []
         elif rows and (newest_season is None or season > newest_season):
             newest_names, newest_season = names, season
@@ -609,6 +634,8 @@ def plain_reason(report: dict) -> str:
         return "skipped: the school's other seasons took too long (--retry-failed tries it again)"
     if "another sport's page" in err and not re.search(r"no players found|bot check", short):
         return "the only roster pages found were another sport's (the site may not list this team's roster)"
+    if "not posted yet" in err:
+        return "this season's roster isn't up yet: the main roster page still shows last season's team"
     if "page looks like the" in err:
         return "the archive page shows a newer season's roster, so there's no roster for this season"
     if "bot check not passed" in err:
@@ -731,13 +758,13 @@ def write_missing_rosters(report_dir: Path, schools_csv: Path, sport_label: str,
         out += [f"## Left out on purpose ({n_left} school{'' if n_left == 1 else 's'})", "",
                 "Never contacted by the scraper, because of the note in the schools file (to try one again, change "
                 "its note so it doesn't start with \"left out\"), or, for single seasons, because the season is in "
-                "`config/<sport>_wrong_seasons.csv` (its only roster page shows another season's roster).", ""]
+                "`config/<sport>/wrong_seasons.csv` (its only roster page shows another season's roster).", ""]
         for d, school in left:
             items = groups[(d, "left_out")][school]
             if school in left_out_now:
                 reason = notes.get(school) or plain_reason(items[0][1])
                 out.append(f"- **{school}** ({labels.get(d, d) or '?'}): {reason}")
-            else:      # single seasons, from config/<sport>_wrong_seasons.csv
+            else:      # single seasons, from config/<sport>/wrong_seasons.csv
                 why = "; ".join(f"{y}: {plain_reason(r)}" for y, r in sorted(items, key=lambda x: x[0]))
                 out.append(f"- **{school}** ({labels.get(d, d) or '?'}, seasons {_seasons_text([y for y, _ in items])}): {why}")
         out.append("")
@@ -843,7 +870,7 @@ def clean_row(r: dict) -> dict:
 
 def from_other_sport(row: dict) -> bool:
     """Saved from another sport's page (a lacrosse season taken from the school's football roster), or a
-    school-season listed in config/<sport>_wrong_seasons.csv (another season's roster)."""
+    school-season listed in config/<sport>/wrong_seasons.csv (another season's roster)."""
     if (WRONG_SEASONS or SEASON_PAGES) and str(row.get("season", "")).isdigit():
         key = (row.get("school", ""), int(row["season"]))
         if key in WRONG_SEASONS:
@@ -902,10 +929,10 @@ def main(argv=None) -> int:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap = argparse.ArgumentParser(description=SCRAPE_ROSTERS_DOC, formatter_class=argparse.RawDescriptionHelpFormatter)
     add_sport_argument(ap)
-    ap.add_argument("--schools", type=Path, help="default: config/<sport>_schools.csv")
-    ap.add_argument("--division-history", type=Path, help="default: config/<sport>_schools.csv (its rows with a season range)")
+    ap.add_argument("--schools", type=Path, help="default: config/<sport>/schools.csv")
+    ap.add_argument("--division-history", type=Path, help="default: config/<sport>/schools.csv (its rows with a season range)")
     ap.add_argument("--seasons", help="e.g. 2016-2019,2021-2026 (default: current season)")
     ap.add_argument("--season", type=int, help="single season (same as --seasons N)")
     ap.add_argument("--division", default="all",
@@ -935,7 +962,7 @@ def build_parser() -> argparse.ArgumentParser:
                     help="try the given-up school-seasons again this run (their tries keep counting)")
     ap.add_argument("--forget-misses", action="store_true",
                     help="ask again for past-season addresses that answered 'not found' before (normally remembered "
-                         f"for {fetch.MISS_DAYS} days)")
+                         f"for {core.MISS_DAYS} days)")
     ap.add_argument("--threads", action="store_true",
                     help="run the schools as threads in one process, like before Oct 27 (slower: one page is parsed "
                          "at a time); the default is one process per worker")
@@ -1117,13 +1144,19 @@ def run(ap: argparse.ArgumentParser, args, sport) -> int:
     def finished_in_order():
         # as_completed(), plus a line every minute naming the schools still running, so a slow one is visible
         from concurrent.futures import FIRST_COMPLETED, wait
-        pending = set(futures)
+        # (one line: how many are running and the one running longest, not a list of names)
+        import time
+        pending, since = set(futures), {}
         while pending:
             done, pending = wait(pending, timeout=60, return_when=FIRST_COMPLETED)
-            if not done:
-                running = sorted(futures[f]["school"] for f in pending if f.running())
-                if running:
-                    log.info("still working on: %s", ", ".join(running[:8]) + (" ..." if len(running) > 8 else ""))
+            now = time.monotonic()
+            running = [f for f in pending if f.running()]
+            for f in running:
+                since.setdefault(f, now)
+            if not done and running:
+                slow = min(running, key=lambda f: since[f])
+                log.info("still working on %d school%s; longest: %s (%d min)", len(running), "" if len(running) == 1 else "s",
+                         futures[slow]["school"], (now - since[slow]) // 60)
             yield from done
 
     try:
@@ -1150,11 +1183,15 @@ def run(ap: argparse.ArgumentParser, args, sport) -> int:
                     new_rows[season].extend(rows)
                     new_reports[season][school["school"]] = report
                     if report["status"] != "left_out":
-                        summary.append(f"{season}:{report['players'] if report['status'] in ('ok', 'partial') else report['status'][:4]}")
+                        summary.append(report["status"])
                 finished.add(school["school"])
                 # Schools whose seasons were all skipped (--retry-failed and already ok, or left out) print nothing
-                if summary:
-                    log.info("[%3d/%d] %-26s %s", i, len(schools), school["school"], " ".join(sorted(summary)))
+                if summary:      # "[ 12/1088] Adrian  11 ok, 1 failed" (each season is in the reports)
+                    from collections import Counter
+                    c = Counter(summary)
+                    log.info("[%3d/%d] %-26s %s", i, len(schools), school["school"],
+                             ", ".join(f"{n} {k}" for k, n in sorted(c.items(), key=lambda kv: ("ok", "partial").index(kv[0])
+                                                                   if kv[0] in ("ok", "partial") else 2)))
         pool.shutdown(wait=True)
     except KeyboardInterrupt:
         # Ctrl-C: save the schools that finished. The ones still running keep what the run before
@@ -1214,5 +1251,74 @@ def run(ap: argparse.ArgumentParser, args, sport) -> int:
     return 0
 
 
+# ==============================================================================================================
+# Finding athletics domains (find-domains)   (was scripts/find_athletics_domains.py)
+# ==============================================================================================================
+
+FIND_ATHLETICS_DOMAINS_DOC = """Run on your Mac from the project folder:  python scripts/scrape_rosters.py find-domains
+Follows each link in rosters/football/redirect_check.csv (athletics pages on a college's main site)
+to where it ends up, and fills in that domain in config/football/schools.csv when the school's
+domain is still blank. Prints what it did; nothing else is changed.
+"""
+import csv
+import urllib.request
+from pathlib import Path
+from urllib.parse import urlparse
+
+
+def find_athletics_domains_main(argv=None):
+    import argparse as _argparse
+    _argparse.ArgumentParser(prog="scrape_rosters.py find-domains", description=FIND_ATHLETICS_DOMAINS_DOC,
+                             formatter_class=_argparse.RawDescriptionHelpFormatter).parse_args(argv)
+
+    ROOT = Path(__file__).resolve().parent.parent
+    CHECK = ROOT / "rosters" / "football" / "redirect_check.csv"
+    SCHOOLS = ROOT / "config" / "football" / "schools.csv"
+    UA = {"User-Agent": "Mozilla/5.0 (Macintosh) college-sports-atlas"}
+    if not CHECK.exists():
+        sys.exit(f"{CHECK} not found: nothing to check")
+
+    found = {}
+    for r in csv.DictReader(open(CHECK)):
+        try:
+            with urllib.request.urlopen(urllib.request.Request(r["ncaa_url"], headers=UA), timeout=30) as resp:
+                final = resp.geturl()
+        except Exception as e:  # noqa: BLE001
+            print(f"  {r['school']}: could not open ({e})")
+            continue
+        host = urlparse(final).netloc.lower().removeprefix("www.")
+        path = urlparse(final).path.strip("/")
+        if path and "athletic" in path.lower():
+            print(f"  {r['school']}: still on the college site ({final}); set roster_url by hand")
+            continue
+        found[r["school"]] = host
+        print(f"  {r['school']}: {host}")
+
+    rows = list(csv.DictReader(open(SCHOOLS)))
+    fields = list(rows[0])
+    n = 0
+    for x in rows:
+        if x["school"] in found and not x["domain"] and x["division"] in ("D2", "D3"):
+            x["domain"] = found[x["school"]]
+            n += 1
+    with open(SCHOOLS, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=fields)
+        w.writeheader()
+        w.writerows(rows)
+    print(f"filled {n} rows")
+
+
+COMMANDS = {"find-domains": find_athletics_domains_main}
+
+
+def command_line(argv=None) -> int:
+    """python3 scripts/scrape_rosters.py <command> [options]"""
+    argv = list(sys.argv[1:] if argv is None else argv)
+    if argv and argv[0] in COMMANDS:
+        sys.argv[0] = f"{Path(sys.argv[0]).name} {argv[0]}"     # so --help says "build.py map"
+        return COMMANDS[argv[0]](argv[1:]) or 0
+    return main(argv) or 0
+
+
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(command_line())
