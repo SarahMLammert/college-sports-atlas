@@ -10,17 +10,6 @@ Commands:
 """
 from __future__ import annotations
 
-import sys
-from pathlib import Path
-
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-
-
-# ==============================================================================================================
-# Suggesting hometown fixes (suggest)   (was scripts/suggest_hometown_fixes.py)
-# ==============================================================================================================
-
-SUGGEST_HOMETOWN_FIXES_DOC = 'Suggest fixes for hometowns the geocoder couldn\'t place, and write them to\nconfig/<sport>/hometown_corrections.csv (default sport: football).\n\nRun it after geocode.py, which writes rosters/<sport>/unmatched_hometowns.csv. Each unmatched\nhometown is checked against a list of about 30,000 US towns (downloaded once to .cache/us_cities.csv\nfrom github.com/kelvins/US-Cities-Database):\n\n    fixed       a misspelled town with one close match in its own state ("Tuscon, AZ" -> Tucson)\n                a state spelled oddly ("Dallas, T.X.", "Galena, Illinios", "Oconomowoc. Wis.")\n                a town with no state that is the only US town of that name ("Ballston Lake" -> NY)\n    review      a likely misspelling with more than one possible town, a town name found in\n                several states, or a town missing from its state whose name (7+ letters) is in just one\n                other state ("Murrieta, GA": CA?); the note names the candidates, nothing is changed\n                a place abroad the parser now reads ("Winnipeg, MB", "Brandon, Manitoba, CA" -> Canada,\n                not California; "Willemstad, Curacao")\n    review      a likely misspelling with more than one possible town, a town name found in\n                several states, or a town missing from its state whose name (7+ letters) is in just one\n                other state ("Murrieta, GA": CA?); the note names the candidates, nothing is changed\n    unfixable   a state with no town ("MN", "Alabama"), a high school name ("Gateway HS"), or text from\n                another column ("R/R", "5-7", "Manager")\n\nOnly hometowns on the unmatched list are touched, so towns the geocoder already places are never\n"corrected" to a neighbour just because the town list lacks them. Rows already marked unfixable, and\nhometowns outside the US, are left alone. Every row it writes says why in its note, so the fixes are\neasy to find and check ("spelling \'...\'", "state from the only US town with this name", ...).\n\n    python scripts/hometown_fixes.py suggest              # add --sport <name> for another sport\n    python scripts/hometown_fixes.py suggest --dry-run    # print what it would change, write nothing\n    python scripts/geocode.py                   # then geocode again\n\nIt\'s safe to run more than once.\n'
 import argparse
 import collections
 import csv
@@ -30,8 +19,18 @@ import sys
 import urllib.request
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))   # so the files here import each other
+
+import geocode as g
+from core import add_sport_argument, load_sport, ROOT
 from geocode import _region, not_a_place, parse_hometown
-from core import ROOT, add_sport_argument, load_sport
+
+# ==============================================================================================================
+# Suggesting hometown fixes (suggest)   (was scripts/suggest_hometown_fixes.py)
+# ==============================================================================================================
+
+SUGGEST_HOMETOWN_FIXES_DOC = 'Suggest fixes for hometowns the geocoder couldn\'t place, and write them to\nconfig/<sport>/hometown_corrections.csv (default sport: football).\n\nRun it after geocode.py, which writes rosters/<sport>/unmatched_hometowns.csv. Each unmatched\nhometown is checked against a list of about 30,000 US towns (downloaded once to .cache/us_cities.csv\nfrom github.com/kelvins/US-Cities-Database):\n\n    fixed       a misspelled town with one close match in its own state ("Tuscon, AZ" -> Tucson)\n                a state spelled oddly ("Dallas, T.X.", "Galena, Illinios", "Oconomowoc. Wis.")\n                a town with no state that is the only US town of that name ("Ballston Lake" -> NY)\n    review      a likely misspelling with more than one possible town, a town name found in\n                several states, or a town missing from its state whose name (7+ letters) is in just one\n                other state ("Murrieta, GA": CA?); the note names the candidates, nothing is changed\n                a place abroad the parser now reads ("Winnipeg, MB", "Brandon, Manitoba, CA" -> Canada,\n                not California; "Willemstad, Curacao")\n    review      a likely misspelling with more than one possible town, a town name found in\n                several states, or a town missing from its state whose name (7+ letters) is in just one\n                other state ("Murrieta, GA": CA?); the note names the candidates, nothing is changed\n    unfixable   a state with no town ("MN", "Alabama"), a high school name ("Gateway HS"), or text from\n                another column ("R/R", "5-7", "Manager")\n\nOnly hometowns on the unmatched list are touched, so towns the geocoder already places are never\n"corrected" to a neighbour just because the town list lacks them. Rows already marked unfixable, and\nhometowns outside the US, are left alone. Every row it writes says why in its note, so the fixes are\neasy to find and check ("spelling \'...\'", "state from the only US town with this name", ...).\n\n    python scripts/hometown_fixes.py suggest              # add --sport <name> for another sport\n    python scripts/hometown_fixes.py suggest --dry-run    # print what it would change, write nothing\n    python scripts/geocode.py                   # then geocode again\n\nIt\'s safe to run more than once.\n'
+
 
 TOWNS_URL = "https://raw.githubusercontent.com/kelvins/US-Cities-Database/main/csv/us_cities.csv"
 TOWNS_CSV = ROOT / ".cache" / "us_cities.csv"
@@ -381,12 +380,7 @@ def suggest_hometown_fixes_main(argv=None):
 # ==============================================================================================================
 
 FIX_HOMETOWN_SPELLINGS_DOC = 'Add fixes for misspelled hometowns to config/<sport>/hometown_corrections.csv (default sport: football).\n\nEach pair below is a misspelling found next to the real town (within 25 km, same state) in the map\ndata, checked by hand. Pairs that are two real places (Los Gatos / Los Altos, Monroe / Montrose,\nGrosse Pointe Farms / Park, ...) are left out.\n\nThe script finds every raw hometown text in the geocoder\'s table, rosters/<sport>/hometowns.csv, that was\nplaced in a misspelled town, and writes a "fixed" row for it in config/<sport>/hometown_corrections.csv.\nRows you already have for those texts are updated; everything else is kept as it is. (Until Oct 27 it\nread players_unique_geocoded.csv, which the geocoder stopped writing on Oct 25, so it found nothing.)\n\nIt also updates hometowns.csv itself, which the geocoder checks before the corrections: each misspelled\nentry gets the real town\'s name and location from the same table. It\'s safe to run more than once.\n\nscripts/pipeline.py runs it in its fix-hometowns step. On its own:\n    python scripts/hometown_fixes.py spellings              # add --sport <name> for another sport\n    python scripts/geocode.py\n    python scripts/build.py map\n'
-import argparse
-import csv
-import sys
-from pathlib import Path
 
-from core import add_sport_argument, load_sport
 
 # Set from --sport in fix_hometown_spellings_main().
 CORRECTIONS = LOOKUP = Path()   # hometown_corrections.csv, and hometowns.csv (the geocoder's table of
@@ -554,8 +548,6 @@ CHECK_GEOCODER_DOC = """Check which geocoder version is in this folder and test 
 
     python scripts/hometown_fixes.py check
 """
-from pathlib import Path
-import geocode as g  # noqa: E402
 
 
 def check_geocoder_main(argv=None):

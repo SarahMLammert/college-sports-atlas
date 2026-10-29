@@ -17,21 +17,30 @@ Commands:
 """
 from __future__ import annotations
 
+import argparse
+import csv
+import json
+import os
+import re
 import sys
+from collections import defaultdict
+from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
+from urllib.parse import urljoin, urlparse
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+from bs4 import BeautifulSoup
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))   # so the files here import each other
+
+import core
+from core import add_sport_argument, Fetcher, load_sport, read_csv, ROOT, season_files
 
 # ==============================================================================================================
 # Reading staff from pages   (was scripts/staff.py)
 # ==============================================================================================================
 
 STAFF_DOC = 'Coaches and staff from a team\'s roster page (Sidearm classic and cards, WMT/Nuxt) or its separate coaches page\n(PrestoSports). Shared by staff.py scrape and the tests.\n\nEvery layout links each coach to a bio page: /sports/<sport>/roster/coaches/<name>/<id> (Sidearm),\n/sports/<sport>/roster/season/<year>/staff/<name> (WMT), /sports/<sport>/coaches/<name> (Presto). parse_staff()\nstarts from those links, takes the name from the link (or its aria-label when the link says "Full Bio") and the\njob title from the card or table row the link sits in.\n'
-import re
-from urllib.parse import urljoin
 
-from bs4 import BeautifulSoup
 
 _BIO_LINK = re.compile(r"/(?:roster/)?coaches/[^/?#]+|/roster/(?:season/[^/]+/)?staff/[^/?#]+|/coach/[^/?#]+", re.I)
 _TITLE_CLASS = re.compile(r"title|position|role|job", re.I)
@@ -244,19 +253,7 @@ Writes rosters/<sport>/staff_<season>.csv: season, division, current_conference,
 (head, associate, assistant, coordinator, graduate, volunteer, support), bio_url, source_url. A season file is
 rewritten as a whole; school-seasons whose roster failed get no staff (there's no page to read).
 """
-import argparse
-import csv
-import os
-import re
-import sys
-from concurrent.futures import ProcessPoolExecutor
-from pathlib import Path
-from urllib.parse import urljoin, urlparse
 
-import core  # noqa: E402
-from core import Fetcher  # noqa: E402
-from core import ROOT, add_sport_argument, load_sport  # noqa: E402
-from core import read_csv, season_files  # noqa: E402
 
 FIELDS = ["season", "division", "current_conference", "school", "name", "title", "role", "bio_url", "source_url"]
 CACHE = ROOT / ".cache" / "html"
@@ -406,15 +403,7 @@ def scrape_staff_main(argv=None) -> int:
 # ==============================================================================================================
 
 BUILD_STAFF_DATA_DOC = 'Coaches and staff for the staff pages: one person per name across a sport\'s schools and seasons, their\nseasons at each school, and their moves between schools.\n\n    python3 scripts/staff.py build --sport football     # rosters/football/staff_*.csv -> docs/football/staff_data.json\n\nReads rosters/<sport>/staff_<season>.csv (staff.py scrape) and the schools, conferences and divisions from\ndocs/<sport>/map_data.json (build.py map, so run that first).\n\nPeople: the same name in the same sport is the same person ("Mike Smith Jr." and "Mike Smith" too, and "Mike A. Smith"\nwhen "Mike Smith" is listed somewhere). A name seen\nat two schools in the same season more than once is two people (a common name), and gets no moves. One season\nat two schools is fine: coaches change jobs mid-year and both pages list them.\n\nA move: the last season at one school, then the first season at the next (at most two seasons later), each with\nthe person\'s role there.\n'
-import argparse
-import csv
-import json
-import re
-import sys
-from collections import defaultdict
-from pathlib import Path
 
-from core import add_sport_argument, load_sport  # noqa: E402
 
 COACHING = {"head", "associate", "assistant", "coordinator", "graduate", "volunteer"}
 _SUFFIX = re.compile(r"\b(jr|sr|ii|iii|iv|dr|coach)\b\.?", re.I)

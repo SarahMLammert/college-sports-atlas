@@ -11,13 +11,27 @@ Commands:
 """
 from __future__ import annotations
 
-import sys
-from pathlib import Path
-
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-
+import argparse
+import contextlib
+import csv
+import gzip
+import hashlib
+import json
+import os
 import re
+import subprocess
+import sys
+import threading
+import time
+from dataclasses import dataclass, field
+from pathlib import Path
+from urllib.parse import urlparse
 
+import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))   # so the files here import each other
 
 def clean(text) -> str:
     """Whitespace squeezed, non-breaking spaces made plain; None -> ''."""
@@ -50,14 +64,6 @@ finds that layout.
 Every script takes --sport (default: football) and gets its paths from here, so it doesn't matter
 which folder a script is run from.
 """
-import argparse
-import contextlib
-import csv
-import json
-import os
-import time
-from dataclasses import dataclass, field
-from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent          # the repo folder (this file is scripts/core.py)
 CONFIG = ROOT / "config"
@@ -384,19 +390,7 @@ def division_for(school: dict, season: int, history: dict[str, list[dict]]) -> s
 FETCH_DOC = ''
 """Downloading roster and staff pages: retries, polite pacing per site, an on-disk cache, and an
 optional headless-browser fallback. Shared by every sport."""
-import gzip
-import hashlib
-import os
-import subprocess
-import sys
-import threading
-import time
-from pathlib import Path
-from urllib.parse import urlparse
 
-import requests
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
 
 USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
@@ -723,9 +717,6 @@ read those files directly; players() turns them into one row per player per scho
 combined file has to be kept on disk (scrape_rosters.py --combined still writes rosters_all_seasons.csv
 and players_unique.csv for opening in a spreadsheet).
 """
-import csv
-import re
-from pathlib import Path
 
 # (clean() is defined at the top of this file)
 
@@ -820,9 +811,6 @@ def players(rosters_dir: Path) -> list[dict]:
 # ==============================================================================================================
 
 LEVELS_DOC = 'Which level a transfer\'s previous school was at: D1, D2, D3, NAIA, JUCO, club or unknown.\n\nEvery college is a row in config/<sport>/schools.csv: the D1 schools, the seasons some of them spent in\nanother division, and the D2, D3, NAIA and junior colleges, with other spellings in its aliases column\n(separated by "|"). A row can be limited to a range of seasons, so "Tarleton State" means Division II\nfor a player who left before 2020 and D1 after. Rows with division HS are high schools whose name looks\nlike a college ("St. John\'s College"), so they stay unknown. Rows with division CLUB are club (non-varsity)\nteams, such as lacrosse\'s MCLA teams: never scraped, only a level for transfers.\n\n    levels = Levels.load(sport)\n    levels.level("Valdosta St.", 2018)        -> ("D2", "Valdosta State")\n    levels.level("Hutchinson (Kan.) CC", 2022) -> ("JUCO", "")\n\nSpellings are compared by key(): lowercase words without "University", "the", "of", "at" or punctuation,\n"St." read as "State" at the end of a name and "Saint" elsewhere, "UW-" as "Wisconsin", and a\nparenthetical state ("(Kan.)", "(MO)") kept as a postal code. A name that fits schools at two different\nlevels ("Bethel", "Concordia") comes back unknown rather than guessed.'
-import csv
-import re
-from pathlib import Path
 
 LEVELS = ["D1", "D2", "D3", "NAIA", "JUCO", "CLUB", "unknown"]
 LEVEL_NAMES = {"D1": "Division I", "D2": "Division II", "D3": "Division III", "NAIA": "NAIA",
@@ -1075,7 +1063,6 @@ def _read_schools(path: Path) -> list[dict]:
 # ==============================================================================================================
 
 NOTES_DOC = 'Long lists of schools go to a notes file instead of the terminal.\n\n    from notes import Notes\n    notes = Notes(sport.rosters_dir / "notes_build.txt")      # rewritten on each run\n    notes.listed("no colors in config/shared/school_colors.csv for", missing)\n\nFive names or fewer are printed as before. More print one line with the count and where the names are.'
-from pathlib import Path
 
 SHOWN = 5
 
@@ -1116,11 +1103,6 @@ where it stopped. Don't run it while a scrape of any sport is running.
     python3 scripts/core.py compress-cache               # everything (about 10-20 minutes)
     python3 scripts/core.py compress-cache --minutes 5   # stop after 5 minutes
 """
-import argparse
-import os
-import sys
-import time
-from pathlib import Path
 
 
 CACHE = Path(__file__).resolve().parent.parent / ".cache" / "html"

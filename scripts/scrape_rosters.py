@@ -37,36 +37,51 @@ Commands:
 """
 from __future__ import annotations
 
+import argparse
+import csv
+import logging
+import os
+import re
 import sys
+import threading
+import urllib.request
+import warnings
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
+from urllib.parse import urljoin, urlparse
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent))   # so the files here import each other
 
+import core
+import geocode
+import sidearm
+from core import (
+    add_sport_argument,
+    build_unique,
+    current_season,
+    d1_schools,
+    division_for,
+    Fetcher,
+    load_all_colleges,
+    load_division_history,
+    load_schools,
+    load_sport,
+    read_csv,
+    ROOT,
+    SCRAPED,
+    season_files,
+    sport_lock,
+    UNIQUE_FIELDS,
+)
+from geocode import *  # noqa: F401,F403
+from sidearm import *  # noqa: F401,F403
 
 # ==============================================================================================================
 # Scraping rosters   (was scripts/scrape_rosters.py)
 # ==============================================================================================================
 
 SCRAPE_ROSTERS_DOC = 'Scrape a sport\'s rosters into CSV, for one season or many.\n\nTo run every step for a sport at once (scrape, retry, geocode, build, check), use scripts/pipeline.py:\n    python3 scripts/pipeline.py softball\n\nExamples\n    python scripts/scrape_rosters.py                                   # current season, every school\n    python scripts/scrape_rosters.py --seasons 2016-2019,2021-2026     # last 10 seasons, skipping 2020\n    python scripts/scrape_rosters.py --seasons 2019 --only "Alabama,Clemson"\n    python scripts/scrape_rosters.py --seasons 2016-2019,2021-2026 --retry-failed --render\n    python scripts/scrape_rosters.py --recombine                       # no downloads: re-clean the saved season files\n    python scripts/scrape_rosters.py --sport lacrosse-mens             # another sport (needs config/lacrosse-mens/settings.json)\n    python scripts/scrape_rosters.py --seasons 2016-2026 --report      # also write the scrape reports and MISSING_ROSTERS.md\n\nReads config/<sport>/settings.json and config/<sport>/schools.csv (default sport: football).\n\nOutputs (in rosters/<sport>/, or --out). The rosters are all cleaned: no jersey numbers or captain\nmarks in names, hometowns split into city/state/country, high school and previous school sorted out.\n    rosters_<season>.csv          every player that season, one row each (the later steps read these)\nOnly with --combined (for opening in a spreadsheet; nothing else needs them):\n    rosters_all_seasons.csv       every saved season stacked (one row per player per season)\n    players_unique.csv            one row per player per school, with first/last season on the roster\nOnly with --report:\n    scrape_report_<season>.csv    per school: status, strategy, player counts, URL, errors\n    MISSING_ROSTERS.md            the failed and partial schools by division, with reasons (always in rosters/<sport>/)\n\n--retry-failed doesn\'t need the reports: it tells which school-seasons are done from the saved rosters.\n\nFetching, page parsing and field cleaning live in core.py, sidearm.py and geocode.py next to this script.\n'
-import argparse
-import os
-import warnings
-import csv
-import logging
-import re
-import shutil
-import sys
-import threading
-from concurrent.futures import ThreadPoolExecutor, as_completed
-from pathlib import Path
-from urllib.parse import urljoin, urlparse
 
-import core, geocode, sidearm
-from core import Fetcher, current_season
-from geocode import *            # noqa: F401,F403
-from core import UNIQUE_FIELDS, build_unique, person_key, read_csv, season_files   # shared with the later steps
-from core import ROOT, SCRAPED, add_sport_argument, d1_schools, division_for, load_all_colleges, load_division_history, load_schools, load_sport, sport_lock
-from sidearm import *              # noqa: F401,F403
 
 # Older code imported everything from this file (`from scrape_rosters import parse_hometown`); keep
 # those names here, including the underscored helpers, so it still works.
@@ -1260,10 +1275,6 @@ Follows each link in rosters/football/redirect_check.csv (athletics pages on a c
 to where it ends up, and fills in that domain in config/football/schools.csv when the school's
 domain is still blank. Prints what it did; nothing else is changed.
 """
-import csv
-import urllib.request
-from pathlib import Path
-from urllib.parse import urlparse
 
 
 def find_athletics_domains_main(argv=None):

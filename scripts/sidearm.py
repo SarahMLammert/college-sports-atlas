@@ -1,22 +1,23 @@
 from __future__ import annotations
 
+import json
+import re
+from itertools import zip_longest
+from typing import Any, Callable, Iterable
+
+from bs4 import BeautifulSoup, Tag
+
+from core import current_season
+from geocode import _PLACEHOLDERS
+from geocode import *  # noqa: F401,F403
+
 """Reading Sidearm, WMT and PrestoSports athletics pages: building roster URLs, checking which season a page
 shows, and pulling players out of it (five parsers, best result kept). Also the rules for telling a
 previous college from a high school.
 
 Sport-specific settings (roster URL paths, minimum roster size, junior-college names) come from
 config/<sport>/settings.json through configure(), which the scripts call at startup."""
-import json
-import re
-from itertools import zip_longest
-from typing import Any, Callable, Iterable
-from urllib.parse import urljoin
 
-from bs4 import BeautifulSoup, Tag
-
-from core import current_season
-from geocode import *            # noqa: F401,F403  clean, parse_hometown, normalize_class, ...
-from geocode import _PLACEHOLDERS, _key, _lookup   # noqa: F401
 
 # Set by configure() from the sport's settings; these defaults are football's.
 ROSTER_PATHS = ["/sports/football/roster"]
@@ -169,7 +170,6 @@ def candidate_urls(domain: str, override: str = "", season: int | None = None) -
             seen.add(u)
             out.append(u)
     return out
-
 
 
 # =============================================================================
@@ -965,7 +965,6 @@ STRATEGIES: list[tuple[str, Callable[[str, BeautifulSoup], list[dict]]]] = [
     ("embedded_json", parse_embedded_json),
     ("ardor_cards", parse_ardor_cards),
 ]
-
 
 
 _CELL_LABEL = re.compile(

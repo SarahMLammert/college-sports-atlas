@@ -1172,6 +1172,12 @@ def test_every_sports_pages_match_footballs():
     assert build.sync_pages_main(["--check"]) == 0
 
 
+def test_map_data_packing_round_trip():
+    P = {"s": [0, 0, 0, 1, 1], "t": [3, 1, 4, 1, 5], "p": [0, 1, 2, 0, 1], "f": [16, 16, 17, 17, 17], "l": [19, 16, 17, 20, 18],
+         "x": [0, 1, 0, 0, 1], "o": [-1, 1, -1, -1, 0], "v": [0, 0, 0, 2, 0], "d": [1, 1, 1, 0, 0], "h": [0, 1, 2, 3, 4]}
+    assert build.unpack_players(build.pack_players(P)) == P
+
+
 def test_map_data_names_and_summary_files(tiny, tmp_path):
     # Oct 28: names in names.txt (only the dot map loads them), front-page numbers in summary.json
     write_season(tiny, 2025, [player("Alpha", "Ann Lee"), player("Alpha", "Bea Diaz", town="Dallas, TX")])
@@ -1184,7 +1190,7 @@ def test_map_data_names_and_summary_files(tiny, tmp_path):
     dst = tmp_path / "site" / "map_data.json"
     build.make_map_data(None, dst, tiny)
     data = json.loads(dst.read_text())
-    assert "names" not in data and len(data["players"]["s"]) == 2
+    assert "names" not in data and data["players"]["packed"] and len(build.unpack_players(data["players"])["s"]) == 2
     assert dst.with_name("names.txt").read_text().split("\n") == ["Ann Lee", "Bea Diaz"]
     summary = json.loads(dst.with_name("summary.json").read_text())
     assert (summary["players"], summary["schools"], summary["first"], summary["last"]) == (2, 1, 2025, 2025)

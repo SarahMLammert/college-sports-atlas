@@ -63,9 +63,9 @@ import time
 from dataclasses import dataclass, field
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-from core import LOCK_ENV, ROOT, SportBusy, available_sports, load_sport, sport_lock  # noqa: E402
-from core import read_csv, season_files  # noqa: E402
+sys.path.insert(0, str(Path(__file__).resolve().parent))   # so the files here import each other
+
+from core import available_sports, load_sport, LOCK_ENV, read_csv, ROOT, season_files, sport_lock, SportBusy
 
 SCRIPTS = Path(__file__).resolve().parent
 STEPS = ["test", "scrape", "retry", "redo-current", "geocode", "fix-hometowns", "frozen", "build",

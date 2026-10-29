@@ -14,11 +14,37 @@ Commands:
 """
 from __future__ import annotations
 
+import argparse
+import csv
+import difflib
+import json
+import re
+import statistics
 import sys
+from collections import Counter, defaultdict
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent))   # so the files here import each other
 
+import sidearm
+from core import (
+    add_sport_argument,
+    available_sports,
+    build_unique,
+    d1_schools,
+    is_major,
+    LEVELS,
+    Levels,
+    load_schools,
+    load_sport,
+    Notes,
+    players,
+    read_csv,
+    ROOT,
+    season_files,
+    season_rows,
+)
+from sidearm import clean_name, load_known_colleges, sort_schools
 
 # ==============================================================================================================
 # The map data (map)   (was scripts/build_map_data.py)
@@ -49,21 +75,8 @@ college, or unknown (no school named, or a name that fits two levels).
 
 It reads frozen_class_seasons.csv from rosters/<sport>/ and writes transfer_levels.csv there.
 """
-import argparse
-import csv
-from pathlib import Path
-import json
-import re
-import sys
-from collections import Counter
 
 # The scraper's rules for telling a previous college from a high school, so both steps agree.
-import sidearm
-from core import LEVELS, Levels, is_major
-from core import Notes
-from core import add_sport_argument, d1_schools, load_sport
-from core import players
-from sidearm import clean_name, load_known_colleges, sort_schools
 
 # Position groups come from the sport's settings (config/<sport>/settings.json): the groups, the roster
 # abbreviations in each, words a spelled-out position starts with, and the group for anything else.
@@ -253,6 +266,68 @@ def placed_players(sport) -> list[dict]:
     return rows
 
 
+# ---- the players' columns, packed (Oct 28) ----
+# Football's map_data.json was 15.5 MB, almost all of it the players' columns written out in full. Columns that
+# repeat (school, first season, division: the players are in school order) are written as runs, the last season as
+# the number of seasons after the first, and the columns that are mostly empty (transfer, previous school, level
+# of the previous school) as only the players they apply to. docs/common.js (loadData) unpacks them; unpack_players
+# below does the same in Python. A file without "packed" is in the old, plain form.
+PACKED = 1
+
+
+def _runs(a):
+    out = []
+    for v in a:
+        if out and out[-2] == v:
+            out[-1] += 1
+        else:
+            out += [v, 1]
+    return out
+
+
+def _unruns(a):
+    out = []
+    for i in range(0, len(a), 2):
+        out += [a[i]] * a[i + 1]
+    return out
+
+
+def _sparse(a, empty):
+    """[gap, value, gap, value, ...]: gap = players since the last one listed (first: its index)."""
+    out, last = [], -1
+    for i, v in enumerate(a):
+        if v != empty:
+            out += [i - last - 1, v]
+            last = i
+    return out
+
+
+def _unsparse(a, n, empty):
+    out, i = [empty] * n, -1
+    for k in range(0, len(a), 2):
+        i += a[k] + 1
+        out[i] = a[k + 1]
+    return out
+
+
+def pack_players(P: dict) -> dict:
+    n = len(P["s"])
+    return {"packed": PACKED, "n": n, "s": _runs(P["s"]), "f": _runs(P["f"]), "d": _runs(P["d"]),
+            "len": [l - f for f, l in zip(P["f"], P["l"])], "p": P["p"], "t": P["t"], "h": P["h"],
+            "x": _sparse(P["x"], 0), "o": _sparse(P["o"], -1), "v": _sparse(P["v"], 0)}
+
+
+def unpack_players(P: dict) -> dict:
+    if not P.get("packed"):
+        return P
+    n = P["n"]
+    f = _unruns(P["f"])
+    return {"s": _unruns(P["s"]), "t": P["t"], "p": P["p"], "f": f, "l": [a + b for a, b in zip(f, P["len"])],
+            "x": _unsparse(P["x"], n, 0), "o": _unsparse(P["o"], n, -1), "v": _unsparse(P["v"], n, 0),
+            "d": _unruns(P["d"]), "h": P["h"]}
+
+
+
 def make_map_data(src, dst, sport):
     sidearm.configure(sport)     # the sport's junior colleges, for telling a college from a high school
     use_positions(sport)
@@ -359,7 +434,7 @@ def make_map_data(src, dst, sport):
         # For the pages: the sport's name, which divisions are D1, and how divisions and positions are written
         "sport": sport.label or sport.name, "d1": list(sport.d1_divisions),
         "divLabels": {d: sport.division_label(d) for d in divs}, "posLabels": dict(sport.position_labels),
-        "players": {k: v for k, v in P.items() if k != "n"},
+        "players": pack_players({k: v for k, v in P.items() if k != "n"}),
     }
     Path(dst).parent.mkdir(parents=True, exist_ok=True)
     with open(dst, "w", encoding="utf-8") as fh:
@@ -424,12 +499,6 @@ editing the CSV:
     python scripts/build.py locations                 # football
     python scripts/build.py locations --sport mens-basketball
 """
-import argparse
-import csv
-import json
-
-from core import Notes
-from core import ROOT, add_sport_argument, load_schools, load_sport
 
 
 def build_school_locations_main(argv=None):
@@ -463,15 +532,7 @@ def build_school_locations_main(argv=None):
 # ==============================================================================================================
 
 CHECK_FROZEN_CLASSES_DOC = 'Find school-seasons whose class labels don\'t advance from year to year.\n\nSome schools\' archive roster pages show every player\'s class as of a later\nseason (Ohio State 2017-2022, for one). Newcomers then look like juniors or\nolder, and build.py map\'s "arrived as a junior or older" rule reads them\nas transfers. This script finds those seasons.\n\nFor each pair of a school\'s consecutive seasons in the data (2019 -> 2021\ncounts as consecutive), it takes the players on both rosters and checks\nwhether their class moved up. Two measures are printed:\n\n  all     every returning player\n  no_sr   only players who were FR, SO or JR the season before, so seniors and\n          grads repeating a year (often the COVID free year) don\'t count\n\nA frozen archive scores ~90-100% on both. A season inflated by COVID repeats\nscores high on "all" but normal on "no_sr".\n\nRun:  python scripts/build.py frozen          # add --sport <name> for another sport\nReads the season files (rosters_<season>.csv) in rosters/<sport>/ and writes rosters/<sport>/frozen_class_seasons.csv\n(school, season, share) for the build.\n'
-import argparse
-import csv
-import re
-import statistics
-from collections import defaultdict
-from pathlib import Path
 
-from core import add_sport_argument, load_sport
-from core import season_rows
 
 CUTOFF = 0.6        # flag a pair of seasons when this share of players didn't advance
 MIN_PAIRS = 30      # need at least this many returning players to judge (the sport's frozen_min_pairs replaces it)
@@ -617,13 +678,7 @@ scripts/pipeline.py runs it as its last step. It only reads; it changes nothing.
 The oversized and repeated lists are also written to rosters/<sport>/roster_checks.csv, with the page
 address each one came from, for checking in a browser.
 """
-import argparse
-import csv
-import statistics
-from collections import Counter, defaultdict
 
-from core import add_sport_argument, load_sport
-from core import build_unique, read_csv, season_files
 
 OVERSIZED = 2.0      # a school-season this many times the school's median is listed
 OVERSIZED_MIN_EXTRA = 10   # ... and at least this many players over it (small rosters vary a lot)
@@ -766,13 +821,7 @@ def check_rosters_main(argv=None) -> int:
 # ==============================================================================================================
 
 SYNC_PAGES_DOC = 'Copy football\'s map pages to every other sport, so a fix made once reaches all of them.\n\n    python3 scripts/build.py sync           # write docs/<sport>/players-*.html for every sport but football\n    python3 scripts/build.py sync --check   # only say which pages differ from football\'s beyond their own words\n\ndocs/football/players-dotmap.html, players-heatmap.html and players-transfers.html are the masters (and\nstaff-moves.html and staff-directory.html, which are copied as they are): edit those,\nthen run this. Each other sport keeps its own words, taken from its current page: the <title>, the description,\nthe <h1> heading and the subtitle (id="sub"); women\'s sports also get she/her for he/his/him. Everything else comes\nfrom football\'s page. (Before Oct 28 the pages were edited one by one, and the other sports never got football\'s\nmulti-conference filter: picking two conferences there left the heading at "All-school stats".)\n'
-import argparse
-import difflib
-import re
-import sys
-from pathlib import Path
 
-from core import ROOT, available_sports  # noqa: E402
 
 PAGES = ["players-dotmap.html", "players-heatmap.html", "players-transfers.html"]
 # The staff pages take their words from staff_data.json, so every sport gets football's file as it is (made if missing)

@@ -20,8 +20,20 @@
   const narrow = () => matchMedia("(max-width: 760px)").matches;
 
   // ---------- data ----------
+  // map_data.json since Oct 28 packs the players' columns (scripts/build.py, pack_players): school, first season and
+  // division as runs [value, count, ...], the last season as seasons after the first ("len"), and transfer, previous
+  // school and its level as [gap, value, ...] for the players they apply to. Unpacked here into plain columns.
+  function unpackPlayers(Q) {
+    const n = Q.n;
+    const runs = (a) => { const out = new Array(n); let k = 0; for (let i = 0; i < a.length; i += 2) for (let j = 0; j < a[i + 1]; j++) out[k++] = a[i]; return out; };
+    const sparse = (a, empty) => { const out = new Array(n).fill(empty); let k = -1; for (let i = 0; i < a.length; i += 2) { k += a[i] + 1; out[k] = a[i + 1]; } return out; };
+    const f = runs(Q.f);
+    return { s: runs(Q.s), t: Q.t, p: Q.p, f, l: f.map((v, i) => v + Q.len[i]), x: sparse(Q.x, 0), o: sparse(Q.o, -1),
+             v: sparse(Q.v, 0), d: runs(Q.d), h: Q.h };
+  }
   async function loadData() {
     const data = await fetch("map_data.json").then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); });
+    if (data.players.packed) data.players = unpackPlayers(data.players);
     const P = data.players;
     data.N = P.s.length;
     data.SEASONS = [...new Set([...P.f, ...P.l])].map((f) => f + 2000).sort((a, b) => a - b);   // every season anyone was on a roster
