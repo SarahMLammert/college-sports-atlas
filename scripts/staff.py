@@ -489,6 +489,45 @@ def build(rows: list[dict], schools: list[str]) -> dict:
     return {"people": "\n".join(names), "titles": titles, "stints": st, "moves": mv, "shared": shared}
 
 
+# ---- the stints, packed (Oct 28) ----
+# Each person's seasons are together and in order, so staff_data.json writes per person how many seasons ("n"), the
+# first season (minus 2000) and then the gap to the next ("y"), and school, role and title as 0 when the same as the
+# person's season before, else the value + 1. Football's file went from 3.9 MB to about 2.6 MB. docs/common.js
+# (GP.unpackStints) unpacks it; unpack_stints below does the same in Python.
+def pack_stints(st: dict) -> dict:
+    out = {"packed": 1, "n": [], "y": [], "s": [], "r": [], "t": []}
+    for k in range(len(st["p"])):
+        new = k == 0 or st["p"][k] != st["p"][k - 1]
+        if new:
+            out["n"].append(0)
+        out["n"][-1] += 1
+        out["y"].append(st["y"][k] - 2000 if new else st["y"][k] - st["y"][k - 1])
+        for c in "srt":
+            out[c].append(st[c][k] + 1 if new or st[c][k] != st[c][k - 1] else 0)
+    out["first"] = st["p"][0] if st["p"] else 0
+    out["people"] = [st["p"][k] for k in range(len(st["p"])) if k == 0 or st["p"][k] != st["p"][k - 1]]
+    if out["people"] == list(range(out["first"], out["first"] + len(out["people"]))):
+        del out["people"]                       # people numbered 0, 1, 2, ... in order: nothing to write
+    return out
+
+
+def unpack_stints(q: dict) -> dict:
+    if not q.get("packed"):
+        return q
+    people = q.get("people") or list(range(q.get("first", 0), q.get("first", 0) + len(q["n"])))
+    st = {"p": [], "s": [], "y": [], "r": [], "t": []}
+    k = 0
+    for person, n in zip(people, q["n"]):
+        for j in range(n):
+            st["p"].append(person)
+            st["y"].append(q["y"][k] + (2000 if j == 0 else st["y"][-1]))
+            for c in "srt":
+                st[c].append(q[c][k] - 1 if j == 0 or q[c][k] else st[c][-1])
+            k += 1
+    return st
+
+
+
 def build_staff_data_main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=BUILD_STAFF_DATA_DOC, formatter_class=argparse.RawDescriptionHelpFormatter)
     add_sport_argument(ap)
@@ -510,7 +549,10 @@ def build_staff_data_main(argv=None) -> int:
                divLabels=md.get("divLabels", {}), d1=md.get("d1", []), roles=ROLES,
                roleLabels=[ROLE_LABELS[r] for r in ROLES])
     dst = sport.site_dir / "staff_data.json"
+    stints = out["stints"]
+    out["stints"] = pack_stints(stints)
     dst.write_text(json.dumps(out, separators=(",", ":"), ensure_ascii=False), encoding="utf-8")
+    out["stints"] = stints
     n_people = out["people"].count("\n") + 1
     mv = out["moves"]
     heads = sum(1 for r in mv["rb"] if ROLES[r] == "head")

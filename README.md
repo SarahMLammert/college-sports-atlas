@@ -30,6 +30,10 @@ has five pages:
 - **Staff Directory** (`staff-directory.html`): a school's staff by season, its head coaches over time, and any
   person's career.
 
+Football and baseball come in two files: the dot map opens on the D1 schools (`map_data.json`) and loads the
+other divisions (`map_data_more.json`) only when a view or a search needs them. Map and staff data are packed
+(`build.py`, `staff.py`) and unpacked by `docs/common.js`.
+
 Every view is saved in the address after `#` (e.g. `football/players-dotmap.html#school=Alabama&pos=QB`), so links can be shared.
 The pages are football's: edit `docs/football/*.html`, then `python3 scripts/build.py sync` copies them to every
 sport (`--check` only reports differences; a test fails if they differ).
@@ -127,5 +131,4 @@ tests/                 test_atlas.py (python3 -m pytest tests -q)
 
 - Junior colleges with no known roster site are listed but not scraped; NJCAA's own stats pages could fill them.
 - Coaches are matched by name only, so two people with the same name can be mixed up.
-- Football's `map_data.json` is about 9 MB (packed since Oct 28, from 15.5 MB) plus 6 MB of names; still slow on phones.
-- `rosters/` was committed until Oct 28, so the git history is large (about 580 MB).
+- `rosters/` was committed until Oct 28, so the git history is large (about 580 MB) until it's rewritten without it.

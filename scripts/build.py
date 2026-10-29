@@ -273,6 +273,7 @@ def placed_players(sport) -> list[dict]:
 # of the previous school) as only the players they apply to. docs/common.js (loadData) unpacks them; unpack_players
 # below does the same in Python. A file without "packed" is in the old, plain form.
 PACKED = 1
+SPLIT_ABOVE = 150_000     # players; above this the D1 schools' players get a file of their own
 
 
 def _runs(a):
@@ -434,8 +435,23 @@ def make_map_data(src, dst, sport):
         # For the pages: the sport's name, which divisions are D1, and how divisions and positions are written
         "sport": sport.label or sport.name, "d1": list(sport.d1_divisions),
         "divLabels": {d: sport.division_label(d) for d in divs}, "posLabels": dict(sport.position_labels),
-        "players": pack_players({k: v for k, v in P.items() if k != "n"}),
     }
+    # Big sports (football, baseball) come in two files: map_data.json with the D1 schools' players, which the dot
+    # map opens on, and map_data_more.json with everyone else, which it loads when a view needs them (Oct 28).
+    # The players are put D1 schools first; names.txt follows the same order.
+    if len(P["s"]) > SPLIT_ABOVE:
+        d1_school = [div_now[sc][1] in sport.d1_divisions for sc in schools]
+        order = sorted(range(len(P["s"])), key=lambda k: (not d1_school[P["s"][k]], k))
+        P = {key: [col[k] for k in order] for key, col in P.items()}
+        cut = sum(d1_school[sc] for sc in P["s"])
+        first = {k: v[:cut] for k, v in P.items() if k != "n"}
+        rest = {k: v[cut:] for k, v in P.items() if k != "n"}
+        out["players"], out["more"] = pack_players(first), ["map_data_more.json"]
+        with open(Path(dst).with_name("map_data_more.json"), "w", encoding="utf-8") as fh:
+            json.dump({"players": pack_players(rest)}, fh, separators=(",", ":"))
+    else:
+        out["players"] = pack_players({k: v for k, v in P.items() if k != "n"})
+        Path(dst).with_name("map_data_more.json").unlink(missing_ok=True)
     Path(dst).parent.mkdir(parents=True, exist_ok=True)
     with open(dst, "w", encoding="utf-8") as fh:
         json.dump(out, fh, separators=(",", ":"), ensure_ascii=False)

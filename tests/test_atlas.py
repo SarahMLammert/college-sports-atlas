@@ -1228,6 +1228,13 @@ def test_staff_roles():
         assert role_of(title, sport) == want, title
 
 
+def test_staff_packing_round_trip():
+    from staff import pack_stints, unpack_stints
+    st = {"p": [0, 0, 0, 1, 2, 2], "s": [5, 5, 7, 1, 2, 2], "y": [2016, 2017, 2019, 2024, 2020, 2021],
+          "r": [2, 2, 0, 1, 6, 6], "t": [0, 0, 3, 1, 4, 5]}
+    assert unpack_stints(pack_stints(st)) == st
+
+
 def test_staff_moves_between_schools():
     from staff import build, person_key
     assert person_key("Mike Smith Jr.") == person_key("mike smith")

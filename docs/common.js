@@ -31,22 +31,48 @@
     return { s: runs(Q.s), t: Q.t, p: Q.p, f, l: f.map((v, i) => v + Q.len[i]), x: sparse(Q.x, 0), o: sparse(Q.o, -1),
              v: sparse(Q.v, 0), d: runs(Q.d), h: Q.h };
   }
-  async function loadData() {
+  // Big sports (football, baseball) split their players in two (Oct 28): map_data.json has the D1 schools'
+  // players, data.more the files with the rest. loadData() waits for all of them unless asked for
+  // { all: false } (the dot map, which opens on D1 and calls data.loadAll() when a view needs the others).
+  // data.complete says whether everything is in; data.loadAll() adds the rest to the same columns, in place.
+  async function loadData({ all = true } = {}) {
     const data = await fetch("map_data.json").then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); });
     if (data.players.packed) data.players = unpackPlayers(data.players);
     const P = data.players;
+    const seasons = () => {
+      const set = new Set(); for (let k = 0; k < P.f.length; k++) { set.add(P.f[k]); set.add(P.l[k]); }
+      data.SEASONS = [...set].map((f) => f + 2000).sort((a, b) => a - b);   // every season anyone was on a roster
+      data.FIRST = data.SEASONS[0]; data.LAST = data.SEASONS[data.SEASONS.length - 1];
+    };
     data.N = P.s.length;
-    data.SEASONS = [...new Set([...P.f, ...P.l])].map((f) => f + 2000).sort((a, b) => a - b);   // every season anyone was on a roster
-    data.FIRST = data.SEASONS[0]; data.LAST = data.SEASONS[data.SEASONS.length - 1];
+    seasons();
     // Players' names: in names.txt since Oct 28 (only the dot map needs them, and it draws before they arrive).
     // data.nameList is filled in place when they load, so code holding it sees them; data.loadNames() fetches
     // them once and resolves when they're in. Data built before then still has them in map_data.json.
     data.nameList = new Array(data.N).fill("");
-    let namesLoad = null;
+    let allNames = null, namesLoad = null;
+    const fillNames = () => { if (allNames) for (let i = 0; i < data.N; i++) data.nameList[i] = allNames[i] || ""; };
     data.loadNames = () => namesLoad || (namesLoad = (typeof data.names === "string" ? Promise.resolve(data.names)
       : fetch("names.txt").then((r) => { if (!r.ok) throw new Error(r.status); return r.text(); }))
-      .then((text) => { const a = text.split("\n"); for (let i = 0; i < data.N; i++) data.nameList[i] = a[i] || ""; data.namesLoaded = true; delete data.names; }));
+      .then((text) => { allNames = text.split("\n"); fillNames(); data.namesLoaded = true; delete data.names; }));
     if (typeof data.names === "string") data.loadNames();
+    // the rest of a split sport
+    const more = data.more || [];
+    data.complete = more.length === 0;
+    let allLoad = null;
+    data.loadAll = () => allLoad || (allLoad = Promise.all(more.map((f) => fetch(f).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })))
+      .then((parts) => {
+        for (const part of parts) {
+          const Q = part.players.packed ? unpackPlayers(part.players) : part.players;
+          for (const key of Object.keys(P)) { const col = P[key], add = Q[key]; for (let i = 0; i < add.length; i++) col.push(add[i]); }
+        }
+        data.N = P.s.length;
+        for (let i = data.nameList.length; i < data.N; i++) data.nameList.push("");
+        fillNames(); seasons();
+        data.complete = true;
+        return data;
+      }));
+    if (data.complete) allLoad = Promise.resolve(data);
     data.posLabel = data.posLabels || POS_LABEL;
     data.d1 = data.d1 || D1_DIVS;
     data.divLabel = data.divLabels || DIV_TITLE;
@@ -55,10 +81,13 @@
     data.schoolIndex = new Map(data.schools.map((s, i) => [s[0].toLowerCase(), i]));
     // campus city, state and coordinates (built from config/school_locations.csv); the pages work without it
     let loc = null;
-    try { loc = await fetch("school_locations.json").then((r) => r.ok ? r.json() : null); } catch (e) {}
+    const locLoad = fetch("school_locations.json").then((r) => r.ok ? r.json() : null).catch(() => null);
+    if (all) await data.loadAll();
+    try { loc = await locLoad; } catch (e) {}
     data.campus = data.schools.map((s) => { const v = loc && loc.schools[s[0]]; return v ? { city: v[0], state: v[1], lat: v[2], lon: v[3] } : null; });
     return data;
   }
+
 
   // ---------- school colors ----------
   const lum = (hex) => { const c = d3.color(hex).rgb(); const f = (v) => { v /= 255; return v <= .03928 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; }; return .2126 * f(c.r) + .7152 * f(c.g) + .0722 * f(c.b); };
@@ -107,6 +136,7 @@
     const confOf = (i) => { const c = data.schools[i][1]; return Number.isInteger(c) && c >= 0 && c < confs.length ? c : -1; };
     const confLabel = (c) => (c >= 0 && confs[c]) || "No conference";
     const hasPlayers = new Uint8Array(data.schools.length); P.s.forEach((s) => { hasPlayers[s] = 1; });
+    if (!data.complete) hasPlayers.fill(1);   // a big sport with only its D1 part loaded: every school in the data has players
     const groups = [], gKey = new Map(), schoolGroup = new Int32Array(data.schools.length).fill(-1);
     data.schools.forEach((s, i) => {
       if (!hasPlayers[i]) return;
@@ -367,7 +397,12 @@
     addEventListener("resize", () => { if (isOpen()) place(); });
     document.addEventListener("pointerdown", (e) => { if (isOpen() && !e.target.closest(".fwrap")) setOpen(false); });
 
-    return { state, passes, schoolOk, confText, sync, reset, activeCount, summary, toParams, fromParams, setOpen, isOpen, updateBadge, divName, isD1 };
+    // true when every school the filters let through is a D1 school (the dot map then needn't load the rest)
+    function onlyD1() {
+      if (state.school >= 0) return isD1(data.schools[state.school][2]);
+      return state.groups.size > 0 && [...state.groups].every((g) => isD1(groups[g].div));
+    }
+    return { state, passes, schoolOk, confText, sync, reset, activeCount, summary, toParams, fromParams, setOpen, isOpen, updateBadge, divName, isD1, onlyD1 };
   }
 
   // Styles for the conference checklist and the part-on division chip, so no page needs its own copy.
@@ -427,5 +462,22 @@
     new ResizeObserver(() => document.documentElement.style.setProperty("--bar-h", bar.getBoundingClientRect().height + "px")).observe(bar);
   }
 
-  window.GP = { $, sport, saveKey, readSaved, POS_LABEL, STATE_ABBR, ABBR_STATE, fmt, pct, esc, css, narrow, loadData, makePalette, makeFilters, copyLink, trackBar, miles, median };
+  // staff_data.json since Oct 28 packs its stints (scripts/staff.py, pack_stints): per person the number of seasons
+  // ("n"), the first season - 2000 then the gap to the next ("y"), and school, role and title as 0 when the same as
+  // the season before, else value + 1. Unpacked here into plain columns p, s, y, r, t.
+  function unpackStints(q) {
+    if (!q.packed) return q;
+    const people = q.people || q.n.map((_, i) => (q.first || 0) + i);
+    const st = { p: [], s: [], y: [], r: [], t: [] };
+    let k = 0;
+    people.forEach((person, i) => {
+      for (let j = 0; j < q.n[i]; j++, k++) {
+        st.p.push(person);
+        st.y.push(q.y[k] + (j === 0 ? 2000 : st.y[st.y.length - 1]));
+        for (const c of ["s", "r", "t"]) st[c].push(j === 0 || q[c][k] ? q[c][k] - 1 : st[c][st[c].length - 1]);
+      }
+    });
+    return st;
+  }
+  window.GP = { $, sport, saveKey, readSaved, POS_LABEL, STATE_ABBR, ABBR_STATE, fmt, pct, esc, css, narrow, loadData, unpackStints, makePalette, makeFilters, copyLink, trackBar, miles, median };
 })();

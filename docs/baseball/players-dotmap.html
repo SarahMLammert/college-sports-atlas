@@ -242,12 +242,13 @@ body { background: var(--sea); }
   // ---------- data ----------
   let data;
   try {
-    data = await GP.loadData();
+    data = await GP.loadData({ all: false });   // big sports: the D1 schools' players first (see moreData below)
   } catch (e) {
     $("loading").textContent = "The player data didn't load. If you opened this file directly, serve the folder instead (python -m http.server), or reload to try again.";
     return;
   }
-  const P = data.players, N = data.N;
+  const P = data.players;
+  let N = data.N;            // grows when a big sport's other divisions arrive (moreData)
   const names = data.nameList;
   const towns = data.towns;
   const T = towns.length;
@@ -747,7 +748,8 @@ body { background: var(--sea); }
 
   // ---------- search ----------
   const townTotal = new Int32Array(T);
-  for (let k = 0; k < N; k++) if (P.t[k] >= 0) townTotal[P.t[k]]++;
+  function countTowns() { townTotal.fill(0); for (let k = 0; k < N; k++) if (P.t[k] >= 0) townTotal[P.t[k]]++; }
+  countTowns();
   let ix = null;
   function searchIndex() {
     if (ix) return ix;
@@ -851,7 +853,7 @@ body { background: var(--sea); }
   }
   let qFrame = 0;
   qEl.addEventListener("input", () => { cancelAnimationFrame(qFrame); qFrame = requestAnimationFrame(renderResults); });
-  qEl.addEventListener("focus", () => { if (qEl.value.trim().length >= 2) renderResults(); });
+  qEl.addEventListener("focus", () => { moreData(); if (qEl.value.trim().length >= 2) renderResults(); });   // search covers every division
   qEl.addEventListener("keydown", (e) => {
     if (e.key === "ArrowDown") { e.preventDefault(); if (resEl.hidden) renderResults(); else setActive(active + 1); }
     else if (e.key === "ArrowUp") { e.preventDefault(); setActive(active - 1); }
@@ -894,7 +896,10 @@ body { background: var(--sea); }
     if (!hash && firstLoad) { hash = GP.readSaved("recruiting-map:last"); }   // opened plainly: pick up where you left off
     const q = new URLSearchParams(hash);
     F.fromParams(q); Object.assign(state, { focusState: null, town: -1, player: -1, hs: null });
-    if (firstLoad && !hash) state.allSchools = true;   // a first visit opens on every school's dots, not an empty map
+    if (firstLoad && !hash) {   // a first visit opens on every school's dots, not an empty map
+      if (!data.complete) F.fromParams(new URLSearchParams("div=D1"));   // a big sport: every D1 school's (the rest loads when asked for)
+      state.allSchools = true;
+    }
     const v = (key) => (q.get(key) || "").trim();
     if (ABBR_STATE[v("state").toUpperCase()]) state.focusState = v("state").toUpperCase();
     if (townIndex.has(v("town"))) state.town = townIndex.get(v("town"));
@@ -934,17 +939,31 @@ body { background: var(--sea); }
   }
   $("scopeChip").addEventListener("click", () => { state.allSchools = false; setSchool(-1); });
 
+  // A big sport opens with only its D1 schools' players. A view that needs any other school, or a search, loads the
+  // rest once (map_data_more.json); until then the map shows what it has and says it's loading.
+  let loadingMore = false;
+  function moreData() {
+    if (data.complete || loadingMore) return;
+    loadingMore = true;
+    data.loadAll().then(() => {
+      N = data.N; countTowns(); ix = null; hsStateList = null; hsCache.clear(); loadingMore = false;
+      update(); if (qEl.value.trim()) renderResults();
+    }).catch(() => { loadingMore = false; $("colorKey").textContent = "The other divisions didn't load; reload to try again."; });
+  }
   function update() {
+    if (!data.complete && !F.onlyD1() && (state.school >= 0 || state.allSchools || hasPeople())) moreData();
     compute(); draw(); renderFindings(); updateScope(); F.updateBadge();
     $("campusKey").hidden = !(state.school >= 0 && data.campus[state.school]);
-    $("colorKey").innerHTML = state.school >= 0
-      ? `${swatch(state.school)}${esc(data.schools[state.school][0])} colors`
+    $("colorKey").innerHTML = loadingMore ? "Loading the other divisions…"
+      : state.school >= 0 ? `${swatch(state.school)}${esc(data.schools[state.school][0])} colors`
       : !state.allSchools ? "Add a school with search or Filters to fill in the map"
       : "Dot color: the school with the most players from that town";
   }
 
   const startHash = location.hash.slice(1) || GP.readSaved("recruiting-map:last");
-  if (/(^|&)player=/.test(startHash)) { try { await data.loadNames(); } catch (e) { /* the player just isn't found */ } }
+  if (/(^|&)player=/.test(startHash)) {
+    try { await Promise.all([data.loadNames(), data.loadAll()]); N = data.N; countTowns(); } catch (e) { /* the player just isn't found */ }
+  }
   let pendingMap = readUrl(true);
   syncControls();
   if (hasPeople() && !narrow()) setPanel("details", true);
