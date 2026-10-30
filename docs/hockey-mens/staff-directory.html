@@ -45,7 +45,7 @@ button.nmb:focus-visible { outline: 2px solid var(--focus); }
 .sugg li small { color: var(--muted); margin-left: 6px; }
 .sugg li[aria-selected="true"], .sugg li:hover { background: var(--accent-soft); }
 .career { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0; }
-.career li { display: grid; grid-template-columns: 6.2em minmax(0, 1fr); gap: 2px 12px; padding: 7px 0; border-top: 1px solid var(--line); font-size: 14.5px; line-height: 1.35; }
+.career li { display: grid; grid-template-columns: 9.5em minmax(0, 1fr); gap: 2px 12px; padding: 7px 0; border-top: 1px solid var(--line); font-size: 14.5px; line-height: 1.35; }
 .career li:first-child { border-top: 0; }
 .career .yr { font-variant-numeric: tabular-nums; color: var(--muted); }
 .career .t { display: block; color: var(--muted); }
@@ -127,7 +127,8 @@ button.nmb:focus-visible { outline: 2px solid var(--focus); }
   const people = data.people.split("\n"), ROLES = data.roles, RL = data.roleLabels, ST = data.stints, MV = data.moves;
   const HEAD = ROLES.indexOf("head"), SUPPORT = ROLES.indexOf("support");
   const FIRST = Math.min(...ST.y), LAST = Math.max(...ST.y);
-  $("sub").textContent = `Every school's coaches and staff, season by season, ${FIRST}–${LAST}`;
+  const SPRING = GP.springOf(data), lab = (y) => GP.seasonLabel(y, SPRING), span = (a, b) => GP.seasonSpan(a, b, SPRING);
+  $("sub").textContent = `Every school's coaches and staff, season by season, ${span(FIRST, LAST)}`;
   const { swatch } = GP.makePalette(data);
   const schoolIndex = new Map(data.schools.map((s, i) => [s[0].toLowerCase(), i]));
   // indexes: the stints of each school and of each person
@@ -169,9 +170,9 @@ button.nmb:focus-visible { outline: 2px solid var(--focus); }
     for (let y = ys[0]; y <= ys[ys.length - 1]; y++) if (!ys.includes(y)) missing.push(y);
     out.innerHTML = `<h2 id="schoolTitle">${swatch(s)}${esc(data.schools[s][0])}</h2>
       <p class="note">${esc([data.divLabels[div] || div, conf].filter(Boolean).join(" · "))} · <a href="staff-moves.html#school=${encodeURIComponent(data.schools[s][0])}">Coaching moves in and out</a></p>
-      <div><h3>Season</h3><div class="seasons" id="seasons">${ys.map((y) => `<button type="button" data-y="${y}" aria-pressed="${y === state.season}">${y}</button>`).join("")}</div>
-      ${missing.length ? `<p class="note" style="margin-top:6px">No staff page found for ${missing.join(", ")}.</p>` : ""}</div>
-      <div><h3>Head coaches</h3><div class="heads">${runs.filter((r) => r.ps.length).map((r) => `<span><b>${r.from}${r.to > r.from ? "–" + r.to : ""}</b>${r.ps.map((p) => `<button type="button" class="nmb" data-p="${p}">${esc(people[p])}</button>`).join(" &amp; ")}</span>`).join("") || `<span class="empty">None listed</span>`}</div></div>
+      <div><h3>Season</h3><div class="seasons" id="seasons">${ys.map((y) => `<button type="button" data-y="${y}" aria-pressed="${y === state.season}">${lab(y)}</button>`).join("")}</div>
+      ${missing.length ? `<p class="note" style="margin-top:6px">No staff page found for ${missing.map(lab).join(", ")}.</p>` : ""}</div>
+      <div><h3>Head coaches</h3><div class="heads">${runs.filter((r) => r.ps.length).map((r) => `<span><b>${span(r.from, r.to)}</b>${r.ps.map((p) => `<button type="button" class="nmb" data-p="${p}">${esc(people[p])}</button>`).join(" &amp; ")}</span>`).join("") || `<span class="empty">None listed</span>`}</div></div>
       ${groups.map((gr) => `<div><h3>${esc(gr.ks.length > 1 ? plural(RL[gr.r]) : RL[gr.r])}</h3><ul class="staff">${gr.ks.map((k) =>
         `<li class="${ST.p[k] === state.person ? "on" : ""}"><span><button type="button" class="nmb" data-p="${ST.p[k]}">${esc(people[ST.p[k]])}</button></span><span class="t">${esc(titleOf(k))}</span></li>`).join("")}</ul></div>`).join("")}
       ${hidden && state.role !== "all" ? `<p class="note">+${fmt(hidden)} support staff (operations, strength, video, trainers…): pick Everyone to list them.</p>` : ""}`;
@@ -202,8 +203,8 @@ button.nmb:focus-visible { outline: 2px solid var(--focus); }
     const nMoves = MV.p.filter((x) => x === p).length;
     out.innerHTML = `<h2 id="personTitle">${esc(people[p])}</h2>
       <p class="note">${fmt(ks.length)} season${ks.length === 1 ? "" : "s"} on a staff page at ${fmt(schools.size)} school${schools.size === 1 ? "" : "s"}${heads ? ` · head coach in ${fmt(heads)}` : ""}${nMoves ? ` · ${fmt(nMoves)} move${nMoves === 1 ? "" : "s"} between schools` : ""}</p>
-      <ol class="career">${runs.map((r) => `<li class="${r.r === HEAD ? "head-job" : ""}"><span class="yr">${r.from}${r.to > r.from ? "–" + r.to : ""}</span><span><button type="button" class="nmb" data-s="${r.s}" data-y="${r.to}">${swatch(r.s)}${esc(data.schools[r.s][0])}</button><span class="t">${esc(data.titles[r.t] || RL[r.r])}</span></span></li>`).join("")}</ol>
-      <p class="fine">Only the schools and seasons in this data: ${esc(sportWords.toLowerCase())} programs whose staff pages were found, ${FIRST}–${LAST}. Jobs elsewhere (high schools, the pros, other sports) and seasons a school didn't post aren't here. People are matched by name, so two coaches with the same name can be mixed together.</p>`;
+      <ol class="career">${runs.map((r) => `<li class="${r.r === HEAD ? "head-job" : ""}"><span class="yr">${span(r.from, r.to)}</span><span><button type="button" class="nmb" data-s="${r.s}" data-y="${r.to}">${swatch(r.s)}${esc(data.schools[r.s][0])}</button><span class="t">${esc(data.titles[r.t] || RL[r.r])}</span></span></li>`).join("")}</ol>
+      <p class="fine">Only the schools and seasons in this data: ${esc(sportWords.toLowerCase())} programs whose staff pages were found, ${span(FIRST, LAST)}. Jobs elsewhere (high schools, the pros, other sports) and seasons a school didn't post aren't here. People are matched by name, so two coaches with the same name can be mixed together.</p>`;
   }
   $("personOut").addEventListener("click", (e) => {
     const b = e.target.closest("[data-s]"); if (!b) return;
@@ -214,7 +215,7 @@ button.nmb:focus-visible { outline: 2px solid var(--focus); }
   // ---------- name search ----------
   const lower = people.map((n) => n.toLowerCase());
   let hits = [], cur = -1;
-  function lastSchool(p) { const ks = byPerson[p]; let best = ks[0]; for (const k of ks) if (ST.y[k] > ST.y[best]) best = k; return best === undefined ? "" : `${data.schools[ST.s[best]][0]}, ${ST.y[best]}`; }
+  function lastSchool(p) { const ks = byPerson[p]; let best = ks[0]; for (const k of ks) if (ST.y[k] > ST.y[best]) best = k; return best === undefined ? "" : `${data.schools[ST.s[best]][0]}, ${lab(ST.y[best])}`; }
   function suggest() {
     const q = $("who").value.trim().toLowerCase(), box = $("sugg");
     hits = [];

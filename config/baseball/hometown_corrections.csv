@@ -880,7 +880,6 @@ Hometown/Previous School(s): West Sacramento,,,,,review,label text removed; plac
 "Shellville, Ga.",Shellville,GA,USA,"Shellville, GA, USA",review,spelling? 'Shellville' -> Snellville or Bellville,1
 "Marsvhille, N.C.",Marsvhille,NC,USA,"Marsvhille, NC, USA",review,spelling? 'Marsvhille' -> Marshville or Mars Hill,1
 "Lovington, Ga.",Lovington,GA,USA,"Lovington, GA, USA",review,spelling? 'Lovington' -> Covington or Lexington,1
-"Lake Park, Ill.",Lake Park,IL,USA,"Lake Park, IL, USA",review,spelling? 'Lake Park' -> Lake Fork or Oak Park,1
 "Stateville, NC",Stateville,NC,USA,"Stateville, NC, USA",review,spelling? 'Stateville' -> Statesville or Stoneville,1
 "Hunterville, N.C.",Hunterville,NC,USA,"Hunterville, NC, USA",review,spelling? 'Hunterville' -> Huntersville or Winterville,1
 "Strafford, CT",Strafford,CT,USA,"Strafford, CT, USA",review,spelling? 'Strafford' -> Stafford or Stratford,1
@@ -1430,6 +1429,7 @@ Dr. & Mrs. D. James Bailey '84,Dr. & Mrs. D. James Bailey,,,Dr. & Mrs. D. James 
 "Calson, Wash.",Calson,WA,USA,"Calson, WA, USA",review,spelling? 'Calson' -> Carson or Carlson,1
 "Grower, MO",Grower,MO,USA,"Grower, MO, USA",review,spelling? 'Grower' -> Gower or Grover,1
 "Sisbee, Texas",Sisbee,TX,USA,"Sisbee, TX, USA",review,spelling? 'Sisbee' -> Silsbee or Bisbee,1
+Thorbecke VO - Netherlands,Thorbecke,,,Thorbecke,review,unknown state/country 'VO',1
 ,,,,,unfixable,blank hometown,3308
 Hometown/ Previous School,,,,,unfixable,column header scraped as data,861
 Hometown,,,,,unfixable,column header scraped as data,524
@@ -1572,6 +1572,10 @@ NV,,,,,unfixable,"state only, no town",2
 VA,,,,,unfixable,"state only, no town",2
 Mo.,,,,,unfixable,"state only, no town",2
 / Cesar Chavez/San Joaquin Delta College,,,,,unfixable,dropped school text,2
+Santa Clara High School,,,,,unfixable,"a school name, not a town",2
+Centennial Secondary High School - Canada,,,,,unfixable,"a school name, not a town",1
+Gunderson High School,,,,,unfixable,"a school name, not a town",1
+Kings Academy High School,,,,,unfixable,"a school name, not a town",1
 Merritt Island HS,,,,,unfixable,"a school name, not a town",1
 Weatherford HS,,,,,unfixable,"a school name, not a town",1
 Cave Creek HS,,,,,unfixable,"a school name, not a town",1
@@ -1606,7 +1610,6 @@ Yanagawa High School (Japan),,,,,unfixable,"a school name, not a town",1
 Salinas High School,,,,,unfixable,"a school name, not a town",1
 Woodland Christian High School,,,,,unfixable,"a school name, not a town",1
 Crespi Carmelite High School,,,,,unfixable,"a school name, not a town",1
-Santa Clara High School,,,,,unfixable,"a school name, not a town",1
 Moanalua High School - Hawaii,,,,,unfixable,"a school name, not a town",1
 Caland Lyceum High School - Netherlands,,,,,unfixable,"a school name, not a town",1
 Valley Christian High School,,,,,unfixable,"a school name, not a town",1
@@ -2668,7 +2671,7 @@ Independence KS,Independence,KS,USA,"Independence, KS, USA",fixed,,3
 "Grandbury, Texas",Granbury,TX,USA,"Granbury, TX, USA",fixed,spelling 'Grandbury' -> Granbury,3
 Perkinston,Perkinston,MS,USA,"Perkinston, MS, USA",fixed,state from the only US town with this name,3
 "Cortland Manor, N.Y.",Cortlandt Manor,NY,USA,"Cortlandt Manor, NY, USA",fixed,spelling 'Cortland Manor' -> Cortlandt Manor,3
-"Oley Valley, Pa.",Ore Valley,PA,USA,"Ore Valley, PA, USA",fixed,spelling 'Oley Valley' -> Ore Valley,3
+"Oley Valley, Pa.",Oley,PA,USA,"Oley, PA, USA",fixed,checked by hand Oct 29,3
 "Milmont Park, Pa.",Milmont Park,PA,USA,"Milmont Park, PA, USA",fixed,state 'Pa.' -> PA,3
 "North Richland, Texas",North Richland,TX,USA,"North Richland, TX, USA",fixed,state 'Texas' -> TX,3
 "Summers Co, WV",Summers Co,WV,USA,"Summers Co, WV, USA",fixed,,3
@@ -3200,7 +3203,7 @@ Arleta,Arleta,OR,USA,"Arleta, OR, USA",fixed,state from the only US town with th
 "Mufreesboro, Tenn.",Murfreesboro,TN,USA,"Murfreesboro, TN, USA",fixed,spelling 'Mufreesboro' -> Murfreesboro,2
 "Humboldt, Texas",Humboldt,TX,USA,"Humboldt, TX, USA",fixed,state 'Texas' -> TX,2
 "La Grande Park, Ill.",La Grange Park,IL,USA,"La Grange Park, IL, USA",fixed,spelling 'La Grande Park' -> La Grange Park,2
-"Tbilisi, Georgia",Tbilisi,GA,USA,"Tbilisi, GA, USA",fixed,state 'Georgia' -> GA,2
+"Tbilisi, Georgia",Tbilisi,,Georgia,"Tbilisi, Georgia",fixed,checked by hand Oct 29,2
 "Chesire, Conn.",Cheshire,CT,USA,"Cheshire, CT, USA",fixed,spelling 'Chesire' -> Cheshire,2
 "Lawrencville, Ga.",Lawrenceville,GA,USA,"Lawrenceville, GA, USA",fixed,spelling Lawrencville -> Lawrenceville; state 'Ga.' -> GA,2
 "Wimberly, Texas",Wimberley,TX,USA,"Wimberley, TX, USA",fixed,spelling 'Wimberly' -> Wimberley,2
@@ -3685,6 +3688,7 @@ Seattle WA,Seattle,WA,USA,"Seattle, WA, USA",fixed,,2
 "Sharpesburg, Ga.",Sharpsburg,GA,USA,"Sharpsburg, GA, USA",fixed,spelling 'Sharpesburg' -> Sharpsburg,2
 "Ostego, Minn.",Otsego,MN,USA,"Otsego, MN, USA",fixed,spelling 'Ostego' -> Otsego,2
 St. John's FL,St. John's,FL,USA,"St. John's, FL, USA",fixed,,2
+"Lake Park, Ill.",Roselle,IL,USA,"Roselle, IL, USA",fixed,checked by hand Oct 29,1
 "Catersville, Ga.",Cartersville,GA,USA,"Cartersville, GA, USA",fixed,spelling 'Catersville' -> Cartersville (closer than Yatesville),1
 "Lovetsville, Va.",Lovettsville,VA,USA,"Lovettsville, VA, USA",fixed,spelling 'Lovetsville' -> Lovettsville (closer than Covesville),1
 "Wayneville, Ohio",Waynesville,OH,USA,"Waynesville, OH, USA",fixed,spelling 'Wayneville' -> Waynesville (closer than Maineville),1
@@ -11931,7 +11935,7 @@ Reno Nev.,Reno,NV,USA,"Reno, NV, USA",fixed,state 'Nev.' -> NV,1
 "Stafford, Mo.",Strafford,MO,USA,"Strafford, MO, USA",fixed,spelling 'Stafford' -> Strafford,1
 Chilicothe,Chilicothe,,,Chilicothe,fixed,,1
 "Cossatot, Ark.",Cossatot,AR,USA,"Cossatot, AR, USA",fixed,state 'Ark.' -> AR,1
-"Croton, N.Y.",Groton,NY,USA,"Groton, NY, USA",fixed,spelling 'Croton' -> Groton,1
+"Croton, N.Y.",Croton-on-Hudson,NY,USA,"Croton-on-Hudson, NY, USA",fixed,checked by hand Oct 29,1
 "Hopewell Juction, N.Y.",Hopewell Junction,NY,USA,"Hopewell Junction, NY, USA",fixed,spelling 'Hopewell Juction' -> Hopewell Junction,1
 Stony Point N.Y.,Stony Point,NY,USA,"Stony Point, NY, USA",fixed,state 'N.Y.' -> NY,1
 Danbury CT.,Danbury,CT,USA,"Danbury, CT, USA",fixed,,1

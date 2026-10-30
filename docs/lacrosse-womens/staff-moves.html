@@ -175,7 +175,8 @@ a.nmb:hover { border-bottom-color: var(--fg); }
   const ST = data.stints;
   const SEASONS = [...new Set(MV.y)].sort((a, b) => a - b);
   const FIRST = Math.min(...ST.y), LAST = Math.max(...ST.y);
-  $("sub").textContent = `Where coaches went from school to school, ${FIRST}–${LAST}`;
+  const SPRING = GP.springOf(data), lab = (y) => GP.seasonLabel(y, SPRING);   // seasons as school years: "2023-24"
+  $("sub").textContent = `Where coaches went from school to school, ${GP.seasonSpan(FIRST, LAST, SPRING)}`;
   const { schoolPalette, swatch } = GP.makePalette(data);
   const name = (i) => esc(data.schools[i][0]);
   const schoolIndex = new Map(data.schools.map((s, i) => [s[0].toLowerCase(), i]));
@@ -191,7 +192,7 @@ a.nmb:hover { border-bottom-color: var(--fg); }
   const usedConfs = [...new Set(data.schools.map((s) => s[1]))].filter((c) => data.confs[c]).sort((a, b) => data.confs[a].localeCompare(data.confs[b]));
   $("conf").innerHTML += usedConfs.map((c) => `<option value="${c}">${esc(data.confs[c])}</option>`).join("");
   $("div").innerHTML += data.divs.map((d, i) => `<option value="${i}">${esc(data.divLabels[d] || d)}</option>`).join("");
-  const opts = SEASONS.map((y) => `<option value="${y}">${y}</option>`).join("");
+  const opts = SEASONS.map((y) => `<option value="${y}">${lab(y)}</option>`).join("");
   $("from").innerHTML = opts; $("to").innerHTML = opts;
   function sync() {
     $("school").value = state.school >= 0 ? data.schools[state.school][0] : "";
@@ -330,7 +331,7 @@ a.nmb:hover { border-bottom-color: var(--fg); }
   // the people on a route, for its tooltip (up to four names)
   function routePeople(r) {
     const ks = M.list.filter((k) => MV.a[k] === r.from && MV.b[k] === r.to);
-    const names = ks.slice(0, 4).map((k) => `${MV.y[k]} ${esc(people[MV.p[k]])}`).join("<br>");
+    const names = ks.slice(0, 4).map((k) => `${lab(MV.y[k])} ${esc(people[MV.p[k]])}`).join("<br>");
     return names + (ks.length > 4 ? `<br><span class="note">+${fmt(ks.length - 4)} more</span>` : "");
   }
   cv.addEventListener("pointermove", (e) => {
@@ -362,9 +363,9 @@ a.nmb:hover { border-bottom-color: var(--fg); }
     const p = MV.p[k], a = MV.a[k], b = MV.b[k], y = MV.y[k];
     const [ya, ta] = lastSeasonAt(p, a, y - 1), tb = stintAt.get(p * 1e6 + b * 100 + (y - 2000));
     const job = (r, t) => `${r === HEAD ? `<span class="head-job">${esc(titleOf(t) || RL[r])}</span>` : esc(titleOf(t) || RL[r])}`;
-    const there = side === "in" ? `from ${pickBtn(a)}, ${job(MV.ra[k], ta)} (${ya})` : side === "out" ? `to ${pickBtn(b)} as ${job(MV.rb[k], tb)}` : `${pickBtn(a)}<span class="arrow">→</span>${pickBtn(b)}`;
+    const there = side === "in" ? `from ${pickBtn(a)}, ${job(MV.ra[k], ta)} (${lab(ya)})` : side === "out" ? `to ${pickBtn(b)} as ${job(MV.rb[k], tb)}` : `${pickBtn(a)}<span class="arrow">→</span>${pickBtn(b)}`;
     const here = side === "in" ? job(MV.rb[k], tb) : side === "out" ? `${job(MV.ra[k], ta)} here through ${ya}` : job(MV.rb[k], tb);
-    return `<li data-from="${a}" data-to="${b}"><span class="yr">${y}</span>${personLink(p)} · ${here}<span class="sub2">${there}</span></li>`;
+    return `<li data-from="${a}" data-to="${b}"><span class="yr">${lab(y)}</span>${personLink(p)} · ${here}<span class="sub2">${there}</span></li>`;
   }
   let showAll = { in: 30, out: 30, all: 25 };
   function moveList(ks, side) {

@@ -2473,7 +2473,7 @@ Arleta,Arleta,OR,USA,"Arleta, OR, USA",fixed,state from the only US town with th
 "Mufreesboro, Tenn.",Murfreesboro,TN,USA,"Murfreesboro, TN, USA",fixed,spelling 'Mufreesboro' -> Murfreesboro,2
 "Humboldt, Texas",Humboldt,TX,USA,"Humboldt, TX, USA",fixed,state 'Texas' -> TX,2
 "La Grande Park, Ill.",La Grange Park,IL,USA,"La Grange Park, IL, USA",fixed,spelling 'La Grande Park' -> La Grange Park,2
-"Tbilisi, Georgia",Tbilisi,GA,USA,"Tbilisi, GA, USA",fixed,state 'Georgia' -> GA,2
+"Tbilisi, Georgia",Tbilisi,,Georgia,"Tbilisi, Georgia",fixed,checked by hand Oct 29,2
 "Chesire, Conn.",Cheshire,CT,USA,"Cheshire, CT, USA",fixed,spelling 'Chesire' -> Cheshire,2
 "Lawrencville, Ga.",Lawrenceville,GA,USA,"Lawrenceville, GA, USA",fixed,spelling Lawrencville -> Lawrenceville; state 'Ga.' -> GA,2
 "Tuscon, Arizona",Tucson,AZ,USA,"Tucson, AZ, USA",fixed,spelling 'Tuscon' -> Tucson,2
@@ -2922,7 +2922,7 @@ Philadelphia Miss.,Philadelphia,MS,USA,"Philadelphia, MS, USA",fixed,state 'Miss
 "Harwington, CT",Harwinton,CT,USA,"Harwinton, CT, USA",fixed,spelling 'Harwington' -> Harwinton (closer than Farmington),1
 "Shellville, Ga.",Snellville,GA,USA,"Snellville, GA, USA",fixed,spelling 'Shellville' -> Snellville (closer than Bellville),1
 "Marsvhille, N.C.",Marshville,NC,USA,"Marshville, NC, USA",fixed,spelling 'Marsvhille' -> Marshville (closer than Mars Hill),1
-"Lake Park, Ill.",Lane Park,IL,USA,"Lane Park, IL, USA",fixed,spelling 'Lake Park' -> Lane Park (closer than Lake Fork),1
+"Lake Park, Ill.",Roselle,IL,USA,"Roselle, IL, USA",fixed,checked by hand Oct 29,1
 "Stateville, NC",Statesville,NC,USA,"Statesville, NC, USA",fixed,spelling 'Stateville' -> Statesville (closer than Stoneville),1
 "Hunterville, N.C.",Huntersville,NC,USA,"Huntersville, NC, USA",fixed,spelling 'Hunterville' -> Huntersville (closer than Winterville),1
 "Palantine, Ill.",Palatine,IL,USA,"Palatine, IL, USA",fixed,spelling 'Palantine' -> Palatine (closer than Palestine),1

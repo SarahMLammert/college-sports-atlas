@@ -514,7 +514,7 @@ Copley,Copley,,,Copley,fixed,,1
 "Outer Banks, N.C.",Outer Banks,NC,USA,"Outer Banks, NC, USA",fixed,state 'N.C.' -> NC,1
 "Ponte Verda, FL",Ponte Vedra,FL,USA,"Ponte Vedra, FL, USA",fixed,spelling 'Ponte Verda' -> Ponte Vedra,1
 "Colorada Springs, Co.",Colorado Springs,CO,USA,"Colorado Springs, CO, USA",fixed,spelling 'Colorada Springs' -> Colorado Springs,1
-"Sunny Isles, Fla.",Sunny Slopes,FL,USA,"Sunny Slopes, FL, USA",fixed,spelling 'Sunny Isles' -> Sunny Slopes,1
+"Sunny Isles, Fla.",Sunny Isles Beach,FL,USA,"Sunny Isles Beach, FL, USA",fixed,checked by hand Oct 29,1
 South Salem N.Y.,South Salem,NY,USA,"South Salem, NY, USA",fixed,state 'N.Y.' -> NY,1
 "Shaker, N.Y.",Shakers,NY,USA,"Shakers, NY, USA",fixed,spelling 'Shaker' -> Shakers,1
 "Greensville, S.C,.","Greensville, S.C",,,"Greensville, S.C",fixed,,1

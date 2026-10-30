@@ -1,0 +1,19 @@
+{
+  "label": "Basketball (Women's)",
+  "spring_season": true,
+  "roster_paths": ["/sports/womens-basketball/roster", "/sports/wbkb/roster", "/sports/w-baskbl/roster", "/sports/wbball/roster"],
+  "presto_paths": ["/sports/wbkb/{prev_season}-{yy}/roster"],
+  "min_players": 7,
+  "max_players": 35,
+  "junior_colleges": ["San Jac", "TJC", "LSUE", "LSU-Eunice", "MGCCC", "IWCC", "JCCC", "SCF", "FSW", "IRSC", "JUCO"],
+  "position_groups": ["G", "F", "C", "UNK"],
+  "position_abbreviations": {"G": "g pg sg cg combo g/f gf", "F": "f sf pf w wing f/c fc f/g", "C": "c post c/f"},
+  "position_words": [["point", "G"], ["guard", "G"], ["shooting", "G"], ["forward", "F"], ["small", "F"], ["power", "F"], ["wing", "F"], ["center", "C"], ["centre", "C"], ["post", "C"]],
+  "position_fallback": "UNK",
+  "d1_divisions": ["D1"],
+  "other_divisions": ["D2", "D3", "NAIA", "JUCO"],
+  "division_labels": {"D1": "Division I", "D2": "Division II", "D3": "Division III", "NAIA": "NAIA", "JUCO": "Junior college (NJCAA, CCCAA, NWAC)"},
+  "position_labels": {"G": "Guard", "F": "Forward", "C": "Center", "UNK": "Other"},
+  "thin_roster": 10,
+  "frozen_min_pairs": 8
+}

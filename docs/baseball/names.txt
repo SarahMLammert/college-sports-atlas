@@ -99711,12 +99711,15 @@ Chris Smith
 Colin Williams
 Donggun Chang
 Drew Paxton
+Evan McRae
+Gabriel Salazar-Mata
 James Denight
 Javier Alvardo
 Jay Hernandez
 Jayson Nashed
 Joe Dyer
 Jordan Maske
+Kailan Chao
 Kaleb dela
 Kurt Beckamnn
 Logan Vieira
@@ -99724,9 +99727,11 @@ Luke Gruendle
 Mason Manglicmot
 Mateo Rodriguez
 Mijun Choi
+Myles Potter
 Nico Marin
 Skylar Roenicke
 Taeho Kim
+Trenton Farnham
 Ty Navarro
 Abraham Duran
 Brandon Kim
@@ -172407,7 +172412,6 @@ Justin Stone
 Nathan Kerr
 Shayne Liller
 Tanner Champ
-Tobias Holmelund
 Trent Robison
 Tyler Bradford
 Ashton Staubs

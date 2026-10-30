@@ -73,6 +73,9 @@
         return data;
       }));
     if (data.complete) allLoad = Promise.resolve(data);
+    data.spring = springOf(data);
+    data.seasonLabel = (y) => seasonLabel(y, data.spring);
+    data.seasonSpan = (a, b) => seasonSpan(a, b, data.spring);
     data.posLabel = data.posLabels || POS_LABEL;
     data.d1 = data.d1 || D1_DIVS;
     data.divLabel = data.divLabels || DIV_TITLE;
@@ -248,7 +251,7 @@
       left.forEach((g) => parts.push(nameCount.get(groups[g].name) > 1 ? `${groups[g].name} (${data.divs[groups[g].div]})` : groups[g].name));
       return parts.length <= 2 ? parts.join(", ") : `${state.groups.size} conferences`;
     }
-    for (const id of ["from", "to"]) data.SEASONS.forEach((y) => { const o = document.createElement("option"); o.value = y; o.textContent = y; $(id).appendChild(o); });
+    for (const id of ["from", "to"]) data.SEASONS.forEach((y) => { const o = document.createElement("option"); o.value = y; o.textContent = data.seasonLabel(y); $(id).appendChild(o); });
     $("from").addEventListener("change", (e) => { state.from = +e.target.value; if (state.from > state.to) state.to = state.from; sync(); changed(); });
     $("to").addEventListener("change", (e) => { state.to = +e.target.value; if (state.to < state.from) state.from = state.to; sync(); changed(); });
     data.pos.forEach((p, i) => {
@@ -327,7 +330,7 @@
       const parts = [];
       // a single conference is named by the page itself (its scope line), so only say the rest here
       if (state.groups.size && state.conf === "") parts.push(confText());
-      if (state.from !== data.FIRST || state.to !== data.LAST) parts.push(state.from === state.to ? `${state.from}` : `${state.from}–${state.to}`);
+      if (state.from !== data.FIRST || state.to !== data.LAST) parts.push(data.seasonSpan(state.from, state.to));
       if (state.entry !== "") parts.push(state.entry === "1" ? "transfers" : "high school recruits");
       if (state.pos.size !== data.pos.length) parts.push([...state.pos].sort((a, b) => a - b).map((i) => data.posName(data.pos[i])).join(", "));
       return parts.join(" · ");
@@ -479,5 +482,15 @@
     });
     return st;
   }
-  window.GP = { $, sport, saveKey, readSaved, POS_LABEL, STATE_ABBR, ABBR_STATE, fmt, pct, esc, css, narrow, loadData, unpackStints, makePalette, makeFilters, copyLink, trackBar, miles, median };
+  // Seasons are shown as school years: "2023-24". A season number is the year it starts for fall sports (football,
+  // volleyball, soccer: 2023 = 2023-24) and the year it ends for the rest (2024 = 2023-24). data.spring says which;
+  // data built before Oct 29 doesn't say, so the sport's name decides.
+  const FALL_SPORT = /football|volleyball|soccer/i;
+  const springOf = (d) => d.spring !== undefined ? !!d.spring : !FALL_SPORT.test(d.sport || "");
+  function seasonLabel(y, spring) {
+    const a = spring ? y - 1 : y;
+    return `${a}-${String((a + 1) % 100).padStart(2, "0")}`;
+  }
+  function seasonSpan(a, b, spring) { return a === b ? seasonLabel(a, spring) : `${seasonLabel(a, spring)} to ${seasonLabel(b, spring)}`; }
+  window.GP = { $, sport, saveKey, readSaved, POS_LABEL, STATE_ABBR, ABBR_STATE, fmt, pct, esc, css, narrow, loadData, unpackStints, springOf, seasonLabel, seasonSpan, makePalette, makeFilters, copyLink, trackBar, miles, median };
 })();

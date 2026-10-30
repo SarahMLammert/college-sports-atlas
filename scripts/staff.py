@@ -207,7 +207,7 @@ def role_of(title: str, sport_label: str = "") -> str:
     elsewhere = "|".join([r"field hockey"] + [rf"\b{w}\b" for w in sorted(sport_words)]) if sport_label else r"field hockey"
     # "Head Coach" in one part of the title ("Defensive Coordinator | Head Women's Flag Football Coach" is not)
     for part in re.split(r"\s*[/|;,&]\s*|\s+and\s+|\s+-\s+", t):
-        if re.search(r"\bhead (?:coach|women'?s|men'?s|baseball|softball|football|lacrosse|ice hockey|hockey)\b|^head coach|\binterim head\b|"
+        if re.search(r"\bhead (?:coach|women'?s|men'?s|baseball|softball|football|lacrosse|ice hockey|hockey|basketball|volleyball|soccer)\b|^head coach|\binterim head\b|"
                      r"\bhead coach\b", part) \
                 and not re.search(r"\bassistant head\b|\bassistant to\b|\bassistant$|\bassistant\b.*\bhead coach\b|"
                                   r"head coach'?s?\b.*\b(?:assistant|staff|office)|special assistant|advisor|adviser|"

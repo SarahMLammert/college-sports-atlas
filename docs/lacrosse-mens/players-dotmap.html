@@ -90,6 +90,13 @@ body { background: var(--sea); }
 .pos { font-weight: 600; color: var(--accent); }
 .people .meta { color: var(--muted); font-size: 13px; }
 .sel h2 { font-size: 24px; }
+.career { list-style: none; margin: 2px 0 0; padding: 0; font-size: 14px; display: flex; flex-direction: column; gap: 8px; counter-reset: stop; }
+.career li { display: grid; grid-template-columns: 1.6em 6.6em minmax(0, 1fr); gap: 6px; align-items: start; }
+.career li::before { counter-increment: stop; content: counter(stop); font-weight: 600; color: var(--muted); text-align: right; }
+.career li.pre::before { content: "·"; counter-increment: none; }
+.career li.me { background: var(--accent-soft); border-radius: 4px; box-shadow: 0 0 0 4px var(--accent-soft); }
+.career .yr { color: var(--muted); font-size: 13px; }
+.career .meta, .people .meta { color: var(--muted); font-size: 13px; }
 .divider { border-top: 2px solid var(--fg); padding-top: 14px; }
 
 /* phones: the players panel becomes a bottom sheet so the map stays visible above it */
@@ -512,6 +519,7 @@ body { background: var(--sea); }
     };
     if (state.hs) for (const t of hsTowns(state.hs).keys()) ring(t, 3, 2);
     ring(state.town, 4, 2.5);
+    if (state.player >= 0) drawCareer({ k, ox, oy }, fg, halo);
     // the picked school's campus: a star with a halo
     const c = state.school >= 0 && data.campus[state.school];
     const cp = c ? proj([c.lon, c.lat]) : null;
@@ -523,6 +531,47 @@ body { background: var(--sea); }
       ctx.strokeStyle = halo; ctx.lineWidth = 3.5; ctx.stroke();
       ctx.fillStyle = fg; ctx.fill();
     }
+  }
+  // The selected player's path: hometown, then each campus in turn, numbered.
+  function careerPoints(p) {
+    const pts = [], t = P.t[p];
+    if (t >= 0 && !outside[t]) pts.push({ x: tx[t], y: ty[t], home: true });
+    for (const j of career(p)) {
+      const c = data.campus[P.s[j]], cp = c ? proj([c.lon, c.lat]) : null;
+      if (cp) pts.push({ x: cp[0], y: cp[1], s: P.s[j], me: j === p });
+    }
+    return pts;
+  }
+  const inkOn = (hex) => { const m = /^#?([0-9a-f]{6})$/i.exec(hex || ""); if (!m) return "#fff";
+    const v = parseInt(m[1], 16), L = .299 * (v >> 16) + .587 * (v >> 8 & 255) + .114 * (v & 255); return L > 150 ? "#111" : "#fff"; };
+  function drawCareer({ k, ox, oy }, fg, halo) {
+    const pts = careerPoints(state.player), pal = schoolPalette();
+    if (pts.length < 2) return;
+    const at = (q) => [q.x * k + ox, q.y * k + oy];
+    ctx.save(); ctx.setLineDash([5, 4]); ctx.lineJoin = "round";
+    for (const [lw, col] of [[4.5, halo], [2, fg]]) {
+      ctx.beginPath(); pts.forEach((q, i) => { const [x, y] = at(q); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); });
+      ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.stroke();
+    }
+    ctx.restore();
+    let n = 0;
+    for (const q of pts) {
+      if (q.home) continue;
+      n++;
+      const [x, y] = at(q), r = q.me ? 9 : 7.5, c = pal[q.s];
+      ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fillStyle = c.fill; ctx.fill(); ctx.strokeStyle = q.me ? fg : halo; ctx.lineWidth = q.me ? 2.5 : 2; ctx.stroke();
+      ctx.fillStyle = inkOn(c.fill); ctx.font = `600 ${q.me ? 11 : 10}px system-ui, sans-serif`;
+      ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(String(n), x, y + .5);
+    }
+  }
+  function flyToPlayer(p) {
+    const pts = careerPoints(p);
+    if (pts.length < 2) { flyTo([P.t[p]]); return; }
+    if (!size.w) return;
+    const xs = pts.map((q) => q.x), ys = pts.map((q) => q.y);
+    fitBox(Math.min(...xs), Math.min(...ys), Math.max(...xs), Math.max(...ys), K_US * 4, 750);
+    userMoved = true;
   }
   // ---------- zoom + picking ----------
   const zoom = d3.zoom().clickDistance(5)
@@ -581,10 +630,36 @@ body { background: var(--sea); }
       <span class="v">${fmt(v)}</span><span class="b"><span style="width:${(v / max * 100).toFixed(1)}%"></span></span></li>`).join("")}</ol></div>`;
   }
   function top(map, n) { return [...map.entries()].sort((a, b) => b[1] - a[1]).slice(0, n); }
-  function seasonsText(k) { const f = P.f[k] + 2000, l = P.l[k] + 2000; return f === l ? `${f}` : `${f}–${l}`; }
+  function seasonsText(k) { return data.seasonSpan(P.f[k] + 2000, P.l[k] + 2000); }   // "2023-24 to 2025-26"
+  // A player's whole college career (Oct 29): every roster record with the same name and hometown, oldest first.
+  // Same rule as build.py's find_moves, so it agrees with the transfer lines; two records at different schools
+  // in the same season are probably two people, so those are left out.
+  const LEVELS = data.levels || [];
+  const personKey = (k) => (names[k] || "").toLowerCase().replace(/\b(jr|sr|ii|iii|iv|v)\b\.?/g, "").replace(/[^a-z]/g, "");
+  let careerOf = { k: -1, n: 0, list: [] };
+  function career(k) {
+    if (careerOf.k === k && careerOf.n === N) return careerOf.list;
+    const key = personKey(k), t = P.t[k], list = [];
+    if (key && t >= 0) {
+      for (let j = 0; j < N; j++) if (P.t[j] === t && personKey(j) === key
+        && (j === k || P.s[j] === P.s[k] || P.f[j] >= P.l[k] || P.l[j] <= P.f[k])) list.push(j);
+    } else list.push(k);
+    list.sort((a, b) => P.f[a] - P.f[b] || P.l[a] - P.l[b]);
+    careerOf = { k, n: N, list };
+    return list;
+  }
+  function careerHtml(k) {
+    const list = career(k);
+    const first = list[0];
+    const before = P.x[first] && P.o[first] < 0
+      ? `<li class="pre"><span class="yr">Before</span><span>Another college<br><span class="meta">${P.v[first] > 0 && LEVELS[P.v[first] - 1] && LEVELS[P.v[first] - 1] !== "unknown" ? esc(LEVELS[P.v[first] - 1]) + " · " : ""}not in this data</span></span></li>` : "";
+    return `<ol class="career">${before}${list.map((j) => `<li${j === k ? ' class="me"' : ""}><span class="yr">${seasonsText(j)}</span>
+      <span>${swatch(P.s[j])}${j === k ? esc(data.schools[P.s[j]][0]) : `<button type="button" class="link" data-pick="${j}">${esc(data.schools[P.s[j]][0])}</button>`}<br>
+      <span class="meta">${esc(data.pos[P.p[j]])} · ${esc(data.divs[P.d[j]] || data.divs[data.schools[P.s[j]][2]])}</span></span></li>`).join("")}</ol>`;
+  }
   function personLi(k, withTown) {
     const t = P.t[k];
-    return `<li${k === state.player ? ' class="me"' : ""}><span class="pos">${esc(data.pos[P.p[k]])}</span><span>${esc(names[k])}<br><span class="meta">${esc(data.schools[P.s[k]][0])} · ${seasonsText(k)}${withTown && t >= 0 ? " · " + esc(towns[t][2]) : !withTown && data.hs[P.h[k]] ? " · " + esc(data.hs[P.h[k]]) : ""}${P.x[k] ? " · transfer" : ""}</span></span></li>`;
+    return `<li${k === state.player ? ' class="me"' : ""}><span class="pos">${esc(data.pos[P.p[k]])}</span><span><button type="button" class="link" data-pick="${k}">${esc(names[k])}</button><br><span class="meta">${esc(data.schools[P.s[k]][0])} · ${seasonsText(k)}${withTown && t >= 0 ? " · " + esc(towns[t][2]) : !withTown && data.hs[P.h[k]] ? " · " + esc(data.hs[P.h[k]]) : ""}${P.x[k] ? " · transfer" : ""}</span></span></li>`;
   }
   const head = (label, close) => `<div class="row" style="justify-content:space-between"><span class="label">${label}</span><button type="button" class="link" data-close="${close}">Clear</button></div>`;
   function renderFindings() {
@@ -594,17 +669,19 @@ body { background: var(--sea); }
     for (const k of sel) { const t = P.t[k]; if (t >= 0) townSet.add(t); }
     const schoolsIn = new Set(sel.map((k) => P.s[k]));
     const scope = state.school >= 0 ? data.schools[state.school][0] : state.conf !== "" ? data.confs[+state.conf] : state.div !== "" ? `All ${F.divName(state.div)} schools` : state.groups.size ? `Schools in ${F.confText()}` : "All schools";
-    const years = state.from === state.to ? state.from : state.from + "–" + state.to;
+    const years = data.seasonSpan(state.from, state.to);
     $("sub").textContent = `${fmt(sel.length)} players from ${fmt(townSet.size)} hometowns · ${scope} · on rosters ${years}`;
 
     const hiddenNote = (what) => `<span class="note">${what} <button type="button" class="link" data-clear="filters">Clear filters</button></span>`;
     const selection = [];
     if (state.player >= 0) {
       const k = state.player, t = P.t[k];
+      if (!data.complete) moreData();   // the career can run through any division
       selection.push(`<div class="group sel">${head("Player", "player")}
         <h2>${esc(names[k])}</h2>
-        <span><span class="pos">${esc(data.pos[P.p[k]])}</span> · ${swatch(P.s[k])}${esc(data.schools[P.s[k]][0])} · ${seasonsText(k)}${P.x[k] ? " · transfer" : ""}</span>
         <span class="note">${t >= 0 ? esc(towns[t][2]) : "Hometown unknown"}${data.hs[P.h[k]] ? " · " + esc(data.hs[P.h[k]]) : ""}</span>
+        <span class="label">College career</span>${careerHtml(k)}
+        ${data.complete ? "" : `<span class="note">Looking in the other divisions too…</span>`}
         ${passes(k) ? "" : hiddenNote("Your current filters hide this player, so his hometown may have no dot.")}</div>`);
     }
     if (state.hs) {
@@ -717,6 +794,10 @@ body { background: var(--sea); }
     if (b.dataset.close === "town") { state.town = -1; state.player = -1; }
     if (b.dataset.close === "state") state.focusState = null;
     if (b.dataset.close === "player") state.player = -1;
+    if (b.dataset.pick !== undefined) {   // a player's name, or a school in a career: show that record
+      state.player = +b.dataset.pick; state.town = P.t[state.player]; state.hs = null;
+      draw(); renderFindings(); setPanel("details", true); $("details").querySelector(".panel-body").scrollTop = 0; flyToPlayer(state.player); return;
+    }
     if (b.dataset.close === "hs") state.hs = null;
     if (b.dataset.hsall) { state.hs = { h: state.hs.h, st: null }; flyTo([...hsTowns(state.hs).keys()]); }
     if (b.dataset.clear === "filters") { resetFilters(); syncControls(); update(); return; }
@@ -847,7 +928,7 @@ body { background: var(--sea); }
     else { state.hs = { h: o.id.h, st: o.id.st }; state.town = -1; qEl.value = data.hs[o.id.h]; }
     setPanel("details", true);   // open first so the map centres in the space left beside it
     $("details").querySelector(".panel-body").scrollTop = 0;
-    flyTo(state.hs ? [...hsTowns(state.hs).keys()] : [state.town]);
+    if (state.player >= 0) flyToPlayer(state.player); else flyTo(state.hs ? [...hsTowns(state.hs).keys()] : [state.town]);
     draw(); renderFindings();
     if (narrow()) qEl.blur();
   }
@@ -971,7 +1052,7 @@ body { background: var(--sea); }
   new ResizeObserver(() => {
     resize();
     if (pendingMap !== undefined && size.w) {      // first layout: restore the shared view, or start on the U.S.
-      if (pendingMap) { userMoved = true; applyView(pendingMap); } else fitUS();
+      if (pendingMap) { userMoved = true; applyView(pendingMap); } else if (state.player >= 0) flyToPlayer(state.player); else fitUS();
       pendingMap = undefined;
     }
   }).observe(mapEl);

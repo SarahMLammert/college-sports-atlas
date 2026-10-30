@@ -164,7 +164,59 @@ _COUNTRY_FIXES = {
     "samara region": "Russia", "vic": "Australia",
     "mx": "Mexico", "venzuela": "Venezuela", "candada": "Canada", "brz": "Brazil", "panamá": "Panama",
     "hu": "Hungary", "tokyo": "Japan",
+    # Oct 30 (basketball, volleyball, soccer): more countries, other spellings and local names
+    "türkiye": "Turkey", "turkiye": "Turkey", "turkish": "Turkey", "bosnia": "Bosnia and Herzegovina",
+    "bosnia and herzegovina": "Bosnia and Herzegovina", "bosnia & herzegovina": "Bosnia and Herzegovina",
+    "bosnia-herzegovina": "Bosnia and Herzegovina", "bih": "Bosnia and Herzegovina", "herzegovina": "Bosnia and Herzegovina",
+    "sudan": "Sudan", "south sudan": "South Sudan", "cape verde": "Cape Verde", "cabo verde": "Cape Verde",
+    "gambia": "Gambia", "the gambia": "Gambia", "méxico": "Mexico", "austraila": "Australia", "australa": "Australia",
+    "republic of georgia": "Republic of Georgia", "grand cayman": "Cayman Islands", "cayman": "Cayman Islands",
+    "st. kitts": "Saint Kitts and Nevis", "st kitts": "Saint Kitts and Nevis", "saint kitts": "Saint Kitts and Nevis",
+    "st. kitts and nevis": "Saint Kitts and Nevis", "st. kitts & nevis": "Saint Kitts and Nevis", "nevis": "Saint Kitts and Nevis",
+    "kitts": "Saint Kitts and Nevis", "canary islands": "Spain", "tenerife": "Spain", "gran canaria": "Spain",
+    "cyprus": "Cyprus", "kuwait": "Kuwait", "mozambique": "Mozambique", "côte d'ivoire": "Ivory Coast",
+    "cote d’ivoire": "Ivory Coast", "côte d’ivoire": "Ivory Coast", "barbuda": "Antigua and Barbuda",
+    "antigua and barbuda": "Antigua and Barbuda", "antigua & barbuda": "Antigua and Barbuda",
+    "belguim": "Belgium", "equador": "Ecuador", "st. maarten": "Sint Maarten", "sint maarten": "Sint Maarten",
+    "st maarten": "Sint Maarten", "saint martin": "Sint Maarten", "albania": "Albania", "morrocco": "Morocco",
+    "tobago": "Trinidad and Tobago", "scottland": "Scotland", "palestine": "Palestine", "macedonia": "North Macedonia",
+    "north macedonia": "North Macedonia", "mali": "Mali", "turks and caicos": "Turks and Caicos Islands",
+    "turks & caicos": "Turks and Caicos Islands", "turks and caicos islands": "Turks and Caicos Islands",
+    "st. vincent and grenadines": "Saint Vincent and the Grenadines", "st. vincent and the grenadines": "Saint Vincent and the Grenadines",
+    "st. vincent": "Saint Vincent and the Grenadines", "saint vincent": "Saint Vincent and the Grenadines",
+    "grenadines": "Saint Vincent and the Grenadines", "tunisia": "Tunisia", "nepal": "Nepal", "myanmar": "Myanmar",
+    "guinea": "Guinea", "zambia": "Zambia", "jamacia": "Jamaica", "camaroon": "Cameroon", "bonaire": "Bonaire",
+    "dominica": "Dominica", "switzlerland": "Switzerland", "perú": "Peru", "burkina faso": "Burkina Faso",
+    "faso": "Burkina Faso", "netherland": "Netherlands", "phillippines": "Philippines", "engalnd": "England",
+    "malawi": "Malawi", "new zeland": "New Zealand", "uraguay": "Uruguay", "mongolia": "Mongolia",
+    "semegal": "Senegal", "senagal": "Senegal", "angola": "Angola", "botswana": "Botswana", "namibia": "Namibia",
+    "algeria": "Algeria", "libya": "Libya", "iraq": "Iraq", "iran": "Iran", "afghanistan": "Afghanistan",
+    "sri lanka": "Sri Lanka", "bangladesh": "Bangladesh", "armenia": "Armenia", "azerbaijan": "Azerbaijan",
+    "moldova": "Moldova", "montenegro": "Montenegro", "kosovo": "Kosovo", "malta": "Malta", "andorra": "Andorra",
+    "eritrea": "Eritrea", "somalia": "Somalia", "djibouti": "Djibouti", "burundi": "Burundi", "chad": "Chad",
+    "niger": "Niger", "togo": "Togo", "benin": "Benin", "madagascar": "Madagascar", "mauritius": "Mauritius",
+    "guinea-bissau": "Guinea-Bissau", "equatorial guinea": "Equatorial Guinea", "central african republic": "Central African Republic",
+    "saint lucia": "Saint Lucia", "anguilla": "Anguilla", "montserrat": "Montserrat", "guadeloupe": "Guadeloupe",
+    "martinique": "Martinique", "new caledonia": "New Caledonia", "vanuatu": "Vanuatu", "solomon islands": "Solomon Islands",
 }
+# Oct 30: a city or region of another country written where the country goes ("Getafe, Madrid",
+# "Porto Alegre, Rio Grande do Sul"). Only read this way after a comma: "Madrid" alone could be Madrid, Iowa.
+_REGIONS_ABROAD = {
+    "madrid": "Spain", "barcelona": "Spain", "valencia": "Spain", "basque country": "Spain", "andalusia": "Spain",
+    "london": "England", "greater manchester": "England", "greater london": "England", "west yorkshire": "England",
+    "são paulo": "Brazil", "sao paulo": "Brazil", "rio de janeiro": "Brazil", "rio grande do sul": "Brazil",
+    "minas gerais": "Brazil", "santa catarina": "Brazil", "paraná": "Brazil", "parana": "Brazil", "bahia": "Brazil",
+    "buenos aires": "Argentina", "córdoba": "Argentina", "istanbul": "Turkey", "dubai": "United Arab Emirates",
+    "stockholm": "Sweden", "jalisco": "Mexico", "sonora": "Mexico", "guanajuato": "Mexico", "nuevo león": "Mexico",
+    "nuevo leon": "Mexico", "baja california": "Mexico", "chihuahua": "Mexico", "hyogo": "Japan", "osaka": "Japan",
+    "bavaria": "Germany", "bayern": "Germany", "maharashtra": "India", "lagos": "Nigeria", "accra": "Ghana",
+    "dakar": "Senegal", "nairobi": "Kenya", "copenhagen": "Denmark", "oslo": "Norway", "paris": "France",
+    "île-de-france": "France", "ile-de-france": "France", "berlin": "Germany", "munich": "Germany",
+    "amsterdam": "Netherlands", "den haag": "Netherlands", "haag": "Netherlands", "lisbon": "Portugal",
+}
+# Oct 30: places that aren't a country ("Lagos, Africa", "Accra, West Africa"): the town alone, if it's a big one
+_CONTINENTS = {"africa", "west africa", "east africa", "south africa region", "europe", "asia", "south america",
+               "central america", "caribbean", "west indies", "middle east", "oceania"}
 _COUNTRY_FIXES = {k: v for k, v in _COUNTRY_FIXES.items() if v}
 _CANADIAN_PROVINCES = {
     "ont": "ON", "ontario": "ON", "on": "ON", "que": "QC", "quebec": "QC", "qc": "QC",
@@ -369,6 +421,9 @@ def parse_hometown(raw: str) -> dict:
         return out
     raw = _tidy_punctuation(raw)
     raw = re.sub(r"^(hometown|home town)(\s*/\s*(last|high|previous) school)?\s*:?\s*", "", raw, flags=re.I)
+    # "/ Fresno, CA/Edison HS", "/:Prev. School: Raleigh, NC / East Wake": an empty field before the slash
+    raw = re.sub(r"^[\s/:|]+", "", raw)
+    raw = re.sub(r"^prev(ious)?\.?\s*school\s*:\s*", "", raw, flags=re.I)
     # Drop a school that shares the field: "Atlanta, Ga. / Westlake HS", "Houston, Texas - Lamar"
     raw = re.split(r"\s*/\s*|\s+[-\u2013\u2014]\s+", raw, maxsplit=1)[0].strip()
     if re.fullmatch(r"washington,?\s*d\.?\s*c\.?", raw, flags=re.I):
@@ -411,6 +466,8 @@ def parse_hometown(raw: str) -> dict:
     # "Pago Pago. AS" was one part; "Hilo, Hawai`i \ Waiakea HS": a backslash before the school
     rest[-1] = re.split(r"\s*\\\s*", rest[-1])[0]
     region = _region(rest[-1])
+    if not region and _key(rest[-1]) in _REGIONS_ABROAD:
+        region = {"state": "", "country": _REGIONS_ABROAD[_key(rest[-1])]}
     if region:
         out.update(city=city, **region)
     else:
@@ -878,7 +935,10 @@ class WorldCities:
              "Syria": "SY", "Curacao": "CW", "Hong Kong": "HK", "Samoa": "WS", "American Samoa": "AS",
              "Trinidad and Tobago": "TT", "British Virgin Islands": "VG", "Macedonia": "MK", "North Macedonia": "MK",
              "Bosnia and Herzegovina": "BA", "Saint Lucia": "LC", "Antigua and Barbuda": "AG", "Laos": "LA",
-             "Micronesia": "FM", "Palestine": "PS", "Cape Verde": "CV", "Eswatini": "SZ", "Swaziland": "SZ"}
+             "Micronesia": "FM", "Palestine": "PS", "Cape Verde": "CV", "Eswatini": "SZ", "Swaziland": "SZ",
+             "Turkey": "TR", "Gambia": "GM", "Saint Kitts and Nevis": "KN", "Republic of Georgia": "GE",
+             "Saint Vincent and the Grenadines": "VC", "Turks and Caicos Islands": "TC", "Sint Maarten": "SX",
+             "Cayman Islands": "KY", "Bonaire": "BQ", "Myanmar": "MM", "Burkina Faso": "BF", "Kosovo": "XK"}
     # GeoNames' codes for the Canadian provinces -> the postal codes the parser gives
     CA_ADMIN1 = {"01": "AB", "02": "BC", "03": "MB", "04": "NB", "05": "NL", "07": "NS", "08": "ON", "09": "PE",
                  "10": "QC", "11": "SK", "12": "YT", "13": "NT", "14": "NU"}
@@ -888,6 +948,7 @@ class WorldCities:
         self.by_key: dict[tuple, list] = {}      # (norm name, ISO) -> [(population, admin1, lat, lon)]
         self.big: dict[str, tuple] = {}          # norm name -> the largest town of that name, if it is big
         self.iso: dict[str, str] = {}
+        self.capital_of: dict[str, str] = {}     # ISO -> capital's name (Oct 30: a country's dot when the town isn't found)
         self.ok = False
         try:
             import geonamescache
@@ -897,6 +958,8 @@ class WorldCities:
         gc = geonamescache.GeonamesCache(min_city_population=500)
         for code, c in gc.get_countries().items():
             self.iso[c["name"].lower()] = code
+            if c.get("capital"):
+                self.capital_of[code] = c["capital"]
             self.iso[re.sub(r"^the\s+", "", c["name"].lower())] = code     # "The Netherlands"
         for name, code in self.EXTRA.items():
             self.iso[name.lower()] = code
@@ -923,6 +986,12 @@ class WorldCities:
             options = here or options
         _, _, lat, lon = max(options)
         return (lat, lon, "geonames", "city")
+
+    def capital(self, country: str) -> tuple | None:
+        """The country's capital, for a country with no centroid in COUNTRIES (Uruguay, Gambia, Grenada)."""
+        code = self.iso.get(country.lower()) if self.ok and country else None
+        hit = self.lookup(self.capital_of.get(code, ""), country) if code else None
+        return (hit[0], hit[1], "country_capital", "country") if hit else None
 
     def lookup_big(self, city: str) -> tuple | None:
         hit = self.big.get(norm_city(city)) if self.ok and city else None
@@ -1336,6 +1405,10 @@ def resolve(home: dict, gaz: Gazetteer, nom: Nominatim | None) -> tuple:
         hit = hit if hit and _in_newfoundland(hit) else world().lookup(city, "Netherlands")
         if hit:
             return hit
+    elif country and city and country.lower() in _CONTINENTS:
+        hit = world().lookup_big(city)                   # "Lagos, Africa": the big town of that name
+        if hit:
+            return hit
     elif country and city:
         hit = world().lookup(city, country, state)       # Toronto ON, Santo Domingo, Sydney: the town's own dot
         if hit:
@@ -1352,6 +1425,14 @@ def resolve(home: dict, gaz: Gazetteer, nom: Nominatim | None) -> tuple:
         return (*PROVINCES[state], "province", "region")
     if country in COUNTRIES:
         return (*COUNTRIES[country], "country_centroid", "country")
+    if not country and not state and city and _lookup(_COUNTRY_FIXES, _key(city)):
+        country = _lookup(_COUNTRY_FIXES, _key(city))   # a fixed hometown that is only a country ("Gambia")
+        if country in COUNTRIES:
+            return (*COUNTRIES[country], "country_centroid", "country")
+    if country and country != "USA":
+        hit = world().capital(country)
+        if hit:
+            return hit
     return ("", "", "", "")
 
 

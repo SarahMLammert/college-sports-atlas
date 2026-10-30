@@ -13,9 +13,15 @@ site in `docs/` (GitHub Pages).
 | Lacrosse (Women's) | `lacrosse-womens` | 583 (D1, D2, D3, NAIA, JUCO) | 58K | 2016–2027 |
 | Hockey (Men's) | `hockey-mens` | 162 (NCAA D1, D2, D3) | 18K | 2016–2027 |
 | Hockey (Women's) | `hockey-womens` | 126 (National Collegiate = D1 and D2 schools, D3) | 11K | 2016–2027 |
+| Basketball (Men's) | `basketball-mens` | 1,292 (D1, D2, D3, NAIA, JUCO) | 113K | 2016–2027 |
+| Basketball (Women's) | `basketball-womens` | 1,299 | 86K | 2016–2027 |
+| Volleyball (Women's) | `volleyball-womens` | 1,274 | 90K | 2016–2026 (fall) |
+| Soccer (Men's) | `soccer-mens` | 1,046 | 120K (re-run pending) | 2016–2026 (fall) |
+| Soccer (Women's) | `soccer-womens` | 1,248 | 145K | 2016–2026 (fall) |
 
-Spring and winter sports are named by the spring the season ends in (2025-26 = 2026); from August the
-current season is next spring's. Basketball, volleyball and soccer show as "coming soon" on the front page.
+Football, volleyball and soccer are named by the fall they're played in. Spring and winter sports are named by the
+spring the season ends in (2025-26 = 2026); from August the current season is next spring's. A sport appears on the
+front page once it has been built.
 
 ## The site
 
@@ -33,6 +39,8 @@ has five pages:
 Football and baseball come in two files: the dot map opens on the D1 schools (`map_data.json`) and loads the
 other divisions (`map_data_more.json`) only when a view or a search needs them. Map and staff data are packed
 (`build.py`, `staff.py`) and unpacked by `docs/common.js`.
+
+The pages show seasons as school years (2023-24); links and the data files keep the season number.
 
 Every view is saved in the address after `#` (e.g. `football/players-dotmap.html#school=Alabama&pos=QB`), so links can be shared.
 The pages are football's: edit `docs/football/*.html`, then `python3 scripts/build.py sync` copies them to every

@@ -768,11 +768,14 @@ def check_rosters_main(argv=None) -> int:
     url: dict[tuple[str, int], str] = {}
     names: dict[tuple[str, int], set[str]] = defaultdict(set)
     classes: dict[tuple[str, int], dict[str, str]] = defaultdict(dict)
+    bios: dict[tuple[str, int], dict[str, str]] = defaultdict(dict)
     for r in rows:
         k = (r["school"], int(r["season"]))
         url.setdefault(k, r.get("roster_url", ""))
         names[k].add(name_key(r["name"]))
         classes[k][name_key(r["name"])] = (r.get("class_norm") or "").upper()
+        if r.get("bio_url"):
+            bios[k][name_key(r["name"])] = r["bio_url"].replace(":443/", "/").split("?")[0].rstrip("/")
     seasons_of: dict[str, list[int]] = defaultdict(list)
     for school, season in size:
         seasons_of[school].append(season)
@@ -796,17 +799,35 @@ def check_rosters_main(argv=None) -> int:
             ca, cb = classes[(school, prev)], classes[(school, cur)]
             same_class = sum(1 for n in both if ca.get(n) == cb.get(n)) / len(both)
             if same_class >= SAME_CLASS:
-                found.append(("repeated", school, cur, size[(school, cur)],
-                              f"{len(both) / len(b):.0%} same names and {same_class:.0%} same class years as {prev}",
-                              url[(school, cur)]))
+                # The same player pages (bio links) as the season before: the scraper read the other season's
+                # page, a real error. Different bio pages: the school's own page for this season repeats last
+                # season's roster (often after COVID, when class years weren't moved up). Rescraping can't fix
+                # that, so it is only counted (Oct 30: 8 of 37 flagged were the first kind).
+                ba, bb = bios[(school, prev)], bios[(school, cur)]
+                with_bio = [n for n in both if n in ba and n in bb]
+                same_page = (len(with_bio) >= 0.5 * len(both)
+                             and sum(ba[n] == bb[n] for n in with_bio) >= 0.9 * len(with_bio)) \
+                    or (url[(school, cur)] and url[(school, cur)].rstrip("/") == url[(school, prev)].rstrip("/"))
+                detail = f"{len(both) / len(b):.0%} same names and {same_class:.0%} same class years as {prev}"
+                if same_page:
+                    found.append(("repeated", school, cur, size[(school, cur)], detail + ", same player pages",
+                                  url[(school, cur)]))
+                else:
+                    found.append(("school_copy", school, cur, size[(school, cur)],
+                                  detail + " (the school's own page for this season)", url[(school, cur)]))
     for kind, title in (("oversized", f"Rosters at least {OVERSIZED:g}x the school's usual size"),
-                        ("repeated", "Rosters nearly the same as the season before (another season's page?)")):
+                        ("repeated", "Rosters read from another season's page (same players and player pages as "
+                                     "the season before)")):
         hits = sorted((f for f in found if f[0] == kind), key=lambda f: (f[1], f[2]))
         print(f"\n{title}: {len(hits) or 'none'}")
         for _, school, season, n, detail, _u in hits[:40]:
             print(f"  {school} {season}: {n} players ({detail})")
         if len(hits) > 40:
             print(f"  ... and {len(hits) - 40} more in roster_checks.csv")
+    copies = sum(1 for f in found if f[0] == "school_copy")
+    if copies:
+        print(f"\n{copies} more school-seasons repeat the season before on the school's own page (class years not "
+              "moved up); rescraping can't change them. Listed in roster_checks.csv as school_copy.")
     out = sport.rosters_dir / "roster_checks.csv"
     with open(out, "w", newline="", encoding="utf-8") as fh:
         w = csv.writer(fh)
@@ -843,7 +864,7 @@ PAGES = ["players-dotmap.html", "players-heatmap.html", "players-transfers.html"
 # The staff pages take their words from staff_data.json, so every sport gets football's file as it is (made if missing)
 STAFF_PAGES = ["staff-moves.html", "staff-directory.html"]
 MASTER = "football"
-WOMEN = {"softball", "lacrosse-womens", "hockey-womens"}
+WOMEN = {"softball", "lacrosse-womens", "hockey-womens", "basketball-womens", "volleyball-womens", "soccer-womens"}
 # The lines a sport keeps from its own page: one pattern per line, matched against the whole line
 OWN_LINES = [re.compile(p) for p in (r"^\s*<title>.*</title>\s*$", r'^\s*<meta name="description" .*>\s*$',
                                       r"^\s*<h1>.*</h1>\s*$", r'^\s*<p class="sub" id="sub">.*</p>\s*$')]

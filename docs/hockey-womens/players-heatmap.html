@@ -443,7 +443,7 @@ table.st td.best { font-weight: 700; }
     $("h2h").hidden = !ds.length; $("h2hLink").hidden = !ds.length;
     if (!ds.length) return;
     const s = F.summary();
-    $("h2hNote").textContent = s ? `Only ${s}, as on the maps above` : "All players on these rosters since " + data.FIRST;
+    $("h2hNote").textContent = s ? `Only ${s}, as on the maps above` : "All players on these rosters since " + data.seasonLabel(data.FIRST);
     renderScorecard(ds); renderBattle(ds); renderShared(ds); renderTrend(ds); renderPipes(ds);
   }
 
@@ -517,7 +517,7 @@ table.st td.best { font-weight: 700; }
     el.innerHTML = `<div class="trend-top"><h3>Footprint over time</h3>
         <div class="seg" id="trendMetric" role="group" aria-label="Measure">${Object.entries(METRICS).map(([k, m]) => `<button type="button" data-v="${k}" aria-pressed="${k === trendMetric}">${m.label}</button>`).join("")}</div></div>
       <p class="note why">${METRICS[trendMetric].why}
-        ${data.SEASONS.includes(2020) ? "The" : "No 2020 data; the"} dashed line marks 2021, the first full transfer-portal recruiting cycle.</p>
+        ${data.SEASONS.includes(2020) ? "The" : "No 2020 data; the"} dashed line marks ${data.seasonLabel(2021)}, the first full transfer-portal recruiting cycle.</p>
       <div class="legend-row" id="trendLegend"></div><div class="chart" id="trendChart"></div>`;
     $("trendMetric").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) { trendMetric = b.dataset.v; renderTrend(picked()); } });
     if (seasons.length < 2) { $("trendChart").innerHTML = `<p class="note">Pick a range of at least two seasons to see a trend.</p>`; return; }
@@ -539,7 +539,7 @@ table.st td.best { font-weight: 700; }
     const yl = y.ticks(4).map((t) => `<text x="${ml - 8}" y="${y(t) + 4}" text-anchor="end">${m.fmt(t)}</text>`).join("");
     // label every season when there's room, otherwise every other one (always the first and last)
     const every = x.step() < 38 ? 2 : 1;
-    const xl = seasons.map((s, i) => i % every && i !== seasons.length - 1 ? "" : `<text x="${x(s)}" y="${H - 6}" text-anchor="middle">${every > 1 ? "’" + String(s).slice(2) : s}</text>`).join("");
+    const xl = seasons.map((s, i) => i % every && i !== seasons.length - 1 ? "" : `<text x="${x(s)}" y="${H - 6}" text-anchor="middle">${every > 1 ? "’" + data.seasonLabel(s).slice(-2) : data.seasonLabel(s)}</text>`).join("");
     const era = seasons.includes(2021) ? `<g class="era"><line x1="${x(2021)}" x2="${x(2021)}" y1="${mt}" y2="${H - mb}"/><text x="${x(2021) + 6}" y="${mt + 10}">PORTAL ERA →</text></g>` : "";
     // direct labels at each line's last point, nudged apart so they never overlap
     const ends = series.map((sr) => { let i = sr.vals.length - 1; while (i >= 0 && sr.vals[i] == null) i--; return { sr, i, y: i >= 0 ? y(sr.vals[i]) : null }; }).filter((e) => e.i >= 0).sort((a, b) => a.y - b.y);
@@ -557,7 +557,7 @@ table.st td.best { font-weight: 700; }
       const r = hit.ownerSVGElement.getBoundingClientRect(), mx = (e.clientX - r.left) * (W / r.width);
       let i = 0; seasons.forEach((s, j) => { if (Math.abs(x(s) - mx) < Math.abs(x(seasons[i]) - mx)) i = j; });
       cross.setAttribute("x1", x(seasons[i])); cross.setAttribute("x2", x(seasons[i])); cross.setAttribute("visibility", "visible");
-      tip.innerHTML = `<div><b style="margin:0;padding:0">${seasons[i]}</b></div>` + series.map((sr) => `<div>${swatch(sr.d.si)}${schoolName(sr.d)}<b>${sr.vals[i] == null ? "–" : m.fmt(sr.vals[i])}</b></div>`).join("");
+      tip.innerHTML = `<div><b style="margin:0;padding:0">${data.seasonLabel(seasons[i])}</b></div>` + series.map((sr) => `<div>${swatch(sr.d.si)}${schoolName(sr.d)}<b>${sr.vals[i] == null ? "–" : m.fmt(sr.vals[i])}</b></div>`).join("");
       tip.hidden = false;
       const px = x(seasons[i]) * (r.width / W);
       tip.style.left = Math.max(4, Math.min(px + 12, r.width - tip.offsetWidth - 4)) + "px"; tip.style.top = "8px";

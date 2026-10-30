@@ -89,7 +89,6 @@ West De Pere,West De,,,West De,review,unknown state/country 'Pere',2
 Puerto Rico,Puerto,,,Puerto,review,unknown state/country 'Rico',2
 "No. Scituate, R.I.",No. Scituate,,,No. Scituate,review,unknown state/country 'R.I.',2
 "Cardiff, Calif.",Cardiff,CA,USA,"Cardiff, CA, USA",review,state? no Cardiff in CA; the only US town with this name is in AL,2
-"Rockaway, N.Y.",Rockaway,NY,USA,"Rockaway, NY, USA",review,state? no Rockaway in NY; the only US town with this name is in NJ,2
 "Imperial Valley, CA",Imperial Valley,CA,USA,"Imperial Valley, CA, USA",review,state? no Imperial Valley in CA; the only US town with this name is in TX,2
 "Moscow, Russia",Moscow,,,Moscow,review,unknown state/country 'Russia',1
 "Shanghai, China",Shanghai,,,Shanghai,review,unknown state/country 'China',1
@@ -818,7 +817,6 @@ Hometown/Previous School(s): West Sacramento,,,,,review,label text removed; plac
 "Shellville, Ga.",Shellville,GA,USA,"Shellville, GA, USA",review,spelling? 'Shellville' -> Snellville or Bellville,1
 "Marsvhille, N.C.",Marsvhille,NC,USA,"Marsvhille, NC, USA",review,spelling? 'Marsvhille' -> Marshville or Mars Hill,1
 "Lovington, Ga.",Lovington,GA,USA,"Lovington, GA, USA",review,spelling? 'Lovington' -> Covington or Lexington,1
-"Lake Park, Ill.",Lake Park,IL,USA,"Lake Park, IL, USA",review,spelling? 'Lake Park' -> Lake Fork or Oak Park,1
 "Stateville, NC",Stateville,NC,USA,"Stateville, NC, USA",review,spelling? 'Stateville' -> Statesville or Stoneville,1
 "Hunterville, N.C.",Hunterville,NC,USA,"Hunterville, NC, USA",review,spelling? 'Hunterville' -> Huntersville or Winterville,1
 "Strafford, CT",Strafford,CT,USA,"Strafford, CT, USA",review,spelling? 'Strafford' -> Stafford or Stratford,1
@@ -927,7 +925,7 @@ San Fransisco,San,,,San,review,unknown state/country 'Fransisco',1
 "Pacola, OK",Pacola,OK,USA,"Pacola, OK, USA",review,spelling? 'Pacola' -> Panola or Pocola,1
 "Mean, Ky.",Mean,KY,USA,"Mean, KY, USA",review,spelling? 'Mean' -> Means or means,1
 "Wyle, Texas",Wyle,TX,USA,"Wyle, TX, USA",review,spelling? 'Wyle' -> Wylie or wylie,1
-,,,,,unfixable,blank hometown,1722
+,,,,,unfixable,blank hometown,1756
 Hometown/ Previous School,,,,,unfixable,column header scraped as data,861
 Hometown,,,,,unfixable,column header scraped as data,524
 HS Hometown/High School:,,,,,unfixable,label with no hometown after it,145
@@ -2015,6 +2013,7 @@ Urbandale IA,Urbandale,IA,USA,"Urbandale, IA, USA",fixed,,3
 "Culpepper, Va.",Culpeper,VA,USA,"Culpeper, VA, USA",fixed,spelling 'Culpepper' -> Culpeper,3
 "Saskatoon, SK",Saskatoon,SK,Canada,"Saskatoon, SK, Canada",fixed,read as Canada,3
 "Indian Land, S.C.",Indian Land,SC,USA,"Indian Land, SC, USA",fixed,state 'S.C.' -> SC,3
+"Rockaway, N.Y.",Queens,NY,USA,"Queens, NY, USA",fixed,checked by hand Oct 29,2
 "Earlville, Md.",Earleville,MD,USA,"Earleville, MD, USA",fixed,spelling 'Earlville' -> Earleville (closer than Parkville),2
 Calgary AB,Calgary,AB,Canada,"Calgary, AB, Canada",fixed,read as Canada,2
 Trinidad & Tobago,,,Trinidad and Tobago,Trinidad and Tobago,fixed,read as Trinidad and Tobago,2
@@ -2533,7 +2532,7 @@ Sunland,Sunland,CA,USA,"Sunland, CA, USA",fixed,state from the only US town with
 "Camp Lejeune, NC",Camp Lejeune,NC,USA,"Camp Lejeune, NC, USA",fixed,,2
 "Humboldt, Texas",Humboldt,TX,USA,"Humboldt, TX, USA",fixed,state 'Texas' -> TX,2
 "La Grande Park, Ill.",La Grange Park,IL,USA,"La Grange Park, IL, USA",fixed,spelling 'La Grande Park' -> La Grange Park,2
-"Tbilisi, Georgia",Tbilisi,GA,USA,"Tbilisi, GA, USA",fixed,state 'Georgia' -> GA,2
+"Tbilisi, Georgia",Tbilisi,,Georgia,"Tbilisi, Georgia",fixed,checked by hand Oct 29,2
 "Chesire, Conn.",Cheshire,CT,USA,"Cheshire, CT, USA",fixed,spelling 'Chesire' -> Cheshire,2
 "Lawrencville, Ga.",Lawrenceville,GA,USA,"Lawrenceville, GA, USA",fixed,spelling Lawrencville -> Lawrenceville; state 'Ga.' -> GA,2
 "Tuscon, Arizona",Tucson,AZ,USA,"Tucson, AZ, USA",fixed,spelling 'Tuscon' -> Tucson,2
@@ -2942,6 +2941,8 @@ Denton Texas,Denton,TX,USA,"Denton, TX, USA",fixed,state 'Texas' -> TX,2
 "Booneville, Mo.",Boonville,MO,USA,"Boonville, MO, USA",fixed,spelling 'Booneville' -> Boonville,2
 null,null,,,null,fixed,,2
 "Timber Creek, Tx",Timber Creek,TX,USA,"Timber Creek, TX, USA",fixed,state 'Tx' -> TX,2
+"Lost River, W.Va.",East River,WV,USA,"East River, WV, USA",fixed,spelling 'Lost River' -> East River,1
+"Lake Park, Ill.",Roselle,IL,USA,"Roselle, IL, USA",fixed,checked by hand Oct 29,1
 "Catersville, Ga.",Cartersville,GA,USA,"Cartersville, GA, USA",fixed,spelling 'Catersville' -> Cartersville (closer than Yatesville),1
 "Gainsville, Texas",Gainesville,TX,USA,"Gainesville, TX, USA",fixed,spelling 'Gainsville' -> Gainesville (closer than Gatesville),1
 "Atchinson, KS",Atchison,KS,USA,"Atchison, KS, USA",fixed,spelling 'Atchinson' -> Atchison (closer than Hutchinson),1
@@ -2968,7 +2969,6 @@ null,null,,,null,fixed,,2
 "San Bernadino, CA",San Bernadino,CA,USA,"San Bernadino, CA, USA",fixed,,1
 Forney TX,Forney,TX,USA,"Forney, TX, USA",fixed,,1
 "Huntington Beach, Cali.",Huntington Beach,CA,USA,"Huntington Beach, CA, USA",fixed,state 'Cali.' -> CA,1
-"Lost River, W.Va.",East River,WV,USA,"East River, WV, USA",fixed,spelling 'Lost River' -> East River,1
 "Martinez, Mo.",Martin,MO,USA,"Martin, MO, USA",fixed,spelling 'Martinez' -> Martin,1
 "Louisville, Kent.",Louisville,KY,USA,"Louisville, KY, USA",fixed,town and state read from the text,1
 "Freeport, Grand Bahamas",Freeport,,Bahamas,"Freeport, Bahamas",fixed,read as Bahamas,1

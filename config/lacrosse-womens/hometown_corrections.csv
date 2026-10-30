@@ -313,7 +313,7 @@ Merrick. N.Y.,Merrick.,NY,USA,"Merrick., NY, USA",fixed,state 'N.Y.' -> NY,1
 "Liominster, Mass.",Leominster,MA,USA,"Leominster, MA, USA",fixed,spelling 'Liominster' -> Leominster,1
 "Harve De Grace, Md.",Havre De Grace,MD,USA,"Havre De Grace, MD, USA",fixed,spelling 'Harve De Grace' -> Havre De Grace,1
 "Canadaigua, N.Y.",Canandaigua,NY,USA,"Canandaigua, NY, USA",fixed,spelling 'Canadaigua' -> Canandaigua,1
-"Oley Valley, Pa.",Ore Valley,PA,USA,"Ore Valley, PA, USA",fixed,spelling 'Oley Valley' -> Ore Valley,1
+"Oley Valley, Pa.",Oley,PA,USA,"Oley, PA, USA",fixed,checked by hand Oct 29,1
 Harrisburg Pa.,Harrisburg,PA,USA,"Harrisburg, PA, USA",fixed,state 'Pa.' -> PA,1
 "State Island, NY",Staten Island,NY,USA,"Staten Island, NY, USA",fixed,spelling 'State Island' -> Staten Island,1
 Roosevelt. N.Y.,Roosevelt.,NY,USA,"Roosevelt., NY, USA",fixed,state 'N.Y.' -> NY,1
@@ -516,7 +516,7 @@ Churchville. Md.,Churchville.,MD,USA,"Churchville., MD, USA",fixed,state 'Md.' -
 "Castleton, N.Y.",Castleton,NY,USA,"Castleton, NY, USA",fixed,state 'N.Y.' -> NY,1
 Penn Valley Pa.,Penn Valley,PA,USA,"Penn Valley, PA, USA",fixed,state 'Pa.' -> PA,1
 "Old Saybook, Conn.",Old Saybrook,CT,USA,"Old Saybrook, CT, USA",fixed,spelling 'Old Saybook' -> Old Saybrook,1
-"North Lockport, NY",South Lockport,NY,USA,"South Lockport, NY, USA",fixed,spelling 'North Lockport' -> South Lockport,1
+"North Lockport, NY",Lockport,NY,USA,"Lockport, NY, USA",fixed,checked by hand Oct 29,1
 "North Tonwanda, NY",North Tonawanda,NY,USA,"North Tonawanda, NY, USA",fixed,spelling 'North Tonwanda' -> North Tonawanda,1
 "Kenston, Ohio",Kenton,OH,USA,"Kenton, OH, USA",fixed,spelling 'Kenston' -> Kenton,1
 "Jarretsville, MD",Jarrettsville,MD,USA,"Jarrettsville, MD, USA",fixed,spelling 'Jarretsville' -> Jarrettsville,1
@@ -536,7 +536,7 @@ Viera Fla./Peachtree City Ga.,Viera,FL,USA,"Viera, FL, USA",fixed,dropped school
 "Eufala, Ala.",Eufaula,AL,USA,"Eufaula, AL, USA",fixed,spelling 'Eufala' -> Eufaula,1
 "Lownesboro, Alabama",Lowndesboro,AL,USA,"Lowndesboro, AL, USA",fixed,spelling 'Lownesboro' -> Lowndesboro,1
 "Wagerville, Alabama",Wagarville,AL,USA,"Wagarville, AL, USA",fixed,spelling 'Wagerville' -> Wagarville,1
-"Tbilisi, Georgia",Tbilisi,GA,USA,"Tbilisi, GA, USA",fixed,state 'Georgia' -> GA,1
+"Tbilisi, Georgia",Tbilisi,,Georgia,"Tbilisi, Georgia",fixed,checked by hand Oct 29,1
 "Hometown, Ill.",Hometown,IL,USA,"Hometown, IL, USA",fixed,state 'Ill.' -> IL,1
 "Chattanogga, Tenn.",Chattanooga,TN,USA,"Chattanooga, TN, USA",fixed,spelling 'Chattanogga' -> Chattanooga,1
 "Lloyd Neck, NY",Lloyd Neck,NY,USA,"Lloyd Neck, NY, USA",fixed,,1

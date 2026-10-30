@@ -56,6 +56,14 @@ body { background: var(--panel) var(--paper-grain); }
 .tl.in .b span { --bar-c: var(--in); } .tl.out .b span { --bar-c: var(--out); }
 .tl.lv .b span { --bar-c: var(--muted); }
 .tl.lv .pct { color: var(--muted); font-size: 12px; margin-left: 6px; }
+.group h3.sub3 { font: 600 11px/1 var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 10px 0 6px; }
+.xtab-wrap { overflow-x: auto; }
+.xtab { border-collapse: collapse; font-size: 12px; font-variant-numeric: tabular-nums; width: 100%; }
+.xtab th, .xtab td { padding: 4px 3px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.xtab thead th { color: var(--muted); font-weight: 600; font-size: 12px; }
+.xtab tbody th { text-align: left; color: var(--muted); font-weight: 600; }
+.xtab td { background: color-mix(in srgb, var(--accent) calc(var(--w, 0) * 38%), transparent); }
+.xtab td.same { font-weight: 700; }
 .tside .fine { font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 12px; margin: 0; }
 :root { --in: var(--accent); --out: #23606b; }   /* came in: terracotta; left: deep sea, as on the landing page */
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --out: #7fc4cf; } }
@@ -164,7 +172,7 @@ body { background: var(--panel) var(--paper-grain); }
 <script src="../common.js"></script>
 <script>
 (async function () {
-  const { $, fmt, esc, css } = GP;
+  const { $, fmt, esc, css, pct } = GP;
 
   let data;
   try { data = await GP.loadData(); }
@@ -186,26 +194,43 @@ body { background: var(--panel) var(--paper-grain); }
   // Every other transfer is counted in M.others, and by the level of the school he came from in M.lv.
   // Filters apply to the new school's roster: seasons on it, division when he joined, position.
   // The conference filter keeps moves to or from a school in that conference.
+  // Levels for the table of moves between divisions: D1 (football: FBS and FCS together), D2, D3, NAIA, JUCO.
+  // The school left: a school in this data counts at its division today (the data has no history for it here);
+  // any other at the level of the school the roster names (P.v). The school joined: its division that season (P.d).
+  const levelOfDiv = (d) => data.d1.includes(data.divs[d]) ? "D1" : data.divs[d];
+  const levelOfSchool = (i) => levelOfDiv(data.schools[i][2]);
+  const levelOfPrev = (k) => HAS_LEVELS && P.v[k] > 0 ? LEVELS[P.v[k] - 1] : "unknown";
+  // Conferences (today's, as on the filters) for the conference tables. A conference is division + conference, since
+  // "Independent" and "No conference" exist in several divisions; those are named with their division.
+  const confKey = (i) => data.schools[i][2] * 10000 + data.schools[i][1];
+  const confNameCount = new Map();
+  [...new Set(data.schools.map((_, i) => confKey(i)))].forEach((k) => { const n = data.confs[k % 10000] || "No conference"; confNameCount.set(n, (confNameCount.get(n) || 0) + 1); });
+  const confName = (k) => { const n = data.confs[k % 10000] || "No conference", d = data.divs[Math.floor(k / 10000)];
+    return confNameCount.get(n) > 1 ? `${n} (${d})` : n; };
   let M = null;
   function compute() {
     const sel = state.school, conf = state.conf === "" ? -1 : +state.conf;
     const inD1 = new Int32Array(S), out = new Int32Array(S), other = new Int32Array(S), lv = new Int32Array(LEVELS.length);
     const pairs = new Map();   // from * S + to -> players
     let moves = 0, others = 0;
+    const between = new Map();   // "from level>to level" -> players (see betweenGroup)
+    const confPairs = new Map();  // "from conference>to conference" -> players, school-to-school moves only (see confGroup)
+    const pair = (k, from) => { const key = (from >= 0 ? levelOfSchool(from) : levelOfPrev(k)) + ">" + levelOfDiv(P.d[k]); between.set(key, (between.get(key) || 0) + 1); };
     for (let k = 0; k < N; k++) {
       if (!P.x[k] || !F.passes(k, true, true)) continue;
       const to = P.s[k], from = P.o[k];
       if (conf >= 0 && data.schools[to][1] !== conf && !(from >= 0 && data.schools[from][1] === conf)) continue;
       if (from < 0) {   // a transfer from a school that isn't in this data, or one the roster doesn't name
-        if (sel < 0 || to === sel) { other[to]++; others++; if (HAS_LEVELS && P.v[k] > 0) lv[P.v[k] - 1]++; }
+        if (sel < 0 || to === sel) { other[to]++; others++; if (HAS_LEVELS && P.v[k] > 0) lv[P.v[k] - 1]++; pair(k, -1); }
         continue;
       }
       if (sel >= 0 && to !== sel && from !== sel) continue;
-      inD1[to]++; out[from]++; moves++;
+      inD1[to]++; out[from]++; moves++; pair(k, from);
+      const ck = confKey(from) + ">" + confKey(to); confPairs.set(ck, (confPairs.get(ck) || 0) + 1);
       const key = from * S + to; pairs.set(key, (pairs.get(key) || 0) + 1);
     }
     const routes = [...pairs.entries()].map(([key, n]) => ({ from: Math.floor(key / S), to: key % S, n })).sort((a, b) => b.n - a.n || a.from - b.from);
-    M = { sel, inD1, out, other, routes, moves, others, lv };
+    M = { sel, inD1, out, other, routes, moves, others, lv, between, confPairs };
   }
 
   // ---------- the map ----------
@@ -362,6 +387,54 @@ body { background: var(--panel) var(--paper-grain); }
       ${list(rows.map((r) => ({ label: `${esc(LEVEL_LABEL[r.l] || r.l)}<span class="pct">${Math.round(r.n / M.others * 100)}%</span>`, n: r.n, from: -1, to: -1 })), "lv", max)}
       ${M.lv[LEVELS.indexOf("D1")] ? `<p class="note">D1 school, not matched: the roster names a D1 school, but he isn't on that school's roster in this data (a different spelling, a stint before ${data.FIRST}, or a high school with the same name).</p>` : ""}</div>`;
   }
+  // Every transfer counted above, by the level of the school left (rows) and the division joined (columns).
+  function betweenGroup(title) {
+    const ORDER = ["D1", "D2", "D3", "NAIA", "JUCO", "CLUB", "unknown"], SHORT = { CLUB: "Club", unknown: "Unknown" };
+    const rows = ORDER.filter((a) => ORDER.some((b) => M.between.get(a + ">" + b)));
+    const cols = ORDER.filter((b) => ORDER.some((a) => M.between.get(a + ">" + b)));
+    if (!rows.length) return "";
+    const n = (a, b) => M.between.get(a + ">" + b) || 0;
+    const total = rows.reduce((t, a) => t + cols.reduce((u, b) => u + n(a, b), 0), 0);
+    const known = rows.filter((a) => a !== "unknown").reduce((t, a) => t + cols.reduce((u, b) => u + n(a, b), 0), 0);
+    const same = cols.reduce((t, b) => t + n(b, b), 0);
+    const max = Math.max(1, ...rows.flatMap((a) => cols.map((b) => n(a, b))));
+    const cell = (a, b) => { const v = n(a, b); return `<td class="${a === b ? "same" : ""}" style="--w:${(v / max).toFixed(3)}" title="${esc(SHORT[a] || a)} → ${esc(b)}: ${fmt(v)} (${pct(v / total)})">${v ? fmt(v) : ""}</td>`; };
+    return `<div class="group"><h2>${title}</h2>
+      <p class="note">${known ? `${pct(same / known)} stayed in the same division; ` : ""}rows are the level of the school left, columns the division joined</p>
+      <div class="xtab-wrap"><table class="xtab"><thead><tr><th title="Rows: the level of the school left. Columns: the division joined.">left ↓ joined →</th>${cols.map((b) => `<th>${esc(b)}</th>`).join("")}</tr></thead>
+      <tbody>${rows.map((a) => `<tr><th>${esc(SHORT[a] || a)}</th>${cols.map((b) => cell(a, b)).join("")}</tr>`).join("")}</tbody></table></div>
+      <p class="note">A school in this data counts at its division today; any other at the level of the school the roster names.</p></div>`;
+  }
+  // Moves between conferences: only school-to-school moves (the old school is in this data), conferences as of today.
+  // All schools: the most common moves from one conference to another, and which conferences gain and lose the most.
+  // One school, or one conference picked: where they came from and went to, by conference.
+  function confGroup() {
+    const rows = [...M.confPairs.entries()].map(([key, n]) => { const [a, b] = key.split(">").map(Number); return { a, b, n }; });
+    if (!rows.length) return "";
+    const total = rows.reduce((t, r) => t + r.n, 0), within = rows.filter((r) => r.a === r.b).reduce((t, r) => t + r.n, 0);
+    const cross = rows.filter((r) => r.a !== r.b).sort((x, y) => y.n - x.n);
+    const bar = (items, cls) => list(items.map((x) => ({ ...x, from: -1, to: -1 })), cls, Math.max(1, ...items.map((x) => x.n)));
+    const head = `<p class="note">School-to-school moves only, conferences as of today; ${pct(within / total)} stayed within a conference</p>`;
+    const sumBy = (rs, side) => { const m = new Map(); for (const r of rs) m.set(r[side], (m.get(r[side]) || 0) + r.n); return [...m.entries()].sort((x, y) => y[1] - x[1]); };
+    let focus = null;    // the conference to show in and out for: the picked school's, or the one picked conference
+    if (M.sel >= 0) focus = confKey(M.sel);
+    else if (state.conf !== "") { const ks = new Set(data.schools.map((s, i) => s[1] === +state.conf ? confKey(i) : null).filter((x) => x !== null)); if (ks.size === 1) focus = [...ks][0]; }
+    if (focus !== null) {
+      const ins = sumBy(cross.filter((r) => r.b === focus), "a").slice(0, 10), outs = sumBy(cross.filter((r) => r.a === focus), "b").slice(0, 10);
+      const title = M.sel >= 0 ? "By conference" : `${esc(confName(focus))}: other conferences`;
+      return `<div class="group"><h2>${title}</h2>${head}
+        <h3 class="sub3">Came in from</h3>${bar(ins.map(([c, n]) => ({ label: esc(confName(c)), n })), "in")}
+        <h3 class="sub3">Left for</h3>${bar(outs.map(([c, n]) => ({ label: esc(confName(c)), n })), "out")}</div>`;
+    }
+    const net = new Map();
+    for (const r of cross) { net.set(r.b, (net.get(r.b) || 0) + r.n); net.set(r.a, (net.get(r.a) || 0) - r.n); }
+    const ranked = [...net.entries()].sort((x, y) => y[1] - x[1]);
+    const gain = ranked.filter((x) => x[1] > 0).slice(0, 8), lose = ranked.filter((x) => x[1] < 0).slice(-8).reverse();
+    return `<div class="group"><h2>Moves between conferences</h2>${head}
+      <h3 class="sub3">Most common moves</h3>${bar(cross.slice(0, 12).map((r) => ({ label: `${esc(confName(r.a))}<span class="arrow">→</span>${esc(confName(r.b))}`, n: r.n })), "")}
+      <h3 class="sub3">Gained the most (in minus out)</h3>${bar(gain.map(([c, n]) => ({ label: esc(confName(c)), n })), "in")}
+      <h3 class="sub3">Lost the most (out minus in)</h3>${bar(lose.map(([c, n]) => ({ label: esc(confName(c)), n: -n })), "out")}</div>`;
+  }
   function renderSide() {
     const side = $("side"), sel = M.sel;
     const fine = `<p class="fine">A move is one player found on two rosters in this data in turn, or whose roster names his old school. Transfers from schools that aren't in this data have no line, so they're counted, by the level of the school they came from, but not drawn. "Unknown" means the roster names no school (he was counted as a transfer because he arrived as a junior or older), or a name that fits schools at two levels ("Bethel", "Concordia").${hasCampus ? "" : " Campus locations (school_locations.json) didn't load, so the map can't place the schools."}</p>`;
@@ -371,6 +444,8 @@ body { background: var(--panel) var(--paper-grain); }
           <div><b>${fmt(M.moves)}</b><small>school-to-school moves</small></div>
           <div><b>${fmt(M.others)}</b><small>other transfers, no line drawn</small></div>
         </div>
+        ${betweenGroup("Moves between divisions")}
+        ${confGroup()}
         ${levelGroup("Where the other transfers came from")}
         <div class="group"><h2>Biggest destinations</h2><p class="note">Most players arriving from another school on the map</p>
           ${list(dest.map((x) => ({ label: pickBtn(x.i), n: x.n, from: -1, to: x.i })), "in", dest.length ? dest[0].n : 1)}</div>
@@ -391,6 +466,8 @@ body { background: var(--panel) var(--paper-grain); }
           <div><b>${net > 0 ? "+" : ""}${fmt(net)}</b><small>net, school to school</small></div>
           <div><b>${fmt(M.other[sel])}</b><small>other transfers in, no line drawn</small></div>
         </div>
+        ${betweenGroup("Between divisions")}
+        ${confGroup()}
         ${levelGroup("Other transfers came from")}
         <div class="group"><h2>Came in from</h2>${list(ins.slice(0, 15).map((r) => ({ label: pickBtn(r.from), n: r.n, from: r.from, to: r.to })), "in", ins.length ? ins[0].n : 1)}
           ${ins.length > 15 ? `<p class="note">+${plural(ins.length - 15, "more school")}</p>` : ""}</div>

@@ -781,7 +781,7 @@ Hometown/Previous School(s): West Sacramento,,,,,review,label text removed; plac
 "Shellville, Ga.",Shellville,GA,USA,"Shellville, GA, USA",review,spelling? 'Shellville' -> Snellville or Bellville,1
 "Marsvhille, N.C.",Marsvhille,NC,USA,"Marsvhille, NC, USA",review,spelling? 'Marsvhille' -> Marshville or Mars Hill,1
 "Lovington, Ga.",Lovington,GA,USA,"Lovington, GA, USA",review,spelling? 'Lovington' -> Covington or Lexington,1
-"Lake Park, Ill.",Lake Park,IL,USA,"Lake Park, IL, USA",review,spelling? 'Lake Park' -> Lane Park or Lake Fork,1
+"Lake Park, Ill.",Roselle,IL,USA,"Roselle, IL, USA",fixed,checked by hand Oct 29,1
 "Stateville, NC",Stateville,NC,USA,"Stateville, NC, USA",review,spelling? 'Stateville' -> Statesville or Stoneville,1
 "Hunterville, N.C.",Hunterville,NC,USA,"Hunterville, NC, USA",review,spelling? 'Hunterville' -> Huntersville or Winterville,1
 "Strafford, CT",Strafford,CT,USA,"Strafford, CT, USA",review,spelling? 'Strafford' -> Stafford or Stratford,1
@@ -2609,7 +2609,7 @@ Arleta,Arleta,OR,USA,"Arleta, OR, USA",fixed,state from the only US town with th
 "Mufreesboro, Tenn.",Murfreesboro,TN,USA,"Murfreesboro, TN, USA",fixed,spelling 'Mufreesboro' -> Murfreesboro,2
 "Humboldt, Texas",Humboldt,TX,USA,"Humboldt, TX, USA",fixed,state 'Texas' -> TX,2
 "La Grande Park, Ill.",La Grange Park,IL,USA,"La Grange Park, IL, USA",fixed,spelling 'La Grande Park' -> La Grange Park,2
-"Tbilisi, Georgia",Tbilisi,GA,USA,"Tbilisi, GA, USA",fixed,state 'Georgia' -> GA,2
+"Tbilisi, Georgia",Tbilisi,,Georgia,"Tbilisi, Georgia",fixed,checked by hand Oct 29,2
 "Chesire, Conn.",Cheshire,CT,USA,"Cheshire, CT, USA",fixed,spelling 'Chesire' -> Cheshire,2
 "Lawrencville, Ga.",Lawrenceville,GA,USA,"Lawrenceville, GA, USA",fixed,spelling Lawrencville -> Lawrenceville; state 'Ga.' -> GA,2
 "Tuscon, Arizona",Tucson,AZ,USA,"Tucson, AZ, USA",fixed,spelling 'Tuscon' -> Tucson,2

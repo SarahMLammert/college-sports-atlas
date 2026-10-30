@@ -365,18 +365,21 @@ def scrape_school_season(school: dict, fetcher: Fetcher, season: int, division: 
 
 def scrape_school_all(school: dict, seasons: list[int], fetcher: Fetcher, history: dict,
                       render: bool, skip: set[tuple[str, int]],
-                      reference: tuple[int, set[str]] | None = None,
+                      reference: tuple | None = None,
                       save_dir: Path | None = None, bios: bool = False) -> list[tuple[int, list[dict], dict]]:
     """All seasons for one school, newest first, reusing the URL pattern that worked.
 
     ``reference`` is (season, roster names) from an already-saved newer season, used to catch
-    archive pages that silently show the current roster. After SCHOOL_MINUTES the school stops starting
+    archive pages that silently show the current roster, optionally with a third item: the saved roster of
+    the season before the current one ({name: class year}), to catch a current page that is still last
+    season's team. After SCHOOL_MINUTES the school stops starting
     new seasons: those are reported failed, and the next --retry-failed picks them up."""
     import time
     deadline = time.monotonic() + SCHOOL_MINUTES * 60
     results = []
     prefer: int | None = None
-    newest_season, newest_names = reference if reference else (None, None)
+    newest_season, newest_names = (reference[0], reference[1]) if reference else (None, None)
+    saved_before_current = reference[2] if reference and len(reference) > 2 else {}
     for season in sorted(seasons, reverse=True):
         if (school["school"], season) in skip:
             continue
@@ -432,6 +435,34 @@ def scrape_school_all(school: dict, seasons: list[int], fetcher: Fetcher, histor
         if idx is not None and report["status"] == "ok":
             prefer = idx
         results.append((season, rows, report))
+    return check_current_is_new(results, saved_before_current)
+
+
+def check_current_is_new(results: list, saved_before: dict[str, str]) -> list:
+    """The current season's page must not still be last season's team. Some sites start the new season by
+    copying the old roster: the page says "2026-27" (or "2027") but has the same players with the same class
+    years (Syracuse softball, Princeton baseball, Michigan men's lacrosse; Oct 30). A real new roster moves
+    returning players up a class. Seasons are scraped newest first, so this runs after the season before
+    has been read; when it was skipped (already saved), ``saved_before`` is its saved roster."""
+    cur = current_season()
+    before = {r["name"].lower(): (r.get("class_norm") or "").upper()
+              for season, rows, _ in results if season == cur - 1 for r in rows} or saved_before
+    if not before:
+        return results
+    for i, (season, rows, report) in enumerate(results):
+        if season != cur or not rows:
+            continue
+        now = {r["name"].lower(): (r.get("class_norm") or "").upper() for r in rows}
+        both = now.keys() & before.keys()
+        if len(both) < 0.9 * len(now):
+            continue
+        # Exactly the same players is a copy too, even with some class years changed (Kansas softball):
+        # a real new season always has players leaving or arriving.
+        if now.keys() == before.keys() or sum(now[n] == before[n] for n in both) >= 0.9 * len(both):
+            report = {**report, "status": "failed", "players": 0, "with_hometown": 0,
+                      "error": f"the {cur} page still shows the {cur - 1} roster (same players and class "
+                               f"years; not updated yet); " + (report.get("error") or "")}
+            results[i] = (season, [], report)
     return results
 
 
@@ -1122,6 +1153,15 @@ def run(ap: argparse.ArgumentParser, args, sport) -> int:
             if r["school"] not in references or references[r["school"]][0] == season:
                 references.setdefault(r["school"], (season, set()))[1].add(r["name"].lower())
 
+    # The saved roster of the season before the current one, for check_current_is_new()
+    before_path = season_files(season_dir).get(current_season() - 1)
+    if before_path:
+        before_rows: dict[str, dict[str, str]] = {}
+        for r in read_csv(before_path):
+            before_rows.setdefault(r["school"], {})[r["name"].lower()] = (r.get("class_norm") or "").upper()
+        for school_name, roster in before_rows.items():
+            ref = references.get(school_name)
+            references[school_name] = (ref[0], ref[1], roster) if ref else (None, None, roster)
     save_dir = args.save_pages.expanduser() if args.save_pages else None
     if save_dir:
         save_dir.mkdir(parents=True, exist_ok=True)
@@ -1190,7 +1230,8 @@ def run(ap: argparse.ArgumentParser, args, sport) -> int:
                     # earlier run saved: keep the saved one and its report. Not when this run found the
                     # saved roster was really a newer season's ("page looks like the 2026 roster").
                     err = report.get("error", "") or ""
-                    if not rows and report.get("status") in ("failed", "left_out") and "page looks like the" not in err:
+                    if (not rows and report.get("status") in ("failed", "left_out") and "page looks like the" not in err
+                            and "roster (same players and class years" not in err):
                         old = [r for r in prev_rows_all[season] if r["school"] == school["school"]]
                         if old:
                             rows = old

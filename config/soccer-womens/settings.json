@@ -1,0 +1,18 @@
+{
+  "label": "Soccer (Women's)",
+  "roster_paths": ["/sports/womens-soccer/roster", "/sports/wsoc/roster", "/sports/w-soccer/roster", "/sports/wsoccer/roster"],
+  "presto_paths": ["/sports/wsoc/{season}-{next_yy}/roster"],
+  "min_players": 14,
+  "max_players": 60,
+  "junior_colleges": ["San Jac", "TJC", "LSUE", "LSU-Eunice", "MGCCC", "IWCC", "JCCC", "SCF", "FSW", "IRSC", "JUCO"],
+  "position_groups": ["GK", "D", "M", "F", "UNK"],
+  "position_abbreviations": {"GK": "gk g k gk/f", "D": "d b def cb fb lb rb wb d/m", "M": "m mf mid cm dm am cdm cam m/f m/d", "F": "f fw fwd st w cf f/m"},
+  "position_words": [["goal", "GK"], ["keeper", "GK"], ["defend", "D"], ["defense", "D"], ["back", "D"], ["center back", "D"], ["midfield", "M"], ["forward", "F"], ["striker", "F"], ["wing", "F"], ["attack", "F"]],
+  "position_fallback": "UNK",
+  "d1_divisions": ["D1"],
+  "other_divisions": ["D2", "D3", "NAIA", "JUCO"],
+  "division_labels": {"D1": "Division I", "D2": "Division II", "D3": "Division III", "NAIA": "NAIA", "JUCO": "Junior college (NJCAA, CCCAA, NWAC)"},
+  "position_labels": {"GK": "Goalkeeper", "D": "Defender", "M": "Midfielder", "F": "Forward", "UNK": "Other"},
+  "thin_roster": 18,
+  "frozen_min_pairs": 15
+}

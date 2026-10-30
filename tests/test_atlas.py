@@ -937,6 +937,40 @@ def test_spring_archives_also_try_the_fall_year():
     assert "https://x.com/sports/football/roster/2023" not in sidearm.candidate_urls("x.com", season=2024)
 
 
+def test_two_year_label_beats_a_bare_year():
+    # Samford: the title says "2026 ... Roster" (the year the season starts), the heading "2026-27"
+    use("basketball-mens")
+    page = "<title>2026 Men's Basketball Roster - Samford</title><h1>2026-27 Men's Basketball Roster</h1>"
+    assert sidearm.detect_season(page) == 2027
+    assert sidearm.detect_season("<title>2025-26 Men's Basketball Roster</title>") == 2026
+    # a news headline (h2) doesn't count as the page's label
+    assert sidearm.detect_season("<title>2026 Softball Roster</title><h2>2026-27 schedule out</h2>") == 2026
+    use("football")
+    assert sidearm.detect_season("<title>2026 Football Roster</title><h1>2026-27 Football</h1>") == 2026
+
+
+def test_current_page_that_is_still_last_seasons_team(monkeypatch):
+    monkeypatch.setattr(sr, "current_season", lambda: 2027)
+    up = {"FR": "SO", "SO": "JR", "JR": "SR", "SR": "GR"}
+    old = [{"name": f"P{i}", "class_norm": c} for i, c in enumerate(["FR", "SO", "JR", "SR"] * 5)]
+    saved = {r["name"].lower(): r["class_norm"] for r in old}
+    rep = lambda: {"status": "ok", "players": 20, "with_hometown": 20, "error": ""}
+    # a copy: same players, same class years (read in this run, or saved earlier)
+    out = sr.check_current_is_new([(2027, [dict(r) for r in old], rep()), (2026, old, rep())], {})
+    assert out[0][1] == [] and "still shows the 2026 roster" in out[0][2]["error"]
+    assert out[1][1] == old
+    assert sr.check_current_is_new([(2027, [dict(r) for r in old], rep())], saved)[0][1] == []
+    # exactly the same players with some class years changed is still a copy (Kansas softball)
+    half = [dict(r, class_norm=up[r["class_norm"]] if i % 2 else r["class_norm"]) for i, r in enumerate(old)]
+    assert sr.check_current_is_new([(2027, half, rep())], saved)[0][1] == []
+    # a real new roster: returning players moved up a class, seniors gone, freshmen in
+    new = [dict(r, class_norm=up[r["class_norm"]]) for r in old if r["class_norm"] != "SR"]
+    new += [{"name": f"N{i}", "class_norm": "FR"} for i in range(4)]
+    assert sr.check_current_is_new([(2027, new, rep())], saved)[0][1] == new
+    # other seasons aren't touched
+    assert sr.check_current_is_new([(2025, [dict(r) for r in old], rep())], saved)[0][1] != []
+
+
 def test_missing_rosters_lists_left_out_once(tiny):
     reports = [
         {"season": 2025, "school": "Alpha", "division": "D1", "status": "failed", "error": "https://alpha.com/r: HTTP 404"},

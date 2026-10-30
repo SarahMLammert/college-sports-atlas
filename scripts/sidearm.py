@@ -125,7 +125,7 @@ def candidate_urls(domain: str, override: str = "", season: int | None = None) -
     if override:
         if season is None:
             urls.append(_fill(override, current_season()))
-        elif "{season}" in override:
+        elif "{" in override:   # any template key: {season}, {prev_season}-{yy}, ... (Oct 29: {prev_season} alone was skipped)
             urls.append(_fill(override, season))
         else:  # plain URL: try the Sidearm and WMT archive conventions on it
             o, span = override.rstrip("/"), _span(season)
@@ -164,6 +164,13 @@ def candidate_urls(domain: str, override: str = "", season: int | None = None) -
     bare = domain.strip().strip("/") if domain else ""
     if bare and bare.count(".") == 1:
         urls.append(f"https://www.{bare}{ROSTER_PATHS[0]}" + (f"/{season}" if season else ""))
+    if season:
+        # Oct 29: both years written out: /roster/2023-2024 (Hawaii), /roster/season/2023-2024 (BYU).
+        # Last, so the addresses above keep their place in the list.
+        first = season - 1 if SPRING else season
+        for path in ROSTER_PATHS:
+            urls.append(f"{base}{path.rstrip('/')}/{first}-{first + 1}")
+            urls.append(f"{base}{path.rstrip('/')}/season/{first}-{first + 1}")
     seen, out = set(), []
     for u in urls:
         if u not in seen:
@@ -183,22 +190,25 @@ _YEAR = re.compile(r"\b(20[0-3]\d)(?:\s*[-–/]\s*(?:20)?(\d{2}))?\b")
 
 def detect_season(html: str) -> int | None:
     soup = BeautifulSoup(html[:400_000], "lxml")
-    candidates: list[str] = []
+    candidates: list[tuple[str, bool]] = []     # (text, is it the page's own label: title, selected season, h1)
     if soup.title:  # .string is None when the title has child nodes; get_text() isn't
-        candidates.append(soup.title.get_text(" "))
+        candidates.append((soup.title.get_text(" "), True))
     for sel in ("select[name=season] option[selected]", "select option[selected]",
                 "h1", "h2", "[class*=roster-title]", "[class*=season] [aria-selected=true]",
                 ".school-team-suite__eyebrow"):   # Ardor Sports Hub (NJCAA app): "Football · 2024-25"
         for el in soup.select(sel)[:3]:
-            candidates.append(el.get_text(" "))
-    for text in candidates:
-        m = _YEAR.search(text or "")
-        if m:
-            # "2023-24" is season 2023 for a fall sport, but season 2024 (that spring) for a spring one.
-            if SPRING and m.group(2):
-                return int(m.group(1)) + 1
-            return int(m.group(1))
-    return None
+            candidates.append((el.get_text(" "), sel != "h2"))   # h2s are often news headlines
+    found = [(m, own) for text, own in candidates for m in [_YEAR.search(text or "")] if m]
+    if not found:
+        return None
+    # A two-year label ("2026-27") beats a bare year elsewhere on the page. A winter sport's title can say
+    # "2026 Men's Basketball Roster" (the year the season starts) while its heading says "2026-27": read
+    # as a bare year, that page was saved as the 2025-26 season (Samford, Wyoming, Pepperdine; Oct 30).
+    m = next((m for m, own in found if own and m.group(2)), found[0][0])
+    # "2023-24" is season 2023 for a fall sport, but season 2024 (that spring) for a spring one.
+    if SPRING and m.group(2):
+        return int(m.group(1)) + 1
+    return int(m.group(1))
 
 
 # =============================================================================
