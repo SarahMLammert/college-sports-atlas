@@ -1342,11 +1342,6 @@ def suggest_correction(raw: str) -> tuple:
     return (city, state, country, "fixed", "; ".join(notes))
 
 
-def query_for(city, state, country):
-    parts = [p for p in (city, state, country) if p]
-    return ", ".join(parts)
-
-
 # ---------------------------------------------------------------------------
 
 _WORLD: WorldCities | None = None
@@ -1468,6 +1463,39 @@ def save_corrections(path: Path, table: dict[str, dict]) -> None:
         w.writerows(rows)
 
 
+def load_sport_corrections(sport) -> tuple[dict[str, dict], set[str]]:
+    """The fixes a sport uses: config/shared/hometown_corrections.csv, with the sport's own rows
+    (config/<sport>/hometown_corrections.csv) on top. Also returns which hometowns are the sport's own.
+
+    Until Oct 30 every sport had a full file of its own, most of it copied from football's: a fix made in one
+    sport never reached the others (108,280 rows in 11 files; 20,776 once merged)."""
+    table = load_corrections(sport.shared_hometown_corrections_csv)
+    own = load_corrections(sport.hometown_corrections_csv)
+    table.update(own)
+    return table, set(own)
+
+
+def save_sport_corrections(sport, table: dict[str, dict], own: set[str]) -> None:
+    """Write a sport's fixes back: its own rows to its file, everything else to the shared file, so a new fix
+    reaches every sport. The shared file is read again first, in case another sport saved it meanwhile.
+    The players column of a shared row is the most players with that hometown in any one sport."""
+    shared = load_corrections(sport.shared_hometown_corrections_csv)
+    mine = {}
+    for raw, row in table.items():
+        if raw in own:
+            mine[raw] = row
+        else:
+            before = shared.get(raw)
+            if before is not None:
+                most = max(int(before.get("players") or 0), int(row.get("players") or 0))
+                row = {**row, "players": str(most)}
+            shared[raw] = row
+    sport.shared_hometown_corrections_csv.parent.mkdir(parents=True, exist_ok=True)
+    save_corrections(sport.shared_hometown_corrections_csv, shared)
+    if mine or sport.hometown_corrections_csv.exists():
+        save_corrections(sport.hometown_corrections_csv, mine)
+
+
 def corrected_home(row: dict | None, statuses: set[str]) -> dict | None:
     if row and row.get("status") in statuses and (row.get("city") or row.get("state") or row.get("country")):
         return {"city": row.get("city", ""), "state": row.get("state", ""), "country": row.get("country", "")}
@@ -1498,15 +1526,19 @@ def main(argv=None) -> int:
     ap.add_argument("--online", action="store_true", help="look up leftovers with OpenStreetMap Nominatim")
     ap.add_argument("--contact", default="anonymous", help="email for the Nominatim User-Agent (their policy)")
     ap.add_argument("--corrections", type=Path, default=None,
-                    help="fix table to read and update (default: config/<sport>/hometown_corrections.csv)")
+                    help="one fix table to read and update instead of the usual pair "
+                         "(config/shared/hometown_corrections.csv plus config/<sport>/hometown_corrections.csv)")
     ap.add_argument("--use-review", action="store_true", help="also apply corrections marked 'review'")
     ap.add_argument("--refresh", action="store_true",
                     help="look every hometown up again instead of reusing hometowns.csv (keeps rows marked 'manual')")
     args = ap.parse_args(argv)
     sport = load_sport(args.sport)
     statuses = {"fixed", "review"} if args.use_review else {"fixed"}
-    corr_path = args.corrections or sport.hometown_corrections_csv
-    table = load_corrections(corr_path)
+    if args.corrections:
+        corr_path, table, own = args.corrections, load_corrections(args.corrections), set()
+    else:
+        corr_path = sport.shared_hometown_corrections_csv
+        table, own = load_sport_corrections(sport)
     lookup_path = sport.rosters_dir / "hometowns.csv"
     known = load_lookup(lookup_path, args.refresh)
 
@@ -1625,7 +1657,10 @@ def main(argv=None) -> int:
         if raw in players_per_raw:
             row["players"] = players_per_raw[raw]
     if table:
-        save_corrections(corr_path, table)
+        if args.corrections:
+            save_corrections(corr_path, table)
+        else:
+            save_sport_corrections(sport, table, own)
 
     def with_guessed_state(h: dict, src: str) -> dict:
         h = dict(h)

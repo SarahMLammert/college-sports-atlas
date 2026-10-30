@@ -29,7 +29,7 @@ import scrape_rosters as sr
 import sidearm
 import hometown_fixes as sug
 from geocode import not_a_place, parse_hometown, split_labeled_hometown
-from core import Levels, is_major, key
+from core import Levels, is_major, key, ROOT
 from core import load_sport
 from scrape_rosters import normalize_class, parse_roster, split_hometown_highschool
 from sidearm import parse_sidearm_classic
@@ -949,6 +949,54 @@ def test_two_year_label_beats_a_bare_year():
     assert sidearm.detect_season("<title>2026 Football Roster</title><h1>2026-27 Football</h1>") == 2026
 
 
+# Real page titles and headings seen in the rosters (Oct 30), with the season each one is.
+REAL_LABELS = [
+    ("basketball-mens", "<title>2026 Men's Basketball Roster - Samford University Athletics</title>"
+                        "<h1>2026-27 Men's Basketball Roster</h1>", 2027),
+    ("basketball-mens", "<title>2025-26 Men's Basketball Roster - Princeton</title>", 2026),
+    ("basketball-womens", "<title>Women's Basketball Roster - Tufts</title><h1>2025-2026 Women's Basketball</h1>", 2026),
+    ("softball", "<title>2026 Softball Roster - Kansas</title>", 2026),
+    ("softball", "<title>2026-27 Softball Roster - Syracuse University Athletics</title>", 2027),
+    ("baseball", "<title>2023-24 Baseball Roster</title>", 2024),
+    ("hockey-mens", "<title>2025-26 MCLA Men's Ice Hockey Roster</title>", 2026),
+    ("lacrosse-mens", "<title>2026 Northwood Men's Lacrosse Roster</title>", 2026),
+    ("football", "<title>2024 Football Roster - Ohio State</title>", 2024),
+    ("football", '<div class="school-team-suite__eyebrow">Football · 2024-25</div>', 2024),
+    ("volleyball-womens", "<title>2025-2026 Women's Volleyball Roster</title>", 2025),
+    ("soccer-mens", "<title>2022 Men's Soccer Roster - California</title>", 2022),
+]
+
+
+@pytest.mark.parametrize("sport,page,season", REAL_LABELS)
+def test_real_page_labels(sport, page, season):
+    use(sport)
+    assert sidearm.detect_season(page) == season
+
+
+def test_season_names_in_one_place():
+    from datetime import date
+    assert core.season_span(2024, spring=False) == "2024-25"
+    assert core.season_span(2024, spring=True) == "2023-24"
+    assert core.season_span(2024, spring=True, full=True) == "2023-2024"
+    assert core.season_first_year(2027, spring=True) == 2026
+    for label, fall, spring in [("2024-25", 2024, 2025), ("2024-2025", 2024, 2025), ("2024/25", 2024, 2025),
+                                ("2024", 2024, 2024), ("no year", None, None)]:
+        assert core.season_from_label(label, spring=False) == fall, label
+        assert core.season_from_label(label, spring=True) == spring, label
+    assert core.fill_season("/sports/mbkb/{prev_season}-{yy}/roster", 2026) == "/sports/mbkb/2025-26/roster"
+    assert core.fill_season("/sports/fball/{season}-{next_yy}/roster", 2024) == "/sports/fball/2024-25/roster"
+    assert core.current_season(date(2026, 10, 30), spring=True) == 2027
+    assert core.current_season(date(2026, 10, 30), spring=False) == 2026
+    assert core.current_season(date(2026, 2, 1), spring=False) == 2025
+    assert core.current_season(date(2026, 7, 31), spring=True) == 2026
+    # the addresses use the same names: spring season 2024 is /roster/2023-24 and /roster/2023-2024
+    use("basketball-mens")
+    urls = sidearm.candidate_urls("samfordsports.com", season=2026)
+    assert "https://samfordsports.com/sports/mens-basketball/roster/2025-26" in urls
+    assert "https://samfordsports.com/sports/mens-basketball/roster/2025-2026" in urls
+    use("football")
+
+
 def test_current_page_that_is_still_last_seasons_team(monkeypatch):
     monkeypatch.setattr(sr, "current_season", lambda: 2027)
     up = {"FR": "SO", "SO": "JR", "JR": "SR", "SR": "GR"}
@@ -1109,6 +1157,64 @@ def test_frozen_check_with_too_few_players_doesnt_crash(tiny, capsys):
     assert (tiny.rosters_dir / "frozen_class_seasons.csv").exists()
 
 
+def test_roster_db_follows_the_csv_files(tiny):
+    import os
+    write_season(tiny, 2024, [player("Alpha", "Ann One"), player("Alpha", "Bea Two", town="")])
+    write_season(tiny, 2025, [player("Alpha", "Ann One", cls="SO")])
+    rows = core.season_rows(tiny.rosters_dir)
+    want = core.read_csv(tiny.rosters_dir / "rosters_2024.csv") + core.read_csv(tiny.rosters_dir / "rosters_2025.csv")
+    assert rows == want                                   # same rows, same order, same text
+    con = core.roster_db(tiny.rosters_dir)
+    assert con.execute("SELECT COUNT(*) FROM rosters").fetchone()[0] == 3
+    assert con.execute("SELECT name_key(?)", ("D'Andre St. John",)).fetchone()[0] == "dandrestjohn"
+    con.close()
+    # a changed season file is picked up on the next open, without being asked
+    write_season(tiny, 2025, [player("Alpha", "Ann One", cls="SO"), player("Alpha", "Cy Three")])
+    os.utime(tiny.rosters_dir / "rosters_2025.csv", ns=(1, 1))     # even with an old timestamp: the size differs
+    assert len(core.season_rows(tiny.rosters_dir)) == 4
+    # a column an older file doesn't have is left out of its rows, as read_csv leaves it out
+    with open(tiny.rosters_dir / "rosters_2023.csv", "w", newline="") as f:
+        f.write("season,school,name,hometown\n2023,Alpha,Old Timer,Austin TX\n")
+    old = next(r for r in core.season_rows(tiny.rosters_dir) if r["name"] == "Old Timer")
+    assert "class_norm" not in old and old.get("class_norm", "") == ""
+
+
+def test_a_spelling_fix_that_starts_differently_is_left_for_a_person():
+    # Oct 30: about half the automatic fixes that changed a first letter or a word were another place
+    for typed, match in [("Delray", "Nelray"), ("Rockaway", "Brockway"), ("York City", "Ford City"),
+                         ("Norwin", "Orwin"), ("West Allegheny", "East Allegheny"), ("Westin", "Destin")]:
+        assert sug.another_town(typed, match), typed
+    for typed, match in [("Lakeworth", "Lake Worth"), ("Sugerland", "Sugar Land"), ("Kissimee", "Kissimmee"),
+                         ("Center Reach", "Centereach"), ("Tuscon", "Tucson")]:
+        assert not sug.another_town(typed, match), typed
+
+
+def test_hometown_fixes_are_shared_with_a_sports_own_on_top(tiny):
+    fields = geo.CORR_FIELDS
+    def write(path, rows):
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with open(path, "w", newline="") as f:
+            w = csv.DictWriter(f, fieldnames=fields); w.writeheader()
+            for r in rows: w.writerow({k: r.get(k, "") for k in fields})
+    write(tiny.shared_hometown_corrections_csv, [
+        {"hometown_raw": "Oahu, HI", "city": "Honolulu", "state": "HI", "country": "USA", "status": "fixed", "players": "5"},
+        {"hometown_raw": "Woodlands, Texas", "city": "The Woodlands", "state": "TX", "country": "USA", "status": "fixed"}])
+    write(tiny.hometown_corrections_csv, [
+        {"hometown_raw": "Oahu, HI", "city": "Kailua", "state": "HI", "country": "USA", "status": "fixed"}])
+    table, own = geo.load_sport_corrections(tiny)
+    assert table["Oahu, HI"]["city"] == "Kailua" and table["Woodlands, Texas"]["city"] == "The Woodlands"
+    assert own == {"Oahu, HI"}
+    # a new fix goes to the shared file; the sport's own row stays in its own file
+    table["Kona, Hawaii"] = {"hometown_raw": "Kona, Hawaii", "city": "Kailua-Kona", "state": "HI", "country": "USA",
+                             "query": "", "status": "fixed", "note": "", "players": "2"}
+    table["Oahu, HI"]["players"] = "9"
+    geo.save_sport_corrections(tiny, table, own)
+    shared = {r["hometown_raw"]: r for r in csv.DictReader(open(tiny.shared_hometown_corrections_csv))}
+    mine = {r["hometown_raw"]: r for r in csv.DictReader(open(tiny.hometown_corrections_csv))}
+    assert set(shared) == {"Oahu, HI", "Woodlands, Texas", "Kona, Hawaii"} and shared["Oahu, HI"]["city"] == "Honolulu"
+    assert set(mine) == {"Oahu, HI"} and mine["Oahu, HI"]["players"] == "9"
+
+
 def test_spelling_fixes_read_the_geocoders_table(tiny):
     with open(tiny.rosters_dir / "hometowns.csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=["hometown", "school", "city", "state", "country", "lat", "lon",
@@ -1119,8 +1225,9 @@ def test_spelling_fixes_read_the_geocoders_table(tiny):
         w.writerow({"hometown": "Baton Rouge, La.", "city": "Baton Rouge", "state": "LA", "country": "USA",
                     "lat": "30.45", "lon": "-91.15", "source": "census", "precision": "city", "players": 40})
     hometown_fixes.fix_hometown_spellings_main(["--sport", "softball"])
-    fixes = {r["hometown_raw"]: r for r in csv.DictReader(open(tiny.hometown_corrections_csv))}
+    fixes = {r["hometown_raw"]: r for r in csv.DictReader(open(tiny.shared_hometown_corrections_csv))}
     assert fixes["Baton Rogue, La."]["city"] == "Baton Rouge" and fixes["Baton Rogue, La."]["players"] == "3"
+    assert not tiny.hometown_corrections_csv.exists()      # nothing of the sport's own
     table = {r["hometown"]: r for r in csv.DictReader(open(tiny.rosters_dir / "hometowns.csv"))}
     assert table["Baton Rogue, La."]["city"] == "Baton Rouge" and table["Baton Rogue, La."]["lat"] == "30.45"
 
@@ -1200,10 +1307,19 @@ def test_season_pages_list_the_page_to_use(tiny, monkeypatch):
     sr.SEASON_PAGES.clear()
 
 
-def test_every_sports_pages_match_footballs():
-    # docs/football/players-*.html are the masters; scripts/build.py sync copies them to the other sports.
-    # A page edited for one sport only fails here: edit football's and run the script.
-    assert build.sync_pages_main(["--check"]) == 0
+def test_every_sport_has_its_pages():
+    # One set of pages for every sport (docs/players-dotmap.html?sport=...), the sport's words in docs/sports.js,
+    # and its old addresses forwarding (python3 scripts/build.py pages writes them).
+    assert build.site_pages_main(["--check"]) == 0
+    words = build.sport_words(ROOT / "docs")
+    for sport, w in words.items():
+        assert "College" in w["players-dotmap"]["title"], sport
+        assert w["women"] == sport.endswith("-womens") or sport == "softball" or w["women"] is False, sport
+    # the shared pages use the sport's pronouns, not football's
+    for page in ("players-dotmap.html", "players-transfers.html"):
+        text = (ROOT / "docs" / page).read_text(encoding="utf-8")
+        assert " his hometown" not in text and "he isn't on that" not in text
+    assert "sport=softball" in build.forwarding_page("softball", "players-dotmap.html")
 
 
 def test_map_data_packing_round_trip():

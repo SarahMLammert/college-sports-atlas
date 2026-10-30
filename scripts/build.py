@@ -3,20 +3,19 @@
     Campus locations (locations)
     Frozen class years (frozen)
     Checking the rosters (check)
-    Copying football's pages to every sport (sync)
+    The site's pages (pages)
 
 Commands:
     python3 scripts/build.py map --sport football   # the map data
     python3 scripts/build.py locations --sport football   # campus locations
     python3 scripts/build.py frozen --sport football   # frozen class years
     python3 scripts/build.py check --sport football   # checking the rosters
-    python3 scripts/build.py sync --check      # copying football's pages to every sport
+    python3 scripts/build.py pages           # the site's pages: old addresses forward to the shared ones
 """
 from __future__ import annotations
 
 import argparse
 import csv
-import difflib
 import json
 import re
 import statistics
@@ -39,10 +38,11 @@ from core import (
     load_sport,
     Notes,
     players,
-    read_csv,
     ROOT,
     season_files,
     season_rows,
+    roster_db,
+    db_rows,
 )
 from sidearm import clean_name, load_known_colleges, sort_schools
 
@@ -114,11 +114,6 @@ def previous_college(prev: str, high_school: str) -> str:
     and a major in that field ('Business', 'Sport Management' on Valparaiso's roster) isn't either."""
     p = sort_schools({"high_school": high_school or "", "previous_school": prev or ""})["previous_school"]
     return "" if is_major(p) else p
-
-
-def is_transfer(prev: str, high_school: str) -> int:
-    """1 if the roster names a college he came from."""
-    return int(bool(previous_college(prev, high_school)))
 
 
 _SUFFIX = re.compile(r"\b(jr|sr|ii|iii|iv|v)\b\.?", re.I)
@@ -245,8 +240,9 @@ def placed_players(sport) -> list[dict]:
     path = sport.rosters_dir / "hometowns.csv"
     if not path.exists():
         sys.exit(f"{path} not found: run geocode.py first.")
-    with open(path, newline="", encoding="utf-8") as fh:
-        places = {(r.get("hometown", ""), r.get("school", "")): r for r in csv.DictReader(fh)}
+    con = roster_db(sport.rosters_dir)          # rosters.db's copy of hometowns.csv (and of the season files)
+    places = {(r.get("hometown", ""), r.get("school", "")): r for r in db_rows(con, "SELECT * FROM hometowns ORDER BY rowid")}
+    con.close()
     rows, unplaced = players(sport.rosters_dir), 0
     for r in rows:
         raw = r.get("hometown", "")
@@ -703,22 +699,11 @@ SAME_CLASS = 0.8     # ... with this share of them still in the same class year 
                      # keeps 60-80% of its players, and nearly all of them move up a class)
 
 
-def report_rows(sport) -> list[dict]:
-    rows = []
-    for path in sorted(sport.rosters_dir.glob("scrape_report_*.csv")):
-        rows += read_csv(path)
-    return rows
-
-
 def status_of(r: dict) -> str:
     st = r.get("status", "")
     if st == "failed" and (r.get("error") or "").lower().startswith("left out"):
         return "left_out"      # reports written before Oct 27
     return st
-
-
-def name_key(name: str) -> str:
-    return "".join(c for c in (name or "").lower() if c.isalpha())
 
 
 def check_rosters_main(argv=None) -> int:
@@ -731,16 +716,15 @@ def check_rosters_main(argv=None) -> int:
         print(f"No season files in {sport.rosters_dir} yet: nothing to check.")
         return 0
 
-    by_season: dict[int, list[dict]] = {}
-    for season, path in files.items():
-        by_season[season] = read_csv(path)
-    rows = [r for season in files for r in by_season[season]]
+    # Everything below reads rosters/<sport>/rosters.db (core.roster_db: rebuilt from the CSVs when they change)
+    con = roster_db(sport.rosters_dir)
+    rows = db_rows(con, "SELECT * FROM rosters ORDER BY rowid")
     unique = build_unique(rows)
     print(f"{sport.label or sport.name}: {len(unique):,} players ({len(rows):,} player-seasons, "
           f"seasons {min(files)}-{max(files)})")
 
     # ---- scrape status by division, from the reports
-    reports = report_rows(sport)
+    reports = db_rows(con, "SELECT * FROM reports ORDER BY rowid")
     if reports:
         order = list(sport.d1_divisions) + [d for d in sport.other_divisions if d not in sport.d1_divisions]
         counts: dict[str, Counter] = defaultdict(Counter)
@@ -757,64 +741,84 @@ def check_rosters_main(argv=None) -> int:
         print("\n(no scrape reports yet: scrape with --report to get the ok/partial/failed table)")
 
     # ---- hometowns
-    unmatched = read_csv(sport.rosters_dir / "unmatched_hometowns.csv")
+    unmatched = db_rows(con, "SELECT * FROM unmatched")
     if unmatched or (sport.rosters_dir / "unmatched_hometowns.csv").exists():
         n = sum(int(r.get("players") or 0) for r in unmatched)
         print(f"\nhometowns not placed: {len(unmatched):,} places, {n:,} players"
               + (" (see unmatched_hometowns.csv)" if unmatched else ""))
 
-    # ---- oversized and repeated rosters
-    size: dict[tuple[str, int], int] = Counter((r["school"], int(r["season"])) for r in rows)
-    url: dict[tuple[str, int], str] = {}
-    names: dict[tuple[str, int], set[str]] = defaultdict(set)
-    classes: dict[tuple[str, int], dict[str, str]] = defaultdict(dict)
-    bios: dict[tuple[str, int], dict[str, str]] = defaultdict(dict)
-    for r in rows:
-        k = (r["school"], int(r["season"]))
-        url.setdefault(k, r.get("roster_url", ""))
-        names[k].add(name_key(r["name"]))
-        classes[k][name_key(r["name"])] = (r.get("class_norm") or "").upper()
-        if r.get("bio_url"):
-            bios[k][name_key(r["name"])] = r["bio_url"].replace(":443/", "/").split("?")[0].rstrip("/")
-    seasons_of: dict[str, list[int]] = defaultdict(list)
-    for school, season in size:
-        seasons_of[school].append(season)
-
+    # ---- oversized and repeated rosters (SQL on rosters.db since Oct 30)
+    # One row per school-season (players, and the roster address of its first row), and one per player name
+    # per school-season (the class year and player page of the last row with that name, as the old Python did).
+    con.executescript("""
+        CREATE TEMP TABLE sizes AS
+            SELECT school, CAST(season AS INTEGER) AS season, COUNT(*) AS n, MIN(rowid) AS first, roster_url AS url
+            FROM rosters GROUP BY school, CAST(season AS INTEGER);
+        CREATE TEMP TABLE k AS
+            SELECT school, CAST(season AS INTEGER) AS season, name_key(name) AS n, MAX(rowid) AS last,
+                   upper(coalesce(class_norm, '')) AS c
+            FROM rosters GROUP BY school, CAST(season AS INTEGER), name_key(name);
+        CREATE TEMP TABLE kb AS
+            SELECT school, CAST(season AS INTEGER) AS season, name_key(name) AS n, MAX(rowid) AS last,
+                   bio_key(bio_url) AS b
+            FROM rosters WHERE coalesce(bio_url, '') <> '' GROUP BY school, CAST(season AS INTEGER), name_key(name);
+        CREATE INDEX temp.k_i ON k (school, season, n);
+        CREATE INDEX temp.kb_i ON kb (school, season, n);
+        CREATE TEMP TABLE pairs AS        -- each school-season and the school's season before it in the data
+            SELECT school, season AS cur, LAG(season) OVER (PARTITION BY school ORDER BY season) AS prev FROM sizes;
+    """)
+    size = {(r["school"], r["season"]): r["n"] for r in con.execute("SELECT school, season, n FROM sizes")}
+    url = {(r["school"], r["season"]): r["url"] or "" for r in con.execute("SELECT school, season, url FROM sizes")}
     found = []   # (kind, school, season, players, detail, url)
+    seasons_of: dict[str, list[int]] = defaultdict(list)
+    for school, season in sorted(size):
+        seasons_of[school].append(season)
     for school, ys in seasons_of.items():
-        ys.sort()
         if len(ys) >= 3:
             med = statistics.median(size[(school, y)] for y in ys)
             for y in ys:
                 n = size[(school, y)]
                 if n >= OVERSIZED * med and n - med >= OVERSIZED_MIN_EXTRA:
                     found.append(("oversized", school, y, n, f"usually {med:g}", url[(school, y)]))
-        for prev, cur in zip(ys, ys[1:]):
-            a, b = names[(school, prev)], names[(school, cur)]
-            both = a & b
-            if len(b) < sport.min_players or len(both) < REPEATED * len(b):
-                continue
-            # Returning players move up a class; a copy of the season before's page keeps every label.
-            # (A roster with no class years can't be told apart, so it's listed too.)
-            ca, cb = classes[(school, prev)], classes[(school, cur)]
-            same_class = sum(1 for n in both if ca.get(n) == cb.get(n)) / len(both)
-            if same_class >= SAME_CLASS:
-                # The same player pages (bio links) as the season before: the scraper read the other season's
-                # page, a real error. Different bio pages: the school's own page for this season repeats last
-                # season's roster (often after COVID, when class years weren't moved up). Rescraping can't fix
-                # that, so it is only counted (Oct 30: 8 of 37 flagged were the first kind).
-                ba, bb = bios[(school, prev)], bios[(school, cur)]
-                with_bio = [n for n in both if n in ba and n in bb]
-                same_page = (len(with_bio) >= 0.5 * len(both)
-                             and sum(ba[n] == bb[n] for n in with_bio) >= 0.9 * len(with_bio)) \
-                    or (url[(school, cur)] and url[(school, cur)].rstrip("/") == url[(school, prev)].rstrip("/"))
-                detail = f"{len(both) / len(b):.0%} same names and {same_class:.0%} same class years as {prev}"
-                if same_page:
-                    found.append(("repeated", school, cur, size[(school, cur)], detail + ", same player pages",
-                                  url[(school, cur)]))
-                else:
-                    found.append(("school_copy", school, cur, size[(school, cur)],
-                                  detail + " (the school's own page for this season)", url[(school, cur)]))
+    # For each school-season: its names, how many were on the season before's roster, how many of those kept
+    # the same class year, how many have a player page in both seasons, and how many of those are the same page.
+    pairs = con.execute("""
+        SELECT p.school, p.cur, p.prev,
+               (SELECT COUNT(*) FROM k WHERE k.school = p.school AND k.season = p.cur) AS names,
+               COUNT(*) AS both_seasons,
+               SUM(a.c = b.c) AS same_class,
+               SUM(ab.b IS NOT NULL AND bb.b IS NOT NULL) AS with_bio,
+               SUM(ab.b = bb.b) AS same_bio
+        FROM pairs p
+        JOIN k b ON b.school = p.school AND b.season = p.cur
+        JOIN k a ON a.school = p.school AND a.season = p.prev AND a.n = b.n
+        LEFT JOIN kb bb ON bb.school = p.school AND bb.season = p.cur AND bb.n = b.n
+        LEFT JOIN kb ab ON ab.school = p.school AND ab.season = p.prev AND ab.n = b.n
+        WHERE p.prev IS NOT NULL
+        GROUP BY p.school, p.cur, p.prev
+    """).fetchall()
+    con.close()
+    for school, cur, prev, names, both, same_class_n, with_bio, same_bio in pairs:
+        if names < sport.min_players or both < REPEATED * names:
+            continue
+        # Returning players move up a class; a copy of the season before's page keeps every label.
+        # (A roster with no class years can't be told apart, so it's listed too.)
+        same_class = same_class_n / both
+        if same_class < SAME_CLASS:
+            continue
+        # The same player pages (bio links) as the season before: the scraper read the other season's
+        # page, a real error. Different bio pages: the school's own page for this season repeats last
+        # season's roster (often after COVID, when class years weren't moved up). Rescraping can't fix
+        # that, so it is only counted (Oct 30: 8 of 37 flagged were the first kind).
+        same_page = (with_bio >= 0.5 * both and same_bio >= 0.9 * with_bio) \
+            or bool(url[(school, cur)] and url[(school, cur)].rstrip("/") == url[(school, prev)].rstrip("/"))
+        detail = f"{both / names:.0%} same names and {same_class:.0%} same class years as {prev}"
+        if same_page:
+            found.append(("repeated", school, cur, size[(school, cur)], detail + ", same player pages",
+                          url[(school, cur)]))
+        else:
+            found.append(("school_copy", school, cur, size[(school, cur)],
+                          detail + " (the school's own page for this season)", url[(school, cur)]))
     for kind, title in (("oversized", f"Rosters at least {OVERSIZED:g}x the school's usual size"),
                         ("repeated", "Rosters read from another season's page (same players and player pages as "
                                      "the season before)")):
@@ -854,71 +858,76 @@ def check_rosters_main(argv=None) -> int:
 
 
 # ==============================================================================================================
-# Copying football's pages to every sport (sync)   (was scripts/sync_pages.py)
+# The site's pages (pages)
 # ==============================================================================================================
 
-SYNC_PAGES_DOC = 'Copy football\'s map pages to every other sport, so a fix made once reaches all of them.\n\n    python3 scripts/build.py sync           # write docs/<sport>/players-*.html for every sport but football\n    python3 scripts/build.py sync --check   # only say which pages differ from football\'s beyond their own words\n\ndocs/football/players-dotmap.html, players-heatmap.html and players-transfers.html are the masters (and\nstaff-moves.html and staff-directory.html, which are copied as they are): edit those,\nthen run this. Each other sport keeps its own words, taken from its current page: the <title>, the description,\nthe <h1> heading and the subtitle (id="sub"); women\'s sports also get she/her for he/his/him. Everything else comes\nfrom football\'s page. (Before Oct 28 the pages were edited one by one, and the other sports never got football\'s\nmulti-conference filter: picking two conferences there left the heading at "All-school stats".)\n'
+PAGES_DOC = """Make each sport's old page addresses forward to the shared pages, and check every sport has its words.
+
+    python3 scripts/build.py pages            # write docs/<sport>/<page>.html for every sport
+    python3 scripts/build.py pages --check    # only say what is missing or out of date
+
+Since Oct 30 the site has one set of pages for every sport: docs/players-dotmap.html, players-heatmap.html,
+players-transfers.html, staff-moves.html and staff-directory.html, opened as players-dotmap.html?sport=softball.
+Edit those files directly. Each sport's words on them (title, description, heading, subtitle, she/her) are in
+docs/sports.js, and its data stays in docs/<sport>/. The old addresses (docs/softball/players-dotmap.html, in
+links people have saved) are small pages that forward to the new one, keeping the #view part of the link.
+(Before Oct 30 every sport had its own copy of the five pages, kept in step by a sync command.)"""
+
+PAGES = ["players-dotmap.html", "players-heatmap.html", "players-transfers.html", "staff-moves.html",
+         "staff-directory.html"]
+PLAYER_PAGES = PAGES[:3]
 
 
-PAGES = ["players-dotmap.html", "players-heatmap.html", "players-transfers.html"]
-# The staff pages take their words from staff_data.json, so every sport gets football's file as it is (made if missing)
-STAFF_PAGES = ["staff-moves.html", "staff-directory.html"]
-MASTER = "football"
-WOMEN = {"softball", "lacrosse-womens", "hockey-womens", "basketball-womens", "volleyball-womens", "soccer-womens"}
-# The lines a sport keeps from its own page: one pattern per line, matched against the whole line
-OWN_LINES = [re.compile(p) for p in (r"^\s*<title>.*</title>\s*$", r'^\s*<meta name="description" .*>\s*$',
-                                      r"^\s*<h1>.*</h1>\s*$", r'^\s*<p class="sub" id="sub">.*</p>\s*$')]
-_PRONOUNS = {"he": "she", "his": "her", "him": "her", "He": "She", "His": "Her"}
+def forwarding_page(sport: str, page: str) -> str:
+    """The page at a sport's old address: it sends the browser to the shared page for that sport."""
+    target = f"../{page}?sport={sport}"
+    return (f'<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<title>Moved</title>\n'
+            f'<meta name="robots" content="noindex">\n<link rel="canonical" href="{target}">\n'
+            f'<script>location.replace("{target}" + location.hash);</script>\n'
+            f'<meta http-equiv="refresh" content="0; url={target}">\n</head>\n'
+            f'<body><p>This page has moved: <a href="{target}">{page}?sport={sport}</a></p></body>\n</html>\n')
 
 
-def build(master: str, own: str, women: bool) -> str:
-    """The sport's page: the master's lines, with the sport's own title, description, heading and subtitle."""
-    mine = {}
-    for line in own.splitlines():
-        for i, pat in enumerate(OWN_LINES):
-            if i not in mine and pat.match(line):
-                mine[i] = line
-    out = []
-    for line in master.splitlines():
-        hit = next((i for i, pat in enumerate(OWN_LINES) if pat.match(line)), None)
-        if hit is not None and hit in mine:
-            line = mine[hit]
-        elif women:
-            line = re.sub(r"\b(he|his|him|He|His)\b", lambda m: _PRONOUNS[m.group(1)], line)
-        out.append(line)
-    return "\n".join(out) + ("\n" if master.endswith("\n") else "")
+def sport_words(docs: Path) -> dict:
+    """docs/sports.js read back: sport -> its words (the file is JavaScript holding one JSON-like object)."""
+    text = (docs / "sports.js").read_text(encoding="utf-8")
+    body = text[text.index("{"):text.rindex("}") + 1]
+    body = re.sub(r"^(\s*)(women):", r'\1"\2":', body, flags=re.M)      # the one unquoted key
+    body = re.sub(r",(\s*[}\]])", r"\1", body)                           # trailing commas
+    return json.loads(body)
 
 
-def sync_pages_main(argv=None) -> int:
-    ap = argparse.ArgumentParser(description=SYNC_PAGES_DOC, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--check", action="store_true", help="don't write: list the pages that differ and how many lines")
+def site_pages_main(argv=None) -> int:
+    ap = argparse.ArgumentParser(description=PAGES_DOC, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--check", action="store_true", help="don't write: list what is missing or out of date")
     args = ap.parse_args(argv)
     docs = ROOT / "docs"
-    stale = 0
+    problems = 0
+    words = sport_words(docs)
+    for page in PAGES:
+        if not (docs / page).exists():
+            print(f"missing: docs/{page}"); problems += 1
     for sport in available_sports():
-        if sport == MASTER:
-            continue
-        for page in PAGES + STAFF_PAGES:
-            master_path, path = docs / MASTER / page, docs / sport / page
-            if not master_path.exists() or not (path.exists() or page in STAFF_PAGES):
+        if not (docs / sport).is_dir():
+            continue                      # not built yet
+        for page in PLAYER_PAGES:
+            if not words.get(sport, {}).get(page[:-5]):
+                print(f"missing: {sport}'s words for {page} in docs/sports.js"); problems += 1
+        for page in PAGES:
+            path, want = docs / sport / page, forwarding_page(sport, page)
+            if path.exists() and path.read_text(encoding="utf-8") == want:
                 continue
-            old = path.read_text(encoding="utf-8") if path.exists() else ""
-            master = master_path.read_text(encoding="utf-8")
-            new = master if page in STAFF_PAGES else build(master, old, sport in WOMEN)
-            if new == old:
-                continue
-            stale += 1
-            changed = sum(1 for d in difflib.unified_diff(old.splitlines(), new.splitlines(), lineterm="", n=0)
-                          if d[:1] in "+-" and not d.startswith(("+++", "---")))
-            print(f"{'differs' if args.check else 'updated'}: docs/{sport}/{page} ({changed} lines)")
+            problems += 1
+            print(f"{'out of date' if args.check else 'written'}: docs/{sport}/{page}")
             if not args.check:
-                path.write_text(new, encoding="utf-8")
-    if not stale:
-        print("Every sport's pages match football's.")
-    return 1 if (args.check and stale) else 0
+                path.write_text(want, encoding="utf-8")
+                problems -= 1
+    if not problems:
+        print("Every sport's pages are in place.")
+    return 1 if problems else 0
 
 
-COMMANDS = {"map": build_map_data_main, "locations": build_school_locations_main, "frozen": check_frozen_classes_main, "check": check_rosters_main, "sync": sync_pages_main}
+COMMANDS = {"map": build_map_data_main, "locations": build_school_locations_main, "frozen": check_frozen_classes_main, "check": check_rosters_main, "pages": site_pages_main}
 
 
 def command_line(argv=None) -> int:

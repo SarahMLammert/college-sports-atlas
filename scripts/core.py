@@ -51,7 +51,8 @@ PATHS_DOC = """Where each sport's files live, and its settings from config/<spor
     config/<sport>/settings.json                               a sport's settings (football, lacrosse-mens, ...)
     config/<sport>/schools.csv                                 its colleges: D1, their seasons in another
                                                                division, and D2/D3/NAIA/JUCO
-    config/<sport>/hometown_corrections.csv                    hometown fixes (yours and the geocoder's suggestions)
+    config/shared/hometown_corrections.csv                     hometown fixes for every sport (yours and the geocoder's)
+    config/<sport>/hometown_corrections.csv                    a sport's own fixes, only where it differs (optional)
     config/<sport>/wrong_seasons.csv, season_pages.csv         roster pages to skip, or to use, for a season (optional)
     rosters/<sport>/                                           the rosters (cleaned) and everything else the scripts
                                                                write: scrape reports, the geocoder's hometown table,
@@ -122,12 +123,7 @@ class Sport:
         2027, the 2026-27 team). Fall sports: the fall it's played in, from March. Football skips 2020."""
         if self.seasons:
             return self.seasons
-        from datetime import date
-        t = today or date.today()
-        if self.spring_season:
-            last = t.year + 1 if t.month >= 8 else t.year
-        else:
-            last = t.year if t.month >= 3 else t.year - 1
+        last = current_season(today, spring=self.spring_season)
         return f"2016-2019,2021-{last}" if self.name == "football" else f"2016-{last}"
 
     # ---- this sport's folders and files ----
@@ -181,7 +177,13 @@ class Sport:
 
     @property
     def hometown_corrections_csv(self) -> Path:
+        """This sport's own hometown fixes: only where it needs a different answer from the shared file."""
         return CONFIG / self.name / "hometown_corrections.csv"
+
+    @property
+    def shared_hometown_corrections_csv(self) -> Path:
+        """Hometown fixes for every sport (a hometown's text means the same place in every sport; Oct 30)."""
+        return CONFIG / "shared" / "hometown_corrections.csv"
 
     @property
     def division_history_csv(self) -> Path:      # the history rows now live in schools.csv
@@ -398,11 +400,59 @@ USER_AGENT = (
 )
 
 
-# Set by sidearm.configure() from the sport's settings.
+# ---- season names, in one place (Oct 30) ---------------------------------------------------------------------
+# A season is one number. A fall sport (football, volleyball, soccer) names it by the fall it's played in:
+# season 2024 = 2024-25. Every other sport ("spring": baseball, softball, lacrosse, and the winter sports
+# basketball and hockey) names it by the spring it ends in: season 2024 = 2023-24. Everything that turns a
+# season into a label, an address or a page's year back into a season goes through the functions below
+# (docs/common.js seasonLabel() is the same rule for the site). Before Oct 30 each script had its own copy,
+# and a bare year on a basketball page was read the wrong way (claude/wrong-seasons-oct30.md).
+
+# Set by sidearm.configure() (and staff.py) from the sport's settings; every function below takes spring=
+# to override it.
 SPRING_SEASON = False
 
 
-def current_season(today=None) -> int:
+def _spring(spring: bool | None) -> bool:
+    return SPRING_SEASON if spring is None else bool(spring)
+
+
+def season_first_year(season: int, spring: bool | None = None) -> int:
+    """The calendar year the season starts in: fall 2024 -> 2024; spring season 2024 (2023-24) -> 2023."""
+    return season - 1 if _spring(spring) else season
+
+
+def season_span(season: int, spring: bool | None = None, full: bool = False) -> str:
+    """The two-year label: '2024-25' (fall 2024) or '2023-24' (spring 2024); full=True: '2023-2024'."""
+    a = season_first_year(season, spring)
+    return f"{a}-{a + 1}" if full else f"{a}-{(a + 1) % 100:02d}"
+
+
+def fill_season(template: str, season: int) -> str:
+    """Fill a roster address template. Keys: {season}, {next_season}, {next_yy} (fall: 2024-{next_yy} ->
+    2024-25), {prev_season}, {yy} (spring: {prev_season}-{yy} -> 2023-24 for season 2024)."""
+    return template.format(season=season, next_season=season + 1, next_yy=f"{(season + 1) % 100:02d}",
+                           prev_season=season - 1, yy=f"{season % 100:02d}")
+
+
+SEASON_LABEL = re.compile(r"\b(20[0-3]\d)(?:\s*[-–/]\s*(?:20)?(\d{2}))?\b")
+
+
+def season_from_label(text: str, spring: bool | None = None) -> int | None:
+    """The season a label names: '2024-25', '2024-2025', '2024/25' or a bare '2024'.
+
+    A two-year label starts in its first year, so it is season 2024 for a fall sport and 2025 for a spring
+    one. A bare year is taken as the season's own number (a softball page saying "2026" is the 2026 season).
+    Some winter-sport sites use a bare year for the year the season starts; detect_season() prefers a page's
+    two-year label for that reason."""
+    m = SEASON_LABEL.search(text or "")
+    if not m:
+        return None
+    year = int(m.group(1))
+    return year + 1 if m.group(2) and _spring(spring) else year
+
+
+def current_season(today=None, spring: bool | None = None) -> int:
     """The season a school's main roster page shows today.
 
     Fall sport (football): the season is the fall it's played in, so 2026 from March 2026 (when the
@@ -412,7 +462,7 @@ def current_season(today=None) -> int:
     with no year on it was saved as 2026 while it already showed 2027.)"""
     from datetime import date
     today = today or date.today()
-    if SPRING_SEASON:
+    if _spring(spring):
         return today.year + 1 if today.month >= 8 else today.year
     return today.year if today.month >= 3 else today.year - 1
 
@@ -747,14 +797,125 @@ def season_files(out_dir: Path) -> dict[int, Path]:
 
 
 def season_rows(rosters_dir: Path) -> list[dict]:
-    """Every row of every saved season file, oldest season first."""
-    files = season_files(rosters_dir)
-    if not files:
+    """Every row of every saved season file, oldest season first (read from rosters.db since Oct 30)."""
+    if not season_files(rosters_dir):
         raise SystemExit(f"No season roster files (rosters_<season>.csv) in {rosters_dir}. Run scrape_rosters.py first.")
-    rows = []
-    for path in files.values():
-        rows += read_csv(path)
-    return rows
+    con = roster_db(rosters_dir)
+    try:
+        return db_rows(con, "SELECT * FROM rosters ORDER BY rowid")
+    finally:
+        con.close()
+
+
+# ---- the roster database (Oct 30) --------------------------------------------------------------------------
+# rosters/<sport>/rosters.db holds a sport's season files, scrape reports and hometown tables in one SQLite file,
+# for the checks (build.py check, frozen) and the map build. The CSV files stay the source: scrape_rosters.py and
+# geocode.py write them, and the database is rebuilt from them whenever one of them has changed (or is new or
+# gone) since it was built, so it never needs to be refreshed by hand. It's in rosters/, so not in git.
+#   rosters      every row of every season file, oldest season first, in file order (all columns text)
+#   reports      every row of the scrape_report_<season>.csv files
+#   hometowns    hometowns.csv (geocode.py's table of places)
+#   unmatched    unmatched_hometowns.csv
+# Two functions are available in queries: name_key(name) (letters only, lowercase: "D'Andre St. John" ->
+# "dandrestjohn") and bio_key(url) (a player page's address without :443, query string or trailing slash).
+
+DB_FILE = "rosters.db"
+_DB_VERSION = "1"
+
+
+def name_key(name: str) -> str:
+    return "".join(c for c in (name or "").lower() if c.isalpha())
+
+
+def bio_key(url: str) -> str:
+    return (url or "").replace(":443/", "/").split("?")[0].rstrip("/")
+
+
+def _db_files(rosters_dir: Path) -> dict[str, list[Path]]:
+    d = Path(rosters_dir)
+    reports = sorted(d.glob("scrape_report_*.csv"))
+    return {"rosters": list(season_files(d).values()), "reports": reports,
+            "hometowns": [p for p in [d / "hometowns.csv"] if p.exists()],
+            "unmatched": [p for p in [d / "unmatched_hometowns.csv"] if p.exists()]}
+
+
+def _db_stamp(files: dict[str, list[Path]]) -> str:
+    """What the database was built from: every file's name, size and modification time."""
+    import json
+    parts = [_DB_VERSION] + [f"{t}:{p.name}:{p.stat().st_size}:{p.stat().st_mtime_ns}"
+                             for t, paths in files.items() for p in paths]
+    return json.dumps(parts)
+
+
+def _db_functions(con) -> None:
+    con.create_function("name_key", 1, name_key, deterministic=True)
+    con.create_function("bio_key", 1, bio_key, deterministic=True)
+
+
+def _build_db(path: Path, files: dict[str, list[Path]], stamp: str) -> None:
+    import os
+    import sqlite3
+    tmp = path.with_name(path.name + ".tmp")
+    tmp.unlink(missing_ok=True)
+    con = sqlite3.connect(tmp)
+    try:
+        con.execute("PRAGMA journal_mode = OFF")
+        con.execute("PRAGMA synchronous = OFF")
+        con.execute("CREATE TABLE meta (key TEXT PRIMARY KEY, value TEXT)")
+        for table, paths in files.items():
+            columns: list[str] = []
+            for p in paths:                       # every column any of the files has, in first-seen order
+                with open(p, newline="", encoding="utf-8") as fh:
+                    header = next(csv.reader(fh), [])
+                for c in header:
+                    c = "current_conference" if c == "conference" and "current_conference" not in header else c
+                    if c and c not in columns:
+                        columns.append(c)
+            if not columns:
+                columns = ["empty"]
+            quoted = ", ".join(f'"{c}"' for c in columns)
+            con.execute(f'CREATE TABLE "{table}" ({", ".join(f"{q} TEXT" for q in quoted.split(", "))})')
+            for p in paths:
+                rows = read_csv(p)                # read_csv renames an old "conference" column too
+                con.executemany(f'INSERT INTO "{table}" ({quoted}) VALUES ({", ".join("?" * len(columns))})',
+                                ([r.get(c) for c in columns] for r in rows))
+        if files["rosters"]:
+            con.execute('CREATE INDEX rosters_school_season ON rosters (school, season)')
+        con.execute("INSERT INTO meta VALUES ('sources', ?)", (stamp,))
+        con.commit()
+    finally:
+        con.close()
+    os.replace(tmp, path)
+
+
+def roster_db(rosters_dir: Path):
+    """An open connection to rosters/<sport>/rosters.db, rebuilt first if a CSV changed. Rows come back as
+    sqlite3.Row (by name or position); db_rows() turns a query into plain dicts like read_csv's."""
+    import sqlite3
+    rosters_dir = Path(rosters_dir)
+    path = rosters_dir / DB_FILE
+    files = _db_files(rosters_dir)
+    stamp = _db_stamp(files)
+    built = None
+    if path.exists():
+        try:
+            con = sqlite3.connect(path)
+            built = con.execute("SELECT value FROM meta WHERE key = 'sources'").fetchone()
+            con.close()
+        except sqlite3.Error:
+            built = None
+    if not built or built[0] != stamp:
+        _build_db(path, files, stamp)
+    con = sqlite3.connect(path)
+    con.row_factory = sqlite3.Row
+    _db_functions(con)
+    return con
+
+
+def db_rows(con, sql: str, params=()) -> list[dict]:
+    """A query's rows as dicts. A column that a row's own CSV file didn't have (NULL) is left out, as read_csv
+    would have, so r.get("x", "") still answers ""."""
+    return [{k: row[k] for k in row.keys() if row[k] is not None} for row in con.execute(sql, params)]
 
 
 _SUFFIX = re.compile(r"\b(jr|sr|ii|iii|iv|v)\b\.?", re.I)
@@ -813,8 +974,6 @@ def players(rosters_dir: Path) -> list[dict]:
 LEVELS_DOC = 'Which level a transfer\'s previous school was at: D1, D2, D3, NAIA, JUCO, club or unknown.\n\nEvery college is a row in config/<sport>/schools.csv: the D1 schools, the seasons some of them spent in\nanother division, and the D2, D3, NAIA and junior colleges, with other spellings in its aliases column\n(separated by "|"). A row can be limited to a range of seasons, so "Tarleton State" means Division II\nfor a player who left before 2020 and D1 after. Rows with division HS are high schools whose name looks\nlike a college ("St. John\'s College"), so they stay unknown. Rows with division CLUB are club (non-varsity)\nteams, such as lacrosse\'s MCLA teams: never scraped, only a level for transfers.\n\n    levels = Levels.load(sport)\n    levels.level("Valdosta St.", 2018)        -> ("D2", "Valdosta State")\n    levels.level("Hutchinson (Kan.) CC", 2022) -> ("JUCO", "")\n\nSpellings are compared by key(): lowercase words without "University", "the", "of", "at" or punctuation,\n"St." read as "State" at the end of a name and "Saint" elsewhere, "UW-" as "Wisconsin", and a\nparenthetical state ("(Kan.)", "(MO)") kept as a postal code. A name that fits schools at two different\nlevels ("Bethel", "Concordia") comes back unknown rather than guessed.'
 
 LEVELS = ["D1", "D2", "D3", "NAIA", "JUCO", "CLUB", "unknown"]
-LEVEL_NAMES = {"D1": "Division I", "D2": "Division II", "D3": "Division III", "NAIA": "NAIA",
-               "JUCO": "Junior college", "CLUB": "Club team", "unknown": "Unknown"}
 
 _DROP = {"the", "of", "at", "university", "univ", "suny", "in"}
 _EXPAND = {"mt": "mount", "uw": "wisconsin", "wis": "wisconsin", "unc": "north carolina",

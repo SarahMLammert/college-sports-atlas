@@ -282,7 +282,7 @@ def final_url_index(cache: Path) -> dict[str, Path]:
     return out
 
 
-def coaches_page(roster_url: str, html: str, season: int, spring: bool) -> str:
+def coaches_page(roster_url: str, html: str, season: int) -> str:
     """Where the season's coaching staff is when the roster page doesn't list it."""
     m = re.search(r'data-coaches-url="([^"]+)"', html or "")           # Presto says so itself
     if m:
@@ -305,7 +305,7 @@ def _init(sport_name: str, offline: bool, index: dict) -> None:
     sport = load_sport(sport_name)
     core.SPRING_SEASON = bool(sport.spring_season)
     _WORKER.update(fetcher=Fetcher(CACHE, delay=1.5, timeout=10), offline=offline, index=index,
-                   spring=bool(sport.spring_season), label=sport.label or sport.name)
+                   label=sport.label or sport.name)
 
 
 def _page(url: str, rendered: bool) -> str | None:
@@ -329,7 +329,7 @@ def one(job: tuple) -> tuple[tuple, list[dict], str]:
         people = parse_staff(staff_part(html), url)
         how = "page" if people else "none"
     if not people:
-        extra = coaches_page(url, html or "", season, _WORKER["spring"])
+        extra = coaches_page(url, html or "", season)
         if extra:
             page = _page(extra, False)
             if page is None and not _WORKER["offline"]:

@@ -28,12 +28,6 @@ Only with --report:
 
 Fetching, page parsing and field cleaning live in core.py, sidearm.py and geocode.py next to this script.
 
-This file holds, in order:
-    Scraping rosters
-    Finding athletics domains (find-domains)
-
-Commands:
-    python3 scripts/scrape_rosters.py find-domains --sport football   # finding athletics domains
 """
 from __future__ import annotations
 
@@ -44,7 +38,6 @@ import os
 import re
 import sys
 import threading
-import urllib.request
 import warnings
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -111,7 +104,7 @@ def roster_link_re() -> re.Pattern:
 
 def presto_season(season: int) -> str:
     """Presto's season label: fall 2024 -> '2024-25'; a spring sport's 2024 season -> '2023-24'."""
-    return f"{season - 1}-{season % 100:02d}" if sidearm.SPRING else f"{season}-{(season + 1) % 100:02d}"
+    return core.season_span(season)
 
 OUT_FIELDS = (
     ["season", "division", "current_conference", "school"]
@@ -1307,60 +1300,7 @@ def run(ap: argparse.ArgumentParser, args, sport) -> int:
     return 0
 
 
-# ==============================================================================================================
-# Finding athletics domains (find-domains)   (was scripts/find_athletics_domains.py)
-# ==============================================================================================================
-
-FIND_ATHLETICS_DOMAINS_DOC = """Run on your Mac from the project folder:  python scripts/scrape_rosters.py find-domains
-Follows each link in rosters/football/redirect_check.csv (athletics pages on a college's main site)
-to where it ends up, and fills in that domain in config/football/schools.csv when the school's
-domain is still blank. Prints what it did; nothing else is changed.
-"""
-
-
-def find_athletics_domains_main(argv=None):
-    import argparse as _argparse
-    _argparse.ArgumentParser(prog="scrape_rosters.py find-domains", description=FIND_ATHLETICS_DOMAINS_DOC,
-                             formatter_class=_argparse.RawDescriptionHelpFormatter).parse_args(argv)
-
-    ROOT = Path(__file__).resolve().parent.parent
-    CHECK = ROOT / "rosters" / "football" / "redirect_check.csv"
-    SCHOOLS = ROOT / "config" / "football" / "schools.csv"
-    UA = {"User-Agent": "Mozilla/5.0 (Macintosh) college-sports-atlas"}
-    if not CHECK.exists():
-        sys.exit(f"{CHECK} not found: nothing to check")
-
-    found = {}
-    for r in csv.DictReader(open(CHECK)):
-        try:
-            with urllib.request.urlopen(urllib.request.Request(r["ncaa_url"], headers=UA), timeout=30) as resp:
-                final = resp.geturl()
-        except Exception as e:  # noqa: BLE001
-            print(f"  {r['school']}: could not open ({e})")
-            continue
-        host = urlparse(final).netloc.lower().removeprefix("www.")
-        path = urlparse(final).path.strip("/")
-        if path and "athletic" in path.lower():
-            print(f"  {r['school']}: still on the college site ({final}); set roster_url by hand")
-            continue
-        found[r["school"]] = host
-        print(f"  {r['school']}: {host}")
-
-    rows = list(csv.DictReader(open(SCHOOLS)))
-    fields = list(rows[0])
-    n = 0
-    for x in rows:
-        if x["school"] in found and not x["domain"] and x["division"] in ("D2", "D3"):
-            x["domain"] = found[x["school"]]
-            n += 1
-    with open(SCHOOLS, "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=fields)
-        w.writeheader()
-        w.writerows(rows)
-    print(f"filled {n} rows")
-
-
-COMMANDS = {"find-domains": find_athletics_domains_main}
+COMMANDS: dict = {}     # sub-commands (find-domains, a one-time football tool, was removed Oct 30)
 
 
 def command_line(argv=None) -> int:

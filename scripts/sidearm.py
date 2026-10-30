@@ -7,6 +7,7 @@ from typing import Any, Callable, Iterable
 
 from bs4 import BeautifulSoup, Tag
 
+import core
 from core import current_season
 from geocode import _PLACEHOLDERS
 from geocode import *  # noqa: F401,F403
@@ -99,18 +100,8 @@ def normal_size(n: int) -> bool:
     return n >= MIN_PLAYERS and (not MAX_PLAYERS or n <= MAX_PLAYERS)
 
 
-def _fill(template: str, season: int) -> str:
-    """Template keys: {season}, {next_season}, {next_yy} (fall: 2024-25), and {prev_season}, {yy}
-    (spring: season 2024 is 2023-24)."""
-    return template.format(season=season, next_season=season + 1, next_yy=f"{(season + 1) % 100:02d}",
-                           prev_season=season - 1, yy=f"{season % 100:02d}")
-
-
-def _span(season: int) -> str:
-    """The two-year label for a season: 2024-25 for a fall sport, 2023-24 for a spring sport."""
-    if SPRING:
-        return f"{season - 1}-{season % 100:02d}"
-    return f"{season}-{(season + 1) % 100:02d}"
+_fill = core.fill_season          # season names live in core.py (Oct 30)
+_span = core.season_span
 
 
 def candidate_urls(domain: str, override: str = "", season: int | None = None) -> list[str]:
@@ -146,8 +137,8 @@ def candidate_urls(domain: str, override: str = "", season: int | None = None) -
         # 2023-24 roster (spring 2024). Tried after the usual addresses; the season check confirms the year.
         for path in ROSTER_PATHS:
             path = path.rstrip("/")
-            urls.append(f"{base}{path}/{season - 1}")
-            urls.append(f"{base}{path}/season/{season - 1}/")
+            urls.append(f"{base}{path}/{core.season_first_year(season)}")
+            urls.append(f"{base}{path}/season/{core.season_first_year(season)}/")
     # PrestoSports: /sports/fball/2019-20/roster. The list view first: some sites (Morningside) only
     # put the roster table there. Then the same on www.: some sites (Hutchinson, Iowa Western,
     # Kilgore) only answer there. Hosts with a subdomain (deanza.prestosports.com) get no www. copy.
@@ -167,10 +158,10 @@ def candidate_urls(domain: str, override: str = "", season: int | None = None) -
     if season:
         # Oct 29: both years written out: /roster/2023-2024 (Hawaii), /roster/season/2023-2024 (BYU).
         # Last, so the addresses above keep their place in the list.
-        first = season - 1 if SPRING else season
+        full = core.season_span(season, full=True)
         for path in ROSTER_PATHS:
-            urls.append(f"{base}{path.rstrip('/')}/{first}-{first + 1}")
-            urls.append(f"{base}{path.rstrip('/')}/season/{first}-{first + 1}")
+            urls.append(f"{base}{path.rstrip('/')}/{full}")
+            urls.append(f"{base}{path.rstrip('/')}/season/{full}")
     seen, out = set(), []
     for u in urls:
         if u not in seen:
@@ -185,7 +176,7 @@ def candidate_urls(domain: str, override: str = "", season: int | None = None) -
 # Work out which season a roster page is showing, so archive URLs that silently fall back
 # to the current roster are caught instead of being saved under the wrong year.
 
-_YEAR = re.compile(r"\b(20[0-3]\d)(?:\s*[-–/]\s*(?:20)?(\d{2}))?\b")
+_YEAR = core.SEASON_LABEL
 
 
 def detect_season(html: str) -> int | None:
@@ -205,10 +196,7 @@ def detect_season(html: str) -> int | None:
     # "2026 Men's Basketball Roster" (the year the season starts) while its heading says "2026-27": read
     # as a bare year, that page was saved as the 2025-26 season (Samford, Wyoming, Pepperdine; Oct 30).
     m = next((m for m, own in found if own and m.group(2)), found[0][0])
-    # "2023-24" is season 2023 for a fall sport, but season 2024 (that spring) for a spring one.
-    if SPRING and m.group(2):
-        return int(m.group(1)) + 1
-    return int(m.group(1))
+    return core.season_from_label(m.group(0))     # "2023-24": season 2023 (fall) or 2024 (spring)
 
 
 # =============================================================================

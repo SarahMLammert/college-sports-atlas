@@ -230,6 +230,18 @@ def closest_town(town: str, code: str, towns: dict) -> tuple[str | None, str | N
     return towns[code][close[0]], (None if sure else (towns[code][close[1]] if len(close) > 1 else close[0]))
 
 
+def another_town(typed: str, match: str) -> bool:
+    """True when the closest town starts differently from what the roster typed: the first letter, or the first
+    letter of one of the words when both have the same number of words. That is another place, not a typo
+    (Oct 30: Delray -> Nelray, Rockaway -> Brockway, York City -> Ford City, Norwin -> Orwin, West Allegheny ->
+    East Allegheny, Westin -> Destin; about half of the 334 such automatic fixes were wrong). Such a match is
+    left for a person to check. Joined or split words keep their first letter: Lakeworth -> Lake Worth is fine."""
+    a, b = norm(typed).split(), norm(match).split()
+    if not a or not b or a[0][:1] != b[0][:1]:
+        return True
+    return len(a) == len(b) and any(x[:1] != y[:1] for x, y in zip(a, b))
+
+
 def suggest(row: dict, towns: dict, states_of: dict, accept: bool = False) -> tuple[str, dict] | None:
     """(what was done, new field values) for one corrections row, or None to leave it"""
     raw = row["hometown_raw"]
@@ -258,6 +270,9 @@ def suggest(row: dict, towns: dict, states_of: dict, accept: bool = False) -> tu
                 return "fixed: town and state read", fixed(name, code, "town and state read from the text")
             return None
         best, other = closest_town(town, code, towns)
+        if best and another_town(town, best):
+            return "review: spelling unsure", dict(status="review", note=f"spelling? '{town}' -> {best} "
+                                                   "(starts differently: often another place, not a typo)")
         if best and not other:
             return "fixed: spelling", fixed(best, code, f"spelling '{town}' -> {best}")
         if best:
@@ -312,7 +327,7 @@ def suggest_hometown_fixes_main(argv=None):
                          "clearly closer town, and a distinctive town name found only in another state")
     args = ap.parse_args(argv)
     sport = load_sport(args.sport)
-    unmatched_csv, corrections_csv = sport.rosters_dir / "unmatched_hometowns.csv", sport.hometown_corrections_csv
+    unmatched_csv, corrections_csv = sport.rosters_dir / "unmatched_hometowns.csv", sport.shared_hometown_corrections_csv
     if not unmatched_csv.exists():
         sys.exit(f"{unmatched_csv} not found. Run geocode.py first.")
 
@@ -321,13 +336,9 @@ def suggest_hometown_fixes_main(argv=None):
     if not unmatched:
         print("Every hometown is placed: nothing to suggest.")
         return
-    fields, rows = FIELDS, []
-    if corrections_csv.exists():   # the geocoder only writes it once it has a suggestion of its own
-        with open(corrections_csv, newline="", encoding="utf-8") as fh:
-            reader = csv.DictReader(fh)
-            fields = reader.fieldnames or FIELDS
-            rows = list(reader)
-    by_raw = {r["hometown_raw"]: r for r in rows}
+    fields = FIELDS
+    by_raw, own = g.load_sport_corrections(sport)     # shared fixes plus this sport's own (Oct 30)
+    rows = list(by_raw.values())
     for raw, u in unmatched.items():          # an unmatched hometown with no corrections row yet gets one
         if raw not in by_raw:
             row = {f: u.get(f, "") for f in fields}
@@ -368,10 +379,7 @@ def suggest_hometown_fixes_main(argv=None):
         print("Nothing to change.")
     if args.dry_run or not counts:
         return
-    with open(corrections_csv, "w", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=fields, extrasaction="ignore")
-        w.writeheader()
-        w.writerows(rows)
+    g.save_sport_corrections(sport, by_raw, own)
     print(f"Saved {corrections_csv}. Next: python scripts/geocode.py, then build.py map.")
 
 
@@ -476,7 +484,7 @@ def fix_hometown_spellings_main(argv=None):
     ap = argparse.ArgumentParser(description=FIX_HOMETOWN_SPELLINGS_DOC, formatter_class=argparse.RawDescriptionHelpFormatter)
     add_sport_argument(ap)
     sport = load_sport(ap.parse_args(argv).sport)
-    CORRECTIONS, LOOKUP = sport.hometown_corrections_csv, sport.rosters_dir / "hometowns.csv"
+    CORRECTIONS, LOOKUP = sport.shared_hometown_corrections_csv, sport.rosters_dir / "hometowns.csv"
     if not LOOKUP.exists():
         sys.exit(f"{LOOKUP} not found. Run geocode.py first.")
     wrong = {(place, bad.lower()): good for place, bad, good in FIXES}
@@ -493,13 +501,9 @@ def fix_hometown_spellings_main(argv=None):
                 prev = found.get(raw)
                 found[raw] = (place, r["city"], wrong[key], (prev[3] if prev else 0) + int(r.get("players") or 0))
 
-    fields, rows = SPELLING_FIELDS, []
-    if CORRECTIONS.exists():
-        with open(CORRECTIONS, newline="", encoding="utf-8") as fh:
-            reader = csv.DictReader(fh)
-            fields = reader.fieldnames or SPELLING_FIELDS
-            rows = list(reader)
-    by_raw = {r["hometown_raw"]: r for r in rows}
+    fields = SPELLING_FIELDS
+    by_raw, own = g.load_sport_corrections(sport)     # shared fixes plus this sport's own (Oct 30)
+    rows = list(by_raw.values())
 
     added = updated = 0
     for raw, (place, bad, good, n) in sorted(found.items()):
@@ -520,10 +524,7 @@ def fix_hometown_spellings_main(argv=None):
             added += 1
 
     if added or updated:
-        with open(CORRECTIONS, "w", newline="", encoding="utf-8") as fh:
-            w = csv.DictWriter(fh, fieldnames=fields, extrasaction="ignore")
-            w.writeheader()
-            w.writerows(rows)
+        g.save_sport_corrections(sport, by_raw, own)
 
     patched, dropped = patch_lookup(wrong)
     if patched or dropped:

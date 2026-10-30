@@ -238,45 +238,45 @@
 <script>
   // ---- Edit this list as sports come online. ----
   // id: the sport's folder name, sport first and then sex when the sport has both (lacrosse-mens).
-  // players / staff / learn: the page to open, or null for "coming soon".
+  // players / staff / learn: the page to open (players-dotmap.html?sport=<id>), or null for "coming soon".
   // stats: the recruiting summary shown under the sport's name when it lights up.
   // learnSum: the learning summary, once its learn page exists.
   const SPORTS = [
     { id: 'football',   name: 'Football',   sub: '',        icon: 'football',
-      players: 'football/players-dotmap.html', staff: 'football/staff-moves.html', learn: null,
+      players: 'players-dotmap.html?sport=football', staff: 'staff-moves.html?sport=football', learn: null,
       stats: [['264', 'schools'], ['137K', 'players']] },
     { id: 'lacrosse-mens',   name: 'Lacrosse', sub: "Men's",   icon: 'lacrosse',
-      players: 'lacrosse-mens/players-dotmap.html', staff: 'lacrosse-mens/staff-moves.html', learn: null,
+      players: 'players-dotmap.html?sport=lacrosse-mens', staff: 'staff-moves.html?sport=lacrosse-mens', learn: null,
       stats: [['457', 'schools'], ['73K', 'players']] },
     { id: 'lacrosse-womens', name: 'Lacrosse', sub: "Women's", icon: 'lacrosse',
-      players: 'lacrosse-womens/players-dotmap.html', staff: 'lacrosse-womens/staff-moves.html', learn: null,
+      players: 'players-dotmap.html?sport=lacrosse-womens', staff: 'staff-moves.html?sport=lacrosse-womens', learn: null,
       stats: [['609', 'schools'], ['64K', 'players']] },
     { id: 'baseball',   name: 'Baseball',   sub: '',        icon: 'baseball',
-      players: 'baseball/players-dotmap.html', staff: 'baseball/staff-moves.html', learn: null,
+      players: 'players-dotmap.html?sport=baseball', staff: 'staff-moves.html?sport=baseball', learn: null,
       stats: [['1,088', 'schools'], ['210K', 'players']] },
     { id: 'softball',   name: 'Softball',   sub: '',        icon: 'softball',
-      players: 'softball/players-dotmap.html', staff: 'softball/staff-moves.html', learn: null,
+      players: 'players-dotmap.html?sport=softball', staff: 'staff-moves.html?sport=softball', learn: null,
       stats: [['1,129', 'schools'], ['110K', 'players']] },
     { id: 'hockey-mens',    name: 'Hockey',     sub: "Men's",   icon: 'hockey',
-      players: 'hockey-mens/players-dotmap.html', staff: 'hockey-mens/staff-moves.html', stats: [['162', 'schools'], ['18K', 'players']],
+      players: 'players-dotmap.html?sport=hockey-mens', staff: 'staff-moves.html?sport=hockey-mens', stats: [['162', 'schools'], ['18K', 'players']],
       learn: null, learnSum: 'Rink · positions · systems' },          // set learn: 'hockey/learn.html' once it's built
     { id: 'hockey-womens',  name: 'Hockey',     sub: "Women's", icon: 'hockey',
-      players: 'hockey-womens/players-dotmap.html', staff: 'hockey-womens/staff-moves.html', stats: [['126', 'schools'], ['11K', 'players']],
+      players: 'players-dotmap.html?sport=hockey-womens', staff: 'staff-moves.html?sport=hockey-womens', stats: [['126', 'schools'], ['11K', 'players']],
       learn: null, learnSum: 'Rink · positions · systems' },          // same page as men's
     { id: 'basketball-mens', name: 'Basketball', sub: "Men's", icon: 'basketball',
-      players: 'basketball-mens/players-dotmap.html', staff: 'basketball-mens/staff-moves.html', learn: null,
+      players: 'players-dotmap.html?sport=basketball-mens', staff: 'staff-moves.html?sport=basketball-mens', learn: null,
       stats: [['1,212', 'schools'], ['113K', 'players']] },
     { id: 'basketball-womens', name: 'Basketball', sub: "Women's", icon: 'basketball',
-      players: 'basketball-womens/players-dotmap.html', staff: 'basketball-womens/staff-moves.html', learn: null,
+      players: 'players-dotmap.html?sport=basketball-womens', staff: 'staff-moves.html?sport=basketball-womens', learn: null,
       stats: [['1,201', 'schools'], ['86K', 'players']] },
     { id: 'volleyball-womens', name: 'Volleyball', sub: "Women's", icon: 'volleyball',
-      players: 'volleyball-womens/players-dotmap.html', staff: 'volleyball-womens/staff-moves.html', learn: null,
+      players: 'players-dotmap.html?sport=volleyball-womens', staff: 'staff-moves.html?sport=volleyball-womens', learn: null,
       stats: [['1,175', 'schools'], ['90K', 'players']] },
     { id: 'soccer-mens', name: 'Soccer', sub: "Men's", icon: 'soccer',
-      players: 'soccer-mens/players-dotmap.html', staff: 'soccer-mens/staff-moves.html', learn: null,
+      players: 'players-dotmap.html?sport=soccer-mens', staff: 'staff-moves.html?sport=soccer-mens', learn: null,
       stats: [['790', 'schools'], ['120K', 'players']] },
     { id: 'soccer-womens', name: 'Soccer', sub: "Women's", icon: 'soccer',
-      players: 'soccer-womens/players-dotmap.html', staff: 'soccer-womens/staff-moves.html', learn: null,
+      players: 'players-dotmap.html?sport=soccer-womens', staff: 'staff-moves.html?sport=soccer-womens', learn: null,
       stats: [['1,154', 'schools'], ['145K', 'players']] },
   ];
 

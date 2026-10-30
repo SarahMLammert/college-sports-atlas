@@ -1,8 +1,56 @@
-// Shared by every sport's pages (docs/<sport>/players-*.html):
-// constants, loading the data, school colors, and the Filters dropdown (its controls, logic and link format).
-// Load after d3.
+// Shared by every page of every sport (docs/players-*.html and staff-*.html, one set for all sports since Oct 30):
+// which sport the page shows, constants, loading the data, school colors, and the Filters dropdown (its
+// controls, logic and link format). Load after d3 and sports.js.
 (function () {
   const $ = (id) => document.getElementById(id);
+
+  // ---------- which sport ----------
+  // The sport is in the address: players-dotmap.html?sport=softball. Its data is in its own folder
+  // (docs/softball/map_data.json). The old addresses (docs/softball/players-dotmap.html) forward here.
+  const SPORT_PAGES = window.SPORT_PAGES || {};
+  const sport = new URLSearchParams(location.search).get("sport") || "";
+  if (!SPORT_PAGES[sport]) {                  // no sport, or one that doesn't exist: the front page
+    location.replace("index.html");
+    throw new Error(`unknown sport "${sport}"`);
+  }
+  const dataUrl = (file) => `${encodeURIComponent(sport)}/${file}`;
+  const women = !!SPORT_PAGES[sport].women;
+  const pronoun = { he: women ? "she" : "he", his: women ? "her" : "his", him: women ? "her" : "him" };
+  // The sport's own words on this page (sports.js): title, description, heading, subtitle.
+  const pageName = location.pathname.split("/").pop().replace(/\.html$/, "") || "players-dotmap";
+  const words = SPORT_PAGES[sport][pageName];
+  function putWords() {
+    if (!words) return;
+    if (words.title) document.title = words.title;
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta && words.description) meta.setAttribute("content", words.description);
+    const h1 = document.querySelector("header h1") || document.querySelector("h1");
+    if (h1 && words.h1) h1.innerHTML = words.h1;
+    const sub = $("sub");
+    if (sub && words.sub) sub.innerHTML = words.sub;
+  }
+  // Links to the other map pages keep the sport: players-heatmap.html -> players-heatmap.html?sport=softball.
+  // Links written later by the pages' scripts are fixed as they appear.
+  const PAGE_LINK = /^((?:players|staff)-[a-z-]+\.html)(\?[^#]*)?(#.*)?$/;
+  function keepSport(a) {
+    const href = a.getAttribute("href");
+    const m = href && href.match(PAGE_LINK);
+    if (!m || /[?&]sport=/.test(m[2] || "")) return;
+    a.setAttribute("href", `${m[1]}${m[2] ? m[2] + "&" : "?"}sport=${encodeURIComponent(sport)}${m[3] || ""}`);
+  }
+  function keepSportIn(node) {
+    if (node.nodeType !== 1) return;
+    if (node.matches("a[href]")) keepSport(node);
+    node.querySelectorAll("a[href]").forEach(keepSport);
+  }
+  function startPage() {
+    putWords();
+    keepSportIn(document.body);
+    new MutationObserver((list) => list.forEach((m) => {
+      if (m.type === "attributes") keepSport(m.target); else m.addedNodes.forEach(keepSportIn);
+    })).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ["href"] });
+  }
+  if (document.body) startPage(); else document.addEventListener("DOMContentLoaded", startPage);
   // Each sport's map_data.json says how it writes its positions and divisions (from config/<sport>.json):
   //   data.posLabels  position group -> chip text ("FO" -> "Faceoff")
   //   data.d1         the divisions that make up D1 (football: FBS and FCS; lacrosse: D1)
@@ -36,7 +84,7 @@
   // { all: false } (the dot map, which opens on D1 and calls data.loadAll() when a view needs the others).
   // data.complete says whether everything is in; data.loadAll() adds the rest to the same columns, in place.
   async function loadData({ all = true } = {}) {
-    const data = await fetch("map_data.json").then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); });
+    const data = await fetch(dataUrl("map_data.json")).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); });
     if (data.players.packed) data.players = unpackPlayers(data.players);
     const P = data.players;
     const seasons = () => {
@@ -53,14 +101,14 @@
     let allNames = null, namesLoad = null;
     const fillNames = () => { if (allNames) for (let i = 0; i < data.N; i++) data.nameList[i] = allNames[i] || ""; };
     data.loadNames = () => namesLoad || (namesLoad = (typeof data.names === "string" ? Promise.resolve(data.names)
-      : fetch("names.txt").then((r) => { if (!r.ok) throw new Error(r.status); return r.text(); }))
+      : fetch(dataUrl("names.txt")).then((r) => { if (!r.ok) throw new Error(r.status); return r.text(); }))
       .then((text) => { allNames = text.split("\n"); fillNames(); data.namesLoaded = true; delete data.names; }));
     if (typeof data.names === "string") data.loadNames();
     // the rest of a split sport
     const more = data.more || [];
     data.complete = more.length === 0;
     let allLoad = null;
-    data.loadAll = () => allLoad || (allLoad = Promise.all(more.map((f) => fetch(f).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })))
+    data.loadAll = () => allLoad || (allLoad = Promise.all(more.map((f) => fetch(dataUrl(f)).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })))
       .then((parts) => {
         for (const part of parts) {
           const Q = part.players.packed ? unpackPlayers(part.players) : part.players;
@@ -445,9 +493,7 @@
   }
   const median = (arr) => { if (!arr.length) return null; const a = Float64Array.from(arr).sort(), m = a.length >> 1; return a.length % 2 ? a[m] : (a[m - 1] + a[m]) / 2; };
 
-  // Each page remembers its last view in the browser. The sport is the page's folder
-  // (docs/football/players-dotmap.html -> "football"), so every sport keeps its own.
-  const sport = decodeURIComponent(location.pathname.split("/").slice(-2, -1)[0] || "");
+  // Each page remembers its last view in the browser, separately for every sport.
   const saveKey = (name) => `${sport}:${name}`;
   function readSaved(name) {
     try { return localStorage.getItem(saveKey(name)) || ""; }
@@ -492,5 +538,5 @@
     return `${a}-${String((a + 1) % 100).padStart(2, "0")}`;
   }
   function seasonSpan(a, b, spring) { return a === b ? seasonLabel(a, spring) : `${seasonLabel(a, spring)} to ${seasonLabel(b, spring)}`; }
-  window.GP = { $, sport, saveKey, readSaved, POS_LABEL, STATE_ABBR, ABBR_STATE, fmt, pct, esc, css, narrow, loadData, unpackStints, springOf, seasonLabel, seasonSpan, makePalette, makeFilters, copyLink, trackBar, miles, median };
+  window.GP = { $, sport, dataUrl, he: pronoun.he, his: pronoun.his, him: pronoun.him, saveKey, readSaved, POS_LABEL, STATE_ABBR, ABBR_STATE, fmt, pct, esc, css, narrow, loadData, unpackStints, springOf, seasonLabel, seasonSpan, makePalette, makeFilters, copyLink, trackBar, miles, median };
 })();

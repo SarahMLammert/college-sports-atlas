@@ -13,20 +13,22 @@ site in `docs/` (GitHub Pages).
 | Lacrosse (Women's) | `lacrosse-womens` | 583 (D1, D2, D3, NAIA, JUCO) | 58K | 2016–2027 |
 | Hockey (Men's) | `hockey-mens` | 162 (NCAA D1, D2, D3) | 18K | 2016–2027 |
 | Hockey (Women's) | `hockey-womens` | 126 (National Collegiate = D1 and D2 schools, D3) | 11K | 2016–2027 |
-| Basketball (Men's) | `basketball-mens` | 1,292 (D1, D2, D3, NAIA, JUCO) | 113K | 2016–2027 |
-| Basketball (Women's) | `basketball-womens` | 1,299 | 86K | 2016–2027 |
-| Volleyball (Women's) | `volleyball-womens` | 1,274 | 90K | 2016–2026 (fall) |
-| Soccer (Men's) | `soccer-mens` | 1,046 | 120K (re-run pending) | 2016–2026 (fall) |
-| Soccer (Women's) | `soccer-womens` | 1,248 | 145K | 2016–2026 (fall) |
+| Basketball (Men's) | `basketball-mens` | 1,215 (D1, D2, D3, NAIA, JUCO) | 120K | 2016–2027 |
+| Basketball (Women's) | `basketball-womens` | 1,220 | 97K | 2016–2027 |
+| Volleyball (Women's) | `volleyball-womens` | 1,192 | 97K | 2016–2026 (fall) |
+| Soccer (Men's) | `soccer-mens` | 949 | 151K | 2016–2026 (fall) |
+| Soccer (Women's) | `soccer-womens` | 1,161 | 148K | 2016–2026 (fall) |
 
 Football, volleyball and soccer are named by the fall they're played in. Spring and winter sports are named by the
 spring the season ends in (2025-26 = 2026); from August the current season is next spring's. A sport appears on the
-front page once it has been built.
+front page once it has been built. Every script turns seasons into labels and addresses (and a page's year back into a
+season) with the same few functions in `scripts/core.py` (`season_span`, `season_from_label`, `fill_season`,
+`current_season`); `docs/common.js` has the same rule for the site.
 
 ## The site
 
-`docs/index.html` is the sport picker (its numbers come from each sport's `summary.json`). Each sport's folder
-has five pages:
+`docs/index.html` is the sport picker (its numbers come from each sport's `summary.json`). There is one set of five
+pages for every sport, opened with the sport in the address (`players-dotmap.html?sport=softball`):
 
 - **Recruiting Map** (`players-dotmap.html`): a dot for every hometown, worldwide; filters for school,
   conference, division, seasons, transfers and positions; search for a school, player or town.
@@ -42,9 +44,11 @@ other divisions (`map_data_more.json`) only when a view or a search needs them. 
 
 The pages show seasons as school years (2023-24); links and the data files keep the season number.
 
-Every view is saved in the address after `#` (e.g. `football/players-dotmap.html#school=Alabama&pos=QB`), so links can be shared.
-The pages are football's: edit `docs/football/*.html`, then `python3 scripts/build.py sync` copies them to every
-sport (`--check` only reports differences; a test fails if they differ).
+Every view is saved in the address after `#` (e.g. `players-dotmap.html?sport=football#school=Alabama&pos=QB`), so links
+can be shared. Edit the pages in `docs/` directly. Each sport's own words on them (title, description, heading,
+subtitle, and she/her for women's sports) are in `docs/sports.js`; its data is in `docs/<sport>/`. The old addresses
+(`docs/football/players-dotmap.html`) are small pages that forward to the new one, written by
+`python3 scripts/build.py pages` (`--check` only reports; a test fails if a sport is missing).
 
 **Publish:** GitHub → Settings → Pages → deploy from branch `main`, folder `/docs`. To look locally:
 `cd docs && python3 -m http.server`, then http://localhost:8000.
@@ -79,22 +83,23 @@ The steps one by one:
 | `geocode.py --sport X` | place hometowns (`rosters/<sport>/hometowns.csv`, `unmatched_hometowns.csv`) |
 | `hometown_fixes.py suggest --sport X [--accept-likely]` | suggest fixes for unplaced hometowns |
 | `hometown_fixes.py spellings --sport X` | fix misspelled towns from the geocoder's table |
-| `build.py frozen / map / locations / check / sync` | class-year check, map data, campus file, roster check, page sync |
+| `build.py frozen / map / locations / check / pages` | class-year check, map data, campus file, roster check, site pages |
 | `staff.py scrape / build --sport X` | coaches from the roster pages, then the staff data |
 | `core.py compress-cache` | compress the page cache |
 
 ## Folders
 
 ```
-config/shared/         school_colors.csv, school_locations.csv (every sport)
+config/shared/         school_colors.csv, school_locations.csv, hometown_corrections.csv (every sport)
 config/<sport>/        settings.json        roster paths, roster size, positions, divisions, seasons
                        schools.csv          every college: division, conference, site, seasons, notes
-                       hometown_corrections.csv   hometown fixes (status fixed / review / unfixable)
+                       hometown_corrections.csv   only where this sport needs a different fix from the shared one
                        wrong_seasons.csv, season_pages.csv   pages to skip or to use (optional)
 rosters/<sport>/       working files, not committed: rosters_<season>.csv, scrape reports, MISSING_ROSTERS.md,
-                       attempts.csv, hometowns.csv, staff_<season>.csv, notes and logs
-docs/                  the site; docs/<sport>/ has the pages plus map_data.json, names.txt, summary.json,
-                       school_locations.json, staff_data.json
+                       attempts.csv, hometowns.csv, staff_<season>.csv, notes and logs, and rosters.db (below)
+docs/                  the site: the five pages, common.js, common.css, sports.js (each sport's words), index.html;
+                       docs/<sport>/ has map_data.json, names.txt, summary.json, school_locations.json,
+                       staff_data.json and the old addresses' forwarding pages
 scripts/               core.py (paths, downloads, season files, levels), sidearm.py (reading roster pages),
                        scrape_rosters.py, geocode.py, hometown_fixes.py, build.py, staff.py, pipeline.py
 tests/                 test_atlas.py (python3 -m pytest tests -q)
@@ -116,13 +121,18 @@ tests/                 test_atlas.py (python3 -m pytest tests -q)
   list a season whose page is really another year in `wrong_seasons.csv`, or give the right page in `season_pages.csv`.
 - **Hometowns.** Read from the roster text (US states, Canadian provinces, countries, hockey's three-letter
   codes like SWE/CZE), then placed with Census, USGS and GeoNames town lists. Plain "NL" is a Newfoundland town
-  if one has that name, otherwise Dutch. Fixes go in `hometown_corrections.csv`; `suggest --accept-likely`
+  if one has that name, otherwise Dutch. Fixes go in `config/shared/hometown_corrections.csv`, shared by every
+  sport (a sport's own file only holds the few places where it needs a different answer); `suggest --accept-likely`
   also takes clear misspellings and a wrong state only when the right one is a neighbour. Rows marked
   `manual` in `hometowns.csv` are never changed.
 - **Transfers.** A player counts as a transfer if the roster names a college as his previous school, he was on
   another school's roster in this data first, or he arrives as a junior or older. Junior hockey teams ("(USHL)")
   are never colleges; for hockey only a known college counts. Old schools get a level (D1, D2, D3, NAIA,
   JUCO, club, unknown). Seasons whose class years never advance ("frozen") don't use the class-year rule.
+- **The roster database.** `rosters/<sport>/rosters.db` (SQLite) holds the season files, scrape reports and hometown
+  tables. The checks (`build.py check`, `frozen`) and the map build read it; it's rebuilt from the CSVs by itself
+  whenever one of them changes, so the CSVs stay the files to edit. To look around: `sqlite3 rosters/softball/rosters.db`
+  (tables `rosters`, `reports`, `hometowns`, `unmatched`).
 - **Staff.** Coaches are read from the roster pages (or the coaches page). People are matched by name; a
   move is a person's last season at one school followed by their first at another within two seasons.
   Titles become roles (head, associate, assistant, coordinator, graduate, volunteer, support).
@@ -132,8 +142,8 @@ tests/                 test_atlas.py (python3 -m pytest tests -q)
 1. Make `config/<sport>/` (name: sport, then sex if both, e.g. `basketball-womens`) with `settings.json`
    (copy one and change the roster paths, roster size, positions and divisions) and `schools.csv`.
 2. Add any new schools' colors and campuses to `config/shared/`.
-3. Copy football's pages into `docs/<sport>/`, change their titles, and add the sport to `docs/index.html`.
-4. Run `python3 scripts/pipeline.py <sport>`.
+3. Add the sport's words to `docs/sports.js` (copy a similar sport's entry) and the sport to `docs/index.html`.
+4. Run `python3 scripts/pipeline.py <sport>`, then `python3 scripts/build.py pages`.
 
 ## Known issues
 
