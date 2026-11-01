@@ -27,7 +27,8 @@ season) with the same few functions in `scripts/core.py` (`season_span`, `season
 
 ## The site
 
-`docs/index.html` is the sport picker (its numbers come from each sport's `summary.json`). There is one set of five
+`docs/index.html` is the sport picker (its list of sports comes from `docs/sports.js`, its numbers from each sport's
+`summary.json`). There is one set of five
 pages for every sport, opened with the sport in the address (`players-dotmap.html?sport=softball`):
 
 - **Recruiting Map** (`players-dotmap.html`): a dot for every hometown, worldwide; filters for school,
@@ -46,9 +47,11 @@ The pages show seasons as school years (2023-24); links and the data files keep 
 
 Every view is saved in the address after `#` (e.g. `players-dotmap.html?sport=football#school=Alabama&pos=QB`), so links
 can be shared. Edit the pages in `docs/` directly. Each sport's own words on them (title, description, heading,
-subtitle, and she/her for women's sports) are in `docs/sports.js`; its data is in `docs/<sport>/`. The old addresses
-(`docs/football/players-dotmap.html`) are small pages that forward to the new one, written by
-`python3 scripts/build.py pages` (`--check` only reports; a test fails if a sport is missing).
+subtitle, and she/her for women's sports) and its place on the front page are in the `site` part of
+`config/<sport>/settings.json`; `python3 scripts/build.py pages` copies them into `docs/sports.js` (don't edit that
+file by hand; the pipeline's build step runs it). Its data is in `docs/<sport>/`. The old addresses
+(`docs/football/players-dotmap.html`) are small pages that forward to the new one, also written by `build.py pages`
+(`--check` only reports; a test fails if `sports.js` doesn't match the settings).
 
 **Publish:** GitHub → Settings → Pages → deploy from branch `main`, folder `/docs`. To look locally:
 `cd docs && python3 -m http.server`, then http://localhost:8000.
@@ -64,7 +67,7 @@ python3 scripts/pipeline.py softball hockey-mens           # some sports
 python3 scripts/pipeline.py baseball --steps geocode,build # some steps
 python3 scripts/pipeline.py football --from geocode        # start at a step
 python3 scripts/pipeline.py softball --dry-run             # print the commands only
-python3 -m pytest tests -q                                 # the tests
+python3 -m pytest tests -q                                 # the tests (about 1 minute with the page test)
 ```
 
 Steps, in order: `scrape` (quick pass) → `retry` (slow pass with a browser) → `redo-current` (only with
@@ -84,6 +87,8 @@ The steps one by one:
 | `hometown_fixes.py suggest --sport X [--accept-likely]` | suggest fixes for unplaced hometowns |
 | `hometown_fixes.py spellings --sport X` | fix misspelled towns from the geocoder's table |
 | `build.py frozen / map / locations / check / pages` | class-year check, map data, campus file, roster check, site pages |
+| `build.py compare --sport X --school S --season Y` | a school's roster against its season before, player by player |
+| `hometown_fixes.py review [--apply FILE]` | list automatic spelling fixes to check by hand, then apply your decisions |
 | `staff.py scrape / build --sport X` | coaches from the roster pages, then the staff data |
 | `core.py compress-cache` | compress the page cache |
 
@@ -97,12 +102,20 @@ config/<sport>/        settings.json        roster paths, roster size, positions
                        wrong_seasons.csv, season_pages.csv   pages to skip or to use (optional)
 rosters/<sport>/       working files, not committed: rosters_<season>.csv, scrape reports, MISSING_ROSTERS.md,
                        attempts.csv, hometowns.csv, staff_<season>.csv, notes and logs, and rosters.db (below)
-docs/                  the site: the five pages, common.js, common.css, sports.js (each sport's words), index.html;
+docs/                  the site: the five pages, common.js, common.css, index.html, and sports.js (written by
+                       build.py pages from the settings);
                        docs/<sport>/ has map_data.json, names.txt, summary.json, school_locations.json,
                        staff_data.json and the old addresses' forwarding pages
 scripts/               core.py (paths, downloads, season files, levels), sidearm.py (reading roster pages),
-                       scrape_rosters.py, geocode.py, hometown_fixes.py, build.py, staff.py, pipeline.py
-tests/                 test_atlas.py (python3 -m pytest tests -q)
+                       hometowns.py (reading hometown, class, height and weight fields), scrape_rosters.py,
+                       scrape_reports.py (attempts.csv, the problem list, MISSING_ROSTERS.md), geocode.py (placing
+                       hometowns), hometown_fixes.py, build.py, staff.py, pipeline.py
+tests/                 test_atlas.py: the code (also checked with pyflakes), the parsers, the builds
+                       roster_pages.zip + roster_pages_expected.json: nine real roster pages, one per kind of
+                       site, and what the parser reads from each
+                       test_pages.py: opens the site's pages in a headless browser and fails on any error
+                       (needs `python3 -m playwright install chromium`; skipped without it)
+                       sidearm_classic.html, sidearm_nextgen_table.html: two small hand-made pages
 .cache/                downloaded pages (gzip) and town lists, not committed; it makes reruns fast. Plan: delete
                        it once every sport is added and checked (the next run would then download everything again)
 ```
@@ -140,10 +153,11 @@ tests/                 test_atlas.py (python3 -m pytest tests -q)
 ## Adding a sport
 
 1. Make `config/<sport>/` (name: sport, then sex if both, e.g. `basketball-womens`) with `settings.json`
-   (copy one and change the roster paths, roster size, positions and divisions) and `schools.csv`.
+   (copy one and change the roster paths, roster size, positions and divisions, and its `site` part: the words on
+   the map pages and the front-page disc; `core.Sport.site` explains each key) and `schools.csv`.
 2. Add any new schools' colors and campuses to `config/shared/`.
-3. Add the sport's words to `docs/sports.js` (copy a similar sport's entry) and the sport to `docs/index.html`.
-4. Run `python3 scripts/pipeline.py <sport>`, then `python3 scripts/build.py pages`.
+3. Run `python3 scripts/pipeline.py <sport>`. Its build step writes `docs/sports.js`, so the sport appears on the
+   front page and its map pages with nothing typed into `docs/`.
 
 ## Known issues
 

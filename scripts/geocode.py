@@ -1,8 +1,10 @@
-"""This file holds, in order:
-    Reading hometowns
-    Placing hometowns on the map
+"""Placing hometowns on the map: hometown -> latitude and longitude, from the Census and USGS town lists,
+GeoNames for towns abroad, the corrections files and (with --online) Nominatim. Writes
+rosters/<sport>/hometowns.csv, unmatched_hometowns.csv and suggested fixes.
 
-Commands:
+    python3 scripts/geocode.py --sport softball
+
+Reading the hometown text itself ("Atlanta, Ga.") is in hometowns.py.
 """
 from __future__ import annotations
 
@@ -22,507 +24,13 @@ import requests
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))   # so the files here import each other
 
-from core import add_sport_argument, clean, load_sport, players
+import core
+from core import add_sport_argument, load_sport, players
+from hometowns import (US_STATES, _CONTINENTS, _COUNTRY_FIXES, _key, _lookup, _region, not_a_place, parse_hometown,
+                       split_labeled_hometown)
 
 # ==============================================================================================================
-# Reading hometowns   (was scripts/hometowns.py)
-# ==============================================================================================================
-
-HOMETOWNS_DOC = ''
-
-"""Cleaning raw roster fields: hometowns (city, state, country), class years, heights, weights.
-Shared by the scraper and the geocoder, for every sport."""
-
-US_STATES = {
-    "AL": "Alabama", "AK": "Alaska", "AZ": "Arizona", "AR": "Arkansas", "CA": "California",
-    "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware", "DC": "District of Columbia",
-    "FL": "Florida", "GA": "Georgia", "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois",
-    "IN": "Indiana", "IA": "Iowa", "KS": "Kansas", "KY": "Kentucky", "LA": "Louisiana",
-    "ME": "Maine", "MD": "Maryland", "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota",
-    "MS": "Mississippi", "MO": "Missouri", "MT": "Montana", "NE": "Nebraska", "NV": "Nevada",
-    "NH": "New Hampshire", "NJ": "New Jersey", "NM": "New Mexico", "NY": "New York",
-    "NC": "North Carolina", "ND": "North Dakota", "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon",
-    "PA": "Pennsylvania", "RI": "Rhode Island", "SC": "South Carolina", "SD": "South Dakota",
-    "TN": "Tennessee", "TX": "Texas", "UT": "Utah", "VT": "Vermont", "VA": "Virginia",
-    "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming",
-    "PR": "Puerto Rico", "GU": "Guam", "VI": "U.S. Virgin Islands", "AS": "American Samoa",
-    "MP": "Northern Mariana Islands",
-}
-
-# AP-style and other abbreviations seen on rosters -> USPS code.
-_STATE_ALIASES = {
-    "long island": "NY", "n. car": "NC", "n car": "NC", "s. car": "SC", "s car": "SC",   # Oct 28
-    "ala": "AL", "alas": "AK", "ariz": "AZ", "ark": "AR", "calif": "CA", "cal": "CA",
-    "colo": "CO", "col": "CO", "conn": "CT", "del": "DE", "d.c": "DC", "dc": "DC",
-    "washington dc": "DC", "washington d.c": "DC", "fla": "FL", "flor": "FL", "ga": "GA",
-    "ill": "IL", "ills": "IL", "ind": "IN", "kan": "KS", "kans": "KS", "ky": "KY", "la": "LA",
-    "md": "MD", "mass": "MA", "mich": "MI", "minn": "MN", "miss": "MS", "mo": "MO",
-    "mont": "MT", "neb": "NE", "nebr": "NE", "nev": "NV", "n.h": "NH", "nh": "NH",
-    "n.j": "NJ", "nj": "NJ", "n.m": "NM", "n.mex": "NM", "nm": "NM", "n.y": "NY", "ny": "NY",
-    "n.c": "NC", "nc": "NC", "n.d": "ND", "n.dak": "ND", "nd": "ND", "okla": "OK",
-    "ore": "OR", "oreg": "OR", "pa": "PA", "penn": "PA", "penna": "PA", "r.i": "RI", "ri": "RI",
-    "s.c": "SC", "sc": "SC", "s.d": "SD", "s.dak": "SD", "sd": "SD", "tenn": "TN",
-    "tex": "TX", "vt": "VT", "va": "VA", "wash": "WA", "w.va": "WV", "w.v": "WV", "wva": "WV",
-    "wv": "WV", "wis": "WI", "wisc": "WI", "wyo": "WY", "p.r": "PR", "pr": "PR",
-    "puerto rico": "PR", "guam": "GU", "american samoa": "AS", "a.s": "AS",
-    "u.s. virgin islands": "VI", "virgin islands": "VI", "saipan": "MP",
-    # Hawaii: islands and spellings with the okina
-    "hawai'i": "HI", "hawaii": "HI", "hi": "HI", "o'ahu": "HI", "oahu": "HI", "maui": "HI",
-    "kaua'i": "HI", "kauai": "HI", "big island": "HI", "hawai'i island": "HI", "moloka'i": "HI",
-    "lana'i": "HI", "molokai": "HI", "lanai": "HI",
-    "ga": "GA", "geo": "GA", "tx": "TX", "texas": "TX", "fl": "FL", "ca": "CA",
-    "ken": "KY", "w. va": "WV", "w. virginia": "WV", "hawai‘i": "HI", "hawaiʻi": "HI",
-    # Oct 27 (softball): more spellings seen on rosters. "Ill." read as "III." or "lll." (capital I or
-    # lower-case L in place of the I's); short forms that no style guide uses but rosters do.
-    "iii": "IL", "lll": "IL", "illi": "IL", "illinios": "IL", "virg": "VA", "ten": "TN", "kent": "KY",
-    "mary": "MD", "min": "MN", "miinn": "MN", "color": "CO", "ida": "ID", "mon": "MT", "louis": "LA",
-    "ver": "VT", "west va": "WV", "nev": "NV", "ak": "AK", "vir": "VA", "wisc.": "WI",
-    "usvi": "VI", "us virgin islands": "VI", "virgin island": "VI", "st. croix": "VI", "st. thomas": "VI",
-    "mariana islands": "MP", "northern marianas": "MP", "cnmi": "MP",
-}
-for _code, _name in US_STATES.items():
-    _STATE_ALIASES[_name.lower()] = _code
-    _STATE_ALIASES[_code.lower()] = _code
-
-_COUNTRY_FIXES = {
-    "aus": "Australia", "aust": "Australia", "australia": "Australia", "nz": "New Zealand",
-    "new zealand": "New Zealand", "eng": "England", "england": "England", "uk": "United Kingdom",
-    "can": "Canada", "canada": "Canada", "ger": "Germany", "germany": "Germany",
-    "mex": "Mexico", "mexico": "Mexico", "nigeria": "Nigeria", "bahamas": "Bahamas",
-    "the bahamas": "Bahamas", "jamaica": "Jamaica", "samoa": "Samoa", "tonga": "Tonga",
-    "japan": "Japan", "france": "France", "ireland": "Ireland", "sweden": "Sweden",
-    "netherlands": "Netherlands", "austria": "Austria", "brazil": "Brazil",
-    "the netherlands": "Netherlands", "holland": "Netherlands", "united kingdom": "United Kingdom",
-    "great britain": "United Kingdom", "scotland": "Scotland", "wales": "Wales",
-    "northern ireland": "Northern Ireland", "au": "Australia", "western australia": "Australia",
-    "south australia": "Australia", "new south wales": "Australia", "nsw": "Australia",
-    "queensland": "Australia", "qld": "Australia", "victoria": "Australia", "tasmania": "Australia",
-    "grand bahama": "Bahamas", "nassau": "Bahamas", "china": "China", "serbia": "Serbia",
-    "hungary": "Hungary", "south korea": "South Korea", "korea": "South Korea", "greece": "Greece",
-    "russia": "Russia", "egypt": "Egypt", "liberia": "Liberia", "syria": "Syria", "panama": "Panama",
-    "venezuela": "Venezuela", "croatia": "Croatia", "gabon": "Gabon", "ghana": "Ghana",
-    "cameroon": "Cameroon", "kenya": "Kenya", "senegal": "Senegal", "south africa": "South Africa",
-    "italy": "Italy", "spain": "Spain", "denmark": "Denmark", "norway": "Norway", "finland": "Finland",
-    "switzerland": "Switzerland", "belgium": "Belgium", "poland": "Poland", "ukraine": "Ukraine",
-    "israel": "Israel", "haiti": "Haiti", "dominican republic": "Dominican Republic", "fiji": "Fiji",
-    "democratic republic of the congo": "Democratic Republic of the Congo",
-    "democratic republic of congo": "Democratic Republic of the Congo",
-    "dr of the congo": "Democratic Republic of the Congo", "drc": "Democratic Republic of the Congo",
-    "congo": "Congo", "czech republic": "Czech Republic", "czechia": "Czech Republic",
-    # Oct 27 (softball)
-    "curacao": "Curacao", "curaçao": "Curacao", "curacau": "Curacao", "suriname": "Suriname",
-    "qatar": "Qatar", "hong kong": "Hong Kong", "trinidad": "Trinidad and Tobago",
-    "trinidad and tobago": "Trinidad and Tobago", "trinidad & tobago": "Trinidad and Tobago",
-    "colombia": "Colombia", "columbia": "Colombia", "philippines": "Philippines", "phillipines": "Philippines",
-    "singapore": "Singapore", "lithuania": "Lithuania", "grand bahamas": "Bahamas", "bahama": "Bahamas",
-    "british virgin islands": "British Virgin Islands", "bvi": "British Virgin Islands", "aruba": "Aruba",
-    "guatemala": "Guatemala", "argentina": "Argentina", "chile": "Chile", "peru": "Peru",
-    "bermuda": "Bermuda", "cayman islands": "Cayman Islands", "rwanda": "Rwanda",
-    # Oct 28: abbreviations and spellings left unplaced after the Oct 27 runs (baseball most of all)
-    "dr": "Dominican Republic", "d.r": "Dominican Republic", "rd": "Dominican Republic",
-    "dom. rep": "Dominican Republic", "dom rep": "Dominican Republic", "dom. republic": "Dominican Republic",
-    "dominican rep": "Dominican Republic", "dominican repub": "Dominican Republic",
-    "domincan republic": "Dominican Republic", "dominic republic": "Dominican Republic",
-    "dominican republica": "Dominican Republic", "republica dominicana": "Dominican Republic",
-    "república dominicana": "Dominican Republic", "rep. dominicana": "Dominican Republic",
-    "vz": "Venezuela", "ve": "Venezuela", "ven": "Venezuela", "venez": "Venezuela", "venezuala": "Venezuela",
-    "jpn": "Japan", "jap": "Japan", "pan": "Panama", "nicaragua": "Nicaragua", "nic": "Nicaragua",
-    "saudi arabia": "Saudi Arabia", "cuba": "Cuba", "honduras": "Honduras", "el salvador": "El Salvador",
-    "costa rica": "Costa Rica", "ecuador": "Ecuador", "uruguay": "Uruguay", "paraguay": "Paraguay",
-    "bolivia": "Bolivia", "belize": "Belize", "barbados": "Barbados", "grenada": "Grenada",
-    "st. lucia": "Saint Lucia", "saint lucia": "Saint Lucia", "antigua": "Antigua and Barbuda",
-    "u.s. virgin islands": "", "taiwan": "Taiwan", "india": "India", "pakistan": "Pakistan",
-    "vietnam": "Vietnam", "thailand": "Thailand", "indonesia": "Indonesia", "malaysia": "Malaysia",
-    "portugal": "Portugal", "iceland": "Iceland", "estonia": "Estonia", "latvia": "Latvia",
-    "slovakia": "Slovakia", "slovenia": "Slovenia", "romania": "Romania", "bulgaria": "Bulgaria",
-    "turkey": "Turkey", "lebanon": "Lebanon", "jordan": "Jordan", "morocco": "Morocco", "uganda": "Uganda",
-    "zimbabwe": "Zimbabwe", "ethiopia": "Ethiopia", "tanzania": "Tanzania", "sierra leone": "Sierra Leone",
-    "ivory coast": "Ivory Coast", "cote d'ivoire": "Ivory Coast", "united arab emirates": "United Arab Emirates",
-    "uae": "United Arab Emirates", "argentine": "Argentina", "brasil": "Brazil", "deutschland": "Germany",
-    "espana": "Spain", "españa": "Spain", "italia": "Italy", "sverige": "Sweden", "danmark": "Denmark",
-    "norge": "Norway", "suomi": "Finland", "schweiz": "Switzerland", "österreich": "Austria",
-    "the philippines": "Philippines", "republic of korea": "South Korea", "s. korea": "South Korea",
-    "papua new guinea": "Papua New Guinea", "png": "Papua New Guinea", "cook islands": "Cook Islands",
-    "tahiti": "French Polynesia", "french polynesia": "French Polynesia", "guyana": "Guyana",
-    # Oct 28 (hockey): the three-letter codes hockey rosters use (IOC and ISO), short forms and misspellings.
-    # Not "ind" (Indiana), "can"/"aut" stay as they were, "den" is Denmark only after a comma.
-    "swe": "Sweden", "swed": "Sweden", "sweeden": "Sweden", "se": "Sweden", "fin": "Finland", "fi": "Finland",
-    "svk": "Slovakia", "slovak republic": "Slovakia", "cze": "Czech Republic", "cz": "Czech Republic",
-    "czech rep": "Czech Republic", "the czech republic": "Czech Republic", "czechoslovakia": "Czech Republic",
-    "lva": "Latvia", "lat": "Latvia", "lv": "Latvia", "blr": "Belarus", "belarus": "Belarus", "fra": "France",
-    "nor": "Norway", "nw": "Norway", "sui": "Switzerland", "swi": "Switzerland", "swiss": "Switzerland",
-    "che": "Switzerland", "den": "Denmark", "dnk": "Denmark", "dk": "Denmark", "deu": "Germany", "aut": "Austria",
-    "rus": "Russia", "russian federation": "Russia", "kaz": "Kazakhstan", "kazakhstan": "Kazakhstan",
-    "svn": "Slovenia", "slo": "Slovenia", "ita": "Italy", "hun": "Hungary", "pol": "Poland", "ukr": "Ukraine",
-    "ua": "Ukraine", "gbr": "United Kingdom", "kor": "South Korea", "kr": "South Korea", "chn": "China",
-    "ned": "Netherlands", "nld": "Netherlands", "est": "Estonia", "ltu": "Lithuania", "srb": "Serbia",
-    "cro": "Croatia", "hrv": "Croatia", "bul": "Bulgaria", "rou": "Romania", "isl": "Iceland", "irl": "Ireland",
-    "esp": "Spain", "bel": "Belgium", "nzl": "New Zealand", "isr": "Israel", "isreal": "Israel",
-    "uzbekistan": "Uzbekistan", "luxembourg": "Luxembourg", "lux": "Luxembourg",
-    # regions written where the country goes
-    "østfold": "Norway", "ostfold": "Norway", "uusimaa": "Finland", "catalunya": "Spain", "catalonia": "Spain",
-    "samara region": "Russia", "vic": "Australia",
-    "mx": "Mexico", "venzuela": "Venezuela", "candada": "Canada", "brz": "Brazil", "panamá": "Panama",
-    "hu": "Hungary", "tokyo": "Japan",
-    # Oct 30 (basketball, volleyball, soccer): more countries, other spellings and local names
-    "türkiye": "Turkey", "turkiye": "Turkey", "turkish": "Turkey", "bosnia": "Bosnia and Herzegovina",
-    "bosnia and herzegovina": "Bosnia and Herzegovina", "bosnia & herzegovina": "Bosnia and Herzegovina",
-    "bosnia-herzegovina": "Bosnia and Herzegovina", "bih": "Bosnia and Herzegovina", "herzegovina": "Bosnia and Herzegovina",
-    "sudan": "Sudan", "south sudan": "South Sudan", "cape verde": "Cape Verde", "cabo verde": "Cape Verde",
-    "gambia": "Gambia", "the gambia": "Gambia", "méxico": "Mexico", "austraila": "Australia", "australa": "Australia",
-    "republic of georgia": "Republic of Georgia", "grand cayman": "Cayman Islands", "cayman": "Cayman Islands",
-    "st. kitts": "Saint Kitts and Nevis", "st kitts": "Saint Kitts and Nevis", "saint kitts": "Saint Kitts and Nevis",
-    "st. kitts and nevis": "Saint Kitts and Nevis", "st. kitts & nevis": "Saint Kitts and Nevis", "nevis": "Saint Kitts and Nevis",
-    "kitts": "Saint Kitts and Nevis", "canary islands": "Spain", "tenerife": "Spain", "gran canaria": "Spain",
-    "cyprus": "Cyprus", "kuwait": "Kuwait", "mozambique": "Mozambique", "côte d'ivoire": "Ivory Coast",
-    "cote d’ivoire": "Ivory Coast", "côte d’ivoire": "Ivory Coast", "barbuda": "Antigua and Barbuda",
-    "antigua and barbuda": "Antigua and Barbuda", "antigua & barbuda": "Antigua and Barbuda",
-    "belguim": "Belgium", "equador": "Ecuador", "st. maarten": "Sint Maarten", "sint maarten": "Sint Maarten",
-    "st maarten": "Sint Maarten", "saint martin": "Sint Maarten", "albania": "Albania", "morrocco": "Morocco",
-    "tobago": "Trinidad and Tobago", "scottland": "Scotland", "palestine": "Palestine", "macedonia": "North Macedonia",
-    "north macedonia": "North Macedonia", "mali": "Mali", "turks and caicos": "Turks and Caicos Islands",
-    "turks & caicos": "Turks and Caicos Islands", "turks and caicos islands": "Turks and Caicos Islands",
-    "st. vincent and grenadines": "Saint Vincent and the Grenadines", "st. vincent and the grenadines": "Saint Vincent and the Grenadines",
-    "st. vincent": "Saint Vincent and the Grenadines", "saint vincent": "Saint Vincent and the Grenadines",
-    "grenadines": "Saint Vincent and the Grenadines", "tunisia": "Tunisia", "nepal": "Nepal", "myanmar": "Myanmar",
-    "guinea": "Guinea", "zambia": "Zambia", "jamacia": "Jamaica", "camaroon": "Cameroon", "bonaire": "Bonaire",
-    "dominica": "Dominica", "switzlerland": "Switzerland", "perú": "Peru", "burkina faso": "Burkina Faso",
-    "faso": "Burkina Faso", "netherland": "Netherlands", "phillippines": "Philippines", "engalnd": "England",
-    "malawi": "Malawi", "new zeland": "New Zealand", "uraguay": "Uruguay", "mongolia": "Mongolia",
-    "semegal": "Senegal", "senagal": "Senegal", "angola": "Angola", "botswana": "Botswana", "namibia": "Namibia",
-    "algeria": "Algeria", "libya": "Libya", "iraq": "Iraq", "iran": "Iran", "afghanistan": "Afghanistan",
-    "sri lanka": "Sri Lanka", "bangladesh": "Bangladesh", "armenia": "Armenia", "azerbaijan": "Azerbaijan",
-    "moldova": "Moldova", "montenegro": "Montenegro", "kosovo": "Kosovo", "malta": "Malta", "andorra": "Andorra",
-    "eritrea": "Eritrea", "somalia": "Somalia", "djibouti": "Djibouti", "burundi": "Burundi", "chad": "Chad",
-    "niger": "Niger", "togo": "Togo", "benin": "Benin", "madagascar": "Madagascar", "mauritius": "Mauritius",
-    "guinea-bissau": "Guinea-Bissau", "equatorial guinea": "Equatorial Guinea", "central african republic": "Central African Republic",
-    "saint lucia": "Saint Lucia", "anguilla": "Anguilla", "montserrat": "Montserrat", "guadeloupe": "Guadeloupe",
-    "martinique": "Martinique", "new caledonia": "New Caledonia", "vanuatu": "Vanuatu", "solomon islands": "Solomon Islands",
-}
-# Oct 30: a city or region of another country written where the country goes ("Getafe, Madrid",
-# "Porto Alegre, Rio Grande do Sul"). Only read this way after a comma: "Madrid" alone could be Madrid, Iowa.
-_REGIONS_ABROAD = {
-    "madrid": "Spain", "barcelona": "Spain", "valencia": "Spain", "basque country": "Spain", "andalusia": "Spain",
-    "london": "England", "greater manchester": "England", "greater london": "England", "west yorkshire": "England",
-    "são paulo": "Brazil", "sao paulo": "Brazil", "rio de janeiro": "Brazil", "rio grande do sul": "Brazil",
-    "minas gerais": "Brazil", "santa catarina": "Brazil", "paraná": "Brazil", "parana": "Brazil", "bahia": "Brazil",
-    "buenos aires": "Argentina", "córdoba": "Argentina", "istanbul": "Turkey", "dubai": "United Arab Emirates",
-    "stockholm": "Sweden", "jalisco": "Mexico", "sonora": "Mexico", "guanajuato": "Mexico", "nuevo león": "Mexico",
-    "nuevo leon": "Mexico", "baja california": "Mexico", "chihuahua": "Mexico", "hyogo": "Japan", "osaka": "Japan",
-    "bavaria": "Germany", "bayern": "Germany", "maharashtra": "India", "lagos": "Nigeria", "accra": "Ghana",
-    "dakar": "Senegal", "nairobi": "Kenya", "copenhagen": "Denmark", "oslo": "Norway", "paris": "France",
-    "île-de-france": "France", "ile-de-france": "France", "berlin": "Germany", "munich": "Germany",
-    "amsterdam": "Netherlands", "den haag": "Netherlands", "haag": "Netherlands", "lisbon": "Portugal",
-}
-# Oct 30: places that aren't a country ("Lagos, Africa", "Accra, West Africa"): the town alone, if it's a big one
-_CONTINENTS = {"africa", "west africa", "east africa", "south africa region", "europe", "asia", "south america",
-               "central america", "caribbean", "west indies", "middle east", "oceania"}
-_COUNTRY_FIXES = {k: v for k, v in _COUNTRY_FIXES.items() if v}
-_CANADIAN_PROVINCES = {
-    "ont": "ON", "ontario": "ON", "on": "ON", "que": "QC", "quebec": "QC", "qc": "QC",
-    "b.c": "BC", "bc": "BC", "british columbia": "BC", "alta": "AB", "alberta": "AB", "ab": "AB",
-    "man": "MB", "manitoba": "MB", "sask": "SK", "saskatchewan": "SK", "n.s": "NS",
-    "nova scotia": "NS", "n.b": "NB", "new brunswick": "NB", "p.e.i": "PE", "newfoundland": "NL",
-    "ontario, canada": "ON", "québec": "QC", "nfld": "NL",
-    # Oct 27: the postal codes (MB, SK, NS, ...) were missing, so "Winnipeg, MB" came out as a country "MB".
-    # Not "NL": on rosters that is as often the Netherlands ("Spijkenisse, NL").
-    "mb": "MB", "sk": "SK", "ns": "NS", "nb": "NB", "pe": "PE", "pei": "PE", "prince edward island": "PE",
-    "newfoundland and labrador": "NL", "yt": "YT", "yukon": "YT", "nt": "NT", "northwest territories": "NT",
-    "nu": "NU", "nunavut": "NU",
-    "alb": "AB", "albt": "AB", "sask.": "SK", "qué": "QC", "que.": "QC", "p.q": "QC", "nfl": "NL",
-    # Oct 28 (hockey). "N.L." and "N.F." with their dots are Newfoundland; plain "NL" is decided by the
-    # geocoder (a Newfoundland town of that name, else the Netherlands).
-    "pq": "QC", "queb": "QC", "n.l": "NL", "n.f": "NL", "nf": "NL", "nfld.": "NL", "newfoundland & labrador": "NL",
-    "nwt": "NT", "n.w.t": "NT", "yukon territory": "YT", "nunuvat": "NU", "prince edward": "PE",
-    "manatoba": "MB", "atla": "AB", "altberta": "AB", "albera": "AB", "ontartio": "ON", "onatrio": "ON", "mantoba": "MB",
-    "manitboa": "MB", "saskatechewan": "SK", "sasketchewan": "SK", "saskatchwan": "SK", "novia scotia": "NS",
-}
-
-
-def _key(part: str) -> str:
-    part = clean(part).replace("’", "'").replace("‘", "'").replace("ʻ", "'").replace("`", "'")
-    return part.lower().rstrip(".").strip()
-
-
-_PLACEHOLDERS = {"hometown", "n/a", "na", "-", "--", "tbd", "none", "unknown", "/"}
-
-# Text from another column that some rosters put where the hometown goes: bats/throws ("R/R", "L/R"),
-# a height ("5-7", "5'7\""), a role ("Manager"). Never a town.
-_NOT_A_PLACE = re.compile(r"""(?ix)^(?:
-    [LRSB]\s*/\s*[LRSB] | [LRSB] | right | left | switch | both
-    | (?:student\s+)?manager | \d\s*[-'’]\s*\d{1,2}(?:"|''|”)? )$""")
-# Bats/throws at the end of the field: "MSJC / R/R", "Fullerton College / L/R"
-_TRAILING_BATS = re.compile(r"\s*/\s*[LRSB]\s*/\s*[LRSB]\s*$", re.I)
-
-
-def not_a_place(text: str) -> bool:
-    """'R/R', 'L', '5-7', 'Manager' -> True: something from another column, not a hometown."""
-    return bool(_NOT_A_PLACE.match(clean(text)))
-
-
-def _lookup(table: dict, k: str) -> str:
-    """Look a state/country token up as written, then with dots, spaces and stray symbols
-    removed, so 'W. Va.', 'F.L.', 'P.A.', 'U.K.' and 'SC|' all match."""
-    if k in table:
-        return table[k]
-    return table.get(re.sub(r"[^a-z]", "", k), "")
-
-
-def split_hometown_highschool(value: str) -> tuple[str, str]:
-    """'Atlanta, Ga. / Westlake HS' -> ('Atlanta, Ga.', 'Westlake HS')."""
-    value = clean(value)
-    if " / " in value:
-        a, b = value.split(" / ", 1)
-        return clean(a), clean(b)
-    if "/" in value and value.count("/") == 1:
-        a, b = value.split("/", 1)
-        return clean(a), clean(b)
-    return value, ""
-
-
-# A roster's column label saved in front of the value: "Hometown/Prev. School: Wilson, NC / Beddingfield".
-_LABEL = re.compile(r"^(?P<label>[^:]{2,60}?)\s*\.?\s*:\s*(?P<value>.*)$")
-_LABEL_WORDS = re.compile(r"\b(hometown|home town|hs|city|high school|prev|previous|last school|college|grad)\b", re.I)
-_HOME_WORDS = re.compile(r"hometown|home town|city", re.I)
-
-
-def split_labeled_hometown(value: str) -> tuple[str, str]:
-    """Take a column label off a hometown field and split off the school that shares it.
-    Returns (hometown, school). A field without such a label comes back unchanged, with no school.
-
-        'Hometown/Prev. School: Wilson, NC / Beddingfield'  -> ('Wilson, NC', 'Beddingfield')
-        'Hometown/Previous School(s): Omaha, Neb.'          -> ('Omaha, Neb.', '')
-        'HS City (State): Mayfair HS / Lakewood (CA)'       -> ('Lakewood, CA', 'Mayfair HS')
-        'HS City (State): Mayfair'                          -> ('', 'Mayfair')   (a school, no town)
-        'HS Hometown/High School: Santa Ana'                -> ('Santa Ana', '')
-        'ICC Grad Date:'                                    -> ('', '')          (no hometown in it)
-    """
-    v = clean(value)
-    m = _LABEL.match(v)
-    if not m or not _LABEL_WORDS.search(m.group("label")):
-        return v, ""
-    label, val = m.group("label").strip(), m.group("value").strip()
-    if not _HOME_WORDS.search(label):
-        return "", ""
-    labels = ["HS", "City"] if re.match(r"hs city", label, re.I) else [p.strip() for p in label.split("/")]
-    vals = [p.strip() for p in re.split(r"\s*/\s*", val)] if val else []
-    home_idx = next(i for i, part in enumerate(labels) if _HOME_WORDS.search(part))
-    if len(vals) < len(labels) and home_idx > 0:
-        # Fewer values than the label names, and the town isn't first: "HS City (State): Mayfair"
-        # holds only the high school.
-        home, schools = "", vals
-    elif vals:
-        i = min(home_idx, len(vals) - 1) if len(vals) >= len(labels) else 0
-        home, schools = vals[i], vals[:i] + vals[i + 1:]
-    else:
-        home, schools = "", []
-    if re.search(r"\b(college|university|univ|cc|jc)\b", home, re.I):
-        # "HS City (State): Lakewood/University of Nevada": a high school and a college, no town
-        home, schools = "", schools + [home]
-    home = re.sub(r"\s*\(([A-Za-z]{2})\)$", r", \1", home)   # "Lakewood (CA)" -> "Lakewood, CA"
-    return home.strip(" ,"), " / ".join(s for s in schools if s)
-
-
-def _tidy_punctuation(raw: str) -> str:
-    """Typing slips around the state: 'Randleman, N,C,' -> 'Randleman, N.C.'; 'New Ulm, Minn,.' ->
-    'New Ulm, Minn.'; 'St, Joseph, Mo.' -> 'St. Joseph, Mo.'; 'Smithfield,Ga.' keeps working."""
-    raw = re.sub(r",\s*([A-Za-z])\s*,\s*([A-Za-z])\s*[,.]*$", r", \1.\2.", raw)
-    raw = re.sub(r",\s*\.$", ".", raw)
-    raw = re.sub(r"^(St|Ste|Ft|Mt),\s+", r"\1. ", raw)
-    return raw
-
-
-def _region(token: str) -> dict | None:
-    """A trailing region we know: a US state, a Canadian province, a country, or a province or region
-    followed by its country ('Ontario Canada', 'B.C. Canada', 'Alberta-Canada', 'Lombardia Italy')."""
-    k = _key(token)
-    if _lookup(_STATE_ALIASES, k):
-        return {"state": _lookup(_STATE_ALIASES, k), "country": "USA"}
-    if _lookup(_CANADIAN_PROVINCES, k):
-        return {"state": _lookup(_CANADIAN_PROVINCES, k), "country": "Canada"}
-    if _lookup(_COUNTRY_FIXES, k):
-        return {"state": "", "country": _lookup(_COUNTRY_FIXES, k)}
-    words = re.split(r"[\s\-]+", k)
-    for n in (2, 1):                                   # the country is the last one or two words
-        if len(words) <= n:
-            continue
-        country = _lookup(_COUNTRY_FIXES, " ".join(words[-n:]))
-        if not country:
-            continue
-        head = " ".join(words[:-n])
-        if country == "Canada" and _lookup(_CANADIAN_PROVINCES, head):
-            return {"state": _lookup(_CANADIAN_PROVINCES, head), "country": "Canada"}
-        return {"state": "", "country": country}
-    return None
-
-
-_PROVINCE_CODES = {"AB", "BC", "B.C.", "MB", "SK", "ON", "QC", "NS", "NB", "PE", "PEI", "NL"}
-_PROVINCE_NAMES = {"alberta", "british columbia", "manitoba", "saskatchewan", "ontario", "quebec", "québec",
-                   "nova scotia", "new brunswick", "prince edward island", "newfoundland"}
-
-
-def _canadian_without_comma(text: str) -> dict | None:
-    """'Calgary AB', 'Okotoks Alberta', 'Chilliwack British Columbia', 'Delta BC Canada' (no comma) ->
-    the town and province. Only Canada: a US state written without a comma is checked against the US
-    town list by hometown_fixes.py suggest, since 'Port Washington' or 'Saint Louis' end in a state's name."""
-    words = re.sub(r"[\s\-]+(canada|can)\.?$", "", clean(text), flags=re.I).split()
-    for n in (3, 2, 1):
-        if len(words) <= n:
-            continue
-        tail = " ".join(words[-n:])
-        if tail.upper() in _PROVINCE_CODES and tail.upper() == tail or tail.lower() in _PROVINCE_NAMES:
-            code = _lookup(_CANADIAN_PROVINCES, _key(tail))
-            if code:
-                return {"city": " ".join(words[:-n]).rstrip(" ,."), "state": code, "country": "Canada"}
-    return None
-
-
-# Places written with no comma before an unmistakable territory or country: "Cidra PR", "San Juan Puerto Rico",
-# "Pago Pago AS", "Santo Domingo DR", "Valencia Venezuela", "Chitre Panama". Only these: most other endings
-# ("Las Cruces New Mexico", "Port Washington") are part of a US town's name or a state.
-_NO_COMMA_ENDINGS = [
-    (re.compile(r"^(.+?)[\s.]+(?:PR|P\.R\.|Puerto Rico)$"), "PR", "USA"),
-    (re.compile(r"^(.+?)[\s.]+(?:AS|American Samoa)$"), "AS", "USA"),
-    (re.compile(r"^(.+?)[\s.]+(?:DR|D\.R\.|R\.D\.|Dominican Republic|Rep(?:ublica|\.)? Dominicana)$", re.I), "",
-     "Dominican Republic"),
-    (re.compile(r"^(.+?)\s+(Venezuela|Panama|Nicaragua|Colombia|Curacao|Aruba|Bahamas|Japan|Australia)$", re.I), "", None),
-]
-
-
-def _no_comma_ending(text: str) -> dict | None:
-    for pat, state, country in _NO_COMMA_ENDINGS:
-        m = pat.match(text)
-        if not m:
-            continue
-        city = m.group(1).strip(" .,")
-        if not city:      # (PR and AS match in capitals only: "Cidra PR", not "Cidra pr")
-            continue
-        return {"city": city, "state": state,
-                "country": country or _lookup(_COUNTRY_FIXES, _key(m.group(2)))}
-    return None
-
-
-_HAWAII_ISLANDS = {"maui", "oahu", "o'ahu", "kauai", "kaua'i", "big island", "molokai", "moloka'i", "lanai", "lana'i"}
-
-# Country names that are also US towns. Written alone, they're read as the town (its state is guessed from the
-# school, like any town given without a state): "Lebanon" on an Ohio Northern roster is Lebanon OH, "Holland" on
-# Hope's is Holland MI. A player from abroad gives a city too ("Beirut, Lebanon").
-_ALSO_US_TOWNS = {"lebanon", "jordan", "peru", "cuba", "holland", "poland", "denmark", "turkey", "belgium", "norway",
-                  "columbia"}   # "Columbia" alone: Columbia MS, SC, MO (with a city it's still read as Colombia)
-
-
-def parse_hometown(raw: str) -> dict:
-    """Return {'city','state','country'} from strings like 'Mobile, Ala.' or 'Sydney, Australia'."""
-    raw = split_labeled_hometown(html.unescape(raw or ""))[0]
-    raw = clean(raw).replace("’", "'").replace("‘", "'").replace("ʻ", "'")
-    out = {"city": "", "state": "", "country": ""}
-    raw = _TRAILING_BATS.sub("", raw).strip(' "')
-    if not raw or raw.lower().strip(" .") in _PLACEHOLDERS or not_a_place(raw):
-        return out
-    raw = _tidy_punctuation(raw)
-    raw = re.sub(r"^(hometown|home town)(\s*/\s*(last|high|previous) school)?\s*:?\s*", "", raw, flags=re.I)
-    # "/ Fresno, CA/Edison HS", "/:Prev. School: Raleigh, NC / East Wake": an empty field before the slash
-    raw = re.sub(r"^[\s/:|]+", "", raw)
-    raw = re.sub(r"^prev(ious)?\.?\s*school\s*:\s*", "", raw, flags=re.I)
-    # Drop a school that shares the field: "Atlanta, Ga. / Westlake HS", "Houston, Texas - Lamar"
-    raw = re.split(r"\s*/\s*|\s+[-\u2013\u2014]\s+", raw, maxsplit=1)[0].strip()
-    if re.fullmatch(r"washington,?\s*d\.?\s*c\.?", raw, flags=re.I):
-        return {"city": "Washington", "state": "DC", "country": "USA"}
-    # "Pago Pago (AS)", "Lakewood (CA)": a state or territory code in brackets is the state
-    m = re.match(r"^(.+?)\s*\(([A-Z]{2})\)$", raw)
-    if m and m.group(2) in US_STATES:
-        raw = f"{m.group(1)}, {m.group(2)}"
-    # Drop parenthetical notes: "Miami, Fla. (Central HS)", "Houston, Texas (Alief Taylor)"
-    raw = re.sub(r"\s*\([^)]*\)?\s*$", "", raw).strip().rstrip(",")
-    if not raw:
-        return out
-    parts = [p.strip() for p in raw.split(",") if p.strip()]
-    if len(parts) == 1:
-        k = _key(parts[0])
-        if k in _HAWAII_ISLANDS:        # "Maui": the island, so it gets the island's dot, not Hawaii's middle
-            return {"city": clean(parts[0]), "state": "HI", "country": "USA"}
-        if _lookup(_STATE_ALIASES, k):  # just a state
-            out.update(state=_lookup(_STATE_ALIASES, k), country="USA")
-        elif _lookup(_COUNTRY_FIXES, k) and k not in _ALSO_US_TOWNS:
-            out["country"] = _lookup(_COUNTRY_FIXES, k)
-        else:
-            out.update(_canadian_without_comma(parts[0]) or _no_comma_ending(parts[0]) or {"city": parts[0]})
-        return out
-
-    city, rest = parts[0].strip("'\" "), parts[1:]
-    last = _key(rest[-1])
-    # "Montreal, Quebec, Canada" -> keep the province
-    if len(rest) >= 2 and last in ("canada", "can") and _key(rest[-2]) in _CANADIAN_PROVINCES:
-        return {"city": city, "state": _CANADIAN_PROVINCES[_key(rest[-2])], "country": "Canada"}
-    # "Brandon, Manitoba, CA": CA is Canada here, not California
-    if len(rest) >= 2 and last == "ca" and _lookup(_CANADIAN_PROVINCES, _key(rest[-2])):
-        return {"city": city, "state": _lookup(_CANADIAN_PROVINCES, _key(rest[-2])), "country": "Canada"}
-    if last in ("usa", "u.s.a", "us", "u.s", "united states"):
-        rest = rest[:-1] or rest
-        last = _key(rest[-1])
-    # "Rockledge, Fla. USA": the country written after the state with no comma
-    if re.search(r"\s+(usa|u\.s\.a\.?)$", rest[-1], re.I):
-        rest = rest[:-1] + [re.sub(r"\s+(usa|u\.s\.a\.?)$", "", rest[-1], flags=re.I)]
-    # "Pago Pago. AS" was one part; "Hilo, Hawai`i \ Waiakea HS": a backslash before the school
-    rest[-1] = re.split(r"\s*\\\s*", rest[-1])[0]
-    region = _region(rest[-1])
-    if not region and _key(rest[-1]) in _REGIONS_ABROAD:
-        region = {"state": "", "country": _REGIONS_ABROAD[_key(rest[-1])]}
-    if region:
-        out.update(city=city, **region)
-    else:
-        # Unknown trailing token: treat as a foreign country/region.
-        out.update(city=city, country=clean(rest[-1]))
-    return out
-
-
-_RS = r"^(r|rs|red|redshirt|medical redshirt)?[\s\-.]*"
-_CLASS_MAP = [
-    (_RS + r"(fr|fy|first[\s\-]year)", "FR"),
-    (_RS + r"so", "SO"),
-    (_RS + r"jr|junior", "JR"),
-    (_RS + r"sr|senior", "SR"),
-    (r"^gr|grad|^5th|fifth|^6th|sixth|^7th|seventh|^gs|post[\s\-]?bacc", "GR"),
-    (r"^1st|first", "FR"),
-    (r"^2nd|second", "SO"),
-    (r"^3rd|third", "JR"),
-    (r"^4th|fourth", "SR"),
-]
-
-
-def normalize_class(value: str) -> str:
-    v = clean(value).lower()
-    if not v:
-        return ""
-    for pattern, code in _CLASS_MAP:
-        if re.search(pattern, v):
-            redshirt = re.match(r"^(r[\s\-.]|rs|red|redshirt|medical redshirt)", v)
-            return ("R-" + code) if redshirt and code != "GR" else code
-    return clean(value)
-
-
-def format_height(feet=None, inches=None, raw: str = "") -> str:
-    if feet not in (None, "", 0, "0"):
-        try:  # a bad value here used to raise and throw away the whole roster
-            return f"{int(float(feet))}-{int(float(inches or 0))}"
-        except (TypeError, ValueError):
-            pass
-    raw = clean(raw)
-    m = re.match(r"^(\d)\s*['\-’ ]\s*(\d{1,2})", raw)
-    return f"{m.group(1)}-{int(m.group(2))}" if m else raw
-
-
-def clean_weight(value) -> str:
-    m = re.search(r"\d{2,3}", clean(value))
-    return m.group(0) if m else ""
-
-# what `from geocode import *` gives (the hometown readers; it used to be `from hometowns import *`)
-__all__ = ["US_STATES", "clean", "clean_weight", "format_height", "html", "normalize_class", "not_a_place", "parse_hometown",
-           "re", "split_hometown_highschool", "split_labeled_hometown"]
-
-
-# ==============================================================================================================
-# Placing hometowns on the map   (was scripts/geocode_hometowns.py)
+# Placing hometowns on the map
 # ==============================================================================================================
 
 GEOCODE_HOMETOWNS_DOC = 'Add latitude/longitude to scraped rosters so hometowns can be mapped.\n\nOffline sources (downloaded once into .cache/):\n  1. US Census Gazetteer places + county subdivisions (cities, towns, CDPs, townships)\n  2. USGS GNIS Populated Places (unincorporated communities and neighborhoods:\n     Cypress TX, Ellenwood GA, Kingwood TX, Pacoima CA, ...)\n  3. US Census Gazetteer counties ("Stafford, Va.", "Broward County, Fla.")  -> county centroid\n  4. Built-in centroids for US territories and common foreign countries      -> coarse fallback\nOptional online source (--online): OpenStreetMap Nominatim for whatever is left\n(foreign cities, typos), 1 request/second, cached in .cache/nominatim.json.\n\n    python scripts/geocode.py                       # the season files in rosters/football/\n    python scripts/geocode.py --online --contact you@example.com\n    python scripts/geocode.py --sport mens-basketball\n\nHometowns that don\'t match get a suggested fix (typos, wrong state, school text mixed in).\nSuggestions marked "fixed" are applied in the same run; "review" ones are applied only with\n--use-review. All suggestions are saved to config/<sport>/hometown_corrections.csv, where your\nhand edits are kept from run to run and win over the built-in rules.\n\nReads every player from the season files (rosters_<season>.csv), one row per player per school\n(built in memory, the same way scrape_rosters.py --combined writes players_unique.csv).\n\nWrites config/<sport>/hometown_corrections.csv (the fix table: status fixed / review / unfixable),\nand in rosters/<sport>/:\n  hometowns.csv               one row per hometown: what the roster said, the town it was read as,\n                              lat/lon, where the answer came from, and how many players. Open it\n                              to look anything up. Re-runs reuse it, so only new hometowns are\n                              looked up. To move a dot by hand, change its lat/lon and set its\n                              source to "manual"; manual rows are always kept. build.py map\n                              reads each player\'s dot from here.\n  unmatched_hometowns.csv     what still couldn\'t be placed, most common first\nGiven a CSV instead (geocode.py some.csv), it also writes some_geocoded.csv next to it: the\nrows + home_lat, home_lon, geo_source, geo_precision, with each hometown\'s corrected city/state/country.\n\nAfter changing the parser or this script, run with --refresh to look every hometown up again.\n'
@@ -691,7 +199,7 @@ COUNTRIES = {
     "United Arab Emirates": (23.42, 53.85), "Guyana": (4.86, -58.93), "Portugal": (39.40, -8.22),
     "Colombia": (4.57, -74.30), "Argentina": (-38.42, -63.62), "Chile": (-35.68, -71.54),
     "Philippines": (12.88, 121.77), "India": (20.59, 78.96), "Turkey": (38.96, 35.24),
-    "Trinidad and Tobago": (10.69, -61.22), "Puerto Rico": (18.22, -66.59), "Iceland": (64.96, -19.02),
+    "Trinidad and Tobago": (10.69, -61.22), "Iceland": (64.96, -19.02),
     "Lithuania": (55.17, 23.88), "Latvia": (56.88, 24.60), "Estonia": (58.60, 25.01),
     "Slovenia": (46.15, 14.99), "Slovakia": (48.67, 19.70), "Romania": (45.94, 24.97),
     "Bulgaria": (42.73, 25.49), "Bosnia and Herzegovina": (43.92, 17.68), "Montenegro": (42.71, 19.37),
@@ -706,7 +214,7 @@ COUNTRIES = {
     "Taiwan": (23.70, 120.96), "Singapore": (1.35, 103.82), "Papua New Guinea": (-6.31, 143.96),
     "French Polynesia": (-17.68, -149.41), "Cook Islands": (-21.24, -159.78),
     "Curacao": (12.17, -68.99), "Suriname": (3.92, -56.03), "Qatar": (25.35, 51.18), "Hong Kong": (22.32, 114.17),
-    "British Virgin Islands": (18.42, -64.64), "Aruba": (12.52, -69.97), "Rwanda": (-1.94, 29.87),
+    "British Virgin Islands": (18.42, -64.64), "Aruba": (12.52, -69.97),
 }
 
 
@@ -824,7 +332,7 @@ class Gazetteer:
             print("Unincorporated towns and neighborhoods (Ellenwood GA, Mililani HI, Cypress TX, ...)")
             print("won't be placed. Download it in a browser from")
             print(f"  {GNIS_URL}")
-            print(f"or the 'Populated Places' national text file at https://www.usgs.gov/us-board-on-geographic-names/download-gnis-data")
+            print("or the 'Populated Places' national text file at https://www.usgs.gov/us-board-on-geographic-names/download-gnis-data")
             print(f"save it as {local}, and run this again.")
             print("!" * 78 + "\n")
             return
@@ -952,9 +460,9 @@ class WorldCities:
         self.ok = False
         try:
             import geonamescache
-        except ImportError:
-            print("  (no world town list: pip install geonamescache to place towns abroad on their own dots)")
-            return
+        except ImportError:                       # main() checks first; this is for other callers
+            raise SystemExit("geonamescache isn't installed: without it every town abroad would get its province's "
+                             "dot. python3 -m pip install -r requirements.txt")
         gc = geonamescache.GeonamesCache(min_city_population=500)
         for code, c in gc.get_countries().items():
             self.iso[c["name"].lower()] = code
@@ -1532,6 +1040,7 @@ def main(argv=None) -> int:
     ap.add_argument("--refresh", action="store_true",
                     help="look every hometown up again instead of reusing hometowns.csv (keeps rows marked 'manual')")
     args = ap.parse_args(argv)
+    core.check_packages(["requests", "geonamescache"], "Placing hometowns (geocode.py)")
     sport = load_sport(args.sport)
     statuses = {"fixed", "review"} if args.use_review else {"fixed"}
     if args.corrections:

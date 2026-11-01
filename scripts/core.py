@@ -113,9 +113,22 @@ class Sport:
     # The seasons scripts/pipeline.py scrapes when none are given, e.g. "2016-2026". Blank: 2016 to the current
     # season, without 2020 for football (default_seasons()).
     seasons: str = ""
+    # The website's words and front-page place for this sport (Nov 1). build.py pages writes docs/sports.js from
+    # these, which the map pages and the front page read, so a new sport needs nothing typed into docs/:
+    #   front_page: {"disc": "lacrosse", "name": "Lacrosse", "icon": "lacrosse", "order": 2, "sex": "m"}: the
+    #     front page shows one disc per "disc", in "order"; "sex" ("m"/"w") when the disc has both teams; "sub"
+    #     for a line under a one-team disc's name (Volleyball: "Women's"); "learn" (its learn page) and
+    #     "learn_summary". Teams sharing a disc must give it the same name, icon, order and learn page.
+    #   women: true for she/her on the pages.
+    #   players-dotmap, players-heatmap, players-transfers: each page's title, description, h1 and sub.
+    site: dict = field(default_factory=dict)
 
     def division_label(self, division: str) -> str:
         return self.division_labels.get(division, division)
+
+    def current_season(self, today=None) -> int:
+        """The season the sport's main roster pages show today (core.current_season for this sport)."""
+        return current_season(today, spring=self.spring_season)
 
     def default_seasons(self, today=None) -> str:
         """2016 to the current season. Spring sports name a season by the spring it ends in, and post next
@@ -353,7 +366,7 @@ def load_schools(path: Path, divisions: set[str] | None = None) -> list[dict]:
 
 def d1_schools(path: Path) -> list[dict]:
     """Rows in the sport's D1 divisions (football: FBS/FCS) with no season range: the D1 schools. The scraper's "is this a college?" check
-    (sidearm.load_known_colleges) uses only these names, since many smaller colleges share a name
+    (sidearm.college_keys) uses only these names, since many smaller colleges share a name
     with high schools ("Central", "Union", "Franklin")."""
     return [r for r in _rows(path) if r["division"].strip() in D1 and not _spans(r)]
 
@@ -408,21 +421,15 @@ USER_AGENT = (
 # (docs/common.js seasonLabel() is the same rule for the site). Before Oct 30 each script had its own copy,
 # and a bare year on a basketball page was read the wrong way (claude/wrong-seasons-oct30.md).
 
-# Set by sidearm.configure() (and staff.py) from the sport's settings; every function below takes spring=
-# to override it.
-SPRING_SEASON = False
+# Every function here is told whether the sport is a spring one (sport.spring_season). Until Oct 31 they read a
+# module variable, SPRING_SEASON, that sidearm.configure() set: whichever sport configured last decided.
 
-
-def _spring(spring: bool | None) -> bool:
-    return SPRING_SEASON if spring is None else bool(spring)
-
-
-def season_first_year(season: int, spring: bool | None = None) -> int:
+def season_first_year(season: int, spring: bool) -> int:
     """The calendar year the season starts in: fall 2024 -> 2024; spring season 2024 (2023-24) -> 2023."""
-    return season - 1 if _spring(spring) else season
+    return season - 1 if spring else season
 
 
-def season_span(season: int, spring: bool | None = None, full: bool = False) -> str:
+def season_span(season: int, spring: bool, full: bool = False) -> str:
     """The two-year label: '2024-25' (fall 2024) or '2023-24' (spring 2024); full=True: '2023-2024'."""
     a = season_first_year(season, spring)
     return f"{a}-{a + 1}" if full else f"{a}-{(a + 1) % 100:02d}"
@@ -438,7 +445,7 @@ def fill_season(template: str, season: int) -> str:
 SEASON_LABEL = re.compile(r"\b(20[0-3]\d)(?:\s*[-–/]\s*(?:20)?(\d{2}))?\b")
 
 
-def season_from_label(text: str, spring: bool | None = None) -> int | None:
+def season_from_label(text: str, spring: bool) -> int | None:
     """The season a label names: '2024-25', '2024-2025', '2024/25' or a bare '2024'.
 
     A two-year label starts in its first year, so it is season 2024 for a fall sport and 2025 for a spring
@@ -449,10 +456,10 @@ def season_from_label(text: str, spring: bool | None = None) -> int | None:
     if not m:
         return None
     year = int(m.group(1))
-    return year + 1 if m.group(2) and _spring(spring) else year
+    return year + 1 if m.group(2) and spring else year
 
 
-def current_season(today=None, spring: bool | None = None) -> int:
+def current_season(today=None, *, spring: bool) -> int:
     """The season a school's main roster page shows today.
 
     Fall sport (football): the season is the fall it's played in, so 2026 from March 2026 (when the
@@ -462,7 +469,7 @@ def current_season(today=None, spring: bool | None = None) -> int:
     with no year on it was saved as 2026 while it already showed 2027.)"""
     from datetime import date
     today = today or date.today()
-    if _spring(spring):
+    if spring:
         return today.year + 1 if today.month >= 8 else today.year
     return today.year if today.month >= 3 else today.year - 1
 
@@ -477,30 +484,138 @@ def current_season(today=None, spring: bool | None = None) -> int:
 #               has rosters the season before and after: most likely no season was played.
 # A failure because of a bot check, a time limit or a dropped connection stays "failed": a re-run can fix it.
 
-def covid_season(spring: bool | None = None) -> int:
-    return 2021 if _spring(spring) else 2020
+def covid_season(spring: bool) -> int:
+    return 2021 if spring else 2020
 
 
-_HARD_FAILURE = re.compile(r"HTTP 202|bot check|timed out|took over|Timeout|Connection|SSL|certificate|HTTP 5\d\d", re.I)
+# ---- why a school-season failed, as a code (Oct 31) ----
+# Every scrape report row has a "reason" column. The scraper sets it where it decides (a newer season's roster,
+# the time limit, a left-out school, ...); a failed download gets the code of its most telling error. Decisions
+# (keep a saved roster when a retry fails, count a try, "not posted yet") read the code. Before Oct 31 they
+# searched the error text, and a reworded message would have changed them without a word; reason_code() still
+# works the code out from the text for reports written before then.
+REASONS = {
+    "": "saved",
+    "not_found": "no roster page, or no players on it",
+    "wrong_season": "the pages found show another season",
+    "newer_roster": "the archive page is really a newer season's roster (decided on purpose: no roster that season)",
+    "not_posted": "this season's roster isn't up yet: the pages still show last season's team",
+    "other_sport": "the only pages found were another sport's",
+    "bot_check": "the site showed a bot check",
+    "refused": "the site refused the request (HTTP 403)",
+    "no_connection": "no connection to the site (or its certificate was refused)",
+    "slow": "the site was too slow",
+    "time_limit": "not tried: the school's other seasons used up its time",
+    "left_out": "left out on purpose (a note in the schools file, or wrong_seasons.csv)",
+    "no_program": "no team that season",
+    "no_hometowns": "saved, but most players have no hometown",
+    "size": "saved, but an unusual number of players for the sport",
+    "other": "something else (see the error)",
+}
+# A re-run can fix these; the rest are about the site's pages themselves.
+RETRYABLE = {"bot_check", "no_connection", "slow", "time_limit", "refused", "other"}
 
 
-def failure_kind(report: dict, has_season=None, spring: bool | None = None, today=None) -> str:
+def reason_code(report: dict) -> str:
+    """The report's reason code: its own "reason" column, or for an older report, worked out from its text."""
+    code = report.get("reason")
+    if code:
+        return code
+    status, err = report.get("status", ""), report.get("error") or ""
+    low = err.lower()
+    if status == "ok":
+        return ""
+    if status == "no_program":
+        return "no_program"
+    if status == "left_out" or (status == "failed" and low.startswith("left out")):
+        return "left_out"
+    if status == "partial":
+        try:
+            return "no_hometowns" if int(report.get("with_hometown") or 0) < 0.5 * int(report.get("players") or 0) else "size"
+        except ValueError:
+            return "size"
+    if low.startswith("timed out: this school took over"):
+        return "time_limit"
+    if "not posted yet" in low or "(same players and class years" in low:
+        return "not_posted"
+    if "page looks like the" in low:
+        return "newer_roster"
+    if re.search(r"http 202|bot check", low):
+        return "bot_check"
+    if re.search(r"connectionerror|proxyerror|sslerror|certificate|err_connection|err_name_not_resolved|err_cert", low):
+        return "no_connection"
+    if re.search(r"timeout|too slow|timed out|gave up", low):
+        return "slow"
+    if "http 403" in low:
+        return "refused"
+    if "another sport's page" in low and not re.search(r"http 404|no players found", low):
+        return "other_sport"
+    if re.search(r"page shows \d{4}|redirected to", low):
+        return "wrong_season"
+    if re.search(r"http 404|http 410|no players found", low) or not err:
+        return "not_found"
+    return "other"
+
+
+def failure_kind(report: dict, has_season=None, *, spring: bool, today=None) -> str:
     """'not_posted', 'covid' or 'failed' for a failed school-season's report (any other report: its status).
     has_season(school, season) -> bool says whether the school has a roster that season (for 'covid')."""
     if report.get("status") != "failed":
         return report.get("status", "")
-    if _HARD_FAILURE.search(report.get("error") or ""):
+    code = reason_code(report)
+    if code == "not_posted":
+        return "not_posted"
+    if code in RETRYABLE or code == "left_out":
         return "failed"
     try:
         season = int(report["season"])
     except (KeyError, ValueError):
         return "failed"
-    if _spring(spring) and season == current_season(today, spring):
+    if spring and season == current_season(today, spring=spring):
         return "not_posted"          # a spring or winter sport's next season (a fall sport's is being played)
     if season == covid_season(spring) and has_season and has_season(report["school"], season - 1) \
             and has_season(report["school"], season + 1):
         return "covid"
     return "failed"
+
+
+# ---- the packages a step needs (Oct 31) ----
+# Two packages used to fail quietly: without geonamescache the geocoder put every town abroad on its province's
+# dot (Toronto 100 miles off), and without Playwright every browser retry became a "failed" season. A step now
+# stops at once when a package it needs is missing, and says so when a version differs from requirements.txt.
+
+def pinned_versions() -> dict[str, str]:
+    """package -> version, from the name==version lines of requirements.txt"""
+    path = ROOT / "requirements.txt"
+    out = {}
+    if path.exists():
+        for line in path.read_text(encoding="utf-8").splitlines():
+            m = re.match(r"\s*([A-Za-z0-9_.-]+)\s*==\s*([^\s#;]+)", line)
+            if m:
+                out[m.group(1).lower()] = m.group(2)
+    return out
+
+
+def check_packages(needed: list[str], step: str) -> None:
+    """Stop with a clear message if a package `step` needs isn't installed; warn if its version isn't the
+    pinned one (the data was built with those)."""
+    from importlib import metadata
+    pins, missing = pinned_versions(), []
+    for name in needed:
+        try:
+            have = metadata.version(name)
+        except metadata.PackageNotFoundError:
+            missing.append(name)
+            continue
+        want = pins.get(name.lower())
+        if want and have != want:
+            print(f"note: {name} {have} is installed; requirements.txt has {want} (results may differ slightly)",
+                  file=sys.stderr)
+    if missing:
+        raise SystemExit(f"{step} needs {', '.join(missing)}, which isn't installed in this Python ({sys.executable}).\n"
+                         f"  Install everything with:  {Path(sys.executable).name} -m pip install -r requirements.txt"
+                         + ("\n  then once:  python3 -m playwright install chromium" if "playwright" in missing else "")
+                         + "\n  (On the Mac, run the scripts with the project's .venv: source .venv/bin/activate)")
 
 
 class _Retry(Retry):
@@ -710,7 +825,7 @@ class Fetcher:
                 return html
             self.drop_cached(path)
         try:
-            import playwright  # noqa: F401
+            __import__("playwright")          # only checks that it is installed
         except ImportError as exc:
             raise RuntimeError("Playwright not installed: pip install playwright && playwright install chromium") from exc
         if self._site(url) in self._slow_sites:
@@ -820,6 +935,13 @@ def read_csv(path: Path) -> list[dict]:
         if "current_conference" not in r and "conference" in r:
             r["current_conference"] = r.pop("conference")
     return rows
+
+
+def write_csv(path: Path, fields: list[str], rows: list[dict]) -> None:
+    with open(path, "w", newline="", encoding="utf-8") as fh:
+        w = csv.DictWriter(fh, fieldnames=fields, extrasaction="ignore")
+        w.writeheader()
+        w.writerows(rows)
 
 
 def season_files(out_dir: Path) -> dict[int, Path]:

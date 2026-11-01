@@ -15,5 +15,12 @@
   "division_labels": {"D1": "Division I", "D2": "Division II", "D3": "Division III", "NAIA": "NAIA", "JUCO": "Junior college (NJCAA)"},
   "position_labels": {"A": "Attack", "M": "Midfield", "D": "Defense", "G": "Goalie", "UNK": "Other"},
   "thin_roster": 18,
-  "frozen_min_pairs": 15
+  "frozen_min_pairs": 15,
+  "site": {
+    "front_page": {"disc": "lacrosse", "name": "Lacrosse", "icon": "lacrosse", "order": 2, "sex": "w"},
+    "women": true,
+    "players-dotmap": {"title": "College Lacrosse (Women's) Recruiting Map", "description": "Where every varsity college women's lacrosse player since 2016 comes from, mapped: Division I, II and III, NAIA and junior college.", "h1": "College Lacrosse (Women's) <span>Recruiting Map</span>", "sub": "Hometowns of every varsity college women's lacrosse player since 2016"},
+    "players-heatmap": {"title": "College Lacrosse (Women's) Recruiting Footprints", "description": "Compare where up to four college women's lacrosse programs, from Division I to junior college, find their players, state by state.", "h1": "College Lacrosse (Women's) <span>Recruiting Footprints</span>"},
+    "players-transfers": {"title": "College Lacrosse (Women's) Transfer Map", "description": "Where college women's lacrosse players transferred, school to school, since 2016.", "h1": "College Lacrosse (Women's) <span>Transfer Map</span>", "sub": "Where players moved from school to school since 2016"}
+  }
 }

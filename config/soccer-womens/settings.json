@@ -14,5 +14,12 @@
   "division_labels": {"D1": "Division I", "D2": "Division II", "D3": "Division III", "NAIA": "NAIA", "JUCO": "Junior college (NJCAA, CCCAA, NWAC)"},
   "position_labels": {"GK": "Goalkeeper", "D": "Defender", "M": "Midfielder", "F": "Forward", "UNK": "Other"},
   "thin_roster": 18,
-  "frozen_min_pairs": 15
+  "frozen_min_pairs": 15,
+  "site": {
+    "front_page": {"disc": "soccer", "name": "Soccer", "icon": "soccer", "order": 8, "sex": "w"},
+    "women": true,
+    "players-dotmap": {"title": "College Soccer (Women's) Recruiting Map", "description": "Where every varsity college women's soccer player since 2016 comes from, mapped: Division I, II and III, NAIA and junior college.", "h1": "College Soccer (Women's) <span>Recruiting Map</span>", "sub": "Hometowns of every varsity college women's soccer player since 2016"},
+    "players-heatmap": {"title": "College Soccer (Women's) Recruiting Footprints", "description": "Compare where up to four college women's soccer programs, from Division I to junior college, find their players, state by state.", "h1": "College Soccer (Women's) <span>Recruiting Footprints</span>"},
+    "players-transfers": {"title": "College Soccer (Women's) Transfer Map", "description": "Where college women's soccer players transferred, school to school, since 2016.", "h1": "College Soccer (Women's) <span>Transfer Map</span>", "sub": "Where players moved from school to school since 2016"}
+  }
 }

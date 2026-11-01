@@ -12,7 +12,7 @@ of messages, settings files' contents, and one-time fixes for files from before 
 """
 import csv
 import json
-import logging
+import functools
 import zipfile
 from datetime import date
 from pathlib import Path
@@ -25,14 +25,14 @@ import core
 import geocode as geo
 import build
 import hometown_fixes
+import scrape_reports
 import scrape_rosters as sr
 import sidearm
 import hometown_fixes as sug
-from geocode import not_a_place, parse_hometown, split_labeled_hometown
+from hometowns import normalize_class, not_a_place, parse_hometown, split_labeled_hometown
 from core import Levels, is_major, key, ROOT
 from core import load_sport
-from scrape_rosters import normalize_class, parse_roster, split_hometown_highschool
-from sidearm import parse_sidearm_classic
+from sidearm import parse_roster, parse_sidearm_classic
 
 
 # ==================================================================================================
@@ -329,13 +329,10 @@ def test_state_only_gets_the_states_middle(cache):
 HERE = Path(__file__).parent
 
 
-@pytest.fixture
-def football():
-    """Football's settings and junior colleges (so "Iowa Western" counts as a college) for every test in this section,
-    whatever an earlier test configured."""
-    sr.sidearm.configure(load_sport("football"))
-    sr.load_known_colleges([{"school": n} for n in
-                            ["Wake Forest", "Notre Dame", "SMU", "Texas", "Miami (FL)", "Duke", "Alabama", "Texas Tech"]])
+# Football's settings, a few D1 schools and its junior colleges (so "Iowa Western" counts as a college), given to
+# every parse in this section. (Before Oct 31 a fixture set them as module variables in sidearm.)
+FOOTBALL = sidearm.Rules.for_sport(load_sport("football"), [{"school": n} for n in
+                                   ["Wake Forest", "Notre Dame", "SMU", "Texas", "Miami (FL)", "Duke", "Alabama", "Texas Tech"]])
 
 
 # ---------------------------------------------------------------------------- page builders
@@ -372,14 +369,13 @@ def nuxt_page(tree) -> str:
 
 
 def roster(html):
-    return {p["name"]: p for p in sr.parse_roster(html)[1]}
+    return {p["name"]: p for p in sidearm.parse_roster(html, FOOTBALL)[1]}
 
 
 # ---------------------------------------------------------------------------- parsers
 
-@pytest.mark.usefixtures("football")
 def test_sidearm_nextgen_table():
-    strategy, players = parse_roster((HERE / "sidearm_nextgen_table.html").read_text())
+    strategy, players = parse_roster((HERE / "sidearm_nextgen_table.html").read_text(), FOOTBALL)
     assert strategy == "html_table"
     assert len(players) == 4  # coaching staff table ignored
     p = players[2]
@@ -389,9 +385,8 @@ def test_sidearm_nextgen_table():
     assert p["bio_url"].endswith("/devan-thompkins/17536")
 
 
-@pytest.mark.usefixtures("football")
 def test_sidearm_classic():
-    strategy, players = parse_roster((HERE / "sidearm_classic.html").read_text())
+    strategy, players = parse_roster((HERE / "sidearm_classic.html").read_text(), FOOTBALL)
     assert strategy == "sidearm_classic"
     a, b = players
     assert (a["name"], a["jersey"], a["position"], a["class_year"]) == ("John Smith", "7", "QB", "R-Jr.")
@@ -400,7 +395,6 @@ def test_sidearm_classic():
     assert b["hometown"] == "Stockholm, Sweden"
 
 
-@pytest.mark.usefixtures("football")
 def test_sidearm_nuxt_payload():
     # Shape copied from gobison.com (Sidearm nextgen): pinia.roster.roster.<id>.players[]
     players = [
@@ -415,7 +409,7 @@ def test_sidearm_nuxt_payload():
     ]
     coaches = [{"firstName": "Tim", "lastName": "Polasek", "title": "Head Coach"}]
     tree = {"data": {}, "pinia": {"roster": {"roster": {"2316": {"players": players, "coaches": coaches}}}}}
-    strategy, out = parse_roster(nuxt_page(tree))
+    strategy, out = parse_roster(nuxt_page(tree), FOOTBALL)
     assert strategy == "nuxt_data"
     assert [p["name"] for p in out] == ["Preston Brown", "Cam Miller"]
     p = out[0]
@@ -423,7 +417,6 @@ def test_sidearm_nuxt_payload():
     assert p["high_school"] == "Hillsboro HS" and p["bio_url"].endswith("/24396")
 
 
-@pytest.mark.usefixtures("football")
 def test_wmt_nuxt_payload():
     # Shape copied from clemsontigers.com (WMT): data.roster-<id>-players-list[] -> {player:{...}, class_level, player_position}
     sport = {"id": 20, "name": "Football"}
@@ -443,7 +436,7 @@ def test_wmt_nuxt_payload():
          "player_position": pos_s, "class_level": fr},
     ]
     tree = {"data": {"sport-view-football": {"name": "Football"}, "roster-276-players-list": lst}}
-    strategy, out = parse_roster(nuxt_page(tree))
+    strategy, out = parse_roster(nuxt_page(tree), FOOTBALL)
     assert strategy == "nuxt_data"
     assert len(out) == 2
     f = out[0]
@@ -452,16 +445,14 @@ def test_wmt_nuxt_payload():
     assert f["bio_url"] == "/sports/football/roster/player/michael-foster"
 
 
-@pytest.mark.usefixtures("football")
 def test_embedded_json_fallback():
     data = {"props": {"pageProps": {"roster": [
         {"name": "Joe Tester", "hometown": "Austin, Texas", "position": "WR", "class": "So."}]}}}
     html = f'<script id="__NEXT_DATA__" type="application/json">{json.dumps(data)}</script>'
-    strategy, out = parse_roster(html)
+    strategy, out = parse_roster(html, FOOTBALL)
     assert strategy == "embedded_json" and out[0]["hometown"] == "Austin, Texas"
 
 
-@pytest.mark.usefixtures("football")
 def test_old_sidearm_vue_roster_not_duplicated():
     # Shape from utahstateaggies.com: `roster: {...}` JS object with the same players listed twice
     # (players + players_by_gender.M) and a roster-level "title". Previously produced ~2x rows.
@@ -475,14 +466,13 @@ def test_old_sidearm_vue_roster_not_duplicated():
                   "players_by_gender": {"M": players}}
     html = ("<script>require(['vue'], function (Vue) { Vue.component('x', { data: () => ({ roster: "
             + json.dumps(roster_obj) + " }) }) })</script>")
-    strategy, out = parse_roster(html)
+    strategy, out = parse_roster(html, FOOTBALL)
     assert strategy == "embedded_json"
     assert len(out) == 40
     assert out[0]["name"] == "Kian0 Test" and out[0]["high_school"] == "Dana Hills HS"
     assert out[0]["position"] == "WR" and out[0]["class_year"] == "Jr."
 
 
-@pytest.mark.usefixtures("football")
 def test_table_hs_previous_split_and_link_name_fallback():
     html = """<table><thead><tr><th>No.</th><th>Name</th><th>Pos.</th><th>Cl.</th><th>Hometown</th>
     <th>High School/Previous School</th></tr></thead><tbody>
@@ -491,40 +481,36 @@ def test_table_hs_previous_split_and_link_name_fallback():
     <tr><td>2</td><td><a href="/sports/fball/2026-27/bios/sam_lee"></a></td>
         <td>QB</td><td>Fr.</td><td>Newark, NJ</td><td>Weequahic</td></tr>
     </tbody></table>"""
-    _, out = parse_roster(html)
+    _, out = parse_roster(html, FOOTBALL)
     assert out[0]["name"] == "John Doe"
     assert (out[0]["high_school"], out[0]["previous_school"]) == ("Hewitt-Trussville HS", "Virginia")
     assert out[1]["name"] == "Sam Lee" and out[1]["high_school"] == "Weequahic"
 
 
-@pytest.mark.usefixtures("football")
 def test_classic_long_position_kept_whole():
     html = """<ul><li class="sidearm-roster-player">
       <div class="sidearm-roster-player-name"><h3><a href="/x">Pat Long</a></h3></div>
       <div class="sidearm-roster-player-position"><span>Defensive Back 6'0" 190 lbs</span></div>
       <span class="sidearm-roster-player-hometown">Tulsa, Okla.</span></li></ul>"""
-    _, out = parse_roster(html)
+    _, out = parse_roster(html, FOOTBALL)
     assert out[0]["position"] == "Defensive Back"
 
 
-@pytest.mark.usefixtures("football")
 def test_bad_height_does_not_drop_roster():
     players = [{"firstName": f"P{i}", "lastName": "X", "hometown": "Ames, Iowa",
                 "heightFeet": "6'2\"" if i == 0 else 6, "heightInches": 1} for i in range(30)]
-    strategy, out = parse_roster(nuxt_page({"pinia": {"roster": {"players": players}}}))
+    strategy, out = parse_roster(nuxt_page({"pinia": {"roster": {"players": players}}}), FOOTBALL)
     assert strategy == "nuxt_data" and len(out) == 30
 
 
-@pytest.mark.usefixtures("football")
 def test_deep_devalue_payload_no_recursion():
-    from scrape_rosters import decode_devalue
+    from sidearm import decode_devalue
     raw = [[1]] + [[i + 1] for i in range(1, 100_000)] + ["end"]
     decode_devalue(raw)  # used to need a huge recursion limit
 
 
 # ---------------------------------------------------------------------------- class years
 
-@pytest.mark.usefixtures("football")
 def test_class_normalization():
     cases = {"Fr.": "FR", "R-Fr.": "R-FR", "Redshirt Sophomore": "R-SO", "Jr.": "JR", "Sr.": "SR",
              "Gr.": "GR", "5th": "GR", "2nd": "SO", "Graduate": "GR", "So.": "SO",
@@ -571,7 +557,6 @@ CARD_PAGE = """
 """
 
 
-@pytest.mark.usefixtures("football")
 def test_class_year_from_card_view():
     """Sidearm pages that hold the roster twice (Lamar, Linfield, Bates, Hamilton, Puget Sound): the classic
     list has no class year, the card view further down does. The classic parser takes the year from the cards."""
@@ -588,19 +573,17 @@ def test_class_year_from_card_view():
 
 # ---------------------------------------------------------------------------- coaches, staff and names
 
-@pytest.mark.usefixtures("football")
 def test_nuxt_coaches_with_hometowns_dropped():
     players = [{"firstName": f"P{i}", "lastName": "X", "hometown": "Ames, Iowa", "positionShort": "WR",
                 "jerseyNumber": str(i)} for i in range(30)]
     coaches = [{"firstName": "Tim", "lastName": "Coach", "hometown": "Fargo, N.D.", "title": "Head Coach"}]
-    strategy, out = parse_roster(nuxt_page({"pinia": {"roster": {"players": players, "coaches": coaches}}}))
+    strategy, out = parse_roster(nuxt_page({"pinia": {"roster": {"players": players, "coaches": coaches}}}), FOOTBALL)
     assert strategy == "nuxt_data" and len(out) == 30
     assert all(p["name"] != "Tim Coach" for p in out)
 
 
-@pytest.mark.usefixtures("football")
 def test_staff_titles_in_player_fields_dropped():
-    from scrape_rosters import drop_staff, is_staff
+    from sidearm import drop_staff, is_staff
     assert is_staff({"position": "Student Manager"})
     assert is_staff({"class_year": "Head Coach"})
     assert is_staff({"position": "Director of Football Operations"})
@@ -611,15 +594,13 @@ def test_staff_titles_in_player_fields_dropped():
     assert len(drop_staff(rows)) == 20
 
 
-@pytest.mark.usefixtures("football")
 def test_staff_table_with_hometown_column_ignored():
     html = """<table><thead><tr><th>Name</th><th>Title</th><th>Hometown</th></tr></thead>
       <tbody><tr><td>Sam Boss</td><td>Head Coach</td><td>Tulsa, Okla.</td></tr></tbody></table>"""
-    _, out = parse_roster(html)
+    _, out = parse_roster(html, FOOTBALL)
     assert out == []
 
 
-@pytest.mark.usefixtures("football")
 def test_clean_name_strips_numbers_and_captain_marks():
     from scrape_rosters import clean_name
     for raw in ("89 Mason Thomas", "#89 Mason Thomas", "Mason Thomas 89", "C Mason Thomas", "C 89 Mason Thomas",
@@ -631,22 +612,20 @@ def test_clean_name_strips_numbers_and_captain_marks():
 
 # ---------------------------------------------------------------------------- previous school vs. high school
 
-@pytest.mark.usefixtures("football")
 def test_looks_like_college():
     for v in ["Texas Tech", "Wake Forest", "Blinn College", "Butler CC", "Univ. of Iowa", "University of Miami",
               "Penn State", "Prairie View A&M", "Miami (FL)", "SMU", "Naval Academy", "Saddleback College"]:
-        assert sr.looks_like_college(v), v
+        assert sidearm.looks_like_college(v, FOOTBALL.colleges), v
     for v in ["Lamar HS", "IMG Academy", "Mater Dei", "College Park High School", "Fork Union Military Academy",
               "C.C. Winn", "St. Thomas Aquinas", "Bishop Gorman", "", "Westlake H.S.", "Tech High School"]:
-        assert not sr.looks_like_college(v), v
+        assert not sidearm.looks_like_college(v, FOOTBALL.colleges), v
 
 
 def sort(hs, prev):
-    p = sr.sort_schools({"high_school": hs, "previous_school": prev})
+    p = sidearm.sort_schools({"high_school": hs, "previous_school": prev}, FOOTBALL.colleges)
     return p["high_school"], p["previous_school"]
 
 
-@pytest.mark.usefixtures("football")
 def test_sort_schools():
     assert sort("Lamar HS / Texas Tech", "") == ("Lamar HS", "Texas Tech")      # combined field
     assert sort("Wake Forest", "") == ("", "Wake Forest")                       # "Last School" = a college
@@ -668,7 +647,6 @@ def test_sort_schools():
     assert sort("", "") == ("", "")
 
 
-@pytest.mark.usefixtures("football")
 def test_nuxt_last_school_and_parent_entry():
     data = {"roster": [
         {"firstName": "Sam", "lastName": "Hartman", "hometown": "Charlotte, N.C.", "lastSchool": "Wake Forest", "position": "QB"},
@@ -684,23 +662,21 @@ def test_nuxt_last_school_and_parent_entry():
     assert r["Riley Leonard"]["previous_school"] == "Duke" and r["Riley Leonard"]["high_school"] == "Fairhope HS"
 
 
-@pytest.mark.usefixtures("football")
 def test_table_last_school_and_college_columns():
     html = """<table><thead><tr><th>No.</th><th>Name</th><th>Pos.</th><th>Hometown / Last School</th></tr></thead><tbody>
       <tr><td>10</td><td>Sam Hartman</td><td>QB</td><td>Charlotte, N.C. / Wake Forest</td></tr>
       <tr><td>11</td><td>Joe Freshman</td><td>WR</td><td>Austin, Texas / Westlake HS</td></tr></tbody></table>
       <table><thead><tr><th>#</th><th>Name</th><th>Pos</th><th>Hometown</th><th>High School</th><th>College</th></tr></thead><tbody>
       <tr><td>1</td><td>Al Transfer</td><td>DB</td><td>Miami, Fla.</td><td>Central HS</td><td>Miami (FL)</td></tr></tbody></table>"""
-    soup = sr.BeautifulSoup(html, "lxml")
-    rows = {p["name"]: p for p in sr.tidy_players(sr.parse_html_tables(html, soup))}
+    soup = BeautifulSoup(html, "lxml")
+    rows = {p["name"]: p for p in sidearm.tidy_players(sidearm.parse_html_tables(html, soup), FOOTBALL)}
     assert rows["Sam Hartman"]["hometown"] == "Charlotte, N.C." and rows["Sam Hartman"]["previous_school"] == "Wake Forest"
     assert rows["Joe Freshman"]["high_school"] == "Westlake HS" and not rows["Joe Freshman"]["previous_school"]
     # the second table is smaller, so check its header mapping directly
-    assert sr._header_field("College") == "previous_school"
-    assert sr._header_field("Former School") == "previous_school"
+    assert sidearm._header_field("College") == "previous_school"
+    assert sidearm._header_field("Former School") == "previous_school"
 
 
-@pytest.mark.usefixtures("football")
 def test_sidearm_classic_combined_school_field():
     html = """<ul><li class="sidearm-roster-player"><div class="sidearm-roster-player-name"><h3><a href="/bio/1">Pat Mover</a></h3></div>
       <span class="sidearm-roster-player-position">LB</span><span class="sidearm-roster-player-hometown">Lubbock, Texas</span>
@@ -791,8 +767,10 @@ def test_key_and_majors():
 # Running a scrape: sizes, addresses, seasons, reasons, downloads, the lock, pipeline.py, checks
 # ==================================================================================================
 
-def use(name):
-    sidearm.configure(core.load_sport(name))
+@functools.lru_cache(maxsize=None)
+def use(name) -> sidearm.Rules:
+    """A sport's scraper rules, handed to the functions under test."""
+    return sidearm.Rules.for_sport(core.load_sport(name))
 
 
 # ---------------------------------------------------------------------------- a tiny sport in tmp_path
@@ -821,10 +799,7 @@ def tiny(tmp_path, monkeypatch):
                     "aliases", "note"])
         w.writerow(["Alpha", "D1", "X", "alpha.com", "", "", "", "", ""])
         w.writerow(["Blocked", "D3", "Y", "blocked.edu", "", "", "", "", "left out: bot check every season"])
-    sport = core.load_sport("softball")
-    sidearm.configure(sport)
-    yield sport
-    core.SPRING_SEASON = False
+    return core.load_sport("softball")
 
 
 def write_season(sport, season, rows):
@@ -844,24 +819,18 @@ def player(school, name, cls="FR", town="Austin, TX"):
 # ---------------------------------------------------------------------------- roster size per sport
 
 def test_each_sport_has_its_own_normal_size():
-    use("softball")
-    assert sidearm.normal_size(22) and not sidearm.normal_size(8) and not sidearm.normal_size(60)
-    use("football")
-    assert sidearm.normal_size(110) and not sidearm.normal_size(22)
-    use("baseball")      # saved rosters are judged by the same sizes
+    r = use("softball")
+    assert sidearm.normal_size(22, r) and not sidearm.normal_size(8, r) and not sidearm.normal_size(60, r)
+    r = use("football")
+    assert sidearm.normal_size(110, r) and not sidearm.normal_size(22, r)
+    r = use("baseball")      # saved rosters are judged by the same sizes
     season = lambda n: [{"school": "A", "division": "D1", "hometown": "X"} for _ in range(n)]
-    assert [sr.saved_reports(season(n))["A"]["status"] for n in (38, 8, 130)] == ["ok", "partial", "partial"]
+    assert [sr.saved_reports(season(n), r)["A"]["status"] for n in (38, 8, 130)] == ["ok", "partial", "partial"]
 
 
 def test_a_slow_school_stops_after_its_time_limit():
-    use("baseball")
-    old = sr.SCHOOL_MINUTES
-    sr.SCHOOL_MINUTES = 0          # already past the limit: nothing is downloaded
-    try:
-        out = sr.scrape_school_all({"school": "A", "division": "D1", "domain": "a.edu"}, [2024, 2025], None, {},
-                                   render=False, skip=set())
-    finally:
-        sr.SCHOOL_MINUTES = old
+    job = sr.Job(rules=use("baseball"), school_minutes=0)    # already past the limit: nothing is downloaded
+    out = sr.scrape_school_all({"school": "A", "division": "D1", "domain": "a.edu"}, [2024, 2025], None, {}, job, skip=set())
     assert [r["status"] for _, _, r in out] == ["failed", "failed"]
     assert all(r["error"].startswith("timed out") for _, _, r in out)
 
@@ -869,17 +838,15 @@ def test_a_slow_school_stops_after_its_time_limit():
 # ---------------------------------------------------------------------------- seasons
 
 def test_current_season_fall_and_spring():
-    core.SPRING_SEASON = False
-    assert core.current_season(date(2026, 10, 27)) == 2026      # football in the autumn: this fall
-    assert core.current_season(date(2027, 2, 1)) == 2026
-    core.SPRING_SEASON = True
-    try:
-        assert core.current_season(date(2026, 10, 27)) == 2027  # softball in the autumn: next spring
-        assert core.current_season(date(2026, 4, 1)) == 2026
-        assert core.current_season(date(2026, 7, 31)) == 2026
-        assert core.current_season(date(2026, 8, 1)) == 2027
-    finally:
-        core.SPRING_SEASON = False
+    assert core.current_season(date(2026, 10, 27), spring=False) == 2026      # football in the autumn: this fall
+    assert core.current_season(date(2027, 2, 1), spring=False) == 2026
+    assert core.current_season(date(2026, 10, 27), spring=True) == 2027       # softball in the autumn: next spring
+    assert core.current_season(date(2026, 4, 1), spring=True) == 2026
+    assert core.current_season(date(2026, 7, 31), spring=True) == 2026
+    assert core.current_season(date(2026, 8, 1), spring=True) == 2027
+    # a sport asks with its own setting
+    assert core.Sport(name="softball", spring_season=True).current_season(date(2026, 10, 27)) == 2027
+    assert core.Sport(name="football").current_season(date(2026, 10, 27)) == 2026
 
 
 def test_default_seasons():
@@ -894,16 +861,16 @@ def test_default_seasons():
 
 def test_main_page_still_showing_last_season_is_not_this_seasons_roster(monkeypatch):
     # October: the main roster page (no year on it) can still show last spring's team
-    use("lacrosse-womens")
+    job = sr.Job(rules=use("lacrosse-womens"))
     last = {f"player {i}" for i in range(30)}
-    def fake(school, fetcher, season, division, render, prefer, save_dir=None, bios=False):
+    def fake(school, fetcher, season, division, job, prefer=None):
         names = sorted(last) if season == 2027 else []
         rows = [{"name": n.title()} for n in names]
         return rows, {"season": season, "school": "A", "status": "ok", "season_check": "current", "players": len(rows),
                       "with_hometown": len(rows), "error": ""}, None
     monkeypatch.setattr(sr, "scrape_school_season", fake)
-    monkeypatch.setattr(core, "current_season", lambda today=None: 2027)
-    out = sr.scrape_school_all({"school": "A", "division": "D1", "domain": "a.edu"}, [2027], None, {}, render=False,
+    monkeypatch.setattr(core, "current_season", lambda today=None, *, spring: 2027)
+    out = sr.scrape_school_all({"school": "A", "division": "D1", "domain": "a.edu"}, [2027], None, {}, job,
                                skip=set(), reference=(2026, last))
     (season, rows, report), = out
     assert season == 2027 and rows == [] and report["status"] == "failed"
@@ -917,36 +884,32 @@ def test_presto_links_follow_the_sport():
         ("baseball", 'href="/sports/m-basebl/2025-26/roster"', "2023-24"),
         ("softball", 'href="/sports/sball/2025-26/roster"', "2023-24"),
     ]:
-        use(name)
-        assert sr.roster_link_re().search(page), name
-        assert sr.presto_season(2024) == want, name
-    use("baseball")
-    assert not sr.roster_link_re().search('href="/sports/fball/2025-26/roster"')
-    use("football")
-    assert not sr.roster_link_re().search('href="/sports/flagfball/2025-26/roster"')
+        r = use(name)
+        assert sr.roster_link_re(r).search(page), name
+        assert sr.presto_season(2024, r.spring) == want, name
+    assert not sr.roster_link_re(use("baseball")).search('href="/sports/fball/2025-26/roster"')
+    assert not sr.roster_link_re(use("football")).search('href="/sports/flagfball/2025-26/roster"')
 
 
 def test_spring_archives_also_try_the_fall_year():
-    use("baseball")
-    urls = sidearm.candidate_urls("clemsontigers.com", season=2024)
+    r = use("baseball")
+    urls = sidearm.candidate_urls("clemsontigers.com", season=2024, rules=r)
     assert "https://clemsontigers.com/sports/baseball/roster/2024" in urls
     assert "https://clemsontigers.com/sports/baseball/roster/2023" in urls
     assert urls.index("https://clemsontigers.com/sports/baseball/roster/2024") < urls.index("https://clemsontigers.com/sports/baseball/roster/2023")
-    assert sidearm.detect_season("<title>2023-24 Baseball Roster</title>") == 2024
-    use("football")
-    assert "https://x.com/sports/football/roster/2023" not in sidearm.candidate_urls("x.com", season=2024)
+    assert sidearm.detect_season("<title>2023-24 Baseball Roster</title>", r) == 2024
+    assert "https://x.com/sports/football/roster/2023" not in sidearm.candidate_urls("x.com", season=2024, rules=use("football"))
 
 
 def test_two_year_label_beats_a_bare_year():
     # Samford: the title says "2026 ... Roster" (the year the season starts), the heading "2026-27"
-    use("basketball-mens")
+    r = use("basketball-mens")
     page = "<title>2026 Men's Basketball Roster - Samford</title><h1>2026-27 Men's Basketball Roster</h1>"
-    assert sidearm.detect_season(page) == 2027
-    assert sidearm.detect_season("<title>2025-26 Men's Basketball Roster</title>") == 2026
+    assert sidearm.detect_season(page, r) == 2027
+    assert sidearm.detect_season("<title>2025-26 Men's Basketball Roster</title>", r) == 2026
     # a news headline (h2) doesn't count as the page's label
-    assert sidearm.detect_season("<title>2026 Softball Roster</title><h2>2026-27 schedule out</h2>") == 2026
-    use("football")
-    assert sidearm.detect_season("<title>2026 Football Roster</title><h1>2026-27 Football</h1>") == 2026
+    assert sidearm.detect_season("<title>2026 Softball Roster</title><h2>2026-27 schedule out</h2>", r) == 2026
+    assert sidearm.detect_season("<title>2026 Football Roster</title><h1>2026-27 Football</h1>", use("football")) == 2026
 
 
 # Real page titles and headings seen in the rosters (Oct 30), with the season each one is.
@@ -969,8 +932,7 @@ REAL_LABELS = [
 
 @pytest.mark.parametrize("sport,page,season", REAL_LABELS)
 def test_real_page_labels(sport, page, season):
-    use(sport)
-    assert sidearm.detect_season(page) == season
+    assert sidearm.detect_season(page, use(sport)) == season
 
 
 def test_season_names_in_one_place():
@@ -990,33 +952,61 @@ def test_season_names_in_one_place():
     assert core.current_season(date(2026, 2, 1), spring=False) == 2025
     assert core.current_season(date(2026, 7, 31), spring=True) == 2026
     # the addresses use the same names: spring season 2024 is /roster/2023-24 and /roster/2023-2024
-    use("basketball-mens")
-    urls = sidearm.candidate_urls("samfordsports.com", season=2026)
+    urls = sidearm.candidate_urls("samfordsports.com", season=2026, rules=use("basketball-mens"))
     assert "https://samfordsports.com/sports/mens-basketball/roster/2025-26" in urls
     assert "https://samfordsports.com/sports/mens-basketball/roster/2025-2026" in urls
-    use("football")
 
 
 def test_current_page_that_is_still_last_seasons_team(monkeypatch):
-    monkeypatch.setattr(sr, "current_season", lambda: 2027)
+    monkeypatch.setattr(core, "current_season", lambda today=None, *, spring: 2027)
     up = {"FR": "SO", "SO": "JR", "JR": "SR", "SR": "GR"}
     old = [{"name": f"P{i}", "class_norm": c} for i, c in enumerate(["FR", "SO", "JR", "SR"] * 5)]
     saved = {r["name"].lower(): r["class_norm"] for r in old}
     rep = lambda: {"status": "ok", "players": 20, "with_hometown": 20, "error": ""}
     # a copy: same players, same class years (read in this run, or saved earlier)
-    out = sr.check_current_is_new([(2027, [dict(r) for r in old], rep()), (2026, old, rep())], {})
+    out = sr.check_current_is_new([(2027, [dict(r) for r in old], rep()), (2026, old, rep())], {}, True)
     assert out[0][1] == [] and "still shows the 2026 roster" in out[0][2]["error"]
     assert out[1][1] == old
-    assert sr.check_current_is_new([(2027, [dict(r) for r in old], rep())], saved)[0][1] == []
+    assert sr.check_current_is_new([(2027, [dict(r) for r in old], rep())], saved, True)[0][1] == []
     # exactly the same players with some class years changed is still a copy (Kansas softball)
     half = [dict(r, class_norm=up[r["class_norm"]] if i % 2 else r["class_norm"]) for i, r in enumerate(old)]
-    assert sr.check_current_is_new([(2027, half, rep())], saved)[0][1] == []
+    assert sr.check_current_is_new([(2027, half, rep())], saved, True)[0][1] == []
     # a real new roster: returning players moved up a class, seniors gone, freshmen in
     new = [dict(r, class_norm=up[r["class_norm"]]) for r in old if r["class_norm"] != "SR"]
     new += [{"name": f"N{i}", "class_norm": "FR"} for i in range(4)]
-    assert sr.check_current_is_new([(2027, new, rep())], saved)[0][1] == new
+    assert sr.check_current_is_new([(2027, new, rep())], saved, True)[0][1] == new
     # other seasons aren't touched
-    assert sr.check_current_is_new([(2025, [dict(r) for r in old], rep())], saved)[0][1] != []
+    assert sr.check_current_is_new([(2025, [dict(r) for r in old], rep())], saved, True)[0][1] != []
+
+
+def test_a_missing_package_stops_the_step(capsys):
+    assert core.pinned_versions()["geonamescache"]            # requirements.txt pins exact versions
+    with pytest.raises(SystemExit) as e:
+        core.check_packages(["requests", "surely-not-installed"], "Placing hometowns")
+    assert "surely-not-installed" in str(e.value) and "requirements.txt" in str(e.value)
+    core.check_packages(["requests"], "Scraping")             # installed: no stop
+
+
+def test_reason_codes():
+    f = lambda err, status="failed", **kw: core.reason_code({"status": status, "error": err, **kw})
+    # older reports: the code is worked out from the text, the most telling error first
+    assert f("https://x/r/2019: HTTP 404; https://x/r/season/2019/: HTTP 404") == "not_found"
+    assert f("https://x/r/2019: page shows 2024; https://x/r/2019-20: HTTP 404") == "wrong_season"
+    assert f("https://x/r/2019: HTTP 202; https://x/r/2019-20: HTTP 404") == "bot_check"
+    assert f("https://x/r/2019: ConnectionError") == "no_connection"
+    assert f("timed out: this school took over 3 minutes") == "time_limit"
+    assert f("page looks like the 2026 roster; https://x/r: HTTP 404") == "newer_roster"
+    assert f("the 2027 page still shows the 2026 roster (same players and class years; not updated yet); ") == "not_posted"
+    assert f("left out: bot check every season") == "left_out"
+    assert f("", status="partial", players="20", with_hometown="3") == "no_hometowns"
+    assert f("", status="ok") == ""
+    # a report's own code wins over its text
+    assert core.reason_code({"status": "failed", "reason": "not_posted", "error": "https://x: HTTP 202"}) == "not_posted"
+    assert set(core.RETRYABLE) <= set(core.REASONS)
+    # what the code decides: a time limit isn't a try, a left-out school is left out
+    assert not scrape_reports.counts_as_try({"status": "failed", "reason": "time_limit"})
+    assert scrape_reports.counts_as_try({"status": "failed", "reason": "not_found"})
+    assert scrape_reports.is_left_out({"status": "left_out", "reason": "left_out"})
 
 
 def test_failures_that_are_not_missing_rosters():
@@ -1045,8 +1035,8 @@ def test_missing_rosters_lists_left_out_once(tiny):
             w = csv.DictWriter(f, fieldnames=sr.REPORT_FIELDS, extrasaction="ignore")
             w.writeheader()
             w.writerows(r for r in reports if r["season"] == season)
-    path = sr.write_missing_rosters(tiny.rosters_dir, tiny.schools_csv, "Softball", [],
-                                    division_order=["D1", "D2", "D3", "NAIA", "JUCO"])
+    path = scrape_reports.write_missing_rosters(tiny.rosters_dir, tiny.schools_csv, "Softball", [],
+                                    division_order=["D1", "D2", "D3", "NAIA", "JUCO"], rules=sidearm.Rules.for_sport(tiny))
     text = path.read_text()
     assert "| division | ok | partial | failed | not posted yet | COVID | left out |" in text
     assert "| D3 | 0 | 0 | 0 | 0 | 0 | 2 |" in text
@@ -1264,19 +1254,18 @@ def test_cache_pages_are_saved_compressed_and_old_ones_still_read(tmp_path):
 
 
 def test_another_sports_page_is_never_a_roster():
-    use("lacrosse-womens")
-    assert sidearm.other_sport_page("https://curryathletics.com/sports/fball/2017-18/roster") == "fball"
-    assert sidearm.other_sport_page("https://x.edu/roster.aspx?path=mbkb&season=2019") == "mbkb"
-    assert sidearm.other_sport_page("https://x.edu/sports/womens-lacrosse/roster/2019") == ""
-    assert sidearm.other_sport_page("https://x.edu/sports/lacrosse/roster/2019") == ""      # shared name: ours
-    assert sidearm.other_sport_page("https://x.edu/sports/sb/roster/2019") == ""           # unknown code: not judged
-    use("football")
-    assert sidearm.other_sport_page("https://x.edu/sports/fball/2019-20/roster") == ""
-    assert sidearm.other_sport_page("https://x.edu/sports/flagfball/2019-20/roster") == "flagfball"
-    use("softball")
+    r = use("lacrosse-womens")
+    assert sidearm.other_sport_page("https://curryathletics.com/sports/fball/2017-18/roster", r) == "fball"
+    assert sidearm.other_sport_page("https://x.edu/roster.aspx?path=mbkb&season=2019", r) == "mbkb"
+    assert sidearm.other_sport_page("https://x.edu/sports/womens-lacrosse/roster/2019", r) == ""
+    assert sidearm.other_sport_page("https://x.edu/sports/lacrosse/roster/2019", r) == ""      # shared name: ours
+    assert sidearm.other_sport_page("https://x.edu/sports/sb/roster/2019", r) == ""           # unknown code: not judged
+    r = use("football")
+    assert sidearm.other_sport_page("https://x.edu/sports/fball/2019-20/roster", r) == ""
+    assert sidearm.other_sport_page("https://x.edu/sports/flagfball/2019-20/roster", r) == "flagfball"
     rows = [{"name": "A", "roster_url": "https://x.edu/sports/womens-volleyball/roster/2019", "hometown": ""},
             {"name": "B", "roster_url": "https://x.edu/sports/softball/roster/2019", "hometown": ""}]
-    assert [r["name"] for r in sr.clean_rows(rows)] == ["B"]
+    assert [r["name"] for r in sr.clean_rows(rows, sr.Job(rules=use("softball")))] == ["B"]
 
 
 def test_saved_rows_from_another_sport_are_scraped_again(tiny, monkeypatch):
@@ -1298,7 +1287,6 @@ def test_wrong_seasons_are_left_out_and_their_rows_dropped(tiny, monkeypatch):
     assert list(csv.DictReader(open(tiny.rosters_dir / "rosters_2024.csv", encoding="utf-8"))) == []
     report = {r["school"]: r for r in csv.DictReader(open(tiny.rosters_dir / "scrape_report_2024.csv", encoding="utf-8"))}
     assert report["Alpha"]["status"] == "left_out" and "same roster as 2025" in report["Alpha"]["error"]
-    sr.WRONG_SEASONS.clear()
 
 
 def test_season_pages_list_the_page_to_use(tiny, monkeypatch):
@@ -1319,14 +1307,42 @@ def test_season_pages_list_the_page_to_use(tiny, monkeypatch):
     assert asked == [page]                                   # only the listed page, and its "2023" is accepted
     rows = list(csv.DictReader(open(tiny.rosters_dir / "rosters_2024.csv", encoding="utf-8")))
     assert rows and all(r["roster_url"] == page for r in rows) and not any(r["name"].startswith("Old") for r in rows)
-    sr.SEASON_PAGES.clear()
+
+
+def test_code_is_clean():
+    # Nov 1: pyflakes over the scripts and tests: unused imports, undefined names, a name defined twice, a dictionary
+    # key given twice with different values. Star imports are gone, so it can tell which names are real.
+    import io
+    try:
+        from pyflakes.api import checkPath
+        from pyflakes.reporter import Reporter
+    except ImportError:
+        pytest.fail("pyflakes isn't installed: python3 -m pip install -r requirements.txt", pytrace=False)
+    out = io.StringIO()
+    files = sorted((ROOT / "scripts").glob("*.py")) + sorted((ROOT / "tests").glob("*.py"))
+    count = sum(checkPath(str(f), Reporter(out, out)) for f in files)
+    assert count == 0, out.getvalue()
+    # pyflakes lets a key given twice with the same value pass ("Puerto Rico" and "Rwanda" in geocode.py's
+    # country table until Nov 1); a repeat is still a slip, so look for those too
+    import ast
+    repeats = []
+    for f in files:
+        for node in ast.walk(ast.parse(f.read_text(encoding="utf-8"))):
+            if isinstance(node, ast.Dict):
+                seen = set()
+                for k in node.keys:
+                    if isinstance(k, ast.Constant):
+                        if k.value in seen:
+                            repeats.append(f"{f.name}:{k.lineno} {k.value!r}")
+                        seen.add(k.value)
+    assert not repeats, repeats
 
 
 def test_every_sport_has_its_pages():
     # One set of pages for every sport (docs/players-dotmap.html?sport=...), the sport's words in docs/sports.js,
     # and its old addresses forwarding (python3 scripts/build.py pages writes them).
-    assert build.site_pages_main(["--check"]) == 0
-    words = build.sport_words(ROOT / "docs")
+    assert build.site_pages_main(["--check"]) == 0          # docs/sports.js is what the settings say
+    words = build.sport_words(build.site_sports(ROOT / "docs"))
     for sport, w in words.items():
         assert "College" in w["players-dotmap"]["title"], sport
         assert w["women"] == sport.endswith("-womens") or sport == "softball" or w["women"] is False, sport
@@ -1335,6 +1351,94 @@ def test_every_sport_has_its_pages():
         text = (ROOT / "docs" / page).read_text(encoding="utf-8")
         assert " his hometown" not in text and "he isn't on that" not in text
     assert "sport=softball" in build.forwarding_page("softball", "players-dotmap.html")
+
+
+def test_front_page_discs_from_settings(tmp_path):
+    # Nov 1: the front page's list comes from each sport's settings; teams of one disc must agree, men's first
+    fp = {"disc": "polo", "name": "Water Polo", "icon": "polo", "order": 9}
+    men = core.Sport(name="polo-mens", site={"front_page": {**fp, "sex": "m"}})
+    women = core.Sport(name="polo-womens", site={"front_page": {**fp, "sex": "w"}})
+    (tmp_path / "polo-mens").mkdir()
+    (tmp_path / "polo-mens" / "summary.json").write_text('{"players": 12345, "schools": 1215}')
+    discs, problems = build.front_page_discs([women, men], tmp_path)
+    assert not problems and [t["id"] for t in discs[0]["teams"]] == ["polo-mens", "polo-womens"]
+    assert discs[0]["teams"][0]["stats"] == [["1,215", "schools"], ["12K", "players"]] and discs[0]["teams"][1]["stats"] is None
+    women.site["front_page"]["name"] = "Polo"
+    assert any('"name"' in p for p in build.front_page_discs([men, women], tmp_path)[1])
+    assert build.short_count(9999) == "9,999" and build.short_count(120_189) == "120K" and build.short_count(97_500) == "98K"
+
+
+def test_spelling_review_lists_then_applies_decisions(tmp_path, monkeypatch, capsys):
+    # Nov 1: the Oct 30 spelling screen as a command (hometown_fixes.py review)
+    shared = tmp_path / "config" / "shared" / "hometown_corrections.csv"
+    shared.parent.mkdir(parents=True)
+    rows = [("Delray, FL", "Nelray", "FL", "spelling 'Delray' -> Nelray"),          # starts differently
+            ("Lewiston, Mont.", "Lewistown", "MT", "spelling 'Lewiston' -> Lewistown"),   # Lewiston is a town as typed
+            ("Sugerland, TX", "Sugar Land", "TX", "spelling 'Sugerland' -> Sugar Land"),  # a plain typo: not listed
+            ("Delray, Fla.", "Delray", "FL", "")]                                          # a plain reading of Delray
+    with open(shared, "w", newline="", encoding="utf-8") as fh:
+        w = csv.writer(fh)
+        w.writerow(["hometown_raw", "city", "state", "country", "query", "status", "note", "players"])
+        for raw, city, st, note in rows:
+            w.writerow([raw, city, st, "USA", f"{city}, {st}, USA", "fixed", note, 3])
+    monkeypatch.setattr(sug, "ROOT", tmp_path)
+    monkeypatch.setattr(sug, "load_towns", lambda: ({"MT": {sug.norm("Lewiston"): 1}}, {}))
+    out = tmp_path / "review.csv"
+    sug.review_main(["--out", str(out)])
+    listed = {r["typed"]: r for r in csv.DictReader(open(out, encoding="utf-8"))}
+    assert set(listed) == {"Delray", "Lewiston"}
+    listed["Delray"]["decision"] = "Delray Beach, FL"
+    listed["Lewiston"]["decision"] = "keep"
+    with open(out, "w", newline="", encoding="utf-8") as fh:
+        w = csv.DictWriter(fh, fieldnames=sug.REVIEW_FIELDS)
+        w.writeheader()
+        w.writerows(listed.values())
+    sug.review_main(["--apply", str(out)])
+    after = {r["hometown_raw"]: r for r in csv.DictReader(open(shared, encoding="utf-8"))}
+    assert after["Delray, FL"]["city"] == "Delray Beach" and "checked by hand" in after["Delray, FL"]["note"]
+    assert after["Delray, Fla."]["city"] == "Delray Beach"                     # the plain reading too
+    assert after["Lewiston, Mont."]["city"] == "Lewistown" and "right" in after["Lewiston, Mont."]["note"]
+    assert after["Sugerland, TX"]["note"] == "spelling 'Sugerland' -> Sugar Land"
+    sug.review_main(["--out", str(out)])                                       # nothing left to look at
+    assert not list(csv.DictReader(open(out, encoding="utf-8")))
+
+
+def test_compare_two_seasons_player_by_player(tiny, capsys):
+    write_season(tiny, 2024, [player("Alpha", "Ann Lee", "FR"), player("Alpha", "Bea Diaz", "JR")])
+    write_season(tiny, 2025, [player("Alpha", "Ann Lee", "SO"), player("Alpha", "Cat Moe", "FR")])
+    assert build.compare_seasons_main(["--sport", "softball", "--school", "Alpha", "--season", "2025"]) == 0
+    out = capsys.readouterr().out
+    assert "against 2024" in out and "1 of 2 names were on the 2024 roster" in out
+    assert "SO <- FR" in out and "same class year 0" in out
+    assert build.compare_seasons_main(["--sport", "softball", "--school", "Alpha", "--season", "2024"]) == 1
+
+
+def test_real_roster_pages():
+    # Nov 1: nine saved pages, one or two per kind of site (Sidearm classic and cards, WMT and Sidearm tables, a Nuxt
+    # payload, embedded JSON, PrestoSports and Ardor pages through the browser, and Samford's), in
+    # tests/roster_pages.zip, with what the parser read from each in tests/roster_pages_expected.json. When it read
+    # them they matched the saved rosters exactly. After a deliberate parser change, look at what changed, then
+    # write the new results with:  UPDATE_ROSTER_PAGES=1 python3 -m pytest tests -q -k real_roster_pages
+    import os
+    here = Path(__file__).resolve().parent
+    expected = json.loads((here / "roster_pages_expected.json").read_text(encoding="utf-8"))
+    update = bool(os.environ.get("UPDATE_ROSTER_PAGES"))
+    with zipfile.ZipFile(here / "roster_pages.zip") as z:
+        for e in expected:
+            html = z.read(e["page"]).decode("utf-8")
+            rules = sidearm.Rules.for_sport(load_sport(e["sport"]))
+            strategy, players = sidearm.parse_roster(html, rules)
+            got = [{k: p.get(k, "") for k in sidearm.FIELDS} for p in players]
+            season = sidearm.detect_season(html, rules)
+            if update:
+                e.update(strategy=strategy, season=season, players=got)
+                continue
+            assert (strategy, season, len(got)) == (e["strategy"], e["season"], len(e["players"])), e["page"]
+            for a, b in zip(got, e["players"]):
+                assert a == b, (e["page"], {k: (a[k], b[k]) for k in a if a[k] != b[k]})
+    if update:
+        (here / "roster_pages_expected.json").write_text(json.dumps(expected, indent=1, ensure_ascii=False) + "\n",
+                                                         encoding="utf-8")
 
 
 def test_map_data_packing_round_trip():
@@ -1425,10 +1529,11 @@ def test_staff_moves_between_schools():
 
 def test_junior_hockey_teams_are_not_colleges():
     from sidearm import looks_like_college, sort_schools
+    colleges = use("hockey-mens").colleges
     for team in ["Omaha Lancers (USHL)", "Dubuque Fighting Saints (USHL)", "Maine Nordiques (NAHL)",
                  "Penticton Vees (BCHL)", "Youngstown Phantoms (USHL)", "Djurgardens IF J20 (J20 Nationell)"]:
-        assert not looks_like_college(team), team
-    assert sort_schools({"high_school": "", "previous_school": "St. Cloud Norsemen (NAHL)"})["previous_school"] == ""
-    assert looks_like_college("Boston College")
+        assert not looks_like_college(team, colleges), team
+    assert sort_schools({"high_school": "", "previous_school": "St. Cloud Norsemen (NAHL)"}, colleges)["previous_school"] == ""
+    assert looks_like_college("Boston College", colleges)
 
 

@@ -15,5 +15,12 @@
   "division_labels": {"D1": "Division I", "D2": "Division II", "D3": "Division III", "NAIA": "NAIA", "JUCO": "Junior college (NJCAA, CCCAA, NWAC)"},
   "position_labels": {"G": "Guard", "F": "Forward", "C": "Center", "UNK": "Other"},
   "thin_roster": 10,
-  "frozen_min_pairs": 8
+  "frozen_min_pairs": 8,
+  "site": {
+    "front_page": {"disc": "basketball", "name": "Basketball", "icon": "basketball", "order": 6, "sex": "w"},
+    "women": true,
+    "players-dotmap": {"title": "College Basketball (Women's) Recruiting Map", "description": "Where every varsity college women's basketball player since 2016 comes from, mapped: Division I, II and III, NAIA and junior college.", "h1": "College Basketball (Women's) <span>Recruiting Map</span>", "sub": "Hometowns of every varsity college women's basketball player since 2016"},
+    "players-heatmap": {"title": "College Basketball (Women's) Recruiting Footprints", "description": "Compare where up to four college women's basketball programs, from Division I to junior college, find their players, state by state.", "h1": "College Basketball (Women's) <span>Recruiting Footprints</span>"},
+    "players-transfers": {"title": "College Basketball (Women's) Transfer Map", "description": "Where college women's basketball players transferred, school to school, since 2016.", "h1": "College Basketball (Women's) <span>Transfer Map</span>", "sub": "Where players moved from school to school since 2016"}
+  }
 }

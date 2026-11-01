@@ -21,31 +21,34 @@ import re
 import statistics
 import sys
 from collections import Counter, defaultdict
+from dataclasses import dataclass
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))   # so the files here import each other
 
-import sidearm
 from core import (
     add_sport_argument,
     available_sports,
+    bio_key,
     build_unique,
-    d1_schools,
     is_major,
     LEVELS,
     Levels,
     load_schools,
     load_sport,
+    name_key,
     Notes,
     players,
+    read_csv,
     ROOT,
     season_files,
     season_rows,
     failure_kind,
+    reason_code,
     roster_db,
     db_rows,
 )
-from sidearm import clean_name, load_known_colleges, sort_schools
+from sidearm import Rules, clean_name, sort_schools
 
 # ==============================================================================================================
 # The map data (map)   (was scripts/build_map_data.py)
@@ -81,39 +84,42 @@ It reads frozen_class_seasons.csv from rosters/<sport>/ and writes transfer_leve
 
 # Position groups come from the sport's settings (config/<sport>/settings.json): the groups, the roster
 # abbreviations in each, words a spelled-out position starts with, and the group for anything else.
-POS_GROUPS: list[str] = []
-ABBR: dict[str, str] = {}
-WORDS: list[tuple[str, str]] = []
-FALLBACK = ""
+# (Until Oct 31 these were module variables that use_positions(sport) set; now each build makes its own.)
+@dataclass(frozen=True)
+class Positions:
+    groups: tuple[str, ...]
+    abbr: dict
+    words: tuple[tuple[str, str], ...]
+    fallback: str
+
+    @classmethod
+    def for_sport(cls, sport) -> "Positions":
+        groups = tuple(sport.position_groups)
+        return cls(groups=groups,
+                   abbr={a: g for g, v in sport.position_abbreviations.items() for a in v.split()},
+                   words=tuple(tuple(w) for w in sport.position_words),
+                   fallback=sport.position_fallback or groups[-1])
+
+    def group(self, p: str) -> int:
+        """The index of the position group a roster's position belongs to."""
+        p = re.sub(r"^pos\.?:\s*", "", (p or "").strip().lower())
+        first = re.split(r"[\s,/-]+", p)[0] if p else ""
+        if p in self.abbr:
+            g = self.abbr[p]
+        elif first in self.abbr:
+            g = self.abbr[first]
+        elif p.startswith("defensive") and "DEF" in self.groups:   # football: "Defensive Line", "Defensive Back"
+            g = ("DL" if re.search(r"line|end|tackle", p) else "DB" if "back" in p else "DEF")
+        else:
+            g = next((grp for w, grp in self.words if p.startswith(w)), self.fallback)
+        return self.groups.index(g) if g in self.groups else self.groups.index(self.fallback)
 
 
-def use_positions(sport) -> None:
-    global POS_GROUPS, ABBR, WORDS, FALLBACK
-    POS_GROUPS = list(sport.position_groups)
-    ABBR = {a: g for g, v in sport.position_abbreviations.items() for a in v.split()}
-    WORDS = [tuple(w) for w in sport.position_words]
-    FALLBACK = sport.position_fallback or POS_GROUPS[-1]
-
-
-def pos_group(p: str) -> int:
-    p = re.sub(r"^pos\.?:\s*", "", (p or "").strip().lower())
-    first = re.split(r"[\s,/-]+", p)[0] if p else ""
-    if p in ABBR:
-        g = ABBR[p]
-    elif first in ABBR:
-        g = ABBR[first]
-    elif p.startswith("defensive") and "DEF" in POS_GROUPS:   # football: "Defensive Line", "Defensive Back"
-        g = ("DL" if re.search(r"line|end|tackle", p) else "DB" if "back" in p else "DEF")
-    else:
-        g = next((grp for w, grp in WORDS if p.startswith(w)), FALLBACK)
-    return POS_GROUPS.index(g) if g in POS_GROUPS else POS_GROUPS.index(FALLBACK)
-
-
-def previous_college(prev: str, high_school: str) -> str:
+def previous_college(prev: str, high_school: str, colleges=frozenset()) -> str:
     """The college the roster says he came from, or "". Uses the scraper's sort_schools(), so a high school
     filed as "previous school" ('Pickerington Central', 'Menard' next to 'Menard HS', 'IMG Academy') isn't one,
     and a major in that field ('Business', 'Sport Management' on Valparaiso's roster) isn't either."""
-    p = sort_schools({"high_school": high_school or "", "previous_school": prev or ""})["previous_school"]
+    p = sort_schools({"high_school": high_school or "", "previous_school": prev or ""}, colleges)["previous_school"]
     return "" if is_major(p) else p
 
 
@@ -327,15 +333,13 @@ def unpack_players(P: dict) -> dict:
 
 
 def make_map_data(src, dst, sport):
-    sidearm.configure(sport)     # the sport's junior colleges, for telling a college from a high school
-    use_positions(sport)
+    rules = Rules.for_sport(sport)   # its D1 schools and junior colleges, for telling a college from a high school
+    positions = Positions.for_sport(sport)
     if src:
         with open(src, newline="", encoding="utf-8") as fh:
             rows = list(csv.DictReader(fh))
     else:
         rows = placed_players(sport)
-    if sport.schools_csv.exists():
-        load_known_colleges(d1_schools(sport.schools_csv))   # so "Wake Forest" counts as a college
     levels = Levels.load(sport)
     schools = sorted({r["school"] for r in rows})
     sidx = {s: i for i, s in enumerate(schools)}
@@ -396,7 +400,7 @@ def make_map_data(src, dst, sport):
         if hs not in hidx:
             hidx[hs] = len(hs_tab)
             hs_tab.append(hs)
-        prev = previous_college(r["previous_school"], r["high_school"])
+        prev = previous_college(r["previous_school"], r["high_school"], rules.colleges)
         if prev and sport.transfer_needs_known_college and levels.level(prev, int(r["first_season"]) - 1)[0] == "unknown":
             prev = ""                                  # hockey: a junior or prep team, not a college
         listed, moved, upper = (int(bool(prev)), i in came_from,
@@ -410,7 +414,7 @@ def make_map_data(src, dst, sport):
             how["not counted: class year untrustworthy that season"] += 1
         P["s"].append(sidx[r["school"]])
         P["t"].append(t)
-        P["p"].append(pos_group(r["position"]))
+        P["p"].append(positions.group(r["position"]))
         P["f"].append(int(r["first_season"]) - 2000)
         P["l"].append(int(r["last_season"]) - 2000)
         P["x"].append(transfer)
@@ -428,7 +432,7 @@ def make_map_data(src, dst, sport):
     out = {
         "schools": [[s, confs.index(conf[s]), divs.index(div_now[s][1]) if div_now[s][1] in divs else 0,
                      *colors.get(s, ("#777777", "#FFFFFF"))] for s in schools],
-        "confs": confs, "divs": divs, "pos": POS_GROUPS, "towns": towns, "hs": hs_tab, "levels": LEVELS,
+        "confs": confs, "divs": divs, "pos": list(positions.groups), "towns": towns, "hs": hs_tab, "levels": LEVELS,
         # For the pages: the sport's name, which divisions are D1, and how divisions and positions are written
         "sport": sport.label or sport.name, "d1": list(sport.d1_divisions),
         "divLabels": {d: sport.division_label(d) for d in divs}, "posLabels": dict(sport.position_labels),
@@ -462,7 +466,7 @@ def make_map_data(src, dst, sport):
                "last": 2000 + seasons[-1] if seasons else None}
     Path(dst).with_name("summary.json").write_text(json.dumps(summary), encoding="utf-8")
     print(f"{len(rows)} players, {len(towns)} hometowns, {len(schools)} schools -> {dst}")
-    print("position groups:", Counter(POS_GROUPS[i] for i in P["p"]).most_common())
+    print("position groups:", Counter(positions.groups[i] for i in P["p"]).most_common())
     skipped = how.pop("not counted: class year untrustworthy that season", 0)
     print("transfers:", sum(P["x"]), "| counted because:", dict(how))
     if skipped:
@@ -548,7 +552,6 @@ CHECK_FROZEN_CLASSES_DOC = 'Find school-seasons whose class labels don\'t advanc
 
 
 CUTOFF = 0.6        # flag a pair of seasons when this share of players didn't advance
-MIN_PAIRS = 30      # need at least this many returning players to judge (the sport's frozen_min_pairs replaces it)
 WATCH = ("Ohio State", "Alabama", "Georgia", "Miami (FL)", "Florida", "Penn State")   # football examples; other sports print none
 
 _RANKS = [(("FR", "FY", "FIRST", "1"), 1), (("SO", "2"), 2), (("JR", "JU", "3"), 3),
@@ -577,8 +580,7 @@ def check_frozen_classes_main(argv=None):
     ap = argparse.ArgumentParser(description=CHECK_FROZEN_CLASSES_DOC, formatter_class=argparse.RawDescriptionHelpFormatter)
     add_sport_argument(ap)
     sport = load_sport(ap.parse_args(argv).sport)
-    global MIN_PAIRS
-    MIN_PAIRS = sport.frozen_min_pairs
+    min_pairs = sport.frozen_min_pairs   # need at least this many returning players to judge (30 unless the sport says)
     out = sport.rosters_dir / "frozen_class_seasons.csv"
     by = defaultdict(dict)          # (school, season) -> {(name, hometown): rank}
     unreadable = defaultdict(int)
@@ -601,12 +603,12 @@ def check_frozen_classes_main(argv=None):
             before, after = by[(school, prev)], by[(school, cur)]
             pairs = [(before[k], c) for k, c in after.items() if k in before and before[k] and c]
             young = [(a, b) for a, b in pairs if a <= 3]
-            if len(pairs) < MIN_PAIRS:
+            if len(pairs) < min_pairs:
                 continue
             share = lambda ps: sum(b <= a for a, b in ps) / len(ps)
             # A frozen archive lists most players at their final class (SR/GR), so
             # too few underclassmen remain to judge; then fall back to everyone.
-            sy = share(young) if len(young) >= MIN_PAIRS else None
+            sy = share(young) if len(young) >= min_pairs else None
             results.append((school, prev, cur, share(pairs), len(pairs), sy, len(young)))
 
     if not results:
@@ -702,7 +704,7 @@ SAME_CLASS = 0.8     # ... with this share of them still in the same class year 
 
 def status_of(r: dict) -> str:
     st = r.get("status", "")
-    if st == "failed" and (r.get("error") or "").lower().startswith("left out"):
+    if st == "failed" and reason_code(r) == "left_out":
         return "left_out"      # reports written before Oct 27
     return st
 
@@ -866,21 +868,111 @@ def check_rosters_main(argv=None) -> int:
 # The site's pages (pages)
 # ==============================================================================================================
 
-PAGES_DOC = """Make each sport's old page addresses forward to the shared pages, and check every sport has its words.
+COMPARE_DOC = """Compare a school's roster for one season with its season before, player by player (Nov 1; the
+check used on Oct 30 for the rosters build.py check flags as repeated).
 
-    python3 scripts/build.py pages            # write docs/<sport>/<page>.html for every sport
+    python3 scripts/build.py compare --sport basketball-womens --school "Michigan State" --season 2018
+    python3 scripts/build.py compare --sport softball --school Syracuse --season 2027 --before 2025
+
+For each player on the later roster it shows whether the same name was on the earlier one, and whether the class
+year, jersey, height, weight, hometown and player page (bio link) are the same. A summary line counts them.
+How to read it:
+  - the same player pages and the same class years: the scraper read the other season's page (fix the season's
+    address in config/<sport>/season_pages.csv, or add the school-season to wrong_seasons.csv, and rescrape);
+  - the same names and class years but new player pages: the school's own page repeats last season's roster;
+  - class years moved up, and new jerseys, heights or weights: a normal returning team."""
+
+
+def compare_seasons_main(argv=None) -> int:
+    ap = argparse.ArgumentParser(description=COMPARE_DOC, formatter_class=argparse.RawDescriptionHelpFormatter)
+    add_sport_argument(ap)
+    ap.add_argument("--school", required=True, help="the school, as in the schools file")
+    ap.add_argument("--season", type=int, required=True, help="the season to check")
+    ap.add_argument("--before", type=int, help="the season to compare with (default: the school's season before it)")
+    args = ap.parse_args(argv)
+    sport = load_sport(args.sport)
+    files = season_files(sport.rosters_dir)
+
+    def roster(season: int) -> dict:
+        if season not in files:
+            return {}
+        rows = [r for r in read_csv(files[season]) if r["school"].lower() == args.school.lower()]
+        return {name_key(r["name"]): r for r in rows}
+
+    cur = roster(args.season)
+    if not cur:
+        print(f"No {args.season} roster for {args.school} in {sport.rosters_dir}.")
+        return 1
+    before = args.before or max((y for y in files if y < args.season and roster(y)), default=None)
+    prev = roster(before) if before else {}
+    if not prev:
+        print(f"{args.school} has no roster before {args.season} to compare with.")
+        return 1
+    checks = [("class", "class_norm"), ("jersey", "jersey"), ("height", "height"), ("weight", "weight"),
+              ("hometown", "hometown")]
+    counts = Counter()
+    width = max(len(r["name"]) for r in cur.values())
+    print(f"{args.school}: {args.season} ({len(cur)} players) against {before} ({len(prev)} players)")
+    print(f"  {'name':{width}}  on {before}  " + "  ".join(f"{label:8}" for label, _ in checks) + "  player page")
+    for k, r in sorted(cur.items(), key=lambda kv: kv[1]["name"]):
+        p = prev.get(k)
+        if not p:
+            print(f"  {r['name']:{width}}  new")
+            continue
+        counts["both"] += 1
+        marks = []
+        for label, field in checks:
+            a, b = (r.get(field) or "").strip(), (p.get(field) or "").strip()
+            same = bool(a) and a.lower() == b.lower()
+            counts[label] += same
+            marks.append(f"{'same' if same else '-' if not a and not b else (a or '-') + ' <- ' + (b or '-'):8}")
+        a, b = bio_key(r.get("bio_url", "")), bio_key(p.get("bio_url", ""))
+        if a and b:
+            counts["with_bio"] += 1
+            counts["same_bio"] += a == b
+        page = "same" if a and a == b else ("new" if a and b else "-")
+        print(f"  {r['name']:{width}}  yes      " + "  ".join(marks) + f"  {page}")
+    both = counts["both"]
+    print(f"\n{both} of {len(cur)} names were on the {before} roster"
+          + (f"; of those, same class year {counts['class']}, jersey {counts['jersey']}, height {counts['height']}, "
+             f"weight {counts['weight']}, hometown {counts['hometown']}; same player page {counts['same_bio']} of "
+             f"{counts['with_bio']} with one in both seasons" if both else ""))
+    url_cur = next(iter(cur.values())).get("roster_url", "")
+    url_prev = next(iter(prev.values())).get("roster_url", "")
+    print(f"  {args.season} read from {url_cur or '?'}\n  {before} read from {url_prev or '?'}")
+    return 0
+
+
+PAGES_DOC = """Write docs/sports.js from every sport's settings, and make each sport's old page addresses forward to
+the shared pages.
+
+    python3 scripts/build.py pages            # write docs/sports.js and docs/<sport>/<page>.html for every sport
     python3 scripts/build.py pages --check    # only say what is missing or out of date
 
 Since Oct 30 the site has one set of pages for every sport: docs/players-dotmap.html, players-heatmap.html,
 players-transfers.html, staff-moves.html and staff-directory.html, opened as players-dotmap.html?sport=softball.
-Edit those files directly. Each sport's words on them (title, description, heading, subtitle, she/her) are in
-docs/sports.js, and its data stays in docs/<sport>/. The old addresses (docs/softball/players-dotmap.html, in
-links people have saved) are small pages that forward to the new one, keeping the #view part of the link.
+Edit those files directly. A sport's words on them (title, description, heading, subtitle, she/her) and its
+place on the front page are in the "site" part of config/<sport>/settings.json; this command copies them into
+docs/sports.js, which the pages read (Nov 1; before that docs/sports.js and the list in docs/index.html were
+typed by hand). A sport is on the site once docs/<sport>/ exists (build.py map makes it); pipeline.py's build
+step runs this command after the map. The old addresses (docs/softball/players-dotmap.html, in links people
+have saved) are small pages that forward to the new one, keeping the #view part of the link.
 (Before Oct 30 every sport had its own copy of the five pages, kept in step by a sync command.)"""
 
 PAGES = ["players-dotmap.html", "players-heatmap.html", "players-transfers.html", "staff-moves.html",
          "staff-directory.html"]
 PLAYER_PAGES = PAGES[:3]
+FRONT_PAGE_KEYS = {"disc", "name", "icon", "order", "sex", "sub", "learn", "learn_summary"}
+DISC_KEYS = ("name", "icon", "order", "sub", "learn", "learn_summary")      # the same for every team of a disc
+
+SPORTS_JS_HEAD = """// Written by python3 scripts/build.py pages from the "site" part of each config/<sport>/settings.json. Don't edit
+// it here: change the settings and run build.py pages (pipeline.py's build step runs it after the map).
+// SPORT_PAGES: each sport's words on the three player map pages (the browser tab's title, the search description,
+//   the heading and the subtitle), she/her for women's sports, and spring (its seasons are named for the spring
+//   they end in). common.js puts these in.
+// SPORT_DISCS: the front page's discs in order, each with its teams and their numbers (from summary.json, for
+//   when the page can't load it).
+"""
 
 
 def forwarding_page(sport: str, page: str) -> str:
@@ -893,13 +985,72 @@ def forwarding_page(sport: str, page: str) -> str:
             f'<body><p>This page has moved: <a href="{target}">{page}?sport={sport}</a></p></body>\n</html>\n')
 
 
-def sport_words(docs: Path) -> dict:
-    """docs/sports.js read back: sport -> its words (the file is JavaScript holding one JSON-like object)."""
-    text = (docs / "sports.js").read_text(encoding="utf-8")
-    body = text[text.index("{"):text.rindex("}") + 1]
-    body = re.sub(r"^(\s*)(women):", r'\1"\2":', body, flags=re.M)      # the one unquoted key
-    body = re.sub(r",(\s*[}\]])", r"\1", body)                           # trailing commas
-    return json.loads(body)
+def site_sports(docs: Path) -> list:
+    """The sports on the site: set up in config/ and built (docs/<sport>/ exists)."""
+    return [load_sport(name) for name in available_sports() if (docs / name).is_dir()]
+
+
+def sport_words(sports: list) -> dict:
+    """sport -> its words for docs/sports.js: women, spring, and each player page's title, description, h1, sub."""
+    return {s.name: {"women": bool(s.site.get("women")), "spring": s.spring_season,
+                     **{page[:-5]: s.site.get(page[:-5]) for page in PLAYER_PAGES}} for s in sports}
+
+
+def short_count(n: int) -> str:
+    """The front page's way of writing a number: 1,215 and 120K."""
+    return f"{int(n / 1000 + 0.5)}K" if n >= 10000 else f"{n:,}"
+
+
+def front_page_discs(sports: list, docs: Path) -> tuple[list, list]:
+    """The front page's discs (one per "disc", in "order"), and what is wrong with the settings."""
+    problems, discs = [], {}
+    for s in sports:
+        fp = s.site.get("front_page") or {}
+        where = f"config/{s.name}/settings.json"
+        if not fp.get("disc") or not fp.get("name") or "order" not in fp:
+            problems.append(f'{where}: "site" needs a "front_page" with disc, name, icon and order'); continue
+        if set(fp) - FRONT_PAGE_KEYS:
+            problems.append(f"{where}: unknown front_page settings {', '.join(sorted(set(fp) - FRONT_PAGE_KEYS))}")
+        stats = None
+        summary = docs / s.name / "summary.json"
+        if summary.exists():
+            j = json.loads(summary.read_text(encoding="utf-8"))
+            if j.get("players") and j.get("schools"):
+                stats = [[f"{j['schools']:,}", "schools"], [short_count(j["players"]), "players"]]
+        team = {"id": s.name, "sex": fp.get("sex", ""), "stats": stats}
+        d = discs.setdefault(fp["disc"], {"fp": fp, "teams": [], "from": s.name})
+        for k in DISC_KEYS:
+            if fp.get(k) != d["fp"].get(k):
+                problems.append(f'{where}: front_page "{k}" is {fp.get(k)!r}, but {d["from"]} (same disc) has {d["fp"].get(k)!r}')
+        d["teams"].append(team)
+    out = []
+    for disc, d in sorted(discs.items(), key=lambda kv: (kv[1]["fp"]["order"], kv[0])):
+        fp, teams = d["fp"], sorted(d["teams"], key=lambda t: ({"m": 0, "w": 1}.get(t["sex"], 2), t["id"]))
+        if len(teams) > 1 and not all(t["sex"] in ("m", "w") for t in teams):
+            problems.append(f'disc "{disc}" has {len(teams)} teams: each needs "sex": "m" or "w" in its front_page')
+        entry = {"id": disc, "name": fp["name"], "sub": fp.get("sub", ""), "icon": fp.get("icon", disc), "learn": fp.get("learn")}
+        if fp.get("learn_summary"):
+            entry["learnSum"] = fp["learn_summary"]
+        out.append({**entry, "teams": teams})
+    return out, problems
+
+
+def sports_js(docs: Path) -> tuple[str, list]:
+    """docs/sports.js as build.py pages writes it, and what is wrong with the settings."""
+    sports = site_sports(docs)
+    words = sport_words(sports)
+    problems = [f'config/{name}/settings.json: no "site" words for {page}' for name, w in words.items()
+                for page in (p[:-5] for p in PLAYER_PAGES) if not (w[page] or {}).get("title")]
+    discs, more = front_page_discs(sports, docs)
+    lines = [SPORTS_JS_HEAD + "window.SPORT_PAGES = {"]
+    for i, (name, w) in enumerate(sorted(words.items())):
+        lines.append(f'  {json.dumps(name)}: {{"women": {json.dumps(w["women"])}, "spring": {json.dumps(w["spring"])},')
+        pages = [f'    {json.dumps(p[:-5])}: {json.dumps(w[p[:-5]], ensure_ascii=False)}' for p in PLAYER_PAGES]
+        lines.append(",\n".join(pages) + "\n  }" + ("," if i < len(words) - 1 else ""))
+    lines.append("};\nwindow.SPORT_DISCS = [")
+    lines.append(",\n".join(f"  {json.dumps(d, ensure_ascii=False)}" for d in discs))
+    lines.append("];\n")
+    return "\n".join(lines), problems + more
 
 
 def site_pages_main(argv=None) -> int:
@@ -907,32 +1058,38 @@ def site_pages_main(argv=None) -> int:
     ap.add_argument("--check", action="store_true", help="don't write: list what is missing or out of date")
     args = ap.parse_args(argv)
     docs = ROOT / "docs"
-    problems = 0
-    words = sport_words(docs)
+    text, problems = sports_js(docs)
+    for p in problems:
+        print(p)
+    problems = len(problems)
     for page in PAGES:
         if not (docs / page).exists():
             print(f"missing: docs/{page}"); problems += 1
-    for sport in available_sports():
-        if not (docs / sport).is_dir():
-            continue                      # not built yet
-        for page in PLAYER_PAGES:
-            if not words.get(sport, {}).get(page[:-5]):
-                print(f"missing: {sport}'s words for {page} in docs/sports.js"); problems += 1
+    js = docs / "sports.js"
+    if not js.exists() or js.read_text(encoding="utf-8") != text:
+        if args.check:
+            print("out of date: docs/sports.js (run python3 scripts/build.py pages)"); problems += 1
+        else:
+            tmp = js.with_suffix(".js.tmp")       # a pipeline of another sport may be writing it at the same time
+            tmp.write_text(text, encoding="utf-8")
+            tmp.replace(js)
+            print("written: docs/sports.js")
+    for sport in (s.name for s in site_sports(docs)):
         for page in PAGES:
             path, want = docs / sport / page, forwarding_page(sport, page)
             if path.exists() and path.read_text(encoding="utf-8") == want:
                 continue
-            problems += 1
             print(f"{'out of date' if args.check else 'written'}: docs/{sport}/{page}")
-            if not args.check:
+            if args.check:
+                problems += 1
+            else:
                 path.write_text(want, encoding="utf-8")
-                problems -= 1
     if not problems:
         print("Every sport's pages are in place.")
     return 1 if problems else 0
 
 
-COMMANDS = {"map": build_map_data_main, "locations": build_school_locations_main, "frozen": check_frozen_classes_main, "check": check_rosters_main, "pages": site_pages_main}
+COMMANDS = {"map": build_map_data_main, "locations": build_school_locations_main, "frozen": check_frozen_classes_main, "check": check_rosters_main, "pages": site_pages_main, "compare": compare_seasons_main}
 
 
 def command_line(argv=None) -> int:

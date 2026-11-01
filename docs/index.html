@@ -223,6 +223,7 @@
 <body data-mode="recruiting">
 <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script src="sports.js"></script>
 
 <main id="ring-view">
   <div id="stage">
@@ -267,38 +268,18 @@
 <footer><a class="src-btn" href="sources.html">Information about the data <span aria-hidden="true">→</span></a></footer>
 
 <script>
-  // ---- Edit this list as sports come online. ----
-  // One disc per sport. teams: its teams, each with
-  //   id    the sport's folder name (lacrosse-mens), which is also its ?sport= on the map pages
-  //   sex   'm' or 'w' when the sport has both teams (two smaller circles each for players and coaches,
-  //         blue for men's and pink for women's); '' for a sport with one team
-  //   stats the summary's fallback numbers, for when summary.json can't load
-  // sub: a line under the name for a one-team sport that has a sex (Volleyball: Women's).
-  // learn: the sport's learn page (one for both teams), or null for "coming soon"; learnSum: its summary.
+  // ---- The sports: one disc per sport, from docs/sports.js (SPORT_DISCS) ----
+  // build.py pages writes that list from the "site" part of each config/<sport>/settings.json, so a new sport
+  // appears here once it is built; nothing is typed into this page. Each disc has
+  //   id, name, icon; sub (a line under a one-team disc's name: Volleyball: Women's); learn (its learn page, or
+  //   null for "coming soon") and learnSum; teams: each with
+  //     id    the sport's folder name (lacrosse-mens), which is also its ?sport= on the map pages
+  //     sex   'm' or 'w' when the disc has both teams (two smaller circles each for players and coaches,
+  //           blue for men's and pink for women's); '' for a disc with one team
+  //     stats the summary's fallback numbers, for when summary.json can't load
   const TEAM = (id, sex, stats) => ({ id, sex, stats,
     players: `players-dotmap.html?sport=${id}`, staff: `staff-moves.html?sport=${id}` });
-  const SPORTS = [
-    { id: 'football', name: 'Football', sub: '', icon: 'football', learn: null,
-      teams: [TEAM('football', '', [['831', 'schools'], ['446K', 'players']])] },
-    { id: 'lacrosse', name: 'Lacrosse', sub: '', icon: 'lacrosse', learn: null,
-      teams: [TEAM('lacrosse-mens', 'm', [['431', 'schools'], ['69K', 'players']]),
-              TEAM('lacrosse-womens', 'w', [['583', 'schools'], ['58K', 'players']])] },
-    { id: 'baseball', name: 'Baseball', sub: '', icon: 'baseball', learn: null,
-      teams: [TEAM('baseball', '', [['1,082', 'schools'], ['218K', 'players']])] },
-    { id: 'softball', name: 'Softball', sub: '', icon: 'softball', learn: null,
-      teams: [TEAM('softball', '', [['1,118', 'schools'], ['115K', 'players']])] },
-    { id: 'hockey', name: 'Hockey', sub: '', icon: 'hockey', learn: null, learnSum: 'Rink · positions · systems',   // set learn: 'hockey/learn.html' once it's built
-      teams: [TEAM('hockey-mens', 'm', [['162', 'schools'], ['18K', 'players']]),
-              TEAM('hockey-womens', 'w', [['126', 'schools'], ['11K', 'players']])] },
-    { id: 'basketball', name: 'Basketball', sub: '', icon: 'basketball', learn: null,
-      teams: [TEAM('basketball-mens', 'm', [['1,215', 'schools'], ['120K', 'players']]),
-              TEAM('basketball-womens', 'w', [['1,220', 'schools'], ['97K', 'players']])] },
-    { id: 'volleyball', name: 'Volleyball', sub: "Women's", icon: 'volleyball', learn: null,
-      teams: [TEAM('volleyball-womens', '', [['1,192', 'schools'], ['97K', 'players']])] },
-    { id: 'soccer', name: 'Soccer', sub: '', icon: 'soccer', learn: null,
-      teams: [TEAM('soccer-mens', 'm', [['949', 'schools'], ['151K', 'players']]),
-              TEAM('soccer-womens', 'w', [['1,161', 'schools'], ['148K', 'players']])] },
-  ];
+  const SPORTS = (window.SPORT_DISCS || []).map((s) => ({ ...s, teams: s.teams.map((t) => TEAM(t.id, t.sex, t.stats)) }));
   const SEX = { m: { word: "Men's", cls: 'men' }, w: { word: "Women's", cls: 'women' } };
 
   const MODES = {

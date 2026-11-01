@@ -14,5 +14,12 @@
   "division_labels": {"FBS": "FBS (Division I)", "FCS": "FCS (Division I)", "D2": "Division II", "D3": "Division III", "NAIA": "NAIA", "JUCO": "Junior college (NJCAA and California CCCAA)"},
   "position_labels": {"DEF": "Def (unlisted)", "ST": "K/P/LS", "ATH": "ATH/other"},
   "thin_roster": 40,
-  "frozen_min_pairs": 30
+  "frozen_min_pairs": 30,
+  "site": {
+    "front_page": {"disc": "football", "name": "Football", "icon": "football", "order": 1},
+    "women": false,
+    "players-dotmap": {"title": "College Football Recruiting Map", "description": "Where every college football player since 2016 comes from, mapped: FBS, FCS, Division II, Division III, NAIA and junior college.", "h1": "College Football <span>Recruiting Map</span>", "sub": "Hometowns of every college football player since 2016"},
+    "players-heatmap": {"title": "College Football Recruiting Footprints", "description": "Compare where up to four college football programs, from FBS to junior college, find their players, state by state.", "h1": "College Football <span>Recruiting Footprints</span>"},
+    "players-transfers": {"title": "College Football Transfer Map", "description": "Where college football players transferred, school to school, since 2016.", "h1": "College Football <span>Transfer Map</span>", "sub": "Where players moved from school to school since 2016"}
+  }
 }

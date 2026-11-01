@@ -132,7 +132,7 @@
     data.schoolIndex = new Map(data.schools.map((s, i) => [s[0].toLowerCase(), i]));
     // campus city, state and coordinates (built from config/school_locations.csv); the pages work without it
     let loc = null;
-    const locLoad = fetch("school_locations.json").then((r) => r.ok ? r.json() : null).catch(() => null);
+    const locLoad = fetch(dataUrl("school_locations.json")).then((r) => r.ok ? r.json() : null).catch(() => null);
     if (all) await data.loadAll();
     try { loc = await locLoad; } catch (e) {}
     data.campus = data.schools.map((s) => { const v = loc && loc.schools[s[0]]; return v ? { city: v[0], state: v[1], lat: v[2], lon: v[3] } : null; });
@@ -530,9 +530,8 @@
   }
   // Seasons are shown as school years: "2023-24". A season number is the year it starts for fall sports (football,
   // volleyball, soccer: 2023 = 2023-24) and the year it ends for the rest (2024 = 2023-24). data.spring says which;
-  // data built before Oct 29 doesn't say, so the sport's name decides.
-  const FALL_SPORT = /football|volleyball|soccer/i;
-  const springOf = (d) => d.spring !== undefined ? !!d.spring : !FALL_SPORT.test(d.sport || "");
+  // for data built before Oct 29, which doesn't say, the sport's settings do (sports.js, from spring_season).
+  const springOf = (d) => d.spring !== undefined ? !!d.spring : !!(SPORT_PAGES[d.sport || sport] || {}).spring;
   function seasonLabel(y, spring) {
     const a = spring ? y - 1 : y;
     return `${a}-${String((a + 1) % 100).padStart(2, "0")}`;

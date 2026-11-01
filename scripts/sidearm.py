@@ -2,49 +2,61 @@ from __future__ import annotations
 
 import json
 import re
+from dataclasses import dataclass, field as dc_field
 from itertools import zip_longest
 from typing import Any, Callable, Iterable
 
 from bs4 import BeautifulSoup, Tag
 
 import core
-from core import current_season
-from geocode import _PLACEHOLDERS
-from geocode import *  # noqa: F401,F403
+from core import clean
+from hometowns import _PLACEHOLDERS, clean_weight, format_height, not_a_place, parse_hometown, split_hometown_highschool
 
 """Reading Sidearm, WMT and PrestoSports athletics pages: building roster URLs, checking which season a page
 shows, and pulling players out of it (five parsers, best result kept). Also the rules for telling a
 previous college from a high school.
 
 Sport-specific settings (roster URL paths, minimum roster size, junior-college names) come from
-config/<sport>/settings.json through configure(), which the scripts call at startup."""
+config/<sport>/settings.json through Rules.for_sport(sport), passed to the functions that need them."""
 
 
-# Set by configure() from the sport's settings; these defaults are football's.
-ROSTER_PATHS = ["/sports/football/roster"]
-# PrestoSports puts the season in the middle of the path (/sports/fball/2024-25/roster), so these are
-# templates with {season}, {next_season} and {next_yy}, filled in for each season.
-PRESTO_PATHS = ["/sports/fball/{season}-{next_yy}/roster"]
-MIN_PLAYERS = 25  # fewer players than this on a page is suspicious
-MAX_PLAYERS = 0   # more than this (0 = no limit) is suspicious too: probably the wrong page
-JUCO_NAMES: list[str] = []
-# A spring sport (lacrosse, baseball): season 2024 is spring 2024, labeled "2024" or "2023-24".
-SPRING = False
+# ---- a sport's rules for reading its pages (Oct 31) ----
+# Until Oct 31 these were module variables that configure(sport) set at startup (ROSTER_PATHS, MIN_PLAYERS,
+# SPRING, ...), and every function read them: one sport's settings could stay behind for the next one in the same
+# process (the tests reset some by hand). Now each function that needs them is given a Rules, made once per sport
+# with Rules.for_sport(sport). Rules() alone is football's defaults with no known colleges, for quick use.
+
+@dataclass(frozen=True)
+class Rules:
+    roster_paths: tuple = ("/sports/football/roster",)
+    # PrestoSports puts the season in the middle of the path (/sports/fball/2024-25/roster): templates with
+    # {season}, {next_season}, {next_yy}, {prev_season}, {yy}, filled in for each season (core.fill_season).
+    presto_paths: tuple = ("/sports/fball/{season}-{next_yy}/roster",)
+    min_players: int = 25            # fewer players than this on a page is suspicious
+    max_players: int = 0             # more than this (0 = no limit) is suspicious too: probably the wrong page
+    spring: bool = False             # a spring (or winter) sport: season 2024 is 2023-24
+    junior_colleges: tuple = ()
+    colleges: frozenset = dc_field(default_factory=frozenset)   # _college_key() of the colleges known by name
+
+    @property
+    def own_codes(self) -> set:
+        """the sport names in this sport's own addresses ('womens-lacrosse', 'wlax')"""
+        return sport_codes(list(self.roster_paths) + list(self.presto_paths))
+
+    @classmethod
+    def for_sport(cls, sport, schools: list[dict] | None = None) -> "Rules":
+        """The sport's rules. Its known colleges are the D1 schools of its schools.csv (or `schools`) and its junior
+        colleges: smaller colleges share their names with high schools, so only those count by name alone."""
+        if schools is None:
+            schools = core.d1_schools(sport.schools_csv) if sport.schools_csv.exists() else []
+        juco = tuple(sport.junior_colleges)
+        return cls(roster_paths=tuple(sport.roster_paths), presto_paths=tuple(getattr(sport, "presto_paths", []) or ()),
+                   min_players=sport.min_players, max_players=getattr(sport, "max_players", 0) or 0,
+                   spring=bool(getattr(sport, "spring_season", False)), junior_colleges=juco,
+                   colleges=college_keys(schools, juco))
 
 
-def configure(sport) -> None:
-    """Use a sport's roster URL paths, normal roster size, junior-college names and season naming."""
-    global ROSTER_PATHS, PRESTO_PATHS, MIN_PLAYERS, MAX_PLAYERS, JUCO_NAMES, SPRING
-    ROSTER_PATHS = list(sport.roster_paths)
-    PRESTO_PATHS = list(getattr(sport, "presto_paths", []))
-    MIN_PLAYERS = sport.min_players
-    MAX_PLAYERS = getattr(sport, "max_players", 0)
-    JUCO_NAMES = list(sport.junior_colleges)
-    SPRING = bool(getattr(sport, "spring_season", False))
-    OWN_CODES.clear()
-    OWN_CODES.update(sport_codes(ROSTER_PATHS + PRESTO_PATHS))
-    import core
-    core.SPRING_SEASON = SPRING      # so core.current_season() names the season the spring way
+DEFAULT = Rules()
 
 
 # ---- whose roster is this page? ---------------------------------------------------------------------------
@@ -76,35 +88,32 @@ OTHER_SPORT_CODES = {
     "acrobatics-and-tumbling", "stunt", "womens-rugby", "mens-rugby", "rugby", "womens-water-polo", "mens-water-polo",
     "equestrian", "rifle", "fencing", "gymnastics", "wgym", "triathlon", "womens-triathlon",
 }
-OWN_CODES: set[str] = set()
-
-
 def sport_codes(paths: list[str]) -> set[str]:
     """'/sports/womens-lacrosse/roster', '/sports/wlax/{prev_season}-{yy}/roster' -> {'womens-lacrosse', 'wlax'}"""
     return {m.group(1).lower() for p in paths for m in [re.search(r"/sports/([^/{]+)/", p)] if m}
 
 
-def other_sport_page(url: str) -> str:
+def other_sport_page(url: str, rules: Rules) -> str:
     """The other sport's code when a roster address is another sport's page ('fball' on a lacrosse scrape), else ''."""
-    if not url or not OWN_CODES:
+    own = rules.own_codes
+    if not url or not own:
         return ""
     for m in _CODE_IN_URL.finditer(url):
         code = (m.group(1) or m.group(2) or "").lower()
-        if code in OTHER_SPORT_CODES and code not in OWN_CODES:
+        if code in OTHER_SPORT_CODES and code not in own:
             return code
     return ""
 
 
-def normal_size(n: int) -> bool:
+def normal_size(n: int, rules: Rules) -> bool:
     """True when n players is a normal roster for the sport (min_players to max_players)."""
-    return n >= MIN_PLAYERS and (not MAX_PLAYERS or n <= MAX_PLAYERS)
+    return n >= rules.min_players and (not rules.max_players or n <= rules.max_players)
 
 
 _fill = core.fill_season          # season names live in core.py (Oct 30)
-_span = core.season_span
 
 
-def candidate_urls(domain: str, override: str = "", season: int | None = None) -> list[str]:
+def candidate_urls(domain: str, override: str = "", season: int | None = None, rules: Rules = DEFAULT) -> list[str]:
     """Roster URLs to try, most likely first.
 
     ``season=None`` means the current roster page. For past seasons the list always has the same
@@ -115,30 +124,30 @@ def candidate_urls(domain: str, override: str = "", season: int | None = None) -
     override = (override or "").strip()
     if override:
         if season is None:
-            urls.append(_fill(override, current_season()))
+            urls.append(_fill(override, core.current_season(spring=rules.spring)))
         elif "{" in override:   # any template key: {season}, {prev_season}-{yy}, ... (Oct 29: {prev_season} alone was skipped)
             urls.append(_fill(override, season))
         else:  # plain URL: try the Sidearm and WMT archive conventions on it
-            o, span = override.rstrip("/"), _span(season)
+            o, span = override.rstrip("/"), core.season_span(season, rules.spring)
             urls += [f"{o}/{season}", f"{o}/season/{season}/", f"{o}/{span}", f"{o}/season/{span}/"]
     base = f"https://{domain.strip().strip('/')}"
-    for path in ROSTER_PATHS:
+    for path in rules.roster_paths:
         path = path.rstrip("/")
         if season:
-            span = _span(season)                                 # 2019-20 (fall) or 2018-19 (spring)
+            span = core.season_span(season, rules.spring)                                 # 2019-20 (fall) or 2018-19 (spring)
             urls.append(f"{base}{path}/{season}")                # Sidearm:  /roster/2019
             urls.append(f"{base}{path}/season/{season}/")        # WMT:      /roster/season/2019/
             urls.append(f"{base}{path}/{span}")                  # Sidearm:  /roster/2019-20 (Cornell, Ohio State)
             urls.append(f"{base}{path}/season/{span}/")          # WMT:      /roster/season/2019-20/ (Notre Dame, Georgia Tech)
         else:
             urls.append(f"{base}{path}")
-    if season and SPRING:
+    if season and rules.spring:
         # Some sites file a spring season under the fall year it starts in: Clemson's /roster/2023 is the
         # 2023-24 roster (spring 2024). Tried after the usual addresses; the season check confirms the year.
-        for path in ROSTER_PATHS:
+        for path in rules.roster_paths:
             path = path.rstrip("/")
-            urls.append(f"{base}{path}/{core.season_first_year(season)}")
-            urls.append(f"{base}{path}/season/{core.season_first_year(season)}/")
+            urls.append(f"{base}{path}/{core.season_first_year(season, rules.spring)}")
+            urls.append(f"{base}{path}/season/{core.season_first_year(season, rules.spring)}/")
     # PrestoSports: /sports/fball/2019-20/roster. The list view first: some sites (Morningside) only
     # put the roster table there. Then the same on www.: some sites (Hutchinson, Iowa Western,
     # Kilgore) only answer there. Hosts with a subdomain (deanza.prestosports.com) get no www. copy.
@@ -146,20 +155,20 @@ def candidate_urls(domain: str, override: str = "", season: int | None = None) -
     if domain and domain.strip().strip("/").count(".") == 1:
         presto_hosts.append(f"https://www.{domain.strip().strip('/')}")
     for host in presto_hosts:
-        for template in PRESTO_PATHS:
-            path = _fill(template, season if season else current_season())
+        for template in rules.presto_paths:
+            path = _fill(template, season if season else core.current_season(spring=rules.spring))
             urls += [f"{host}{path}?view=list", f"{host}{path}"]
     # The same on www., for a bare domain only: a host that already has a subdomain
     # (athletics.cabrillo.edu) has no www. copy, and trying one only added a misleading
     # "couldn't connect" to the report.
     bare = domain.strip().strip("/") if domain else ""
     if bare and bare.count(".") == 1:
-        urls.append(f"https://www.{bare}{ROSTER_PATHS[0]}" + (f"/{season}" if season else ""))
+        urls.append(f"https://www.{bare}{rules.roster_paths[0]}" + (f"/{season}" if season else ""))
     if season:
         # Oct 29: both years written out: /roster/2023-2024 (Hawaii), /roster/season/2023-2024 (BYU).
         # Last, so the addresses above keep their place in the list.
-        full = core.season_span(season, full=True)
-        for path in ROSTER_PATHS:
+        full = core.season_span(season, rules.spring, full=True)
+        for path in rules.roster_paths:
             urls.append(f"{base}{path.rstrip('/')}/{full}")
             urls.append(f"{base}{path.rstrip('/')}/season/{full}")
     seen, out = set(), []
@@ -179,7 +188,7 @@ def candidate_urls(domain: str, override: str = "", season: int | None = None) -
 _YEAR = core.SEASON_LABEL
 
 
-def detect_season(html: str) -> int | None:
+def detect_season(html: str, rules: Rules = DEFAULT) -> int | None:
     soup = BeautifulSoup(html[:400_000], "lxml")
     candidates: list[tuple[str, bool]] = []     # (text, is it the page's own label: title, selected season, h1)
     if soup.title:  # .string is None when the title has child nodes; get_text() isn't
@@ -196,7 +205,7 @@ def detect_season(html: str) -> int | None:
     # "2026 Men's Basketball Roster" (the year the season starts) while its heading says "2026-27": read
     # as a bare year, that page was saved as the 2025-26 season (Samford, Wyoming, Pepperdine; Oct 30).
     m = next((m for m, own in found if own and m.group(2)), found[0][0])
-    return core.season_from_label(m.group(0))     # "2023-24": season 2023 (fall) or 2024 (spring)
+    return core.season_from_label(m.group(0), rules.spring)     # "2023-24": season 2023 (fall) or 2024 (spring)
 
 
 # =============================================================================
@@ -980,9 +989,9 @@ _HS_WORDS = re.compile(r"\b(hs|h\.s\.|high|academy|prep|preparatory|school)\b", 
 
 # Telling a college from a high school, for fields like "Last School" that can hold either.
 # Filled with the names in config/schools.csv when the scraper starts (see main()).
-KNOWN_COLLEGES: set[str] = set()
+
 # Junior colleges whose roster names often leave out "College"/"CC" come from the sport's settings
-# (JUCO_NAMES, set by configure()): multi-word or distinctive names only, since a single common
+# (Rules.junior_colleges): multi-word or distinctive names only, since a single common
 # word like "Independence" or "Highland" is also a high school name.
 _HS_STRONG = re.compile(r"\b(high school|h\.s\.|hs|prep|preparatory|secondary)\b", re.I)
 _COLLEGE_WORDS = re.compile(r"\b(university|univ\.?|college|community college|institute|polytechnic|state|tech|a&m|"
@@ -995,10 +1004,10 @@ def _college_key(v: str) -> str:
     return re.sub(r"[^a-z&]", "", re.sub(r"^(the|university of)\s+", "", v.strip()))
 
 
-def load_known_colleges(schools: list[dict]) -> None:
-    """D1 schools from the sport's schools.csv plus its junior colleges (JUCO_NAMES)."""
-    KNOWN_COLLEGES.update(_college_key(s["school"]) for s in schools)
-    KNOWN_COLLEGES.update(_college_key(n) for n in JUCO_NAMES)
+def college_keys(schools: list[dict], junior_colleges=()) -> frozenset:
+    """The colleges known by name (Rules.colleges): D1 schools from the sport's schools.csv plus its junior
+    colleges. (Until Oct 31 load_known_colleges() added them to one set shared by every sport in the process.)"""
+    return frozenset(_college_key(s["school"]) for s in schools) | frozenset(_college_key(n) for n in junior_colleges)
 
 
 # A hockey player's "Last School" is usually a junior or prep team named with its league: "Omaha Lancers (USHL)",
@@ -1008,7 +1017,7 @@ _JUNIOR_HOCKEY = re.compile(r"\((?:[^)]*\b)?(?:USHL|NAHL|NA3HL|BCHL|AJHL|SJHL|MJ
                             r"AAA|Midget|Liiga|SHL|HockeyAllsvenskan|J20|SuperElit|DEL|KHL|VHL|Mestis|NLA|NLB)\b", re.I)
 
 
-def looks_like_college(value: str) -> bool:
+def looks_like_college(value: str, colleges: frozenset = frozenset()) -> bool:
     """'Texas Tech', 'Wake Forest', 'Blinn College', 'Butler CC', 'Univ. of Iowa' -> True.
     'Lamar HS', 'IMG Academy', 'Mater Dei', 'College Park High School', 'Fork Union Military Academy' -> False."""
     v = clean(value)
@@ -1021,7 +1030,7 @@ def looks_like_college(value: str) -> bool:
         return True
     if _COLLEGE_WORDS.search(v) and not re.search(r"\b(academy|school)\b", v, re.I):
         return True                                          # "Texas Tech", "Penn State", "Prairie View A&M"
-    return _college_key(v) in KNOWN_COLLEGES                 # "Wake Forest", "Notre Dame", "SMU"
+    return _college_key(v) in colleges                       # "Wake Forest", "Notre Dame", "SMU"
 
 
 def _same_school(a: str, b: str) -> bool:
@@ -1036,7 +1045,7 @@ def _same_school(a: str, b: str) -> bool:
     return x == y or (len(short) >= 5 and long_.startswith(short))
 
 
-def sort_schools(p: dict) -> dict:
+def sort_schools(p: dict, colleges: frozenset = frozenset()) -> dict:
     """Put a college in previous_school and a high school in high_school, whichever field the site used.
 
     'Lamar HS / Texas Tech' in one field   -> high_school 'Lamar HS', previous_school 'Texas Tech'
@@ -1051,7 +1060,7 @@ def sort_schools(p: dict) -> dict:
     hs, prev = " / ".join(hs_parts), " / ".join(prev_parts)
     if len(hs_parts) > 1 or len(prev_parts) > 1:              # combined values
         every = hs_parts + prev_parts
-        colleges = [x for x in every if looks_like_college(x)]
+        colleges = [x for x in every if looks_like_college(x, colleges)]
         others = [x for x in every if x not in colleges]
         hs = next((x for x in others if _HS_WORDS.search(x)), others[0] if others else "")
         if colleges:
@@ -1060,16 +1069,16 @@ def sort_schools(p: dict) -> dict:
             prev = prev_parts[0]                              # the site's own previous-school field
         else:
             prev = ""
-    elif hs and looks_like_college(hs):
+    elif hs and looks_like_college(hs, colleges):
         if not prev:
             hs, prev = "", hs
-        elif not looks_like_college(prev):
+        elif not looks_like_college(prev, colleges):
             hs, prev = prev, hs                               # the two were swapped
-    elif prev and not hs and not looks_like_college(prev):
+    elif prev and not hs and not looks_like_college(prev, colleges):
         hs, prev = prev, ""                                   # a high school filed as the previous school
     if _same_school(hs, prev):
         prev = ""
-    elif prev and not looks_like_college(prev) and (_HS_STRONG.search(prev) or re.search(r"\bacademy\b", prev, re.I)):
+    elif prev and not looks_like_college(prev, colleges) and (_HS_STRONG.search(prev) or re.search(r"\bacademy\b", prev, re.I)):
         hs, prev = hs or prev, ""                             # clearly a high school: never a transfer
     p["high_school"], p["previous_school"] = hs, prev
     return p
@@ -1110,7 +1119,7 @@ def clean_name(name: str) -> str:
     return _undouble(n.strip(" -,"))
 
 
-def tidy_players(players: list[dict]) -> list[dict]:
+def tidy_players(players: list[dict], rules: Rules = DEFAULT) -> list[dict]:
     for p in players:
         for f in ("position", "class_year", "hometown", "high_school", "previous_school", "height", "weight", "jersey"):
             if p.get(f):
@@ -1138,7 +1147,7 @@ def tidy_players(players: list[dict]) -> list[dict]:
                         dest = f
                     p[dest] = school
                     break
-        sort_schools(p)
+        sort_schools(p, rules.colleges)
     return players
 
 
@@ -1170,7 +1179,7 @@ def _visible_backbone(visible: list[dict], data: list[dict]) -> list[dict]:
     return out
 
 
-def parse_roster(html: str) -> tuple[str, list[dict]]:
+def parse_roster(html: str, rules: Rules = DEFAULT) -> tuple[str, list[dict]]:
     """Run every strategy; return (strategy_name, players) for the best result.
 
     When the Nuxt payload has more players than the page visibly lists, and the visible list is a
@@ -1183,7 +1192,7 @@ def parse_roster(html: str) -> tuple[str, list[dict]]:
         if payload_good and name not in _VISIBLE:
             continue   # a good payload was found: only the visible list is still worth reading
         try:
-            players = tidy_players(drop_staff(fn(html, soup)))
+            players = tidy_players(drop_staff(fn(html, soup)), rules)
         except Exception:  # one broken strategy shouldn't sink the page
             players = []
         results[name] = players
@@ -1192,15 +1201,15 @@ def parse_roster(html: str) -> tuple[str, list[dict]]:
         if with_home > best_home or (with_home == best_home and len(players) > len(best)):
             best_name, best = name, players
         if name == "nuxt_data":
-            payload_good = len(players) >= MIN_PLAYERS and with_home >= 0.8 * len(players)
+            payload_good = len(players) >= rules.min_players and with_home >= 0.8 * len(players)
         # Good enough, skip slower strategies; but never stop at the payload, which has to be
         # checked against what the page shows.
-        elif len(players) >= MIN_PLAYERS and with_home >= 0.8 * len(players) \
-                and normal_size(len(players)):
+        elif len(players) >= rules.min_players and with_home >= 0.8 * len(players) \
+                and normal_size(len(players), rules):
             break
     if best_name == "nuxt_data":
         shown = max((results.get(n, []) for n in _VISIBLE), key=len)
-        if len(shown) >= MIN_PLAYERS and len(_dedupe(shown)) < len(_dedupe(best)):
+        if len(shown) >= rules.min_players and len(_dedupe(shown)) < len(_dedupe(best)):
             best_name, best = "nuxt_data:visible", _visible_backbone(shown, best)
     for p in best:
         p.pop("staff_title", None)

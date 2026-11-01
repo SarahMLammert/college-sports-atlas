@@ -32,7 +32,6 @@ from bs4 import BeautifulSoup
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))   # so the files here import each other
 
-import core
 from core import add_sport_argument, Fetcher, load_sport, read_csv, ROOT, season_files
 
 # ==============================================================================================================
@@ -303,7 +302,6 @@ def _init(sport_name: str, offline: bool, index: dict) -> None:
     import signal
     signal.signal(signal.SIGINT, signal.SIG_IGN)
     sport = load_sport(sport_name)
-    core.SPRING_SEASON = bool(sport.spring_season)
     _WORKER.update(fetcher=Fetcher(CACHE, delay=1.5, timeout=10), offline=offline, index=index,
                    label=sport.label or sport.name)
 

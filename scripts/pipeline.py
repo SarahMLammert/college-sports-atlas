@@ -22,7 +22,7 @@ The steps, in order (--steps, --from and --skip use these names):
     geocode        place the hometowns
     fix-hometowns  hometown_fixes.py suggest and hometown_fixes.py spellings, then geocode again
     frozen         build.py frozen
-    build          build.py map -> docs/<sport>/map_data.json
+    build          build.py map -> docs/<sport>/map_data.json, then build.py pages -> docs/sports.js
     locations      build.py locations -> docs/<sport>/school_locations.json
     staff          staff.py scrape (the coaches listed with each saved roster, plus the coaches page when
                    the roster page has none) and staff.py build -> docs/<sport>/staff_data.json
@@ -65,7 +65,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))   # so the files here import each other
 
-from core import available_sports, load_sport, LOCK_ENV, read_csv, ROOT, season_files, sport_lock, SportBusy
+from core import available_sports, check_packages, load_sport, LOCK_ENV, read_csv, ROOT, season_files, sport_lock, SportBusy
 
 SCRIPTS = Path(__file__).resolve().parent
 STEPS = ["test", "scrape", "retry", "redo-current", "geocode", "fix-hometowns", "frozen", "build",
@@ -171,7 +171,7 @@ def plan_for(sport, args) -> Plan:
     plan.commands["fix-hometowns"] = [py("hometown_fixes.py", "suggest", *common),
                                       py("hometown_fixes.py", "spellings", *common), geocode]
     plan.commands["frozen"] = [py("build.py", "frozen", *common)]
-    plan.commands["build"] = [py("build.py", "map", *common)]
+    plan.commands["build"] = [py("build.py", "map", *common), py("build.py", "pages")]   # pages: docs/sports.js, with the new numbers
     plan.commands["locations"] = [py("build.py", "locations", *common)]
     plan.commands["staff"] = [py("staff.py", "scrape", *common, "--seasons", seasons),
                               py("staff.py", "build", *common)]
@@ -347,6 +347,9 @@ def main(argv=None) -> int:
     ap.add_argument("--keep-going", action="store_true", help="carry on with the next step when one fails")
     ap.add_argument("--dry-run", action="store_true", help="print the commands without running anything")
     args = ap.parse_args(argv)
+    # Everything the steps need, checked before a run that can take hours (Oct 31). The retry step uses the browser.
+    if not args.dry_run:
+        check_packages(["requests", "beautifulsoup4", "lxml", "geonamescache", "playwright"], "The pipeline")
 
     have = available_sports()
     sports = have if [s.lower() for s in args.sports] == ["all"] else args.sports

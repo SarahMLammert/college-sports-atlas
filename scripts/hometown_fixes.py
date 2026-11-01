@@ -2,11 +2,13 @@
     Suggesting hometown fixes (suggest)
     Spelling fixes (spellings)
     Checking the geocoder (check)
+    Reviewing automatic spelling fixes (review)
 
 Commands:
     python3 scripts/hometown_fixes.py suggest --sport football   # suggesting hometown fixes
     python3 scripts/hometown_fixes.py spellings --sport football   # spelling fixes
     python3 scripts/hometown_fixes.py check --sport football   # checking the geocoder
+    python3 scripts/hometown_fixes.py review   # automatic spelling fixes a person should look at (every sport)
 """
 from __future__ import annotations
 
@@ -17,13 +19,14 @@ import difflib
 import re
 import sys
 import urllib.request
+from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))   # so the files here import each other
 
 import geocode as g
 from core import add_sport_argument, load_sport, ROOT
-from geocode import _region, not_a_place, parse_hometown
+from hometowns import _region, not_a_place, parse_hometown
 
 # ==============================================================================================================
 # Suggesting hometown fixes (suggest)   (was scripts/suggest_hometown_fixes.py)
@@ -390,10 +393,6 @@ def suggest_hometown_fixes_main(argv=None):
 FIX_HOMETOWN_SPELLINGS_DOC = 'Add fixes for misspelled hometowns to config/<sport>/hometown_corrections.csv (default sport: football).\n\nEach pair below is a misspelling found next to the real town (within 25 km, same state) in the map\ndata, checked by hand. Pairs that are two real places (Los Gatos / Los Altos, Monroe / Montrose,\nGrosse Pointe Farms / Park, ...) are left out.\n\nThe script finds every raw hometown text in the geocoder\'s table, rosters/<sport>/hometowns.csv, that was\nplaced in a misspelled town, and writes a "fixed" row for it in config/<sport>/hometown_corrections.csv.\nRows you already have for those texts are updated; everything else is kept as it is. (Until Oct 27 it\nread players_unique_geocoded.csv, which the geocoder stopped writing on Oct 25, so it found nothing.)\n\nIt also updates hometowns.csv itself, which the geocoder checks before the corrections: each misspelled\nentry gets the real town\'s name and location from the same table. It\'s safe to run more than once.\n\nscripts/pipeline.py runs it in its fix-hometowns step. On its own:\n    python scripts/hometown_fixes.py spellings              # add --sport <name> for another sport\n    python scripts/geocode.py\n    python scripts/build.py map\n'
 
 
-# Set from --sport in fix_hometown_spellings_main().
-CORRECTIONS = LOOKUP = Path()   # hometown_corrections.csv, and hometowns.csv (the geocoder's table of
-                                # hometowns it has placed)
-
 # (state or country, misspelled city as it appears on the map, correct city)
 FIXES = [
     ("CA", "Milipitas", "Milpitas"), ("CA", "Pasedena", "Pasadena"), ("CA", "Rockling", "Rocklin"),
@@ -435,15 +434,15 @@ FIXES = [
 SPELLING_FIELDS = ["hometown_raw", "city", "state", "country", "query", "status", "note", "players"]
 
 
-def patch_lookup(wrong: dict) -> tuple[int, int]:
-    """The geocoder keeps every hometown it has placed in rosters/<sport>/hometowns.csv (keyed by the raw text)
+def patch_lookup(wrong: dict, lookup: Path) -> tuple[int, int]:
+    """The geocoder keeps every hometown it has placed in rosters/<sport>/hometowns.csv (``lookup``, keyed by the raw text)
     and reuses those rows before it reads hometown_corrections.csv, so a correction alone never moves
     a hometown it has already placed. Point the misspelled rows at the real town: copy its location
     from the table's own row for that town, or drop the row if the table has none (the next geocode
     run then looks it up again, using the correction)."""
-    if not LOOKUP.exists():
+    if not lookup.exists():
         return 0, 0
-    with open(LOOKUP, newline="", encoding="utf-8") as fh:
+    with open(lookup, newline="", encoding="utf-8") as fh:
         reader = csv.DictReader(fh)
         fields = reader.fieldnames
         rows = list(reader)
@@ -472,7 +471,7 @@ def patch_lookup(wrong: dict) -> tuple[int, int]:
         else:
             dropped += 1
     if patched or dropped:
-        with open(LOOKUP, "w", newline="", encoding="utf-8") as fh:
+        with open(lookup, "w", newline="", encoding="utf-8") as fh:
             w = csv.DictWriter(fh, fieldnames=fields)
             w.writeheader()
             w.writerows(keep)
@@ -480,17 +479,16 @@ def patch_lookup(wrong: dict) -> tuple[int, int]:
 
 
 def fix_hometown_spellings_main(argv=None):
-    global CORRECTIONS, LOOKUP
     ap = argparse.ArgumentParser(description=FIX_HOMETOWN_SPELLINGS_DOC, formatter_class=argparse.RawDescriptionHelpFormatter)
     add_sport_argument(ap)
     sport = load_sport(ap.parse_args(argv).sport)
-    CORRECTIONS, LOOKUP = sport.shared_hometown_corrections_csv, sport.rosters_dir / "hometowns.csv"
-    if not LOOKUP.exists():
-        sys.exit(f"{LOOKUP} not found. Run geocode.py first.")
+    corrections, lookup = sport.shared_hometown_corrections_csv, sport.rosters_dir / "hometowns.csv"
+    if not lookup.exists():
+        sys.exit(f"{lookup} not found. Run geocode.py first.")
     wrong = {(place, bad.lower()): good for place, bad, good in FIXES}
 
     found = {}   # raw hometown text -> (place, bad, good, players)
-    with open(LOOKUP, newline="", encoding="utf-8") as fh:
+    with open(lookup, newline="", encoding="utf-8") as fh:
         for r in csv.DictReader(fh):
             if r.get("school") or r.get("source") == "manual":
                 continue        # per-school guesses repeat the main row; hand-placed rows are left alone
@@ -526,14 +524,14 @@ def fix_hometown_spellings_main(argv=None):
     if added or updated:
         g.save_sport_corrections(sport, by_raw, own)
 
-    patched, dropped = patch_lookup(wrong)
+    patched, dropped = patch_lookup(wrong, lookup)
     if patched or dropped:
-        print(f"{LOOKUP}: {patched} misspelled entries moved to the real town"
+        print(f"{lookup}: {patched} misspelled entries moved to the real town"
               + (f", {dropped} removed so the geocoder looks them up again" if dropped else ""))
 
     towns = {(p, b) for p, b, _, _ in found.values()}
     missing = [f"{bad}, {place}" for place, bad, _ in FIXES if (place, bad) not in towns]
-    print(f"{added} corrections added and {updated} updated in {CORRECTIONS}, covering {len(towns)} misspelled towns")
+    print(f"{added} corrections added and {updated} updated in {corrections}, covering {len(towns)} misspelled towns")
     if missing and len(missing) < len(FIXES):
         print(f"{len(missing)} of the {len(FIXES)} known misspellings aren't in this sport's hometowns "
               "(already fixed, or never seen)")
@@ -544,6 +542,151 @@ def fix_hometown_spellings_main(argv=None):
 # ==============================================================================================================
 # Checking the geocoder (check)   (was scripts/check_geocoder.py)
 # ==============================================================================================================
+
+# ==============================================================================================================
+# Reviewing automatic spelling fixes (review)
+# ==============================================================================================================
+
+REVIEW_DOC = """List the automatic spelling fixes a person should look at, and apply what they decide (Nov 1: the
+spelling screen used on Oct 30, kept as a command).
+
+    python3 scripts/hometown_fixes.py review                                    # writes rosters/spelling_review.csv
+    python3 scripts/hometown_fixes.py review --apply rosters/spelling_review.csv
+
+It reads every corrections file (config/shared/ and each sport's own) and lists the automatic spelling fixes
+("spelling 'Delray' -> Nelray" in the note, not checked by hand) where
+  - the fix starts differently from what the roster typed (a different first letter, or a word's first letter):
+    on Oct 30 about half of those were another place (Delray -> Nelray, Rockaway -> Brockway), or
+  - what the roster typed is itself a town in that state.
+Since Oct 30 `suggest` leaves new fixes of the first kind for review, so the list mostly holds rows of the second
+kind and any older ones. The town list is the one `suggest` uses (.cache/us_cities.csv).
+
+Fill in the decision column, then run with --apply. A decision is one of
+  keep            the fix is right: the row stays, with "checked by hand" added to its note
+  as written      the fix is wrong and the right place isn't clear: keep the town as the roster typed it
+  City, ST        the right place (Delray Beach, FL)
+Blank decisions are skipped. A changed row's note says "checked by hand <date>", so it isn't listed again. A
+"City, ST" decision also corrects the plain readings of the same text (a row reading "Delray, FL" as Delray).
+Afterwards place the hometowns again: python3 scripts/pipeline.py <sport> --from geocode."""
+
+REVIEW_FIELDS = ["decision", "typed", "fixed_to", "state", "players", "why", "example", "files"]
+
+
+def corrections_files() -> list[Path]:
+    """Every hometown corrections file: the shared one first, then each sport's own."""
+    shared = ROOT / "config" / "shared" / "hometown_corrections.csv"
+    return [p for p in [shared] if p.exists()] + sorted(p for p in (ROOT / "config").glob("*/hometown_corrections.csv")
+                                                        if p != shared)
+
+
+def _automatic_spelling(row: dict) -> str | None:
+    """What the roster typed, for an automatic spelling fix not checked by hand; None for any other row."""
+    note = row.get("note") or ""
+    if row.get("status") != "fixed" or not note.lower().startswith("spelling") or "hand" in note.lower():
+        return None
+    m = re.match(r"spelling '(.+?)' -> (.+?)(?: \(|$)", note)
+    return m.group(1) if m else parse_hometown(row["hometown_raw"])["city"]
+
+
+def review_main(argv=None) -> int:
+    ap = argparse.ArgumentParser(description=REVIEW_DOC, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--apply", type=Path, metavar="CSV", help="apply the decisions filled in on this list")
+    ap.add_argument("--out", type=Path, default=ROOT / "rosters" / "spelling_review.csv", help="where to write the list")
+    args = ap.parse_args(argv)
+    if args.apply:
+        return apply_review(args.apply)
+    towns, _states_of = load_towns()
+    found: dict[tuple[str, str], dict] = {}
+    for path in corrections_files():
+        for r in read_rows(path):
+            typed = _automatic_spelling(r)
+            if typed is None:
+                continue
+            st = r["state"]
+            real = bool(st) and norm(typed) in towns.get(st, {})
+            if not (real or another_town(typed, r["city"])):
+                continue
+            item = found.setdefault((typed, st), {"decision": "", "typed": typed, "fixed_to": r["city"], "state": st,
+                                                  "players": 0, "why": "", "example": r["hometown_raw"], "files": []})
+            item["players"] = max(item["players"], int(r.get("players") or 0))
+            item["why"] = "a town in that state as typed" if real else "starts differently"
+            if path.parent.name not in item["files"]:
+                item["files"].append(path.parent.name)
+    rows = sorted(found.values(), key=lambda x: (-x["players"], x["typed"]))
+    args.out.parent.mkdir(parents=True, exist_ok=True)
+    with open(args.out, "w", newline="", encoding="utf-8") as fh:
+        w = csv.DictWriter(fh, fieldnames=REVIEW_FIELDS)
+        w.writeheader()
+        w.writerows({**x, "files": " ".join(x["files"])} for x in rows)
+    print(f"{len(rows)} automatic spelling fixes to look at -> {args.out}")
+    for x in rows[:15]:
+        print(f"  {x['typed']}, {x['state']} -> {x['fixed_to']}  ({x['players']} players; {x['why']})")
+    if len(rows) > 15:
+        print(f"  ... and {len(rows) - 15} more")
+    if rows:
+        print("Fill in the decision column (keep / as written / City, ST), then run review --apply with the file.")
+    return 0
+
+
+def read_rows(path: Path) -> list[dict]:
+    with open(path, newline="", encoding="utf-8") as fh:
+        return list(csv.DictReader(fh))
+
+
+def apply_review(decisions_csv: Path) -> int:
+    decided = {}
+    for d in read_rows(decisions_csv):
+        text = (d.get("decision") or "").strip()
+        if not text:
+            continue
+        key = (d["typed"], d["state"])
+        if text.lower() in ("keep", "as written"):
+            decided[key] = text.lower()
+        else:
+            m = re.fullmatch(r"(.+?),\s*([A-Za-z]{2})", text)
+            if not m:
+                raise SystemExit(f"{decisions_csv}: can't read the decision {text!r} for {d['typed']}, {d['state']} "
+                                 "(use keep, as written, or City, ST)")
+            decided[key] = (m.group(1).strip(), m.group(2).upper())
+    stamp = f"checked by hand {date.today():%b} {date.today().day}"
+    total = 0
+    for path in corrections_files():
+        rows = read_rows(path)
+        if not rows:
+            continue
+        n = 0
+        for r in rows:
+            typed = _automatic_spelling(r)
+            d = decided.get((typed, r["state"])) if typed is not None else None
+            if typed is None and r.get("status") in ("fixed", "review") and "hand" not in (r.get("note") or "").lower():
+                d = decided.get((r["city"], r["state"]))          # a plain reading of the same text
+                d = d if isinstance(d, tuple) else None
+                typed = r["city"]
+            if d is None:
+                continue
+            if d == "keep":                   # right: say so, so the next review doesn't list it again
+                r["note"] = f"{r['note']} ({stamp}: right)"
+                n += 1
+                continue
+            wrong = r["city"]
+            if d == "as written":
+                city, st, why = typed.strip(" ."), r["state"], f"kept as written (the automatic fix to {wrong} was wrong)"
+            else:
+                (city, st) = d
+                was, now = (f"{typed}, {r['state']}", f"{city}, {st}") if st != r["state"] else (typed, city)
+                why = f"{was} is {now}" + (f" (the automatic fix to {wrong} was wrong)" if wrong not in (typed, city) else "")
+            r.update(city=city, state=st, country="USA", query=f"{city}, {st}, USA", status="fixed", note=f"{stamp}: {why}")
+            n += 1
+        if n:
+            with open(path, "w", newline="", encoding="utf-8") as fh:
+                w = csv.DictWriter(fh, fieldnames=list(rows[0].keys()))
+                w.writeheader()
+                w.writerows(rows)
+            print(f"  {path.relative_to(ROOT)}: {n} rows changed")
+        total += n
+    print(f"{total} rows changed. Place the hometowns again: python3 scripts/pipeline.py <sport> --from geocode")
+    return 0
+
 
 CHECK_GEOCODER_DOC = """Check which geocoder version is in this folder and test a few towns that didn't place.
 
@@ -564,7 +707,8 @@ def check_geocoder_main(argv=None):
     print("Census keys that start with 'rabun':", [k for k in gaz.places if k[0].startswith("rabun")][:10])
 
 
-COMMANDS = {"suggest": suggest_hometown_fixes_main, "spellings": fix_hometown_spellings_main, "check": check_geocoder_main}
+COMMANDS = {"suggest": suggest_hometown_fixes_main, "spellings": fix_hometown_spellings_main, "check": check_geocoder_main,
+            "review": review_main}
 
 
 def command_line(argv=None) -> int:
