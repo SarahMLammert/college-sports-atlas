@@ -3,7 +3,7 @@ hometown_raw,city,state,country,query,status,note,players
 "Woodlands, Texas",Woodlands,TX,USA,"Woodlands, TX, USA",fixed,state 'Texas' -> TX,3
 "Highland Ranch, Colo.",Highlands Ranch,CO,USA,"Highlands Ranch, CO, USA",fixed,spelling 'Highland Ranch' -> Highlands Ranch,2
 "Cummings, Ga.",Cumming,GA,USA,"Cumming, GA, USA",fixed,spelling 'Cummings' -> Cumming,2
-"Kutaisi, Georgia",Kutaisi,GA,USA,"Kutaisi, GA, USA",fixed,state 'Georgia' -> GA,2
+"Kutaisi, Georgia",Kutaisi,,Georgia,"Kutaisi, Georgia",fixed,checked by hand Oct 30,2
 "North Huntington, Pa.",North Huntingdon,PA,USA,"North Huntingdon, PA, USA",fixed,spelling 'North Huntington' -> North Huntingdon,1
 "Oahu, Hawaii",Oahu,HI,USA,"Oahu, HI, USA",fixed,state 'Hawaii' -> HI,1
 "Thompson Station, Tenn.",Thompsons Station,TN,USA,"Thompsons Station, TN, USA",fixed,spelling 'Thompson Station' -> Thompsons Station (closer than Thompson's Station),1

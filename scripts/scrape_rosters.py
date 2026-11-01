@@ -718,6 +718,8 @@ def write_missing_rosters(report_dir: Path, schools_csv: Path, sport_label: str,
     for path in sorted(report_dir.glob("scrape_report_*.csv")):
         reports += read_csv(path)
     seasons_checked = sorted({int(r["season"]) for r in reports if str(r.get("season", "")).isdigit()})
+    saved = {(r["school"], int(r["season"])) for r in reports if r.get("status") in ("ok", "partial")}
+    has_season = lambda school, season: (school, season) in saved
     # (division, status) -> school -> [(season, report)]
     groups: dict[tuple[str, str], dict[str, list[tuple[int, dict]]]] = {}
     counts: dict[str, dict[str, int]] = {}
@@ -728,7 +730,9 @@ def write_missing_rosters(report_dir: Path, schools_csv: Path, sport_label: str,
         status = r["status"]
         if is_left_out(r) or (status == "failed" and r["school"] in left_out_now):
             status = "left_out"      # an older report's "failed", or a school left out since that run
-        c = counts.setdefault(div, {"ok": 0, "partial": 0, "failed": 0, "left_out": 0})
+        elif status == "failed":
+            status = core.failure_kind(r, has_season)     # not posted yet, or the COVID season (Oct 30)
+        c = counts.setdefault(div, {"ok": 0, "partial": 0, "failed": 0, "not_posted": 0, "covid": 0, "left_out": 0})
         c[status] = c.get(status, 0) + 1
         if status in ("failed", "partial", "left_out"):
             groups.setdefault((div, status), {}).setdefault(r["school"], []).append((int(r["season"]), r))
@@ -749,15 +753,19 @@ def write_missing_rosters(report_dir: Path, schools_csv: Path, sport_label: str,
            "- **Left out**: never contacted, on purpose: the school's note in the schools file starts with "
            "\"left out\" (most refuse automated visitors). They're listed once, at the end.",
            "- Seasons before a program started or after it ended aren't listed: they're not failures.",
+           "- **Not posted yet**: the current season, when the school's site has no roster for it yet (its pages "
+           "still show last season's team). Counted on their own, not listed; the next runs pick them up.",
+           "- **COVID**: no roster for the COVID season (fall 2020, or 2020-21) at a school with rosters the "
+           "seasons before and after: most likely no season was played. Counted on their own, not listed.",
            "- **Not tried any more**: failed or partial on several runs in a row (`attempts.csv` in this folder "
            "counts the tries), so runs skip it. `--retry-given-up` tries those again; deleting a row from "
            "attempts.csv does it for one school-season.", "",
-           "| division | ok | partial | failed | left out |", "|---|---|---|---|---|"]
+           "| division | ok | partial | failed | not posted yet | COVID | left out |", "|---|---|---|---|---|---|---|"]
     divs = [d for d in order if d in counts] + sorted(d for d in counts if d not in order)
     for d in divs:
         c = counts[d]
         out.append(f"| {d or '?'} | {c.get('ok', 0)} | {c.get('partial', 0)} | {c.get('failed', 0)} "
-                   f"| {c.get('left_out', 0)} |")
+                   f"| {c.get('not_posted', 0)} | {c.get('covid', 0)} | {c.get('left_out', 0)} |")
     out.append("")
     for d in divs:
         failed, partial = groups.get((d, "failed"), {}), groups.get((d, "partial"), {})

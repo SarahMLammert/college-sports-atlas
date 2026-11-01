@@ -467,6 +467,42 @@ def current_season(today=None, spring: bool | None = None) -> int:
     return today.year if today.month >= 3 else today.year - 1
 
 
+# ---- failures that aren't missing rosters (Oct 30) ----
+# A failed school-season usually means no roster could be saved. Two kinds aren't missing data, so the counts
+# (MISSING_ROSTERS.md, build.py check) show them on their own:
+#   not_posted  the current season, when the site has no roster for it yet (its pages still show last season's
+#               team, or there is no page): spring sports in the autumn. In October 2026 about 500 each in
+#               baseball and softball.
+#   covid       the COVID season (fall 2020 for a fall sport, 2020-21 for the rest), with no page, at a school that
+#               has rosters the season before and after: most likely no season was played.
+# A failure because of a bot check, a time limit or a dropped connection stays "failed": a re-run can fix it.
+
+def covid_season(spring: bool | None = None) -> int:
+    return 2021 if _spring(spring) else 2020
+
+
+_HARD_FAILURE = re.compile(r"HTTP 202|bot check|timed out|took over|Timeout|Connection|SSL|certificate|HTTP 5\d\d", re.I)
+
+
+def failure_kind(report: dict, has_season=None, spring: bool | None = None, today=None) -> str:
+    """'not_posted', 'covid' or 'failed' for a failed school-season's report (any other report: its status).
+    has_season(school, season) -> bool says whether the school has a roster that season (for 'covid')."""
+    if report.get("status") != "failed":
+        return report.get("status", "")
+    if _HARD_FAILURE.search(report.get("error") or ""):
+        return "failed"
+    try:
+        season = int(report["season"])
+    except (KeyError, ValueError):
+        return "failed"
+    if _spring(spring) and season == current_season(today, spring):
+        return "not_posted"          # a spring or winter sport's next season (a fall sport's is being played)
+    if season == covid_season(spring) and has_season and has_season(report["school"], season - 1) \
+            and has_season(report["school"], season + 1):
+        return "covid"
+    return "failed"
+
+
 class _Retry(Retry):
     """Retry that honors a site's "come back in N seconds" (Retry-After) for at most 30 seconds.
     Without a cap, one site asking for an hour stalls that school, and the whole run waits on it."""

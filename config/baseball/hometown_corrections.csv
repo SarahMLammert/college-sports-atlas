@@ -20,6 +20,7 @@ Singapore,,,Singapore,Singapore,fixed,read as Singapore,4
 "Mirimar, Fla.",Miramar,FL,USA,"Miramar, FL, USA",fixed,spelling 'Mirimar' -> Miramar,2
 "North Huntington, PA",North Huntingdon,PA,USA,"North Huntingdon, PA, USA",fixed,spelling 'North Huntington' -> North Huntingdon,2
 Lee Summit MO,Lee's Summit,MO,USA,"Lee's Summit, MO, USA",fixed,spelling 'Lee Summit' -> Lee's Summit,2
+"Cary Grove, Ill.",Camp Grove,IL,USA,"Camp Grove, IL, USA",fixed,spelling 'Cary Grove' -> Camp Grove,1
 "Highland Ranch, Colo.",Highlands Ranch,CO,USA,"Highlands Ranch, CO, USA",fixed,spelling 'Highland Ranch' -> Highlands Ranch,1
 "Lutherville-Timonium, Md.",Lutherville Timonium,MD,USA,"Lutherville Timonium, MD, USA",fixed,spelling 'Lutherville-Timonium' -> Lutherville Timonium,1
 "Oahu, HI",Oahu,HI,USA,"Oahu, HI, USA",fixed,,1
@@ -27,10 +28,9 @@ Glastonbury,Glastonbury,CT,USA,"Glastonbury, CT, USA",fixed,state from the only 
 "Elliott City, Md.",Ellicott City,MD,USA,"Ellicott City, MD, USA",fixed,spelling 'Elliott City' -> Ellicott City,1
 "Glenn Mills, Pa.",Glen Mills,PA,USA,"Glen Mills, PA, USA",fixed,spelling 'Glenn Mills' -> Glen Mills,1
 "Marrietta, GA",Marietta,GA,USA,"Marietta, GA, USA",fixed,spelling 'Marrietta' -> Marietta,1
-"East St. Louis, Mo.",East St. Louis,IL,USA,"East St. Louis, IL, USA",fixed,"state MO -> IL: no East St. Louis in MO, the only US town with this name",1
+"East St. Louis, Mo.",East St. Louis,IL,USA,"East St. Louis, IL, USA",fixed,checked by hand Oct 30,1
 "Cummings, GA",Cumming,GA,USA,"Cumming, GA, USA",fixed,spelling 'Cummings' -> Cumming,1
 "Norwin, Pa.",North Huntingdon,PA,USA,"North Huntingdon, PA, USA",fixed,checked by hand Oct 30: Norwin is North Huntingdon (the automatic fix to Orwin was wrong),1
-"Cary Grove, Ill.",Camp Grove,IL,USA,"Camp Grove, IL, USA",fixed,spelling 'Cary Grove' -> Camp Grove,1
 "Annadale, VA",Annandale,VA,USA,"Annandale, VA, USA",fixed,spelling 'Annadale' -> Annandale,1
 "Delray, FL",Delray Beach,FL,USA,"Delray Beach, FL, USA",fixed,checked by hand Oct 30: Delray is Delray Beach (the automatic fix to Nelray was wrong),1
 "Stone Oak, Texas",San Antonio,TX,USA,"San Antonio, TX, USA",fixed,checked by hand Oct 30: Stone Oak is San Antonio (the automatic fix to Lone Oak was wrong),1

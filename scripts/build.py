@@ -41,6 +41,7 @@ from core import (
     ROOT,
     season_files,
     season_rows,
+    failure_kind,
     roster_db,
     db_rows,
 )
@@ -728,15 +729,19 @@ def check_rosters_main(argv=None) -> int:
     if reports:
         order = list(sport.d1_divisions) + [d for d in sport.other_divisions if d not in sport.d1_divisions]
         counts: dict[str, Counter] = defaultdict(Counter)
+        saved = {(r["school"], int(r["season"])) for r in reports if r.get("status") in ("ok", "partial")}
         for r in reports:
             st = status_of(r)
+            if st == "failed":     # not posted yet, or the COVID season: not missing data (core.failure_kind)
+                st = failure_kind(r, lambda school, season: (school, season) in saved, spring=sport.spring_season)
             if st != "no_program":
                 counts[r.get("division") or "?"][st] += 1
         divs = [d for d in order if d in counts] + sorted(d for d in counts if d not in order)
-        print("\nschool-seasons      ok  partial  failed  left out")
+        print("\nschool-seasons      ok  partial  failed  not posted   COVID  left out")
         for d in divs:
             c = counts[d]
-            print(f"  {d:<12} {c['ok']:7,} {c['partial']:8,} {c['failed']:7,} {c['left_out']:9,}")
+            print(f"  {d:<12} {c['ok']:7,} {c['partial']:8,} {c['failed']:7,} {c['not_posted']:11,} {c['covid']:7,} "
+                  f"{c['left_out']:9,}")
     else:
         print("\n(no scrape reports yet: scrape with --report to get the ok/partial/failed table)")
 

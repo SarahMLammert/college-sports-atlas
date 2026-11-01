@@ -14,7 +14,7 @@ Stringer,Stringer,,,Stringer,fixed,,2
 "Marrietta, GA",Marietta,GA,USA,"Marietta, GA, USA",fixed,spelling 'Marrietta' -> Marietta (closer than Garretta),1
 "Corapolis, PA",Coraopolis,PA,USA,"Coraopolis, PA, USA",fixed,spelling 'Corapolis' -> Coraopolis,1
 "Hazelhurst, GA",Hazlehurst,GA,USA,"Hazlehurst, GA, USA",fixed,spelling 'Hazelhurst' -> Hazlehurst,1
-"Bed Stuy, NY",Bed Stuy,NY,USA,"Bed Stuy, NY, USA",fixed,,1
+"Bed Stuy, NY",Brooklyn,NY,USA,"Brooklyn, NY, USA",fixed,checked by hand Oct 30,1
 "Destrahan, LA",Destrehan,LA,USA,"Destrehan, LA, USA",fixed,spelling 'Destrahan' -> Destrehan,1
 "Toana, Va.",Toano,VA,USA,"Toano, VA, USA",fixed,spelling 'Toana' -> Toano,1
 "Middleton, Del.",Middletown,DE,USA,"Middletown, DE, USA",fixed,spelling 'Middleton' -> Middletown,1

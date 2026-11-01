@@ -4,19 +4,19 @@ hometown_raw,city,state,country,query,status,note,players
 Arleta,Arleta,,,Arleta,fixed,,3
 "Elliott City, Md.",Ellicott City,MD,USA,"Ellicott City, MD, USA",fixed,spelling 'Elliott City' -> Ellicott City,2
 Marin,Marin,,,Marin,fixed,,2
+"Clarksville, Ga.",Clarkesville,GA,USA,"Clarkesville, GA, USA",fixed,spelling 'Clarksville' -> Clarkesville,1
+"Suprise, Ariz.",Surprise,AZ,USA,"Surprise, AZ, USA",fixed,spelling 'Suprise' -> Surprise,1
 Singapore,,,Singapore,Singapore,fixed,read as Singapore,1
 "Murietta, Calif.",Murrieta,CA,USA,"Murrieta, CA, USA",fixed,spelling 'Murietta' -> Murrieta,1
 "Thompson Station, Tenn.",Thompsons Station,TN,USA,"Thompsons Station, TN, USA",fixed,spelling 'Thompson Station' -> Thompsons Station,1
 "Manakin-Sabot, Va.",Manakin Sabot,VA,USA,"Manakin Sabot, VA, USA",fixed,spelling 'Manakin-Sabot' -> Manakin Sabot,1
 Lansingburgh,Lansingburgh,,,Lansingburgh,fixed,,1
 "Huntington Valley, Pa.",Huntingdon Valley,PA,USA,"Huntingdon Valley, PA, USA",fixed,spelling 'Huntington Valley' -> Huntingdon Valley,1
-"Clarksville, Ga.",Clarkesville,GA,USA,"Clarkesville, GA, USA",fixed,spelling 'Clarksville' -> Clarkesville,1
 "Township of Washington, NJ",Township Of Washington,NJ,USA,"Township Of Washington, NJ, USA",fixed,town and state read from the text,1
 "Marrietta, GA",Marietta,GA,USA,"Marietta, GA, USA",fixed,spelling 'Marrietta' -> Marietta,1
 "Township of Washington, N.J.",Township Of Washington,NJ,USA,"Township Of Washington, NJ, USA",fixed,town and state read from the text,1
 "Hazelhurst, GA",Hazlehurst,GA,USA,"Hazlehurst, GA, USA",fixed,spelling 'Hazelhurst' -> Hazlehurst,1
 "Kailua-Kona, Hawai'i",Kailua Kona,HI,USA,"Kailua Kona, HI, USA",fixed,spelling 'Kailua-Kona' -> Kailua Kona,1
-"Suprise, Ariz.",Surprise,AZ,USA,"Surprise, AZ, USA",fixed,spelling 'Suprise' -> Surprise,1
 "Newton, Conn.",Newtown,CT,USA,"Newtown, CT, USA",fixed,spelling 'Newton' -> Newtown,1
 Menomonee Falls. Wis.,Menomonee Falls,WI,USA,"Menomonee Falls, WI, USA",fixed,town and state read from the text,1
 "Johnsontown, Colo.",Johnstown,CO,USA,"Johnstown, CO, USA",fixed,spelling 'Johnsontown' -> Johnstown,1

@@ -215,7 +215,7 @@ Drake,D1,Missouri Valley,godrakebulldogs.com,,,,,
 Illinois State,D1,Missouri Valley,goredbirds.com,,,,,
 Indiana State,D1,Missouri Valley,gosycamores.com,,,,,
 Murray State,D1,Missouri Valley,goracers.com,,,,,
-Southern Illinois,D1,Missouri Valley,siusalukis.com,,,,SIU|SIU Carbondale|Southern Illinois University Carbondale|Southern Illinois University at Carbondale|Southern Illinois-Carbondale,
+Southern Illinois,D1,Missouri Valley,siusalukis.com,https://siusalukis.com/sports/soccer/roster,,,SIU|SIU Carbondale|Southern Illinois University Carbondale|Southern Illinois University at Carbondale|Southern Illinois-Carbondale,no men's team: its women's roster may be at /sports/soccer/ (Oct 30)
 Evansville,D1,Missouri Valley,gopurpleaces.com,,,,,
 UIC,D1,Missouri Valley,uicflames.com,,,,University of Illinois Chicago,
 Northern Iowa,D1,Missouri Valley,unipanthers.com,,,,UNI,
@@ -360,7 +360,7 @@ St. Thomas (MN),D3,,,,,2020,,FCS from 2021
 Abilene Christian,D1,UAC,acusports.com,,,,ACU,
 Austin Peay,D1,UAC,letsgopeay.com,,,,Austin Peay State University,
 Eastern Kentucky,D1,UAC,ekusports.com,,,,EKU,
-Tarleton State,D1,UAC,tarletonsports.com,,,,,
+Tarleton State,D1,UAC,tarletonsports.com,https://tarletonsports.com/sports/soccer/roster,,,,no men's team: its women's roster may be at /sports/soccer/ (Oct 30)
 Tarleton State,D2,,,,,2019,,FCS from 2020-21
 Little Rock,D1,UAC,lrtrojans.com,,,,University of Arkansas at Little Rock,
 Central Arkansas,D1,UAC,ucasports.com,,,,,
@@ -457,7 +457,7 @@ Roosevelt,D2,GLIAC,,,2023,,,
 Roosevelt,NAIA,,,,2020,2022,,
 Saginaw Valley State,D2,Great Lakes Intercollegiate Athletic Conference,svsucardinals.com,,,,SVSU|Saginaw Valley,
 Wisconsin-Parkside,D2,Great Lakes Intercollegiate Athletic Conference,parksiderangers.com,,,,,
-Wayne State (MI),D2,Great Lakes Intercollegiate Athletic Conference,wsuathletics.com,,,,Wayne State,
+Wayne State (MI),D2,Great Lakes Intercollegiate Athletic Conference,wsuathletics.com,https://wsuathletics.com/sports/soccer/roster,,,Wayne State,no men's team: its women's roster may be at /sports/soccer/ (Oct 30)
 Drury,D2,Great Lakes Valley Conference,drurypanthers.com,,,,Drury University,
 Lewis,D2,Great Lakes Valley Conference,lewisflyers.com,,,,,
 Lincoln (MO),D2,Great Lakes Valley Conference,lubluetigers.com,,,,Lincoln University,
@@ -510,11 +510,11 @@ Alabama-Huntsville,D2,Gulf South Conference,uahchargers.com,,,,Alabama Huntsvill
 Montevallo,D2,Gulf South Conference,montevallofalcons.com,,,,,
 West Alabama,D2,Gulf South Conference,uwaathletics.com,,,,UWA,
 Valdosta State,D2,Gulf South Conference,vstateblazers.com,,,,,
-Allen,D2,Southern Intercol. Ath. Conf.,auyellowjackets.com,,,,,
+Allen,D2,Southern Intercol. Ath. Conf.,auyellowjackets.com,https://auyellowjackets.com/sports/soccer/roster,,,,no men's team: its women's roster may be at /sports/soccer/ (Oct 30)
 Allen,NAIA,,,,,2019,,NAIA through 2020 (NCAA directory)
-Bluefield State,D2,Southern Intercol. Ath. Conf.,gobstate.com,,,,,
+Bluefield State,D2,Southern Intercol. Ath. Conf.,gobstate.com,https://gobstate.com/sports/soccer/roster,,,,no men's team: its women's roster may be at /sports/soccer/ (Oct 30)
 Bluefield State,D2,CIAA,,,2021,,,
-Edward Waters,D2,Southern Intercol. Ath. Conf.,ewutigerpride.com,,,,,
+Edward Waters,D2,Southern Intercol. Ath. Conf.,ewutigerpride.com,https://ewutigerpride.com/sports/soccer/roster,,,,no men's team: its women's roster may be at /sports/soccer/ (Oct 30)
 Edward Waters,D2,SIAC,,,2021,,,
 Edward Waters,NAIA,,,,,2020,,
 Salem (WV),D2,Southern Intercol. Ath. Conf.,salemtigers.com,,,,Salem University (West Virginia),
@@ -550,7 +550,7 @@ Missouri Western,D2,Mid-America Intercollegiate Athletics Association,gogriffons
 Newman,D2,Mid-America Intercollegiate Athletics Association,newmanjets.com,,,,,
 Northeastern State,D2,Mid-America Intercollegiate Athletics Association,goriverhawksgo.com,,,,,
 Northwest Missouri State,D2,Mid-America Intercollegiate Athletics Association,bearcatsports.com,,,,Northwest Missouri,
-Pittsburg State,D2,Mid-America Intercollegiate Athletics Association,pittstategorillas.com,,,,,
+Pittsburg State,D2,Mid-America Intercollegiate Athletics Association,pittstategorillas.com,https://pittstategorillas.com/sports/soccer/roster,,,,no men's team: its women's roster may be at /sports/soccer/ (Oct 30)
 Rogers State,D2,Mid-America Intercollegiate Athletics Association,rsuhillcats.com,,,,,
 Central Missouri,D2,Mid-America Intercollegiate Athletics Association,ucmathletics.com,,,,UCM,
 Central Oklahoma,D2,Mid-America Intercollegiate Athletics Association,bronchosports.com,,,,UCO,
@@ -569,7 +569,7 @@ Shawnee State,D2,Mountain East Conference,ssubears.com,,,,,
 Shawnee State,NAIA,,,,,2024,,NAIA through 2025 (NCAA directory)
 Charleston (WV),D2,Mountain East Conference,ucgoldeneagles.com,,,,University of Charleston|University of Charleston (West Virginia),
 West Liberty,D2,Mountain East Conference,hilltoppersports.com,,,,,
-West Virginia State,D2,Mountain East Conference,wvsuyellowjackets.com,,,,,
+West Virginia State,D2,Mountain East Conference,wvsuyellowjackets.com,https://wvsuyellowjackets.com/sports/soccer/roster,,,,no men's team: its women's roster may be at /sports/soccer/ (Oct 30)
 West Virginia Wesleyan,D2,Mountain East Conference,wesleyanbobcats.com,,,,West Virginia Wesleyan College,
 Wheeling,D2,Mountain East Conference,wucardinals.com,,,,Wheeling Jesuit,
 Adelphi,D2,Northeast 10 Conference,aupanthers.com,,,,,
@@ -1084,7 +1084,7 @@ Methodist,D3,USA South Athletic Conference,mumonarchs.com,,,,,
 North Carolina Wesleyan,D3,USA South Athletic Conference,ncwsports.com,,,,NC Wesleyan,
 Pfeiffer,D3,USA South Athletic Conference,gofalconsports.com,,,,,
 Pfeiffer,D2,,,,,2019,,D2 through 2020 (NCAA directory)
-Salem (NC),D3,USA South Athletic Conference,salemspirits.prestosports.com,,,,Salem College|Salem College (North Carolina),
+Salem (NC),D3,USA South Athletic Conference,salemspirits.prestosports.com,https://salemspirits.prestosports.com/sports/soccer/roster,,,Salem College|Salem College (North Carolina),no men's team: its women's roster may be at /sports/soccer/ (Oct 30)
 Southern Virginia,D3,USA South Athletic Conference,knightathletics.com,,,,,
 William Peace,D3,USA South Athletic Conference,gopeacepacers.com,,,,,
 Cairn,D3,United East Conference,cairnhighlanders.com,,,,,

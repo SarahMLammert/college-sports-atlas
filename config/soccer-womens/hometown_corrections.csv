@@ -14,11 +14,11 @@ hometown_raw,city,state,country,query,status,note,players
 "Huntington Valley, Pa.",Huntingdon Valley,PA,USA,"Huntingdon Valley, PA, USA",fixed,spelling 'Huntington Valley' -> Huntingdon Valley,1
 "Elliott City, Md.",Ellicott City,MD,USA,"Ellicott City, MD, USA",fixed,spelling 'Elliott City' -> Ellicott City,1
 "Colorado Spring, Colo.",Colorado Springs,CO,USA,"Colorado Springs, CO, USA",fixed,spelling 'Colorado Spring' -> Colorado Springs,1
-"East St. Louis, Mo.",East St. Louis,IL,USA,"East St. Louis, IL, USA",fixed,"state MO -> IL: no East St. Louis in MO, the only US town with this name",1
+"East St. Louis, Mo.",East St. Louis,IL,USA,"East St. Louis, IL, USA",fixed,checked by hand Oct 30,1
 "San Fernando Valley, Calif.",San Fernando Valley CCD,CA,USA,"San Fernando Valley CCD, CA, USA",fixed,spelling 'San Fernando Valley' -> San Fernando Valley CCD,1
 "West Palm, Fla.",West Park,FL,USA,"West Park, FL, USA",fixed,spelling 'West Palm' -> West Park,1
 "Rancho Murrieta, Calif.",Rancho Murieta,CA,USA,"Rancho Murieta, CA, USA",fixed,spelling 'Rancho Murrieta' -> Rancho Murieta,1
 "Sandy Springs, Md.",Sandy Spring,MD,USA,"Sandy Spring, MD, USA",fixed,spelling 'Sandy Springs' -> Sandy Spring,1
-"Bogato, NJ",Bogato,NJ,USA,"Bogato, NJ, USA",fixed,,1
+"Bogato, NJ",Bogota,NJ,USA,"Bogota, NJ, USA",fixed,checked by hand Oct 30,1
 "Murietta, California",Murrieta,CA,USA,"Murrieta, CA, USA",fixed,spelling 'Murietta' -> Murrieta,1
 "Framington, MA",Framington,MA,USA,"Framington, MA, USA",fixed,,1

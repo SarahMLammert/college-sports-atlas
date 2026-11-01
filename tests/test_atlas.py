@@ -1019,6 +1019,21 @@ def test_current_page_that_is_still_last_seasons_team(monkeypatch):
     assert sr.check_current_is_new([(2025, [dict(r) for r in old], rep())], saved)[0][1] != []
 
 
+def test_failures_that_are_not_missing_rosters():
+    from datetime import date
+    oct30 = date(2026, 10, 30)
+    has = lambda school, season: season in (2019, 2021, 2022)
+    fail = lambda season, err="https://x/roster: HTTP 404": {"status": "failed", "school": "A", "season": season, "error": err}
+    # a spring sport's next season in the autumn: not posted yet, unless a bot check or a time limit stopped it
+    assert core.failure_kind(fail(2027), has, spring=True, today=oct30) == "not_posted"
+    assert core.failure_kind(fail(2027, "https://x/roster: HTTP 202"), has, spring=True, today=oct30) == "failed"
+    assert core.failure_kind(fail(2026), has, spring=False, today=oct30) == "failed"    # fall 2026 is being played
+    # the COVID season with rosters around it: probably not played; without them it's a real gap
+    assert core.failure_kind(fail(2021), has, spring=True, today=oct30) == "failed"     # no 2020 roster
+    assert core.failure_kind(fail(2020), lambda s, y: y in (2019, 2021), spring=False, today=oct30) == "covid"
+    assert core.failure_kind({"status": "ok", "season": 2024}, has, spring=True, today=oct30) == "ok"
+
+
 def test_missing_rosters_lists_left_out_once(tiny):
     reports = [
         {"season": 2025, "school": "Alpha", "division": "D1", "status": "failed", "error": "https://alpha.com/r: HTTP 404"},
@@ -1033,8 +1048,8 @@ def test_missing_rosters_lists_left_out_once(tiny):
     path = sr.write_missing_rosters(tiny.rosters_dir, tiny.schools_csv, "Softball", [],
                                     division_order=["D1", "D2", "D3", "NAIA", "JUCO"])
     text = path.read_text()
-    assert "| division | ok | partial | failed | left out |" in text
-    assert "| D3 | 0 | 0 | 0 | 2 |" in text
+    assert "| division | ok | partial | failed | not posted yet | COVID | left out |" in text
+    assert "| D3 | 0 | 0 | 0 | 0 | 0 | 2 |" in text
     assert "## Left out on purpose (1 school)" in text
     assert text.count("**Blocked**") == 1
     assert "### Failed" in text and "**Alpha**" in text
