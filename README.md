@@ -38,9 +38,9 @@ pages for every sport, opened with the sport in the address (`players-dotmap.htm
 - **Coaching Moves** (`staff-moves.html`): coaches moving between schools (head coach jobs, coaching jobs or any staff job).
 - **Staff Directory** (`staff-directory.html`): a school's staff by season, its head coaches over time, and any
   person's career.
-- **School Influence Map** (`school-influence.html`): one school's reach: everyone who played or coached there, the
-  schools they came from and went on to, each person's career, and how the school ranks. Built in the browser from
-  the player and staff data, so it needs no build step of its own.
+- **School Influence Map** (`school-influence.html`): pick a school and a season to see where everyone who had been
+  there was that season, each person's career, and how the school ranks. Built in the browser from the player and
+  staff data, so it needs no build step of its own.
 
 Football and baseball come in two files: the dot map opens on the D1 schools (`map_data.json`) and loads the
 other divisions (`map_data_more.json`) only when a view or a search needs them. Map and staff data are packed

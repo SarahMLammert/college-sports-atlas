@@ -541,7 +541,7 @@
   // Seasons are shown as school years: "2023-24". A season number is the year it starts for fall sports (football,
   // volleyball, soccer: 2023 = 2023-24) and the year it ends for the rest (2024 = 2023-24). data.spring says which;
   // for data built before Oct 29, which doesn't say, the sport's settings do (sports.js, from spring_season).
-  const springOf = (d) => d.spring !== undefined ? !!d.spring : !!(SPORT_PAGES[d.sport || sport] || {}).spring;
+  const springOf = (d) => d.spring !== undefined ? !!d.spring : !!(SPORT_PAGES[sport] || {}).spring;   // d.sport is the display name, not the id
   function seasonLabel(y, spring) {
     const a = spring ? y - 1 : y;
     return `${a}-${String((a + 1) % 100).padStart(2, "0")}`;

@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="common.css">
 <style>
 /* One school's reach. The controls, then the map of everyone's moves on the left and the rankings on the right
-   (the Transfer Map's layout), then everyone connected to the school, with each person's career. With no school
+   (the Transfer Map's layout), then the school's people that season, with each person's career. With no school
    picked, the map and the list rank the schools. Same file for every sport, opened as ?sport=<id>. */
 body { background: var(--panel) var(--paper-grain); }
 .bar { position: static; padding-bottom: 6px; }
@@ -23,12 +23,22 @@ body { background: var(--panel) var(--paper-grain); }
 .page { padding: 0 max(var(--gap), env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(var(--gap), env(safe-area-inset-left)); display: flex; flex-direction: column; gap: 10px; }
 .ctl { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px 16px; }
 .ctl > div { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
-.ctl .grow { flex: 1 1 220px; max-width: 340px; }
+.ctl .grow { flex: 1 1 220px; max-width: 320px; }
 .ctl .seg button { padding: 6px 11px; font-size: 14px; white-space: nowrap; }
 .ctl .row { display: flex; align-items: center; gap: 6px; }
 .ctl select.field { width: auto; padding: 6px 8px; }
-.step { width: 32px; height: 34px; border: 1px solid var(--border); border-radius: 6px; background: var(--panel); cursor: pointer; font-size: 18px; line-height: 1; padding: 0; }
-.step:disabled { opacity: .4; cursor: default; }
+.step { width: 34px; height: 34px; flex: none; border: 1px solid var(--border); border-radius: 50%; background: var(--panel); cursor: pointer; font-size: 12px; line-height: 1; padding: 0; }
+.step[aria-pressed="true"] { background: var(--fg); color: var(--panel); }
+#yearBox { flex: 0 1 300px; }
+#yearBox .label b { color: var(--fg); font-weight: 600; letter-spacing: .02em; font-size: 13px; }
+#year { flex: 1; min-width: 0; accent-color: var(--accent); }
+.lead { margin: 2px 0; font: 600 21px/1.25 var(--display); }
+.lead b { color: var(--accent); font-weight: 700; font-variant-numeric: tabular-nums; }
+.check { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; cursor: pointer; white-space: nowrap; }
+.check input { accent-color: var(--accent); margin: 0; }
+.pfoot { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+details.more summary { cursor: pointer; color: var(--accent); font-weight: 600; font-size: 14px; }
+details.more table { margin-top: 6px; }
 .ctl[hidden], .ctl > div[hidden] { display: none; }
 .ctl > div { max-width: 100%; }
 .ctl .seg { flex-wrap: wrap; max-width: 100%; border-radius: 16px; }
@@ -46,8 +56,6 @@ body { background: var(--panel) var(--paper-grain); }
 .sel-head h2 { font-size: 24px; }
 .sel-head .note { margin: 3px 0 0; }
 .sel-head .link { white-space: nowrap; }
-.big b { display: block; font: 700 40px/1 var(--display); font-variant-numeric: tabular-nums; color: var(--accent); }
-.big small { color: var(--muted); font-size: 13px; line-height: 1.3; }
 .group { display: flex; flex-direction: column; gap: 6px; }
 .group h2 { font-size: 18px; }
 .group .note { margin: 0; }
@@ -69,7 +77,7 @@ body { background: var(--panel) var(--paper-grain); }
 .tl .v b { color: var(--fg); font-weight: 600; }
 .tl .b { grid-column: 1 / -1; height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
 .tl .b span { display: block; height: 100%; background: var(--bar-c, var(--accent)); }
-.tl.out .b span { --bar-c: var(--out); } .tl.in .b span { --bar-c: var(--in); }
+.tl.out .b span { --bar-c: var(--out); }
 .tside .seg { flex-wrap: wrap; border-radius: 12px; }
 .tside .seg button { padding: 5px 10px; font-size: 13px; }
 .fine { font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 12px; margin: 0; }
@@ -80,7 +88,7 @@ body { background: var(--panel) var(--paper-grain); }
 .people h2 { font-size: 22px; }
 .ptop { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 10px 18px; }
 .ptools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
-.ptools input { width: 220px; max-width: 100%; }
+.ptools input[type="search"] { width: 220px; max-width: 100%; }
 .ptools select { width: auto; }
 .atchip { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; background: var(--accent-soft); border-radius: 999px; padding: 3px 10px; }
 .atchip button { all: unset; cursor: pointer; font-weight: 700; padding: 0 2px; }
@@ -109,7 +117,7 @@ body { background: var(--panel) var(--paper-grain); }
 .career button:hover { border-bottom-color: var(--fg); }
 .career button:focus-visible { outline: 2px solid var(--focus); }
 .empty { color: var(--muted); font-size: 14px; margin: 0; }
-:root { --in: var(--accent); --out: #23606b; }   /* as on the Transfer Map: came in terracotta, left deep sea */
+:root { --out: #23606b; }   /* deep sea, as on the Transfer Map */
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --out: #7fc4cf; } }
 :root[data-theme="dark"] { --out: #7fc4cf; }
 @media (max-width: 1000px) {
@@ -120,9 +128,10 @@ body { background: var(--panel) var(--paper-grain); }
 @media (max-width: 760px) {
   .prow { grid-template-columns: 1fr; }
   .pcols { display: none; }
-  .ptools input { width: 100%; }
+  .ptools input[type="search"] { width: 100%; }
   .ptools { width: 100%; }
-  .ctl .grow { max-width: none; flex-basis: 100%; }
+  .ctl .grow, #yearBox { max-width: none; flex-basis: 100%; }
+  .lead { font-size: 19px; }
   .career li { grid-template-columns: 1.5em minmax(0, 1fr); }
   .career li > :last-child { grid-column: 2; }
 }
@@ -134,7 +143,7 @@ body { background: var(--panel) var(--paper-grain); }
 <header class="bar" id="bar">
   <div class="brand card">
     <h1>College <span id="sportName"></span> <span>School Influence Map</span></h1>
-    <p class="sub" id="sub">Everyone connected to one school, and where they went</p>
+    <p class="sub" id="sub">Where one school's players and coaches went</p>
   </div>
   <div class="tools">
     <a class="btn icon" href="index.html" aria-label="All sports" title="All sports">
@@ -172,42 +181,25 @@ body { background: var(--panel) var(--paper-grain); }
       <input class="field" id="school" list="schoolList" placeholder="Type a school" autocomplete="off">
       <datalist id="schoolList"></datalist>
     </div>
+    <div id="yearBox">
+      <label class="label" for="year">Season: <b id="yearText"></b></label>
+      <div class="row">
+        <button type="button" class="step" id="play" aria-label="Play through the seasons" title="Play through the seasons">▶</button>
+        <input id="year" type="range" min="0" step="1">
+      </div>
+    </div>
     <div id="whoBox">
-      <span class="label" id="whoLabel">People</span>
+      <span class="label" id="whoLabel">Show</span>
       <div class="seg" id="who" role="group" aria-labelledby="whoLabel">
         <button type="button" data-v="all">Everyone</button>
         <button type="button" data-v="player">Players</button>
         <button type="button" data-v="coach">Coaches</button>
-        <button type="button" data-v="alum">Players turned coaches</button>
         <button type="button" data-v="head">Head coaches</button>
-      </div>
-    </div>
-    <div id="dirBox">
-      <span class="label" id="dirLabel">Timing</span>
-      <div class="seg" id="dir" role="group" aria-labelledby="dirLabel">
-        <button type="button" data-v="all">All</button>
-        <button type="button" data-v="out">Already left</button>
-        <button type="button" data-v="in">Still to come</button>
-      </div>
-    </div>
-    <div id="yearBox">
-      <label class="label" for="year">Where they were in</label>
-      <div class="row">
-        <button type="button" class="step" id="yearBack" aria-label="One season earlier">‹</button>
-        <select class="field" id="year"></select>
-        <button type="button" class="step" id="yearNext" aria-label="One season later">›</button>
-      </div>
-    </div>
-    <div id="staffBox">
-      <span class="label" id="staffLabel">Staff</span>
-      <div class="seg" id="staff" role="group" aria-labelledby="staffLabel">
-        <button type="button" data-v="coach">Coaches only</button>
-        <button type="button" data-v="all">With support staff</button>
       </div>
     </div>
   </div>
   <div class="head">
-    <span class="note" id="hint"></span>
+    <p class="lead" id="hint"></p>
     <span class="key" id="key"></span>
   </div>
   <div class="tgrid">
@@ -223,6 +215,7 @@ body { background: var(--panel) var(--paper-grain); }
       <div class="ptools">
         <span class="atchip" id="atChip" hidden></span>
         <input class="field" id="q" type="search" placeholder="Find a name" aria-label="Find a name" autocomplete="off">
+        <label class="check"><input type="checkbox" id="support"> Include support staff</label>
         <select class="field" id="sort" aria-label="Sort people">
           <option value="recent">Most recent first</option>
           <option value="name">A to Z</option>
@@ -231,7 +224,10 @@ body { background: var(--panel) var(--paper-grain); }
     </div>
     <div class="pcols label" aria-hidden="true"><span>Name</span><span>At this school</span><span id="whenCol"></span></div>
     <ol class="plist" id="plist"></ol>
-    <button type="button" class="link" id="moreBtn" hidden></button>
+    <div class="pfoot">
+      <button type="button" class="link" id="moreBtn" hidden></button>
+      <button type="button" class="link" id="noneBtn" hidden></button>
+    </div>
   </section>
 </main>
 
@@ -360,10 +356,10 @@ body { background: var(--panel) var(--paper-grain); }
 
   // ---------- every school's numbers, for the rankings (coaches only, every season) ----------
   const METRICS = [
-    { id: "sent", label: "People who went on", tip: "Players and coaches who were here, then at another school in this data" },
-    { id: "reach", label: "Schools reached", tip: "Other schools those people went on to" },
-    { id: "players", label: "Players who transferred out", tip: "Players on a later roster at another school" },
-    { id: "coaches", label: "Coaches who went on", tip: "Coaches on a later staff at another school" },
+    { id: "sent", label: "Left for another school", tip: "Players and coaches who were here, then at another school in this data" },
+    { id: "reach", label: "Schools reached", tip: "Other schools those people went to" },
+    { id: "players", label: "Players who transferred", tip: "Players on a later roster at another school" },
+    { id: "coaches", label: "Coaches who took another job", tip: "Coaches on a later staff at another school" },
     { id: "alum", label: "Players turned coaches", tip: "Former players later on a coaching staff, here or anywhere" },
     { id: "heads", label: "Head coaches elsewhere today", tip: `Played or coached here, and head coach at another school in ${lab(NOW || data.LAST)}` },
   ];
@@ -410,15 +406,15 @@ body { background: var(--panel) var(--paper-grain); }
   };
 
   // ---------- page state ----------
-  const state = { school: -1, who: "all", dir: "all", staff: "coach", year: 0, at: -1, q: "", sort: "recent", metric: "sent", level: LEVELS[0] || "D1", shown: 100, open: "" };
+  const state = { school: -1, who: "all", staff: "coach", year: 0, at: -1, q: "", sort: "recent", showNone: false, rankOpen: false, metric: "sent", level: LEVELS[0] || "D1", shown: 100, open: "" };
   const ALL_YEARS = [...new Set([...data.SEASONS, ...perYear.keys()])].sort((a, b) => a - b);
   const FIRST = ALL_YEARS[0], LAST = ALL_YEARS[ALL_YEARS.length - 1];
   // The season the page opens on: the newest one with a real count of staff pages (see NOW), else the newest.
   const LATEST = ALL_YEARS.includes(NOW) ? NOW : LAST;
   state.year = LATEST;
-  $("year").innerHTML = ALL_YEARS.map((y) => `<option value="${y}">${lab(y)}</option>`).join("");
+  $("year").max = ALL_YEARS.length - 1;
   $("schoolList").innerHTML = data.schools.map((s, i) => hasPeople(i) ? `<option value="${esc(s[0])}">` : "").join("");
-  $("sub").textContent = `Everyone connected to one school, and where they went, ${span(FIRST, LAST)}`;
+  $("sub").textContent = `Where one school's players and coaches went, ${span(FIRST, LAST)}`;
 
   // ---------- one school: its people and their moves ----------
   let M = null;      // { sel, rows, shown, routes }
@@ -438,7 +434,7 @@ body { background: var(--panel) var(--paper-grain); }
     for (const r of seen.values()) {
       const stops = stopsOf(r.pid, r.c, support);
       const here = stops.filter((x) => x.s === s);
-      if (!here.length) continue;
+      if (!here.length || here[0].from > state.year) continue;     // only people who had been here by that season
       r.stops = stops; r.here = here;
       r.name = r.pid >= 0 ? names[recsOf[r.pid][0]] : staffPeople[r.c];
       r.out = new Map(); r.in = new Map();
@@ -448,11 +444,10 @@ body { background: var(--panel) var(--paper-grain); }
         if (t) (b.from > a.from ? r.out : r.in).set(b.s, t);
       }
       // Where this person was in the picked season: the stop covering it, the newest one if two do.
-      // status: "here", "left" (been here, now elsewhere), "coming" (elsewhere, here later) or "none" (no page that season).
+      // status: "here", "left" (now at another school) or "none" (no roster or staff page that season).
       const y = state.year, cover = stops.filter((x) => x.from <= y && x.to >= y);
       r.where = cover.find((x) => x.s === s) || cover[cover.length - 1] || null;
-      r.been = here[0].from <= y;
-      r.status = !r.where ? "none" : r.where.s === s ? "here" : r.been ? "left" : "coming";
+      r.status = !r.where ? "none" : r.where.s === s ? "here" : "left";
       r.yearStint = r.where && r.where.kind === "staff" ? stintsOf[r.c].find((k) => ST.y[k] === y && ST.s[k] === r.where.s) : undefined;
       if (r.where && r.where.kind === "staff" && r.yearStint === undefined) r.yearStint = r.where.last;    // a season with no staff pages inside a run
       r.head = r.yearStint !== undefined && ST.r[r.yearStint] === HEAD;
@@ -467,27 +462,27 @@ body { background: var(--panel) var(--paper-grain); }
     M = { sel: s, rows };
     refilter();
   }
-  const whoFits = (r) => state.who === "all" || (state.who === "player" ? r.played : state.who === "coach" ? r.coached : state.who === "alum" ? r.turned : r.head);
+  const whoFits = (r) => state.who === "all" || (state.who === "player" ? r.played : state.who === "coach" ? r.coached : r.head);
   // The rows the controls leave, and the map's routes: one line to each campus, with everyone there that season.
   function refilter() {
     if (!M) return;
-    const fits = M.rows.filter((r) => whoFits(r) && (state.dir === "all" || r.status === (state.dir === "out" ? "left" : "coming")));
-    const routes = new Map();
-    let here = 0, away = 0, coming = 0, none = 0;
+    const fits = M.rows.filter(whoFits), routes = new Map();
+    let here = 0, away = 0, none = 0;
     for (const r of fits) {
-      if (r.status === "here") here++; else if (r.status === "left") away++; else if (r.status === "coming") coming++; else none++;
-      if (r.status !== "left" && r.status !== "coming") continue;
-      const dir = r.status === "left" ? "out" : "in", key = dir + r.where.s;
-      let x = routes.get(key);
-      if (!x) routes.set(key, x = { dir, s: r.where.s, n: 0, play: 0, staff: 0 });
+      if (r.status === "here") here++; else if (r.status === "left") away++; else none++;
+      if (r.status !== "left") continue;
+      let x = routes.get(r.where.s);
+      if (!x) routes.set(r.where.s, x = { s: r.where.s, n: 0, play: 0, staff: 0 });
       x.n++; x[r.where.kind]++;
     }
-    M.fits = fits; M.counts = { here, away, coming, none };
+    M.counts = { here, away, none };
     M.routes = [...routes.values()].sort((a, b) => b.n - a.n || a.s - b.s);
     if (state.at >= 0 && !M.routes.some((x) => x.s === state.at)) state.at = -1;
+    // People with no page that season wait behind a link, but a name search always finds them.
     const q = personKey(state.q);
-    M.list = fits.filter((r) => (state.at < 0 || (r.where && r.where.s === state.at)) && (!q || personKey(r.name).includes(q)));
-    const ORDER = { left: 0, here: 1, coming: 2, none: 3 };
+    M.list = fits.filter((r) => (state.at < 0 || (r.where && r.where.s === state.at))
+      && (q ? personKey(r.name).includes(q) : state.showNone || r.status !== "none"));
+    const ORDER = { left: 0, here: 1, none: 2 };
     if (state.sort === "recent") M.list.sort((a, b) => b.head - a.head || ORDER[a.status] - ORDER[b.status] || b.last - a.last || a.name.localeCompare(b.name));
     else M.list.sort((a, b) => a.name.localeCompare(b.name));
   }
@@ -518,7 +513,7 @@ body { background: var(--panel) var(--paper-grain); }
   const openRow = () => M && state.open ? M.rows.find((r) => r.key === state.open) || null : null;
   function draw() {
     if (!size.w) return;
-    const { w, h, dpr } = size, fg = css("--fg"), panel = css("--panel"), cIn = css("--in"), cOut = css("--out"), muted = css("--muted"), accent = css("--accent");
+    const { w, h, dpr } = size, fg = css("--fg"), panel = css("--panel"), cOut = css("--out"), accent = css("--accent");
     g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, w, h);
     g.fillStyle = css("--land"); for (const p of statePaths) g.fill(p);
     g.strokeStyle = css("--border"); g.lineWidth = .7; for (const p of statePaths) g.stroke(p);
@@ -539,10 +534,10 @@ body { background: var(--panel) var(--paper-grain); }
     const open = openRow();
     g.lineCap = "round";
     for (let i = drawable.length - 1; i >= 0; i--) {
-      const r = drawable[i], here = campusXY[sel], there = campusXY[r.s], q = r.dir === "out" ? curve(here, there) : curve(there, here);
+      const r = drawable[i], q = curve(campusXY[sel], campusXY[r.s]);
       const dim = open || (state.at >= 0 && r.s !== state.at) || (hoverSchool >= 0 && hoverSchool !== sel && r.s !== hoverSchool);
       g.globalAlpha = dim ? .1 : .32 + .55 * Math.sqrt(r.n / maxN);
-      g.strokeStyle = r.dir === "out" ? cOut : cIn; g.lineWidth = width(r.n);
+      g.strokeStyle = cOut; g.lineWidth = width(r.n);
       strokeCurve(q);
     }
     g.globalAlpha = 1;
@@ -607,8 +602,8 @@ body { background: var(--panel) var(--paper-grain); }
   function tipFor(si) {
     if (!M) { const m = METRICS.find((x) => x.id === state.metric); return `${swatch(si)}<b>${esc(schoolName(si))}</b><br>${fmt(STAT[state.metric][si])} <span class="note">${esc(m.label.toLowerCase())}</span><br><span class="note">Click to see its people</span>`; }
     if (si === M.sel) return `${swatch(si)}<b>${esc(schoolName(si))}</b>`;
-    const out = M.routes.find((r) => r.s === si && r.dir === "out"), inn = M.routes.find((r) => r.s === si && r.dir === "in");
-    return `${swatch(si)}<b>${esc(schoolName(si))}</b>, ${lab(state.year)}${out ? `<br>Already left ${esc(schoolName(M.sel))}: ${esc(breakdown(out))}` : ""}${inn ? `<br>Still to come: ${esc(breakdown(inn))}` : ""}<br><span class="note">Click to list these people</span>`;
+    const r = M.routes.find((x) => x.s === si);
+    return `${swatch(si)}<b>${esc(schoolName(si))}</b>, ${lab(state.year)}${r ? `<br>${esc(breakdown(r))} from ${esc(schoolName(M.sel))}` : ""}<br><span class="note">Click to list these people</span>`;
   }
   cv.addEventListener("pointermove", (e) => {
     if (!size.w) return;
@@ -625,12 +620,11 @@ body { background: var(--panel) var(--paper-grain); }
     if (si === M.sel) setAt(-1); else setAt(state.at === si ? -1 : si);
   });
   function drawKey() {
-    const line = (c) => `<svg width="22" height="8" aria-hidden="true"><line x1="1" y1="4" x2="21" y2="4" stroke="${c}" stroke-width="3" stroke-linecap="round"/></svg>`;
-    $("key").innerHTML = M ? `<span>${line(css("--out"))}Already left, where they were</span><span>${line(css("--in"))}Still to come, where they were</span><span>Thicker = more people</span>`
-      : `<span>Bigger dot = higher number</span>`;
+    $("key").innerHTML = M ? `<span>Thicker line = more people</span><span>Click a campus to list them</span>` : `<span>Bigger dot = higher number</span>`;
   }
 
   // ---------- the side panel ----------
+  const ordinal = (n) => { const v = n % 100, end = ["th", "st", "nd", "rd"]; return fmt(n) + (end[(v - 20) % 10] || end[v] || end[0]); };
   const pickBtn = (i) => `<button type="button" data-pick="${i}" title="Show ${esc(schoolName(i))}">${swatch(i)}${esc(schoolName(i))}</button>`;
   const atBtn = (i) => `<button type="button" data-at="${i}" title="List the people connected to ${esc(schoolName(i))}">${swatch(i)}${esc(schoolName(i))}</button>`;
   const seg = (id, items, cur) => `<div class="seg" id="${id}">${items.map(([v, t]) => `<button type="button" data-v="${esc(v)}" aria-pressed="${v === cur}">${esc(t)}</button>`).join("")}</div>`;
@@ -651,31 +645,23 @@ body { background: var(--panel) var(--paper-grain); }
         <p class="fine">${FINE}</p>`;
       return;
     }
-    const s = M.sel, camp = data.campus[s], conf = data.confs[data.schools[s][1]] || "", total = M.rows.length, c = M.counts;
-    const outs = M.routes.filter((r) => r.dir === "out"), ins = M.routes.filter((r) => r.dir === "in");
-    const rankRows = METRICS.map((m) => { const r = rankIn(m.id, s); return `<tr title="${esc(m.tip)}"><th scope="row">${esc(m.label)}</th><td class="v">${fmt(STAT[m.id][s])}</td><td class="r">${STAT[m.id][s] ? `${r.tied ? "T-" : "#"}${fmt(r.rank)}` : "–"}</td></tr>`; }).join("");
-    const r0 = rankIn("sent", s);
-    const reachNote = !camp ? `<p class="note">This school's campus isn't on file, so its lines can't be drawn.</p>` : "";
+    const s = M.sel, camp = data.campus[s], conf = data.confs[data.schools[s][1]] || "", total = M.rows.length;
+    const place = (id) => { const r = rankIn(id, s); return !STAT[id][s] ? "–" : `${r.tied ? "Tied for " : ""}${ordinal(r.rank)}`; };
+    const rankRows = METRICS.map((m) => `<tr title="${esc(m.tip)}"><th scope="row">${esc(m.label)}</th><td class="v">${fmt(STAT[m.id][s])}</td><td class="r">${place(m.id)}</td></tr>`).join("");
+    const r0 = rankIn("sent", s), outs = M.routes;
     side.innerHTML = `<div class="sel-head"><div><h2>${swatch(s)}${esc(schoolName(s))}</h2>
-        <p class="note">${camp ? `${esc(camp.city)}, ${esc(camp.state)} · ` : ""}${esc([data.divLabel[data.divs[data.schools[s][2]]] || data.divs[data.schools[s][2]], conf].filter(Boolean).join(" · "))}</p></div>
+        <p class="note">${camp ? `${esc(camp.city)}, ${esc(camp.state)} · ` : ""}${esc([data.divLabel[data.divs[data.schools[s][2]]] || data.divs[data.schools[s][2]], conf].filter(Boolean).join(" · "))}</p>
+        <p class="note">${plural(total, "person").replace("persons", "people")} had been here by ${lab(state.year)}</p></div>
         <button type="button" class="link" id="clearSel">All schools</button></div>
-      <div class="big"><b>${fmt(total)}</b><small>${total === 1 ? "person" : "people"} connected, ever</small></div>
-      <div class="group"><h2>In ${lab(state.year)}</h2>
-        <table class="rank"><tbody>
-          <tr><th scope="row">At ${esc(schoolName(s))}</th><td class="v">${fmt(c.here)}</td></tr>
-          <tr><th scope="row">Already left, at another school</th><td class="v">${fmt(c.away)}</td></tr>
-          ${c.coming ? `<tr><th scope="row">Still to come, at another school</th><td class="v">${fmt(c.coming)}</td></tr>` : ""}
-          <tr><th scope="row">On no roster or staff in this data</th><td class="v">${fmt(c.none)}</td></tr>
-        </tbody></table></div>
-      ${reachNote}
-      <div class="group"><h2>How it ranks</h2><p class="note">Among ${fmt(r0.of)} ${esc(r0.lv)} schools, every season, without support staff</p>
-        <table class="rank"><tbody>${rankRows}</tbody></table></div>
-      <div class="group"><h2>Where they were</h2><p class="note">People who had already left, ${lab(state.year)}</p>${outs.length ? barList(outs.slice(0, 12).map((r) => ({ s: r.s, n: r.n, label: atBtn(r.s) })), "out", outs[0].n) : `<p class="note">No one with these choices.</p>`}
+      ${camp ? "" : `<p class="note">This school's campus isn't on file, so its lines can't be drawn.</p>`}
+      <div class="group"><h2>How it ranks</h2>
+        <p class="note">${STAT.sent[s] ? `${place("sent")} of ${fmt(r0.of)} ${esc(r0.lv)} schools for people who left for another school, all seasons` : `No one here has left for another school yet`}</p>
+        <details class="more"${state.rankOpen ? " open" : ""}><summary>All six rankings</summary><table class="rank"><tbody>${rankRows}</tbody></table></details></div>
+      <div class="group"><h2>Top schools, ${lab(state.year)}</h2>${outs.length ? barList(outs.slice(0, 12).map((r) => ({ s: r.s, n: r.n, label: atBtn(r.s) })), "out", outs[0].n) : `<p class="note">No one at another school that season.</p>`}
         ${outs.length > 12 ? `<p class="note">+${plural(outs.length - 12, "more school")}</p>` : ""}</div>
-      ${ins.length ? `<div class="group"><h2>Still to come</h2><p class="note">People who hadn't arrived yet, ${lab(state.year)}</p>${barList(ins.slice(0, 12).map((r) => ({ s: r.s, n: r.n, label: atBtn(r.s) })), "in", ins[0].n)}
-        ${ins.length > 12 ? `<p class="note">+${plural(ins.length - 12, "more school")}</p>` : ""}</div>` : ""}
       <p class="fine">${FINE}</p>`;
   }
+  $("side").addEventListener("toggle", (e) => { if (e.target.matches("details.more")) state.rankOpen = e.target.open; }, true);
   $("side").addEventListener("click", (e) => {
     const p = e.target.closest("[data-pick]"); if (p) { pick(+p.dataset.pick); return; }
     const a = e.target.closest("[data-at]"); if (a) { setAt(state.at === +a.dataset.at ? -1 : +a.dataset.at); return; }
@@ -696,7 +682,6 @@ body { background: var(--panel) var(--paper-grain); }
     if (x.kind === "play") return x.named ? "Played (named on a later roster)" : `Played · ${esc(data.posName(data.pos[P.p[x.k]]))}`;
     return esc(titleOf(x.best));
   };
-  const lastStop = (r) => r.stops[r.stops.length - 1];
   function hereText(r) {
     const parts = r.here.map((x) => `${x.kind === "play" ? (x.named ? "Played" : esc(data.posName(data.pos[P.p[x.k]]))) : esc(ROLE_LABEL[ST.r[x.best]])}, ${span(x.from, x.to)}`);
     return parts.join("; ");
@@ -706,7 +691,7 @@ body { background: var(--panel) var(--paper-grain); }
     if (r.turned) tags.push(`<span class="tag hot">Turned coach</span>`);
     if (r.played && [...r.out.values()].includes("player")) tags.push(`<span class="tag">Transferred out</span>`);
     if ((r.played && [...r.in.values()].includes("player")) || r.fromOutside >= 0) tags.push(`<span class="tag">Transferred in</span>`);
-    if (r.coached && r.played === false && r.in.size && [...r.in.values()].includes("alum")) tags.push(`<span class="tag">Played elsewhere</span>`);
+    if (r.coached && !r.played && [...r.in.values()].includes("alum")) tags.push(`<span class="tag">Played elsewhere</span>`);
     return tags.join("");
   }
   function renderPeople() {
@@ -714,25 +699,28 @@ body { background: var(--panel) var(--paper-grain); }
     box.hidden = !M;
     if (!M) return;
     const n = M.list.length, s = M.sel;
-    $("peopleTitle").innerHTML = `Everyone connected to ${esc(schoolName(s))}`;
+    $("peopleTitle").innerHTML = `${esc(schoolName(s))}'s people in ${lab(state.year)}`;
     $("whenCol").textContent = `In ${lab(state.year)}`;
-    $("peopleNote").textContent = n === M.rows.length ? plural(n, "person").replace("persons", "people") : `${fmt(n)} of ${plural(M.rows.length, "person").replace("persons", "people")}`;
+    $("peopleNote").textContent = plural(n, "person").replace("persons", "people");
     const chip = $("atChip");
     chip.hidden = state.at < 0;
     chip.innerHTML = state.at >= 0 ? `Connected to ${esc(schoolName(state.at))}<button type="button" aria-label="Show everyone again">×</button>` : "";
     const rows = M.list.slice(0, state.shown);
     $("plist").innerHTML = rows.length ? rows.map((r) => {
-      const open = r.key === state.open, l = lastStop(r), w = r.where;
+      const open = r.key === state.open, w = r.where, l = r.stops.filter((x) => x.from <= state.year).pop();
       return `<li><button type="button" class="prow" data-r="${esc(r.key)}" aria-expanded="${open}">
           <span class="who">${esc(r.name)}</span>
           <span class="here">${hereText(r)}${tagsOf(r)}</span>
           ${w ? `<span class="now">${swatch(w.s)}<b>${esc(schoolName(w.s))}</b>, ${w.kind === "staff" ? esc(ROLE_LABEL[ST.r[r.yearStint]]) : esc(w.named ? "played" : data.posName(data.pos[P.p[w.k]]))}</span>`
-            : `<span class="now none">Not in the data that season${r.been ? `; last seen ${esc(schoolName(l.s))}, ${lab(l.to)}` : ""}</span>`}</button>
+            : `<span class="now none">Not in the data that season; last seen ${esc(schoolName(l.s))}, ${lab(l.to)}</span>`}</button>
         ${open ? careerHtml(r) : ""}</li>`;
     }).join("") : `<li><p class="empty" style="padding:8px 4px">No one matches these choices.</p></li>`;
     const more = M.list.length - rows.length;
     $("moreBtn").hidden = more <= 0;
     $("moreBtn").textContent = `Show ${fmt(Math.min(more, 100))} more of ${fmt(more)}`;
+    const none = M.counts.none, nb = $("noneBtn");
+    nb.hidden = !none || state.at >= 0 || !!personKey(state.q);
+    nb.textContent = state.showNone ? `Hide the ${fmt(none)} not in the data that season` : `Show ${fmt(none)} ${none === 1 ? "other" : "others"} not in the data that season`;
   }
   function careerHtml(r) {
     const s = M.sel;
@@ -756,6 +744,7 @@ body { background: var(--panel) var(--paper-grain); }
   });
   $("atChip").addEventListener("click", (e) => { if (e.target.closest("button")) setAt(-1); });
   $("moreBtn").addEventListener("click", () => { state.shown += 100; renderPeople(); });
+  $("noneBtn").addEventListener("click", () => { state.showNone = !state.showNone; state.shown = 100; refilter(); renderPeople(); });
   $("q").addEventListener("input", () => { state.q = $("q").value; state.shown = 100; refilter(); renderPeople(); });
   $("sort").addEventListener("change", () => { state.sort = $("sort").value; state.shown = 100; refilter(); renderPeople(); });
 
@@ -764,11 +753,24 @@ body { background: var(--panel) var(--paper-grain); }
   function bind(id, key) {
     $(id).addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; state[key] = b.dataset.v; state.shown = 100; state.open = ""; update(); });
   }
-  bind("who", "who"); bind("dir", "dir"); bind("staff", "staff");
-  const setYear = (y) => { state.year = y; state.shown = 100; update(); };
-  $("year").addEventListener("change", () => setYear(+$("year").value));
-  $("yearBack").addEventListener("click", () => { const i = ALL_YEARS.indexOf(state.year); if (i > 0) setYear(ALL_YEARS[i - 1]); });
-  $("yearNext").addEventListener("click", () => { const i = ALL_YEARS.indexOf(state.year); if (i < ALL_YEARS.length - 1) setYear(ALL_YEARS[i + 1]); });
+  bind("who", "who");
+  $("support").addEventListener("change", () => { state.staff = $("support").checked ? "all" : "coach"; state.shown = 100; state.open = ""; update(); });
+  // The season slider, and the play button that walks it forward one season at a time.
+  let timer = null;
+  function stopPlay() { clearInterval(timer); timer = null; $("play").textContent = "▶"; $("play").setAttribute("aria-pressed", "false"); $("play").setAttribute("aria-label", "Play through the seasons"); }
+  function setYear(y) { state.year = y; state.shown = 100; update(); }
+  $("year").addEventListener("input", () => { stopPlay(); setYear(ALL_YEARS[+$("year").value]); });
+  $("play").addEventListener("click", () => {
+    if (timer) { stopPlay(); return; }
+    if (state.year === ALL_YEARS[ALL_YEARS.length - 1]) setYear(ALL_YEARS[0]);
+    $("play").textContent = "❚❚"; $("play").setAttribute("aria-pressed", "true"); $("play").setAttribute("aria-label", "Pause");
+    timer = setInterval(() => {
+      const i = ALL_YEARS.indexOf(state.year);
+      if (i >= ALL_YEARS.length - 1) { stopPlay(); return; }
+      setYear(ALL_YEARS[i + 1]);
+      if (i + 1 === ALL_YEARS.length - 1) stopPlay();
+    }, 1300);
+  });
   function pickFromBox() {
     const v = $("school").value.trim().toLowerCase();
     if (!v) { if (state.school >= 0) pick(-1); return; }
@@ -779,7 +781,8 @@ body { background: var(--panel) var(--paper-grain); }
   $("school").addEventListener("input", () => { if (data.schoolIndex.has($("school").value.trim().toLowerCase())) pickFromBox(); });
   function pick(i) {
     if (i === state.school) { $("school").value = i >= 0 ? schoolName(i) : ""; return; }
-    Object.assign(state, { school: i, at: -1, q: "", open: "", shown: 100 });
+    stopPlay();
+    Object.assign(state, { school: i, at: -1, q: "", open: "", shown: 100, showNone: false });
     $("q").value = "";
     if (i >= 0) state.level = levelOf(i);
     hoverSchool = -1; $("ttip").hidden = true;
@@ -788,14 +791,13 @@ body { background: var(--panel) var(--paper-grain); }
   }
   function setAt(i) { state.at = i; state.shown = 100; state.open = ""; refilter(); renderPeople(); draw(); }
 
-  // ---------- links: school-influence.html?sport=football#school=Notre%20Dame&who=coach&dir=out&year=2022&at=Ohio%20State ----------
+  // ---------- links: school-influence.html?sport=football#school=Notre%20Dame&who=coach&year=2022&at=Ohio%20State ----------
   let lastHash = "";
   function hashNow() {
     const q = new URLSearchParams();
     if (state.school >= 0) {
       q.set("school", schoolName(state.school));
       if (state.who !== "all") q.set("who", state.who);
-      if (state.dir !== "all") q.set("dir", state.dir);
       if (state.staff !== "coach") q.set("staff", state.staff);
       if (state.year !== LATEST) q.set("year", state.year);
       if (state.at >= 0) q.set("at", schoolName(state.at));
@@ -810,14 +812,13 @@ body { background: var(--panel) var(--paper-grain); }
     if (!hash && firstLoad) hash = GP.readSaved("school-influence:last") || "";
     const q = new URLSearchParams(hash), idx = (v) => { const i = data.schoolIndex.get((v || "").toLowerCase()); return i === undefined ? -1 : i; };
     state.school = idx(q.get("school"));
-    state.who = ["player", "coach", "alum", "head"].includes(q.get("who")) ? q.get("who") : "all";
-    state.dir = ["out", "in"].includes(q.get("dir")) ? q.get("dir") : "all";
+    state.who = ["player", "coach", "head"].includes(q.get("who")) ? q.get("who") : "all";
     state.staff = q.get("staff") === "all" ? "all" : "coach";
     state.year = ALL_YEARS.includes(+q.get("year")) ? +q.get("year") : LATEST;
     state.at = idx(q.get("at"));
     state.metric = METRICS.some((m) => m.id === q.get("rank")) ? q.get("rank") : "sent";
     state.level = LEVELS.includes(q.get("level")) ? q.get("level") : state.school >= 0 ? levelOf(state.school) : LEVELS[0] || "D1";
-    state.open = ""; state.q = ""; state.shown = 100; $("q").value = "";
+    state.open = ""; state.q = ""; state.shown = 100; state.showNone = false; $("q").value = "";
   }
   // The other maps open on the same school.
   function otherPages() {
@@ -827,15 +828,24 @@ body { background: var(--panel) var(--paper-grain); }
     $("coachLink").href = "staff-moves.html" + sc;
     $("heatLink").href = "players-heatmap.html" + (state.school >= 0 ? "#compare=" + encodeURIComponent(schoolName(state.school)) : "");
   }
+  // The sentence above the map: what it shows, in words.
+  function leadText() {
+    const c = M.counts, name = esc(schoolName(M.sel)), y = lab(state.year), n = M.routes.length;
+    const word = (k) => state.who === "player" ? (k === 1 ? "player" : "players") : state.who === "coach" ? (k === 1 ? "coach" : "coaches")
+      : state.who === "head" ? (k === 1 ? "head coach" : "head coaches") : k === 1 ? "person" : "people";
+    const was = (k) => k === 1 ? "was" : "were", num = (k) => `<b>${fmt(k)}</b>`;
+    const away = c.away ? `${num(c.away)} ${word(c.away)} who had been at ${name} ${was(c.away)} at ${plural(n, "other school")}` : `no ${word(2)} who had been at ${name} ${was(2)} at another school`;
+    return `In ${y}, ${away}, and ${num(c.here)} ${was(c.here)} at ${name}.`;
+  }
   function update() {
     compute();
     $("school").value = state.school >= 0 ? schoolName(state.school) : "";
-    setSeg("who", state.who); setSeg("dir", state.dir); setSeg("staff", state.staff);
-    $("year").value = state.year;
-    $("yearBack").disabled = state.year === ALL_YEARS[0]; $("yearNext").disabled = state.year === ALL_YEARS[ALL_YEARS.length - 1];
-    for (const id of ["whoBox", "dirBox", "yearBox", "staffBox"]) $(id).hidden = state.school < 0;
-    $("staffBox").hidden = state.school < 0 || !staff;
-    $("hint").textContent = M ? `Everyone who has ever been at ${schoolName(state.school)}, and where they were in ${lab(state.year)}. Click a campus to list them.` : "Pick a school, here or on the map, to see everyone connected to it";
+    setSeg("who", state.who);
+    $("support").checked = state.staff === "all"; $("support").parentElement.hidden = !staff;
+    $("year").value = ALL_YEARS.indexOf(state.year); $("year").setAttribute("aria-valuetext", lab(state.year));
+    $("yearText").textContent = lab(state.year);
+    for (const id of ["whoBox", "yearBox"]) $(id).hidden = state.school < 0;
+    $("hint").innerHTML = M ? leadText() : "Pick a school, here or on the map, to see where its people went.";
     renderSide(); renderPeople(); drawKey(); draw(); otherPages();
     const h = hashNow(); lastHash = h;
     try { localStorage.setItem(GP.saveKey("school-influence:last"), h); } catch (e) {}
