@@ -27,6 +27,8 @@ body { background: var(--panel) var(--paper-grain); }
 .ctl .seg button { padding: 6px 11px; font-size: 14px; white-space: nowrap; }
 .ctl .row { display: flex; align-items: center; gap: 6px; }
 .ctl select.field { width: auto; padding: 6px 8px; }
+.step { width: 32px; height: 34px; border: 1px solid var(--border); border-radius: 6px; background: var(--panel); cursor: pointer; font-size: 18px; line-height: 1; padding: 0; }
+.step:disabled { opacity: .4; cursor: default; }
 .ctl[hidden], .ctl > div[hidden] { display: none; }
 .ctl > div { max-width: 100%; }
 .ctl .seg { flex-wrap: wrap; max-width: 100%; border-radius: 16px; }
@@ -92,6 +94,7 @@ body { background: var(--panel) var(--paper-grain); }
 .prow .who { font-weight: 600; }
 .prow .here, .prow .now { color: var(--muted); }
 .prow .now b { color: var(--fg); font-weight: 500; }
+.prow .now.none { font-style: italic; }
 .tag { display: inline-block; font-size: 11.5px; line-height: 1.3; border: 1px solid var(--line); border-radius: 999px; padding: 0 7px; margin: 0 0 0 4px; color: var(--muted); white-space: nowrap; }
 .tag.hot { border-color: var(--accent); color: var(--accent); }
 .pcols { display: grid; grid-template-columns: 190px minmax(0, 1.2fr) minmax(0, 1fr); gap: 14px; padding: 0 4px; }
@@ -176,23 +179,23 @@ body { background: var(--panel) var(--paper-grain); }
         <button type="button" data-v="player">Players</button>
         <button type="button" data-v="coach">Coaches</button>
         <button type="button" data-v="alum">Players turned coaches</button>
-        <button type="button" data-v="head">Head coaches today</button>
+        <button type="button" data-v="head">Head coaches</button>
       </div>
     </div>
     <div id="dirBox">
-      <span class="label" id="dirLabel">Direction</span>
+      <span class="label" id="dirLabel">Timing</span>
       <div class="seg" id="dir" role="group" aria-labelledby="dirLabel">
-        <button type="button" data-v="all">Both</button>
-        <button type="button" data-v="out">Went on</button>
-        <button type="button" data-v="in">Came in</button>
+        <button type="button" data-v="all">All</button>
+        <button type="button" data-v="out">Already left</button>
+        <button type="button" data-v="in">Still to come</button>
       </div>
     </div>
     <div id="yearBox">
-      <span class="label">Seasons at the school</span>
+      <label class="label" for="year">Where they were in</label>
       <div class="row">
-        <select class="field" id="from" aria-label="From season"></select>
-        <span class="note">to</span>
-        <select class="field" id="to" aria-label="To season"></select>
+        <button type="button" class="step" id="yearBack" aria-label="One season earlier">‹</button>
+        <select class="field" id="year"></select>
+        <button type="button" class="step" id="yearNext" aria-label="One season later">›</button>
       </div>
     </div>
     <div id="staffBox">
@@ -226,7 +229,7 @@ body { background: var(--panel) var(--paper-grain); }
         </select>
       </div>
     </div>
-    <div class="pcols label" aria-hidden="true"><span>Name</span><span>At this school</span><span>Last seen</span></div>
+    <div class="pcols label" aria-hidden="true"><span>Name</span><span>At this school</span><span id="whenCol"></span></div>
     <ol class="plist" id="plist"></ol>
     <button type="button" class="link" id="moreBtn" hidden></button>
   </section>
@@ -407,11 +410,13 @@ body { background: var(--panel) var(--paper-grain); }
   };
 
   // ---------- page state ----------
-  const state = { school: -1, who: "all", dir: "all", from: 0, to: 0, staff: "coach", at: -1, q: "", sort: "recent", metric: "sent", level: LEVELS[0] || "D1", shown: 100, open: "" };
+  const state = { school: -1, who: "all", dir: "all", staff: "coach", year: 0, at: -1, q: "", sort: "recent", metric: "sent", level: LEVELS[0] || "D1", shown: 100, open: "" };
   const ALL_YEARS = [...new Set([...data.SEASONS, ...perYear.keys()])].sort((a, b) => a - b);
   const FIRST = ALL_YEARS[0], LAST = ALL_YEARS[ALL_YEARS.length - 1];
-  state.from = FIRST; state.to = LAST;
-  for (const id of ["from", "to"]) $(id).innerHTML = ALL_YEARS.map((y) => `<option value="${y}">${lab(y)}</option>`).join("");
+  // The season the page opens on: the newest one with a real count of staff pages (see NOW), else the newest.
+  const LATEST = ALL_YEARS.includes(NOW) ? NOW : LAST;
+  state.year = LATEST;
+  $("year").innerHTML = ALL_YEARS.map((y) => `<option value="${y}">${lab(y)}</option>`).join("");
   $("schoolList").innerHTML = data.schools.map((s, i) => hasPeople(i) ? `<option value="${esc(s[0])}">` : "").join("");
   $("sub").textContent = `Everyone connected to one school, and where they went, ${span(FIRST, LAST)}`;
 
@@ -432,7 +437,7 @@ body { background: var(--panel) var(--paper-grain); }
     const rows = [];
     for (const r of seen.values()) {
       const stops = stopsOf(r.pid, r.c, support);
-      const here = stops.filter((x) => x.s === s && x.to >= state.from && x.from <= state.to);
+      const here = stops.filter((x) => x.s === s);
       if (!here.length) continue;
       r.stops = stops; r.here = here;
       r.name = r.pid >= 0 ? names[recsOf[r.pid][0]] : staffPeople[r.c];
@@ -442,9 +447,17 @@ body { background: var(--panel) var(--paper-grain); }
         const t = b.from > a.from ? typeOf(a, b) : b.from < a.from ? typeOf(b, a) : null;
         if (t) (b.from > a.from ? r.out : r.in).set(b.s, t);
       }
+      // Where this person was in the picked season: the stop covering it, the newest one if two do.
+      // status: "here", "left" (been here, now elsewhere), "coming" (elsewhere, here later) or "none" (no page that season).
+      const y = state.year, cover = stops.filter((x) => x.from <= y && x.to >= y);
+      r.where = cover.find((x) => x.s === s) || cover[cover.length - 1] || null;
+      r.been = here[0].from <= y;
+      r.status = !r.where ? "none" : r.where.s === s ? "here" : r.been ? "left" : "coming";
+      r.yearStint = r.where && r.where.kind === "staff" ? stintsOf[r.c].find((k) => ST.y[k] === y && ST.s[k] === r.where.s) : undefined;
+      if (r.where && r.where.kind === "staff" && r.yearStint === undefined) r.yearStint = r.where.last;    // a season with no staff pages inside a run
+      r.head = r.yearStint !== undefined && ST.r[r.yearStint] === HEAD;
       r.played = here.some((x) => x.kind === "play"); r.coached = here.some((x) => x.kind === "staff");
       r.turned = r.played && stops.some((x) => x.kind === "staff");
-      r.head = r.c >= 0 && headNow.has(r.c);
       const before = r.pid >= 0 ? recsOf[r.pid].slice().sort((a, b) => P.f[a] - P.f[b])[0] : -1;
       r.fromOutside = before >= 0 && P.x[before] && P.o[before] < 0 && P.s[before] === s ? before : -1;
       r.last = Math.max(...here.map((x) => x.to));
@@ -455,29 +468,28 @@ body { background: var(--panel) var(--paper-grain); }
     refilter();
   }
   const whoFits = (r) => state.who === "all" || (state.who === "player" ? r.played : state.who === "coach" ? r.coached : state.who === "alum" ? r.turned : r.head);
-  const typeFits = (t) => state.who === "all" || state.who === "head" || state.who === t;
-  const movesFit = (r, m) => { for (const t of m.values()) if (typeFits(t)) return true; return false; };
-  // The rows the controls leave, and the map's routes. A route counts each person once.
+  // The rows the controls leave, and the map's routes: one line to each campus, with everyone there that season.
   function refilter() {
     if (!M) return;
-    const fits = M.rows.filter((r) => whoFits(r) && (state.dir === "all" || movesFit(r, r[state.dir]) || (state.dir === "in" && r.fromOutside >= 0)));
+    const fits = M.rows.filter((r) => whoFits(r) && (state.dir === "all" || r.status === (state.dir === "out" ? "left" : "coming")));
     const routes = new Map();
-    const road = (dir, s, t) => {
-      const key = dir + s; let x = routes.get(key);
-      if (!x) routes.set(key, x = { dir, s, n: 0, player: 0, coach: 0, alum: 0 });
-      x.n++; x[t]++;
-    };
+    let here = 0, away = 0, coming = 0, none = 0;
     for (const r of fits) {
-      if (state.dir !== "in") r.out.forEach((t, s) => { if (typeFits(t)) road("out", s, t); });
-      if (state.dir !== "out") r.in.forEach((t, s) => { if (typeFits(t)) road("in", s, t); });
+      if (r.status === "here") here++; else if (r.status === "left") away++; else if (r.status === "coming") coming++; else none++;
+      if (r.status !== "left" && r.status !== "coming") continue;
+      const dir = r.status === "left" ? "out" : "in", key = dir + r.where.s;
+      let x = routes.get(key);
+      if (!x) routes.set(key, x = { dir, s: r.where.s, n: 0, play: 0, staff: 0 });
+      x.n++; x[r.where.kind]++;
     }
-    M.fits = fits;
+    M.fits = fits; M.counts = { here, away, coming, none };
     M.routes = [...routes.values()].sort((a, b) => b.n - a.n || a.s - b.s);
     if (state.at >= 0 && !M.routes.some((x) => x.s === state.at)) state.at = -1;
     const q = personKey(state.q);
-    M.list = fits.filter((r) => (state.at < 0 || (r.out.has(state.at) && (state.dir !== "in") && typeFits(r.out.get(state.at))) || (r.in.has(state.at) && (state.dir !== "out") && typeFits(r.in.get(state.at))))
-      && (!q || personKey(r.name).includes(q)));
-    if (state.sort === "recent") M.list.sort((a, b) => b.head - a.head || b.last - a.last || a.name.localeCompare(b.name));
+    M.list = fits.filter((r) => (state.at < 0 || (r.where && r.where.s === state.at)) && (!q || personKey(r.name).includes(q)));
+    const ORDER = { left: 0, here: 1, coming: 2, none: 3 };
+    if (state.sort === "recent") M.list.sort((a, b) => b.head - a.head || ORDER[a.status] - ORDER[b.status] || b.last - a.last || a.name.localeCompare(b.name));
+    else M.list.sort((a, b) => a.name.localeCompare(b.name));
   }
 
   // ---------- the map ----------
@@ -590,13 +602,13 @@ body { background: var(--panel) var(--paper-grain); }
     tip.style.top = Math.max(6, y - th - 10 < 6 ? y + 16 : y - th - 10) + "px";
   }
   function breakdown(r) {
-    return [r.player && plural(r.player, "player"), r.coach && plural(r.coach, "coach").replace("coachs", "coaches"), r.alum && plural(r.alum, "player turned coach").replace("coachs", "coaches")].filter(Boolean).join(", ");
+    return [r.play && plural(r.play, "player"), r.staff && (r.staff === 1 ? "1 coach" : `${fmt(r.staff)} coaches`)].filter(Boolean).join(", ");
   }
   function tipFor(si) {
     if (!M) { const m = METRICS.find((x) => x.id === state.metric); return `${swatch(si)}<b>${esc(schoolName(si))}</b><br>${fmt(STAT[state.metric][si])} <span class="note">${esc(m.label.toLowerCase())}</span><br><span class="note">Click to see its people</span>`; }
     if (si === M.sel) return `${swatch(si)}<b>${esc(schoolName(si))}</b>`;
     const out = M.routes.find((r) => r.s === si && r.dir === "out"), inn = M.routes.find((r) => r.s === si && r.dir === "in");
-    return `${swatch(si)}<b>${esc(schoolName(si))}</b>${out ? `<br>Went on here: ${esc(breakdown(out))}` : ""}${inn ? `<br>Came from here: ${esc(breakdown(inn))}` : ""}<br><span class="note">Click to list these people</span>`;
+    return `${swatch(si)}<b>${esc(schoolName(si))}</b>, ${lab(state.year)}${out ? `<br>Already left ${esc(schoolName(M.sel))}: ${esc(breakdown(out))}` : ""}${inn ? `<br>Still to come: ${esc(breakdown(inn))}` : ""}<br><span class="note">Click to list these people</span>`;
   }
   cv.addEventListener("pointermove", (e) => {
     if (!size.w) return;
@@ -614,7 +626,7 @@ body { background: var(--panel) var(--paper-grain); }
   });
   function drawKey() {
     const line = (c) => `<svg width="22" height="8" aria-hidden="true"><line x1="1" y1="4" x2="21" y2="4" stroke="${c}" stroke-width="3" stroke-linecap="round"/></svg>`;
-    $("key").innerHTML = M ? `<span>${line(css("--out"))}Went on from here</span><span>${line(css("--in"))}Came here from</span><span>Thicker = more people</span>`
+    $("key").innerHTML = M ? `<span>${line(css("--out"))}Already left, where they were</span><span>${line(css("--in"))}Still to come, where they were</span><span>Thicker = more people</span>`
       : `<span>Bigger dot = higher number</span>`;
   }
 
@@ -639,7 +651,7 @@ body { background: var(--panel) var(--paper-grain); }
         <p class="fine">${FINE}</p>`;
       return;
     }
-    const s = M.sel, camp = data.campus[s], conf = data.confs[data.schools[s][1]] || "", total = M.rows.length;
+    const s = M.sel, camp = data.campus[s], conf = data.confs[data.schools[s][1]] || "", total = M.rows.length, c = M.counts;
     const outs = M.routes.filter((r) => r.dir === "out"), ins = M.routes.filter((r) => r.dir === "in");
     const rankRows = METRICS.map((m) => { const r = rankIn(m.id, s); return `<tr title="${esc(m.tip)}"><th scope="row">${esc(m.label)}</th><td class="v">${fmt(STAT[m.id][s])}</td><td class="r">${STAT[m.id][s] ? `${r.tied ? "T-" : "#"}${fmt(r.rank)}` : "–"}</td></tr>`; }).join("");
     const r0 = rankIn("sent", s);
@@ -647,14 +659,21 @@ body { background: var(--panel) var(--paper-grain); }
     side.innerHTML = `<div class="sel-head"><div><h2>${swatch(s)}${esc(schoolName(s))}</h2>
         <p class="note">${camp ? `${esc(camp.city)}, ${esc(camp.state)} · ` : ""}${esc([data.divLabel[data.divs[data.schools[s][2]]] || data.divs[data.schools[s][2]], conf].filter(Boolean).join(" · "))}</p></div>
         <button type="button" class="link" id="clearSel">All schools</button></div>
-      <div class="big"><b>${fmt(total)}</b><small>${total === 1 ? "person" : "people"} connected${state.from !== FIRST || state.to !== LAST ? `, ${span(state.from, state.to)}` : ""}</small></div>
+      <div class="big"><b>${fmt(total)}</b><small>${total === 1 ? "person" : "people"} connected, ever</small></div>
+      <div class="group"><h2>In ${lab(state.year)}</h2>
+        <table class="rank"><tbody>
+          <tr><th scope="row">At ${esc(schoolName(s))}</th><td class="v">${fmt(c.here)}</td></tr>
+          <tr><th scope="row">Already left, at another school</th><td class="v">${fmt(c.away)}</td></tr>
+          ${c.coming ? `<tr><th scope="row">Still to come, at another school</th><td class="v">${fmt(c.coming)}</td></tr>` : ""}
+          <tr><th scope="row">On no roster or staff in this data</th><td class="v">${fmt(c.none)}</td></tr>
+        </tbody></table></div>
       ${reachNote}
       <div class="group"><h2>How it ranks</h2><p class="note">Among ${fmt(r0.of)} ${esc(r0.lv)} schools, every season, without support staff</p>
         <table class="rank"><tbody>${rankRows}</tbody></table></div>
-      <div class="group"><h2>Where they went on to</h2>${outs.length ? barList(outs.slice(0, 12).map((r) => ({ s: r.s, n: r.n, label: atBtn(r.s) })), "out", outs[0].n) : `<p class="note">No one with these choices.</p>`}
+      <div class="group"><h2>Where they were</h2><p class="note">People who had already left, ${lab(state.year)}</p>${outs.length ? barList(outs.slice(0, 12).map((r) => ({ s: r.s, n: r.n, label: atBtn(r.s) })), "out", outs[0].n) : `<p class="note">No one with these choices.</p>`}
         ${outs.length > 12 ? `<p class="note">+${plural(outs.length - 12, "more school")}</p>` : ""}</div>
-      <div class="group"><h2>Where they came from</h2>${ins.length ? barList(ins.slice(0, 12).map((r) => ({ s: r.s, n: r.n, label: atBtn(r.s) })), "in", ins[0].n) : `<p class="note">No one with these choices.</p>`}
-        ${ins.length > 12 ? `<p class="note">+${plural(ins.length - 12, "more school")}</p>` : ""}</div>
+      ${ins.length ? `<div class="group"><h2>Still to come</h2><p class="note">People who hadn't arrived yet, ${lab(state.year)}</p>${barList(ins.slice(0, 12).map((r) => ({ s: r.s, n: r.n, label: atBtn(r.s) })), "in", ins[0].n)}
+        ${ins.length > 12 ? `<p class="note">+${plural(ins.length - 12, "more school")}</p>` : ""}</div>` : ""}
       <p class="fine">${FINE}</p>`;
   }
   $("side").addEventListener("click", (e) => {
@@ -684,8 +703,7 @@ body { background: var(--panel) var(--paper-grain); }
   }
   function tagsOf(r) {
     const tags = [];
-    if (r.head) tags.push(`<span class="tag hot">Head coach, ${esc(schoolName(headNow.get(r.c)))}</span>`);
-    if (r.turned && !r.head) tags.push(`<span class="tag hot">Turned coach</span>`);
+    if (r.turned) tags.push(`<span class="tag hot">Turned coach</span>`);
     if (r.played && [...r.out.values()].includes("player")) tags.push(`<span class="tag">Transferred out</span>`);
     if ((r.played && [...r.in.values()].includes("player")) || r.fromOutside >= 0) tags.push(`<span class="tag">Transferred in</span>`);
     if (r.coached && r.played === false && r.in.size && [...r.in.values()].includes("alum")) tags.push(`<span class="tag">Played elsewhere</span>`);
@@ -697,17 +715,19 @@ body { background: var(--panel) var(--paper-grain); }
     if (!M) return;
     const n = M.list.length, s = M.sel;
     $("peopleTitle").innerHTML = `Everyone connected to ${esc(schoolName(s))}`;
+    $("whenCol").textContent = `In ${lab(state.year)}`;
     $("peopleNote").textContent = n === M.rows.length ? plural(n, "person").replace("persons", "people") : `${fmt(n)} of ${plural(M.rows.length, "person").replace("persons", "people")}`;
     const chip = $("atChip");
     chip.hidden = state.at < 0;
     chip.innerHTML = state.at >= 0 ? `Connected to ${esc(schoolName(state.at))}<button type="button" aria-label="Show everyone again">×</button>` : "";
     const rows = M.list.slice(0, state.shown);
     $("plist").innerHTML = rows.length ? rows.map((r) => {
-      const open = r.key === state.open, l = lastStop(r);
+      const open = r.key === state.open, l = lastStop(r), w = r.where;
       return `<li><button type="button" class="prow" data-r="${esc(r.key)}" aria-expanded="${open}">
           <span class="who">${esc(r.name)}</span>
           <span class="here">${hereText(r)}${tagsOf(r)}</span>
-          <span class="now">${swatch(l.s)}<b>${esc(schoolName(l.s))}</b>, ${lab(l.to)}</span></button>
+          ${w ? `<span class="now">${swatch(w.s)}<b>${esc(schoolName(w.s))}</b>, ${w.kind === "staff" ? esc(ROLE_LABEL[ST.r[r.yearStint]]) : esc(w.named ? "played" : data.posName(data.pos[P.p[w.k]]))}</span>`
+            : `<span class="now none">Not in the data that season${r.been ? `; last seen ${esc(schoolName(l.s))}, ${lab(l.to)}` : ""}</span>`}</button>
         ${open ? careerHtml(r) : ""}</li>`;
     }).join("") : `<li><p class="empty" style="padding:8px 4px">No one matches these choices.</p></li>`;
     const more = M.list.length - rows.length;
@@ -737,7 +757,7 @@ body { background: var(--panel) var(--paper-grain); }
   $("atChip").addEventListener("click", (e) => { if (e.target.closest("button")) setAt(-1); });
   $("moreBtn").addEventListener("click", () => { state.shown += 100; renderPeople(); });
   $("q").addEventListener("input", () => { state.q = $("q").value; state.shown = 100; refilter(); renderPeople(); });
-  $("sort").addEventListener("change", () => { state.sort = $("sort").value; state.shown = 100; if (state.sort === "name") compute(); refilter(); renderPeople(); });
+  $("sort").addEventListener("change", () => { state.sort = $("sort").value; state.shown = 100; refilter(); renderPeople(); });
 
   // ---------- controls ----------
   const setSeg = (id, v) => $(id).querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.v === v));
@@ -745,8 +765,10 @@ body { background: var(--panel) var(--paper-grain); }
     $(id).addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; state[key] = b.dataset.v; state.shown = 100; state.open = ""; update(); });
   }
   bind("who", "who"); bind("dir", "dir"); bind("staff", "staff");
-  $("from").addEventListener("change", () => { state.from = +$("from").value; if (state.from > state.to) state.to = state.from; state.shown = 100; state.open = ""; update(); });
-  $("to").addEventListener("change", () => { state.to = +$("to").value; if (state.to < state.from) state.from = state.to; state.shown = 100; state.open = ""; update(); });
+  const setYear = (y) => { state.year = y; state.shown = 100; update(); };
+  $("year").addEventListener("change", () => setYear(+$("year").value));
+  $("yearBack").addEventListener("click", () => { const i = ALL_YEARS.indexOf(state.year); if (i > 0) setYear(ALL_YEARS[i - 1]); });
+  $("yearNext").addEventListener("click", () => { const i = ALL_YEARS.indexOf(state.year); if (i < ALL_YEARS.length - 1) setYear(ALL_YEARS[i + 1]); });
   function pickFromBox() {
     const v = $("school").value.trim().toLowerCase();
     if (!v) { if (state.school >= 0) pick(-1); return; }
@@ -766,7 +788,7 @@ body { background: var(--panel) var(--paper-grain); }
   }
   function setAt(i) { state.at = i; state.shown = 100; state.open = ""; refilter(); renderPeople(); draw(); }
 
-  // ---------- links: school-influence.html?sport=football#school=Notre%20Dame&who=coach&dir=out&from=2020&at=Ohio%20State ----------
+  // ---------- links: school-influence.html?sport=football#school=Notre%20Dame&who=coach&dir=out&year=2022&at=Ohio%20State ----------
   let lastHash = "";
   function hashNow() {
     const q = new URLSearchParams();
@@ -775,8 +797,7 @@ body { background: var(--panel) var(--paper-grain); }
       if (state.who !== "all") q.set("who", state.who);
       if (state.dir !== "all") q.set("dir", state.dir);
       if (state.staff !== "coach") q.set("staff", state.staff);
-      if (state.from !== FIRST) q.set("from", state.from);
-      if (state.to !== LAST) q.set("to", state.to);
+      if (state.year !== LATEST) q.set("year", state.year);
       if (state.at >= 0) q.set("at", schoolName(state.at));
     } else {
       if (state.metric !== "sent") q.set("rank", state.metric);
@@ -792,9 +813,7 @@ body { background: var(--panel) var(--paper-grain); }
     state.who = ["player", "coach", "alum", "head"].includes(q.get("who")) ? q.get("who") : "all";
     state.dir = ["out", "in"].includes(q.get("dir")) ? q.get("dir") : "all";
     state.staff = q.get("staff") === "all" ? "all" : "coach";
-    state.from = ALL_YEARS.includes(+q.get("from")) ? +q.get("from") : FIRST;
-    state.to = ALL_YEARS.includes(+q.get("to")) ? +q.get("to") : LAST;
-    if (state.from > state.to) [state.from, state.to] = [state.to, state.from];
+    state.year = ALL_YEARS.includes(+q.get("year")) ? +q.get("year") : LATEST;
     state.at = idx(q.get("at"));
     state.metric = METRICS.some((m) => m.id === q.get("rank")) ? q.get("rank") : "sent";
     state.level = LEVELS.includes(q.get("level")) ? q.get("level") : state.school >= 0 ? levelOf(state.school) : LEVELS[0] || "D1";
@@ -812,10 +831,11 @@ body { background: var(--panel) var(--paper-grain); }
     compute();
     $("school").value = state.school >= 0 ? schoolName(state.school) : "";
     setSeg("who", state.who); setSeg("dir", state.dir); setSeg("staff", state.staff);
-    $("from").value = state.from; $("to").value = state.to;
+    $("year").value = state.year;
+    $("yearBack").disabled = state.year === ALL_YEARS[0]; $("yearNext").disabled = state.year === ALL_YEARS[ALL_YEARS.length - 1];
     for (const id of ["whoBox", "dirBox", "yearBox", "staffBox"]) $(id).hidden = state.school < 0;
     $("staffBox").hidden = state.school < 0 || !staff;
-    $("hint").textContent = M ? "Hover a campus for its people; click one to list them below" : "Pick a school, here or on the map, to see everyone connected to it";
+    $("hint").textContent = M ? `Everyone who has ever been at ${schoolName(state.school)}, and where they were in ${lab(state.year)}. Click a campus to list them.` : "Pick a school, here or on the map, to see everyone connected to it";
     renderSide(); renderPeople(); drawKey(); draw(); otherPages();
     const h = hashNow(); lastHash = h;
     try { localStorage.setItem(GP.saveKey("school-influence:last"), h); } catch (e) {}
