@@ -1,0 +1,848 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>College School Influence Map</title>
+<meta name="description" content="Everyone connected to one college program: its players and coaches, where they came from and where they went.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Barlow:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="common.css">
+<style>
+/* One school's reach. The controls, then the map of everyone's moves on the left and the rankings on the right
+   (the Transfer Map's layout), then everyone connected to the school, with each person's career. With no school
+   picked, the map and the list rank the schools. Same file for every sport, opened as ?sport=<id>. */
+body { background: var(--panel) var(--paper-grain); }
+.bar { position: static; padding-bottom: 6px; }
+.tools { justify-content: flex-end; flex-basis: 640px; }
+@media (min-width: 1101px) {
+  .brand { padding: 8px 14px 9px; max-width: none; }
+  .brand h1 { font-size: 26px; white-space: nowrap; }
+  .brand .sub { margin-top: 2px; }
+}
+.page { padding: 0 max(var(--gap), env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(var(--gap), env(safe-area-inset-left)); display: flex; flex-direction: column; gap: 10px; }
+.ctl { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px 16px; }
+.ctl > div { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.ctl .grow { flex: 1 1 220px; max-width: 340px; }
+.ctl .seg button { padding: 6px 11px; font-size: 14px; white-space: nowrap; }
+.ctl .row { display: flex; align-items: center; gap: 6px; }
+.ctl select.field { width: auto; padding: 6px 8px; }
+.ctl[hidden], .ctl > div[hidden] { display: none; }
+.ctl > div { max-width: 100%; }
+.ctl .seg { flex-wrap: wrap; max-width: 100%; border-radius: 16px; }
+.head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px 18px; min-height: 22px; }
+.key { display: inline-flex; align-items: center; gap: 6px 14px; font-size: 12px; color: var(--muted); flex-wrap: wrap; }
+.key svg { vertical-align: middle; margin-right: 5px; }
+.tgrid { display: grid; grid-template-columns: minmax(0, 1fr) 370px; gap: 14px; height: max(460px, calc(100dvh - var(--bar-h, 80px) - 120px)); }
+.tmap { position: relative; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--sea); min-height: 0; }
+.tmap canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: default; touch-action: manipulation; }
+.tmap canvas.hot { cursor: pointer; }
+.ttip { position: absolute; pointer-events: none; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 5px 9px; font-size: 13px; line-height: 1.35; box-shadow: var(--shadow); white-space: nowrap; font-variant-numeric: tabular-nums; z-index: 2; }
+.ttip .note { font-size: 12px; }
+.tside { border: 1px solid var(--line); border-radius: 8px; overflow: auto; overscroll-behavior: contain; padding: 14px 16px 18px; display: flex; flex-direction: column; gap: 18px; min-height: 0; background: var(--panel); }
+.sel-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.sel-head h2 { font-size: 24px; }
+.sel-head .note { margin: 3px 0 0; }
+.sel-head .link { white-space: nowrap; }
+.big b { display: block; font: 700 40px/1 var(--display); font-variant-numeric: tabular-nums; color: var(--accent); }
+.big small { color: var(--muted); font-size: 13px; line-height: 1.3; }
+.group { display: flex; flex-direction: column; gap: 6px; }
+.group h2 { font-size: 18px; }
+.group .note { margin: 0; }
+.rank { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.rank th, .rank td { padding: 5px 0; border-top: 1px solid var(--line); text-align: right; font-weight: 400; }
+.rank tr:first-child th, .rank tr:first-child td { border-top: 0; }
+.rank th { text-align: left; }
+.rank td.v { font-weight: 600; padding-left: 10px; }
+.rank td.r { color: var(--muted); padding-left: 12px; white-space: nowrap; }
+.tl { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+.tl li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; font-size: 14px; border-radius: 4px; }
+.tl li.hl { background: var(--accent-soft); box-shadow: 0 0 0 4px var(--accent-soft); }
+.tl .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tl .pos { display: inline-block; min-width: 1.9em; color: var(--muted); font-variant-numeric: tabular-nums; }
+.tl .nm button { all: unset; cursor: pointer; border-bottom: 1px dotted var(--muted); }
+.tl .nm button:hover { border-bottom-color: var(--fg); }
+.tl .nm button:focus-visible { outline: 2px solid var(--focus); }
+.tl .v { font-variant-numeric: tabular-nums; color: var(--muted); }
+.tl .v b { color: var(--fg); font-weight: 600; }
+.tl .b { grid-column: 1 / -1; height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.tl .b span { display: block; height: 100%; background: var(--bar-c, var(--accent)); }
+.tl.out .b span { --bar-c: var(--out); } .tl.in .b span { --bar-c: var(--in); }
+.tside .seg { flex-wrap: wrap; border-radius: 12px; }
+.tside .seg button { padding: 5px 10px; font-size: 13px; }
+.fine { font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 12px; margin: 0; }
+
+/* everyone connected */
+.people { border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px 18px; display: flex; flex-direction: column; gap: 12px; background: var(--panel); min-width: 0; }
+.people[hidden] { display: none; }
+.people h2 { font-size: 22px; }
+.ptop { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 10px 18px; }
+.ptools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.ptools input { width: 220px; max-width: 100%; }
+.ptools select { width: auto; }
+.atchip { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; background: var(--accent-soft); border-radius: 999px; padding: 3px 10px; }
+.atchip button { all: unset; cursor: pointer; font-weight: 700; padding: 0 2px; }
+.atchip button:focus-visible { outline: 2px solid var(--focus); }
+.plist { list-style: none; margin: 0; padding: 0; }
+.plist > li { border-top: 1px solid var(--line); }
+.plist > li:first-child { border-top: 0; }
+.prow { all: unset; box-sizing: border-box; display: grid; grid-template-columns: 190px minmax(0, 1.2fr) minmax(0, 1fr); gap: 2px 14px; width: 100%; padding: 7px 4px; cursor: pointer; font-size: 14.5px; line-height: 1.35; align-items: baseline; }
+.prow:hover { background: var(--accent-soft); }
+.prow:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+.prow .who { font-weight: 600; }
+.prow .here, .prow .now { color: var(--muted); }
+.prow .now b { color: var(--fg); font-weight: 500; }
+.tag { display: inline-block; font-size: 11.5px; line-height: 1.3; border: 1px solid var(--line); border-radius: 999px; padding: 0 7px; margin: 0 0 0 4px; color: var(--muted); white-space: nowrap; }
+.tag.hot { border-color: var(--accent); color: var(--accent); }
+.pcols { display: grid; grid-template-columns: 190px minmax(0, 1.2fr) minmax(0, 1fr); gap: 14px; padding: 0 4px; }
+.open { padding: 4px 4px 14px; display: flex; flex-direction: column; gap: 8px; }
+.career { list-style: none; margin: 0; padding: 0; font-size: 14px; display: flex; flex-direction: column; counter-reset: stop; max-width: 680px; }
+.career li { display: grid; grid-template-columns: 1.5em 12em minmax(0, 1fr); gap: 2px 8px; padding: 4px 0; }
+.career li::before { counter-increment: stop; content: counter(stop); color: var(--muted); text-align: right; }
+.career li.me { background: var(--accent-soft); border-radius: 4px; box-shadow: 0 0 0 3px var(--accent-soft); }
+.career .yr { color: var(--muted); font-variant-numeric: tabular-nums; }
+.career .t { color: var(--muted); }
+.career button { all: unset; cursor: pointer; border-bottom: 1px dotted var(--muted); }
+.career button:hover { border-bottom-color: var(--fg); }
+.career button:focus-visible { outline: 2px solid var(--focus); }
+.empty { color: var(--muted); font-size: 14px; margin: 0; }
+:root { --in: var(--accent); --out: #23606b; }   /* as on the Transfer Map: came in terracotta, left deep sea */
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --out: #7fc4cf; } }
+:root[data-theme="dark"] { --out: #7fc4cf; }
+@media (max-width: 1000px) {
+  .tgrid { grid-template-columns: 1fr; height: auto; }
+  .tmap { aspect-ratio: 1.55; }
+  .tside { overflow: visible; }
+}
+@media (max-width: 760px) {
+  .prow { grid-template-columns: 1fr; }
+  .pcols { display: none; }
+  .ptools input { width: 100%; }
+  .ptools { width: 100%; }
+  .ctl .grow { max-width: none; flex-basis: 100%; }
+  .career li { grid-template-columns: 1.5em minmax(0, 1fr); }
+  .career li > :last-child { grid-column: 2; }
+}
+</style>
+</head>
+<body>
+<div class="loading" id="loading">Loading every player and coach…</div>
+
+<header class="bar" id="bar">
+  <div class="brand card">
+    <h1>College <span id="sportName"></span> <span>School Influence Map</span></h1>
+    <p class="sub" id="sub">Everyone connected to one school, and where they went</p>
+  </div>
+  <div class="tools">
+    <a class="btn icon" href="index.html" aria-label="All sports" title="All sports">
+      <svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="2.2 2"/><circle cx="9" cy="2.5" r="1.8" fill="currentColor"/><circle cx="15.5" cy="9" r="1.8" fill="currentColor"/><circle cx="2.5" cy="9" r="1.8" fill="currentColor"/><circle cx="9" cy="15.5" r="1.8" fill="currentColor"/></svg>
+    </a>
+    <a class="btn" id="dotLink" href="players-dotmap.html" title="The dot map of hometowns">
+      <svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="5" cy="6" r="2.2" fill="currentColor"/><circle cx="12.5" cy="5" r="1.5" fill="currentColor"/><circle cx="10" cy="12" r="3" fill="currentColor"/></svg>
+      <span class="txt">Dot map</span>
+    </a>
+    <a class="btn" id="heatLink" href="players-heatmap.html" title="Compare where up to four schools find their players">
+      <svg viewBox="0 0 18 18" aria-hidden="true"><rect x="2" y="2" width="6" height="6" rx="1.3" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="10" y="2" width="6" height="6" rx="1.3" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="2" y="10" width="6" height="6" rx="1.3" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="10" y="10" width="6" height="6" rx="1.3" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+      <span class="txt">Compare</span>
+    </a>
+    <a class="btn" id="transferLink" href="players-transfers.html" title="Where players transferred, school to school">
+      <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 14C5 6 11 4 15 5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" fill="none"/><path d="M11.5 2.8L15 5l-2.6 3.1" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+      <span class="txt">Transfers</span>
+    </a>
+    <a class="btn" id="coachLink" href="staff-moves.html" title="The map of coaches moving between schools">
+      <svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="7" cy="9" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M11 7.5h5v2.6h-4.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      <span class="txt">Coaches</span>
+    </a>
+    <div style="position:relative">
+      <button type="button" class="btn icon" id="share" aria-label="Copy a link to this view" title="Copy a link to this view">
+        <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M7.5 10.5a3 3 0 0 0 4.2 0l2.6-2.6a3 3 0 0 0-4.2-4.2l-.9.9M10.5 7.5a3 3 0 0 0-4.2 0L3.7 10.1a3 3 0 0 0 4.2 4.2l.9-.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+      </button>
+      <div class="toast" id="toast" role="status" hidden></div>
+    </div>
+  </div>
+</header>
+
+<main class="page">
+  <div class="ctl">
+    <div class="grow">
+      <label class="label" for="school">School</label>
+      <input class="field" id="school" list="schoolList" placeholder="Type a school" autocomplete="off">
+      <datalist id="schoolList"></datalist>
+    </div>
+    <div id="whoBox">
+      <span class="label" id="whoLabel">People</span>
+      <div class="seg" id="who" role="group" aria-labelledby="whoLabel">
+        <button type="button" data-v="all">Everyone</button>
+        <button type="button" data-v="player">Players</button>
+        <button type="button" data-v="coach">Coaches</button>
+        <button type="button" data-v="alum">Players turned coaches</button>
+        <button type="button" data-v="head">Head coaches today</button>
+      </div>
+    </div>
+    <div id="dirBox">
+      <span class="label" id="dirLabel">Direction</span>
+      <div class="seg" id="dir" role="group" aria-labelledby="dirLabel">
+        <button type="button" data-v="all">Both</button>
+        <button type="button" data-v="out">Went on</button>
+        <button type="button" data-v="in">Came in</button>
+      </div>
+    </div>
+    <div id="yearBox">
+      <span class="label">Seasons at the school</span>
+      <div class="row">
+        <select class="field" id="from" aria-label="From season"></select>
+        <span class="note">to</span>
+        <select class="field" id="to" aria-label="To season"></select>
+      </div>
+    </div>
+    <div id="staffBox">
+      <span class="label" id="staffLabel">Staff</span>
+      <div class="seg" id="staff" role="group" aria-labelledby="staffLabel">
+        <button type="button" data-v="coach">Coaches only</button>
+        <button type="button" data-v="all">With support staff</button>
+      </div>
+    </div>
+  </div>
+  <div class="head">
+    <span class="note" id="hint"></span>
+    <span class="key" id="key"></span>
+  </div>
+  <div class="tgrid">
+    <div class="tmap" id="tmap">
+      <canvas id="cv" aria-label="Map of the schools connected to the picked school. The lists give the same numbers."></canvas>
+      <div class="ttip" id="ttip" hidden></div>
+    </div>
+    <aside class="tside" id="side" aria-live="polite"></aside>
+  </div>
+  <section class="people" id="people" aria-labelledby="peopleTitle" hidden>
+    <div class="ptop">
+      <div><h2 id="peopleTitle"></h2><span class="note" id="peopleNote"></span></div>
+      <div class="ptools">
+        <span class="atchip" id="atChip" hidden></span>
+        <input class="field" id="q" type="search" placeholder="Find a name" aria-label="Find a name" autocomplete="off">
+        <select class="field" id="sort" aria-label="Sort people">
+          <option value="recent">Most recent first</option>
+          <option value="name">A to Z</option>
+        </select>
+      </div>
+    </div>
+    <div class="pcols label" aria-hidden="true"><span>Name</span><span>At this school</span><span>Last seen</span></div>
+    <ol class="plist" id="plist"></ol>
+    <button type="button" class="link" id="moreBtn" hidden></button>
+  </section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<script src="sports.js"></script>
+<script src="common.js"></script>
+<script>
+(async function () {
+  const { $, fmt, esc, css } = GP;
+  let data, staff = null;
+  try {
+    [data, staff] = await Promise.all([GP.loadData(),
+      fetch(GP.dataUrl("staff_data.json")).then((r) => r.ok ? r.json() : null).catch(() => null)]);
+    await data.loadNames();
+  } catch (e) { $("loading").textContent = "The data didn't load. If you opened this file directly, serve the folder instead (python -m http.server), or reload to try again."; return; }
+  const sportWords = data.sport.replace(/^(.*) \((.*)\)$/, "$2 $1");
+  $("sportName").textContent = sportWords;
+  document.title = `College ${sportWords} School Influence Map`;
+  const P = data.players, N = data.N, S = data.schools.length, names = data.nameList;
+  const { schoolPalette, swatch } = GP.makePalette(data);
+  const lab = data.seasonLabel, span = data.seasonSpan;
+  const schoolName = (i) => data.schools[i][0];
+  const plural = (n, w) => `${fmt(n)} ${w}${n === 1 ? "" : "s"}`;
+  const LEVEL_LABEL = { D1: "a D1 school", D2: "a Division II school", D3: "a Division III school", NAIA: "an NAIA school", JUCO: "a junior college", CLUB: "a club team", unknown: "another college" };
+
+  // ---------- the people ----------
+  // A player is every roster record with the same name and hometown (the rule on the dot map and in build.py's
+  // find_moves). Two records at different schools in overlapping seasons are probably two people, so they stay apart.
+  const personKey = (s) => (s || "").toLowerCase().replace(/\b(jr|sr|ii|iii|iv|v)\b\.?/g, "").replace(/[^a-z]/g, "");
+  const groups = new Map(), PID = new Int32Array(N);
+  let nP = 0;
+  {
+    const recs = [];
+    for (let k = 0; k < N; k++) {
+      const key = personKey(names[k]);
+      if (key && P.t[k] >= 0) {
+        const g = key + "|" + P.t[k];
+        const id = groups.get(g);
+        if (id === undefined) { groups.set(g, nP); PID[k] = nP++; recs.push(k); }
+        else { PID[k] = id; const a = recs[id]; if (Array.isArray(a)) a.push(k); else recs[id] = [a, k]; }
+      } else { PID[k] = nP++; recs.push(k); }
+    }
+    groups.clear();
+    for (let id = 0, end = nP; id < end; id++) {
+      const ks = recs[id]; if (!Array.isArray(ks)) continue;
+      const clash = ks.some((a) => ks.some((b) => P.s[a] !== P.s[b] && P.f[a] < P.l[b] && P.f[b] < P.l[a]));
+      if (clash) for (const k of ks.slice(1)) { PID[k] = nP++; recs.push(k); }
+    }
+  }
+  const recsOf = Array.from({ length: nP }, () => []);    // each player's records
+  for (let k = 0; k < N; k++) recsOf[PID[k]].push(k);
+  const recordsAt = data.schools.map(() => []), leftFrom = data.schools.map(() => []);
+  for (let k = 0; k < N; k++) { recordsAt[P.s[k]].push(k); if (P.o[k] >= 0) leftFrom[P.o[k]].push(k); }
+
+  // Coaches, from staff_data.json. Its schools are matched by name, in case the two files ever differ.
+  const staffPeople = staff ? staff.people.split("\n") : [];
+  const ST = staff ? GP.unpackStints(staff.stints) : { p: [], s: [], y: [], r: [], t: [] };
+  const ROLE_LABEL = staff ? staff.roleLabels : [], ROLES = staff ? staff.roles : [];
+  const HEAD = ROLES.indexOf("head"), SUPPORT = ROLES.indexOf("support");
+  const smap = staff ? staff.schools.map((s) => data.schoolIndex.has(s[0].toLowerCase()) ? data.schoolIndex.get(s[0].toLowerCase()) : -1) : [];
+  const stintsOf = staffPeople.map(() => []), stintsAt = data.schools.map(() => []);
+  for (let k = 0; k < ST.p.length; k++) {
+    const s = smap[ST.s[k]]; ST.s[k] = s;
+    if (s >= 0) { stintsOf[ST.p[k]].push(k); stintsAt[s].push(k); }
+  }
+  stintsOf.forEach((ks) => ks.sort((a, b) => ST.y[a] - ST.y[b]));
+  const titleOf = (k) => staff.titles[ST.t[k]] || ROLE_LABEL[ST.r[k]];
+
+  // Who is a head coach today: the last season with a real count of staff pages (the newest spring season can be thin).
+  const perYear = new Map();
+  for (let k = 0; k < ST.p.length; k++) perYear.set(ST.y[k], (perYear.get(ST.y[k]) || 0) + 1);
+  const peak = Math.max(0, ...perYear.values());
+  const NOW = Math.max(0, ...[...perYear.keys()].filter((y) => perYear.get(y) >= peak / 2));
+  const headNow = new Map();    // coach -> school
+  for (let k = 0; k < ST.p.length; k++) if (ST.y[k] === NOW && ST.r[k] === HEAD && ST.s[k] >= 0) headNow.set(ST.p[k], ST.s[k]);
+
+  // Players who went into coaching: matched by name, so the rules are strict. The person must show up on a staff page
+  // no earlier than the player's last season. A name that's the only player and only coach with it is enough, unless the
+  // first job is too senior for someone just done playing; otherwise one of the staff jobs must be at a school the player played for.
+  const coachOfPlayer = new Map(), playerOfCoach = new Map();
+  if (staff) {
+    const coachesByKey = new Map();
+    staffPeople.forEach((n, c) => { if (!stintsOf[c].length) return; const key = personKey(n); if (!key) return; if (!coachesByKey.has(key)) coachesByKey.set(key, []); coachesByKey.get(key).push(c); });
+    const playersByKey = new Map();
+    for (let id = 0; id < nP; id++) { const key = personKey(names[recsOf[id][0]]); if (coachesByKey.has(key)) { if (!playersByKey.has(key)) playersByKey.set(key, []); playersByKey.get(key).push(id); } }
+    for (const [key, cs] of coachesByKey) {
+      const ps = playersByKey.get(key); if (!ps) continue;
+      for (const c of cs) {
+        const first = ST.y[stintsOf[c][0]], places = new Set(stintsOf[c].map((k) => ST.s[k]));
+        const fits = ps.filter((id) => !coachOfPlayer.has(id) && Math.max(...recsOf[id].map((k) => P.l[k])) + 2000 <= first);
+        const sameSchool = fits.filter((id) => recsOf[id].some((k) => places.has(P.s[k])));
+        // a senior first job right after playing, at a different school, is an older coach with the same name
+        const firstRole = ROLES[ST.r[stintsOf[c][0]]], senior = ["head", "associate", "coordinator"].includes(firstRole);
+        const soon = (id) => first - (Math.max(...recsOf[id].map((k) => P.l[k])) + 2000) <= 3;
+        const pick = sameSchool.length === 1 ? sameSchool[0] : !sameSchool.length && ps.length === 1 && cs.length === 1 && fits.length === 1 && !(senior && soon(fits[0])) ? fits[0] : -1;
+        if (pick >= 0) { coachOfPlayer.set(pick, c); playerOfCoach.set(c, pick); }
+      }
+    }
+  }
+
+  // A person's stops, oldest first: { s, from, to, kind: "play" | "staff", ... }. pid: player or -1; c: coach or -1.
+  // support: keep support jobs. A school a roster names as the previous one, with no record there, is a stop too.
+  function stopsOf(pid, c, support) {
+    const out = [];
+    if (pid >= 0) {
+      const ks = recsOf[pid];
+      for (const k of ks) {
+        const o = P.o[k];
+        if (o >= 0 && !ks.some((j) => P.s[j] === o)) { const y = P.f[k] + 1999; out.push({ s: o, from: y, to: y, kind: "play", named: true }); }
+        out.push({ s: P.s[k], from: P.f[k] + 2000, to: P.l[k] + 2000, kind: "play", k });
+      }
+    }
+    if (c >= 0) {
+      let run = null;
+      for (const k of stintsOf[c]) {
+        if (ST.s[k] < 0 || (!support && ST.r[k] === SUPPORT)) continue;
+        if (run && run.s === ST.s[k] && ST.y[k] - run.to <= 2) { run.to = ST.y[k]; run.last = k; if (ST.r[k] === HEAD) run.head = true; if (ST.r[k] < ST.r[run.best]) run.best = k; }
+        else { run = { s: ST.s[k], from: ST.y[k], to: ST.y[k], kind: "staff", best: k, last: k, head: ST.r[k] === HEAD }; out.push(run); }
+      }
+    }
+    return out.sort((a, b) => a.from - b.from || a.to - b.to);
+  }
+  // Moves out of a stop a at school s to a later stop b elsewhere. The type: player, coach, or alum (played, then coached).
+  const typeOf = (a, b) => a.kind === "play" ? (b.kind === "play" ? "player" : "alum") : (b.kind === "staff" ? "coach" : null);
+
+  // ---------- every school's numbers, for the rankings (coaches only, every season) ----------
+  const METRICS = [
+    { id: "sent", label: "People who went on", tip: "Players and coaches who were here, then at another school in this data" },
+    { id: "reach", label: "Schools reached", tip: "Other schools those people went on to" },
+    { id: "players", label: "Players who transferred out", tip: "Players on a later roster at another school" },
+    { id: "coaches", label: "Coaches who went on", tip: "Coaches on a later staff at another school" },
+    { id: "alum", label: "Players turned coaches", tip: "Former players later on a coaching staff, here or anywhere" },
+    { id: "heads", label: "Head coaches elsewhere today", tip: `Played or coached here, and head coach at another school in ${lab(NOW || data.LAST)}` },
+  ];
+  const STAT = Object.fromEntries(METRICS.map((m) => [m.id, new Int32Array(S)]));
+  {
+    const reach = data.schools.map(() => new Set());
+    const tally = (pid, c) => {
+      const stops = stopsOf(pid, c, false);
+      if (stops.length < 2 && !(c >= 0 && pid >= 0) && !headNow.has(c)) return;
+      const went = new Set(), played = new Set(), wasHere = new Set(), turned = new Set();
+      for (const a of stops) {
+        wasHere.add(a.s);
+        for (const b of stops) {
+          if (a.s !== b.s && b.from > a.from) {
+            const t = typeOf(a, b); if (!t) continue;
+            const key = a.s * 4 + (t === "player" ? 1 : t === "coach" ? 2 : 3);
+            if (!played.has(key)) { played.add(key); if (t === "player") STAT.players[a.s]++; if (t === "coach") STAT.coaches[a.s]++; }
+            if (!went.has(a.s)) { went.add(a.s); STAT.sent[a.s]++; }
+            reach[a.s].add(b.s);
+          }
+        }
+        if (a.kind === "play" && !turned.has(a.s) && stops.some((b) => b.kind === "staff")) { turned.add(a.s); STAT.alum[a.s]++; }
+      }
+      const h = c >= 0 ? headNow.get(c) : undefined;
+      if (h !== undefined) wasHere.forEach((s) => { if (s !== h) STAT.heads[s]++; });
+    };
+    for (let id = 0; id < nP; id++) {
+      const c = coachOfPlayer.has(id) ? coachOfPlayer.get(id) : -1;
+      if (recsOf[id].length > 1 || c >= 0 || recsOf[id].some((k) => P.o[k] >= 0)) tally(id, c);
+    }
+    stintsOf.forEach((ks, c) => { if (ks.length && !playerOfCoach.has(c)) tally(-1, c); });
+    reach.forEach((set, s) => { STAT.reach[s] = set.size; });
+  }
+  // Schools are ranked within their level: all of D1 together, then each other division.
+  const levelOf = (s) => data.d1.includes(data.divs[data.schools[s][2]]) ? "D1" : data.divs[data.schools[s][2]];
+  const hasPeople = (s) => recordsAt[s].length > 0 || stintsAt[s].length > 0;
+  const LEVELS = [...new Set(data.schools.map((_, s) => s).filter(hasPeople).map(levelOf))]
+    .sort((a, b) => (a === "D1" ? -1 : b === "D1" ? 1 : data.divs.indexOf(a) - data.divs.indexOf(b)));
+  const rankIn = (id, s) => {
+    const lv = levelOf(s), a = STAT[id], mine = a[s];
+    let rank = 1, of = 0, ties = 0;
+    for (let i = 0; i < S; i++) { if (!hasPeople(i) || levelOf(i) !== lv) continue; of++; if (a[i] > mine) rank++; else if (a[i] === mine) ties++; }
+    return { rank, of, tied: ties > 1, lv };
+  };
+
+  // ---------- page state ----------
+  const state = { school: -1, who: "all", dir: "all", from: 0, to: 0, staff: "coach", at: -1, q: "", sort: "recent", metric: "sent", level: LEVELS[0] || "D1", shown: 100, open: "" };
+  const ALL_YEARS = [...new Set([...data.SEASONS, ...perYear.keys()])].sort((a, b) => a - b);
+  const FIRST = ALL_YEARS[0], LAST = ALL_YEARS[ALL_YEARS.length - 1];
+  state.from = FIRST; state.to = LAST;
+  for (const id of ["from", "to"]) $(id).innerHTML = ALL_YEARS.map((y) => `<option value="${y}">${lab(y)}</option>`).join("");
+  $("schoolList").innerHTML = data.schools.map((s, i) => hasPeople(i) ? `<option value="${esc(s[0])}">` : "").join("");
+  $("sub").textContent = `Everyone connected to one school, and where they went, ${span(FIRST, LAST)}`;
+
+  // ---------- one school: its people and their moves ----------
+  let M = null;      // { sel, rows, shown, routes }
+  function compute() {
+    const s = state.school;
+    if (s < 0) { M = null; return; }
+    const support = state.staff === "all", seen = new Map();
+    const add = (pid, c) => {
+      const key = pid >= 0 ? "p" + pid : "c" + c;
+      if (!seen.has(key)) seen.set(key, { key, pid, c });
+    };
+    for (const k of recordsAt[s]) add(PID[k], -1);
+    for (const k of leftFrom[s]) add(PID[k], -1);
+    for (const k of stintsAt[s]) { if (support || ST.r[k] !== SUPPORT) add(playerOfCoach.has(ST.p[k]) ? playerOfCoach.get(ST.p[k]) : -1, ST.p[k]); }
+    if (staff) for (const r of seen.values()) if (r.pid >= 0 && r.c < 0 && coachOfPlayer.has(r.pid)) r.c = coachOfPlayer.get(r.pid);
+    const rows = [];
+    for (const r of seen.values()) {
+      const stops = stopsOf(r.pid, r.c, support);
+      const here = stops.filter((x) => x.s === s && x.to >= state.from && x.from <= state.to);
+      if (!here.length) continue;
+      r.stops = stops; r.here = here;
+      r.name = r.pid >= 0 ? names[recsOf[r.pid][0]] : staffPeople[r.c];
+      r.out = new Map(); r.in = new Map();
+      for (const a of here) for (const b of stops) {
+        if (b.s === s) continue;
+        const t = b.from > a.from ? typeOf(a, b) : b.from < a.from ? typeOf(b, a) : null;
+        if (t) (b.from > a.from ? r.out : r.in).set(b.s, t);
+      }
+      r.played = here.some((x) => x.kind === "play"); r.coached = here.some((x) => x.kind === "staff");
+      r.turned = r.played && stops.some((x) => x.kind === "staff");
+      r.head = r.c >= 0 && headNow.has(r.c);
+      const before = r.pid >= 0 ? recsOf[r.pid].slice().sort((a, b) => P.f[a] - P.f[b])[0] : -1;
+      r.fromOutside = before >= 0 && P.x[before] && P.o[before] < 0 && P.s[before] === s ? before : -1;
+      r.last = Math.max(...here.map((x) => x.to));
+      rows.push(r);
+    }
+    rows.sort((a, b) => a.name.localeCompare(b.name));
+    M = { sel: s, rows };
+    refilter();
+  }
+  const whoFits = (r) => state.who === "all" || (state.who === "player" ? r.played : state.who === "coach" ? r.coached : state.who === "alum" ? r.turned : r.head);
+  const typeFits = (t) => state.who === "all" || state.who === "head" || state.who === t;
+  const movesFit = (r, m) => { for (const t of m.values()) if (typeFits(t)) return true; return false; };
+  // The rows the controls leave, and the map's routes. A route counts each person once.
+  function refilter() {
+    if (!M) return;
+    const fits = M.rows.filter((r) => whoFits(r) && (state.dir === "all" || movesFit(r, r[state.dir]) || (state.dir === "in" && r.fromOutside >= 0)));
+    const routes = new Map();
+    const road = (dir, s, t) => {
+      const key = dir + s; let x = routes.get(key);
+      if (!x) routes.set(key, x = { dir, s, n: 0, player: 0, coach: 0, alum: 0 });
+      x.n++; x[t]++;
+    };
+    for (const r of fits) {
+      if (state.dir !== "in") r.out.forEach((t, s) => { if (typeFits(t)) road("out", s, t); });
+      if (state.dir !== "out") r.in.forEach((t, s) => { if (typeFits(t)) road("in", s, t); });
+    }
+    M.fits = fits;
+    M.routes = [...routes.values()].sort((a, b) => b.n - a.n || a.s - b.s);
+    if (state.at >= 0 && !M.routes.some((x) => x.s === state.at)) state.at = -1;
+    const q = personKey(state.q);
+    M.list = fits.filter((r) => (state.at < 0 || (r.out.has(state.at) && (state.dir !== "in") && typeFits(r.out.get(state.at))) || (r.in.has(state.at) && (state.dir !== "out") && typeFits(r.in.get(state.at))))
+      && (!q || personKey(r.name).includes(q)));
+    if (state.sort === "recent") M.list.sort((a, b) => b.head - a.head || b.last - a.last || a.name.localeCompare(b.name));
+  }
+
+  // ---------- the map ----------
+  const albers = d3.geoAlbersUsa();
+  const US_FIT = { type: "MultiPoint", coordinates: [[-124.7, 48.4], [-67, 47.4], [-80.1, 25.1], [-117.1, 32.5], [-97.2, 25.9], [-160, 21], [-150, 61]] };
+  const cv = $("cv"), g = cv.getContext("2d");
+  let size = { w: 0, h: 0, dpr: 1 }, statePaths = [], stateFeatures = [], campusXY = [], hoverSchool = -1;
+
+  function layout() {
+    const r = $("tmap").getBoundingClientRect();
+    if (!r.width) return;
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    size = { w: r.width, h: r.height, dpr };
+    cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr);
+    albers.fitExtent([[12, 12], [r.width - 12, r.height - 12]], US_FIT);
+    const path = d3.geoPath(albers);
+    statePaths = stateFeatures.map((f) => new Path2D(path(f) || ""));
+    campusXY = data.campus.map((c) => c ? albers([c.lon, c.lat]) : null);
+    draw();
+  }
+  function curve(a, b) {
+    const dx = b[0] - a[0], dy = b[1] - a[1], len = Math.hypot(dx, dy) || 1, bend = Math.min(.22 * len, 90);
+    return { a, b, c: [(a[0] + b[0]) / 2 + dy / len * bend, (a[1] + b[1]) / 2 - dx / len * bend] };
+  }
+  function strokeCurve(q) { g.beginPath(); g.moveTo(q.a[0], q.a[1]); g.quadraticCurveTo(q.c[0], q.c[1], q.b[0], q.b[1]); g.stroke(); }
+  const openRow = () => M && state.open ? M.rows.find((r) => r.key === state.open) || null : null;
+  function draw() {
+    if (!size.w) return;
+    const { w, h, dpr } = size, fg = css("--fg"), panel = css("--panel"), cIn = css("--in"), cOut = css("--out"), muted = css("--muted"), accent = css("--accent");
+    g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, w, h);
+    g.fillStyle = css("--land"); for (const p of statePaths) g.fill(p);
+    g.strokeStyle = css("--border"); g.lineWidth = .7; for (const p of statePaths) g.stroke(p);
+    const pal = schoolPalette();
+    if (!M) {          // no school picked: every campus at its level, sized by the ranking
+      const a = STAT[state.metric], ids = data.schools.map((_, i) => i).filter((i) => campusXY[i] && hasPeople(i) && levelOf(i) === state.level).sort((x, y) => a[x] - a[y]);
+      const max = Math.max(1, ...ids.map((i) => a[i]));
+      for (const i of ids) {
+        const p = campusXY[i], r = 1.8 + 11 * Math.sqrt(a[i] / max);
+        g.beginPath(); g.arc(p[0], p[1], r, 0, Math.PI * 2);
+        g.globalAlpha = .9; g.fillStyle = pal[i].fill; g.fill(); g.globalAlpha = 1;
+        g.lineWidth = i === hoverSchool ? 2.5 : 1; g.strokeStyle = i === hoverSchool ? fg : panel; g.stroke();
+      }
+      return;
+    }
+    const sel = M.sel, drawable = campusXY[sel] ? M.routes.filter((r) => campusXY[r.s]) : [];
+    const maxN = Math.max(1, ...drawable.map((r) => r.n)), width = (n) => .7 + 5.3 * Math.sqrt(n / maxN);
+    const open = openRow();
+    g.lineCap = "round";
+    for (let i = drawable.length - 1; i >= 0; i--) {
+      const r = drawable[i], here = campusXY[sel], there = campusXY[r.s], q = r.dir === "out" ? curve(here, there) : curve(there, here);
+      const dim = open || (state.at >= 0 && r.s !== state.at) || (hoverSchool >= 0 && hoverSchool !== sel && r.s !== hoverSchool);
+      g.globalAlpha = dim ? .1 : .32 + .55 * Math.sqrt(r.n / maxN);
+      g.strokeStyle = r.dir === "out" ? cOut : cIn; g.lineWidth = width(r.n);
+      strokeCurve(q);
+    }
+    g.globalAlpha = 1;
+    const count = new Int32Array(S);
+    for (const r of M.routes) count[r.s] += r.n;
+    const maxC = Math.max(1, ...count);
+    const order = data.schools.map((_, i) => i).filter((i) => campusXY[i] && (count[i] || i === sel)).sort((a, b) => count[a] - count[b]);
+    if (open) g.globalAlpha = .35;
+    for (const i of order) {
+      const p = campusXY[i], r = i === sel ? 8 : 2.4 + 4.6 * Math.sqrt(count[i] / maxC);
+      g.beginPath(); g.arc(p[0], p[1], r, 0, Math.PI * 2);
+      g.fillStyle = pal[i].fill; g.fill();
+      g.lineWidth = i === sel || i === hoverSchool || i === state.at ? 2.5 : 1; g.strokeStyle = i === hoverSchool || i === state.at ? fg : panel; g.stroke();
+    }
+    g.globalAlpha = 1;
+    if (open) drawPath(open, accent, panel, fg, pal);
+    const label = (i) => {
+      if (!campusXY[i]) return;
+      const p = campusXY[i], text = schoolName(i);
+      g.font = `600 13px ${css("--body")}`; g.textBaseline = "middle";
+      const tw = g.measureText(text).width, x = Math.min(p[0] + 12, w - tw - 8);
+      g.lineWidth = 4; g.strokeStyle = panel; g.strokeText(text, x, p[1]); g.fillStyle = fg; g.fillText(text, x, p[1]);
+    };
+    if (!open) { label(sel); if (state.at >= 0) label(state.at); }
+  }
+  // One person's path, stop by stop, numbered as in their career list.
+  function drawPath(r, accent, panel, fg, pal) {
+    const pts = r.stops.map((x) => campusXY[x.s]);
+    g.strokeStyle = accent; g.lineWidth = 2.5; g.lineCap = "round";
+    let prev = null;
+    for (const p of pts) { if (!p) continue; if (prev && (prev[0] !== p[0] || prev[1] !== p[1])) strokeCurve(curve(prev, p)); prev = p; }
+    const used = new Map();
+    r.stops.forEach((x, i) => {
+      const p = pts[i]; if (!p) return;
+      const off = used.get(x.s) || 0; used.set(x.s, off + 1);
+      const px = p[0] + off * 15;
+      g.beginPath(); g.arc(px, p[1], 8.5, 0, Math.PI * 2); g.fillStyle = pal[x.s].fill; g.fill();
+      g.lineWidth = 1.5; g.strokeStyle = panel; g.stroke();
+      g.font = `600 11px ${css("--body")}`; g.textAlign = "center"; g.textBaseline = "middle";
+      g.fillStyle = d3.hsl(pal[x.s].fill).l > .6 ? "#222" : "#fff"; g.fillText(String(i + 1), px, p[1] + .5);
+      g.textAlign = "start";
+    });
+  }
+  function schoolAt(mx, my) {
+    let best = -1, bd = 14 * 14;
+    const hit = M ? new Set([M.sel, ...M.routes.map((r) => r.s)]) : null;
+    campusXY.forEach((p, i) => {
+      if (!p || (hit ? !hit.has(i) : !hasPeople(i) || levelOf(i) !== state.level)) return;
+      const d = (p[0] - mx) ** 2 + (p[1] - my) ** 2; if (d < bd) { bd = d; best = i; }
+    });
+    return best;
+  }
+  function showTip(html, x, y) {
+    const tip = $("ttip"); tip.innerHTML = html; tip.hidden = false;
+    const tw = tip.offsetWidth, th = tip.offsetHeight;
+    tip.style.left = Math.max(6, Math.min(x + 14, size.w - tw - 6)) + "px";
+    tip.style.top = Math.max(6, y - th - 10 < 6 ? y + 16 : y - th - 10) + "px";
+  }
+  function breakdown(r) {
+    return [r.player && plural(r.player, "player"), r.coach && plural(r.coach, "coach").replace("coachs", "coaches"), r.alum && plural(r.alum, "player turned coach").replace("coachs", "coaches")].filter(Boolean).join(", ");
+  }
+  function tipFor(si) {
+    if (!M) { const m = METRICS.find((x) => x.id === state.metric); return `${swatch(si)}<b>${esc(schoolName(si))}</b><br>${fmt(STAT[state.metric][si])} <span class="note">${esc(m.label.toLowerCase())}</span><br><span class="note">Click to see its people</span>`; }
+    if (si === M.sel) return `${swatch(si)}<b>${esc(schoolName(si))}</b>`;
+    const out = M.routes.find((r) => r.s === si && r.dir === "out"), inn = M.routes.find((r) => r.s === si && r.dir === "in");
+    return `${swatch(si)}<b>${esc(schoolName(si))}</b>${out ? `<br>Went on here: ${esc(breakdown(out))}` : ""}${inn ? `<br>Came from here: ${esc(breakdown(inn))}` : ""}<br><span class="note">Click to list these people</span>`;
+  }
+  cv.addEventListener("pointermove", (e) => {
+    if (!size.w) return;
+    const rect = cv.getBoundingClientRect(), mx = e.clientX - rect.left, my = e.clientY - rect.top, si = schoolAt(mx, my);
+    if (si !== hoverSchool) { hoverSchool = si; draw(); highlight(); }
+    cv.classList.toggle("hot", si >= 0);
+    if (si >= 0) showTip(tipFor(si), mx, my); else $("ttip").hidden = true;
+  });
+  cv.addEventListener("pointerleave", () => { hoverSchool = -1; $("ttip").hidden = true; draw(); highlight(); });
+  cv.addEventListener("click", (e) => {
+    const rect = cv.getBoundingClientRect(), si = schoolAt(e.clientX - rect.left, e.clientY - rect.top);
+    if (si < 0) return;
+    if (!M) { pick(si); return; }
+    if (si === M.sel) setAt(-1); else setAt(state.at === si ? -1 : si);
+  });
+  function drawKey() {
+    const line = (c) => `<svg width="22" height="8" aria-hidden="true"><line x1="1" y1="4" x2="21" y2="4" stroke="${c}" stroke-width="3" stroke-linecap="round"/></svg>`;
+    $("key").innerHTML = M ? `<span>${line(css("--out"))}Went on from here</span><span>${line(css("--in"))}Came here from</span><span>Thicker = more people</span>`
+      : `<span>Bigger dot = higher number</span>`;
+  }
+
+  // ---------- the side panel ----------
+  const pickBtn = (i) => `<button type="button" data-pick="${i}" title="Show ${esc(schoolName(i))}">${swatch(i)}${esc(schoolName(i))}</button>`;
+  const atBtn = (i) => `<button type="button" data-at="${i}" title="List the people connected to ${esc(schoolName(i))}">${swatch(i)}${esc(schoolName(i))}</button>`;
+  const seg = (id, items, cur) => `<div class="seg" id="${id}">${items.map(([v, t]) => `<button type="button" data-v="${esc(v)}" aria-pressed="${v === cur}">${esc(t)}</button>`).join("")}</div>`;
+  function barList(rows, cls, max) {
+    return `<ol class="tl ${cls}">${rows.map((r) => `<li data-s="${r.s}"><span class="nm">${r.pos || ""}${r.label}</span><span class="v"><b>${fmt(r.n)}</b></span><span class="b"><span style="width:${(r.n / max * 100).toFixed(1)}%"></span></span></li>`).join("")}</ol>`;
+  }
+  const FINE = `Players are matched from roster to roster by name and hometown, and coaches from staff to staff by name. A player counts as turned coach when the same name shows up on a staff page no earlier than ${GP.his} last roster, and the name is rare enough, or the school the same, to be confident. This data starts in ${lab(FIRST)}, so anyone who played or coached here before then isn't counted.`;
+  function renderSide() {
+    const side = $("side");
+    if (!M) {
+      const a = STAT[state.metric], m = METRICS.find((x) => x.id === state.metric);
+      const top = data.schools.map((_, i) => i).filter((i) => hasPeople(i) && levelOf(i) === state.level).sort((x, y) => a[y] - a[x] || x - y).slice(0, 25);
+      const max = Math.max(1, ...top.map((i) => a[i]));
+      side.innerHTML = `<div class="group"><h2>The most connected programs</h2><p class="note">${esc(m.tip)}, ${span(FIRST, LAST)}. Pick a school above or below to see its people.</p></div>
+        <div class="group"><span class="label">Rank by</span>${seg("metricSeg", METRICS.map((x) => [x.id, x.label]), state.metric)}</div>
+        ${LEVELS.length > 1 ? `<div class="group"><span class="label">Level</span>${seg("levelSeg", LEVELS.map((l) => [l, l]), state.level)}</div>` : ""}
+        <div class="group">${barList(top.map((i, n) => ({ s: i, n: a[i], pos: `<span class="pos">${n + 1}</span>`, label: pickBtn(i) })), "out", max)}</div>
+        <p class="fine">${FINE}</p>`;
+      return;
+    }
+    const s = M.sel, camp = data.campus[s], conf = data.confs[data.schools[s][1]] || "", total = M.rows.length;
+    const outs = M.routes.filter((r) => r.dir === "out"), ins = M.routes.filter((r) => r.dir === "in");
+    const rankRows = METRICS.map((m) => { const r = rankIn(m.id, s); return `<tr title="${esc(m.tip)}"><th scope="row">${esc(m.label)}</th><td class="v">${fmt(STAT[m.id][s])}</td><td class="r">${STAT[m.id][s] ? `${r.tied ? "T-" : "#"}${fmt(r.rank)}` : "–"}</td></tr>`; }).join("");
+    const r0 = rankIn("sent", s);
+    const reachNote = !camp ? `<p class="note">This school's campus isn't on file, so its lines can't be drawn.</p>` : "";
+    side.innerHTML = `<div class="sel-head"><div><h2>${swatch(s)}${esc(schoolName(s))}</h2>
+        <p class="note">${camp ? `${esc(camp.city)}, ${esc(camp.state)} · ` : ""}${esc([data.divLabel[data.divs[data.schools[s][2]]] || data.divs[data.schools[s][2]], conf].filter(Boolean).join(" · "))}</p></div>
+        <button type="button" class="link" id="clearSel">All schools</button></div>
+      <div class="big"><b>${fmt(total)}</b><small>${total === 1 ? "person" : "people"} connected${state.from !== FIRST || state.to !== LAST ? `, ${span(state.from, state.to)}` : ""}</small></div>
+      ${reachNote}
+      <div class="group"><h2>How it ranks</h2><p class="note">Among ${fmt(r0.of)} ${esc(r0.lv)} schools, every season, without support staff</p>
+        <table class="rank"><tbody>${rankRows}</tbody></table></div>
+      <div class="group"><h2>Where they went on to</h2>${outs.length ? barList(outs.slice(0, 12).map((r) => ({ s: r.s, n: r.n, label: atBtn(r.s) })), "out", outs[0].n) : `<p class="note">No one with these choices.</p>`}
+        ${outs.length > 12 ? `<p class="note">+${plural(outs.length - 12, "more school")}</p>` : ""}</div>
+      <div class="group"><h2>Where they came from</h2>${ins.length ? barList(ins.slice(0, 12).map((r) => ({ s: r.s, n: r.n, label: atBtn(r.s) })), "in", ins[0].n) : `<p class="note">No one with these choices.</p>`}
+        ${ins.length > 12 ? `<p class="note">+${plural(ins.length - 12, "more school")}</p>` : ""}</div>
+      <p class="fine">${FINE}</p>`;
+  }
+  $("side").addEventListener("click", (e) => {
+    const p = e.target.closest("[data-pick]"); if (p) { pick(+p.dataset.pick); return; }
+    const a = e.target.closest("[data-at]"); if (a) { setAt(state.at === +a.dataset.at ? -1 : +a.dataset.at); return; }
+    if (e.target.closest("#clearSel")) { pick(-1); return; }
+    const b = e.target.closest(".seg button"); if (!b) return;
+    if (b.closest("#metricSeg")) state.metric = b.dataset.v; else state.level = b.dataset.v;
+    update();
+  });
+  $("side").addEventListener("pointerover", (e) => {
+    const li = e.target.closest("li[data-s]"), si = li ? +li.dataset.s : -1;
+    if (si !== hoverSchool) { hoverSchool = si; draw(); }
+  });
+  $("side").addEventListener("pointerleave", () => { hoverSchool = -1; draw(); });
+  function highlight() { $("side").querySelectorAll("li[data-s]").forEach((li) => li.classList.toggle("hl", +li.dataset.s === hoverSchool)); }
+
+  // ---------- everyone connected ----------
+  const stopWhat = (x) => {
+    if (x.kind === "play") return x.named ? "Played (named on a later roster)" : `Played · ${esc(data.posName(data.pos[P.p[x.k]]))}`;
+    return esc(titleOf(x.best));
+  };
+  const lastStop = (r) => r.stops[r.stops.length - 1];
+  function hereText(r) {
+    const parts = r.here.map((x) => `${x.kind === "play" ? (x.named ? "Played" : esc(data.posName(data.pos[P.p[x.k]]))) : esc(ROLE_LABEL[ST.r[x.best]])}, ${span(x.from, x.to)}`);
+    return parts.join("; ");
+  }
+  function tagsOf(r) {
+    const tags = [];
+    if (r.head) tags.push(`<span class="tag hot">Head coach, ${esc(schoolName(headNow.get(r.c)))}</span>`);
+    if (r.turned && !r.head) tags.push(`<span class="tag hot">Turned coach</span>`);
+    if (r.played && [...r.out.values()].includes("player")) tags.push(`<span class="tag">Transferred out</span>`);
+    if ((r.played && [...r.in.values()].includes("player")) || r.fromOutside >= 0) tags.push(`<span class="tag">Transferred in</span>`);
+    if (r.coached && r.played === false && r.in.size && [...r.in.values()].includes("alum")) tags.push(`<span class="tag">Played elsewhere</span>`);
+    return tags.join("");
+  }
+  function renderPeople() {
+    const box = $("people");
+    box.hidden = !M;
+    if (!M) return;
+    const n = M.list.length, s = M.sel;
+    $("peopleTitle").innerHTML = `Everyone connected to ${esc(schoolName(s))}`;
+    $("peopleNote").textContent = n === M.rows.length ? plural(n, "person").replace("persons", "people") : `${fmt(n)} of ${plural(M.rows.length, "person").replace("persons", "people")}`;
+    const chip = $("atChip");
+    chip.hidden = state.at < 0;
+    chip.innerHTML = state.at >= 0 ? `Connected to ${esc(schoolName(state.at))}<button type="button" aria-label="Show everyone again">×</button>` : "";
+    const rows = M.list.slice(0, state.shown);
+    $("plist").innerHTML = rows.length ? rows.map((r) => {
+      const open = r.key === state.open, l = lastStop(r);
+      return `<li><button type="button" class="prow" data-r="${esc(r.key)}" aria-expanded="${open}">
+          <span class="who">${esc(r.name)}</span>
+          <span class="here">${hereText(r)}${tagsOf(r)}</span>
+          <span class="now">${swatch(l.s)}<b>${esc(schoolName(l.s))}</b>, ${lab(l.to)}</span></button>
+        ${open ? careerHtml(r) : ""}</li>`;
+    }).join("") : `<li><p class="empty" style="padding:8px 4px">No one matches these choices.</p></li>`;
+    const more = M.list.length - rows.length;
+    $("moreBtn").hidden = more <= 0;
+    $("moreBtn").textContent = `Show ${fmt(Math.min(more, 100))} more of ${fmt(more)}`;
+  }
+  function careerHtml(r) {
+    const s = M.sel;
+    const outside = r.fromOutside >= 0 && P.v[r.fromOutside] > 0 ? data.levels[P.v[r.fromOutside] - 1] : r.fromOutside >= 0 ? "unknown" : "";
+    const links = [];
+    if (r.pid >= 0) { const k = recsOf[r.pid][0]; links.push(`<a href="players-dotmap.html#player=${encodeURIComponent(names[k] + "~" + schoolName(P.s[k]))}">On the dot map</a>`); }
+    if (r.c >= 0) links.push(`<a href="staff-directory.html#person=${encodeURIComponent(staffPeople[r.c])}">In the staff directory</a>`);
+    return `<div class="open"><ol class="career">${r.stops.map((x) => `<li class="${x.s === s ? "me" : ""}"><span class="yr">${span(x.from, x.to)}</span>
+        <span>${swatch(x.s)}${x.s === s ? esc(schoolName(x.s)) : `<button type="button" data-pick="${x.s}" title="Show ${esc(schoolName(x.s))}">${esc(schoolName(x.s))}</button>`} <span class="t">${stopWhat(x)}</span></span></li>`).join("")}</ol>
+      ${outside ? `<p class="note" style="margin:0">Before this: ${esc(LEVEL_LABEL[outside] || LEVEL_LABEL.unknown)} that isn't in this data.</p>` : ""}
+      ${r.pid >= 0 && r.c >= 0 ? `<p class="note" style="margin:0">Playing and coaching seasons are joined by name.</p>` : ""}
+      <p class="note" style="margin:0">${links.join(" · ")}</p></div>`;
+  }
+  $("plist").addEventListener("click", (e) => {
+    const p = e.target.closest("[data-pick]"); if (p) { pick(+p.dataset.pick); return; }
+    const b = e.target.closest(".prow"); if (!b) return;
+    state.open = state.open === b.dataset.r ? "" : b.dataset.r;
+    renderPeople(); draw();
+    const again = $("plist").querySelector(`[data-r="${CSS.escape(b.dataset.r)}"]`); if (again) again.focus();
+    if (state.open && GP.narrow()) $("tmap").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  $("atChip").addEventListener("click", (e) => { if (e.target.closest("button")) setAt(-1); });
+  $("moreBtn").addEventListener("click", () => { state.shown += 100; renderPeople(); });
+  $("q").addEventListener("input", () => { state.q = $("q").value; state.shown = 100; refilter(); renderPeople(); });
+  $("sort").addEventListener("change", () => { state.sort = $("sort").value; state.shown = 100; if (state.sort === "name") compute(); refilter(); renderPeople(); });
+
+  // ---------- controls ----------
+  const setSeg = (id, v) => $(id).querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.v === v));
+  function bind(id, key) {
+    $(id).addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; state[key] = b.dataset.v; state.shown = 100; state.open = ""; update(); });
+  }
+  bind("who", "who"); bind("dir", "dir"); bind("staff", "staff");
+  $("from").addEventListener("change", () => { state.from = +$("from").value; if (state.from > state.to) state.to = state.from; state.shown = 100; state.open = ""; update(); });
+  $("to").addEventListener("change", () => { state.to = +$("to").value; if (state.to < state.from) state.from = state.to; state.shown = 100; state.open = ""; update(); });
+  function pickFromBox() {
+    const v = $("school").value.trim().toLowerCase();
+    if (!v) { if (state.school >= 0) pick(-1); return; }
+    const i = data.schoolIndex.has(v) ? data.schoolIndex.get(v) : data.schools.findIndex((s, x) => hasPeople(x) && s[0].toLowerCase().startsWith(v));
+    if (i >= 0) pick(i);
+  }
+  $("school").addEventListener("change", pickFromBox);
+  $("school").addEventListener("input", () => { if (data.schoolIndex.has($("school").value.trim().toLowerCase())) pickFromBox(); });
+  function pick(i) {
+    if (i === state.school) { $("school").value = i >= 0 ? schoolName(i) : ""; return; }
+    Object.assign(state, { school: i, at: -1, q: "", open: "", shown: 100 });
+    $("q").value = "";
+    if (i >= 0) state.level = levelOf(i);
+    hoverSchool = -1; $("ttip").hidden = true;
+    update();
+    scrollTo({ top: 0, behavior: "smooth" });
+  }
+  function setAt(i) { state.at = i; state.shown = 100; state.open = ""; refilter(); renderPeople(); draw(); }
+
+  // ---------- links: school-influence.html?sport=football#school=Notre%20Dame&who=coach&dir=out&from=2020&at=Ohio%20State ----------
+  let lastHash = "";
+  function hashNow() {
+    const q = new URLSearchParams();
+    if (state.school >= 0) {
+      q.set("school", schoolName(state.school));
+      if (state.who !== "all") q.set("who", state.who);
+      if (state.dir !== "all") q.set("dir", state.dir);
+      if (state.staff !== "coach") q.set("staff", state.staff);
+      if (state.from !== FIRST) q.set("from", state.from);
+      if (state.to !== LAST) q.set("to", state.to);
+      if (state.at >= 0) q.set("at", schoolName(state.at));
+    } else {
+      if (state.metric !== "sent") q.set("rank", state.metric);
+      if (state.level !== (LEVELS[0] || "D1")) q.set("level", state.level);
+    }
+    return q.toString();
+  }
+  function readUrl(firstLoad) {
+    let hash = location.hash.slice(1);
+    if (!hash && firstLoad) hash = GP.readSaved("school-influence:last") || "";
+    const q = new URLSearchParams(hash), idx = (v) => { const i = data.schoolIndex.get((v || "").toLowerCase()); return i === undefined ? -1 : i; };
+    state.school = idx(q.get("school"));
+    state.who = ["player", "coach", "alum", "head"].includes(q.get("who")) ? q.get("who") : "all";
+    state.dir = ["out", "in"].includes(q.get("dir")) ? q.get("dir") : "all";
+    state.staff = q.get("staff") === "all" ? "all" : "coach";
+    state.from = ALL_YEARS.includes(+q.get("from")) ? +q.get("from") : FIRST;
+    state.to = ALL_YEARS.includes(+q.get("to")) ? +q.get("to") : LAST;
+    if (state.from > state.to) [state.from, state.to] = [state.to, state.from];
+    state.at = idx(q.get("at"));
+    state.metric = METRICS.some((m) => m.id === q.get("rank")) ? q.get("rank") : "sent";
+    state.level = LEVELS.includes(q.get("level")) ? q.get("level") : state.school >= 0 ? levelOf(state.school) : LEVELS[0] || "D1";
+    state.open = ""; state.q = ""; state.shown = 100; $("q").value = "";
+  }
+  // The other maps open on the same school.
+  function otherPages() {
+    const sc = state.school >= 0 ? "#school=" + encodeURIComponent(schoolName(state.school)) : "";
+    $("dotLink").href = "players-dotmap.html" + sc;
+    $("transferLink").href = "players-transfers.html" + sc;
+    $("coachLink").href = "staff-moves.html" + sc;
+    $("heatLink").href = "players-heatmap.html" + (state.school >= 0 ? "#compare=" + encodeURIComponent(schoolName(state.school)) : "");
+  }
+  function update() {
+    compute();
+    $("school").value = state.school >= 0 ? schoolName(state.school) : "";
+    setSeg("who", state.who); setSeg("dir", state.dir); setSeg("staff", state.staff);
+    $("from").value = state.from; $("to").value = state.to;
+    for (const id of ["whoBox", "dirBox", "yearBox", "staffBox"]) $(id).hidden = state.school < 0;
+    $("staffBox").hidden = state.school < 0 || !staff;
+    $("hint").textContent = M ? "Hover a campus for its people; click one to list them below" : "Pick a school, here or on the map, to see everyone connected to it";
+    renderSide(); renderPeople(); drawKey(); draw(); otherPages();
+    const h = hashNow(); lastHash = h;
+    try { localStorage.setItem(GP.saveKey("school-influence:last"), h); } catch (e) {}
+    try { history.replaceState(null, "", location.pathname + location.search + (h ? "#" + h : "")); } catch (e) {}
+  }
+  addEventListener("hashchange", () => { if (location.hash.slice(1) !== lastHash) { readUrl(); update(); } });
+  $("share").addEventListener("click", () => { GP.copyLink($("toast")); });
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape" || e.target.closest("input")) return;
+    if (state.open) { state.open = ""; renderPeople(); draw(); }
+    else if (state.at >= 0) setAt(-1);
+  });
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { drawKey(); draw(); renderSide(); });
+  GP.trackBar($("bar"));
+  readUrl(true);
+  $("loading").remove();
+  update();
+  new ResizeObserver(layout).observe($("tmap"));
+  layout();
+  try {
+    const us = await fetch("https://cdn.jsdelivr.net/npm/us-atlas@3.0.1/states-10m.json").then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); });
+    stateFeatures = topojson.feature(us, us.objects.states).features.filter((f) => f.properties.name !== "Puerto Rico");
+    layout();
+  } catch (e) {
+    $("hint").textContent = "The state outlines didn't load; the campuses and lines still draw in the right places.";
+  }
+})();
+</script>
+</body>
+</html>

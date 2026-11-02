@@ -31,7 +31,7 @@
   }
   // Links to the other map pages keep the sport: players-heatmap.html -> players-heatmap.html?sport=softball.
   // Links written later by the pages' scripts are fixed as they appear.
-  const PAGE_LINK = /^((?:players|staff)-[a-z-]+\.html)(\?[^#]*)?(#.*)?$/;
+  const PAGE_LINK = /^((?:players|staff|school)-[a-z-]+\.html)(\?[^#]*)?(#.*)?$/;
   function keepSport(a) {
     const href = a.getAttribute("href");
     const m = href && href.match(PAGE_LINK);
@@ -50,6 +50,16 @@
       if (m.type === "attributes") keepSport(m.target); else m.addedNodes.forEach(keepSportIn);
     })).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ["href"] });
   }
+  // The Influence button opens on the school this page is showing, which every page keeps in its address
+  // (school=Alabama, or the first of compare=Alabama|Georgia on the heat maps).
+  function influenceHref(e) {
+    const a = e.target.closest && e.target.closest("#influenceLink");
+    if (!a) return;
+    const q = new URLSearchParams(location.hash.slice(1)), school = q.get("school") || (q.get("compare") || "").split("|")[0];
+    a.setAttribute("href", `school-influence.html?sport=${encodeURIComponent(sport)}${school && school !== "all" ? "#school=" + encodeURIComponent(school) : ""}`);
+  }
+  document.addEventListener("pointerdown", influenceHref, true);
+  document.addEventListener("click", influenceHref, true);
   if (document.body) startPage(); else document.addEventListener("DOMContentLoaded", startPage);
   // Each sport's map_data.json says how it writes its positions and divisions (from config/<sport>.json):
   //   data.posLabels  position group -> chip text ("FO" -> "Faceoff")

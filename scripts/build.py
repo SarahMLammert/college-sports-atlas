@@ -950,7 +950,8 @@ the shared pages.
     python3 scripts/build.py pages --check    # only say what is missing or out of date
 
 Since Oct 30 the site has one set of pages for every sport: docs/players-dotmap.html, players-heatmap.html,
-players-transfers.html, staff-moves.html and staff-directory.html, opened as players-dotmap.html?sport=softball.
+players-transfers.html, staff-moves.html and staff-directory.html, opened as players-dotmap.html?sport=softball
+(and school-influence.html since Nov 2, which never had a docs/<sport>/ address, so it has no forwarding page).
 Edit those files directly. A sport's words on them (title, description, heading, subtitle, she/her) and its
 place on the front page are in the "site" part of config/<sport>/settings.json; this command copies them into
 docs/sports.js, which the pages read (Nov 1; before that docs/sports.js and the list in docs/index.html were

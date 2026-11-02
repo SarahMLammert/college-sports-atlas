@@ -11,13 +11,13 @@ site in `docs/` (GitHub Pages).
 | Softball | `softball` | 1,118 (D1, D2, D3, NAIA, JUCO) | 115K | 2016–2027 |
 | Lacrosse (Men's) | `lacrosse-mens` | 431 (D1, D2, D3, NAIA, JUCO) | 69K | 2016–2027 |
 | Lacrosse (Women's) | `lacrosse-womens` | 583 (D1, D2, D3, NAIA, JUCO) | 58K | 2016–2027 |
-| Hockey (Men's) | `hockey-mens` | 162 (NCAA D1, D2, D3) | 18K | 2016–2027 |
-| Hockey (Women's) | `hockey-womens` | 126 (National Collegiate = D1 and D2 schools, D3) | 11K | 2016–2027 |
+| Hockey (Men's) | `hockey-mens` | 162 (NCAA D1, D2, D3) | 20K | 2016–2027 |
+| Hockey (Women's) | `hockey-womens` | 126 (National Collegiate = D1 and D2 schools, D3) | 12K | 2016–2027 |
 | Basketball (Men's) | `basketball-mens` | 1,215 (D1, D2, D3, NAIA, JUCO) | 120K | 2016–2027 |
-| Basketball (Women's) | `basketball-womens` | 1,220 | 97K | 2016–2027 |
-| Volleyball (Women's) | `volleyball-womens` | 1,192 | 97K | 2016–2026 (fall) |
-| Soccer (Men's) | `soccer-mens` | 949 | 151K | 2016–2026 (fall) |
-| Soccer (Women's) | `soccer-womens` | 1,161 | 148K | 2016–2026 (fall) |
+| Basketball (Women's) | `basketball-womens` | 1,220 | 99K | 2016–2027 |
+| Volleyball (Women's) | `volleyball-womens` | 1,192 | 98K | 2016–2026 (fall) |
+| Soccer (Men's) | `soccer-mens` | 950 | 152K | 2016–2026 (fall) |
+| Soccer (Women's) | `soccer-womens` | 1,161 | 149K | 2016–2026 (fall) |
 
 Football, volleyball and soccer are named by the fall they're played in. Spring and winter sports are named by the
 spring the season ends in (2025-26 = 2026); from August the current season is next spring's. A sport appears on the
@@ -38,6 +38,9 @@ pages for every sport, opened with the sport in the address (`players-dotmap.htm
 - **Coaching Moves** (`staff-moves.html`): coaches moving between schools (head coach jobs, coaching jobs or any staff job).
 - **Staff Directory** (`staff-directory.html`): a school's staff by season, its head coaches over time, and any
   person's career.
+- **School Influence Map** (`school-influence.html`): one school's reach: everyone who played or coached there, the
+  schools they came from and went on to, each person's career, and how the school ranks. Built in the browser from
+  the player and staff data, so it needs no build step of its own.
 
 Football and baseball come in two files: the dot map opens on the D1 schools (`map_data.json`) and loads the
 other divisions (`map_data_more.json`) only when a view or a search needs them. Map and staff data are packed

@@ -96,7 +96,7 @@ def run_checks(sports: list[str], docs: Path = DOCS, route=None) -> list[str]:
             page.close()
             out += [f"index.html: {x}" for x in problems]
             for sport in sports:
-                pages = PLAYER_PAGES + [s for s in STAFF_PAGES if (docs / sport / "staff_data.json").exists()]
+                pages = PLAYER_PAGES + [s for s in STAFF_PAGES if (docs / sport / "staff_data.json").exists()] + ["school-influence"]
                 for name in pages:
                     problems, page = check_page(browser, f"{base}{name}.html?sport={sport}", route)
                     want = (words[sport].get(name) or {}).get("title")
