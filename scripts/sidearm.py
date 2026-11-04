@@ -37,6 +37,8 @@ class Rules:
     spring: bool = False             # a spring (or winter) sport: season 2024 is 2023-24
     junior_colleges: tuple = ()
     colleges: frozenset = dc_field(default_factory=frozenset)   # _college_key() of the colleges known by name
+    sex: str = ""                    # "m"/"w": keep only this team's athletes from a page that lists both
+    combined_codes: frozenset = frozenset()   # address codes that usually show both teams ('track-and-field')
 
     @property
     def own_codes(self) -> set:
@@ -53,7 +55,8 @@ class Rules:
         return cls(roster_paths=tuple(sport.roster_paths), presto_paths=tuple(getattr(sport, "presto_paths", []) or ()),
                    min_players=sport.min_players, max_players=getattr(sport, "max_players", 0) or 0,
                    spring=bool(getattr(sport, "spring_season", False)), junior_colleges=juco,
-                   colleges=college_keys(schools, juco))
+                   colleges=college_keys(schools, juco), sex=getattr(sport, "roster_sex", "") or "",
+                   combined_codes=frozenset(sport_codes(list(getattr(sport, "combined_paths", []) or []))))
 
 
 DEFAULT = Rules()
@@ -84,7 +87,10 @@ OTHER_SPORT_CODES = {
     "mens-golf", "womens-golf", "mgolf", "wgolf", "m-golf", "w-golf",
     "field-hockey", "fhockey", "fh", "w-fieldh",
     "mens-swimming-and-diving", "womens-swimming-and-diving", "swimming-and-diving", "swim", "mswim", "wswim",
-    "womens-rowing", "rowing", "wrowing", "cheerleading", "cheer", "dance", "esports", "bowling", "womens-bowling",
+    "womens-rowing", "rowing", "wrowing", "mens-rowing", "mrowing", "wrow", "mrow", "w-rowing", "m-rowing", "crew",
+    "womens-crew", "mens-crew", "water-polo", "wpolo", "mpolo", "wwpolo", "mwpolo", "wwaterpolo", "mwaterpolo",
+    "m-wpolo", "w-wpolo", "tennis", "golf", "track", "swimming", "swim-dive", "mswimdive", "wswimdive", "m-swim",
+    "w-swim", "w-wrestl", "wrestle", "c-xc", "c-track", "c-swim", "mtrack-field", "wtrack-field", "cheerleading", "cheer", "dance", "esports", "bowling", "womens-bowling",
     "acrobatics-and-tumbling", "stunt", "womens-rugby", "mens-rugby", "rugby", "womens-water-polo", "mens-water-polo",
     "equestrian", "rifle", "fencing", "gymnastics", "wgym", "triathlon", "womens-triathlon",
 }
@@ -976,7 +982,7 @@ STRATEGIES: list[tuple[str, Callable[[str, BeautifulSoup], list[dict]]]] = [
 
 _CELL_LABEL = re.compile(
     r"^(No\.?|#|Jersey|Name|Full Name|Pos\.?|Position|Cl\.?|Class|Yr\.?|Year|Academic Year|Elig\.?|"
-    r"Ht\.?|Height|Wt\.?|Weight|Hometown(?:\s*/\s*[A-Za-z ]+)?|High School(?:\s*/\s*[A-Za-z ]+)?|Last School|"
+    r"Ht\.?|Height|Wt\.?|Weight|Hometown(?:\s*/\s*[A-Za-z ]+)*|High School(?:\s*/\s*[A-Za-z ]+)?|Last School|"
     r"Previous Schools?|Prev\. School|Former School|College|Experience|Exp\.?)\s*:\s*",
     re.I,
 )
@@ -1179,7 +1185,93 @@ def _visible_backbone(visible: list[dict], data: list[dict]) -> list[dict]:
     return out
 
 
-def parse_roster(html: str, rules: Rules = DEFAULT) -> tuple[str, list[dict]]:
+# ---- which seasons a team's page lists ------------------------------------------------------------------------
+# A team's roster page usually names the seasons the site has for it: a season dropdown, links to /roster/2019, or
+# the season names in its data. Scraping goes newest first, so once a page gives its list, older seasons needn't be
+# tried. Tested on both wrestling runs (Nov 3): 18% fewer tries, 1 roster of 3,124 lost (Kentucky Wesleyan 2016).
+_YEAR_LABEL = re.compile(r"\b(20[012]\d)(?:[-–/]\d{2,4})?\b")
+
+
+def earliest_listed(html: str) -> int | None:
+    """The first year of the oldest season the page lists, or None when it doesn't list at least three. "2018-19" is
+    read as 2018 even for a spring sport, whose season is 2019: one extra try costs less than a lost roster."""
+    years = set()
+    for block in re.findall(r"<select[^>]*>(.*?)</select>", html, re.S | re.I):
+        options = [o for o in re.findall(r"<option[^>]*>(.*?)</option>", block, re.S | re.I) if _YEAR_LABEL.search(o)]
+        if len(options) >= 2:
+            years |= {int(_YEAR_LABEL.search(o).group(1)) for o in options}
+    years |= {int(y) for y in re.findall(r"/roster/(?:season/)?(20[012]\d)(?:-\d{2,4})?\b", html)}
+    years |= {int(y) for y in re.findall(r'"season(?:_?[Nn]ame|_?[Tt]itle)?"\s*:\s*"(20[012]\d)(?:-\d{2,4})?"', html)}
+    return min(years) if len(years) >= 3 else None
+
+
+# ---- men and women on one page ---------------------------------------------------------------------------------
+# Track, cross country and swimming sites often have one roster for both teams, and may have no usable men's or
+# women's page at all (Nov 2: Oregon's /sports/mens-track-and-field/roster is empty, Grand Valley State's
+# /sports/mens-cross-country/roster stops at 2013). Those pages say who is who in three ways: Sidearm's person list
+# ("name":"Lilly Alberts","gender":"F"), Nuxt's player records (firstName, lastName, gender), and separate tables
+# (caption "Women's 2024 Cross Country Roster", or a first header cell "Women").
+_NAME_GENDER = re.compile(r'"name"\s*:\s*"([^"]{2,80})"\s*,\s*"gender"\s*:\s*"([MFmf])"')
+_TEAM_WORD = re.compile(r"\b(women|men)(?:['’]?s)?\b", re.I)
+
+
+def sex_by_name(html: str, soup: BeautifulSoup) -> dict[str, str]:
+    """_name_key(name) -> "m" or "w", for everyone the page says is on the men's or the women's team."""
+    marks = {_name_key(name): "w" if g in "Ff" else "m" for name, g in _NAME_GENDER.findall(html)}
+    node = soup.find("script", id="__NUXT_DATA__")
+    if node is not None:
+        try:
+            data = json.loads(node.string or "")
+        except ValueError:
+            data = []
+        def value(i):
+            return data[i] if isinstance(i, int) and 0 <= i < len(data) else None
+        for rec in data if isinstance(data, list) else []:
+            if isinstance(rec, dict) and {"firstName", "lastName", "gender"} <= set(rec):
+                g = value(rec["gender"])
+                if isinstance(g, str) and g in ("M", "F", "m", "f"):
+                    marks[_name_key(f"{value(rec['firstName'])} {value(rec['lastName'])}")] = "w" if g in "Ff" else "m"
+    for table in soup.find_all("table"):
+        title = table.find("caption") or table.find("th")
+        found = _TEAM_WORD.search(title.get_text(" ")) if title is not None else None
+        if not found or _STAFF_SECTIONS.search(title.get_text(" ")):
+            continue
+        team = "w" if found.group(1).lower() == "women" else "m"
+        for a in table.select("tbody a"):
+            if a.get_text(strip=True):
+                marks[_name_key(clean(a.get_text(" ")))] = team
+    # A heading over each list: "Men's 2026 Cross Country Roster", "Women's Roster" (Nov 4: most combined cross country
+    # pages). In page order, so each link belongs to the heading above it; a staff heading ends the list.
+    team = None
+    for el in soup.find_all(re.compile(r"^(h[1-6]|a)$")):
+        text = clean(el.get_text(" "))
+        if el.name != "a":
+            found = _TEAM_WORD.search(text)
+            if _STAFF_SECTIONS.search(text):
+                team = None
+            elif found and re.search(r"\broster\b", text, re.I):
+                team = "w" if found.group(1).lower() == "women" else "m"
+        elif team and text:
+            marks.setdefault(_name_key(text), team)
+    return marks
+
+
+def keep_own_sex(players: list[dict], html: str, soup: BeautifulSoup, rules: Rules, url: str = "") -> list[dict]:
+    """Only this team's athletes. Nothing from a page of the other team, or from an address that usually shows both
+    teams when the page doesn't say who is who: half a roster of the wrong athletes is worse than a gap."""
+    if not rules.sex:
+        return players
+    marks = sex_by_name(html, soup)
+    found = {marks[k] for k in (_name_key(p["name"]) for p in players) if k in marks}
+    if len(found) == 2:
+        return [p for p in players if marks.get(_name_key(p["name"])) == rules.sex]
+    if found:
+        return players if rules.sex in found else []
+    codes = {(m.group(1) or m.group(2) or "").lower() for m in _CODE_IN_URL.finditer(url or "")}
+    return [] if codes & rules.combined_codes else players
+
+
+def parse_roster(html: str, rules: Rules = DEFAULT, url: str = "") -> tuple[str, list[dict]]:
     """Run every strategy; return (strategy_name, players) for the best result.
 
     When the Nuxt payload has more players than the page visibly lists, and the visible list is a
@@ -1215,4 +1307,5 @@ def parse_roster(html: str, rules: Rules = DEFAULT) -> tuple[str, list[dict]]:
         p.pop("staff_title", None)
         if p["hometown"].strip().lower().rstrip(":. ") in _PLACEHOLDERS:
             p["hometown"] = ""
+    best = keep_own_sex(best, html, soup, rules, url)
     return best_name, _dedupe(best)

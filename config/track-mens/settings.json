@@ -1,0 +1,205 @@
+{
+ "label": "Track & Field (Men's)",
+ "roster_paths": [
+  "/sports/mens-track-and-field/roster",
+  "/sports/mtrack/roster",
+  "/sports/m-track/roster",
+  "/sports/mtf/roster",
+  "/sports/track-and-field/roster",
+  "/sports/track/roster",
+  "/sports/trackfield/roster",
+  "/sports/c-track/roster"
+ ],
+ "presto_paths": [
+  "/sports/mtrack/{prev_season}-{yy}/roster",
+  "/sports/track/{prev_season}-{yy}/roster"
+ ],
+ "min_players": 5,
+ "max_players": 150,
+ "junior_colleges": [
+  "San Jac",
+  "TJC",
+  "LSUE",
+  "LSU-Eunice",
+  "MGCCC",
+  "IWCC",
+  "JCCC",
+  "SCF",
+  "FSW",
+  "IRSC",
+  "JUCO"
+ ],
+ "spring_season": true,
+ "roster_sex": "m",
+ "combined_paths": [
+  "/sports/track-and-field/roster",
+  "/sports/track/roster",
+  "/sports/trackfield/roster",
+  "/sports/c-track/roster"
+ ],
+ "position_groups": [
+  "SPR",
+  "DIST",
+  "JUMP",
+  "THROW",
+  "MULTI",
+  "UNK"
+ ],
+ "position_abbreviations": {
+  "SPR": "s sp spr sprint sprints sprinter sprinters h hur hurdle hurdles hurdler sh",
+  "DIST": "d dist distance md mid mid-distance ld xc",
+  "JUMP": "j jump jumps jumper jumps lj tj hj pv vault",
+  "THROW": "t th throw throws thrower wt shot discus javelin hammer",
+  "MULTI": "m multi multis mult multi-event multi-events combined heptathlon decathlon pentathlon"
+ },
+ "position_words": [
+  [
+   "sprint",
+   "SPR"
+  ],
+  [
+   "hurdl",
+   "SPR"
+  ],
+  [
+   "short",
+   "SPR"
+  ],
+  [
+   "relay",
+   "SPR"
+  ],
+  [
+   "distance",
+   "DIST"
+  ],
+  [
+   "middle",
+   "DIST"
+  ],
+  [
+   "long distance",
+   "DIST"
+  ],
+  [
+   "cross",
+   "DIST"
+  ],
+  [
+   "jump",
+   "JUMP"
+  ],
+  [
+   "long jump",
+   "JUMP"
+  ],
+  [
+   "high jump",
+   "JUMP"
+  ],
+  [
+   "triple",
+   "JUMP"
+  ],
+  [
+   "pole",
+   "JUMP"
+  ],
+  [
+   "throw",
+   "THROW"
+  ],
+  [
+   "shot",
+   "THROW"
+  ],
+  [
+   "discus",
+   "THROW"
+  ],
+  [
+   "javelin",
+   "THROW"
+  ],
+  [
+   "hammer",
+   "THROW"
+  ],
+  [
+   "weight",
+   "THROW"
+  ],
+  [
+   "multi",
+   "MULTI"
+  ],
+  [
+   "combined",
+   "MULTI"
+  ],
+  [
+   "hept",
+   "MULTI"
+  ],
+  [
+   "dec",
+   "MULTI"
+  ]
+ ],
+ "position_fallback": "UNK",
+ "d1_divisions": [
+  "D1"
+ ],
+ "other_divisions": [
+  "D2",
+  "D3",
+  "NAIA",
+  "JUCO"
+ ],
+ "division_labels": {
+  "D1": "Division I",
+  "D2": "Division II",
+  "D3": "Division III",
+  "NAIA": "NAIA",
+  "JUCO": "Junior college (NJCAA, CCCAA, NWAC)"
+ },
+ "position_labels": {
+  "SPR": "Sprints and hurdles",
+  "DIST": "Distance",
+  "JUMP": "Jumps",
+  "THROW": "Throws",
+  "MULTI": "Multi-events",
+  "UNK": "Other"
+ },
+ "thin_roster": 12,
+ "frozen_min_pairs": 8,
+ "site": {
+  "front_page": {
+   "disc": "track",
+   "name": "Track & Field",
+   "icon": "track",
+   "ring": "spring",
+   "order": 24,
+   "sex": "m"
+  },
+  "women": false,
+  "players-dotmap": {
+   "title": "College Track & Field (Men's) Recruiting Map",
+   "description": "Where every varsity college men's track & field athlete since 2016 comes from, mapped: Division I, II and III, NAIA and junior college.",
+   "h1": "College Track & Field (Men's) <span>Recruiting Map</span>",
+   "sub": "Hometowns of every varsity college men's track & field athlete since 2016"
+  },
+  "players-heatmap": {
+   "title": "College Track & Field (Men's) Recruiting Footprints",
+   "description": "Compare where up to four college men's track & field programs, from Division I to junior college, find their athletes, state by state.",
+   "h1": "College Track & Field (Men's) <span>Recruiting Footprints</span>"
+  },
+  "players-transfers": {
+   "title": "College Track & Field (Men's) Transfer Map",
+   "description": "Where college men's track & field athletes transferred, school to school, since 2016.",
+   "h1": "College Track & Field (Men's) <span>Transfer Map</span>",
+   "sub": "Where athletes moved from school to school since 2016"
+  }
+ },
+ "seasons": "2016-2026"
+}

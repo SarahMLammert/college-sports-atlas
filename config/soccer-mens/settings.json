@@ -16,7 +16,7 @@
   "thin_roster": 18,
   "frozen_min_pairs": 15,
   "site": {
-    "front_page": {"disc": "soccer", "name": "Soccer", "icon": "soccer", "order": 8, "sex": "m"},
+    "front_page": {"disc": "soccer", "name": "Soccer", "icon": "soccer", "order": 2, "sex": "m", "ring": "fall"},
     "women": false,
     "players-dotmap": {"title": "College Soccer (Men's) Recruiting Map", "description": "Where every varsity college men's soccer player since 2016 comes from, mapped: Division I, II and III, NAIA and junior college.", "h1": "College Soccer (Men's) <span>Recruiting Map</span>", "sub": "Hometowns of every varsity college men's soccer player since 2016"},
     "players-heatmap": {"title": "College Soccer (Men's) Recruiting Footprints", "description": "Compare where up to four college men's soccer programs, from Division I to junior college, find their players, state by state.", "h1": "College Soccer (Men's) <span>Recruiting Footprints</span>"},

@@ -17,7 +17,7 @@
   "thin_roster": 25,
   "frozen_min_pairs": 20,
   "site": {
-    "front_page": {"disc": "lacrosse", "name": "Lacrosse", "icon": "lacrosse", "order": 2, "sex": "m"},
+    "front_page": {"disc": "lacrosse", "name": "Lacrosse", "icon": "lacrosse", "order": 23, "sex": "m", "ring": "spring"},
     "women": false,
     "players-dotmap": {"title": "College Lacrosse (Men's) Recruiting Map", "description": "Where every varsity college men's lacrosse player since 2016 comes from, mapped: Division I, II and III, NAIA and junior college.", "h1": "College Lacrosse (Men's) <span>Recruiting Map</span>", "sub": "Hometowns of every varsity college men's lacrosse player since 2016"},
     "players-heatmap": {"title": "College Lacrosse (Men's) Recruiting Footprints", "description": "Compare where up to four college men's lacrosse programs, from Division I to junior college, find their players, state by state.", "h1": "College Lacrosse (Men's) <span>Recruiting Footprints</span>"},

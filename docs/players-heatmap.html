@@ -4,31 +4,29 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>College Football Recruiting Footprints</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="description" content="Compare where up to four college football programs, from FBS to junior college, find their players, state by state.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Barlow:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="common.css">
 <style>
-/* Layout: an ordinary scrolling page. Title bar on top, then four big U.S. maps, two per row,
-   each state shaded by its share of that school's roster, with the state ranking on one line underneath. */
-body { background: var(--panel) var(--paper-grain); }
-.bar { position: static; padding-bottom: 6px; }
-.tools { justify-content: flex-end; }
-@media (min-width: 1101px) {   /* compact title so four maps fit on laptop screens */
-  .brand { padding: 8px 14px 9px; max-width: none; }
-  .brand h1 { font-size: 26px; white-space: nowrap; }
-  .brand .sub { margin-top: 2px; }
-}
 .page { padding: 0 max(var(--gap), env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(var(--gap), env(safe-area-inset-left)); display: flex; flex-direction: column; gap: 12px; }
-.head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px 18px; }
+.head { min-height: 0; }
 .head .note b { color: var(--fg); }
-.key { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: var(--muted); flex-wrap: wrap; }
+.key { gap: 4px; }
+.key svg { margin-right: 0; }
 .key i { display: inline-block; width: 22px; height: 12px; border-radius: 3px; border: 1px solid var(--line); }
 .key span { margin-right: 6px; }
 .cgrid { display: grid; grid-template-columns: repeat(2, minmax(0, var(--col-w, 1fr))); justify-content: center; gap: 14px; }
 .cell { border: 1px solid var(--line); border-radius: 8px; display: flex; flex-direction: column; overflow: hidden; background: var(--panel); }
 .cell-head { display: flex; gap: 8px; align-items: center; padding: 5px 8px 5px 10px; border-bottom: 1px solid var(--line); }
 .cell-head .field { flex: 1; min-width: 0; padding: 4px 8px; }
+.cell-x { flex: none; width: 22px; height: 22px; border: 0; border-radius: 50%; background: none; color: var(--muted); font-size: 17px; line-height: 1; cursor: pointer; }
+.cell-x:hover { background: var(--accent-soft); color: var(--fg); }
+.addcell { grid-column: 1 / -1; min-height: 42px; border: 1.5px dashed var(--border); border-radius: 8px; background: none; color: var(--accent); font-weight: 600; cursor: pointer; }
+.addcell:hover { background: var(--accent-soft); }
 .cell-head .n { font-size: 12px; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
 .cell-map { position: relative; height: var(--map-h, 360px); background: var(--sea); }   /* --map-h: set by fitMaps() so two rows fit the window */
 .cell-map canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: pointer; touch-action: manipulation; }
@@ -59,9 +57,7 @@ body { background: var(--panel) var(--paper-grain); }
 .h2h { display: flex; flex-direction: column; gap: 12px; margin-top: 18px; padding-top: 16px; border-top: 2px solid var(--fg); scroll-margin-top: 12px; }
 .h2h-head { display: flex; align-items: baseline; gap: 6px 14px; flex-wrap: wrap; }
 .h2h-head h2 { font-size: 26px; }
-.h2h-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .box { border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 10px; min-width: 0; position: relative; }
-.box.span2 { grid-column: 1 / -1; }
 .box h3 { font: 700 19px/1.1 var(--display); text-transform: uppercase; letter-spacing: .1em; margin: 0; }
 .box .why { margin: -4px 0 0; }
 .tscroll { overflow-x: auto; }
@@ -98,7 +94,6 @@ table.st td.best { font-weight: 700; }
 .ctip div { display: flex; align-items: center; gap: 6px; }
 .ctip b { margin-left: auto; padding-left: 12px; }
 .pipe td .st-ab { font-weight: 600; }
-@media (max-width: 1100px) { .h2h-grid { grid-template-columns: 1fr; } }
 @media (max-width: 760px) {
   .box { padding: 12px; }
   table.st th, table.st td { padding: 6px 6px; }
@@ -117,8 +112,8 @@ table.st td.best { font-weight: 700; }
     <p class="sub">Where up to four schools find their players, state by state</p>
   </div>
   <div class="tools">
-    <a class="btn icon" id="homeLink" href="index.html" aria-label="All sports" title="All sports">
-      <svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="2.2 2"/><circle cx="9" cy="2.5" r="1.8" fill="currentColor"/><circle cx="15.5" cy="9" r="1.8" fill="currentColor"/><circle cx="9" cy="15.5" r="1.8" fill="currentColor"/><circle cx="2.5" cy="9" r="1.8" fill="currentColor"/></svg>
+    <a class="btn" id="homeLink" href="index.html" aria-label="All sports" title="All sports">
+      <svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="2.2 2"/><circle cx="9" cy="2.5" r="1.8" fill="currentColor"/><circle cx="15.5" cy="9" r="1.8" fill="currentColor"/><circle cx="9" cy="15.5" r="1.8" fill="currentColor"/><circle cx="2.5" cy="9" r="1.8" fill="currentColor"/></svg><span class="txt">All sports</span>
     </a>
     <div class="fwrap">
       <button type="button" class="btn filters" id="filtersBtn" aria-expanded="false" aria-controls="filters">
@@ -159,31 +154,20 @@ table.st td.best { font-weight: 700; }
         </div>
       </aside>
     </div>
-    <a class="btn" id="mapLink" href="players-dotmap.html" title="Back to the dot map">
-      <svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="5" cy="6" r="2.2" fill="currentColor"/><circle cx="12.5" cy="5" r="1.5" fill="currentColor"/><circle cx="10" cy="12" r="3" fill="currentColor"/></svg>
-      <span class="txt">Dot map</span>
-    </a>
-    <a class="btn" id="transfersLink" href="players-transfers.html" title="Where players transferred, school to school">
-      <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 6h10.5M10.5 3l3 3-3 3M15 12H4.5M7.5 9l-3 3 3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
-      <span class="txt">Transfers</span>
-    </a>
-    <a class="btn" id="influenceLink" href="school-influence.html" title="Everyone connected to one school, and where they went">
-      <svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="2.6" fill="currentColor"/><circle cx="3" cy="4" r="1.5" fill="currentColor"/><circle cx="15" cy="4" r="1.5" fill="currentColor"/><circle cx="3.5" cy="14.5" r="1.5" fill="currentColor"/><circle cx="14.5" cy="14.5" r="1.5" fill="currentColor"/><path d="M9 9L3 4M9 9l6-5M9 9l-5.5 5.5M9 9l5.5 5.5" stroke="currentColor" stroke-width="1.3"/></svg>
-      <span class="txt">Where they went</span>
-    </a>
     <div style="position:relative">
-      <button type="button" class="btn icon" id="share" aria-label="Copy a link to this comparison" title="Copy a link to this comparison">
-        <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M7.5 10.5a3 3 0 0 0 4.2 0l2.6-2.6a3 3 0 0 0-4.2-4.2l-.9.9M10.5 7.5a3 3 0 0 0-4.2 0L3.7 10.1a3 3 0 0 0 4.2 4.2l.9-.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+      <button type="button" class="btn" id="share" aria-label="Copy a link to this comparison" title="Copy a link to this comparison">
+        <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M7.5 10.5a3 3 0 0 0 4.2 0l2.6-2.6a3 3 0 0 0-4.2-4.2l-.9.9M10.5 7.5a3 3 0 0 0-4.2 0L3.7 10.1a3 3 0 0 0 4.2 4.2l.9-.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg><span class="txt">Copy link</span>
       </button>
       <div class="toast" id="toast" role="status" hidden></div>
     </div>
+    <nav class="maptabs" id="mapTabs" aria-label="Maps"></nav>
   </div>
 </header>
 
 <main class="page">
+  <div class="fchips" id="fchips" hidden></div>
   <div class="head">
     <span class="note" id="hint">Hover or tap a state on a map to see its rank, players and share; click to keep it shown</span>
-    <span class="note" id="filterNote"></span>
     <a class="link" href="#h2h" id="h2hLink" hidden>Head-to-head stats ↓</a>
     <span class="key" id="key" aria-label="Share of roster"></span>
   </div>
@@ -191,13 +175,7 @@ table.st td.best { font-weight: 700; }
 
   <section class="h2h" id="h2h" aria-labelledby="h2hTitle" hidden>
     <div class="h2h-head"><h2 id="h2hTitle">Head to head</h2><span class="note" id="h2hNote"></span></div>
-    <div class="h2h-grid">
-      <div class="box span2" id="scorecard"></div>
-      <div class="box" id="battle"></div>
-      <div class="box" id="sharedHs"></div>
-      <div class="box span2" id="trend"></div>
-      <div class="box span2" id="pipes"></div>
-    </div>
+    <div id="h2hTabs"></div>
   </section>
 </main>
 
@@ -211,12 +189,12 @@ table.st td.best { font-weight: 700; }
 
   let data;
   try { data = await GP.loadData(); }
-  catch (e) { $("loading").textContent = "The player data didn't load. If you opened this file directly, serve the folder instead (python -m http.server), or reload to try again."; return; }
+  catch (e) { GP.loadFailed("The player data"); return; }
   const P = data.players, N = data.N, tState = data.tState;
   const { schoolPalette, swatch } = GP.makePalette(data);
   const F = GP.makeFilters(data, { onChange: refresh });
   const state = F.state;
-  let picks = [-1, -1, -1, -1];
+  let picks = [-1, -1, -1, -1], adding = -1;     // adding: a box opened for typing, with no school in it yet
 
   // ---------- shading: share of the school's roster from each state, one scale for all four maps ----------
   // 0 → the plain map color; small shares get a light tint, ~40% and up the school's full color, then deeper.
@@ -233,22 +211,34 @@ table.st td.best { font-weight: 700; }
       + `<span>· each map in its school's color · <svg width="10" height="10" aria-hidden="true" style="vertical-align:-1px"><circle cx="5" cy="5" r="4" fill="${css("--fg")}"/></svg> campus</span>`;
   }
 
+  // Boxes in use come first, so the first box is always on screen; only those show, then one Add a school button.
+  function closeUp() {
+    const on = picks.filter((i) => i >= 0);
+    picks = [0, 1, 2, 3].map((i) => on[i] === undefined ? -1 : on[i]);
+    cells.forEach((c, i) => { c.input.value = picks[i] >= 0 ? data.schools[picks[i]][0] : ""; c.pinSt = c.hoverSt = null; });
+  }
+  function showBoxes() {
+    const n = picks.filter((i) => i >= 0).length;
+    cells.forEach((c, i) => { c.el.hidden = !(picks[i] >= 0 || i === adding || (!n && i === 0)); c.x.hidden = picks[i] < 0; });
+    $("addSchool").hidden = !n || n === 4 || adding >= 0;
+  }
+
   // ---------- the four boxes ----------
   const albers = d3.geoAlbersUsa();
-  const US_FIT = { type: "MultiPoint", coordinates: [[-124.7, 48.4], [-67, 47.4], [-80.1, 25.1], [-117.1, 32.5], [-97.2, 25.9], [-160, 21], [-150, 61]] };
+  const { US_FIT } = GP;
   let stateFeatures = [], paths = [], size = { w: 0, h: 0, dpr: 1 }, boxes = [];
   const cells = [];
   for (let c = 0; c < 4; c++) {
     const el = document.createElement("div");
     el.className = "cell";
     el.innerHTML = `<div class="cell-head"><span class="swc"></span><label class="vh" for="pick${c}">School ${c + 1}</label>
-        <input class="field" id="pick${c}" list="schoolList" placeholder="Pick school ${c + 1}" autocomplete="off"><span class="n"></span></div>
+        <input class="field" id="pick${c}" list="schoolList" placeholder="Type a school" autocomplete="off"><span class="n"></span><button type="button" class="cell-x" aria-label="Remove this school" title="Remove this school" hidden>×</button></div>
       <div class="cell-map"><canvas></canvas><div class="empty">No school picked</div><div class="cell-hover" hidden></div></div>
       <div class="rankwrap"><div class="cell-rank"><span class="note">Pick a school to rank its states</span></div>
-        <button type="button" class="rnav prev" aria-label="Earlier states" hidden>‹</button><button type="button" class="rnav next" aria-label="More states" hidden>›</button></div>`;
+        <button type="button" class="rnav prev" aria-label="Earlier states" hidden><svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M7.5 2.5 4 6l3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" class="rnav next" aria-label="More states" hidden><svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>`;
     $("cgrid").appendChild(el);
     const cv = el.querySelector("canvas");
-    const cell = { hoverSt: null, pinSt: null, input: el.querySelector("input"), n: el.querySelector(".n"), sw: el.querySelector(".swc"), cv, ctx: cv.getContext("2d"),
+    const cell = { el, x: el.querySelector(".cell-x"), hoverSt: null, pinSt: null, input: el.querySelector("input"), n: el.querySelector(".n"), sw: el.querySelector(".swc"), cv, ctx: cv.getContext("2d"),
       empty: el.querySelector(".empty"), hover: el.querySelector(".cell-hover"), rank: el.querySelector(".cell-rank"),
       wrap: el.querySelector(".rankwrap"), prev: el.querySelector(".rnav.prev"), next: el.querySelector(".rnav.next") };
     cells.push(cell);
@@ -256,8 +246,11 @@ table.st td.best { font-weight: 700; }
       const v = cell.input.value.trim().toLowerCase();
       const next = !v ? -1 : data.schoolIndex.has(v) ? data.schoolIndex.get(v) : null;
       if (next === null || next === picks[c]) return;
+      adding = next < 0 ? c : -1;          // cleared to type another: the box stays open
       picks[c] = next; cell.pinSt = cell.hoverSt = null; refresh();
     });
+    cell.input.addEventListener("blur", () => { if (picks[c] < 0 && adding === c && picks.some((i) => i >= 0)) { adding = -1; closeUp(); refresh(); } });
+    cell.x.addEventListener("click", () => { picks[c] = -1; adding = -1; closeUp(); refresh(); });
     // hovering or clicking a state only affects this map (and its ranking line)
     const setHover = (st) => { if (st !== cell.hoverSt) { cell.hoverSt = st; draw(); } };
     const togglePin = (st) => { cell.pinSt = st && st !== cell.pinSt ? st : null; draw(); showInLine(cell, cell.pinSt); };
@@ -412,6 +405,7 @@ table.st td.best { font-weight: 700; }
     q.delete("conf");
     const names = picks.map((i) => i >= 0 ? data.schools[i][0] : "").join("|").replace(/\|+$/, "");
     if (names) q.set("compare", names);
+    GP.tabToParams(q);
     return q.toString().replace(/%2C/gi, ",").replace(/%7C/gi, "|");
   }
   // This browser remembers the last comparison, so coming back from the dot map picks up where you left off.
@@ -420,18 +414,19 @@ table.st td.best { font-weight: 700; }
   function writeUrl() {
     const h = hashNow(); lastHash = h;
     try { localStorage.setItem(SAVE_KEY, h); } catch (e) {}
-    try { history.replaceState(null, "", location.pathname + location.search + (h ? "#" + h : "")); } catch (e) {}
+    GP.setHash(h);
     // "Dot map" opens that page plainly; it reopens however you last left it
   }
   function readUrl(firstLoad) {
     let hash = location.hash.slice(1);
     if (!hash && firstLoad) { hash = GP.readSaved("recruiting-footprints:last"); }   // opened plainly: restore the last comparison
     const q = new URLSearchParams(hash);
+    GP.tabFromParams(q); GP.showTab(q.get("tab") || "score");
     F.fromParams(q);
     state.school = -1; state.allSchools = false; state.conf = "";
     const parts = (q.get("compare") || "").split("|");
     picks = [0, 1, 2, 3].map((i) => { const n = (parts[i] || "").trim().toLowerCase(); return data.schoolIndex.has(n) ? data.schoolIndex.get(n) : -1; });
-    cells.forEach((c, i) => { c.input.value = picks[i] >= 0 ? data.schools[picks[i]][0] : ""; });
+    adding = -1; closeUp();
     F.sync();
   }
   addEventListener("hashchange", () => { if (location.hash.slice(1) !== lastHash) { readUrl(); refresh(); } });
@@ -442,7 +437,21 @@ table.st td.best { font-weight: 700; }
   const picked = () => boxes.filter((d, i) => d && boxes.findIndex((o) => o && o.si === d.si) === i);   // each school once
   const schoolName = (d) => esc(data.schools[d.si][0]);
   const colorOf = (d) => schoolPalette()[d.si].fill;
-  const plural = (n, w) => `${fmt(n)} ${w}${n === 1 ? "" : "s"}`;
+  const { plural } = GP;
+  $("cgrid").insertAdjacentHTML("beforeend", `<button type="button" class="addcell" id="addSchool" hidden>+ Add a school to compare</button>`);
+  $("addSchool").addEventListener("click", () => {
+    adding = picks.findIndex((i) => i < 0);
+    showBoxes(); layout();
+    cells[adding].input.focus();
+  });
+  $("h2hTabs").innerHTML = GP.tabsHTML([
+    ["score", "Scorecard", `<div class="box" id="scorecard"></div>`],
+    ["battle", "Battleground states", `<div class="box" id="battle"></div>`],
+    ["shared", "Shared high schools", `<div class="box" id="sharedHs"></div>`],
+    ["trend", "Over time", `<div class="box" id="trend"></div>`],
+    ["pipes", "Position pipelines", `<div class="box" id="pipes"></div>`],
+  ], "Head-to-head stats");
+  document.addEventListener("gp-tab", () => renderTrend(picked()));   // it measures its width, so it waits to be seen
   function renderH2H() {
     const ds = picked();
     $("h2h").hidden = !ds.length; $("h2hLink").hidden = !ds.length;
@@ -594,10 +603,8 @@ table.st td.best { font-weight: 700; }
     const anchor = boxesNow.find((b) => { const r = b.getBoundingClientRect(); return r.top <= mid && r.bottom >= mid; })
       || boxesNow.find((b) => b.getBoundingClientRect().top >= 0);
     const before = anchor && anchor.getBoundingClientRect().top;
-    compute(); renderRanks(); draw(); writeUrl(); renderH2H();
+    showBoxes(); compute(); renderRanks(); draw(); writeUrl(); renderH2H();
     if (anchor && anchor.offsetParent && before < innerHeight) scrollBy(0, anchor.getBoundingClientRect().top - before);
-    const s = F.summary();
-    $("filterNote").textContent = s ? `Only ${s}` : "";
   }
 
   readUrl(true);
@@ -611,8 +618,7 @@ table.st td.best { font-weight: 700; }
 
   // state outlines load in the background
   try {
-    const us = await fetch("https://cdn.jsdelivr.net/npm/us-atlas@3.0.1/states-10m.json").then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); });
-    stateFeatures = topojson.feature(us, us.objects.states).features;
+    stateFeatures = await GP.usStates(true);
     layout();
   } catch (e) {
     $("hint").textContent = "The state outlines didn't load, so the maps can't be drawn. The state rankings below each box still work; reload to try again.";

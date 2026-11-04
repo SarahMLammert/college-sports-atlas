@@ -1,0 +1,92 @@
+{
+ "label": "Cross Country (Women's)",
+ "roster_paths": [
+  "/sports/womens-cross-country/roster",
+  "/sports/wxc/roster",
+  "/sports/w-xc/roster",
+  "/sports/wcross/roster",
+  "/sports/cross-country/roster",
+  "/sports/xc/roster",
+  "/sports/c-xc/roster", "/sports/cross/roster"
+ ],
+ "presto_paths": [
+  "/sports/wxc/{season}-{next_yy}/roster",
+  "/sports/xc/{season}-{next_yy}/roster"
+ ],
+ "min_players": 3,
+ "max_players": 80,
+ "junior_colleges": [
+  "San Jac",
+  "TJC",
+  "LSUE",
+  "LSU-Eunice",
+  "MGCCC",
+  "IWCC",
+  "JCCC",
+  "SCF",
+  "FSW",
+  "IRSC",
+  "JUCO"
+ ],
+ "roster_sex": "w",
+ "combined_paths": [
+  "/sports/cross-country/roster",
+  "/sports/xc/roster",
+  "/sports/c-xc/roster", "/sports/cross/roster"
+ ],
+ "position_groups": [
+  "ALL"
+ ],
+ "position_abbreviations": {},
+ "position_words": [],
+ "position_fallback": "ALL",
+ "d1_divisions": [
+  "D1"
+ ],
+ "other_divisions": [
+  "D2",
+  "D3",
+  "NAIA",
+  "JUCO"
+ ],
+ "division_labels": {
+  "D1": "Division I",
+  "D2": "Division II",
+  "D3": "Division III",
+  "NAIA": "NAIA",
+  "JUCO": "Junior college (NJCAA, CCCAA, NWAC)"
+ },
+ "position_labels": {
+  "ALL": "All runners"
+ },
+ "thin_roster": 6,
+ "frozen_min_pairs": 4,
+ "site": {
+  "front_page": {
+   "disc": "cross-country",
+   "name": "Cross Country",
+   "icon": "cross-country",
+   "ring": "fall",
+   "order": 5,
+   "sex": "w"
+  },
+  "women": true,
+  "players-dotmap": {
+   "title": "College Cross Country (Women's) Recruiting Map",
+   "description": "Where every varsity college women's cross country runner since 2016 comes from, mapped: Division I, II and III, NAIA and junior college.",
+   "h1": "College Cross Country (Women's) <span>Recruiting Map</span>",
+   "sub": "Hometowns of every varsity college women's cross country runner since 2016"
+  },
+  "players-heatmap": {
+   "title": "College Cross Country (Women's) Recruiting Footprints",
+   "description": "Compare where up to four college women's cross country programs, from Division I to junior college, find their runners, state by state.",
+   "h1": "College Cross Country (Women's) <span>Recruiting Footprints</span>"
+  },
+  "players-transfers": {
+   "title": "College Cross Country (Women's) Transfer Map",
+   "description": "Where college women's cross country runners transferred, school to school, since 2016.",
+   "h1": "College Cross Country (Women's) <span>Transfer Map</span>",
+   "sub": "Where runners moved from school to school since 2016"
+  }
+ }
+}

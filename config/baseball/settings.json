@@ -17,7 +17,7 @@
   "thin_roster": 25,
   "frozen_min_pairs": 20,
   "site": {
-    "front_page": {"disc": "baseball", "name": "Baseball", "icon": "baseball", "order": 3},
+    "front_page": {"disc": "baseball", "name": "Baseball", "icon": "baseball", "order": 21, "ring": "spring"},
     "women": false,
     "players-dotmap": {"title": "College Baseball Recruiting Map", "description": "Where every varsity college baseball player since 2016 comes from, mapped: Division I, II and III, NAIA and junior college.", "h1": "College Baseball <span>Recruiting Map</span>", "sub": "Hometowns of every varsity college baseball player since 2016"},
     "players-heatmap": {"title": "College Baseball Recruiting Footprints", "description": "Compare where up to four college baseball programs, from Division I to junior college, find their players, state by state.", "h1": "College Baseball <span>Recruiting Footprints</span>"},

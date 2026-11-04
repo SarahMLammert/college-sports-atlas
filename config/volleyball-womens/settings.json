@@ -16,7 +16,7 @@
   "thin_roster": 12,
   "frozen_min_pairs": 10,
   "site": {
-    "front_page": {"disc": "volleyball", "name": "Volleyball", "icon": "volleyball", "order": 7, "sub": "Women's"},
+    "front_page": {"disc": "volleyball", "name": "Volleyball", "icon": "volleyball", "order": 3, "ring": "fall", "sex": "w"},
     "women": true,
     "players-dotmap": {"title": "College Volleyball (Women's) Recruiting Map", "description": "Where every varsity college women's volleyball player since 2016 comes from, mapped: Division I, II and III, NAIA and junior college.", "h1": "College Volleyball (Women's) <span>Recruiting Map</span>", "sub": "Hometowns of every varsity college women's volleyball player since 2016"},
     "players-heatmap": {"title": "College Volleyball (Women's) Recruiting Footprints", "description": "Compare where up to four college women's volleyball programs, from Division I to junior college, find their players, state by state.", "h1": "College Volleyball (Women's) <span>Recruiting Footprints</span>"},

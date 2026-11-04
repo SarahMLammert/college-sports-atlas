@@ -19,6 +19,7 @@ import hashlib
 import json
 import os
 import re
+import socket
 import subprocess
 import sys
 import threading
@@ -80,6 +81,11 @@ class Sport:
     label: str = ""
     roster_paths: list[str] = field(default_factory=list)
     presto_paths: list[str] = field(default_factory=list)   # PrestoSports season pages: /sports/fball/{season}-{next_yy}/roster
+    # Track, cross country, swimming and others: many schools list men and women on one page (Oregon, Grand Valley
+    # State). roster_sex ("m"/"w") keeps only this team's athletes from such a page. combined_paths are the roster
+    # addresses (also in roster_paths) that usually show both: a page from one that can't be split is refused.
+    roster_sex: str = ""
+    combined_paths: list[str] = field(default_factory=list)
     # A normal roster for this sport has min_players to max_players players. Outside that, a scraped page is
     # flagged as partial (cut off, or the wrong page). max_players 0 = no upper limit.
     min_players: int = 25
@@ -115,10 +121,10 @@ class Sport:
     seasons: str = ""
     # The website's words and front-page place for this sport (Nov 1). build.py pages writes docs/sports.js from
     # these, which the map pages and the front page read, so a new sport needs nothing typed into docs/:
-    #   front_page: {"disc": "lacrosse", "name": "Lacrosse", "icon": "lacrosse", "order": 2, "sex": "m"}: the
-    #     front page shows one disc per "disc", in "order"; "sex" ("m"/"w") when the disc has both teams; "sub"
-    #     for a line under a one-team disc's name (Volleyball: "Women's"); "learn" (its learn page) and
-    #     "learn_summary". Teams sharing a disc must give it the same name, icon, order and learn page.
+    #   front_page: {"disc": "lacrosse", "name": "Lacrosse", "icon": "lacrosse", "ring": "spring", "order": 23, "sex": "m"}:
+    #     the front page shows one disc per "disc", on its "ring" (fall, winter or spring: the season people know the
+    #     sport by), in "order"; "sex" ("m"/"w") when the disc has both teams; "sub"
+    #     for a line under a one-team disc's name. Teams sharing a disc must give it the same name, icon, ring and order.
     #   women: true for she/her on the pages.
     #   players-dotmap, players-heatmap, players-transfers: each page's title, description, h1 and sub.
     site: dict = field(default_factory=dict)
@@ -505,7 +511,8 @@ REASONS = {
     "refused": "the site refused the request (HTTP 403)",
     "no_connection": "no connection to the site (or its certificate was refused)",
     "slow": "the site was too slow",
-    "time_limit": "not tried: the school's other seasons used up its time",
+    "time_limit": "ran out of time",
+    "no_archive": "not tried: newer seasons in a row have no roster",
     "left_out": "left out on purpose (a note in the schools file, or wrong_seasons.csv)",
     "no_program": "no team that season",
     "no_hometowns": "saved, but most players have no hometown",
@@ -534,8 +541,10 @@ def reason_code(report: dict) -> str:
             return "no_hometowns" if int(report.get("with_hometown") or 0) < 0.5 * int(report.get("players") or 0) else "size"
         except ValueError:
             return "size"
-    if low.startswith("timed out: this school took over"):
+    if low.startswith(("timed out: this season took over", "timed out: this school took over")):   # school: before Nov 4
         return "time_limit"
+    if low.startswith("not tried:"):
+        return "no_archive"
     if "not posted yet" in low or "(same players and class years" in low:
         return "not_posted"
     if "page looks like the" in low:
@@ -755,7 +764,12 @@ class Fetcher:
             raise requests.exceptions.ConnectionError(f"{host} couldn't be reached earlier in this run; skipped")
         self._pace(url)
         try:
-            resp = self._download(url)
+            try:
+                resp = self._download(url)
+            except requests.exceptions.ConnectionError:
+                if not self._waited_for_internet():
+                    raise
+                resp = self._download(url)     # the internet was out, not this site: ask it again
         except (TimeoutError, requests.exceptions.Timeout):
             self._mark_slow(url)
             raise
@@ -789,6 +803,26 @@ class Fetcher:
     def _mark_slow(self, url: str) -> None:
         with self._host_lock:
             self._slow_sites.add(self._site(url))
+
+    OFFLINE_CHECK_EVERY = 15   # seconds between looks while the internet is out
+    OFFLINE_WAIT_LIMIT = 3600  # seconds to wait before letting the failures through
+
+    def _waited_for_internet(self) -> bool:
+        """After a failed connection: if the whole internet is out, wait for it and return True.
+
+        A failed connection takes no time, so without this a short outage (the Mac waking from sleep, Wi-Fi
+        dropping) fails every school left in the run within seconds and marks each site dead. Volleyball lost
+        157 schools that way in one second on Nov 3. False means the internet is fine and it was the site."""
+        if internet_up():
+            return False
+        print(f"\nNo internet connection. Waiting for it to come back ({clock()}) ...", file=sys.stderr, flush=True)
+        give_up = time.monotonic() + self.OFFLINE_WAIT_LIMIT
+        while time.monotonic() < give_up:
+            time.sleep(self.OFFLINE_CHECK_EVERY)
+            if internet_up():
+                print(f"Internet is back ({clock()}).", file=sys.stderr, flush=True)
+                return True
+        return False
 
     def _download(self, url: str) -> requests.Response:
         """session.get with a hard limit on the whole download.
@@ -860,6 +894,25 @@ _UNREACHABLE = ("NameResolutionError", "Failed to resolve", "nodename nor servna
                 "Unable to connect to proxy")
 
 
+def clock() -> str:
+    return time.strftime("%H:%M:%S")
+
+
+# Two big sites that have nothing to do with any school: if neither answers, the internet is out.
+INTERNET_CHECKS = ("www.ncaa.com", "en.wikipedia.org")
+
+
+def internet_up(timeout: float = 4) -> bool:
+    """True if a connection to either check site opens. Sends nothing, just opens and closes it."""
+    for host in INTERNET_CHECKS:
+        try:
+            socket.create_connection((host, 443), timeout).close()
+            return True
+        except OSError:
+            continue
+    return False
+
+
 def unreachable(exc: Exception) -> bool:
     """True when the host itself can't be reached (no such name, refused), as opposed to a connection that
     broke halfway (reset, cut off), which may work on the next address."""
@@ -921,7 +974,7 @@ and players_unique.csv for opening in a spreadsheet).
 
 # (clean() is defined at the top of this file)
 
-UNIQUE_FIELDS = ["school", "name", "position", "hometown", "home_city", "home_state", "home_country",
+UNIQUE_FIELDS = ["school", "name", "position", "weight", "hometown", "home_city", "home_state", "home_country",
                  "high_school", "previous_school", "first_season", "last_season", "n_seasons", "seasons",
                  "first_class", "division_first_season", "current_conference"]
 
@@ -1107,7 +1160,10 @@ def build_unique(rows: list[dict]) -> list[dict]:
         first, last = grp[0], grp[-1]
         seasons = sorted({int(r["season"]) for r in grp})
         out.append({
-            "school": first["school"], "name": last["name"], "position": last["position"],
+            "school": first["school"], "name": last["name"],
+            # The newest season that lists one: wrestling's position column is often blank, with the class as weight
+            "position": next((r["position"] for r in reversed(grp) if r["position"]), ""),
+            "weight": next((r.get("weight") or "" for r in reversed(grp) if r.get("weight")), ""),
             **{f: next((r[f] for r in grp if r["hometown"]), first[f])
                for f in ("hometown", "home_city", "home_state", "home_country")},
             "high_school": next((r["high_school"] for r in grp if r["high_school"]), ""),

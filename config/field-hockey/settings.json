@@ -1,0 +1,123 @@
+{
+ "label": "Field Hockey",
+ "roster_paths": [
+  "/sports/field-hockey/roster",
+  "/sports/fhockey/roster",
+  "/sports/fh/roster",
+  "/sports/w-fieldh/roster"
+ ],
+ "presto_paths": [
+  "/sports/fh/{season}-{next_yy}/roster"
+ ],
+ "min_players": 12,
+ "max_players": 45,
+ "junior_colleges": [
+  "San Jac",
+  "TJC",
+  "LSUE",
+  "LSU-Eunice",
+  "MGCCC",
+  "IWCC",
+  "JCCC",
+  "SCF",
+  "FSW",
+  "IRSC",
+  "JUCO"
+ ],
+ "position_groups": [
+  "GK",
+  "D",
+  "M",
+  "F",
+  "UNK"
+ ],
+ "position_abbreviations": {
+  "GK": "gk g k",
+  "D": "d b def fb",
+  "M": "m mf mid",
+  "F": "f fw fwd a att"
+ },
+ "position_words": [
+  [
+   "goal",
+   "GK"
+  ],
+  [
+   "keeper",
+   "GK"
+  ],
+  [
+   "defen",
+   "D"
+  ],
+  [
+   "back",
+   "D"
+  ],
+  [
+   "mid",
+   "M"
+  ],
+  [
+   "forward",
+   "F"
+  ],
+  [
+   "attack",
+   "F"
+  ]
+ ],
+ "position_fallback": "UNK",
+ "d1_divisions": [
+  "D1"
+ ],
+ "other_divisions": [
+  "D2",
+  "D3",
+  "NAIA",
+  "JUCO"
+ ],
+ "division_labels": {
+  "D1": "Division I",
+  "D2": "Division II",
+  "D3": "Division III",
+  "NAIA": "NAIA",
+  "JUCO": "Junior college (NJCAA, CCCAA, NWAC)"
+ },
+ "position_labels": {
+  "GK": "Goalkeeper",
+  "D": "Defender",
+  "M": "Midfielder",
+  "F": "Forward",
+  "UNK": "Other"
+ },
+ "thin_roster": 15,
+ "frozen_min_pairs": 12,
+ "site": {
+  "front_page": {
+   "disc": "field-hockey",
+   "name": "Field Hockey",
+   "icon": "field-hockey",
+   "ring": "fall",
+   "order": 4
+  },
+  "women": true,
+  "players-dotmap": {
+   "title": "College Field Hockey Recruiting Map",
+   "description": "Where every varsity college field hockey player since 2016 comes from, mapped: Division I, II and III.",
+   "h1": "College Field Hockey <span>Recruiting Map</span>",
+   "sub": "Hometowns of every varsity college field hockey player since 2016"
+  },
+  "players-heatmap": {
+   "title": "College Field Hockey Recruiting Footprints",
+   "description": "Compare where up to four college field hockey programs, from Division I to Division III, find their players, state by state.",
+   "h1": "College Field Hockey <span>Recruiting Footprints</span>"
+  },
+  "players-transfers": {
+   "title": "College Field Hockey Transfer Map",
+   "description": "Where college field hockey players transferred, school to school, since 2016.",
+   "h1": "College Field Hockey <span>Transfer Map</span>",
+   "sub": "Where players moved from school to school since 2016"
+  }
+ }
+}

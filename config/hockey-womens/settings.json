@@ -81,7 +81,7 @@
   "frozen_min_pairs": 12,
   "transfer_needs_known_college": true,
   "site": {
-    "front_page": {"disc": "hockey", "name": "Hockey", "icon": "hockey", "order": 5, "sex": "w", "learn_summary": "Rink · positions · systems"},
+    "front_page": {"disc": "hockey", "name": "Hockey", "icon": "hockey", "order": 12, "sex": "w", "ring": "winter"},
     "women": true,
     "players-dotmap": {"title": "College Hockey (Women's) Recruiting Map", "description": "Where every varsity college women's ice hockey player since 2016 comes from, mapped: Division I, II and III.", "h1": "College Hockey (Women's) <span>Recruiting Map</span>", "sub": "Hometowns of every varsity college women's ice hockey player since 2016"},
     "players-heatmap": {"title": "College Hockey (Women's) Recruiting Footprints", "description": "Compare where up to four college women's ice hockey programs, from Division I to Division III, find their players, state by state.", "h1": "College Hockey (Women's) <span>Recruiting Footprints</span>"},

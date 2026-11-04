@@ -17,7 +17,7 @@
   "thin_roster": 10,
   "frozen_min_pairs": 8,
   "site": {
-    "front_page": {"disc": "basketball", "name": "Basketball", "icon": "basketball", "order": 6, "sex": "w"},
+    "front_page": {"disc": "basketball", "name": "Basketball", "icon": "basketball", "order": 11, "sex": "w", "ring": "winter"},
     "women": true,
     "players-dotmap": {"title": "College Basketball (Women's) Recruiting Map", "description": "Where every varsity college women's basketball player since 2016 comes from, mapped: Division I, II and III, NAIA and junior college.", "h1": "College Basketball (Women's) <span>Recruiting Map</span>", "sub": "Hometowns of every varsity college women's basketball player since 2016"},
     "players-heatmap": {"title": "College Basketball (Women's) Recruiting Footprints", "description": "Compare where up to four college women's basketball programs, from Division I to junior college, find their players, state by state.", "h1": "College Basketball (Women's) <span>Recruiting Footprints</span>"},

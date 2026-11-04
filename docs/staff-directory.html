@@ -4,25 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>College Coaching Staffs</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="description" content="Every school's coaches and staff, season by season, and each coach's career.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Barlow:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="common.css">
 <style>
-/* A school's staff for a season on the left; one person's seasons, school by school, on the right.
-   The words are set by the script from staff_data.json, so this page is the same file for every sport. */
-body { background: var(--panel) var(--paper-grain); }
-.bar { position: static; padding-bottom: 6px; }
-.tools { justify-content: flex-end; }
-@media (min-width: 1101px) {
-  .brand { padding: 8px 14px 9px; max-width: none; }
-  .brand h1 { font-size: 26px; white-space: nowrap; }
-  .brand .sub { margin-top: 2px; }
-}
 .page { padding: 0 max(var(--gap), env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(var(--gap), env(safe-area-inset-left)); display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 14px; align-items: start; }
 .box { border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px 18px; display: flex; flex-direction: column; gap: 14px; background: var(--panel); min-width: 0; }
 .ctl { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px 14px; }
-.ctl > div { display: flex; flex-direction: column; gap: 5px; }
 .ctl .grow { flex: 1 1 220px; }
 .box h2 { font-size: 24px; }
 .box h3 { font: 600 11px/1 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 4px 0 6px; }
@@ -32,7 +24,6 @@ body { background: var(--panel) var(--paper-grain); }
 .staff .t { color: var(--muted); }
 .staff li.on { background: var(--accent-soft); box-shadow: 0 0 0 4px var(--accent-soft); border-radius: 3px; }
 button.nmb { all: unset; cursor: pointer; font-weight: 600; border-bottom: 1px dotted var(--muted); }
-button.nmb:hover { border-bottom-color: var(--fg); }
 button.nmb:focus-visible { outline: 2px solid var(--focus); }
 .heads { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 14px; }
 .heads span b { font-variant-numeric: tabular-nums; color: var(--muted); font-weight: 500; margin-right: 4px; }
@@ -51,8 +42,11 @@ button.nmb:focus-visible { outline: 2px solid var(--focus); }
 .career .t { display: block; color: var(--muted); }
 .career .head-job .t { color: var(--accent); font-weight: 600; }
 .empty { color: var(--muted); font-size: 14px; }
-.fine { font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 12px; margin: 0; }
 @media (max-width: 900px) { .page { grid-template-columns: 1fr; } }
+@media (min-width: 901px) {   /* wide windows show both side by side, so a name's career opens next to the list */
+  .page > .tabs { display: none; }
+  .page > section[hidden] { display: flex !important; }
+}
 @media (max-width: 520px) { .staff li { grid-template-columns: 1fr; } }
 </style>
 </head>
@@ -65,32 +59,25 @@ button.nmb:focus-visible { outline: 2px solid var(--focus); }
     <p class="sub" id="sub">Every school's coaches and staff, season by season</p>
   </div>
   <div class="tools">
-    <a class="btn icon" href="index.html" aria-label="All sports" title="All sports">
-      <svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="2.2 2"/><circle cx="9" cy="2.5" r="1.8" fill="currentColor"/><circle cx="15.5" cy="9" r="1.8" fill="currentColor"/><circle cx="9" cy="15.5" r="1.8" fill="currentColor"/><circle cx="2.5" cy="9" r="1.8" fill="currentColor"/></svg>
-    </a>
-    <a class="btn" id="movesLink" href="staff-moves.html" title="The map of coaches moving between schools">
-      <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 14C5 6 11 4 15 5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" fill="none"/><path d="M11.5 2.8L15 5l-2.6 3.1" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
-      <span class="txt">Coaching moves</span>
-    </a>
-    <a class="btn" href="players-dotmap.html" title="The players' dot map">
-      <svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="5" cy="6" r="2.2" fill="currentColor"/><circle cx="12.5" cy="5" r="1.5" fill="currentColor"/><circle cx="10" cy="12" r="3" fill="currentColor"/></svg>
-      <span class="txt">Players</span>
-    </a>
-    <a class="btn" id="influenceLink" href="school-influence.html" title="Everyone connected to one school, and where they went">
-      <svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="2.6" fill="currentColor"/><circle cx="3" cy="4" r="1.5" fill="currentColor"/><circle cx="15" cy="4" r="1.5" fill="currentColor"/><circle cx="3.5" cy="14.5" r="1.5" fill="currentColor"/><circle cx="14.5" cy="14.5" r="1.5" fill="currentColor"/><path d="M9 9L3 4M9 9l6-5M9 9l-5.5 5.5M9 9l5.5 5.5" stroke="currentColor" stroke-width="1.3"/></svg>
-      <span class="txt">Where they went</span>
+    <a class="btn" href="index.html" aria-label="All sports" title="All sports">
+      <svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="2.2 2"/><circle cx="9" cy="2.5" r="1.8" fill="currentColor"/><circle cx="15.5" cy="9" r="1.8" fill="currentColor"/><circle cx="9" cy="15.5" r="1.8" fill="currentColor"/><circle cx="2.5" cy="9" r="1.8" fill="currentColor"/></svg><span class="txt">All sports</span>
     </a>
     <div style="position:relative">
-      <button type="button" class="btn icon" id="share" aria-label="Copy a link to this view" title="Copy a link to this view">
-        <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M7.5 10.5a3 3 0 0 0 4.2 0l2.6-2.6a3 3 0 0 0-4.2-4.2l-.9.9M10.5 7.5a3 3 0 0 0-4.2 0L3.7 10.1a3 3 0 0 0 4.2 4.2l.9-.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+      <button type="button" class="btn" id="share" aria-label="Copy a link to this view" title="Copy a link to this view">
+        <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M7.5 10.5a3 3 0 0 0 4.2 0l2.6-2.6a3 3 0 0 0-4.2-4.2l-.9.9M10.5 7.5a3 3 0 0 0-4.2 0L3.7 10.1a3 3 0 0 0 4.2 4.2l.9-.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg><span class="txt">Copy link</span>
       </button>
       <div class="toast" id="toast" role="status" hidden></div>
     </div>
+    <nav class="maptabs" id="mapTabs" aria-label="Maps"></nav>
   </div>
 </header>
 
-<main class="page">
-  <section class="box" aria-labelledby="schoolTitle">
+<main class="page tabset">
+  <div class="tabs" role="tablist" aria-label="Staff Directory">
+    <button type="button" role="tab" data-tab="school" aria-selected="true">School staff</button>
+    <button type="button" role="tab" data-tab="person" aria-selected="false" tabindex="-1">Find a coach</button>
+  </div>
+  <section class="box tabpanel" role="tabpanel" data-tab="school" aria-labelledby="schoolTitle">
     <div class="ctl">
       <div class="grow">
         <label class="label" for="school">School</label>
@@ -107,7 +94,7 @@ button.nmb:focus-visible { outline: 2px solid var(--focus); }
     </div>
     <div id="schoolOut"></div>
   </section>
-  <section class="box" aria-labelledby="personTitle">
+  <section class="box tabpanel" role="tabpanel" data-tab="person" aria-labelledby="personTitle" hidden>
     <div class="search">
       <label class="label" for="who">Find a coach</label>
       <input class="field" id="who" placeholder="Type a name" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="sugg" aria-autocomplete="list">
@@ -125,7 +112,7 @@ button.nmb:focus-visible { outline: 2px solid var(--focus); }
   const { $, fmt, esc } = GP;
   let data;
   try { data = await fetch(GP.dataUrl("staff_data.json")).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }); data.stints = GP.unpackStints(data.stints); }
-  catch (e) { $("loading").textContent = "The coaches' data didn't load. If you opened this file directly, serve the folder instead (python -m http.server), or reload to try again."; return; }
+  catch (e) { GP.loadFailed("The coaches' data"); return; }
   const sportWords = data.sport.replace(/^(.*) \((.*)\)$/, "$2 $1");
   $("sportName").textContent = sportWords;
   document.title = `College ${sportWords} Coaching Staffs`;
@@ -184,7 +171,7 @@ button.nmb:focus-visible { outline: 2px solid var(--focus); }
   }
   $("schoolOut").addEventListener("click", (e) => {
     const y = e.target.closest("[data-y]"); if (y) { state.season = +y.dataset.y; update(); return; }
-    const p = e.target.closest("[data-p]"); if (p) { state.person = +p.dataset.p; update(); if (GP.narrow()) $("personOut").scrollIntoView({ behavior: "smooth", block: "start" }); }
+    const p = e.target.closest("[data-p]"); if (p) { state.person = +p.dataset.p; update(); GP.showTab("person"); }
   });
   $("school").addEventListener("change", () => {
     const v = $("school").value.trim().toLowerCase();
@@ -214,7 +201,7 @@ button.nmb:focus-visible { outline: 2px solid var(--focus); }
   $("personOut").addEventListener("click", (e) => {
     const b = e.target.closest("[data-s]"); if (!b) return;
     state.school = +b.dataset.s; state.season = +b.dataset.y; update();
-    if (GP.narrow()) $("schoolOut").scrollIntoView({ behavior: "smooth", block: "start" });
+    GP.showTab("school");
   });
 
   // ---------- name search ----------
@@ -258,12 +245,15 @@ button.nmb:focus-visible { outline: 2px solid var(--focus); }
     if (state.school >= 0) { q.set("school", data.schools[state.school][0]); if (state.season) q.set("season", state.season); }
     if (state.role !== "coach") q.set("show", state.role);
     if (state.person >= 0) q.set("person", people[state.person]);
+    GP.tabToParams(q);
     return q.toString();
   }
   function readUrl(firstLoad) {
     let hash = location.hash.slice(1);
     if (!hash && firstLoad) hash = GP.readSaved("staff-directory:last") || "";
     const q = new URLSearchParams(hash), sc = (q.get("school") || "").toLowerCase();
+    GP.tabFromParams(q);
+    GP.showTab(q.get("tab") || (q.get("person") && !q.get("school") ? "person" : "school"));
     state.school = schoolIndex.has(sc) ? schoolIndex.get(sc) : -1;
     state.season = +q.get("season") || 0;
     state.role = q.get("show") === "all" ? "all" : "coach";
@@ -276,8 +266,7 @@ button.nmb:focus-visible { outline: 2px solid var(--focus); }
     renderSchool(); renderPerson();
     const h = hashNow(); lastHash = h;
     try { localStorage.setItem(GP.saveKey("staff-directory:last"), h); } catch (e) {}
-    try { history.replaceState(null, "", location.pathname + location.search + (h ? "#" + h : "")); } catch (e) {}
-    $("movesLink").href = "staff-moves.html" + (state.school >= 0 ? "#school=" + encodeURIComponent(data.schools[state.school][0]) : "");
+    GP.setHash(h);
   }
   addEventListener("hashchange", () => { if (location.hash.slice(1) !== lastHash) { readUrl(); update(); } });
   $("share").addEventListener("click", () => { GP.copyLink($("toast")); });

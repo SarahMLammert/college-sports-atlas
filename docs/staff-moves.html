@@ -4,58 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>College Coaching Moves</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="description" content="Where college coaches moved from school to school, season by season.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Barlow:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="common.css">
 <style>
-/* The Transfer Map's layout (players-transfers.html) for coaches: the map of moves on the left, the lists on the
-   right, with the filters in a row under the title instead of a dropdown. The words are the sport's own, set by
-   the script from staff_data.json, so this page is the same file for every sport. */
-body { background: var(--panel) var(--paper-grain); }
-.bar { position: static; padding-bottom: 6px; }
-.tools { justify-content: flex-end; }
-@media (min-width: 1101px) {
-  .brand { padding: 8px 14px 9px; max-width: none; }
-  .brand h1 { font-size: 26px; white-space: nowrap; }
-  .brand .sub { margin-top: 2px; }
-}
-.page { padding: 0 max(var(--gap), env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(var(--gap), env(safe-area-inset-left)); display: flex; flex-direction: column; gap: 10px; }
-.ctl { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px 16px; }
-.ctl > div { display: flex; flex-direction: column; gap: 5px; }
 .ctl .field { width: auto; }
 .ctl #school { width: 230px; }
-.ctl .row { display: flex; align-items: center; gap: 6px; }
-.head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px 18px; min-height: 22px; }
-.key { display: inline-flex; align-items: center; gap: 6px 14px; font-size: 12px; color: var(--muted); flex-wrap: wrap; }
-.key svg { vertical-align: middle; margin-right: 5px; }
 .tgrid { display: grid; grid-template-columns: minmax(0, 1fr) 390px; gap: 14px; height: max(460px, calc(100dvh - 190px)); }
-.tmap { position: relative; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--sea); min-height: 0; }
 .tmap canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: manipulation; }
-.tmap canvas.hot { cursor: pointer; }
-.ttip { position: absolute; pointer-events: none; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 5px 9px; font-size: 13px; line-height: 1.35; box-shadow: var(--shadow); white-space: nowrap; font-variant-numeric: tabular-nums; z-index: 2; }
-.ttip .note { font-size: 12px; }
-.tside { border: 1px solid var(--line); border-radius: 8px; overflow: auto; overscroll-behavior: contain; padding: 14px 16px 18px; display: flex; flex-direction: column; gap: 18px; min-height: 0; }
-.sel-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
-.sel-head h2 { font-size: 24px; }
-.sel-head .note { margin-top: 3px; }
-.big { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 16px; }
-.big div { display: flex; flex-direction: column; }
-.big b { font: 700 30px/1 var(--display); font-variant-numeric: tabular-nums; }
-.big b.in { color: var(--in); } .big b.out { color: var(--out); }
-.big small { color: var(--muted); font-size: 12px; line-height: 1.3; margin-top: 2px; }
-.group h2 { font-size: 18px; }
 .group .note { margin: -2px 0 4px; }
-.tl { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
-.tl li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; font-size: 14px; border-radius: 4px; }
-.tl li.hl { background: var(--accent-soft); box-shadow: 0 0 0 4px var(--accent-soft); }
-.tl .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.tl .arrow { color: var(--muted); margin: 0 4px; }
-.tl .v { font-variant-numeric: tabular-nums; color: var(--muted); }
-.tl .v b { color: var(--fg); font-weight: 600; }
-.tl .b { grid-column: 1 / -1; height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
-.tl .b span { display: block; height: 100%; background: var(--bar-c, var(--accent)); }
-.tl.in .b span { --bar-c: var(--in); } .tl.out .b span { --bar-c: var(--out); }
 .pl { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
 .pl li { font-size: 14px; line-height: 1.35; border-radius: 4px; }
 .pl li.hl { background: var(--accent-soft); box-shadow: 0 0 0 4px var(--accent-soft); }
@@ -63,20 +24,10 @@ body { background: var(--panel) var(--paper-grain); }
 .pl .sub2 { display: block; color: var(--muted); font-size: 12.5px; }
 .pl .head-job { color: var(--accent); font-weight: 600; }
 button.nmb { all: unset; cursor: pointer; border-bottom: 1px dotted var(--muted); }
-button.nmb:hover { border-bottom-color: var(--fg); }
 button.nmb:focus-visible, a.nmb:focus-visible { outline: 2px solid var(--focus); }
 a.nmb { color: inherit; text-decoration: none; border-bottom: 1px dotted var(--muted); font-weight: 600; }
 a.nmb:hover { border-bottom-color: var(--fg); }
 .more { align-self: flex-start; }
-.tside .fine { font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 12px; margin: 0; }
-:root { --in: var(--accent); --out: #23606b; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --out: #7fc4cf; } }
-:root[data-theme="dark"] { --out: #7fc4cf; }
-@media (max-width: 1000px) {
-  .tgrid { grid-template-columns: 1fr; height: auto; }
-  .tmap { aspect-ratio: 1.55; }
-  .tside { overflow: visible; }
-}
 @media (max-width: 560px) { .ctl #school { width: 100%; } .ctl > div:first-child { flex: 1 1 100%; } }
 </style>
 </head>
@@ -89,58 +40,60 @@ a.nmb:hover { border-bottom-color: var(--fg); }
     <p class="sub" id="sub">Where coaches went from school to school</p>
   </div>
   <div class="tools">
-    <a class="btn icon" href="index.html" aria-label="All sports" title="All sports">
-      <svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="2.2 2"/><circle cx="9" cy="2.5" r="1.8" fill="currentColor"/><circle cx="15.5" cy="9" r="1.8" fill="currentColor"/><circle cx="9" cy="15.5" r="1.8" fill="currentColor"/><circle cx="2.5" cy="9" r="1.8" fill="currentColor"/></svg>
+    <a class="btn" href="index.html" aria-label="All sports" title="All sports">
+      <svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="2.2 2"/><circle cx="9" cy="2.5" r="1.8" fill="currentColor"/><circle cx="15.5" cy="9" r="1.8" fill="currentColor"/><circle cx="9" cy="15.5" r="1.8" fill="currentColor"/><circle cx="2.5" cy="9" r="1.8" fill="currentColor"/></svg><span class="txt">All sports</span>
     </a>
-    <a class="btn" id="dirLink" href="staff-directory.html" title="Every school's coaches and staff, season by season">
-      <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 4h12M3 9h12M3 14h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
-      <span class="txt">Staff directory</span>
-    </a>
-    <a class="btn" href="players-dotmap.html" title="The players' dot map">
-      <svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="5" cy="6" r="2.2" fill="currentColor"/><circle cx="12.5" cy="5" r="1.5" fill="currentColor"/><circle cx="10" cy="12" r="3" fill="currentColor"/></svg>
-      <span class="txt">Players</span>
-    </a>
-    <a class="btn" id="influenceLink" href="school-influence.html" title="Everyone connected to one school, and where they went">
-      <svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="2.6" fill="currentColor"/><circle cx="3" cy="4" r="1.5" fill="currentColor"/><circle cx="15" cy="4" r="1.5" fill="currentColor"/><circle cx="3.5" cy="14.5" r="1.5" fill="currentColor"/><circle cx="14.5" cy="14.5" r="1.5" fill="currentColor"/><path d="M9 9L3 4M9 9l6-5M9 9l-5.5 5.5M9 9l5.5 5.5" stroke="currentColor" stroke-width="1.3"/></svg>
-      <span class="txt">Where they went</span>
-    </a>
+    <div class="fwrap">
+      <button type="button" class="btn filters" id="filtersBtn" aria-expanded="false" aria-controls="filters">
+        <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M2 4h14M5 9h8M7.5 14h3" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+        <span class="txt">Filters</span><span class="badge" id="fcount" hidden></span>
+      </button>
+      <aside class="panel pop card" id="filters" aria-labelledby="filtersTitle" hidden>
+        <div class="panel-head">
+          <h2 id="filtersTitle">Filters</h2>
+          <div class="row"><button type="button" class="link" id="resetAll">Reset</button><button type="button" class="x" data-closepanel="filters" aria-label="Close filters">×</button></div>
+        </div>
+        <div class="panel-body">
+          <div class="group">
+            <label class="label" for="school">School</label>
+            <input class="field" id="school" list="schoolList" placeholder="All schools" autocomplete="off">
+            <datalist id="schoolList"></datalist>
+          </div>
+          <div class="group">
+            <span class="label" id="roleLabel">Moves into</span>
+            <div class="seg" id="role" role="group" aria-labelledby="roleLabel">
+              <button type="button" data-v="head">Head coach</button>
+              <button type="button" data-v="coach">Coaching</button>
+              <button type="button" data-v="all">Any staff</button>
+            </div>
+          </div>
+          <div class="group">
+            <label class="label" for="div">Division</label>
+            <select class="field" id="div"><option value="">All divisions</option></select>
+          </div>
+          <div class="group">
+            <label class="label" for="conf">Conference</label>
+            <select class="field" id="conf"><option value="">All conferences</option></select>
+          </div>
+          <div class="group">
+            <span class="label">First season at the new school</span>
+            <div class="row"><select class="field" id="from" aria-label="From season"></select><span class="note">to</span><select class="field" id="to" aria-label="To season"></select></div>
+          </div>
+        </div>
+      </aside>
+    </div>
     <div style="position:relative">
-      <button type="button" class="btn icon" id="share" aria-label="Copy a link to this view" title="Copy a link to this view">
-        <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M7.5 10.5a3 3 0 0 0 4.2 0l2.6-2.6a3 3 0 0 0-4.2-4.2l-.9.9M10.5 7.5a3 3 0 0 0-4.2 0L3.7 10.1a3 3 0 0 0 4.2 4.2l.9-.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+      <button type="button" class="btn" id="share" aria-label="Copy a link to this view" title="Copy a link to this view">
+        <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M7.5 10.5a3 3 0 0 0 4.2 0l2.6-2.6a3 3 0 0 0-4.2-4.2l-.9.9M10.5 7.5a3 3 0 0 0-4.2 0L3.7 10.1a3 3 0 0 0 4.2 4.2l.9-.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg><span class="txt">Copy link</span>
       </button>
       <div class="toast" id="toast" role="status" hidden></div>
     </div>
+    <nav class="maptabs" id="mapTabs" aria-label="Maps"></nav>
   </div>
 </header>
 
 <main class="page">
-  <div class="ctl">
-    <div>
-      <label class="label" for="school">School</label>
-      <input class="field" id="school" list="schoolList" placeholder="All schools" autocomplete="off">
-      <datalist id="schoolList"></datalist>
-    </div>
-    <div>
-      <span class="label" id="roleLabel">Moves into</span>
-      <div class="seg" id="role" role="group" aria-labelledby="roleLabel">
-        <button type="button" data-v="head">Head coach jobs</button>
-        <button type="button" data-v="coach">Coaching jobs</button>
-        <button type="button" data-v="all">Any staff job</button>
-      </div>
-    </div>
-    <div>
-      <label class="label" for="div">Division</label>
-      <select class="field" id="div"><option value="">All divisions</option></select>
-    </div>
-    <div>
-      <label class="label" for="conf">Conference</label>
-      <select class="field" id="conf"><option value="">All conferences</option></select>
-    </div>
-    <div>
-      <span class="label">First season at the new school</span>
-      <div class="row"><select class="field" id="from" aria-label="From season"></select><span class="note">to</span><select class="field" id="to" aria-label="To season"></select></div>
-    </div>
-  </div>
+  <div class="fchips" id="fchips" hidden></div>
   <div class="head">
     <span class="note" id="hint">Hover a campus to see its coaching moves; click it to pick that school</span>
     <span class="key" id="key"></span>
@@ -164,7 +117,7 @@ a.nmb:hover { border-bottom-color: var(--fg); }
   let data;
   try {
     data = await fetch(GP.dataUrl("staff_data.json")).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }); data.stints = GP.unpackStints(data.stints);
-  } catch (e) { $("loading").textContent = "The coaches' data didn't load. If you opened this file directly, serve the folder instead (python -m http.server), or reload to try again."; return; }
+  } catch (e) { GP.loadFailed("The coaches' data"); return; }
   let loc = null;
   try { loc = await fetch(GP.dataUrl("school_locations.json")).then((r) => r.ok ? r.json() : null); } catch (e) {}
   data.campus = data.schools.map((s) => { const v = loc && loc.schools[s[0]]; return v ? { city: v[0], state: v[1], lat: v[2], lon: v[3] } : null; });
@@ -204,7 +157,22 @@ a.nmb:hover { border-bottom-color: var(--fg); }
     $("role").querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.v === state.role));
     $("div").value = state.div; $("conf").value = state.conf;
     $("from").value = state.from; $("to").value = state.to;
+    const chips = [];
+    if (state.school >= 0) chips.push([data.schools[state.school][0], () => pick(-1)]);
+    if (state.role !== "coach") chips.push([state.role === "head" ? "Head coach jobs" : "Any staff job", () => { state.role = "coach"; refresh(); }]);
+    if (state.div !== "") { const d = data.divs[+state.div]; chips.push([data.divLabels[d] || d, () => { state.div = ""; refresh(); }]); }
+    if (state.conf !== "") chips.push([data.confs[+state.conf], () => { state.conf = ""; refresh(); }]);
+    if (state.from !== SEASONS[0] || state.to !== SEASONS[SEASONS.length - 1]) chips.push([`${lab(state.from)} to ${lab(state.to)}`, () => { state.from = SEASONS[0]; state.to = SEASONS[SEASONS.length - 1]; refresh(); }]);
+    GP.showChips($("fchips"), chips);
+    $("fcount").hidden = !chips.length; $("fcount").textContent = chips.length;
+    $("filtersBtn").setAttribute("aria-label", chips.length ? `Filters, ${chips.length} active` : "Filters");
   }
+  GP.dropdown();
+  const clearFilters = (keepSchool) => {
+    Object.assign(state, { school: keepSchool ? state.school : -1, role: "coach", div: "", conf: "", from: SEASONS[0], to: SEASONS[SEASONS.length - 1] });
+    refresh();
+  };
+  $("resetAll").addEventListener("click", () => clearFilters(false));
   $("school").addEventListener("change", () => {
     const v = $("school").value.trim().toLowerCase();
     if (!v) return pick(-1);
@@ -241,7 +209,7 @@ a.nmb:hover { border-bottom-color: var(--fg); }
 
   // ---------- the map (as on the Transfer Map) ----------
   const albers = d3.geoAlbersUsa();
-  const US_FIT = { type: "MultiPoint", coordinates: [[-124.7, 48.4], [-67, 47.4], [-80.1, 25.1], [-117.1, 32.5], [-97.2, 25.9], [-160, 21], [-150, 61]] };
+  const { US_FIT } = GP;
   const cv = $("cv"), g = cv.getContext("2d");
   let size = { w: 0, h: 0, dpr: 1 }, statePaths = [], stateFeatures = [], campusXY = [], hoverSchool = -1, hoverRoute = null;
   const MAX_ARCS = 450;
@@ -256,10 +224,7 @@ a.nmb:hover { border-bottom-color: var(--fg); }
     campusXY = data.campus.map((c) => c ? albers([c.lon, c.lat]) : null);
     draw();
   }
-  function curve(a, b) {
-    const dx = b[0] - a[0], dy = b[1] - a[1], len = Math.hypot(dx, dy) || 1, bend = Math.min(.22 * len, 90);
-    return { a, b, c: [(a[0] + b[0]) / 2 + dy / len * bend, (a[1] + b[1]) / 2 - dx / len * bend] };
-  }
+  const { curve } = GP;
   function arrowHead(q, color, w) {
     const ang = Math.atan2(q.b[1] - q.c[1], q.b[0] - q.c[0]), s = 4 + w * 1.6, tip = [q.b[0] - Math.cos(ang) * 5, q.b[1] - Math.sin(ang) * 5];
     g.beginPath(); g.moveTo(tip[0], tip[1]);
@@ -332,7 +297,7 @@ a.nmb:hover { border-bottom-color: var(--fg); }
     tip.style.left = Math.max(6, Math.min(x + 14, size.w - tw - 6)) + "px";
     tip.style.top = Math.max(6, y - th - 10 < 6 ? y + 16 : y - th - 10) + "px";
   }
-  const plural = (n, w) => `${fmt(n)} ${w}${n === 1 ? "" : "s"}`;
+  const { plural } = GP;
   // the people on a route, for its tooltip (up to four names)
   function routePeople(r) {
     const ks = M.list.filter((k) => MV.a[k] === r.from && MV.b[k] === r.to);
@@ -379,6 +344,12 @@ a.nmb:hover { border-bottom-color: var(--fg); }
     return `<ol class="pl">${ks.slice(0, n).map((k) => moveRow(k, side)).join("")}</ol>${ks.length > n ? `<button type="button" class="link more" data-more="${side}">Show ${fmt(Math.min(ks.length - n, 100))} more of ${fmt(ks.length - n)}</button>` : ""}`;
   }
   const fine = `<p class="fine">A move is one person on two schools' staff pages in turn: the last season listed at one school, then the first at the next, at most two seasons later. The season is the one on the new school's page. People are matched by name within this sport, so two coaches with the same name can be mixed up; a name listed at two schools in two or more of the same seasons is kept as two people, with no moves. Seasons a school didn't post its staff for are gaps, so a coach whose old school is missing that season may show no move. Moves from schools outside this data (high schools, the NFL, other levels) aren't counted.</p>`;
+  // Nothing to show: say so, and offer the likeliest way to see more.
+  function noMatch(text) {
+    const wider = state.role !== "all" ? `<button type="button" class="link" data-wider="role">Try any staff job</button>` : "";
+    const filtered = state.div !== "" || state.conf !== "" || state.from !== SEASONS[0] || state.to !== SEASONS[SEASONS.length - 1];
+    return `<div class="nomatch"><p>${text}</p>${wider}${filtered ? `<button type="button" class="link" data-wider="reset">Clear the filters</button>` : ""}</div>`;
+  }
   function renderSide() {
     const side = $("side"), sel = M.sel;
     const roleWord = state.role === "head" ? "head coaching jobs" : state.role === "coach" ? "coaching jobs" : "staff jobs";
@@ -389,10 +360,12 @@ a.nmb:hover { border-bottom-color: var(--fg); }
           <div><b>${fmt(M.list.length)}</b><small>moves into ${roleWord}, ${state.from}–${state.to}</small></div>
           <div><b class="in">${fmt(heads)}</b><small>of them into a head coach's job</small></div>
         </div>
-        <div class="group"><h2>Latest moves</h2><p class="note">Head coaches first in each season</p>${moveList(M.list, "all")}</div>
-        <div class="group"><h2>Most hires from other schools</h2>${bars(dest.map((x) => ({ label: pickBtn(x.i), n: x.n, from: -1, to: x.i })), "in", dest.length ? dest[0].n : 1)}</div>
-        <div class="group"><h2>Most coaches hired away</h2>${bars(src.map((x) => ({ label: pickBtn(x.i), n: x.n, from: x.i, to: -1 })), "out", src.length ? src[0].n : 1)}</div>
-        <div class="group"><h2>Most common moves</h2>${bars(routes.map((r) => ({ label: `${pickBtn(r.from)}<span class="arrow">→</span>${pickBtn(r.to)}`, n: r.n, from: r.from, to: r.to })), "", routes.length ? routes[0].n : 1)}</div>
+        ${!M.list.length ? noMatch("No coaching moves with these filters.") : GP.tabsHTML([
+          ["latest", GP.tabCount("Latest moves", M.list.length), `<div class="group"><p class="note">Head coaches first in each season</p>${moveList(M.list, "all")}</div>`],
+          ["schools", "Schools", `<div class="group"><h2>Most hires from other schools</h2>${bars(dest.map((x) => ({ label: pickBtn(x.i), n: x.n, from: -1, to: x.i })), "in", dest.length ? dest[0].n : 1)}</div>
+            <div class="group"><h2>Most coaches hired away</h2>${bars(src.map((x) => ({ label: pickBtn(x.i), n: x.n, from: x.i, to: -1 })), "out", src.length ? src[0].n : 1)}</div>`],
+          ["routes", "Common moves", `<div class="group">${bars(routes.map((r) => ({ label: `${pickBtn(r.from)}<span class="arrow">→</span>${pickBtn(r.to)}`, n: r.n, from: r.from, to: r.to })), "", routes.length ? routes[0].n : 1)}</div>`],
+        ], "Coaching move details")}
         ${fine}`;
     } else {
       const ins = M.list.filter((k) => MV.b[k] === sel), outs = M.list.filter((k) => MV.a[k] === sel), camp = data.campus[sel];
@@ -403,14 +376,18 @@ a.nmb:hover { border-bottom-color: var(--fg); }
           <div><b class="in">${fmt(ins.length)}</b><small>hired from other schools</small></div>
           <div><b class="out">${fmt(outs.length)}</b><small>left for other schools</small></div>
         </div>
-        <div class="group"><h2>Came in</h2>${moveList(ins, "in")}</div>
-        <div class="group"><h2>Left</h2>${moveList(outs, "out")}</div>
+        ${!ins.length && !outs.length ? noMatch(`No coaching moves for ${name(sel)} with these filters.`) : GP.tabsHTML([
+          ["in", GP.tabCount("Came in", ins.length), `<div class="group">${moveList(ins, "in")}</div>`],
+          ["out", GP.tabCount("Left", outs.length), `<div class="group">${moveList(outs, "out")}</div>`],
+        ], "Coaching move details")}
         ${fine}`;
       $("clearSel").addEventListener("click", () => pick(-1));
     }
   }
   $("side").addEventListener("click", (e) => {
     const b = e.target.closest("[data-pick]"); if (b) return pick(+b.dataset.pick);
+    const w = e.target.closest("[data-wider]");
+    if (w) { if (w.dataset.wider === "role") { state.role = "all"; refresh(); } else clearFilters(true); return; }
     const m = e.target.closest("[data-more]"); if (m) { showAll[m.dataset.more] += 100; renderSide(); }
   });
   $("side").addEventListener("pointerover", (e) => {
@@ -445,17 +422,19 @@ a.nmb:hover { border-bottom-color: var(--fg); }
     if (state.conf !== "") q.set("conf", data.confs[+state.conf]);
     if (state.from !== SEASONS[0]) q.set("from", state.from);
     if (state.to !== SEASONS[SEASONS.length - 1]) q.set("to", state.to);
+    GP.tabToParams(q);
     return q.toString();
   }
   function writeUrl() {
     const h = hashNow(); lastHash = h;
     try { localStorage.setItem(SAVE_KEY, h); } catch (e) {}
-    try { history.replaceState(null, "", location.pathname + location.search + (h ? "#" + h : "")); } catch (e) {}
+    GP.setHash(h);
   }
   function readUrl(firstLoad) {
     let hash = location.hash.slice(1);
     if (!hash && firstLoad) hash = GP.readSaved("staff-moves:last") || "";
     const q = new URLSearchParams(hash), sc = (q.get("school") || "").toLowerCase();
+    GP.tabFromParams(q);
     state.school = schoolIndex.has(sc) ? schoolIndex.get(sc) : -1;
     state.role = ["head", "coach", "all"].includes(q.get("role")) ? q.get("role") : "coach";
     const d = data.divs.indexOf(q.get("div")); state.div = d >= 0 ? String(d) : "";
@@ -470,7 +449,6 @@ a.nmb:hover { border-bottom-color: var(--fg); }
   function pick(i) { state.school = i; hoverRoute = null; hoverSchool = -1; $("ttip").hidden = true; showAll = { in: 30, out: 30, all: 25 }; refresh(); }
   function refresh() {
     sync(); compute(); renderSide(); drawKey(); draw(); writeUrl();
-    $("dirLink").href = "staff-directory.html" + (state.school >= 0 ? "#school=" + encodeURIComponent(data.schools[state.school][0]) : "");
     $("hint").textContent = M.sel >= 0 ? "Hover a line to see who made that move; click another campus to switch schools" : "Hover a campus to see its coaching moves; click it to pick that school";
   }
   readUrl(true);
@@ -480,8 +458,7 @@ a.nmb:hover { border-bottom-color: var(--fg); }
   matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { drawKey(); draw(); renderSide(); });
   layout();
   try {
-    const us = await fetch("https://cdn.jsdelivr.net/npm/us-atlas@3.0.1/states-10m.json").then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); });
-    stateFeatures = topojson.feature(us, us.objects.states).features.filter((f) => f.properties.name !== "Puerto Rico");
+    stateFeatures = await GP.usStates();
     layout();
   } catch (e) { $("hint").textContent = "The state outlines didn't load; the campuses and moves still draw in the right places."; }
 })();

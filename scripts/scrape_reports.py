@@ -26,10 +26,12 @@ GIVE_UP_AFTER = 3     # tries (failed or partial) before a school-season is skip
 
 def counts_as_try(report: dict) -> bool:
     """A failed or partial result that says something about the site. Not: never started because the
-    school ran out of time, left out on purpose, or no program that season."""
+    school ran out of time (before Nov 4, when the limit was per school), left out on purpose, or no program
+    that season. A season that used its whole limit counts, so one that never finishes is eventually given up."""
     if report.get("status") not in ("failed", "partial"):
         return False
-    return core.reason_code(report) != "time_limit"
+    code = core.reason_code(report)
+    return code != "no_archive" and (code != "time_limit" or "this season took over" in (report.get("error") or ""))
 
 
 def read_attempts(rosters_dir: Path, rules: sidearm.Rules = sidearm.DEFAULT) -> dict[tuple[str, int], dict]:
@@ -192,7 +194,9 @@ def plain_reason(report: dict, rules: sidearm.Rules = sidearm.DEFAULT) -> str:
         return err[0].upper() + err[1:] if err else "Left out"
     code = core.reason_code(report)
     if code == "time_limit":
-        return "skipped: the school's other seasons took too long (--retry-failed tries it again)"
+        return "ran out of time (--retry-failed tries it again)"
+    if code == "no_archive":
+        return "not tried: the newer seasons have no roster, so this one probably doesn't (--retry-given-up tries it)"
     if code == "other_sport":
         return "the only roster pages found were another sport's (the site may not list this team's roster)"
     if code == "not_posted":

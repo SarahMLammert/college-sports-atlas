@@ -1,0 +1,116 @@
+{
+ "label": "Rowing (Women's)",
+ "roster_paths": [
+  "/sports/womens-rowing/roster",
+  "/sports/wrowing/roster",
+  "/sports/w-rowing/roster",
+  "/sports/womens-crew/roster",
+  "/sports/wrow/roster",
+  "/sports/rowing/roster",
+  "/sports/crew/roster"
+ ],
+ "presto_paths": [
+  "/sports/wrow/{prev_season}-{yy}/roster"
+ ],
+ "min_players": 10,
+ "max_players": 150,
+ "junior_colleges": [
+  "San Jac",
+  "TJC",
+  "LSUE",
+  "LSU-Eunice",
+  "MGCCC",
+  "IWCC",
+  "JCCC",
+  "SCF",
+  "FSW",
+  "IRSC",
+  "JUCO"
+ ],
+ "spring_season": true,
+ "roster_sex": "w",
+ "combined_paths": [
+  "/sports/rowing/roster",
+  "/sports/crew/roster"
+ ],
+ "position_groups": [
+  "ROW",
+  "COX",
+  "UNK"
+ ],
+ "position_abbreviations": {
+  "ROW": "r rower port starboard stroke bow sweep scull sculler novice varsity",
+  "COX": "c cox coxswain"
+ },
+ "position_words": [
+  [
+   "row",
+   "ROW"
+  ],
+  [
+   "port",
+   "ROW"
+  ],
+  [
+   "starboard",
+   "ROW"
+  ],
+  [
+   "cox",
+   "COX"
+  ]
+ ],
+ "position_fallback": "UNK",
+ "d1_divisions": [
+  "D1"
+ ],
+ "other_divisions": [
+  "D2",
+  "D3",
+  "NAIA",
+  "JUCO"
+ ],
+ "division_labels": {
+  "D1": "Division I",
+  "D2": "Division II",
+  "D3": "Division III",
+  "NAIA": "NAIA",
+  "JUCO": "Junior college (NJCAA, CCCAA, NWAC)"
+ },
+ "position_labels": {
+  "ROW": "Rower",
+  "COX": "Coxswain",
+  "UNK": "Other"
+ },
+ "thin_roster": 20,
+ "frozen_min_pairs": 15,
+ "site": {
+  "front_page": {
+   "disc": "rowing",
+   "name": "Rowing",
+   "icon": "rowing",
+   "ring": "spring",
+   "order": 25,
+   "sex": "w"
+  },
+  "women": true,
+  "players-dotmap": {
+   "title": "College Rowing (Women's) Recruiting Map",
+   "description": "Where every varsity college women's rowing rower since 2016 comes from, mapped: Division I, II and III.",
+   "h1": "College Rowing (Women's) <span>Recruiting Map</span>",
+   "sub": "Hometowns of every varsity college women's rowing rower since 2016"
+  },
+  "players-heatmap": {
+   "title": "College Rowing (Women's) Recruiting Footprints",
+   "description": "Compare where up to four college women's rowing programs, from Division I to Division III, find their rowers, state by state.",
+   "h1": "College Rowing (Women's) <span>Recruiting Footprints</span>"
+  },
+  "players-transfers": {
+   "title": "College Rowing (Women's) Transfer Map",
+   "description": "Where college women's rowing rowers transferred, school to school, since 2016.",
+   "h1": "College Rowing (Women's) <span>Transfer Map</span>",
+   "sub": "Where rowers moved from school to school since 2016"
+  }
+ },
+ "seasons": "2016-2026"
+}

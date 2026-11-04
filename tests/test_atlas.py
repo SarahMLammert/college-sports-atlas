@@ -28,11 +28,19 @@ import hometown_fixes
 import scrape_reports
 import scrape_rosters as sr
 import sidearm
+import staff
 import hometown_fixes as sug
 from hometowns import normalize_class, not_a_place, parse_hometown, split_labeled_hometown
 from core import Levels, is_major, key, ROOT
 from core import load_sport
 from sidearm import parse_roster, parse_sidearm_classic
+
+
+@pytest.fixture(autouse=True)
+def internet_is_fine(monkeypatch):
+    """No test asks the real internet whether it's up (offline, a failed fetch would wait an hour)."""
+    monkeypatch.setattr(core, "internet_up", lambda *a, **k: True)
+
 
 
 # ==================================================================================================
@@ -828,11 +836,99 @@ def test_each_sport_has_its_own_normal_size():
     assert [sr.saved_reports(season(n), r)["A"]["status"] for n in (38, 8, 130)] == ["ok", "partial", "partial"]
 
 
-def test_a_slow_school_stops_after_its_time_limit():
-    job = sr.Job(rules=use("baseball"), school_minutes=0)    # already past the limit: nothing is downloaded
+def test_a_slow_season_stops_after_its_time_limit():
+    job = sr.Job(rules=use("baseball"), season_minutes=0)    # already past the limit: nothing is downloaded
     out = sr.scrape_school_all({"school": "A", "division": "D1", "domain": "a.edu"}, [2024, 2025], None, {}, job, skip=set())
     assert [r["status"] for _, _, r in out] == ["failed", "failed"]
     assert all(r["error"].startswith("timed out") for _, _, r in out)
+
+
+def test_a_slow_season_doesnt_use_up_the_next_seasons_time(monkeypatch):
+    clock, asked = [0.0], []
+    monkeypatch.setattr(sr.time, "monotonic", lambda: clock[0])
+    class Slow:
+        def get(self, url, remember_miss=True):
+            asked.append(url)
+            clock[0] += 40
+            return 404, url, ""
+    job = sr.Job(rules=use("baseball"), season_minutes=1)
+    out = sr.scrape_school_all({"school": "A", "division": "D1", "domain": "a.edu"}, [2023, 2024], Slow(), {}, job, skip=set())
+    assert len(asked) == 4                    # 2 pages each: 80 seconds passes the 60-second limit
+    assert {season for season, _, _ in out} == {2023, 2024}
+    assert all(r["error"].startswith("timed out: this season took over 1 minutes") for _, _, r in out)
+    assert all(core.reason_code(r) == "time_limit" and scrape_reports.counts_as_try(r) for _, _, r in out)
+
+
+def test_a_cell_label_with_several_slashes_isnt_read_as_the_hometown():
+    # Tusculum football: every player's hometown was "Hometown/ Previous School", placed at Hometown, Illinois
+    html = """<table><thead><tr><th>Name</th><th>Hometown/ Previous School / High School</th></tr></thead><tbody>
+    <tr><th class="name">Earnest Johnson</th>
+    <td><span class="label">Hometown/ Previous School / High School:</span> Detroit, Mich. / Northwestern HS</td></tr>
+    <tr><th class="name">Carlos Turner</th>
+    <td><span class="label">Hometown/ Previous School / High School:</span> St. Louis, Mo. / Lift for Life Academy</td></tr>
+    </tbody></table>"""
+    found = sidearm.parse_html_tables(html, BeautifulSoup(html, "lxml"))
+    assert [(p["hometown"], p["high_school"]) for p in found] == [
+        ("Detroit, Mich.", "Northwestern HS"), ("St. Louis, Mo.", "Lift for Life Academy")]
+
+
+def test_a_run_of_seasons_with_no_roster_ends_where_expected():
+    none, ok = {"status": "failed", "reason": "wrong_season"}, {"status": "ok"}
+    slow = {"status": "failed", "reason": "time_limit"}
+    assert sr.no_roster_run_ends({2024: ok, 2023: none, 2022: none, 2021: none, 2020: slow}) == 2021
+    assert sr.no_roster_run_ends({2024: none, 2023: none, 2022: ok, 2021: none}) is None
+    assert sr.no_roster_run_ends({2024: none, 2023: none, 2022: slow, 2021: none}) is None    # a bad moment isn't an answer
+
+
+def test_seasons_known_missing_are_skipped_but_not_counted_as_tries(monkeypatch):
+    tried = []
+    def one_season(school, fetcher, season, division, job, prefer):
+        tried.append(season)
+        return [], {"season": season, "status": "failed", "season_check": "", "error": "x: HTTP 404"}, None
+    monkeypatch.setattr(sr, "scrape_school_season", one_season)
+    monkeypatch.setattr(sr, "division_for", lambda school, season, history: "D1")
+    job = sr.Job(rules=use("baseball"))
+    out = sr.scrape_school_all({"school": "X"}, [2019, 2020, 2021, 2022, 2023], None, {}, job, known=(2020, 2022))
+    assert tried == [2023, 2022]
+    status = {season: report for season, _, report in out}
+    assert status[2021]["reason"] == "no_archive" and not scrape_reports.counts_as_try(status[2021])
+    assert status[2019]["status"] == "no_program"
+
+
+def test_headings_above_the_lists_say_who_is_on_which_team():
+    rows = lambda: [{"name": n} for n in ("Ann Lee", "Bea Roy", "Cal Fox", "Dan Poe", "Eve Coach")]
+    both = """<h2>Men's 2026 Cross Country Roster</h2><ul><li><a href="/roster/cal">Cal Fox</a></li><li><a href="/roster/dan">Dan Poe</a></li></ul>
+    <h2>Women's 2026 Cross Country Roster</h2><ul><li><a href="/roster/ann">Ann Lee</a></li><li><a href="/roster/bea">Bea Roy</a></li></ul>
+    <h2>Cross Country Coaching Staff</h2><a href="/coaches/eve">Eve Coach</a>"""
+    rules = lambda sex: sidearm.Rules(sex=sex, combined_codes=frozenset({"cross-country"}))
+    url = "https://a.edu/sports/cross-country/roster"
+    names = lambda html, sex: [p["name"] for p in sidearm.keep_own_sex(rows(), html, BeautifulSoup(html, "lxml"), rules(sex), url)]
+    assert names(both, "w") == ["Ann Lee", "Bea Roy"]
+    assert names(both, "m") == ["Cal Fox", "Dan Poe"]
+    one_team = "<h2>2023 Men's Cross Country Roster</h2><a href='/roster/cal'>Cal Fox</a>"
+    assert names(one_team, "w") == []                    # a men-only page at the shared address
+    assert "Cal Fox" in names(one_team, "m")
+
+
+def test_a_certificate_error_skips_that_hosts_other_addresses(monkeypatch):
+    asked = []
+    class BadCertificate:
+        def get(self, url, remember_miss=True):
+            asked.append(url)
+            if "//www." not in url:
+                raise requests.exceptions.SSLError("certificate")
+            return 404, url, ""
+    job = sr.Job(rules=use("softball"))
+    sr.scrape_school_season({"school": "A", "domain": "a.edu"}, BadCertificate(), 2024, "D1", job)
+    assert sum("//www." not in u for u in asked) == 1      # one try at a.edu, and the www. addresses still get theirs
+    assert any("//www." in u for u in asked)
+
+
+def test_player_pages_stop_at_the_time_limit():
+    players = [{"hometown": "", "bio_url": "/a", "high_school": "", "previous_school": ""}]
+    errors = []
+    assert sr.fill_from_bios(players, "https://a.edu/roster", None, errors, deadline=0) == 0
+    assert errors == ["bios: ran out of time after 0 of 1 player pages"]
 
 
 # ---------------------------------------------------------------------------- seasons
@@ -1100,7 +1196,7 @@ def plan(tiny, *argv):
     import pipeline
     ns = pipeline.argparse.Namespace(
         steps=None, from_step=None, skip=None, only=None, division=None, seasons=None, rescrape=False,
-        no_refresh=False, workers=16, retry_workers=8, first_minutes=2, school_minutes=5, use_review=False, test=False,
+        no_refresh=False, workers=16, retry_workers=8, first_minutes=2, season_minutes=5, use_review=False, test=False,
         give_up_after=None, retry_given_up=False,
         redo_current=False, keep_going=False, dry_run=True)
     for a in argv:
@@ -1355,7 +1451,7 @@ def test_every_sport_has_its_pages():
 
 def test_front_page_discs_from_settings(tmp_path):
     # Nov 1: the front page's list comes from each sport's settings; teams of one disc must agree, men's first
-    fp = {"disc": "polo", "name": "Water Polo", "icon": "polo", "order": 9}
+    fp = {"disc": "polo", "name": "Water Polo", "icon": "polo", "order": 9, "ring": "fall"}
     men = core.Sport(name="polo-mens", site={"front_page": {**fp, "sex": "m"}})
     women = core.Sport(name="polo-womens", site={"front_page": {**fp, "sex": "w"}})
     (tmp_path / "polo-mens").mkdir()
@@ -1363,6 +1459,7 @@ def test_front_page_discs_from_settings(tmp_path):
     discs, problems = build.front_page_discs([women, men], tmp_path)
     assert not problems and [t["id"] for t in discs[0]["teams"]] == ["polo-mens", "polo-womens"]
     assert discs[0]["teams"][0]["stats"] == [["1,215", "schools"], ["12K", "players"]] and discs[0]["teams"][1]["stats"] is None
+    assert discs[0]["ring"] == "fall" and discs[0]["teams"][0]["built"] and not discs[0]["teams"][1]["built"]
     women.site["front_page"]["name"] = "Polo"
     assert any('"name"' in p for p in build.front_page_discs([men, women], tmp_path)[1])
     assert build.short_count(9999) == "9,999" and build.short_count(120_189) == "120K" and build.short_count(97_500) == "98K"
@@ -1537,3 +1634,94 @@ def test_junior_hockey_teams_are_not_colleges():
     assert looks_like_college("Boston College", colleges)
 
 
+
+
+def test_men_and_women_on_one_page():
+    # Nov 2: track, cross country and swimming sites often list both teams on one page (Grand Valley State, Oregon)
+    players = [{"name": n, "hometown": "Ada, Mich."} for n in ("Sam Allen", "Allie Arnsman", "Pat Lee")]
+    rows = lambda: [dict(p) for p in players]
+    men = sidearm.Rules(sex="m", combined_codes=frozenset({"cross-country"}))
+    women = sidearm.Rules(sex="w", combined_codes=frozenset({"cross-country"}))
+    keep = lambda html, rules, url="": [p["name"] for p in sidearm.keep_own_sex(rows(), html, BeautifulSoup(html, "lxml"), rules, url)]
+    # Sidearm's person list; someone it doesn't mark on a page of both is left out
+    html = '{"name":"Sam Allen","gender":"M","url":"a"},{"name":"Allie Arnsman","gender":"F","url":"b"}'
+    assert keep(html, men) == ["Sam Allen"] and keep(html, women) == ["Allie Arnsman"]
+    # Nuxt's records, and a Sport with no roster_sex is left alone
+    nuxt = '<script id="__NUXT_DATA__">[{"firstName":1,"lastName":2,"gender":3},"Sam","Allen","M",{"firstName":5,"lastName":6,"gender":7},"Allie","Arnsman","F"]</script>'
+    assert keep(nuxt, women) == ["Allie Arnsman"] and keep(nuxt, sidearm.Rules()) == ["Sam Allen", "Allie Arnsman", "Pat Lee"]
+    # Separate tables, by caption or by a first header cell
+    tables = ("<table><caption>Women's 2024 Cross Country Roster</caption><tbody><tr><td><a href=x>Allie Arnsman</a></td></tr></tbody></table>"
+              '<table><thead><tr><th id="men">Men</th></tr></thead><tbody><tr><td><a href=y>Sam Allen</a></td></tr></tbody></table>')
+    assert keep(tables, men) == ["Sam Allen"]
+    # One team only: all of it, or none of it when it's the other team's page
+    one = '{"name":"Sam Allen","gender":"M"}'
+    assert keep(one, men) == ["Sam Allen", "Allie Arnsman", "Pat Lee"] and keep(one, women) == []
+    # Nothing to go on: fine on a men's address, refused on an address that usually shows both
+    assert len(keep("<p>roster</p>", men, "https://x.edu/sports/mens-cross-country/roster/2024")) == 3
+    assert keep("<p>roster</p>", men, "https://x.edu/sports/cross-country/roster/2024") == []
+
+
+def test_new_sports_settings():
+    # Every sport loads, its combined addresses are among its roster addresses, and another sport's page is refused
+    for name in core.available_sports():
+        sport = core.load_sport(name)
+        assert set(sport.combined_paths) <= set(sport.roster_paths), name
+        assert sport.site["front_page"]["ring"] in build.RINGS, name
+    rules = sidearm.Rules.for_sport(core.load_sport("track-mens"), [])
+    assert sidearm.other_sport_page("https://x.edu/sports/womens-track-and-field/roster", rules)
+    assert sidearm.other_sport_page("https://x.edu/sports/mens-cross-country/roster", rules)
+    assert not sidearm.other_sport_page("https://x.edu/sports/track-and-field/roster", rules)
+    assert staff.role_of("Head Cross Country/Track Coach", "Track & Field (Men's)") == "head"
+    assert staff.role_of("Head Swimming & Diving Coach", "Swimming & Diving (Women's)") == "head"
+    assert staff.role_of("Head Field Hockey Coach", "Field Hockey") == "head"
+    assert staff.role_of("Head Wrestling Coach", "Wrestling (Men's)") == "head"
+    assert staff.role_of("Head Soccer Coach", "Wrestling (Men's)") != "head"
+
+
+def test_seasons_older_than_a_teams_list_are_skipped(monkeypatch):
+    # Nov 3: newest first, so the page's season list can rule out older seasons
+    page = "<select>" + "".join(f"<option>{y}-{(y + 1) % 100}</option>" for y in (2021, 2022, 2023)) + "</select>"
+    assert sidearm.earliest_listed(page) == 2021
+    assert sidearm.earliest_listed('<a href="/sports/x/roster/2024">') is None        # one year isn't a list
+    assert sidearm.earliest_listed("<select><option>All</option><option>Men</option></select>") is None
+    tried = []
+    def one_season(school, fetcher, season, division, job, prefer=None):
+        tried.append(season)
+        report = {"season": season, "status": "ok", "players": 1, "season_check": "verified", "error": "", "earliest_listed": 2023}
+        return [{"name": "A"}], report, None
+    monkeypatch.setattr(sr, "scrape_school_season", one_season)
+    monkeypatch.setattr(sr, "division_for", lambda school, season, history: "D1")
+    job = type("J", (), {"season_minutes": 1, "wrong_seasons": {}, "season_pages": {("X", 2021): "url"}, "rules": sidearm.Rules()})()
+    out = sr.scrape_school_all({"school": "X"}, [2020, 2021, 2022, 2023, 2024], None, {}, job)
+    assert tried == [2024, 2023, 2021]            # 2021 has a page of its own listed in season_pages.csv
+    status = {season: report["status"] for season, _, report in out}
+    assert status[2022] == status[2020] == "no_program" and "earliest_listed" not in out[0][2]
+
+
+def test_an_internet_outage_waits_instead_of_failing_every_school(tmp_path, monkeypatch):
+    fetcher = core.Fetcher(tmp_path, delay=0)
+    fetcher.OFFLINE_CHECK_EVERY = 0
+    calls, ups = [], [False, False, True]        # out when first checked, back two looks later
+    resp = type("R", (), {"status_code": 200, "text": "<html>ok</html>", "url": "https://x.edu/a"})()
+
+    def download(url):
+        calls.append(url)
+        if len(calls) == 1:
+            raise core.requests.exceptions.ConnectionError("NameResolutionError: Failed to resolve")
+        return resp
+    monkeypatch.setattr(fetcher, "_download", download)
+    monkeypatch.setattr(core, "internet_up", lambda: ups.pop(0))
+    assert fetcher.get("https://x.edu/a")[0] == 200
+    assert len(calls) == 2 and not fetcher._dead_hosts
+
+
+def test_a_dead_site_is_still_marked_dead_when_the_internet_is_fine(tmp_path, monkeypatch):
+    fetcher = core.Fetcher(tmp_path, delay=0)
+
+    def download(url):
+        raise core.requests.exceptions.ConnectionError("NameResolutionError: Failed to resolve")
+    monkeypatch.setattr(fetcher, "_download", download)
+    monkeypatch.setattr(core, "internet_up", lambda: True)
+    with pytest.raises(core.requests.exceptions.ConnectionError):
+        fetcher.get("https://gone.edu/a")
+    assert "gone.edu" in fetcher._dead_hosts

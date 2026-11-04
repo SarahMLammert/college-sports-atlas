@@ -1,0 +1,153 @@
+{
+ "label": "Swimming & Diving (Women's)",
+ "roster_paths": [
+  "/sports/womens-swimming-and-diving/roster",
+  "/sports/wswim/roster",
+  "/sports/w-swim/roster",
+  "/sports/wswimdive/roster",
+  "/sports/womens-swimming/roster",
+  "/sports/swimming-and-diving/roster",
+  "/sports/swimming/roster",
+  "/sports/swim/roster",
+  "/sports/c-swim/roster"
+ ],
+ "presto_paths": [
+  "/sports/wswimdive/{prev_season}-{yy}/roster",
+  "/sports/wswim/{prev_season}-{yy}/roster"
+ ],
+ "min_players": 5,
+ "max_players": 70,
+ "junior_colleges": [
+  "San Jac",
+  "TJC",
+  "LSUE",
+  "LSU-Eunice",
+  "MGCCC",
+  "IWCC",
+  "JCCC",
+  "SCF",
+  "FSW",
+  "IRSC",
+  "JUCO"
+ ],
+ "spring_season": true,
+ "roster_sex": "w",
+ "combined_paths": [
+  "/sports/swimming-and-diving/roster",
+  "/sports/swimming/roster",
+  "/sports/swim/roster",
+  "/sports/c-swim/roster"
+ ],
+ "position_groups": [
+  "FREE",
+  "BACK",
+  "BREAST",
+  "FLY",
+  "IM",
+  "DIVE",
+  "UNK"
+ ],
+ "position_abbreviations": {
+  "FREE": "fr free freestyle sprint distance mid-distance dist",
+  "BACK": "bk back backstroke",
+  "BREAST": "br breast breaststroke",
+  "FLY": "fl fly butterfly",
+  "IM": "im ind",
+  "DIVE": "d dv dive diver diving"
+ },
+ "position_words": [
+  [
+   "free",
+   "FREE"
+  ],
+  [
+   "sprint",
+   "FREE"
+  ],
+  [
+   "distance",
+   "FREE"
+  ],
+  [
+   "back",
+   "BACK"
+  ],
+  [
+   "breast",
+   "BREAST"
+  ],
+  [
+   "fly",
+   "FLY"
+  ],
+  [
+   "butterfly",
+   "FLY"
+  ],
+  [
+   "individual",
+   "IM"
+  ],
+  [
+   "div",
+   "DIVE"
+  ]
+ ],
+ "position_fallback": "UNK",
+ "d1_divisions": [
+  "D1"
+ ],
+ "other_divisions": [
+  "D2",
+  "D3",
+  "NAIA",
+  "JUCO"
+ ],
+ "division_labels": {
+  "D1": "Division I",
+  "D2": "Division II",
+  "D3": "Division III",
+  "NAIA": "NAIA",
+  "JUCO": "Junior college (NJCAA, CCCAA, NWAC)"
+ },
+ "position_labels": {
+  "FREE": "Freestyle",
+  "BACK": "Backstroke",
+  "BREAST": "Breaststroke",
+  "FLY": "Butterfly",
+  "IM": "Individual medley",
+  "DIVE": "Diving",
+  "UNK": "Other"
+ },
+ "thin_roster": 8,
+ "frozen_min_pairs": 6,
+ "site": {
+  "front_page": {
+   "disc": "swimming",
+   "name": "Swimming",
+   "icon": "swimming",
+   "ring": "winter",
+   "order": 14,
+   "sex": "w"
+  },
+  "women": true,
+  "players-dotmap": {
+   "title": "College Swimming & Diving (Women's) Recruiting Map",
+   "description": "Where every varsity college women's swimming & diving swimmer since 2016 comes from, mapped: Division I, II and III, NAIA and junior college.",
+   "h1": "College Swimming & Diving (Women's) <span>Recruiting Map</span>",
+   "sub": "Hometowns of every varsity college women's swimming & diving swimmer since 2016"
+  },
+  "players-heatmap": {
+   "title": "College Swimming & Diving (Women's) Recruiting Footprints",
+   "description": "Compare where up to four college women's swimming & diving programs, from Division I to junior college, find their swimmers, state by state.",
+   "h1": "College Swimming & Diving (Women's) <span>Recruiting Footprints</span>"
+  },
+  "players-transfers": {
+   "title": "College Swimming & Diving (Women's) Transfer Map",
+   "description": "Where college women's swimming & diving swimmers transferred, school to school, since 2016.",
+   "h1": "College Swimming & Diving (Women's) <span>Transfer Map</span>",
+   "sub": "Where swimmers moved from school to school since 2016"
+  }
+ },
+ "seasons": "2016-2026"
+}

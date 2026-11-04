@@ -4,56 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>College Football Transfer Map</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="description" content="Where college football players transferred, school to school, since 2016.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Barlow:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="common.css">
 <style>
-/* Layout: an ordinary scrolling page like players-heatmap.html. Title bar on top, then the U.S. map of
-   school-to-school transfers on the left and the lists on the right (stacked on narrow screens). */
-body { background: var(--panel) var(--paper-grain); }
-.bar { position: static; padding-bottom: 6px; }
-.tools { justify-content: flex-end; }
-@media (min-width: 1101px) {   /* one-line title, as on the Footprints page */
-  .brand { padding: 8px 14px 9px; max-width: none; }
-  .brand h1 { font-size: 26px; white-space: nowrap; }
-  .brand .sub { margin-top: 2px; }
-}
-.page { padding: 0 max(var(--gap), env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(var(--gap), env(safe-area-inset-left)); display: flex; flex-direction: column; gap: 10px; }
-.head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px 18px; min-height: 22px; }
-.key { display: inline-flex; align-items: center; gap: 6px 14px; font-size: 12px; color: var(--muted); flex-wrap: wrap; }
-.key svg { vertical-align: middle; margin-right: 5px; }
 .tgrid { display: grid; grid-template-columns: minmax(0, 1fr) 370px; gap: 14px; height: max(460px, calc(100dvh - var(--bar-h, 80px) - 52px)); }
-.tmap { position: relative; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--sea); min-height: 0; }
-.tmap canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: default; touch-action: manipulation; }
-.tmap canvas.hot { cursor: pointer; }
 .tmap .msg { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); max-width: 420px; text-align: center; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; color: var(--muted); font-size: 14px; box-shadow: var(--shadow); }
-.ttip { position: absolute; pointer-events: none; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 5px 9px; font-size: 13px; line-height: 1.35; box-shadow: var(--shadow); white-space: nowrap; font-variant-numeric: tabular-nums; z-index: 2; }
-.ttip .note { font-size: 12px; }
-.tside { border: 1px solid var(--line); border-radius: 8px; overflow: auto; overscroll-behavior: contain; padding: 14px 16px 18px; display: flex; flex-direction: column; gap: 18px; min-height: 0; }
-.sel-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
-.sel-head h2 { font-size: 24px; }
-.sel-head .note { margin-top: 3px; }
-.big { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 16px; }
-.big div { display: flex; flex-direction: column; }
-.big b { font: 700 30px/1 var(--display); font-variant-numeric: tabular-nums; }
-.big b.in { color: var(--in); } .big b.out { color: var(--out); }
-.big small { color: var(--muted); font-size: 12px; line-height: 1.3; margin-top: 2px; }
-.group h2 { font-size: 18px; }
 .group .note { margin: -2px 0 2px; }
-.tl { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
-.tl li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; font-size: 14px; border-radius: 4px; }
-.tl li.hl { background: var(--accent-soft); box-shadow: 0 0 0 4px var(--accent-soft); }
-.tl .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.tl .nm button { all: unset; cursor: pointer; border-bottom: 1px dotted var(--muted); }
-.tl .nm button:hover { border-bottom-color: var(--fg); }
-.tl .nm button:focus-visible { outline: 2px solid var(--focus); }
-.tl .arrow { color: var(--muted); margin: 0 4px; }
-.tl .v { font-variant-numeric: tabular-nums; color: var(--muted); }
-.tl .v b { color: var(--fg); font-weight: 600; }
-.tl .b { grid-column: 1 / -1; height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
-.tl .b span { display: block; height: 100%; background: var(--bar-c, var(--accent)); }
-.tl.in .b span { --bar-c: var(--in); } .tl.out .b span { --bar-c: var(--out); }
 .tl.lv .b span { --bar-c: var(--muted); }
 .tl.lv .pct { color: var(--muted); font-size: 12px; margin-left: 6px; }
 .group h3.sub3 { font: 600 11px/1 var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 10px 0 6px; }
@@ -63,17 +24,7 @@ body { background: var(--panel) var(--paper-grain); }
 .xtab thead th { color: var(--muted); font-weight: 600; font-size: 12px; }
 .xtab tbody th { text-align: left; color: var(--muted); font-weight: 600; }
 .xtab td { background: color-mix(in srgb, var(--accent) calc(var(--w, 0) * 38%), transparent); }
-.xtab td.same { font-weight: 700; }
-.tside .fine { font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 12px; margin: 0; }
-:root { --in: var(--accent); --out: #23606b; }   /* came in: terracotta; left: deep sea, as on the landing page */
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --out: #7fc4cf; } }
-:root[data-theme="dark"] { --out: #7fc4cf; }
-@media (max-width: 1000px) {
-  .tgrid { grid-template-columns: 1fr; height: auto; }
-  .tmap { aspect-ratio: 1.55; }
-  .tside { overflow: visible; }
-}
-</style>
+.xtab td.same { font-weight: 700; }</style>
 </head>
 <body>
 <div class="loading" id="loading">Loading players…</div>
@@ -84,8 +35,8 @@ body { background: var(--panel) var(--paper-grain); }
     <p class="sub" id="sub">Where players moved from school to school since 2016</p>
   </div>
   <div class="tools">
-    <a class="btn icon" id="homeLink" href="index.html" aria-label="All sports" title="All sports">
-      <svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="2.2 2"/><circle cx="9" cy="2.5" r="1.8" fill="currentColor"/><circle cx="15.5" cy="9" r="1.8" fill="currentColor"/><circle cx="9" cy="15.5" r="1.8" fill="currentColor"/><circle cx="2.5" cy="9" r="1.8" fill="currentColor"/></svg>
+    <a class="btn" id="homeLink" href="index.html" aria-label="All sports" title="All sports">
+      <svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="2.2 2"/><circle cx="9" cy="2.5" r="1.8" fill="currentColor"/><circle cx="15.5" cy="9" r="1.8" fill="currentColor"/><circle cx="9" cy="15.5" r="1.8" fill="currentColor"/><circle cx="2.5" cy="9" r="1.8" fill="currentColor"/></svg><span class="txt">All sports</span>
     </a>
     <div class="fwrap">
       <button type="button" class="btn filters" id="filtersBtn" aria-expanded="false" aria-controls="filters">
@@ -134,31 +85,20 @@ body { background: var(--panel) var(--paper-grain); }
         </div>
       </aside>
     </div>
-    <a class="btn" id="mapLink" href="players-dotmap.html" title="The dot map of hometowns">
-      <svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="5" cy="6" r="2.2" fill="currentColor"/><circle cx="12.5" cy="5" r="1.5" fill="currentColor"/><circle cx="10" cy="12" r="3" fill="currentColor"/></svg>
-      <span class="txt">Dot map</span>
-    </a>
-    <a class="btn" id="compareLink" href="players-heatmap.html" title="Compare where up to four schools find their players">
-      <svg viewBox="0 0 18 18" aria-hidden="true"><rect x="2" y="2" width="6" height="6" rx="1.3" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="10" y="2" width="6" height="6" rx="1.3" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="2" y="10" width="6" height="6" rx="1.3" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="10" y="10" width="6" height="6" rx="1.3" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
-      <span class="txt">Compare</span>
-    </a>
-    <a class="btn" id="influenceLink" href="school-influence.html" title="Everyone connected to one school, and where they went">
-      <svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="2.6" fill="currentColor"/><circle cx="3" cy="4" r="1.5" fill="currentColor"/><circle cx="15" cy="4" r="1.5" fill="currentColor"/><circle cx="3.5" cy="14.5" r="1.5" fill="currentColor"/><circle cx="14.5" cy="14.5" r="1.5" fill="currentColor"/><path d="M9 9L3 4M9 9l6-5M9 9l-5.5 5.5M9 9l5.5 5.5" stroke="currentColor" stroke-width="1.3"/></svg>
-      <span class="txt">Where they went</span>
-    </a>
     <div style="position:relative">
-      <button type="button" class="btn icon" id="share" aria-label="Copy a link to this view" title="Copy a link to this view">
-        <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M7.5 10.5a3 3 0 0 0 4.2 0l2.6-2.6a3 3 0 0 0-4.2-4.2l-.9.9M10.5 7.5a3 3 0 0 0-4.2 0L3.7 10.1a3 3 0 0 0 4.2 4.2l.9-.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+      <button type="button" class="btn" id="share" aria-label="Copy a link to this view" title="Copy a link to this view">
+        <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M7.5 10.5a3 3 0 0 0 4.2 0l2.6-2.6a3 3 0 0 0-4.2-4.2l-.9.9M10.5 7.5a3 3 0 0 0-4.2 0L3.7 10.1a3 3 0 0 0 4.2 4.2l.9-.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg><span class="txt">Copy link</span>
       </button>
       <div class="toast" id="toast" role="status" hidden></div>
     </div>
+    <nav class="maptabs" id="mapTabs" aria-label="Maps"></nav>
   </div>
 </header>
 
 <main class="page">
+  <div class="fchips" id="fchips" hidden></div>
   <div class="head">
     <span class="note" id="hint">Hover a campus to see its transfers; click it to pick that school</span>
-    <span class="note" id="filterNote"></span>
     <span class="key" id="key"></span>
   </div>
   <div class="tgrid">
@@ -181,7 +121,7 @@ body { background: var(--panel) var(--paper-grain); }
 
   let data;
   try { data = await GP.loadData(); }
-  catch (e) { $("loading").textContent = "The player data didn't load. If you opened this file directly, serve the folder instead (python -m http.server), or reload to try again."; return; }
+  catch (e) { GP.loadFailed("The player data"); return; }
   const P = data.players, N = data.N, S = data.schools.length;
   const { schoolPalette, swatch } = GP.makePalette(data);
   const F = GP.makeFilters(data, { onChange: refresh, onSchool: (i) => pick(i) });
@@ -240,7 +180,7 @@ body { background: var(--panel) var(--paper-grain); }
 
   // ---------- the map ----------
   const albers = d3.geoAlbersUsa();
-  const US_FIT = { type: "MultiPoint", coordinates: [[-124.7, 48.4], [-67, 47.4], [-80.1, 25.1], [-117.1, 32.5], [-97.2, 25.9], [-160, 21], [-150, 61]] };
+  const { US_FIT } = GP;
   const cv = $("cv"), g = cv.getContext("2d");
   let size = { w: 0, h: 0, dpr: 1 }, statePaths = [], campusXY = [], hoverSchool = -1, hoverRoute = null;
   const MAX_ARCS = 450;   // the all-schools view draws the busiest routes only; the lists still count everything
@@ -258,10 +198,7 @@ body { background: var(--panel) var(--paper-grain); }
     draw();
   }
   // A curve from a to b that bends to the left of the direction of travel, so A→B and B→A don't sit on top of each other.
-  function curve(a, b) {
-    const dx = b[0] - a[0], dy = b[1] - a[1], len = Math.hypot(dx, dy) || 1, bend = Math.min(.22 * len, 90);
-    return { a, b, c: [(a[0] + b[0]) / 2 + dy / len * bend, (a[1] + b[1]) / 2 - dx / len * bend] };
-  }
+  const { curve } = GP;
   function arrowHead(q, color, w) {
     // direction at the end of a quadratic curve is b - c
     const ang = Math.atan2(q.b[1] - q.c[1], q.b[0] - q.c[0]), s = 4 + w * 1.6;
@@ -353,7 +290,7 @@ body { background: var(--panel) var(--paper-grain); }
     tip.style.left = Math.max(6, Math.min(x + 14, W - tw - 6)) + "px";
     tip.style.top = Math.max(6, y - th - 10 < 6 ? y + 16 : y - th - 10) + "px";
   }
-  const plural = (n, w) => `${fmt(n)} ${w}${n === 1 ? "" : "s"}`;
+  const { plural } = GP;
   function routeText(r) {
     return `${swatch(r.from)}${name(r.from)} <span class="note">→</span> ${swatch(r.to)}${name(r.to)}<br><b>${plural(r.n, "player")}</b>`;
   }
@@ -440,6 +377,10 @@ body { background: var(--panel) var(--paper-grain); }
       <h3 class="sub3">Gained the most (in minus out)</h3>${bar(gain.map(([c, n]) => ({ label: esc(confName(c)), n })), "in")}
       <h3 class="sub3">Lost the most (out minus in)</h3>${bar(lose.map(([c, n]) => ({ label: esc(confName(c)), n: -n })), "out")}</div>`;
   }
+  function noMatch(text) {
+    const more = F.activeCount() > (state.school >= 0 ? 1 : 0);
+    return `<div class="nomatch"><p>${text}</p>${more ? `<button type="button" class="link" id="widen">Clear the other filters</button>` : ""}</div>`;
+  }
   function renderSide() {
     const side = $("side"), sel = M.sel;
     const fine = `<p class="fine">A move is one player found on two rosters in this data in turn, or whose roster names ${GP.his} old school. Transfers from schools that aren't in this data have no line, so they're counted, by the level of the school they came from, but not drawn. "Unknown" means the roster names no school (${GP.he} was counted as a transfer because he arrived as a junior or older), or a name that fits schools at two levels ("Bethel", "Concordia").${hasCampus ? "" : " Campus locations (school_locations.json) didn't load, so the map can't place the schools."}</p>`;
@@ -449,15 +390,17 @@ body { background: var(--panel) var(--paper-grain); }
           <div><b>${fmt(M.moves)}</b><small>school-to-school moves</small></div>
           <div><b>${fmt(M.others)}</b><small>other transfers, no line drawn</small></div>
         </div>
-        ${betweenGroup("Moves between divisions")}
-        ${confGroup()}
-        ${levelGroup("Where the other transfers came from")}
-        <div class="group"><h2>Biggest destinations</h2><p class="note">Most players arriving from another school on the map</p>
-          ${list(dest.map((x) => ({ label: pickBtn(x.i), n: x.n, from: -1, to: x.i })), "in", dest.length ? dest[0].n : 1)}</div>
-        <div class="group"><h2>Biggest sources</h2><p class="note">Most players leaving for another school on the map</p>
-          ${list(src.map((x) => ({ label: pickBtn(x.i), n: x.n, from: x.i, to: -1 })), "out", src.length ? src[0].n : 1)}</div>
-        <div class="group"><h2>Most common moves</h2><p class="note">Hover one to find it on the map</p>
-          ${list(routes.map((r) => ({ label: `${pickBtn(r.from)}<span class="arrow">→</span>${pickBtn(r.to)}`, n: r.n, from: r.from, to: r.to })), "", routes.length ? routes[0].n : 1)}</div>
+        ${!M.moves && !M.others ? noMatch("No transfers with these filters.") : GP.tabsHTML([
+          ["schools", "Schools", `<div class="group"><h2>Biggest destinations</h2><p class="note">Most players arriving from another school on the map</p>
+            ${list(dest.map((x) => ({ label: pickBtn(x.i), n: x.n, from: -1, to: x.i })), "in", dest.length ? dest[0].n : 1)}</div>
+          <div class="group"><h2>Biggest sources</h2><p class="note">Most players leaving for another school on the map</p>
+            ${list(src.map((x) => ({ label: pickBtn(x.i), n: x.n, from: x.i, to: -1 })), "out", src.length ? src[0].n : 1)}</div>
+          <div class="group"><h2>Most common moves</h2><p class="note">Hover one to find it on the map</p>
+            ${list(routes.map((r) => ({ label: `${pickBtn(r.from)}<span class="arrow">→</span>${pickBtn(r.to)}`, n: r.n, from: r.from, to: r.to })), "", routes.length ? routes[0].n : 1)}</div>`],
+          ["divisions", "Divisions", betweenGroup("Moves between divisions")],
+          ["conferences", "Conferences", confGroup()],
+          ["other", GP.tabCount("Other", M.others), levelGroup("Where the other transfers came from")],
+        ], "Transfer details")}
         ${fine}`;
     } else {
       const ins = M.routes.filter((r) => r.to === sel), outs = M.routes.filter((r) => r.from === sel);
@@ -471,19 +414,24 @@ body { background: var(--panel) var(--paper-grain); }
           <div><b>${net > 0 ? "+" : ""}${fmt(net)}</b><small>net, school to school</small></div>
           <div><b>${fmt(M.other[sel])}</b><small>other transfers in, no line drawn</small></div>
         </div>
-        ${betweenGroup("Between divisions")}
-        ${confGroup()}
-        ${levelGroup("Other transfers came from")}
-        <div class="group"><h2>Came in from</h2>${list(ins.slice(0, 15).map((r) => ({ label: pickBtn(r.from), n: r.n, from: r.from, to: r.to })), "in", ins.length ? ins[0].n : 1)}
-          ${ins.length > 15 ? `<p class="note">+${plural(ins.length - 15, "more school")}</p>` : ""}</div>
-        <div class="group"><h2>Left for</h2>${list(outs.slice(0, 15).map((r) => ({ label: pickBtn(r.to), n: r.n, from: r.from, to: r.to })), "out", outs.length ? outs[0].n : 1)}
-          ${outs.length > 15 ? `<p class="note">+${plural(outs.length - 15, "more school")}</p>` : ""}</div>
+        ${!nIn && !nOut && !M.other[sel] ? noMatch(`No transfers for ${name(sel)} with these filters.`) : GP.tabsHTML([
+          ["schools", GP.tabCount("Schools", ins.length + outs.length), `<div class="group"><h2>Came in from</h2>${list(ins.slice(0, 15).map((r) => ({ label: pickBtn(r.from), n: r.n, from: r.from, to: r.to })), "in", ins.length ? ins[0].n : 1)}
+            ${ins.length > 15 ? `<p class="note">+${plural(ins.length - 15, "more school")}</p>` : ""}</div>
+          <div class="group"><h2>Left for</h2>${list(outs.slice(0, 15).map((r) => ({ label: pickBtn(r.to), n: r.n, from: r.from, to: r.to })), "out", outs.length ? outs[0].n : 1)}
+            ${outs.length > 15 ? `<p class="note">+${plural(outs.length - 15, "more school")}</p>` : ""}</div>`],
+          ["divisions", "Divisions", betweenGroup("Between divisions")],
+          ["conferences", "Conferences", confGroup()],
+          ["other", GP.tabCount("Other", M.other[sel]), levelGroup("Other transfers came from")],
+        ], "Transfer details")}
         ${fine}`;
       $("clearSel").addEventListener("click", () => pick(-1));
     }
   }
   // hovering a list row lights up its route; clicking a school name picks that school
-  $("side").addEventListener("click", (e) => { const b = e.target.closest("[data-pick]"); if (b) pick(+b.dataset.pick); });
+  $("side").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-pick]"); if (b) { pick(+b.dataset.pick); return; }
+    if (e.target.closest("#widen")) { const sc = state.school; F.reset(); state.school = sc; F.sync(); refresh(); }
+  });
   $("side").addEventListener("pointerover", (e) => {
     const li = e.target.closest("li[data-from]"); if (!li) return;
     const from = +li.dataset.from, to = +li.dataset.to;
@@ -514,17 +462,19 @@ body { background: var(--panel) var(--paper-grain); }
     const q = F.toParams(new URLSearchParams());
     q.delete("arrived");
     if (state.allSchools) q.delete("school");
+    GP.tabToParams(q);
     return q.toString().replace(/%2C/gi, ",");
   }
   function writeUrl() {
     const h = hashNow(); lastHash = h;
     try { localStorage.setItem(SAVE_KEY, h); } catch (e) {}
-    try { history.replaceState(null, "", location.pathname + location.search + (h ? "#" + h : "")); } catch (e) {}
+    GP.setHash(h);
   }
   function readUrl(firstLoad) {
     let hash = location.hash.slice(1);
     if (!hash && firstLoad) { hash = GP.readSaved("recruiting-transfers:last"); }
-    F.fromParams(new URLSearchParams(hash));
+    const q = new URLSearchParams(hash);
+    F.fromParams(q); GP.tabFromParams(q);
     state.allSchools = false; state.entry = "";
     F.sync();
   }
@@ -543,8 +493,6 @@ body { background: var(--panel) var(--paper-grain); }
   function refresh() {
     state.entry = "";   // never filter by recruit type here: everyone is a transfer
     compute(); renderSide(); drawKey(); draw(); writeUrl();
-    const s = F.summary();
-    $("filterNote").textContent = s ? `Only ${s}` : "";
     $("hint").textContent = M.sel >= 0 ? "Hover a line or campus for its numbers; click another campus to switch schools" : "Hover a campus to see its transfers; click it to pick that school";
     if (!hasCampus) { $("msg").hidden = false; $("msg").textContent = "Campus locations didn't load (school_locations.json), so the moves can't be drawn. The lists beside the map still work."; }
   }
@@ -559,8 +507,7 @@ body { background: var(--panel) var(--paper-grain); }
   // state outlines load in the background; the campuses and routes draw without them
   layout();
   try {
-    const us = await fetch("https://cdn.jsdelivr.net/npm/us-atlas@3.0.1/states-10m.json").then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); });
-    stateFeatures = topojson.feature(us, us.objects.states).features.filter((f) => f.properties.name !== "Puerto Rico");
+    stateFeatures = await GP.usStates();
     layout();
   } catch (e) {
     $("hint").textContent = "The state outlines didn't load; the campuses and moves still draw in the right places.";

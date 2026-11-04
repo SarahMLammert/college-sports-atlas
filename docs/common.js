@@ -45,21 +45,133 @@
   }
   function startPage() {
     putWords();
+    mapTabs();
     keepSportIn(document.body);
     new MutationObserver((list) => list.forEach((m) => {
       if (m.type === "attributes") keepSport(m.target); else m.addedNodes.forEach(keepSportIn);
     })).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ["href"] });
   }
-  // The Influence button opens on the school this page is showing, which every page keeps in its address
-  // (school=Alabama, or the first of compare=Alabama|Georgia on the heat maps).
-  function influenceHref(e) {
-    const a = e.target.closest && e.target.closest("#influenceLink");
-    if (!a) return;
-    const q = new URLSearchParams(location.hash.slice(1)), school = q.get("school") || (q.get("compare") || "").split("|")[0];
-    a.setAttribute("href", `school-influence.html?sport=${encodeURIComponent(sport)}${school && school !== "all" ? "#school=" + encodeURIComponent(school) : ""}`);
+  // ---------- tabs ----------
+  // The strip of maps in every page's title bar. A map opens on the school this page is showing, which every page
+  // keeps in its address (school=Alabama, or the first of compare=Alabama|Georgia on Footprints).
+  const MAPS = [
+    ["Players", [["players-dotmap", "Recruiting Map"], ["players-heatmap", "Footprints"], ["players-transfers", "Transfer Map"]]],
+    ["Coaches", [["staff-moves", "Coaching Moves"], ["staff-directory", "Staff Directory"]]],
+    ["Schools", [["school-influence", "School Influence"]]],
+  ];
+  function mapTabs() {
+    const nav = $("mapTabs"), here = location.pathname.split("/").pop().replace(".html", "");
+    if (!nav) return;
+    nav.innerHTML = MAPS.map(([group, maps]) => `<span class="grp">${group}</span>` + maps.map(([page, name]) =>
+      `<a href="${page}.html"${page === here ? ' aria-current="page"' : ""}>${name}</a>`).join("")).join("");
+    const on = nav.querySelector("[aria-current]");
+    if (on) nav.scrollLeft = on.offsetLeft - 60;      // phones: the strip scrolls, so show this page's tab
+    const carry = (e) => {
+      const a = e.target.closest && e.target.closest("a");
+      if (!a) return;
+      const q = new URLSearchParams(location.hash.slice(1)), school = q.get("school") || (q.get("compare") || "").split("|")[0];
+      const page = a.getAttribute("href").split(/[?#]/)[0], key = page === "players-heatmap.html" ? "compare" : "school";
+      a.setAttribute("href", `${page}?sport=${encodeURIComponent(sport)}${school && school !== "all" ? `#${key}=${encodeURIComponent(school)}` : ""}`);
+    };
+    nav.addEventListener("pointerdown", carry, true);
+    nav.addEventListener("click", carry, true);
+    sportPicker(nav, here);
   }
-  document.addEventListener("pointerdown", influenceHref, true);
-  document.addEventListener("click", influenceHref, true);
+  // The sport dropdown: the same map for another sport, on the same school when it has one. Built sports only.
+  function sportPicker(nav, here) {
+    const discs = (window.SPORT_DISCS || []).filter((d) => d.teams.some((t) => t.built));
+    if (!discs.length) return;
+    const SEX = { m: " (Men's)", w: " (Women's)" }, seasons = ["fall", "winter", "spring"];
+    const options = (ring) => discs.filter((d) => d.ring === ring).flatMap((d) => d.teams.filter((t) => t.built).map((t) =>
+      `<option value="${t.id}"${t.id === sport ? " selected" : ""}>${d.name}${SEX[t.sex] || (d.sub ? ` (${d.sub})` : "")}</option>`)).join("");
+    const pick = document.createElement("select");
+    pick.className = "field sportpick"; pick.id = "sportPick"; pick.setAttribute("aria-label", "Sport");
+    pick.innerHTML = seasons.map((r) => `<optgroup label="${r[0].toUpperCase() + r.slice(1)}">${options(r)}</optgroup>`).join("");
+    const home = nav.parentElement.querySelector('a[href^="index.html"]');
+    if (home) home.after(pick); else nav.parentElement.prepend(pick);
+    pick.addEventListener("change", () => {
+      const q = new URLSearchParams(location.hash.slice(1)), school = q.get("school") || (q.get("compare") || "").split("|")[0];
+      const key = here === "players-heatmap" ? "compare" : "school";
+      location.href = `${here}.html?sport=${encodeURIComponent(pick.value)}${school && school !== "all" ? `#${key}=${encodeURIComponent(school)}` : ""}`;
+    });
+  }
+  // The active filters as chips under the title or above the map; a chip's × clears that filter.
+  // items: [[label, clear], ...]
+  function showChips(el, items) {
+    if (!el) return;
+    el._clear = items.map((x) => x[1]);
+    el.innerHTML = items.map(([label], i) => `<button type="button" class="fchip" data-i="${i}" aria-label="Clear filter: ${esc(label)}">${esc(label)}<span aria-hidden="true">×</span></button>`).join("");
+    el.hidden = !items.length;
+    if (!el._wired) {
+      el._wired = true;
+      el.addEventListener("click", (e) => { const b = e.target.closest("[data-i]"); if (b) el._clear[+b.dataset.i](); });
+    }
+  }
+  const tabCount = (label, n) => `${label} <span class="ct">${fmt(n)}</span>`;
+  // The dropdown under a page's Filters button: hangs off the button, pointer aimed back at it, closes on any click elsewhere.
+  function dropdown(onOpen) {
+    const panel = $("filters"), btn = $("filtersBtn");
+    function place() {
+      const b = btn.getBoundingClientRect();
+      panel.style.right = "";
+      const edge = 12, r0 = panel.getBoundingClientRect();
+      if (r0.left < edge) panel.style.right = (r0.left - edge) + "px";   // nudge it back on screen
+      const r = panel.getBoundingClientRect();
+      panel.style.setProperty("--caret-x", Math.round(b.left + b.width / 2 - r.left) + "px");
+      panel.style.setProperty("--pop-top", Math.round(b.bottom + 12) + "px");
+    }
+    function setOpen(open) {
+      panel.hidden = !open; btn.setAttribute("aria-expanded", open);
+      if (open) { place(); onOpen && onOpen(); }
+    }
+    const isOpen = () => !panel.hidden;
+    btn.addEventListener("click", () => setOpen(!isOpen()));
+    panel.querySelectorAll('[data-closepanel="filters"]').forEach((b) => b.addEventListener("click", () => setOpen(false)));
+    addEventListener("resize", () => { if (isOpen()) place(); });
+    document.addEventListener("pointerdown", (e) => { if (isOpen() && !e.target.closest(".fwrap")) setOpen(false); });
+    return { setOpen, isOpen };
+  }
+  // Tabs inside a page. A page has one set; the open tab is kept here, so a list redrawn with new numbers stays on it,
+  // and in the address (tab=), like the rest of a view. A set is [[key, label, html], ...]; a tab with no html is left out.
+  let tabKey = "";
+  function tabsHTML(tabs, label) {
+    tabs = tabs.filter((t) => t[2]);
+    const on = tabs.some((t) => t[0] === tabKey) ? tabKey : tabs[0][0];
+    return `<div class="tabset"><div class="tabs" role="tablist" aria-label="${label}">${tabs.map(([k, name]) =>
+      `<button type="button" role="tab" data-tab="${k}" aria-selected="${k === on}"${k === on ? "" : ' tabindex="-1"'}>${name}</button>`).join("")}</div>
+      ${tabs.map(([k, , html]) => `<div class="tabpanel" role="tabpanel" data-tab="${k}"${k === on ? "" : " hidden"}>${html}</div>`).join("")}</div>`;
+  }
+  function openTab(btn) {
+    const set = btn.closest(".tabset"), k = btn.dataset.tab;
+    set.querySelectorAll(":scope > .tabs [role=tab]").forEach((b) => {
+      b.setAttribute("aria-selected", b === btn);
+      if (b === btn) b.removeAttribute("tabindex"); else b.tabIndex = -1;
+    });
+    set.querySelectorAll(":scope > .tabpanel").forEach((p) => { p.hidden = p.dataset.tab !== k; });
+    tabKey = k;
+    document.dispatchEvent(new CustomEvent("gp-tab", { detail: k }));
+  }
+  function tabToParams(q) {         // the first tab is the default, so it stays out of the address
+    const first = document.querySelector("[role=tab]");
+    if (tabKey && first && tabKey !== first.dataset.tab) q.set("tab", tabKey);
+  }
+  function tabFromParams(q) { tabKey = q.get("tab") || ""; }
+  function showTab(k) { const b = document.querySelector(`[role=tab][data-tab="${k}"]`); if (b) openTab(b); }
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest && e.target.closest("[role=tab]");
+    if (!b) return;
+    openTab(b);
+    const q = new URLSearchParams(location.hash.slice(1));
+    q.delete("tab"); tabToParams(q);
+    setHash(q.toString());
+  });
+  document.addEventListener("keydown", (e) => {       // arrow keys move along the tabs
+    const b = e.target.closest && e.target.closest("[role=tab]"), step = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
+    if (!b || !step) return;
+    const all = [...b.parentElement.children], next = all[(all.indexOf(b) + step + all.length) % all.length];
+    next.focus(); next.click();
+    e.preventDefault();
+  });
   if (document.body) startPage(); else document.addEventListener("DOMContentLoaded", startPage);
   // Each sport's map_data.json says how it writes its positions and divisions (from config/<sport>.json):
   //   data.posLabels  position group -> chip text ("FO" -> "Faceoff")
@@ -370,6 +482,16 @@
       const n = activeCount();
       $("fcount").hidden = !n; $("fcount").textContent = n;
       $("filtersBtn").setAttribute("aria-label", n ? `Filters, ${n} active` : "Filters");
+      showChips($("fchips"), activeChips());
+    }
+    function activeChips() {
+      const clear = (fn) => () => { fn(); sync(); changed(); }, out = [], dots = $("fchips");
+      if (hasSchool && state.school >= 0 && !(dots && "noschool" in dots.dataset)) out.push([data.schools[state.school][0], clear(() => { state.school = -1; })]);
+      if (state.groups.size) out.push([confText(), clear(() => { state.groups.clear(); })]);
+      if (state.from !== data.FIRST || state.to !== data.LAST) out.push([`${data.seasonLabel(state.from)} to ${data.seasonLabel(state.to)}`, clear(() => { state.from = data.FIRST; state.to = data.LAST; })]);
+      if (state.entry !== "") out.push([state.entry === "1" ? "Transfers" : "High school recruits", clear(() => { state.entry = ""; })]);
+      if (state.pos.size !== data.pos.length) out.push([`${state.pos.size} of ${data.pos.length} positions`, clear(() => { state.pos = allPos(); })]);
+      return out;
     }
     // skipSchool: ignore the school filter (rankings); skipConf: ignore the conference filter too
     function passes(k, skipSchool, skipConf) {
@@ -437,26 +559,7 @@
       if (v("pos")) { const s = new Set(v("pos").split(",").map((p) => data.pos.indexOf(p.trim().toUpperCase())).filter((i) => i >= 0)); if (s.size) state.pos = s; }
     }
 
-    // the dropdown itself: hangs off its button, pointer aimed back at it, closes on any click elsewhere
-    const panel = $("filters"), btn = $("filtersBtn");
-    function place() {
-      const b = btn.getBoundingClientRect();
-      panel.style.right = "";
-      const edge = 12, r0 = panel.getBoundingClientRect();
-      if (r0.left < edge) panel.style.right = (r0.left - edge) + "px";   // nudge it back on screen
-      const r = panel.getBoundingClientRect();
-      panel.style.setProperty("--caret-x", Math.round(b.left + b.width / 2 - r.left) + "px");
-      panel.style.setProperty("--pop-top", Math.round(b.bottom + 12) + "px");
-    }
-    function setOpen(open) {
-      panel.hidden = !open; btn.setAttribute("aria-expanded", open);
-      if (open) { place(); onOpen && onOpen(); }
-    }
-    const isOpen = () => !panel.hidden;
-    btn.addEventListener("click", () => setOpen(!isOpen()));
-    panel.querySelectorAll('[data-closepanel="filters"]').forEach((b) => b.addEventListener("click", () => setOpen(false)));
-    addEventListener("resize", () => { if (isOpen()) place(); });
-    document.addEventListener("pointerdown", (e) => { if (isOpen() && !e.target.closest(".fwrap")) setOpen(false); });
+    const { setOpen, isOpen } = dropdown(onOpen);
 
     // true when every school the filters let through is a D1 school (the dot map then needn't load the rest)
     function onlyD1() {
@@ -547,5 +650,28 @@
     return `${a}-${String((a + 1) % 100).padStart(2, "0")}`;
   }
   function seasonSpan(a, b, spring) { return a === b ? seasonLabel(a, spring) : `${seasonLabel(a, spring)} to ${seasonLabel(b, spring)}`; }
-  window.GP = { $, sport, dataUrl, he: pronoun.he, his: pronoun.his, him: pronoun.him, saveKey, readSaved, POS_LABEL, STATE_ABBR, ABBR_STATE, fmt, pct, esc, css, narrow, loadData, unpackStints, springOf, seasonLabel, seasonSpan, makePalette, makeFilters, copyLink, trackBar, miles, median };
+  // ---------- small things every map page needs ----------
+  const plural = (n, w) => `${fmt(n)} ${w}${n === 1 ? "" : "s"}`;
+  const US_FIT = { type: "MultiPoint", coordinates: [[-124.7, 48.4], [-67, 47.4], [-80.1, 25.1], [-117.1, 32.5], [-97.2, 25.9], [-160, 21], [-150, 61]] };
+  // The states' outlines. The route maps leave Puerto Rico out; the heat maps keep it.
+  async function usStates(withPuertoRico) {
+    const r = await fetch("https://cdn.jsdelivr.net/npm/us-atlas@3.0.1/states-10m.json");
+    if (!r.ok) throw new Error(r.status);
+    const us = await r.json(), all = topojson.feature(us, us.objects.states).features;
+    return withPuertoRico ? all : all.filter((f) => f.properties.name !== "Puerto Rico");
+  }
+  // A route's curve between two points on a map: a quadratic curve bending to one side.
+  function curve(a, b) {
+    const dx = b[0] - a[0], dy = b[1] - a[1], len = Math.hypot(dx, dy) || 1, bend = Math.min(.22 * len, 90);
+    return { a, b, c: [(a[0] + b[0]) / 2 + dy / len * bend, (a[1] + b[1]) / 2 - dx / len * bend] };
+  }
+  function loadFailed(what) {
+    $("loading").classList.add("failed");
+    $("loading").textContent = `${what} didn't load. If you opened this file directly, serve the folder instead (python -m http.server), or reload to try again.`;
+  }
+  // Put the view in the address without adding a history step (sandboxed previews can refuse).
+  function setHash(h) {
+    try { history.replaceState(null, "", location.pathname + location.search + (h ? "#" + h : "")); } catch (e) { /* stays as it was */ }
+  }
+  window.GP = { showChips, tabCount, dropdown, tabsHTML, tabToParams, tabFromParams, showTab, plural, US_FIT, usStates, curve, loadFailed, setHash, $, sport, dataUrl, he: pronoun.he, his: pronoun.his, him: pronoun.him, saveKey, readSaved, POS_LABEL, STATE_ABBR, ABBR_STATE, fmt, pct, esc, css, narrow, loadData, unpackStints, springOf, seasonLabel, seasonSpan, makePalette, makeFilters, copyLink, trackBar, miles, median };
 })();

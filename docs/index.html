@@ -3,7 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Recruiting Maps</title>
+<title>College Sports Atlas</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Barlow:wght@400;500;600&display=swap">
@@ -25,10 +28,6 @@
     --accent: #A8461C;                 /* recruiting: terracotta */
     --glow: rgba(168, 70, 28, 0.24);
   }
-  body[data-mode="learn"] {
-    --accent: #23606B;                 /* learn: deep sea */
-    --glow: rgba(35, 96, 107, 0.24);
-  }
   * { box-sizing: border-box; }
   html, body { margin: 0; color: var(--ink); font-family: 'Barlow', system-ui, sans-serif; }
   html {
@@ -49,32 +48,23 @@
   .cond { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; }
   .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-  /* ---------- Mode switch (center of the globe, top of the phone list) ---------- */
-  .switch { display: inline-flex; padding: 3px; gap: 3px; border-radius: 999px; border: 1px solid var(--line); background: var(--panel); }
-  .switch button {
-    min-height: 46px; padding: 0 22px; border: 0; border-radius: 999px; background: none; color: var(--muted); cursor: pointer;
-    font: 700 18px/1 'Cormorant Garamond', Georgia, serif; text-transform: uppercase; letter-spacing: 0.14em;
-    transition: background 0.2s, color 0.2s;
-  }
-  .switch button:hover { color: var(--ink); }
-  .switch button[aria-pressed="true"] { background: var(--accent); color: var(--paper-hi); }
-
   /* ---------- Ring (desktop / tablet) ---------- */
   #ring-view { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 28px 16px 16px; }
   #stage { position: relative; }
-  #ring { position: absolute; left: 0; top: 0; width: 1200px; height: 980px; transform-origin: 0 0; }
+  #ring { position: absolute; left: 0; top: 0; width: 1180px; height: 1020px; transform-origin: 0 0; }
   #ring > svg.scale { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; }
   .scale .orbit { fill: none; stroke: var(--line); stroke-width: 1.5; stroke-dasharray: 2 7; stroke-linecap: round; }
   .scale .rule { fill: none; stroke: var(--line); stroke-width: 1; }
   .scale .tick { stroke: var(--muted); stroke-width: 1; opacity: 0.6; }
   .scale .tick.major { stroke-width: 1.6; opacity: 0.9; }
+  .scale .season { font: 700 16px/1 'Cormorant Garamond', Georgia, serif; letter-spacing: 0.24em; text-transform: uppercase; fill: var(--muted); text-anchor: middle; dominant-baseline: central; paint-order: stroke; stroke: var(--paper); stroke-width: 8px; }
 
   /* The globe */
   .center {
-    position: absolute; left: 400px; top: 290px; width: 400px; height: 400px; border-radius: 50%;
+    position: absolute; left: 430px; top: 350px; width: 320px; height: 320px; border-radius: 50%;
     background: radial-gradient(circle at 36% 30%, var(--sea-hi) 0%, var(--sea) 52%, var(--sea-lo) 100%);
     box-shadow: 0 0 0 1.5px var(--ink), 0 0 0 6px var(--paper), 0 0 0 7px var(--line), 0 18px 50px -24px rgba(58, 46, 34, 0.55), 0 0 60px -10px var(--glow);
-    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 26px; gap: 12px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 22px; gap: 8px;
     overflow: hidden; transition: box-shadow 0.3s;
   }
   .center > :not(.earth):not(.shade) { position: relative; }
@@ -98,21 +88,23 @@
   .center .title { font-size: 58px; line-height: 0.95; margin: 0; letter-spacing: 0.08em; white-space: nowrap; align-self: stretch; }
   .center .title span, .list-head .title span { color: var(--accent); font-style: italic; text-transform: none; letter-spacing: 0.02em; font-size: 1.12em; transition: color 0.2s; }
   .hint { margin: 0 0 14px; font-size: 21px; line-height: 1.35; color: var(--dim); max-width: 320px; }
-  .center .hint { color: var(--ink); font-weight: 500; }
+  .center .kicker { font-size: 12px; }
+  .center .hint { color: var(--ink); font-weight: 500; font-size: 17px; line-height: 1.25; margin-bottom: 6px; max-width: 250px; min-height: 42px; }
+  .center .hint.stat { color: var(--accent); font-weight: 600; font-size: 15px; line-height: 1.25; }
 
   /* Sport discs: dashed when the sport has nothing on this side yet */
   .disc, .badge { border-radius: 50%; border: 1.5px dashed rgba(58, 46, 34, 0.42); background: var(--paper-hi); color: var(--muted); display: flex; align-items: center; justify-content: center; }
   .disc.live, .live > .pick > .badge { border-style: solid; border-color: var(--ink); background: var(--panel); color: var(--ink); box-shadow: inset 0 0 0 4px var(--paper-hi), inset 0 0 0 5px var(--edge); }
-  .disc { position: absolute; left: 0; top: 0; width: 84px; height: 84px; padding: 0; cursor: pointer; font: inherit; transition: transform 0.18s ease, opacity 0.18s, box-shadow 0.18s, border-color 0.18s, background 0.18s, color 0.18s; }
+  .disc { position: absolute; left: 0; top: 0; width: 64px; height: 64px; padding: 0; cursor: pointer; font: inherit; transition: transform 0.18s ease, opacity 0.18s, box-shadow 0.18s, border-color 0.18s, background 0.18s, color 0.18s; }
 
   /* Lighting: the lit sport glows, the rest fade */
   .disc.lit { transform: scale(1.14); border-color: var(--accent); color: var(--accent); box-shadow: 0 0 0 6px var(--glow), 0 0 30px var(--glow); }
   .disc.live.lit { background: var(--accent); color: var(--paper-hi); box-shadow: inset 0 0 0 4px var(--accent), inset 0 0 0 5px rgba(247, 240, 223, 0.5), 0 0 0 6px var(--glow), 0 0 30px var(--glow); }
-  #ring.has-lit .disc:not(.lit), #ring.has-lit .label:not(.lit) { opacity: 0.4; }
+  /* The others fade, but only their icon and outline: a disc stays solid, so the rings pass behind it */
+  #ring.has-lit .label:not(.lit), #ring.has-lit .disc:not(.lit) > svg { opacity: 0.4; }
+  #ring.has-lit .disc:not(.lit) { border-color: rgba(58, 46, 34, 0.22); box-shadow: none; }
+  .disc > svg { transition: opacity 0.18s; }
 
-  /* A switch of sides pulses the sports that have pages there */
-  @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 transparent; } 40% { box-shadow: 0 0 0 9px var(--glow), 0 0 26px var(--glow); border-color: var(--accent); } }
-  .disc.pulse { animation: pulse 0.7s ease-out both; }
 
   /* The lit sport's page buttons fade in beside it */
   .sat {
@@ -124,9 +116,14 @@
   .sat.lit { opacity: 1; visibility: visible; transform: none; transition: opacity 0.16s, transform 0.16s, visibility 0s; }
   a.sat.lit:hover { transform: scale(1.12); background: var(--accent); color: var(--paper-hi); }
   .sat.off { border: 1.5px dashed rgba(58, 46, 34, 0.42); color: var(--muted); }
-  body[data-mode="recruiting"] .sat[data-kind="learn"],
-  body[data-mode="learn"] .sat[data-kind="players"],
-  body[data-mode="learn"] .sat[data-kind="staff"] { display: none; }
+  /* Each button's name, above or below it, so the names stay close to the disc and clear of the globe's title */
+  .sat .tag { position: absolute; left: 50%; translate: -50% 0; padding: 2px 9px 3px; border-radius: 999px; background: var(--paper-hi); box-shadow: 0 0 0 1px var(--line);
+    font-size: 15px; font-weight: 600; line-height: 1.2; white-space: nowrap; color: var(--accent); pointer-events: none; }
+  .sat.men .tag { color: var(--men); translate: -70% 0; }      /* the two teams' names lean apart */
+  .sat.women .tag { color: var(--women); translate: -30% 0; }
+  .sat.off .tag { color: var(--muted); }
+  .sat.side-t .tag { bottom: calc(100% + 6px); }
+  .sat.side-b .tag { top: calc(100% + 11px); }
   /* A sport with both teams: two smaller circles a side, blue for men's and pink for women's, each with the
      man or woman figure on its edge */
   :root { --men: #2F64A3; --women: #C2477F; }
@@ -136,7 +133,9 @@
     pointer-events: none; opacity: 0; transform: scale(0.6); transition: opacity 0.16s, transform 0.16s; }
   .mini.lit { opacity: 0.55; transform: none; }
   .sum .tl { display: block; font-size: 16px; }
-  .label .sum .tl { white-space: nowrap; }
+  .center .hint .tl { display: block; font-size: 14px; white-space: nowrap; }
+  .center .hint .tl.men { color: var(--men); }
+  .center .hint .tl.women { color: var(--women); }
   .sum .tl.men { color: var(--men); }
   .sum .tl.women { color: var(--women); }
   .sat.men { border-color: var(--men); color: var(--men); }
@@ -158,19 +157,50 @@
   .team.women .btn:not(.off) { border-color: var(--women); }
   .team.women .btn:not(.ghost):not(.off) { background: var(--women); }
   .team.women .btn.ghost { color: var(--women); }
-  .disc:focus-visible, .sat:focus-visible, .btn:focus-visible, .pick:focus-visible, .switch button:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+  .disc:focus-visible, .sat:focus-visible, .btn:focus-visible, .pick:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 
-  /* Names sit outside the ring like place names on a map; the summary appears when the sport is lit */
-  .label { position: absolute; left: 0; top: 0; width: 240px; display: flex; flex-direction: column; align-items: center; text-align: center; pointer-events: none; gap: 1px; transition: opacity 0.18s; }
-  .label .n { font-size: 27px; line-height: 1.05; color: var(--dim); letter-spacing: 0.1em; }
+  /* Each sport's name sits under its disc; a lit sport's drops below its small ring of buttons */
+  .label { position: absolute; left: 0; top: 0; width: 170px; display: flex; flex-direction: column; align-items: center; text-align: center; pointer-events: none; gap: 1px; transition: opacity 0.18s; }
+  .label .n { font-size: 17px; line-height: 1.1; color: var(--dim); letter-spacing: 0.08em; white-space: nowrap; }
+  .label.lit { z-index: 6; }
+  .label.lit .n { font-size: 22px; padding: 1px 10px 2px; border-radius: 999px; background: var(--paper); }
+  .sat, .mini { z-index: 5; }
   .label.live .n, .label.lit .n { color: var(--ink); }
   .label .s { font: italic 600 21px/1.2 'Cormorant Garamond', Georgia, serif; color: var(--muted); min-height: 24px; }
   .label .s:empty { display: none; }   /* no Men's/Women's line (Football, Baseball, Softball): no blank gap */
-  .label .sum { font-size: 17px; font-weight: 600; line-height: 1.25; color: var(--accent); opacity: 0; transform: translateY(-3px); transition: opacity 0.18s, transform 0.18s; }
-  .label.lit .sum { opacity: 1; transform: none; }
 
   .legend { display: flex; gap: 28px; align-items: center; font-size: 14px; color: var(--muted); min-height: 20px; }
   .legend span { display: inline-flex; align-items: center; gap: 8px; }
+
+  /* A clicked sport's maps, in the globe */
+  .center.menu .kicker, .center.menu .title, .center.menu .hint { display: none; }
+  .gmaps { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%; }
+  .gmaps[hidden] { display: none; }
+  .gname { font-size: 25px; letter-spacing: 0.08em; line-height: 1; color: var(--ink); }
+  .gcols { display: flex; gap: 8px; justify-content: center; }
+  .gcol { display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 16px; }
+  .gcols.one .gcol { display: grid; grid-template-columns: auto auto; gap: 3px 14px; justify-items: center; }
+  .gcol b { font-size: 14px; font-weight: 700; color: inherit; }
+  .gcol.men { color: var(--men); }
+  .gcol.women { color: var(--women); }
+  .gcol a { font-weight: 600; color: var(--ink); text-decoration: none; white-space: nowrap; border-radius: 4px; padding: 0 5px; background: rgba(247, 240, 223, 0.72); }
+  .gcol a:hover { background: var(--accent); color: var(--paper-hi); }
+  .gcol .soon { font-style: italic; color: var(--muted); }
+
+  /* Find a school */
+  .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .finder { position: absolute; z-index: 20; top: 28px; left: 32px; width: 270px; }
+  #findSchool { width: 100%; height: 42px; padding: 0 16px; border: 1px solid var(--line); border-radius: 21px; background: var(--panel); color: var(--ink); font: inherit; font-size: 15px; }
+  #findSchool:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .fresults { margin-top: 6px; max-height: min(66vh, 560px); overflow: auto; padding: 8px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); box-shadow: 0 12px 30px -14px rgba(58, 46, 34, 0.5); }
+  .fhit { padding: 7px 0; border-top: 1px solid var(--edge); }
+  .fhit:first-child { border-top: 0; }
+  .fname { font-weight: 600; font-size: 15px; color: var(--ink); }
+  .fsports { display: flex; flex-wrap: wrap; gap: 3px 9px; margin-top: 3px; }
+  .fsports a { font-size: 13px; color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+  .fsports a.men { color: var(--men); }
+  .fsports a.women { color: var(--women); }
+  .fnone { margin: 2px 0; font-size: 14px; color: var(--muted); }
 
   /* ---------- List (phones) ---------- */
   #list-view { display: none; flex: 1; flex-direction: column; gap: 14px; padding: 28px 22px 24px; width: 100%; max-width: 520px; margin: 0 auto; }
@@ -178,6 +208,7 @@
   .list-head .title { font-size: 42px; line-height: 1; margin: 0; }
   .list-head .hint { margin: 0 0 4px; max-width: 320px; color: var(--muted); font-size: 18px; }
   .rows { display: flex; flex-direction: column; gap: 8px; }
+  .season-head { margin: 10px 0 0; font: 700 15px/1.2 'Cormorant Garamond', Georgia, serif; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
   .row { display: flex; flex-direction: column; border-radius: 12px; border: 1px solid var(--line); background: rgba(249, 243, 228, 0.6); transition: border-color 0.18s, box-shadow 0.18s, opacity 0.18s; }
   .rows.has-lit .row:not(.lit) { opacity: 0.55; }
   .row.lit { border-color: var(--accent); box-shadow: 0 0 0 3px var(--glow); }
@@ -199,6 +230,7 @@
   a.btn:hover { filter: brightness(1.08); }
 
   @media (max-width: 700px) {
+    .finder { position: relative; top: auto; left: auto; width: auto; margin: 22px 22px -14px; max-width: 476px; }
     #ring-view { display: none; }
     #list-view { display: flex; }
   }
@@ -220,30 +252,34 @@
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
 </head>
-<body data-mode="recruiting">
+<body>
 <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
 <script src="sports.js"></script>
 
+<div class="finder" id="finder" role="search">
+  <label class="vh" for="findSchool">Find a school in every sport</label>
+  <input id="findSchool" type="search" placeholder="Find a school" autocomplete="off" spellcheck="false">
+  <div class="fresults" id="findResults" hidden></div>
+</div>
+
 <main id="ring-view">
   <div id="stage">
     <div id="ring">
-      <svg class="scale" width="1200" height="980" aria-hidden="true">
+      <svg class="scale" width="1180" height="1020" aria-hidden="true">
         <g id="dial"></g>
         <g id="axis"></g>
+        <g id="seasons"></g>
       </svg>
       <div class="center">
         <svg class="earth" viewBox="0 0 400 400" aria-hidden="true">
           <path class="grat"/><path class="land"/><path class="eq"/>
         </svg>
         <div class="shade" aria-hidden="true"></div>
-        <div class="kicker">College sports</div>
+        <div class="kicker">College</div>
         <h1 class="title cond" data-role="title"></h1>
         <p class="hint" data-role="hint"></p>
-        <div class="switch" role="group" aria-label="Which side of the site">
-          <button type="button" data-mode="recruiting">Recruiting</button>
-          <button type="button" data-mode="learn">Learn</button>
-        </div>
+        <div class="gmaps" id="globeMaps" hidden></div>
       </div>
     </div>
   </div>
@@ -252,13 +288,9 @@
 
 <main id="list-view">
   <div class="list-head">
-    <div class="kicker">College sports</div>
+    <div class="kicker">College</div>
     <h1 class="title cond" data-role="title"></h1>
     <p class="hint" data-role="hint"></p>
-    <div class="switch" role="group" aria-label="Which side of the site">
-      <button type="button" data-mode="recruiting">Recruiting</button>
-      <button type="button" data-mode="learn">Learn</button>
-    </div>
   </div>
   <div class="rows" id="rows"></div>
 </main>
@@ -270,22 +302,18 @@
 <script>
   // ---- The sports: one disc per sport, from docs/sports.js (SPORT_DISCS) ----
   // build.py pages writes that list from the "site" part of each config/<sport>/settings.json, so a new sport
-  // appears here once it is built; nothing is typed into this page. Each disc has
-  //   id, name, icon; sub (a line under a one-team disc's name: Volleyball: Women's); learn (its learn page, or
-  //   null for "coming soon") and learnSum; teams: each with
+  // appears here once it is set up; nothing is typed into this page. Each disc has
+  //   id, name, icon; ring (fall, winter or spring); sub (a line under a one-team disc's name); teams: each with
   //     id    the sport's folder name (lacrosse-mens), which is also its ?sport= on the map pages
   //     sex   'm' or 'w' when the disc has both teams (two smaller circles each for players and coaches,
   //           blue for men's and pink for women's); '' for a disc with one team
   //     stats the summary's fallback numbers, for when summary.json can't load
-  const TEAM = (id, sex, stats) => ({ id, sex, stats,
-    players: `players-dotmap.html?sport=${id}`, staff: `staff-moves.html?sport=${id}` });
-  const SPORTS = (window.SPORT_DISCS || []).map((s) => ({ ...s, teams: s.teams.map((t) => TEAM(t.id, t.sex, t.stats)) }));
+  //     built whether it has pages yet; set up but not built yet, it shows as "coming soon"
+  const TEAM = (t) => ({ ...t, players: t.built ? `players-dotmap.html?sport=${t.id}` : '', staff: t.built ? `staff-moves.html?sport=${t.id}` : '' });
+  const SPORTS = (window.SPORT_DISCS || []).map((s) => ({ ...s, teams: s.teams.map(TEAM) }));
   const SEX = { m: { word: "Men's", cls: 'men' }, w: { word: "Women's", cls: 'women' } };
 
-  const MODES = {
-    recruiting: { title: 'Recruiting<br><span>maps</span>', hint: 'Hover or tap a sport.', doc: 'Recruiting Maps' },
-    learn:      { title: 'Learn the<br><span>game</span>',   hint: 'Positions, plays and systems, drawn out. Hover or tap a sport.', doc: 'Learn the Game' },
-  };
+  const PAGE = { title: 'Sports<br><span>atlas</span>', hint: 'Hover a sport, or click it for all its maps.', doc: 'College Sports Atlas' };
 
   // ---- Icons (40×40 for sports, 24×24 for the page buttons) ----
   const SPORT_ICONS = {
@@ -296,6 +324,15 @@
     softball: '<circle cx="20" cy="20" r="16"/><path d="M11 7C17 13 17 27 11 33"/><path d="M29 7C23 13 23 27 29 33"/>',
     volleyball: '<circle cx="20" cy="20" r="16"/><path d="M20 20C20 12 24 7 30 6.5"/><path d="M20 20C13 24 10 29 10.5 33"/><path d="M20 20C27 24 33 23 36 19"/>',
     lacrosse: '<path d="M6 35L22.5 18.5"/><path d="M22.5 18.5C19.5 13 21.5 5.5 28.5 4.5C35 3.5 38.5 10 35.5 15.5C33.3 19.5 27.5 21 22.5 18.5Z"/><path d="M25 8.5L33.5 16.5M24 13L30.5 19M29 6L35.5 12.5M27 9.5L23 15.5M31.5 8.5L25.5 18.5M35 10L29.5 19"/><circle cx="12" cy="17" r="3.2"/>',
+    wrestling: '<circle cx="20" cy="20" r="16"/><circle cx="20" cy="20" r="6"/><path d="M15 20h3.5M21.5 20H25"/>',
+    'field-hockey': '<path d="M27 4.5L14.5 29c-1.7 3.3-6 3.5-7.6.9-1-1.7-.2-3.7 1.8-4.2"/><circle cx="28" cy="31" r="3.6"/>',
+    'water-polo': '<circle cx="20" cy="14.5" r="10.5"/><path d="M12.6 7.1C17 11 17 18 12.6 21.9M27.4 7.1C23 11 23 18 27.4 21.9"/><path d="M3.5 31c3-3.2 6.2-3.2 9.2 0s6.2 3.2 9.2 0 6.2-3.2 9.2 0 3 2 5.400.8"/>',
+    rowing: '<path d="M9.5 8.5L33 35M30.5 8.5L7 35"/><path d="M5 2.8L12.5 4.5 11.5 10.5 6.5 9Z"/><path d="M35 2.8L27.5 4.5 28.5 10.5 33.5 9Z"/>',
+    tennis: '<ellipse cx="16" cy="14.5" rx="10" ry="11.5" transform="rotate(-35 16 14.5)"/><path d="M9.5 9.5L22.5 19.5M12.5 6.5L25.5 16.5M7.5 14L19.5 23.5M16 4.8L8 21M22 7.5L13.5 24.5"/><path d="M23 23.5L33.5 35.5"/><circle cx="32.5" cy="12" r="3"/>',
+    golf: '<path d="M16 33V5.5L31 11.5 16 17.5"/><ellipse cx="17" cy="33.5" rx="12.5" ry="2.8"/><circle cx="31" cy="27.5" r="2.6"/>',
+    'cross-country': '<path d="M3 33L14 14.5l6.5 9.5 5.5-7.5L37 33Z"/><path d="M14 14.5l3.5 7-3.5-1.5-3 2.5"/><circle cx="30" cy="8.5" r="3.2"/>',
+    track: '<path d="M6.5 14h27M6.5 20.5h27M9.5 14v22M30.5 14v22M5.5 36h8M26.5 36h8"/>',
+    swimming: '<circle cx="28" cy="13" r="4.2"/><path d="M5 22.5L15.5 11.5l9.5 7.5"/><path d="M3.5 28c3-3 6-3 9 0s6.2 3 9.2 0 6-3 9 0 3.300 2 5.300 1M3.5 34.5c3-3 6-3 9 0s6.2 3 9.2 0 6-3 9 0 3.300 2 5.300 1"/>',
     soccer: '<circle cx="20" cy="20" r="16"/><g stroke-width="1.5"><path d="M20.00 14.60L25.14 18.33L23.17 24.37L16.83 24.37L14.86 18.33Z" fill="currentColor"/><path d="M20.00 14.60L20.00 9.00"/><path d="M20.00 9.00L16.90 6.55L15.32 4.70A16 16 0 0 1 24.68 4.70L23.10 6.55Z" fill="currentColor"/><path d="M23.10 6.55L27.76 6.01M31.83 12.89L30.91 8.30"/><path d="M25.14 18.33L30.46 16.60"/><path d="M30.46 16.60L31.83 12.89L33.11 10.82A16 16 0 0 1 36.00 19.72L33.75 18.80Z" fill="currentColor"/><path d="M33.75 18.80L35.71 23.05M30.41 29.05L34.50 26.76"/><path d="M23.17 24.37L26.47 28.90"/><path d="M26.47 28.90L30.41 29.05L32.78 29.63A16 16 0 0 1 25.21 35.13L25.39 32.70Z" fill="currentColor"/><path d="M25.39 32.70L21.95 35.88M14.61 32.70L18.05 35.88"/><path d="M16.83 24.37L13.53 28.90"/><path d="M13.53 28.90L14.61 32.70L14.79 35.13A16 16 0 0 1 7.22 29.63L9.59 29.05Z" fill="currentColor"/><path d="M9.59 29.05L5.50 26.76M6.25 18.80L4.29 23.05"/><path d="M14.86 18.33L9.54 16.60"/><path d="M9.54 16.60L6.25 18.80L4.00 19.72A16 16 0 0 1 6.89 10.82L8.17 12.89Z" fill="currentColor"/><path d="M8.17 12.89L9.09 8.30M16.90 6.55L12.24 6.01"/></g>',
   };
   const JERSEY = '<path d="M8 3L4 5.5L2.5 10L5.5 11L6 9.5V21H18V9.5L18.5 11L21.5 10L20 5.5L16 3C15.3 4.6 13.8 5.5 12 5.5C10.2 5.5 8.7 4.6 8 3Z"/>';
@@ -303,12 +340,10 @@
   // The universal man and woman figures, for the small badge on a team's circles
   const MAN = '<circle cx="12" cy="4.2" r="2.6"/><path d="M8.6 8.4h6.8c.9 0 1.6.7 1.6 1.6v5.4h-2.2V22h-2v-6h-1.6v6h-2v-6.6H7V10c0-.9.7-1.6 1.6-1.6Z"/>';
   const WOMAN = '<circle cx="12" cy="4.2" r="2.6"/><path d="M10 8.4h4c.8 0 1.4.5 1.6 1.2l2.2 7.4h-3.1V22h-2v-5h-1.4v5h-2v-5H6.2l2.2-7.4c.2-.7.8-1.2 1.6-1.2Z"/>';
-  const BOARD = '<rect x="4.5" y="4" width="15" height="17.5" rx="2"/><path d="M9 4V2.8h6V4"/><path d="M8 10l3 3M11 10l-3 3"/><circle cx="15.2" cy="16.4" r="1.7"/>';   // clipboard with an X and an O
 
   const KINDS = {
-    players: { icon: JERSEY,  what: 'players',            label: 'Players',            short: 'Players · soon' },
-    staff:   { icon: WHISTLE, what: 'coaches and staff',  label: 'Coaches &amp; staff', short: 'Staff · soon' },
-    learn:   { icon: BOARD,   what: 'learn the game',     label: 'Learn the game',      short: 'Learn · soon' },
+    players: { icon: JERSEY,  what: 'players',            label: 'Players',            short: 'Players · soon',  tag: 'players' },
+    staff:   { icon: WHISTLE, what: 'coaches and staff',  label: 'Coaches &amp; staff', short: 'Staff · soon',  tag: 'coaches' },
   };
 
   function sportSvg(name, size) {
@@ -318,12 +353,14 @@
     return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg>`;
   }
 
-  // ---- State: which side we're on, which sport is lit, which one a click pinned ----
-  let mode = location.hash === '#learn' ? 'learn' : 'recruiting';
+  const MAP_LINKS = [['players-dotmap', 'Recruiting Map'], ['players-heatmap', 'Footprints'], ['players-transfers', 'Transfer Map'],
+    ['staff-moves', 'Coaching Moves'], ['staff-directory', 'Staff Directory'], ['school-influence', 'School Influence']];
+
+  // ---- State: which sport is lit, which one a click pinned ----
   // The numbers come from each team's summary.json, written by build.py map with its map data (Oct 28);
   // the stats typed in above are only a fallback for when it can't load.
   const short = (n) => n >= 10000 ? `${Math.round(n / 1000)}K` : n.toLocaleString('en-US');
-  SPORTS.forEach((s) => s.teams.forEach((t) => {
+  SPORTS.forEach((s) => s.teams.filter((t) => t.built).forEach((t) => {
     fetch(`${t.id}/summary.json`).then((r) => r.ok ? r.json() : null).then((j) => {
       if (j && j.players && j.schools) { t.stats = [[j.schools.toLocaleString('en-US'), 'schools'], [short(j.players), 'players']]; render(); }
     }).catch(() => {});
@@ -334,80 +371,83 @@
   const paired = (s) => s.teams.length > 1;
   const teamName = (s, t) => s.name.toLowerCase() + (t && t.sex ? ` (${SEX[t.sex].word.toLowerCase()})` : s.sub ? ` (${s.sub.toLowerCase()})` : '');
   const fullName = (s) => teamName(s, paired(s) ? null : s.teams[0]);
-  const kindsFor = () => (mode === 'learn' ? ['learn'] : ['players', 'staff']);
-  const isLive = (s) => mode === 'learn' ? !!s.learn : s.teams.some((t) => t.players || t.staff);
+  const isLive = (s) => s.teams.some((t) => t.players || t.staff);
   const stat = (t) => (t.stats || []).map(([v, k]) => `${v} ${k}`).join(' · ');
   function summary(s) {          // one line, or one per team for a sport with both
     if (!isLive(s)) return 'Coming soon';
-    if (mode === 'learn') return s.learnSum || 'Learn the game';
     if (!paired(s)) return stat(s.teams[0]) || 'Live';
-    return s.teams.map((t) => `${SEX[t.sex].word}: ${(t.stats || []).map(([v, k]) => `${v} ${k}`).reverse().join(' · ')}`).join('\n');
+    return s.teams.map((t) => `${SEX[t.sex].word}: ${t.built ? (t.stats || []).map(([v, k]) => `${v} ${k}`).reverse().join(' · ') : 'coming soon'}`).join('\n');
   }
   // On the page, a sport with both teams gets a line per team in its color.
-  const summaryHTML = (s) => !paired(s) || !isLive(s) || mode === 'learn' ? esc(summary(s))
+  const summaryHTML = (s) => !paired(s) || !isLive(s) ? esc(summary(s))
     : summary(s).split('\n').map((line, i) => `<span class="tl ${SEX[s.teams[i].sex].cls}">${esc(line)}</span>`).join('');
   const esc = (x) => String(x).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
   // A page button on the ring: a link when the page exists, otherwise a "coming soon" marker. A team of a sport
   // with both gets a smaller circle in its color, with the man or woman figure on its edge.
-  function satHTML(s, kind, t) {
-    const k = KINDS[kind], href = kind === 'learn' ? s.learn : t[kind];
-    const who = kind === 'learn' ? s.name.toLowerCase() : teamName(s, t);
-    const sex = kind !== 'learn' && t.sex ? SEX[t.sex] : null;
-    const cls = `sat${sex ? ' small ' + sex.cls : ''}`, icon = smallSvg(k.icon, sex ? 19 : 20);
+  function satHTML(s, kind, t, side) {
+    const k = KINDS[kind], href = t[kind], who = teamName(s, t);
+    const sex = t.sex ? SEX[t.sex] : null;
+    const cls = `sat side-${side}${sex ? ' small ' + sex.cls : ''}`, icon = smallSvg(k.icon, sex ? 19 : 20);
+    const words = sex ? `${sex.word} ${k.tag}` : k.tag[0].toUpperCase() + k.tag.slice(1);
+    const name = `<span class="tag" aria-hidden="true">${words}</span>`;
     const badge = sex ? `<span class="who" aria-hidden="true"><svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">${t.sex === 'm' ? MAN : WOMAN}</svg></span>` : '';
-    const team = kind === 'learn' ? '' : ` data-team="${t.id}"`;
-    if (href) return `<a class="${cls}" data-id="${s.id}" data-kind="${kind}"${team} href="${href}" aria-label="${who}: ${k.what}" title="${who} · ${k.what}">${icon}${badge}</a>`;
-    return `<span class="${cls} off" data-id="${s.id}" data-kind="${kind}"${team} role="img" aria-label="${who}: ${k.what}, coming soon" title="${who} · ${k.what} (coming soon)">${icon}${badge}</span>`;
+    const team = ` data-team="${t.id}"`;
+    if (href) return `<a class="${cls}" data-id="${s.id}" data-kind="${kind}"${team} href="${href}" aria-label="${who}: ${k.what}" title="${who} · ${k.what}">${icon}${badge}${name}</a>`;
+    return `<span class="${cls} off" data-id="${s.id}" data-kind="${kind}"${team} role="img" aria-label="${who}: ${k.what}, coming soon" title="${who} · ${k.what} (coming soon)">${icon}${badge}${name}</span>`;
   }
   // The phone list's buttons: one row per team for a sport with both, in the team's color.
   function actionsHTML(s) {
-    const row = (t) => kindsFor().map((kind, i) => {
-      const k = KINDS[kind], href = kind === 'learn' ? s.learn : t[kind];
-      if (!href) return `<span class="btn off">${smallSvg(k.icon, 18)}${k.short}</span>`;
-      return `<a class="btn${i ? ' ghost' : ''}" href="${href}">${smallSvg(k.icon, 18)}${k.label}</a>`;
-    }).join('');
-    if (mode === 'learn' || !paired(s)) return `<div class="actions">${row(s.teams[0])}</div>`;
+    const row = (t) => t.built ? MAP_LINKS.map(([page, name], i) => `<a class="btn${i ? ' ghost' : ''}" href="${page}.html?sport=${t.id}">${name}</a>`).join('') : '<span class="btn off">Coming soon</span>';
+    if (!paired(s)) return `<div class="actions">${row(s.teams[0])}</div>`;
     return s.teams.map((t) => `<div class="team ${SEX[t.sex].cls}"><span class="tlabel"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">${t.sex === 'm' ? MAN : WOMAN}</svg>${SEX[t.sex].word}</span><div class="actions">${row(t)}</div></div>`).join('');
   }
 
-  // ---- Build the ring once (positions in a 1200×980 box, scaled to fit) ----
-  const CX = 600, CY = 490, R = 345, SAT_DEG = 15, GLOBE = 200;
+  // ---- Build the rings once (positions in a 1180×1020 box, scaled to fit) ----
+  // Three rings around the globe, one per season, fall nearest. Neighbouring rings turn opposite ways.
+  const W = 1180, H = 1020, CX = W / 2, CY = H / 2, SAT_DEG = 15, GLOBE = 200;
+  const DISC = 32;                 // a disc's radius
+  const SHOWN = 160;               // the globe's radius on the stage (GLOBE is its map's, inside the svg's 400×400)
+  const RINGS = [{ id: 'fall', R: 262, turn: 1, start: 30 }, { id: 'winter', R: 354, turn: -1, start: 45 }, { id: 'spring', R: 446, turn: 1, start: 26 }];
+  const OUTER = RINGS[RINGS.length - 1].R;
   const rad = (d) => d * Math.PI / 180;
   const at = (deg, dist) => ({ x: CX + dist * Math.sin(rad(deg)), y: CY - dist * Math.cos(rad(deg)) });
 
   const ring = document.getElementById('ring');
-  const STEP = 360 / SPORTS.length;
   // The lit sport's page buttons sit on a small ring of their own around its disc (Oct 30), at these compass
   // angles (0 = up), the same wherever the disc is: players to the left and coaches to the right; with both
   // teams, men's on the left (players above, coaches below) and women's on the right.
   const MINI_R = 84;
-  const SAT_AT = { players: { '': 270, m: 315, w: 45 }, staff: { '': 90, m: 225, w: 135 }, learn: { '': 0 } };
-  const items = SPORTS.map((s, i) => {
+  const SAT_AT = { players: { '': 270, m: 315, w: 45 }, staff: { '': 90, m: 225, w: 135 } };
+  const items = SPORTS.map((s) => {
     const sats = [];
-    let html = `<button type="button" class="disc" data-id="${s.id}" aria-pressed="false">${sportSvg(s.icon, 58)}</button>`;
+    const orbit = RINGS.find((r) => r.id === s.ring), mates = SPORTS.filter((x) => x.ring === s.ring);
+    let html = `<button type="button" class="disc" data-id="${s.id}" aria-pressed="false">${sportSvg(s.icon, 44)}</button>`;
     ['players', 'staff'].forEach((kind) => s.teams.forEach((t) => {
-      html += satHTML(s, kind, t);
+      const off = SAT_AT[kind][t.sex || ''];
+      html += satHTML(s, kind, t, off > 270 || off < 90 ? 't' : 'b');
       sats.push({ kind, team: t.id, off: SAT_AT[kind][t.sex || ''], half: t.sex ? 19 : 20 });
     }));
-    html += satHTML(s, 'learn', s.teams[0]);
-    sats.push({ kind: 'learn', team: null, off: SAT_AT.learn[''], half: 20 });
     html += `<span class="mini" data-id="${s.id}" aria-hidden="true"></span>`;
-    html += `<div class="label" data-id="${s.id}" aria-hidden="true"><span class="n cond">${s.name}</span><span class="s">${s.sub}</span><span class="sum"></span></div>`;
+    html += `<div class="label" data-id="${s.id}" aria-hidden="true"><span class="n cond">${s.name}</span><span class="s">${s.sub}</span></div>`;
     ring.insertAdjacentHTML('beforeend', html);
     const q = (sel) => ring.querySelector(`${sel}[data-id="${s.id}"]`);
     sats.forEach((x) => { x.el = ring.querySelector(`.sat[data-id="${s.id}"][data-kind="${x.kind}"]${x.team ? `[data-team="${x.team}"]` : ''}`); });
-    return { id: s.id, base: i * STEP, disc: q('.disc'), mini: q('.mini'), sats, label: q('.label') };
+    return { id: s.id, pair: s.teams.length > 1, R: orbit.R, turn: orbit.turn, base: orbit.start + mates.indexOf(s) * 360 / mates.length, disc: q('.disc'), mini: q('.mini'), sats, label: q('.label') };
   });
 
   // The dial between the globe and the ring: a dotted orbit plus a graduated scale, like a globe's meridian ring.
   (function buildDial() {
-    let svg = `<circle class="orbit" cx="${CX}" cy="${CY}" r="${R}"/><circle class="rule" cx="${CX}" cy="${CY}" r="226"/><circle class="rule" cx="${CX}" cy="${CY}" r="242"/>`;
+    let svg = RINGS.map((r) => `<circle class="orbit" cx="${CX}" cy="${CY}" r="${r.R}"/>`).join('')
+      + `<circle class="rule" cx="${CX}" cy="${CY}" r="178"/><circle class="rule" cx="${CX}" cy="${CY}" r="190"/>`;
     for (let d = 0; d < 360; d += 5) {
-      const major = d % 30 === 0, a = at(d, 226), b = at(d, major ? 242 : 233);
+      const major = d % 30 === 0, a = at(d, 178), b = at(d, major ? 190 : 184);
       svg += `<line class="tick${major ? ' major' : ''}" x1="${a.x.toFixed(1)}" y1="${a.y.toFixed(1)}" x2="${b.x.toFixed(1)}" y2="${b.y.toFixed(1)}"/>`;
     }
     document.getElementById('dial').innerHTML = svg;
+    // Each ring's name, on its orbit at the top; the discs pass over it
+    document.getElementById('seasons').innerHTML = RINGS.filter((r) => SPORTS.some((s) => s.ring === r.id))
+      .map((r) => `<text class="season" x="${CX}" y="${CY - r.R}">${r.id}</text>`).join('');
   })();
   const dial = document.getElementById('dial');
 
@@ -444,7 +484,7 @@
     const ang = (Math.atan2(uy, ux) * 180 / Math.PI + 90).toFixed(2);   // the rod's lean, for the labels
     let svg = '';
     for (const sgn of [1, -1]) {
-      const a = pt(sgn * 198), b = pt(sgn * 252), cap = pt(sgn * 256), lab = pt(sgn * 276);
+      const a = pt(sgn * (SHOWN - 2)), b = pt(sgn * 198), cap = pt(sgn * 202), lab = pt(sgn * 218);
       svg += `<line class="axis" x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}"/>` +
              `<circle class="pin" cx="${cap[0]}" cy="${cap[1]}" r="6"/><circle class="pin-dot" cx="${cap[0]}" cy="${cap[1]}" r="2"/>` +
              `<text class="pole" x="${lab[0]}" y="${lab[1]}" transform="rotate(${ang} ${lab[0]} ${lab[1]})">${sgn > 0 ? 'N' : 'S'}</text>`;
@@ -463,14 +503,14 @@
   const put = (el, p, half) => { el.style.translate = `${(p.x - half).toFixed(2)}px ${(p.y - half).toFixed(2)}px`; };
   function place(rot) {
     items.forEach((it) => {
-      const deg = it.base + rot, sn = Math.sin(rad(deg)), cs = Math.cos(rad(deg));
-      put(it.disc, at(deg, R), 42);
-      const c = at(deg, R);
+      const deg = it.base + it.turn * rot;
+      const c = at(deg, it.R);
+      put(it.disc, c, DISC);
       put(it.mini, c, MINI_R);
       it.sats.forEach((x) => put(x.el, { x: c.x + MINI_R * Math.sin(rad(x.off)), y: c.y - MINI_R * Math.cos(rad(x.off)) }, x.half));
-      // the label's edge nearest the disc sits here, so it grows away from the ring; a lit sport's moves out past its buttons
-      const a = at(deg, R + 42 + 24 + (it.id === lit ? 56 : 0));
-      it.label.style.translate = `calc(${a.x.toFixed(2)}px + ${(-50 + 50 * sn).toFixed(2)}%) calc(${a.y.toFixed(2)}px + ${(-50 - 50 * cs).toFixed(2)}%)`;
+      // the name sits under the disc, or under its small ring of buttons when it's lit
+      const below = it.id !== lit ? DISC + 2 : it.pair ? MINI_R + 56 : MINI_R + 24;
+      it.label.style.translate = `calc(${c.x.toFixed(2)}px - 50%) ${(c.y + below).toFixed(2)}px`;
     });
     dial.setAttribute('transform', `rotate(${rot.toFixed(3)} ${CX} ${CY})`);
     drawEarth(-20 + rot * EARTH_SPIN);
@@ -481,20 +521,18 @@
   // ---- Draw everything that depends on the side ----
   const rowsEl = document.getElementById('rows');
   function render() {
-    document.body.dataset.mode = mode;
-    document.title = MODES[mode].doc;
-    document.querySelectorAll('[data-role="title"]').forEach((el) => { el.innerHTML = MODES[mode].title; });
-    document.querySelectorAll('[data-role="hint"]').forEach((el) => { el.textContent = MODES[mode].hint; });
-    document.querySelectorAll('.switch button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.mode === mode ? 'true' : 'false'));
+    document.title = PAGE.doc;
+    document.querySelectorAll('[data-role="title"]').forEach((el) => { el.innerHTML = PAGE.title; });
+    document.querySelectorAll('[data-role="hint"]').forEach((el) => { el.textContent = PAGE.hint; });
+    showHint();
 
     SPORTS.forEach((s) => {
       const live = isLive(s);
       ring.querySelectorAll(`.disc[data-id="${s.id}"], .label[data-id="${s.id}"]`).forEach((el) => el.classList.toggle('live', live));
       ring.querySelector(`.disc[data-id="${s.id}"]`).setAttribute('aria-label', `${fullName(s)}: ${summary(s)}`);
-      ring.querySelector(`.label[data-id="${s.id}"] .sum`).innerHTML = summaryHTML(s);
     });
 
-    rowsEl.innerHTML = SPORTS.map((s) => `
+    rowsEl.innerHTML = SPORTS.map((s, i) => `${!i || SPORTS[i - 1].ring !== s.ring ? `<h2 class="season-head">${s.ring}</h2>` : ''}
       <div class="row${isLive(s) ? ' live' : ''}" data-id="${s.id}">
         <button type="button" class="pick" data-id="${s.id}" aria-expanded="false">
           <span class="badge">${sportSvg(s.icon, 32)}</span>
@@ -504,8 +542,8 @@
       </div>`).join('');
 
     fitTitle();
-    document.getElementById('legend').innerHTML = kindsFor().map((k) => `<span>${smallSvg(KINDS[k].icon, 18)}${KINDS[k].label}</span>`).join('')
-      + (mode === 'learn' ? '' : Object.entries(SEX).map(([k, x]) => `<span class="${x.cls}"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">${k === 'm' ? MAN : WOMAN}</svg>${x.word}</span>`).join(''));
+    document.getElementById('legend').innerHTML = ['players', 'staff'].map((k) => `<span>${smallSvg(KINDS[k].icon, 18)}${KINDS[k].label}</span>`).join('')
+      + Object.entries(SEX).map(([k, x]) => `<span class="${x.cls}"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">${k === 'm' ? MAN : WOMAN}</svg>${x.word}</span>`).join('');
     light(lit, true);
   }
 
@@ -520,16 +558,46 @@
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitTitle);
 
   // ---- Lighting ----
+  // The globe's line: the lit sport's numbers, or the hint when none is lit.
+  function showHint() {
+    const el = document.querySelector('.center [data-role="hint"]'), s = lit ? byId(lit) : null;
+    el.classList.toggle('stat', !!s);
+    if (s) el.innerHTML = summaryHTML(s); else el.textContent = PAGE.hint;
+  }
   function light(id, quiet) {
     const changed = id !== lit;
     lit = id;
+    showHint();
     if (changed) { try { place(rot); } catch (e) { /* before the turning starts */ } }
     document.querySelectorAll('[data-id]').forEach((el) => el.classList.toggle('lit', el.dataset.id === id));
+    globeMaps();
+    keepTagsOnScreen();
+    setTimeout(keepTagsOnScreen, 200);     // again once the buttons have grown to full size
     ring.classList.toggle('has-lit', !!id);
     rowsEl.classList.toggle('has-lit', !!id);
     ring.querySelectorAll('.disc').forEach((d) => d.setAttribute('aria-pressed', d.dataset.id === pinned ? 'true' : 'false'));
     rowsEl.querySelectorAll('.pick').forEach((p) => p.setAttribute('aria-expanded', p.dataset.id === id ? 'true' : 'false'));
     if (id && changed && !quiet) { const s = byId(id); document.getElementById('say').textContent = `${fullName(s)}: ${summary(s).replace(/\n/g, '; ')}`; }
+  }
+  // A clicked sport's maps, all of them, in the globe: one column per team for a sport with both.
+  function globeMaps() {
+    const el = document.getElementById('globeMaps'), s = pinned ? byId(pinned) : null, show = !!s && isLive(s);
+    el.hidden = !show;
+    el.parentElement.classList.toggle('menu', show);
+    if (!show) return;
+    const links = (t) => t.built ? MAP_LINKS.map(([page, name]) => `<a href="${page}.html?sport=${t.id}">${name}</a>`).join('') : '<span class="soon">Coming soon</span>';
+    el.innerHTML = `<div class="gname cond">${s.name}</div><div class="gcols${paired(s) ? '' : ' one'}">${s.teams.map((t) =>
+      `<div class="gcol ${t.sex ? SEX[t.sex].cls : ''}">${paired(s) ? `<b>${SEX[t.sex].word}</b>` : ''}${links(t)}</div>`).join('')}</div>`;
+  }
+  // A lit sport near the window's edge: a button's name that would run off it slides back in.
+  function keepTagsOnScreen() {
+    ring.querySelectorAll('.sat').forEach((sat) => {
+      const tag = sat.querySelector('.tag');
+      tag.style.marginLeft = '';
+      if (!sat.classList.contains('lit')) return;
+      const r = tag.getBoundingClientRect(), push = Math.max(0, 8 - r.left) || -Math.max(0, r.right - innerWidth + 8);
+      if (r.width && push) tag.style.marginLeft = `${push / scaleK}px`;
+    });
   }
   const settle = () => { clearTimeout(leaveTimer); leaveTimer = setTimeout(() => light(pinned), 320); };
   const sportOf = (el) => (el && el.closest ? el.closest('#ring [data-id]') : null);
@@ -557,7 +625,7 @@
     if (!disc) return;
     const id = disc.dataset.id;
     if (pinned === id && lit === id) {            // a second click opens the page, when there is just one team
-      const s = byId(id), page = mode === 'learn' ? s.learn : (!paired(s) && s.teams[0].players);
+      const s = byId(id), page = !paired(s) && s.teams[0].players;
       if (page) location.href = page;
       return;
     }
@@ -579,28 +647,36 @@
   });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { pinned = null; light(null); } });
 
-  // ---- The switch ----
-  function setMode(m, fromHash) {
-    if (m === mode) return;
-    mode = m;
-    if (!fromHash) history.replaceState(null, '', m === 'learn' ? '#learn' : location.pathname + location.search);
-    render();
-    // pulse the sports that have pages on this side
-    ring.querySelectorAll('.disc.live').forEach((d, i) => {
-      d.classList.remove('pulse');
-      void d.offsetWidth;
-      d.style.animationDelay = i * 60 + 'ms';
-      d.classList.add('pulse');
-    });
-  }
-  ring.addEventListener('animationend', (e) => { if (e.target.classList.contains('disc')) e.target.classList.remove('pulse'); });
-  document.querySelectorAll('.switch').forEach((sw) => sw.addEventListener('click', (e) => {
-    const b = e.target.closest('button');
-    if (b) setMode(b.dataset.mode);
-  }));
-  window.addEventListener('hashchange', () => setMode(location.hash === '#learn' ? 'learn' : 'recruiting', true));
-
   render();
+
+  // ---- Find a school ----
+  // Each built sport's school list, read the first time the box is used; a result links to the school in each sport.
+  (function finder() {
+    const box = document.getElementById('findSchool'), out = document.getElementById('findResults');
+    const schools = new Map();
+    let ready = null;
+    const load = () => ready || (ready = Promise.all(SPORTS.flatMap((s) => s.teams.filter((t) => t.built).map((t) =>
+      fetch(`${t.id}/school_locations.json`).then((r) => r.ok ? r.json() : { schools: {} }).then((j) => {
+        Object.keys(j.schools).forEach((name) => {
+          if (!schools.has(name)) schools.set(name, []);
+          schools.get(name).push({ s, t });
+        });
+      }).catch(() => {})))));
+    function show() {
+      const q = box.value.trim().toLowerCase();
+      if (q.length < 2) { out.hidden = true; return; }
+      const hits = [...schools.keys()].filter((n) => n.toLowerCase().includes(q))
+        .sort((a, b) => a.toLowerCase().startsWith(q) === b.toLowerCase().startsWith(q) ? a.localeCompare(b) : a.toLowerCase().startsWith(q) ? -1 : 1).slice(0, 8);
+      out.innerHTML = hits.length ? hits.map((n) => `<div class="fhit"><div class="fname">${esc(n)}</div><div class="fsports">${schools.get(n).sort((a, b) => SPORTS.indexOf(a.s) - SPORTS.indexOf(b.s)).map(({ s, t }) =>
+        `<a class="${t.sex ? SEX[t.sex].cls : ''}" href="players-dotmap.html?sport=${t.id}#school=${encodeURIComponent(n)}">${s.name}${t.sex ? ` (${t.sex === 'm' ? 'M' : 'W'})` : ''}</a>`).join('')}</div></div>`).join('')
+        : `<p class="fnone">No school by that name yet.</p>`;
+      out.hidden = false;
+    }
+    box.addEventListener('focus', load);
+    box.addEventListener('input', () => { load().then(show); });
+    box.addEventListener('keydown', (e) => { if (e.key === 'Escape') { box.value = ''; out.hidden = true; } });
+    document.addEventListener('pointerdown', (e) => { if (!e.target.closest('#finder')) out.hidden = true; });
+  })();
 
   // ---- Scale the ring to fit the window ----
   const stage = document.getElementById('stage');
@@ -612,17 +688,16 @@
     const cs = getComputedStyle(ringViewEl);
     const roomH = ringViewEl.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom) - legendEl.offsetHeight - parseFloat(cs.rowGap || 0);
     const roomW = ringViewEl.clientWidth - 32;
-    // 1340, not the stage's 1200: as the ring turns, the sports' names swing out past the stage's sides
-    scaleK = Math.max(0.3, Math.min(1, roomW / 1340, roomH / 980));
+    scaleK = Math.max(0.3, Math.min(1, roomW / W, roomH / H));
     ring.style.transform = `scale(${scaleK})`;
-    stage.style.width = 1200 * scaleK + 'px';
-    stage.style.height = 980 * scaleK + 'px';
+    stage.style.width = W * scaleK + 'px';
+    stage.style.height = H * scaleK + 'px';
   }
   window.addEventListener('resize', fit);
   fit();
 
   // ---- The slow turn ----
-  // One full turn every 200 seconds. It eases to a stop while the mouse is over the globe and its ring,
+  // One full turn every 200 seconds, each ring the other way from its neighbours. It eases to a stop while the mouse is over the globe and its ring,
   // or while a sport is lit, and picks up again when you move away. Reduced motion: it stays still.
   const TURN = 360 / 200;   // degrees per second
   const still = matchMedia('(prefers-reduced-motion: reduce)');
@@ -633,7 +708,7 @@
     if (e.pointerType !== 'mouse' && e.pointerType !== 'pen') return;
     const r = stage.getBoundingClientRect();
     const dx = e.clientX - (r.left + CX * scaleK), dy = e.clientY - (r.top + CY * scaleK);
-    hovering = Math.hypot(dx, dy) < (R + 50) * scaleK;
+    hovering = Math.hypot(dx, dy) < (OUTER + 50) * scaleK;
   });
   document.documentElement.addEventListener('pointerleave', () => { hovering = false; });
 

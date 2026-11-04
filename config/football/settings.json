@@ -16,7 +16,7 @@
   "thin_roster": 40,
   "frozen_min_pairs": 30,
   "site": {
-    "front_page": {"disc": "football", "name": "Football", "icon": "football", "order": 1},
+    "front_page": {"disc": "football", "name": "Football", "icon": "football", "order": 1, "ring": "fall"},
     "women": false,
     "players-dotmap": {"title": "College Football Recruiting Map", "description": "Where every college football player since 2016 comes from, mapped: FBS, FCS, Division II, Division III, NAIA and junior college.", "h1": "College Football <span>Recruiting Map</span>", "sub": "Hometowns of every college football player since 2016"},
     "players-heatmap": {"title": "College Football Recruiting Footprints", "description": "Compare where up to four college football programs, from FBS to junior college, find their players, state by state.", "h1": "College Football <span>Recruiting Footprints</span>"},

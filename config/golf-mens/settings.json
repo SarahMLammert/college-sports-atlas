@@ -1,0 +1,88 @@
+{
+ "label": "Golf (Men's)",
+ "roster_paths": [
+  "/sports/mens-golf/roster",
+  "/sports/mgolf/roster",
+  "/sports/m-golf/roster",
+  "/sports/golf/roster"
+ ],
+ "presto_paths": [
+  "/sports/mgolf/{prev_season}-{yy}/roster"
+ ],
+ "min_players": 3,
+ "max_players": 22,
+ "junior_colleges": [
+  "San Jac",
+  "TJC",
+  "LSUE",
+  "LSU-Eunice",
+  "MGCCC",
+  "IWCC",
+  "JCCC",
+  "SCF",
+  "FSW",
+  "IRSC",
+  "JUCO"
+ ],
+ "spring_season": true,
+ "roster_sex": "m",
+ "combined_paths": [
+  "/sports/golf/roster"
+ ],
+ "position_groups": [
+  "ALL"
+ ],
+ "position_abbreviations": {},
+ "position_words": [],
+ "position_fallback": "ALL",
+ "d1_divisions": [
+  "D1"
+ ],
+ "other_divisions": [
+  "D2",
+  "D3",
+  "NAIA",
+  "JUCO"
+ ],
+ "division_labels": {
+  "D1": "Division I",
+  "D2": "Division II",
+  "D3": "Division III",
+  "NAIA": "NAIA",
+  "JUCO": "Junior college (NJCAA, CCCAA, NWAC)"
+ },
+ "position_labels": {
+  "ALL": "All golfers"
+ },
+ "thin_roster": 5,
+ "frozen_min_pairs": 3,
+ "site": {
+  "front_page": {
+   "disc": "golf",
+   "name": "Golf",
+   "icon": "golf",
+   "ring": "spring",
+   "order": 27,
+   "sex": "m"
+  },
+  "women": false,
+  "players-dotmap": {
+   "title": "College Golf (Men's) Recruiting Map",
+   "description": "Where every varsity college men's golf golfer since 2016 comes from, mapped: Division I, II and III, NAIA and junior college.",
+   "h1": "College Golf (Men's) <span>Recruiting Map</span>",
+   "sub": "Hometowns of every varsity college men's golf golfer since 2016"
+  },
+  "players-heatmap": {
+   "title": "College Golf (Men's) Recruiting Footprints",
+   "description": "Compare where up to four college men's golf programs, from Division I to junior college, find their golfers, state by state.",
+   "h1": "College Golf (Men's) <span>Recruiting Footprints</span>"
+  },
+  "players-transfers": {
+   "title": "College Golf (Men's) Transfer Map",
+   "description": "Where college men's golf golfers transferred, school to school, since 2016.",
+   "h1": "College Golf (Men's) <span>Transfer Map</span>",
+   "sub": "Where golfers moved from school to school since 2016"
+  }
+ },
+ "seasons": "2016-2026"
+}

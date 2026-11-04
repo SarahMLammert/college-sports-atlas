@@ -414,7 +414,7 @@ def make_map_data(src, dst, sport):
             how["not counted: class year untrustworthy that season"] += 1
         P["s"].append(sidx[r["school"]])
         P["t"].append(t)
-        P["p"].append(positions.group(r["position"]))
+        P["p"].append(positions.group(r["position"] or r.get("weight", "")))   # wrestling: many list the class as weight
         P["f"].append(int(r["first_season"]) - 2000)
         P["l"].append(int(r["last_season"]) - 2000)
         P["x"].append(transfer)
@@ -963,16 +963,17 @@ have saved) are small pages that forward to the new one, keeping the #view part 
 PAGES = ["players-dotmap.html", "players-heatmap.html", "players-transfers.html", "staff-moves.html",
          "staff-directory.html"]
 PLAYER_PAGES = PAGES[:3]
-FRONT_PAGE_KEYS = {"disc", "name", "icon", "order", "sex", "sub", "learn", "learn_summary"}
-DISC_KEYS = ("name", "icon", "order", "sub", "learn", "learn_summary")      # the same for every team of a disc
+RINGS = ("fall", "winter", "spring")      # the front page's three rings of sports, inside to outside
+FRONT_PAGE_KEYS = {"disc", "name", "icon", "ring", "order", "sex", "sub"}
+DISC_KEYS = ("name", "icon", "ring", "order", "sub")      # the same for every team of a disc
 
 SPORTS_JS_HEAD = """// Written by python3 scripts/build.py pages from the "site" part of each config/<sport>/settings.json. Don't edit
 // it here: change the settings and run build.py pages (pipeline.py's build step runs it after the map).
 // SPORT_PAGES: each sport's words on the three player map pages (the browser tab's title, the search description,
 //   the heading and the subtitle), she/her for women's sports, and spring (its seasons are named for the spring
 //   they end in). common.js puts these in.
-// SPORT_DISCS: the front page's discs in order, each with its teams and their numbers (from summary.json, for
-//   when the page can't load it).
+// SPORT_DISCS: the front page's discs in order, each with its ring, its teams, their numbers (from summary.json, for
+//   when the page can't load it) and whether they're built yet (a team that isn't shows as coming soon).
 """
 
 
@@ -1008,8 +1009,8 @@ def front_page_discs(sports: list, docs: Path) -> tuple[list, list]:
     for s in sports:
         fp = s.site.get("front_page") or {}
         where = f"config/{s.name}/settings.json"
-        if not fp.get("disc") or not fp.get("name") or "order" not in fp:
-            problems.append(f'{where}: "site" needs a "front_page" with disc, name, icon and order'); continue
+        if not fp.get("disc") or not fp.get("name") or "order" not in fp or fp.get("ring") not in RINGS:
+            problems.append(f'{where}: "site" needs a "front_page" with disc, name, icon, order and ring (fall, winter or spring)'); continue
         if set(fp) - FRONT_PAGE_KEYS:
             problems.append(f"{where}: unknown front_page settings {', '.join(sorted(set(fp) - FRONT_PAGE_KEYS))}")
         stats = None
@@ -1018,7 +1019,7 @@ def front_page_discs(sports: list, docs: Path) -> tuple[list, list]:
             j = json.loads(summary.read_text(encoding="utf-8"))
             if j.get("players") and j.get("schools"):
                 stats = [[f"{j['schools']:,}", "schools"], [short_count(j["players"]), "players"]]
-        team = {"id": s.name, "sex": fp.get("sex", ""), "stats": stats}
+        team = {"id": s.name, "sex": fp.get("sex", ""), "stats": stats, "built": (docs / s.name).is_dir()}
         d = discs.setdefault(fp["disc"], {"fp": fp, "teams": [], "from": s.name})
         for k in DISC_KEYS:
             if fp.get(k) != d["fp"].get(k):
@@ -1029,9 +1030,7 @@ def front_page_discs(sports: list, docs: Path) -> tuple[list, list]:
         fp, teams = d["fp"], sorted(d["teams"], key=lambda t: ({"m": 0, "w": 1}.get(t["sex"], 2), t["id"]))
         if len(teams) > 1 and not all(t["sex"] in ("m", "w") for t in teams):
             problems.append(f'disc "{disc}" has {len(teams)} teams: each needs "sex": "m" or "w" in its front_page')
-        entry = {"id": disc, "name": fp["name"], "sub": fp.get("sub", ""), "icon": fp.get("icon", disc), "learn": fp.get("learn")}
-        if fp.get("learn_summary"):
-            entry["learnSum"] = fp["learn_summary"]
+        entry = {"id": disc, "name": fp["name"], "sub": fp.get("sub", ""), "icon": fp.get("icon", disc), "ring": fp["ring"]}
         out.append({**entry, "teams": teams})
     return out, problems
 
@@ -1042,7 +1041,7 @@ def sports_js(docs: Path) -> tuple[str, list]:
     words = sport_words(sports)
     problems = [f'config/{name}/settings.json: no "site" words for {page}' for name, w in words.items()
                 for page in (p[:-5] for p in PLAYER_PAGES) if not (w[page] or {}).get("title")]
-    discs, more = front_page_discs(sports, docs)
+    discs, more = front_page_discs([load_sport(name) for name in available_sports()], docs)   # unbuilt ones: coming soon
     lines = [SPORTS_JS_HEAD + "window.SPORT_PAGES = {"]
     for i, (name, w) in enumerate(sorted(words.items())):
         lines.append(f'  {json.dumps(name)}: {{"women": {json.dumps(w["women"])}, "spring": {json.dumps(w["spring"])},')

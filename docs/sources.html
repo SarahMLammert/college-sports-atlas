@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Information About the Data</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Barlow:wght@400;500;600&display=swap">
@@ -111,54 +114,9 @@
 
   <section>
     <h2 class="cond"><span class="num">ii.</span>What’s covered</h2>
-    <div class="sports">
-      <div class="sport">
-        <h3 class="cond">Football</h3>
-        <p>Every FBS and FCS school, for the 2016–2019 and 2021–2026 seasons. There’s no 2020 data. Division II, Division III, NAIA and junior-college football are being added.</p>
-        <div class="stats" aria-label="Football in numbers">
-          <div class="stat"><b>264</b><span>schools</span></div>
-          <div class="stat"><b>10</b><span>seasons</span></div>
-          <div class="stat"><b>137K</b><span>player records</span></div>
-        </div>
-      </div>
-      <div class="sport">
-        <h3 class="cond">Lacrosse <em>Men’s</em></h3>
-        <p>Every varsity program: Division I, II and III, NAIA and junior college, for the 2016–2026 seasons, 2020 included. Club teams aren’t included.</p>
-        <div class="stats" aria-label="Men’s lacrosse in numbers">
-          <div class="stat"><b>457</b><span>schools</span></div>
-          <div class="stat"><b>11</b><span>seasons</span></div>
-          <div class="stat"><b>73K</b><span>player records</span></div>
-        </div>
-      </div>
-      <div class="sport">
-        <h3 class="cond">Lacrosse <em>Women’s</em></h3>
-        <p>Division I, II and III, NAIA and junior-college programs for the 2016–2026 seasons. Junior colleges stop in 2024, when the NJCAA dropped women’s lacrosse.</p>
-        <div class="stats" aria-label="Women’s lacrosse in numbers">
-          <div class="stat"><b>609</b><span>schools</span></div>
-          <div class="stat"><b>11</b><span>seasons</span></div>
-          <div class="stat"><b>64K</b><span>player records</span></div>
-        </div>
-      </div>
-      <div class="sport">
-        <h3 class="cond">Baseball</h3>
-        <p>Division I, II and III, NAIA and junior-college programs (NJCAA, California and Northwest junior colleges) for the 2016–2026 seasons. Junior colleges and NAIA schools are included where a roster site was found. Club teams count only as the level a transfer came from.</p>
-        <div class="stats" aria-label="Baseball in numbers">
-          <div class="stat"><b>1,088</b><span>schools</span></div>
-          <div class="stat"><b>11</b><span>seasons</span></div>
-          <div class="stat"><b>210K</b><span>player records</span></div>
-        </div>
-      </div>
-      <div class="sport">
-        <h3 class="cond">Softball</h3>
-        <p>Division I, II and III, NAIA and junior-college programs (NJCAA, California and Northwest junior colleges) for the 2016–2026 seasons. Junior colleges and NAIA schools are included where a roster site was found. Club teams count only as the level a transfer came from.</p>
-        <div class="stats" aria-label="Softball in numbers">
-          <div class="stat"><b>1,129</b><span>schools</span></div>
-          <div class="stat"><b>11</b><span>seasons</span></div>
-          <div class="stat"><b>110K</b><span>player records</span></div>
-        </div>
-      </div>
-    </div>
-    <p class="note" style="margin-top:12px">Spring sports like lacrosse, baseball and softball are named by the year they’re played: the 2024 season is spring 2024, the one many sites label “2023–24.”</p>
+    <div class="sports" id="sports"></div>
+    <p class="note" style="margin-top:12px">Football has no 2020 season. Division I, II and III, NAIA and junior colleges are included where a sport has them and a roster site could be read.</p>
+    <p class="note" style="margin-top:12px">Seasons are shown as school years. Sports played in the spring or winter belong to the school year they end in.</p>
   </section>
 
   <section>
@@ -204,5 +162,26 @@
 </main>
 
 <footer><a class="back" href="index.html"><span aria-hidden="true">←</span> All sports</a></footer>
+<script src="sports.js"></script>
+<script>
+  // What's covered: every built sport, from docs/sports.js and its summary.json, so this list never needs hand editing.
+  (function () {
+    const el = document.getElementById('sports'), teams = [];
+    const SEX = { m: 'Men’s', w: 'Women’s' }, esc = (x) => String(x).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    (window.SPORT_DISCS || []).forEach((d) => d.teams.forEach((t) => { if (t.built) teams.push({ d, t }); }));
+    const span = (y, spring) => { const a = spring ? y - 1 : y; return `${a}-${String((a + 1) % 100).padStart(2, '0')}`; };
+    const big = (n) => n >= 10000 ? `${Math.round(n / 1000)}K` : n.toLocaleString('en-US');
+    function card({ d, t }, j) {
+      const spring = !!(window.SPORT_PAGES[t.id] || {}).spring, tag = SEX[t.sex] || d.sub;
+      const stats = j ? [[j.schools.toLocaleString('en-US'), 'schools'], [big(j.players), 'players'], [big(j.hometowns), 'hometowns']] : (t.stats || []);
+      return `<div class="sport"><h3 class="cond">${esc(d.name)}${tag ? ` <em>${esc(tag)}</em>` : ''}</h3>
+        ${j ? `<p>Seasons ${span(j.first, spring)} to ${span(j.last, spring)}.</p>` : ''}
+        <div class="stats">${stats.map(([v, k]) => `<div class="stat"><b>${esc(v)}</b><span>${esc(k)}</span></div>`).join('')}</div></div>`;
+    }
+    Promise.all(teams.map((x) => fetch(`${x.t.id}/summary.json`).then((r) => r.ok ? r.json() : null).catch(() => null)))
+      .then((all) => { el.innerHTML = teams.map((x, i) => card(x, all[i])).join(''); });
+  })();
+</script>
+
 </body>
 </html>

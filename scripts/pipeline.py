@@ -14,8 +14,8 @@ build the map data, campuses, and a check at the end.
 The steps, in order (--steps, --from and --skip use these names):
 
     test           python -m pytest tests -q              only with --test
-    scrape         the quick pass: 2 minutes per school (--first-minutes), no browser, --workers 16
-    retry          what's still failed or partial, slowly: 3 minutes per school (--school-minutes),
+    scrape         the quick pass: 1 minute per season (--first-minutes), no browser, --workers 16
+    retry          what's still failed or partial, slowly: 3 minutes per season (--season-minutes),
                    --refresh --render --bios, --workers 8
     redo-current   only with --redo-current (spring sports): scrape again the seasons that came from a
                    main roster page with no year on it (build.py check says when there are any)
@@ -145,9 +145,9 @@ def plan_for(sport, args) -> Plan:
         plan.notes["scrape"] = "rosters already saved: only what's missing or partial (--rescrape for everything)"
     else:
         first = list(scrape)
-    plan.commands["scrape"] = [[*first, "--workers", str(args.workers), "--school-minutes", f"{getattr(args, 'first_minutes', 2):g}", "--timeout", "10"]]
+    plan.commands["scrape"] = [[*first, "--workers", str(args.workers), "--season-minutes", f"{getattr(args, 'first_minutes', 1):g}", "--timeout", "10"]]
     retry = [*scrape, "--retry-failed", "--render", "--bios", "--workers", str(args.retry_workers),
-             "--school-minutes", f"{args.school_minutes:g}"]
+             "--season-minutes", f"{args.season_minutes:g}"]
     if not args.no_refresh:
         retry.append("--refresh")
     plan.commands["retry"] = [retry]
@@ -161,7 +161,7 @@ def plan_for(sport, args) -> Plan:
         if schools:
             redo.append(py("scrape_rosters.py", *common, "--seasons", str(season), "--report", "--render",
                            "--bios", "--only", ",".join(schools), "--workers", str(args.retry_workers),
-                           "--school-minutes", f"{args.school_minutes:g}"))
+                           "--season-minutes", f"{args.season_minutes:g}"))
     plan.commands["redo-current"] = redo
     if not redo:
         plan.notes["redo-current"] = "no seasons from a main page without a year"
@@ -332,10 +332,10 @@ def main(argv=None) -> int:
                     help="the retry reuses downloaded pages instead of downloading them again")
     ap.add_argument("--workers", type=int, default=16, help="schools at once in the first pass (default 16)")
     ap.add_argument("--retry-workers", type=int, default=8, help="schools at once in the retry (default 8)")
-    ap.add_argument("--first-minutes", type=float, default=2,
-                    help="time per school in the first pass before its other seasons are left for the retry (default 2)")
-    ap.add_argument("--school-minutes", type=float, default=3,
-                    help="time per school in the retry before its other seasons wait for the next run (default 3)")
+    ap.add_argument("--first-minutes", type=float, default=1,
+                    help="time for each school's season in the first pass; what's left goes to the retry (default 1)")
+    ap.add_argument("--season-minutes", type=float, default=3,
+                    help="time for each school's season in the retry; what's left waits for the next run (default 3)")
     ap.add_argument("--give-up-after", type=int, metavar="N",
                     help="skip school-seasons that failed or came back partial N times (default 3; 0: never)")
     ap.add_argument("--retry-given-up", action="store_true",
@@ -347,6 +347,13 @@ def main(argv=None) -> int:
     ap.add_argument("--keep-going", action="store_true", help="carry on with the next step when one fails")
     ap.add_argument("--dry-run", action="store_true", help="print the commands without running anything")
     args = ap.parse_args(argv)
+    if sys.platform == "darwin" and not args.dry_run:
+        # Keep the Mac awake until this run ends. A sleeping Mac freezes the run, and it wakes up with no
+        # internet for a few seconds. (Closing the lid still sleeps it, unless it's on an external display.)
+        try:
+            subprocess.Popen(["caffeinate", "-is", "-w", str(os.getpid())])
+        except OSError:
+            pass
     # Everything the steps need, checked before a run that can take hours (Oct 31). The retry step uses the browser.
     if not args.dry_run:
         check_packages(["requests", "beautifulsoup4", "lxml", "geonamescache", "playwright"], "The pipeline")

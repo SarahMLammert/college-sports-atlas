@@ -38,6 +38,7 @@ import os
 import re
 import sys
 import threading
+import time
 import warnings
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field as dc_field
@@ -103,7 +104,11 @@ SCRAPE_ROSTERS_DOC = __doc__   # the --help text
 
 log = logging.getLogger("rosters")
 RENDER_TRIES = 2   # most addresses rendered per school-season with --render (each takes a few seconds)
-SCHOOL_MINUTES = 3.0   # the default for --school-minutes: a school that takes longer stops starting new seasons
+SEASON_MINUTES = 3.0   # the default for --season-minutes: a season that takes longer stops asking for more pages
+# A run of this many seasons with no roster, newest first, and the older ones aren't tried. Measured Nov 4 on 16 sports:
+# past a run of 3, 3.6% of the seasons with a result had a roster (89 of 2,483); past a run of 2, 8%.
+NO_ROSTER_RUN = 3
+NO_ROSTER_REASONS = {"wrong_season", "not_found", "newer_roster"}   # the site's answer, not a bad moment
 
 
 @dataclass
@@ -114,7 +119,7 @@ class Job:
     rules: sidearm.Rules = dc_field(default_factory=sidearm.Rules)
     wrong_seasons: dict = dc_field(default_factory=dict)   # config/<sport>/wrong_seasons.csv: (school, season) -> why
     season_pages: dict = dc_field(default_factory=dict)    # config/<sport>/season_pages.csv: (school, season) -> page
-    school_minutes: float = SCHOOL_MINUTES
+    season_minutes: float = SEASON_MINUTES
     render: bool = False
     bios: bool = False
     save_dir: Path | None = None
@@ -174,13 +179,14 @@ BIO_PROBE = 5   # player pages tried before giving up on a site whose pages have
 
 
 def fill_from_bios(players: list[dict], roster_url: str, fetcher: Fetcher, errors: list[str],
-                   colleges: frozenset = frozenset()) -> int:
+                   colleges: frozenset = frozenset(), deadline: float | None = None) -> int:
     """--bios: for a roster that lists players but mostly no hometowns (Morehouse), read each
     player's own page for his hometown, high school and previous school. Only blank fields are
     filled. Returns how many players got a hometown.
 
     Skipped when most players already have a hometown, or most have no page linked. If the first
-    few pages have nothing either (Tyler's pages are built by script), the rest aren't fetched."""
+    few pages have nothing either (Tyler's pages are built by script), the rest aren't fetched. At
+    ``deadline`` (time.monotonic()) it stops and keeps what it has."""
     if not players or sum(1 for p in players if p["hometown"]) >= 0.5 * len(players):
         return 0
     todo = [p for p in players if not p["hometown"] and p.get("bio_url")]
@@ -188,6 +194,9 @@ def fill_from_bios(players: list[dict], roster_url: str, fetcher: Fetcher, error
         return 0
     filled = tried = 0
     for p in todo:
+        if deadline is not None and time.monotonic() >= deadline:
+            errors.append(f"bios: ran out of time after {tried} of {len(todo)} player pages")
+            break
         if tried >= BIO_PROBE and not filled:
             errors.append(f"bios: the first {tried} player pages had no hometown; skipped the rest")
             break
@@ -215,6 +224,10 @@ def fill_from_bios(players: list[dict], roster_url: str, fetcher: Fetcher, error
 def scrape_school_season(school: dict, fetcher: Fetcher, season: int, division: str, job: Job,
                          prefer_idx: int | None = None) -> tuple[list[dict], dict, int | None]:
     rules, render, save_dir, bios = job.rules, job.render, job.save_dir, job.bios
+    # Checked between pages, so a season can run over by one page. Past it, this season stops asking and
+    # keeps any roster it already has; the school's next season starts with its own time.
+    deadline = time.monotonic() + job.season_minutes * 60
+    out_of_time = False
     is_current = season == core.current_season(spring=rules.spring)
     report = {"season": season, "school": school["school"], "division": division,
               "current_conference": school.get("conference", ""), "status": "failed",
@@ -245,6 +258,9 @@ def scrape_school_season(school: dict, fetcher: Fetcher, season: int, division: 
     # host, not per site, because some sites block the bare domain but answer on www. (Riverside).
     blocked_hosts: set[str] = set()
     for idx in order:
+        if time.monotonic() >= deadline:
+            out_of_time = True
+            break
         url = urls[idx]
         host = urlparse(url).netloc.lower()
         if host in blocked_hosts:
@@ -255,6 +271,7 @@ def scrape_school_season(school: dict, fetcher: Fetcher, season: int, division: 
             errors.append(f"{url}: {type(exc).__name__}")
             if "SSL" in type(exc).__name__:   # Python rejects the site's certificate; a browser may not
                 blocked.append(idx)
+                blocked_hosts.add(host)       # and its other addresses would too (Mt. San Antonio: 26 of them, every season)
             continue
         if status != 200:
             errors.append(f"{url}: HTTP {status}")
@@ -268,7 +285,7 @@ def scrape_school_season(school: dict, fetcher: Fetcher, season: int, division: 
             shown = None
             loaded.append(idx)
             check = "verified"
-            strategy, players = parse_roster(html, rules)
+            strategy, players = parse_roster(html, rules, url)
             if not players:
                 errors.append(f"{url}: no players found")
             best = (strategy, players, url, idx, check)    # saved under the listed address, redirect or not
@@ -290,7 +307,7 @@ def scrape_school_season(school: dict, fetcher: Fetcher, season: int, division: 
             check = "verified" if shown == season else "current"
         else:
             check = "verified" if shown == season else "unverified"
-        strategy, players = parse_roster(html, rules)
+        strategy, players = parse_roster(html, rules, final_url)
         if not players:
             errors.append(f"{url}: no players found")
         # A page that shows the right year beats a bigger page that shows no year.
@@ -316,6 +333,9 @@ def scrape_school_season(school: dict, fetcher: Fetcher, season: int, division: 
         followed = False
         n = 0
         while n < len(tries):
+            if time.monotonic() >= deadline:
+                out_of_time = True
+                break
             idx = tries[n]
             n += 1
             url = urls[idx]
@@ -332,7 +352,7 @@ def scrape_school_season(school: dict, fetcher: Fetcher, season: int, division: 
             if shown is not None and shown != season:
                 errors.append(f"render {url}: page shows {shown}")
                 continue
-            strategy, players = parse_roster(html, rules)
+            strategy, players = parse_roster(html, rules, url)
             if not players:
                 errors.append(f"render {url}: no players found")
                 # The page loaded but isn't the roster (Mars Hill's Sidearm address is "Not Found").
@@ -358,15 +378,22 @@ def scrape_school_season(school: dict, fetcher: Fetcher, season: int, division: 
                 break
 
     strategy, players, url, win_idx, check = best
+    earliest = None
+    if players and win_idx is not None and check != "unverified":     # the season list on the page this roster came from
+        page = fetcher._cache_path(urls[win_idx], rendered=strategy.startswith("rendered:"))
+        if Fetcher.is_cached(page):
+            earliest = sidearm.earliest_listed(Fetcher.read_cached(page))
     if save_dir and win_idx is not None:  # --save-pages: keep a copy of the page these players came from
         page = fetcher._cache_path(urls[win_idx], rendered=strategy.startswith("rendered:"))
         if Fetcher.is_cached(page):
             safe = re.sub(r"[^A-Za-z0-9]+", "_", school["school"]).strip("_")
             (save_dir / f"{safe}_{season}.html").write_text(Fetcher.read_cached(page), encoding="utf-8")
     if bios and url:
-        filled = fill_from_bios(players, url, fetcher, errors, rules.colleges)
+        filled = fill_from_bios(players, url, fetcher, errors, rules.colleges, deadline)
         if filled:
             strategy += "+bios"
+    if out_of_time and not players:
+        errors.insert(0, f"timed out: this season took over {job.season_minutes:g} minutes")
     rows = []
     for p in players:
         home = parse_hometown(p["hometown"])
@@ -389,23 +416,74 @@ def scrape_school_season(school: dict, fetcher: Fetcher, season: int, division: 
     elif rows:
         report["status"] = "partial"
     report["reason"] = core.reason_code({**report, "reason": ""})     # from what happened to each address tried
+    report["earliest_listed"] = earliest                              # scrape_school_all takes this back out
     return rows, report, (win_idx if not is_current else None)
+
+
+def oldest_listed(reports: dict[int, dict], fetcher: Fetcher) -> int | None:
+    """The oldest season the team's own pages list, from the pages of its 3 newest saved rosters (no downloads)."""
+    listed = []
+    good = [y for y, r in reports.items() if r.get("status") == "ok" and r.get("url") and r.get("season_check") != "unverified"]
+    for season in sorted(good, reverse=True)[:3]:
+        report = reports[season]
+        for rendered in sorted((False, True), key=lambda r: r != (report.get("strategy") or "").startswith("rendered:")):
+            page = fetcher._cache_path(report["url"], rendered=rendered)
+            if Fetcher.is_cached(page):
+                found = sidearm.earliest_listed(Fetcher.read_cached(page))
+                if found:
+                    listed.append(found)
+                break
+    return min(listed, default=None)
+
+
+def no_roster_run_ends(reports: dict[int, dict]) -> int | None:
+    """The season that completes a run of NO_ROSTER_RUN seasons with no roster, newest first; None if there's no run."""
+    run = 0
+    for season in sorted(reports, reverse=True):
+        report = reports[season]
+        if report.get("status") == "failed" and core.reason_code(report) in NO_ROSTER_REASONS:
+            run += 1
+            if run >= NO_ROSTER_RUN:
+                return season
+        elif report.get("status") not in ("no_program", "left_out"):
+            run = 0
+    return None
+
+
+def seasons_known_missing(by_season: dict[int, dict[str, dict]], skip: set, selected: list[int], fetcher: Fetcher,
+                          job: Job) -> tuple[dict[str, tuple], int, int]:
+    """What the saved reports and pages already say, for --retry-failed. Returns school -> (oldest season its team
+    pages list, season a run with no rosters ends at), and how many school-seasons each will skip."""
+    by_school: dict[str, dict[int, dict]] = {}
+    for season, reports in by_season.items():
+        for school, report in reports.items():
+            by_school.setdefault(school, {})[season] = report
+    known, unlisted, after_run = {}, 0, 0
+    for school, reports in by_school.items():
+        waiting = [y for y in selected if (school, y) not in skip and (school, y) not in job.season_pages]
+        if not waiting:
+            continue
+        oldest, run_end = oldest_listed(reports, fetcher), no_roster_run_ends(reports)
+        if oldest or run_end:
+            known[school] = (oldest, run_end)
+            unlisted += sum(1 for y in waiting if oldest and y < oldest)
+            after_run += sum(1 for y in waiting if run_end and y < run_end and not (oldest and y < oldest))
+    return known, unlisted, after_run
 
 
 def scrape_school_all(school: dict, seasons: list[int], fetcher: Fetcher, history: dict, job: Job,
                       skip: set[tuple[str, int]] = frozenset(),
-                      reference: tuple | None = None) -> list[tuple[int, list[dict], dict]]:
+                      reference: tuple | None = None, known: tuple = (None, None)) -> list[tuple[int, list[dict], dict]]:
     """All seasons for one school, newest first, reusing the URL pattern that worked.
 
     ``reference`` is (season, roster names) from an already-saved newer season, used to catch
     archive pages that silently show the current roster, optionally with a third item: the saved roster of
     the season before the current one ({name: class year}), to catch a current page that is still last
-    season's team. After job.school_minutes the school stops starting
-    new seasons: those are reported failed, and the next --retry-failed picks them up."""
-    import time
-    deadline = time.monotonic() + job.school_minutes * 60
+    season's team. ``known`` is what seasons_known_missing() found for this school. Each season has its own time
+    limit (job.season_minutes, in scrape_school_season)."""
     results = []
     prefer: int | None = None
+    earliest, run_end = known   # earliest: the oldest season this team's page lists, once a page has given its list
     newest_season, newest_names = (reference[0], reference[1]) if reference else (None, None)
     saved_before_current = reference[2] if reference and len(reference) > 2 else {}
     for season in sorted(seasons, reverse=True):
@@ -434,14 +512,22 @@ def scrape_school_all(school: dict, seasons: list[int], fetcher: Fetcher, histor
                                          "season_check": "", "strategy": "", "players": 0, "with_hometown": 0,
                                          "url": "", "error": "left out: " + (wrong or "its roster page is another season's")}))
             continue
-        if time.monotonic() > deadline:
+        if earliest and season < earliest and (school["school"], season) not in job.season_pages:
+            # Newest first, so the team's own page has already said this season isn't on the site
+            results.append((season, [], {"season": season, "school": school["school"], "division": "",
+                                         "current_conference": school.get("conference", ""), "status": "no_program",
+                                         "reason": "no_program", "season_check": "", "strategy": "", "players": 0, "with_hometown": 0,
+                                         "url": "", "error": f"not in the season list on the team's page (it starts at {earliest})"}))
+            continue
+        if run_end and season < run_end and (school["school"], season) not in job.season_pages:
             results.append((season, [], {"season": season, "school": school["school"], "division": division,
                                          "current_conference": school.get("conference", ""), "status": "failed",
-                                         "reason": "time_limit",
-                                         "season_check": "", "strategy": "", "players": 0, "with_hometown": 0,
-                                         "url": "", "error": f"timed out: this school took over {job.school_minutes:g} minutes"}))
+                                         "reason": "no_archive", "season_check": "", "strategy": "", "players": 0,
+                                         "with_hometown": 0, "url": "",
+                                         "error": f"not tried: {NO_ROSTER_RUN} newer seasons in a row have no roster (down to {run_end})"}))
             continue
         rows, report, idx = scrape_school_season(school, fetcher, season, division, job, prefer)
+        earliest = min(filter(None, (earliest, report.pop("earliest_listed", None))), default=None)
         names = {r["name"].lower() for r in rows}
         # A page with no visible year that is ~the same roster as a newer season is almost
         # certainly the site falling back to its current roster.
@@ -520,8 +606,8 @@ def _init_worker(sport_name: str, schools_csv: str, history_csv: str, job_settin
     _WORKER["fetcher"] = Fetcher(**fetch_args)
 
 
-def _scrape_in_worker(school, seasons, skip, reference):
-    return scrape_school_all(school, seasons, _WORKER["fetcher"], _WORKER["history"], _WORKER["job"], skip, reference)
+def _scrape_in_worker(school, seasons, skip, reference, known):
+    return scrape_school_all(school, seasons, _WORKER["fetcher"], _WORKER["history"], _WORKER["job"], skip, reference, known)
 
 
 # ---------------------------------------------------------------------------
@@ -661,8 +747,8 @@ def build_parser() -> argparse.ArgumentParser:
     ap.add_argument("--cache", default=ROOT / ".cache" / "html", type=Path)
     ap.add_argument("--workers", type=int, default=6, help="schools scraped in parallel (different sites)")
     ap.add_argument("--delay", type=float, default=1.5, help="seconds between requests to the same site")
-    ap.add_argument("--school-minutes", type=float, default=SCHOOL_MINUTES,
-                    help=f"stop a school after this many minutes; its other seasons are left for --retry-failed (default {SCHOOL_MINUTES:g})")
+    ap.add_argument("--season-minutes", type=float, default=SEASON_MINUTES,
+                    help=f"stop one school's season after this many minutes; --retry-failed tries it again (default {SEASON_MINUTES:g})")
     ap.add_argument("--timeout", type=int, default=15, help="seconds to wait for one page before giving up (default 15)")
     ap.add_argument("--refresh", action="store_true", help="ignore cached HTML and re-download")
     ap.add_argument("--render", action="store_true", help="headless Chromium for pages the fast path can't parse")
@@ -719,7 +805,7 @@ def run(ap: argparse.ArgumentParser, args, sport) -> int:
     save_dir = args.save_pages.expanduser() if args.save_pages else None
     # This run's settings, given to the functions that need them (D1 names only for the known colleges: smaller
     # colleges share names with high schools)
-    job_settings = dict(school_minutes=args.school_minutes, render=args.render, bios=args.bios, save_dir=save_dir)
+    job_settings = dict(season_minutes=args.season_minutes, render=args.render, bios=args.bios, save_dir=save_dir)
     job = Job.for_sport(sport, d1_schools(args.schools), **job_settings)
     seasons = parse_seasons(args.seasons) if args.seasons else [args.season or sport.current_season()]
     season_dir = report_dir = args.out
@@ -807,6 +893,12 @@ def run(ap: argparse.ArgumentParser, args, sport) -> int:
         log.info("Not trying %d school-seasons (%d schools) that failed or came back partial %d times already "
                  "(%s; --retry-given-up tries them again)", len(stop), len({k for k, _ in stop}),
                  args.give_up_after, ATTEMPTS_FILE)
+    # Seasons the saved pages and reports already rule out. --only and --retry-given-up ask for them on purpose.
+    known = {}
+    if args.retry_failed and not args.only and not args.retry_given_up:
+        known, unlisted, after_run = seasons_known_missing(prev_reports_all, skip, seasons, Fetcher(cache_dir=args.cache), job)
+        log.info("Season check: skipping %d school-seasons older than the team's own season list, and %d older than "
+                 "%d seasons in a row with no roster (--retry-given-up tries them)", unlisted, after_run, NO_ROSTER_RUN)
     todo = sum(1 for s in schools for y in seasons if (s["school"], y) not in skip)
     log.info("Scraping %d schools x %d seasons (%s) = %d roster pages",
              len(schools), len(seasons), ", ".join(map(str, seasons)), todo)
@@ -848,7 +940,7 @@ def run(ap: argparse.ArgumentParser, args, sport) -> int:
         fetcher = Fetcher(**fetch_args)
         pool = ThreadPoolExecutor(max_workers=workers)
         futures = {pool.submit(scrape_school_all, s, seasons, fetcher, history, job, skip_of.get(s["school"], set()),
-                               references.get(s["school"])): s
+                               references.get(s["school"]), known.get(s["school"], (None, None))): s
                    for s in schools}
     else:
         import multiprocessing
@@ -859,7 +951,7 @@ def run(ap: argparse.ArgumentParser, args, sport) -> int:
                                    initargs=(sport.name, str(args.schools), str(args.division_history),
                                              job_settings, fetch_args, args.verbose))
         futures = {pool.submit(_scrape_in_worker, s, seasons, skip_of.get(s["school"], set()),
-                               references.get(s["school"])): s
+                               references.get(s["school"]), known.get(s["school"], (None, None))): s
                    for s in schools}
     finished: set[str] = set()
     interrupted = False

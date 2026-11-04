@@ -4,29 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>College School Influence Map</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="description" content="Everyone connected to one college program: its players and coaches, where they came from and where they went.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Barlow:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="common.css">
 <style>
-/* One school's reach. The controls, then the map of everyone's moves on the left and the rankings on the right
-   (the Transfer Map's layout), then the school's people that season, with each person's career. With no school
-   picked, the map and the list rank the schools. Same file for every sport, opened as ?sport=<id>. */
-body { background: var(--panel) var(--paper-grain); }
-.bar { position: static; padding-bottom: 6px; }
-.tools { justify-content: flex-end; flex-basis: 640px; }
-@media (min-width: 1101px) {
-  .brand { padding: 8px 14px 9px; max-width: none; }
-  .brand h1 { font-size: 26px; white-space: nowrap; }
-  .brand .sub { margin-top: 2px; }
-}
 .page { padding: 0 max(var(--gap), env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(var(--gap), env(safe-area-inset-left)); display: flex; flex-direction: column; gap: 10px; }
-.ctl { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px 16px; }
 .ctl > div { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
 .ctl .grow { flex: 1 1 220px; max-width: 320px; }
 .ctl .seg button { padding: 6px 11px; font-size: 14px; white-space: nowrap; }
-.ctl .row { display: flex; align-items: center; gap: 6px; }
-.ctl select.field { width: auto; padding: 6px 8px; }
+.ctl select.field { width: auto; padding: 6px 28px 6px 8px; }
 .step { width: 34px; height: 34px; flex: none; border: 1px solid var(--border); border-radius: 50%; background: var(--panel); cursor: pointer; font-size: 12px; line-height: 1; padding: 0; }
 .step[aria-pressed="true"] { background: var(--fg); color: var(--panel); }
 #yearBox { flex: 0 1 300px; }
@@ -37,27 +27,13 @@ body { background: var(--panel) var(--paper-grain); }
 .check { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; cursor: pointer; white-space: nowrap; }
 .check input { accent-color: var(--accent); margin: 0; }
 .pfoot { display: flex; flex-wrap: wrap; gap: 8px 20px; }
-details.more summary { cursor: pointer; color: var(--accent); font-weight: 600; font-size: 14px; }
-details.more table { margin-top: 6px; }
 .ctl[hidden], .ctl > div[hidden] { display: none; }
-.ctl > div { max-width: 100%; }
 .ctl .seg { flex-wrap: wrap; max-width: 100%; border-radius: 16px; }
-.head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px 18px; min-height: 22px; }
-.key { display: inline-flex; align-items: center; gap: 6px 14px; font-size: 12px; color: var(--muted); flex-wrap: wrap; }
-.key svg { vertical-align: middle; margin-right: 5px; }
 .tgrid { display: grid; grid-template-columns: minmax(0, 1fr) 370px; gap: 14px; height: max(460px, calc(100dvh - var(--bar-h, 80px) - 120px)); }
-.tmap { position: relative; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--sea); min-height: 0; }
-.tmap canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: default; touch-action: manipulation; }
-.tmap canvas.hot { cursor: pointer; }
-.ttip { position: absolute; pointer-events: none; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 5px 9px; font-size: 13px; line-height: 1.35; box-shadow: var(--shadow); white-space: nowrap; font-variant-numeric: tabular-nums; z-index: 2; }
-.ttip .note { font-size: 12px; }
 .tside { border: 1px solid var(--line); border-radius: 8px; overflow: auto; overscroll-behavior: contain; padding: 14px 16px 18px; display: flex; flex-direction: column; gap: 18px; min-height: 0; background: var(--panel); }
-.sel-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
-.sel-head h2 { font-size: 24px; }
 .sel-head .note { margin: 3px 0 0; }
 .sel-head .link { white-space: nowrap; }
 .group { display: flex; flex-direction: column; gap: 6px; }
-.group h2 { font-size: 18px; }
 .group .note { margin: 0; }
 .rank { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
 .rank th, .rank td { padding: 5px 0; border-top: 1px solid var(--line); text-align: right; font-weight: 400; }
@@ -65,23 +41,9 @@ details.more table { margin-top: 6px; }
 .rank th { text-align: left; }
 .rank td.v { font-weight: 600; padding-left: 10px; }
 .rank td.r { color: var(--muted); padding-left: 12px; white-space: nowrap; }
-.tl { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
-.tl li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; font-size: 14px; border-radius: 4px; }
-.tl li.hl { background: var(--accent-soft); box-shadow: 0 0 0 4px var(--accent-soft); }
-.tl .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .tl .pos { display: inline-block; min-width: 1.9em; color: var(--muted); font-variant-numeric: tabular-nums; }
-.tl .nm button { all: unset; cursor: pointer; border-bottom: 1px dotted var(--muted); }
-.tl .nm button:hover { border-bottom-color: var(--fg); }
-.tl .nm button:focus-visible { outline: 2px solid var(--focus); }
-.tl .v { font-variant-numeric: tabular-nums; color: var(--muted); }
-.tl .v b { color: var(--fg); font-weight: 600; }
-.tl .b { grid-column: 1 / -1; height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
-.tl .b span { display: block; height: 100%; background: var(--bar-c, var(--accent)); }
-.tl.out .b span { --bar-c: var(--out); }
 .tside .seg { flex-wrap: wrap; border-radius: 12px; }
 .tside .seg button { padding: 5px 10px; font-size: 13px; }
-.fine { font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 12px; margin: 0; }
-
 /* everyone connected */
 .people { border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px 18px; display: flex; flex-direction: column; gap: 12px; background: var(--panel); min-width: 0; }
 .people[hidden] { display: none; }
@@ -117,14 +79,7 @@ details.more table { margin-top: 6px; }
 .career button:hover { border-bottom-color: var(--fg); }
 .career button:focus-visible { outline: 2px solid var(--focus); }
 .empty { color: var(--muted); font-size: 14px; margin: 0; }
-:root { --out: #23606b; }   /* deep sea, as on the Transfer Map */
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --out: #7fc4cf; } }
-:root[data-theme="dark"] { --out: #7fc4cf; }
-@media (max-width: 1000px) {
-  .tgrid { grid-template-columns: 1fr; height: auto; }
-  .tmap { aspect-ratio: 1.55; }
-  .tside { overflow: visible; }
-}
+:root { --out: #23606b; }
 @media (max-width: 760px) {
   .prow { grid-template-columns: 1fr; }
   .pcols { display: none; }
@@ -146,31 +101,16 @@ details.more table { margin-top: 6px; }
     <p class="sub" id="sub">Where one school's players and coaches went</p>
   </div>
   <div class="tools">
-    <a class="btn icon" href="index.html" aria-label="All sports" title="All sports">
-      <svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="2.2 2"/><circle cx="9" cy="2.5" r="1.8" fill="currentColor"/><circle cx="15.5" cy="9" r="1.8" fill="currentColor"/><circle cx="2.5" cy="9" r="1.8" fill="currentColor"/><circle cx="9" cy="15.5" r="1.8" fill="currentColor"/></svg>
-    </a>
-    <a class="btn" id="dotLink" href="players-dotmap.html" title="The dot map of hometowns">
-      <svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="5" cy="6" r="2.2" fill="currentColor"/><circle cx="12.5" cy="5" r="1.5" fill="currentColor"/><circle cx="10" cy="12" r="3" fill="currentColor"/></svg>
-      <span class="txt">Dot map</span>
-    </a>
-    <a class="btn" id="heatLink" href="players-heatmap.html" title="Compare where up to four schools find their players">
-      <svg viewBox="0 0 18 18" aria-hidden="true"><rect x="2" y="2" width="6" height="6" rx="1.3" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="10" y="2" width="6" height="6" rx="1.3" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="2" y="10" width="6" height="6" rx="1.3" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="10" y="10" width="6" height="6" rx="1.3" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
-      <span class="txt">Compare</span>
-    </a>
-    <a class="btn" id="transferLink" href="players-transfers.html" title="Where players transferred, school to school">
-      <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 14C5 6 11 4 15 5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" fill="none"/><path d="M11.5 2.8L15 5l-2.6 3.1" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
-      <span class="txt">Transfers</span>
-    </a>
-    <a class="btn" id="coachLink" href="staff-moves.html" title="The map of coaches moving between schools">
-      <svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="7" cy="9" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M11 7.5h5v2.6h-4.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-      <span class="txt">Coaches</span>
+    <a class="btn" href="index.html" aria-label="All sports" title="All sports">
+      <svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="2.2 2"/><circle cx="9" cy="2.5" r="1.8" fill="currentColor"/><circle cx="15.5" cy="9" r="1.8" fill="currentColor"/><circle cx="2.5" cy="9" r="1.8" fill="currentColor"/><circle cx="9" cy="15.5" r="1.8" fill="currentColor"/></svg><span class="txt">All sports</span>
     </a>
     <div style="position:relative">
-      <button type="button" class="btn icon" id="share" aria-label="Copy a link to this view" title="Copy a link to this view">
-        <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M7.5 10.5a3 3 0 0 0 4.2 0l2.6-2.6a3 3 0 0 0-4.2-4.2l-.9.9M10.5 7.5a3 3 0 0 0-4.2 0L3.7 10.1a3 3 0 0 0 4.2 4.2l.9-.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+      <button type="button" class="btn" id="share" aria-label="Copy a link to this view" title="Copy a link to this view">
+        <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M7.5 10.5a3 3 0 0 0 4.2 0l2.6-2.6a3 3 0 0 0-4.2-4.2l-.9.9M10.5 7.5a3 3 0 0 0-4.2 0L3.7 10.1a3 3 0 0 0 4.2 4.2l.9-.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg><span class="txt">Copy link</span>
       </button>
       <div class="toast" id="toast" role="status" hidden></div>
     </div>
+    <nav class="maptabs" id="mapTabs" aria-label="Maps"></nav>
   </div>
 </header>
 
@@ -243,7 +183,7 @@ details.more table { margin-top: 6px; }
     [data, staff] = await Promise.all([GP.loadData(),
       fetch(GP.dataUrl("staff_data.json")).then((r) => r.ok ? r.json() : null).catch(() => null)]);
     await data.loadNames();
-  } catch (e) { $("loading").textContent = "The data didn't load. If you opened this file directly, serve the folder instead (python -m http.server), or reload to try again."; return; }
+  } catch (e) { GP.loadFailed("The data"); return; }
   const sportWords = data.sport.replace(/^(.*) \((.*)\)$/, "$2 $1");
   $("sportName").textContent = sportWords;
   document.title = `College ${sportWords} School Influence Map`;
@@ -251,7 +191,7 @@ details.more table { margin-top: 6px; }
   const { schoolPalette, swatch } = GP.makePalette(data);
   const lab = data.seasonLabel, span = data.seasonSpan;
   const schoolName = (i) => data.schools[i][0];
-  const plural = (n, w) => `${fmt(n)} ${w}${n === 1 ? "" : "s"}`;
+  const { plural } = GP;
   const LEVEL_LABEL = { D1: "a D1 school", D2: "a Division II school", D3: "a Division III school", NAIA: "an NAIA school", JUCO: "a junior college", CLUB: "a club team", unknown: "another college" };
 
   // ---------- the people ----------
@@ -406,7 +346,7 @@ details.more table { margin-top: 6px; }
   };
 
   // ---------- page state ----------
-  const state = { school: -1, who: "all", staff: "coach", year: 0, at: -1, q: "", sort: "recent", showNone: false, rankOpen: false, metric: "sent", level: LEVELS[0] || "D1", shown: 100, open: "" };
+  const state = { school: -1, who: "all", staff: "coach", year: 0, at: -1, q: "", sort: "recent", showNone: false, metric: "sent", level: LEVELS[0] || "D1", shown: 100, open: "" };
   const ALL_YEARS = [...new Set([...data.SEASONS, ...perYear.keys()])].sort((a, b) => a - b);
   const FIRST = ALL_YEARS[0], LAST = ALL_YEARS[ALL_YEARS.length - 1];
   // The season the page opens on: the newest one with a real count of staff pages (see NOW), else the newest.
@@ -489,7 +429,7 @@ details.more table { margin-top: 6px; }
 
   // ---------- the map ----------
   const albers = d3.geoAlbersUsa();
-  const US_FIT = { type: "MultiPoint", coordinates: [[-124.7, 48.4], [-67, 47.4], [-80.1, 25.1], [-117.1, 32.5], [-97.2, 25.9], [-160, 21], [-150, 61]] };
+  const { US_FIT } = GP;
   const cv = $("cv"), g = cv.getContext("2d");
   let size = { w: 0, h: 0, dpr: 1 }, statePaths = [], stateFeatures = [], campusXY = [], hoverSchool = -1;
 
@@ -505,10 +445,7 @@ details.more table { margin-top: 6px; }
     campusXY = data.campus.map((c) => c ? albers([c.lon, c.lat]) : null);
     draw();
   }
-  function curve(a, b) {
-    const dx = b[0] - a[0], dy = b[1] - a[1], len = Math.hypot(dx, dy) || 1, bend = Math.min(.22 * len, 90);
-    return { a, b, c: [(a[0] + b[0]) / 2 + dy / len * bend, (a[1] + b[1]) / 2 - dx / len * bend] };
-  }
+  const { curve } = GP;
   function strokeCurve(q) { g.beginPath(); g.moveTo(q.a[0], q.a[1]); g.quadraticCurveTo(q.c[0], q.c[1], q.b[0], q.b[1]); g.stroke(); }
   const openRow = () => M && state.open ? M.rows.find((r) => r.key === state.open) || null : null;
   function draw() {
@@ -654,14 +591,14 @@ details.more table { margin-top: 6px; }
         <p class="note">${plural(total, "person").replace("persons", "people")} had been here by ${lab(state.year)}</p></div>
         <button type="button" class="link" id="clearSel">All schools</button></div>
       ${camp ? "" : `<p class="note">This school's campus isn't on file, so its lines can't be drawn.</p>`}
-      <div class="group"><h2>How it ranks</h2>
-        <p class="note">${STAT.sent[s] ? `${place("sent")} of ${fmt(r0.of)} ${esc(r0.lv)} schools for people who left for another school, all seasons` : `No one here has left for another school yet`}</p>
-        <details class="more"${state.rankOpen ? " open" : ""}><summary>All six rankings</summary><table class="rank"><tbody>${rankRows}</tbody></table></details></div>
-      <div class="group"><h2>Top schools, ${lab(state.year)}</h2>${outs.length ? barList(outs.slice(0, 12).map((r) => ({ s: r.s, n: r.n, label: atBtn(r.s) })), "out", outs[0].n) : `<p class="note">No one at another school that season.</p>`}
-        ${outs.length > 12 ? `<p class="note">+${plural(outs.length - 12, "more school")}</p>` : ""}</div>
+      ${GP.tabsHTML([
+        ["top", GP.tabCount(`Top schools, ${lab(state.year)}`, outs.length), `<div class="group">${outs.length ? barList(outs.slice(0, 12).map((r) => ({ s: r.s, n: r.n, label: atBtn(r.s) })), "out", outs[0].n) : `<p class="note">No one at another school that season.</p>`}
+          ${outs.length > 12 ? `<p class="note">+${plural(outs.length - 12, "more school")}</p>` : ""}</div>`],
+        ["rank", "How it ranks", `<div class="group"><p class="note">${STAT.sent[s] ? `${place("sent")} of ${fmt(r0.of)} ${esc(r0.lv)} schools for people who left for another school, all seasons` : `No one here has left for another school yet`}</p>
+          <table class="rank"><tbody>${rankRows}</tbody></table></div>`],
+      ], "School details")}
       <p class="fine">${FINE}</p>`;
   }
-  $("side").addEventListener("toggle", (e) => { if (e.target.matches("details.more")) state.rankOpen = e.target.open; }, true);
   $("side").addEventListener("click", (e) => {
     const p = e.target.closest("[data-pick]"); if (p) { pick(+p.dataset.pick); return; }
     const a = e.target.closest("[data-at]"); if (a) { setAt(state.at === +a.dataset.at ? -1 : +a.dataset.at); return; }
@@ -805,12 +742,14 @@ details.more table { margin-top: 6px; }
       if (state.metric !== "sent") q.set("rank", state.metric);
       if (state.level !== (LEVELS[0] || "D1")) q.set("level", state.level);
     }
+    GP.tabToParams(q);
     return q.toString();
   }
   function readUrl(firstLoad) {
     let hash = location.hash.slice(1);
     if (!hash && firstLoad) hash = GP.readSaved("school-influence:last") || "";
     const q = new URLSearchParams(hash), idx = (v) => { const i = data.schoolIndex.get((v || "").toLowerCase()); return i === undefined ? -1 : i; };
+    GP.tabFromParams(q);
     state.school = idx(q.get("school"));
     state.who = ["player", "coach", "head"].includes(q.get("who")) ? q.get("who") : "all";
     state.staff = q.get("staff") === "all" ? "all" : "coach";
@@ -821,13 +760,6 @@ details.more table { margin-top: 6px; }
     state.open = ""; state.q = ""; state.shown = 100; state.showNone = false; $("q").value = "";
   }
   // The other maps open on the same school.
-  function otherPages() {
-    const sc = state.school >= 0 ? "#school=" + encodeURIComponent(schoolName(state.school)) : "";
-    $("dotLink").href = "players-dotmap.html" + sc;
-    $("transferLink").href = "players-transfers.html" + sc;
-    $("coachLink").href = "staff-moves.html" + sc;
-    $("heatLink").href = "players-heatmap.html" + (state.school >= 0 ? "#compare=" + encodeURIComponent(schoolName(state.school)) : "");
-  }
   // The sentence above the map: what it shows, in words.
   function leadText() {
     const c = M.counts, name = esc(schoolName(M.sel)), y = lab(state.year), n = M.routes.length;
@@ -846,10 +778,10 @@ details.more table { margin-top: 6px; }
     $("yearText").textContent = lab(state.year);
     for (const id of ["whoBox", "yearBox"]) $(id).hidden = state.school < 0;
     $("hint").innerHTML = M ? leadText() : "Pick a school, here or on the map, to see where its people went.";
-    renderSide(); renderPeople(); drawKey(); draw(); otherPages();
+    renderSide(); renderPeople(); drawKey(); draw();
     const h = hashNow(); lastHash = h;
     try { localStorage.setItem(GP.saveKey("school-influence:last"), h); } catch (e) {}
-    try { history.replaceState(null, "", location.pathname + location.search + (h ? "#" + h : "")); } catch (e) {}
+    GP.setHash(h);
   }
   addEventListener("hashchange", () => { if (location.hash.slice(1) !== lastHash) { readUrl(); update(); } });
   $("share").addEventListener("click", () => { GP.copyLink($("toast")); });
@@ -866,8 +798,7 @@ details.more table { margin-top: 6px; }
   new ResizeObserver(layout).observe($("tmap"));
   layout();
   try {
-    const us = await fetch("https://cdn.jsdelivr.net/npm/us-atlas@3.0.1/states-10m.json").then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); });
-    stateFeatures = topojson.feature(us, us.objects.states).features.filter((f) => f.properties.name !== "Puerto Rico");
+    stateFeatures = await GP.usStates();
     layout();
   } catch (e) {
     $("hint").textContent = "The state outlines didn't load; the campuses and lines still draw in the right places.";

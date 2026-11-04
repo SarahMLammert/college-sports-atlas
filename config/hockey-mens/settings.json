@@ -85,7 +85,7 @@
   "frozen_min_pairs": 15,
   "transfer_needs_known_college": true,
   "site": {
-    "front_page": {"disc": "hockey", "name": "Hockey", "icon": "hockey", "order": 5, "sex": "m", "learn_summary": "Rink · positions · systems"},
+    "front_page": {"disc": "hockey", "name": "Hockey", "icon": "hockey", "order": 12, "sex": "m", "ring": "winter"},
     "women": false,
     "players-dotmap": {"title": "College Hockey (Men's) Recruiting Map", "description": "Where every varsity college men's ice hockey player since 2016 comes from, mapped: Division I, II and III.", "h1": "College Hockey (Men's) <span>Recruiting Map</span>", "sub": "Hometowns of every varsity college men's ice hockey player since 2016"},
     "players-heatmap": {"title": "College Hockey (Men's) Recruiting Footprints", "description": "Compare where up to four college men's ice hockey programs, from Division I to Division III, find their players, state by state.", "h1": "College Hockey (Men's) <span>Recruiting Footprints</span>"},

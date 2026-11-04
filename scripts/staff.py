@@ -202,11 +202,18 @@ def role_of(title: str, sport_label: str = "") -> str:
                          r"academy|developmental|strength|conditioning|performance", t)
     # other sports' words, less this sport's own ("hockey" is another sport for lacrosse, not for hockey)
     own_words = set(re.findall(r"[a-z]+", sport_label.lower()))
+    if own_words & {"track", "cross"}:           # usually one staff: "Head Cross Country/Track Coach"
+        own_words |= {"track", "field", "cross", "country"}
+    if "swimming" in own_words:
+        own_words |= {"swim", "diving"}
     others = "|".join(w for w in _OTHER_SPORTS.split("|") if not set(w.split()) <= own_words)
-    elsewhere = "|".join([r"field hockey"] + [rf"\b{w}\b" for w in sorted(sport_words)]) if sport_label else r"field hockey"
+    field_hockey = [] if "field" in own_words and "hockey" in own_words else [r"field hockey"]
+    elsewhere = "|".join(field_hockey + [rf"\b{w}\b" for w in sorted(sport_words)]) if sport_label else r"field hockey"
     # "Head Coach" in one part of the title ("Defensive Coordinator | Head Women's Flag Football Coach" is not)
     for part in re.split(r"\s*[/|;,&]\s*|\s+and\s+|\s+-\s+", t):
-        if re.search(r"\bhead (?:coach|women'?s|men'?s|baseball|softball|football|lacrosse|ice hockey|hockey|basketball|volleyball|soccer)\b|^head coach|\binterim head\b|"
+        if re.search(r"\bhead (?:coach|women'?s|men'?s|baseball|softball|football|lacrosse|ice hockey|hockey|basketball|volleyball|soccer|"
+                     r"wrestling|tennis|golf|swimming|diving|track|cross country|rowing|water polo|field hockey)\b|"
+                     r"\bdirector of (?:cross country|track|swimming|rowing)\b|^head coach|\binterim head\b|"
                      r"\bhead coach\b", part) \
                 and not re.search(r"\bassistant head\b|\bassistant to\b|\bassistant$|\bassistant\b.*\bhead coach\b|"
                                   r"head coach'?s?\b.*\b(?:assistant|staff|office)|special assistant|advisor|adviser|"

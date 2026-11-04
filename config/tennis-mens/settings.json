@@ -1,0 +1,89 @@
+{
+ "label": "Tennis (Men's)",
+ "roster_paths": [
+  "/sports/mens-tennis/roster",
+  "/sports/mten/roster",
+  "/sports/m-tennis/roster",
+  "/sports/mtennis/roster",
+  "/sports/tennis/roster"
+ ],
+ "presto_paths": [
+  "/sports/mten/{prev_season}-{yy}/roster"
+ ],
+ "min_players": 4,
+ "max_players": 22,
+ "junior_colleges": [
+  "San Jac",
+  "TJC",
+  "LSUE",
+  "LSU-Eunice",
+  "MGCCC",
+  "IWCC",
+  "JCCC",
+  "SCF",
+  "FSW",
+  "IRSC",
+  "JUCO"
+ ],
+ "spring_season": true,
+ "roster_sex": "m",
+ "combined_paths": [
+  "/sports/tennis/roster"
+ ],
+ "position_groups": [
+  "ALL"
+ ],
+ "position_abbreviations": {},
+ "position_words": [],
+ "position_fallback": "ALL",
+ "d1_divisions": [
+  "D1"
+ ],
+ "other_divisions": [
+  "D2",
+  "D3",
+  "NAIA",
+  "JUCO"
+ ],
+ "division_labels": {
+  "D1": "Division I",
+  "D2": "Division II",
+  "D3": "Division III",
+  "NAIA": "NAIA",
+  "JUCO": "Junior college (NJCAA, CCCAA, NWAC)"
+ },
+ "position_labels": {
+  "ALL": "All players"
+ },
+ "thin_roster": 6,
+ "frozen_min_pairs": 4,
+ "site": {
+  "front_page": {
+   "disc": "tennis",
+   "name": "Tennis",
+   "icon": "tennis",
+   "ring": "spring",
+   "order": 26,
+   "sex": "m"
+  },
+  "women": false,
+  "players-dotmap": {
+   "title": "College Tennis (Men's) Recruiting Map",
+   "description": "Where every varsity college men's tennis player since 2016 comes from, mapped: Division I, II and III, NAIA and junior college.",
+   "h1": "College Tennis (Men's) <span>Recruiting Map</span>",
+   "sub": "Hometowns of every varsity college men's tennis player since 2016"
+  },
+  "players-heatmap": {
+   "title": "College Tennis (Men's) Recruiting Footprints",
+   "description": "Compare where up to four college men's tennis programs, from Division I to junior college, find their players, state by state.",
+   "h1": "College Tennis (Men's) <span>Recruiting Footprints</span>"
+  },
+  "players-transfers": {
+   "title": "College Tennis (Men's) Transfer Map",
+   "description": "Where college men's tennis players transferred, school to school, since 2016.",
+   "h1": "College Tennis (Men's) <span>Transfer Map</span>",
+   "sub": "Where players moved from school to school since 2016"
+  }
+ },
+ "seasons": "2016-2026"
+}
