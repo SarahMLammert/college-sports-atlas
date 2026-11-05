@@ -41,6 +41,11 @@ window.SPORT_PAGES = {
     "players-heatmap": {"title": "College Football Recruiting Footprints", "description": "Compare where up to four college football programs, from FBS to junior college, find their players, state by state.", "h1": "College Football <span>Recruiting Footprints</span>"},
     "players-transfers": {"title": "College Football Transfer Map", "description": "Where college football players transferred, school to school, since 2016.", "h1": "College Football <span>Transfer Map</span>", "sub": "Where players moved from school to school since 2016"}
   },
+  "golf-mens": {"women": false, "spring": true,
+    "players-dotmap": {"title": "College Golf (Men's) Recruiting Map", "description": "Where every varsity college men's golf golfer since 2016 comes from, mapped: Division I, II and III, NAIA and junior college.", "h1": "College Golf (Men's) <span>Recruiting Map</span>", "sub": "Hometowns of every varsity college men's golf golfer since 2016"},
+    "players-heatmap": {"title": "College Golf (Men's) Recruiting Footprints", "description": "Compare where up to four college men's golf programs, from Division I to junior college, find their golfers, state by state.", "h1": "College Golf (Men's) <span>Recruiting Footprints</span>"},
+    "players-transfers": {"title": "College Golf (Men's) Transfer Map", "description": "Where college men's golf golfers transferred, school to school, since 2016.", "h1": "College Golf (Men's) <span>Transfer Map</span>", "sub": "Where golfers moved from school to school since 2016"}
+  },
   "hockey-mens": {"women": false, "spring": true,
     "players-dotmap": {"title": "College Hockey (Men's) Recruiting Map", "description": "Where every varsity college men's ice hockey player since 2016 comes from, mapped: Division I, II and III.", "h1": "College Hockey (Men's) <span>Recruiting Map</span>", "sub": "Hometowns of every varsity college men's ice hockey player since 2016"},
     "players-heatmap": {"title": "College Hockey (Men's) Recruiting Footprints", "description": "Compare where up to four college men's ice hockey programs, from Division I to Division III, find their players, state by state.", "h1": "College Hockey (Men's) <span>Recruiting Footprints</span>"},
@@ -91,6 +96,11 @@ window.SPORT_PAGES = {
     "players-heatmap": {"title": "College Tennis (Men's) Recruiting Footprints", "description": "Compare where up to four college men's tennis programs, from Division I to junior college, find their players, state by state.", "h1": "College Tennis (Men's) <span>Recruiting Footprints</span>"},
     "players-transfers": {"title": "College Tennis (Men's) Transfer Map", "description": "Where college men's tennis players transferred, school to school, since 2016.", "h1": "College Tennis (Men's) <span>Transfer Map</span>", "sub": "Where players moved from school to school since 2016"}
   },
+  "tennis-womens": {"women": true, "spring": true,
+    "players-dotmap": {"title": "College Tennis (Women's) Recruiting Map", "description": "Where every varsity college women's tennis player since 2016 comes from, mapped: Division I, II and III, NAIA and junior college.", "h1": "College Tennis (Women's) <span>Recruiting Map</span>", "sub": "Hometowns of every varsity college women's tennis player since 2016"},
+    "players-heatmap": {"title": "College Tennis (Women's) Recruiting Footprints", "description": "Compare where up to four college women's tennis programs, from Division I to junior college, find their players, state by state.", "h1": "College Tennis (Women's) <span>Recruiting Footprints</span>"},
+    "players-transfers": {"title": "College Tennis (Women's) Transfer Map", "description": "Where college women's tennis players transferred, school to school, since 2016.", "h1": "College Tennis (Women's) <span>Transfer Map</span>", "sub": "Where players moved from school to school since 2016"}
+  },
   "volleyball-mens": {"women": false, "spring": true,
     "players-dotmap": {"title": "College Volleyball (Men's) Recruiting Map", "description": "Where every varsity college men's volleyball player since 2016 comes from, mapped: Division I, II and III, NAIA and junior college.", "h1": "College Volleyball (Men's) <span>Recruiting Map</span>", "sub": "Hometowns of every varsity college men's volleyball player since 2016"},
     "players-heatmap": {"title": "College Volleyball (Men's) Recruiting Footprints", "description": "Compare where up to four college men's volleyball programs, from Division I to junior college, find their players, state by state.", "h1": "College Volleyball (Men's) <span>Recruiting Footprints</span>"},
@@ -138,6 +148,6 @@ window.SPORT_DISCS = [
   {"id": "lacrosse", "name": "Lacrosse", "sub": "", "icon": "lacrosse", "ring": "spring", "teams": [{"id": "lacrosse-mens", "sex": "m", "stats": [["431", "schools"], ["69K", "players"]], "built": true}, {"id": "lacrosse-womens", "sex": "w", "stats": [["583", "schools"], ["58K", "players"]], "built": true}]},
   {"id": "track", "name": "Track & Field", "sub": "", "icon": "track", "ring": "spring", "teams": [{"id": "track-mens", "sex": "m", "stats": null, "built": false}, {"id": "track-womens", "sex": "w", "stats": null, "built": false}]},
   {"id": "rowing", "name": "Rowing", "sub": "", "icon": "rowing", "ring": "spring", "teams": [{"id": "rowing-mens", "sex": "m", "stats": [["54", "schools"], ["9,030", "players"]], "built": true}, {"id": "rowing-womens", "sex": "w", "stats": [["137", "schools"], ["25K", "players"]], "built": true}]},
-  {"id": "tennis", "name": "Tennis", "sub": "", "icon": "tennis", "ring": "spring", "teams": [{"id": "tennis-mens", "sex": "m", "stats": [["737", "schools"], ["36K", "players"]], "built": true}, {"id": "tennis-womens", "sex": "w", "stats": null, "built": false}]},
-  {"id": "golf", "name": "Golf", "sub": "", "icon": "golf", "ring": "spring", "teams": [{"id": "golf-mens", "sex": "m", "stats": null, "built": false}, {"id": "golf-womens", "sex": "w", "stats": null, "built": false}]}
+  {"id": "tennis", "name": "Tennis", "sub": "", "icon": "tennis", "ring": "spring", "teams": [{"id": "tennis-mens", "sex": "m", "stats": [["737", "schools"], ["36K", "players"]], "built": true}, {"id": "tennis-womens", "sex": "w", "stats": [["880", "schools"], ["38K", "players"]], "built": true}]},
+  {"id": "golf", "name": "Golf", "sub": "", "icon": "golf", "ring": "spring", "teams": [{"id": "golf-mens", "sex": "m", "stats": [["939", "schools"], ["43K", "players"]], "built": true}, {"id": "golf-womens", "sex": "w", "stats": null, "built": false}]}
 ];

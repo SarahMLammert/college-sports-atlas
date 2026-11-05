@@ -20,6 +20,7 @@ hometown_raw,city,state,country,query,status,note,players
 "Shanghai, China",Shanghai,,,Shanghai,review,unknown state/country 'China',82
 "Freetown, Sierra Leone",Freetown,,,Freetown,review,unknown state/country 'Sierra Leone',80
 "Perth, Western Australia",Perth,,,Perth,review,unknown state/country 'Western Australia',80
+"Minsk, Belarus",Minsk,,,Minsk,review,unknown state/country 'Belarus',73
 "Montevideo, Uruguay",Montevideo,,,Montevideo,review,unknown state/country 'Uruguay',66
 Liberty Township,Liberty,,,Liberty,review,unknown state/country 'Township',65
 "Maputo, Mozambique",Maputo,,,Maputo,review,unknown state/country 'Mozambique',61
@@ -28,19 +29,18 @@ Liberty Township,Liberty,,,Liberty,review,unknown state/country 'Township',65
 "Bogota, Columbia",Bogota,,,Bogota,review,unknown state/country 'Columbia',51
 "Amsterdam, The Netherlands",Amsterdam,,,Amsterdam,review,unknown state/country 'The Netherlands',48
 "Calgary, Alb.",Calgary,,,Calgary,review,unknown state/country 'Alb.',48
+"Santa Cruz, Bolivia",Santa Cruz,,,Santa Cruz,review,unknown state/country 'Bolivia',45
 "Mililani, Hawai‘i",Mililani,,,Mililani,review,unknown state/country 'Hawai‘i',43
+"Almaty, Kazakhstan",Almaty,,,Almaty,review,unknown state/country 'Kazakhstan',40
 "Kinshasa, Democratic Republic of the Congo",Kinshasa,,,Kinshasa,review,unknown state/country 'Democratic Republic of the Congo',39
 "Libreville, Gabon",Libreville,,,Libreville,review,unknown state/country 'Gabon',38
 "Zrenjanin, Serbia",Zrenjanin,,,Zrenjanin,review,unknown state/country 'Serbia',37
-"Santa Cruz, Bolivia",Santa Cruz,,,Santa Cruz,review,unknown state/country 'Bolivia',35
 Sagamore Hills,Sagamore,,,Sagamore,review,"town name in several states: GA, OH",34
 "Thompson Station, Tenn.",Thompson Station,TN,USA,"Thompson Station, TN, USA",review,spelling? 'Thompson Station' -> Thompsons Station or Thompson's Station,32
 "Kathmandu, Nepal",Kathmandu,,,Kathmandu,review,unknown state/country 'Nepal',29
 West Bloomfield,West,,,West,review,"town name in several states: MI, NY, WI",29
 "Tirana, Albania",Tirana,,,Tirana,review,unknown state/country 'Albania',28
-"Almaty, Kazakhstan",Almaty,,,Almaty,review,unknown state/country 'Kazakhstan',23
 Olmsted Township,Olmsted,,,Olmsted,review,unknown state/country 'Township',23
-"Minsk, Belarus",Minsk,,,Minsk,review,unknown state/country 'Belarus',23
 "Kuala Lumpur, Malaysia",Kuala Lumpur,,,Kuala Lumpur,review,unknown state/country 'Malaysia',22
 The Woodlands,The,,,The,review,unknown state/country 'Woodlands',22
 "Pittsburg, Pa.",Pittsburg,PA,USA,"Pittsburg, PA, USA",review,spelling? 'Pittsburg' -> Pittsburgh or Wattsburg,20
@@ -52,8 +52,8 @@ The Woodlands,The,,,The,review,unknown state/country 'Woodlands',22
 "Bujumbura, Burundi",Bujumbura,,,Bujumbura,review,unknown state/country 'Burundi',17
 "St. Thomas, USVI",St. Thomas,,,St. Thomas,review,unknown state/country 'USVI',17
 "Woodlands, TX",Woodlands,TX,USA,"Woodlands, TX, USA",review,spelling? 'Woodlands' -> Woodland or Goodland,17
+"Jakarta, Indonesia",Jakarta,,,Jakarta,review,unknown state/country 'Indonesia',17
 "Guangzhou, China",Guangzhou,,,Guangzhou,review,unknown state/country 'China',16
-"Jakarta, Indonesia",Jakarta,,,Jakarta,review,unknown state/country 'Indonesia',16
 "Charlottetown, Prince Edward Island",Charlottetown,,,Charlottetown,review,unknown state/country 'Prince Edward Island',15
 "Hillard, Ohio",Hillard,OH,USA,"Hillard, OH, USA",review,spelling? 'Hillard' -> Hilliard or Willard,15
 "Pittsburg, PA",Pittsburg,PA,USA,"Pittsburg, PA, USA",review,spelling? 'Pittsburg' -> Pittsburgh or Wattsburg,15
@@ -90,6 +90,7 @@ Shelby Township,Shelby,,,Shelby,review,unknown state/country 'Township',10
 West Valley,West,,,West,review,unknown state/country 'Valley',10
 El Salvador,El,,,El,review,unknown state/country 'Salvador',10
 "Lahore, Pakistan",Lahore,,,Lahore,review,unknown state/country 'Pakistan',10
+"Yerevan, Armenia",Yerevan,,,Yerevan,review,unknown state/country 'Armenia',10
 "Baltimore, Mary.",Baltimore,,,Baltimore,review,unknown state/country 'Mary.',9
 "Brandon Valley, SD",Brandon Valley,SD,USA,"Brandon Valley, SD, USA",review,state? no Brandon Valley in SD; the only US town with this name is in FL,9
 "Hobart, Tasmania",Hobart,,,Hobart,review,unknown state/country 'Tasmania',9
@@ -138,7 +139,6 @@ Shelby Twp.,Shelby,,,Shelby,review,unknown state/country 'Twp.',6
 "Spring Grove, MM",Spring Grove,,,Spring Grove,review,unknown state/country 'MM',6
 "Toronto, Ontario Canada",Toronto,,,Toronto,review,unknown state/country 'Ontario Canada',6
 Valencia Venezuela,Valencia,,,Valencia,review,unknown state/country 'Venezuela',6
-"Yerevan, Armenia",Yerevan,,,Yerevan,review,unknown state/country 'Armenia',6
 "Zivinice, Bosnia–Herzegovina",Zivinice,,,Zivinice,review,unknown state/country 'Bosnia–Herzegovina',6
 "La Romana, D.R.",La Romana,,,La Romana,review,unknown state/country 'D.R.',6
 Tokyo Japan,Tokyo,,,Tokyo,review,unknown state/country 'Japan',6
@@ -358,6 +358,8 @@ Woodbridge Twp.,Woodbridge,,,Woodbridge,review,unknown state/country 'Twp.',4
 "Rancho Dominguez, Calif.",Rancho Dominguez,CA,USA,"Rancho Dominguez, CA, USA",review,"spelling? 'Rancho Dominguez' -> West Rancho Dominguez (starts differently: often another place, not a typo)",4
 "Halifax, NS",Halifax,,,Halifax,review,unknown state/country 'NS',4
 "Worchester, Mass.",Worchester,MA,USA,"Worchester, MA, USA",review,spelling? 'Worchester' -> Worcester or Dorchester,4
+"Nizhny Novgorod, Russia",Nizhny Novgorod,,,Nizhny Novgorod,review,unknown state/country 'Russia',4
+"Zimbabwe, Africa",Zimbabwe,,,Zimbabwe,review,unknown state/country 'Africa',4
 Academia Maria Reina,Academia Maria,,,Academia Maria,review,unknown state/country 'Reina',3
 "Ada, Koforidua",Ada,,,Ada,review,unknown state/country 'Koforidua',3
 "Aguadillas, Puerto Rico",Aguadillas,,,Aguadillas,review,unknown state/country 'Puerto Rico',3
@@ -605,6 +607,7 @@ Westlake H.S.,Westlake,,,Westlake,review,unknown state/country 'H.S.',3
 "Andover, Md.",Andover,MD,USA,"Andover, MD, USA",review,"spelling? 'Andover' -> Landover (starts differently: often another place, not a typo)",3
 "Bilthoven, Utrecht",Bilthoven,,,Bilthoven,review,unknown state/country 'Utrecht',3
 "Cordoba, Veracruz",Cordoba,,,Cordoba,review,unknown state/country 'Veracruz',3
+"Wuhan, China",Wuhan,,,Wuhan,review,unknown state/country 'China',3
 "Accra, Gahna",Accra,,,Accra,review,unknown state/country 'Gahna',2
 "Adelaide, SA",Adelaide,,,Adelaide,review,unknown state/country 'SA',2
 "Afton, MO",Afton,MO,USA,"Afton, MO, USA",review,spelling? 'Afton' -> Alton or Affton,2
@@ -1089,7 +1092,6 @@ Wilmington Da.,Wilmington,,,Wilmington,review,unknown state/country 'Da.',2
 "Winona, M",Winona,,,Winona,review,unknown state/country 'M',2
 "Winter Gard, Fla.",Winter Gard,FL,USA,"Winter Gard, FL, USA",review,spelling? 'Winter Gard' -> Winter Garden or Winter Park,2
 "Winterthur, Zurich",Winterthur,,,Winterthur,review,unknown state/country 'Zurich',2
-"Wuhan, China",Wuhan,,,Wuhan,review,unknown state/country 'China',2
 Xavier,Xavier,KS,USA,"Xavier, KS, USA",review,"checked by hand Oct 29: automatic fix looked wrong, not sure of the town",2
 Yangon Myanmar,Yangon,,,Yangon,review,unknown state/country 'Myanmar',2
 "Zola Predosa, Bologna",Zola Predosa,,,Zola Predosa,review,unknown state/country 'Bologna',2
@@ -1140,6 +1142,16 @@ Marin County,Marin,,,Marin,review,unknown state/country 'County',2
 "Valencia, Valenzuela",Valencia,,,Valencia,review,unknown state/country 'Valenzuela',2
 "Paris, Fance",Paris,,,Paris,review,unknown state/country 'Fance',2
 "Louiville, KY",Louiville,KY,USA,"Louiville, KY, USA",review,spelling? 'Louiville' -> Louisville or Logville,2
+Chinese Taipei,Chinese,,,Chinese,review,unknown state/country 'Taipei',2
+Saint Kitts and Nevis,Saint Kitts and,,,Saint Kitts and,review,unknown state/country 'Nevis',2
+"Baarn, Utrecht",Baarn,,,Baarn,review,unknown state/country 'Utrecht',2
+"Peterborough, Cambridgeshire",Peterborough,,,Peterborough,review,unknown state/country 'Cambridgeshire',2
+"Honduras, San Pedro Sula",Honduras,,,Honduras,review,unknown state/country 'San Pedro Sula',2
+"Minsk, AE",Minsk,,,Minsk,review,unknown state/country 'AE',2
+"Kingstown,VC.",Kingstown,,,Kingstown,review,unknown state/country 'VC.',2
+"Kingstown,VC",Kingstown,,,Kingstown,review,unknown state/country 'VC',2
+"Lome, Togolese Republic",Lome,,,Lome,review,unknown state/country 'Togolese Republic',2
+"Welford, S.C.",Welford,SC,USA,"Welford, SC, USA",review,spelling? 'Welford' -> Wellford or Wexford,2
 """""""Roanke Rapids NC""""""","""""""Roanke Rapids",,,"""""""Roanke Rapids",review,"unknown state/country 'NC""""""'",1
 """Blackville Hilda","""Blackville",,,"""Blackville",review,unknown state/country 'Hilda',1
 """Broward County","""Broward",,,"""Broward",review,unknown state/country 'County',1
@@ -1424,7 +1436,6 @@ Cherchell Tipaza Algeria,Cherchell Tipaza,,,Cherchell Tipaza,review,unknown stat
 "Chicago, III.",Chicago,,,Chicago,review,unknown state/country 'III.',1
 Chico State U. / R/L,Chico State,,,Chico State,review,unknown state/country 'U.',1
 "Chihuahua, Chihuaha",Chihuahua,,,Chihuahua,review,unknown state/country 'Chihuaha',1
-Chinese Taipei,Chinese,,,Chinese,review,unknown state/country 'Taipei',1
 Choa Chu Kang Crescent,Choa Chu Kang,,,Choa Chu Kang,review,unknown state/country 'Crescent',1
 "Cieszyn, Slask",Cieszyn,,,Cieszyn,review,unknown state/country 'Slask',1
 "Ciudad Cardel, Veracruz",Ciudad Cardel,,,Ciudad Cardel,review,unknown state/country 'Veracruz',1
@@ -2054,7 +2065,6 @@ Newham London,Newham,,,Newham,review,unknown state/country 'London',1
 Newton Abbot (Devon),Newton,,,Newton,review,unknown state/country 'Abbot',1
 "Newton County, HS",Newton County,,,Newton County,review,unknown state/country 'HS',1
 "Nicosia, Cypres",Nicosia,,,Nicosia,review,unknown state/country 'Cypres',1
-"Nizhny Novgorod, Russia",Nizhny Novgorod,,,Nizhny Novgorod,review,unknown state/country 'Russia',1
 "Nogent Sur Oise, Frannce",Nogent Sur Oise,,,Nogent Sur Oise,review,unknown state/country 'Frannce',1
 "Nojent Sur Oise, Frannce",Nojent Sur Oise,,,Nojent Sur Oise,review,unknown state/country 'Frannce',1
 Norman Okla.,Norman,,,Norman,review,unknown state/country 'Okla.',1
@@ -2982,7 +2992,6 @@ The Valley Anguilla,The Valley,,,The Valley,review,unknown state/country 'Anguil
 "Provo, Turks & Caicos Islands",Provo,,,Provo,review,unknown state/country 'Turks & Caicos Islands',1
 "Echt, Limburg",Echt,,,Echt,review,unknown state/country 'Limburg',1
 The Kyrgyz Republic,The Kyrgyz,,,The Kyrgyz,review,unknown state/country 'Republic',1
-"Zimbabwe, Africa",Zimbabwe,,,Zimbabwe,review,unknown state/country 'Africa',1
 Miller Grove,Miller,,,Miller,review,"town name in several states: OH, TX",1
 No Hometown (Military),No,,,No,review,unknown state/country 'Hometown',1
 "Nassau, New Providence",Nassau,,,Nassau,review,unknown state/country 'New Providence',1
@@ -3016,7 +3025,6 @@ Jackson Lumen Christi,Jackson Lumen,,,Jackson Lumen,review,unknown state/country
 "Weeze, North Rhine-Westphalia (Germany)",Weeze,,,Weeze,review,unknown state/country 'North Rhine-Westphalia',1
 Rhenish Girls,Rhenish,,,Rhenish,review,unknown state/country 'Girls',1
 "Tlhageng, Northern Cape",Tlhageng,,,Tlhageng,review,unknown state/country 'Northern Cape',1
-Saint Kitts and Nevis,Saint Kitts and,,,Saint Kitts and,review,unknown state/country 'Nevis',1
 Los Angele,Los,,,Los,review,unknown state/country 'Angele',1
 "Grobina, Lativa",Grobina,,,Grobina,review,unknown state/country 'Lativa',1
 "Bay Ridge, Brooklyn",Bay Ridge,,,Bay Ridge,review,unknown state/country 'Brooklyn',1
@@ -3450,6 +3458,223 @@ Command Secondary School,Command Secondary,,,Command Secondary,review,unknown st
 "Carterville, GA",Carterville,GA,USA,"Carterville, GA, USA",review,spelling? 'Carterville' -> Cartersville or Carnesville,1
 "Holton, Mass.",Holton,MA,USA,"Holton, MA, USA",review,"spelling? 'Holton' -> Bolton (starts differently: often another place, not a typo)",1
 "Clanton, N.J.",Clanton,NJ,USA,"Clanton, NJ, USA",review,spelling? 'Clanton' -> Clayton or Clinton,1
+"Taizhou, Zhejiang (China)",Taizhou,,,Taizhou,review,unknown state/country 'Zhejiang',1
+"Xi'an, Shaanxi",Xi'an,,,Xi'an,review,unknown state/country 'Shaanxi',1
+"Cipolletti, Rio Negro",Cipolletti,,,Cipolletti,review,unknown state/country 'Rio Negro',1
+"Port Coquitlam, Vancouver",Port Coquitlam,,,Port Coquitlam,review,unknown state/country 'Vancouver',1
+"Chisinau, Maldova",Chisinau,,,Chisinau,review,unknown state/country 'Maldova',1
+"Gela, Sicily",Gela,,,Gela,review,unknown state/country 'Sicily',1
+"Santa Tecla, El Savador",Santa Tecla,,,Santa Tecla,review,unknown state/country 'El Savador',1
+"Vushtrri, Kosova",Vushtrri,,,Vushtrri,review,unknown state/country 'Kosova',1
+Women's Tennis,Women's,,,Women's,review,unknown state/country 'Tennis',1
+"Maracaibo, Venezula",Maracaibo,,,Maracaibo,review,unknown state/country 'Venezula',1
+"Mérida, Yucatán",Mérida,,,Mérida,review,unknown state/country 'Yucatán',1
+"Vigo, Santa Irene",Vigo,,,Vigo,review,unknown state/country 'Santa Irene',1
+"Colombia, Girardot",Colombia,,,Colombia,review,unknown state/country 'Girardot',1
+"Manila, Phlippines",Manila,,,Manila,review,unknown state/country 'Phlippines',1
+"Brolo, Sicily",Brolo,,,Brolo,review,unknown state/country 'Sicily',1
+"Makati City, Manila",Makati City,,,Makati City,review,unknown state/country 'Manila',1
+Florida St. College at Jackson,Florida St. College at,,,Florida St. College at,review,unknown state/country 'Jackson',1
+"Paramaribo, Surinam",Paramaribo,,,Paramaribo,review,unknown state/country 'Surinam',1
+"Dniprodzerzhinsk, Dnipropetrovsk region",Dniprodzerzhinsk,,,Dniprodzerzhinsk,review,unknown state/country 'Dnipropetrovsk region',1
+"Opglabbeek, Belgiu",Opglabbeek,,,Opglabbeek,review,unknown state/country 'Belgiu',1
+"Alpharetta, Ga. Ga.",Alpharetta,,,Alpharetta,review,unknown state/country 'Ga. Ga.',1
+"Johannesburg, S.A.",Johannesburg,,,Johannesburg,review,unknown state/country 'S.A.',1
+"Barcelona, SPA",Barcelona,,,Barcelona,review,unknown state/country 'SPA',1
+"Hyderabad, AF Pacific",Hyderabad,,,Hyderabad,review,unknown state/country 'AF Pacific',1
+"Hungary, Budapest",Hungary,,,Hungary,review,unknown state/country 'Budapest',1
+"Lara, Barquisimeto (Venezuela)",Lara,,,Lara,review,unknown state/country 'Barquisimeto',1
+"Bohutin, Prague",Bohutin,,,Bohutin,review,unknown state/country 'Prague',1
+"Karlsbad, Baden-Wuerttemberg",Karlsbad,,,Karlsbad,review,unknown state/country 'Baden-Wuerttemberg',1
+"Dushanbe, Tarikistan",Dushanbe,,,Dushanbe,review,unknown state/country 'Tarikistan',1
+"Apizaco, Tlaxcala",Apizaco,,,Apizaco,review,unknown state/country 'Tlaxcala',1
+"Hull, East Yorkshire",Hull,,,Hull,review,unknown state/country 'East Yorkshire',1
+Nieuwerkerk a/d IJssel,Nieuwerkerk,,,Nieuwerkerk,review,unknown state/country 'a',1
+"West Vancouver, British Columb",West Vancouver,,,West Vancouver,review,unknown state/country 'British Columb',1
+"Banja Luka, B&H",Banja Luka,,,Banja Luka,review,unknown state/country 'B&H',1
+"Queretaro, Queretaro",Queretaro,,,Queretaro,review,unknown state/country 'Queretaro',1
+"Panjim, Goa (India)",Panjim,,,Panjim,review,unknown state/country 'Goa',1
+"Caplijina, Bosnia and Herzegoniva",Caplijina,,,Caplijina,review,unknown state/country 'Bosnia and Herzegoniva',1
+"Johannesburg, South Africia",Johannesburg,,,Johannesburg,review,unknown state/country 'South Africia',1
+"Bogota, Columbus",Bogota,,,Bogota,review,unknown state/country 'Columbus',1
+ins Joan Oro,ins Joan,,,ins Joan,review,unknown state/country 'Oro',1
+"Valencia Carabobo, Venenzuela",Valencia Carabobo,,,Valencia Carabobo,review,unknown state/country 'Venenzuela',1
+"Hong Kong, AP",Hong Kong,,,Hong Kong,review,unknown state/country 'AP',1
+Ixtapan De La Sal,Ixtapan De La,,,Ixtapan De La,review,unknown state/country 'Sal',1
+St Vincent & Grenadines,St Vincent &,,,St Vincent &,review,unknown state/country 'Grenadines',1
+Lower Saxon,Lower,,,Lower,review,unknown state/country 'Saxon',1
+Grier School,Grier,,,Grier,review,unknown state/country 'School',1
+"Chennai, Tamil Nadu",Chennai,,,Chennai,review,unknown state/country 'Tamil Nadu',1
+"Westham, Pevensey, East Sussex","Westham, Pevensey",,,"Westham, Pevensey",review,unknown state/country 'East Sussex',1
+"BARCELONA, SPAN",BARCELONA,,,BARCELONA,review,unknown state/country 'SPAN',1
+"PRAGUE, CZECH",PRAGUE,,,PRAGUE,review,unknown state/country 'CZECH',1
+"Noida, Uttar Pradesh",Noida,,,Noida,review,unknown state/country 'Uttar Pradesh',1
+Max-Planck-Gymnasium Schorndorf,Max-Planck-Gymnasium,,,Max-Planck-Gymnasium,review,unknown state/country 'Schorndorf',1
+"Chelmsford, Essex",Chelmsford,,,Chelmsford,review,unknown state/country 'Essex',1
+"Darmstadt, UN",Darmstadt,,,Darmstadt,review,unknown state/country 'UN',1
+"Benin, Africa",Benin,,,Benin,review,unknown state/country 'Africa',1
+"Riga, Lativa",Riga,,,Riga,review,unknown state/country 'Lativa',1
+"Habib Bourguiba, Mahdia",Habib Bourguiba,,,Habib Bourguiba,review,unknown state/country 'Mahdia',1
+"Barcelona, SP",Barcelona,,,Barcelona,review,unknown state/country 'SP',1
+"La Paz, Boliva",La Paz,,,La Paz,review,unknown state/country 'Boliva',1
+"Xalapa, Veracruz",Xalapa,,,Xalapa,review,unknown state/country 'Veracruz',1
+"Colombo, Sri-Lanka",Colombo,,,Colombo,review,unknown state/country 'Sri-Lanka',1
+"Painswick, Gloucestershire",Painswick,,,Painswick,review,unknown state/country 'Gloucestershire',1
+Port Elizabeth S.,Port Elizabeth,,,Port Elizabeth,review,unknown state/country 'S.',1
+"Belarus, Minsk",Belarus,,,Belarus,review,unknown state/country 'Minsk',1
+"Johannesburg, Gauteng",Johannesburg,,,Johannesburg,review,unknown state/country 'Gauteng',1
+"Leusden, Urecht",Leusden,,,Leusden,review,unknown state/country 'Urecht',1
+"Bayside, Queens",Bayside,,,Bayside,review,unknown state/country 'Queens',1
+"Noida, UP",Noida,,,Noida,review,unknown state/country 'UP',1
+"Almaty, Kazkhstan",Almaty,,,Almaty,review,unknown state/country 'Kazkhstan',1
+"Georgia, Tbilisi",Georgia,,,Georgia,review,unknown state/country 'Tbilisi',1
+U. S. Virgin Islands,U. S. Virgin,,,U. S. Virgin,review,unknown state/country 'Islands',1
+Poroia-Entre Rios,Poroia-Entre,,,Poroia-Entre,review,unknown state/country 'Rios',1
+Saint Germain en Lay,Saint Germain en,,,Saint Germain en,review,unknown state/country 'Lay',1
+"Rabat, Morroco",Rabat,,,Rabat,review,unknown state/country 'Morroco',1
+"Brasília, DF",Brasília,,,Brasília,review,unknown state/country 'DF',1
+"California, Temecula",California,,,California,review,unknown state/country 'Temecula',1
+Al Nahda,Al,,,Al,review,unknown state/country 'Nahda',1
+"Thailand, Bangkok",Thailand,,,Thailand,review,unknown state/country 'Bangkok',1
+Foley H.S.,Foley,,,Foley,review,unknown state/country 'H.S.',1
+"Sao, Paulo/Brazil",Sao,,,Sao,review,unknown state/country 'Paulo',1
+"Almaty, Kazakstahn",Almaty,,,Almaty,review,unknown state/country 'Kazakstahn',1
+Zalesie Gorne,Zalesie,,,Zalesie,review,unknown state/country 'Gorne',1
+"Horrogate, North Yorkshire, GB","Horrogate, North Yorkshire",,,"Horrogate, North Yorkshire",review,unknown state/country 'GB',1
+"Sochi, Rusia",Sochi,,,Sochi,review,unknown state/country 'Rusia',1
+"Oslo, Nordstrand",Oslo,,,Oslo,review,unknown state/country 'Nordstrand',1
+"Kaohsiung, Tawain",Kaohsiung,,,Kaohsiung,review,unknown state/country 'Tawain',1
+West Sussex,West,,,West,review,unknown state/country 'Sussex',1
+Buckeye Online School For Success,Buckeye Online School For,,,Buckeye Online School For,review,unknown state/country 'Success',1
+"Anguilla, Caribbean",Anguilla,,,Anguilla,review,unknown state/country 'Caribbean',1
+"Northfield, Mnn.",Northfield,,,Northfield,review,unknown state/country 'Mnn.',1
+"Zoetermeer, Zuid-Holland, Nederland","Zoetermeer, Zuid-Holland",,,"Zoetermeer, Zuid-Holland",review,unknown state/country 'Nederland',1
+"Bad Salzuflen, Germnay",Bad Salzuflen,,,Bad Salzuflen,review,unknown state/country 'Germnay',1
+"Guwahati, Assam",Guwahati,,,Guwahati,review,unknown state/country 'Assam',1
+"Caplijina, Bosnia and Herzegov",Caplijina,,,Caplijina,review,unknown state/country 'Bosnia and Herzegov',1
+"Nuertingen, Baden-Wuerttemberg",Nuertingen,,,Nuertingen,review,unknown state/country 'Baden-Wuerttemberg',1
+"Coleshill, Warwickshire",Coleshill,,,Coleshill,review,unknown state/country 'Warwickshire',1
+"Menomie, Wisconsin",Menomie,WI,USA,"Menomie, WI, USA",review,spelling? 'Menomie' -> Menomonie or Menominee,1
+"Irvina, CA",Irvina,CA,USA,"Irvina, CA, USA",review,spelling? 'Irvina' -> Irvine or Irving,1
+"Roswell, TX",Roswell,TX,USA,"Roswell, TX, USA",review,"spelling? 'Roswell' -> Crowell (starts differently: often another place, not a typo)",1
+"Middltown, NJ",Middltown,NJ,USA,"Middltown, NJ, USA",review,spelling? 'Middltown' -> Middletown or Milltown,1
+"West Roxbury, N.Y.",West Roxbury,NY,USA,"West Roxbury, NY, USA",review,state? no West Roxbury in NY; the only US town with this name is in MA,1
+"Ebesnburg, Pa.",Ebesnburg,PA,USA,"Ebesnburg, PA, USA",review,spelling? 'Ebesnburg' -> Ebensburg or Edenburg,1
+"Summerville, Ohio",Summerville,OH,USA,"Summerville, OH, USA",review,spelling? 'Summerville' -> Summersville or Somerville,1
+"Conway Springs, Ark.",Conway Springs,AR,USA,"Conway Springs, AR, USA",review,state? no Conway Springs in AR; the only US town with this name is in KS,1
+"Pine Creek, CO",Pine Creek,CO,USA,"Pine Creek, CO, USA",review,spelling? 'Pine Creek' -> Piney Creek or Pine Crest,1
+"Prattsburg, NY",Prattsburg,NY,USA,"Prattsburg, NY, USA",review,spelling? 'Prattsburg' -> Prattsburgh or Plattsburgh,1
+"Grosse lle, MI",Grosse lle,MI,USA,"Grosse lle, MI, USA",review,"spelling? 'Grosse lle' -> Grosse Ile (starts differently: often another place, not a typo)",1
+"Hasbrouck Heights, PA",Hasbrouck Heights,PA,USA,"Hasbrouck Heights, PA, USA",review,state? no Hasbrouck Heights in PA; the only US town with this name is in NJ,1
+"Coffeville, Miss.",Coffeville,MS,USA,"Coffeville, MS, USA",review,spelling? 'Coffeville' -> Coffeeville or Coleville,1
+"Roger, Ark.",Roger,AR,USA,"Roger, AR, USA",review,spelling? 'Roger' -> Rogers or Rover,1
+"Clintwood, WV",Clintwood,WV,USA,"Clintwood, WV, USA",review,"spelling? 'Clintwood' -> Linwood (starts differently: often another place, not a typo)",1
+"Long Lake, MO",Long Lake,MO,USA,"Long Lake, MO, USA",review,spelling? 'Long Lake' -> Long Lane or Love Lake,1
+"St. Petersburg Beach, Fla.",St. Petersburg Beach,FL,USA,"St. Petersburg Beach, FL, USA",review,"spelling? 'St. Petersburg Beach' -> St. Petersburg CCD (starts differently: often another place, not a typo)",1
+"Bothel, WA",Bothel,WA,USA,"Bothel, WA, USA",review,spelling? 'Bothel' -> Bothell or Bethel,1
+"Sugar Hills, Ga.",Sugar Hills,GA,USA,"Sugar Hills, GA, USA",review,spelling? 'Sugar Hills' -> Sugar Hill or Sugar Mill,1
+Rio Grande do Sul,Rio Grande do,,,Rio Grande do,review,unknown state/country 'Sul',1
+"Plettenberg Bay, Z.A.",Plettenberg Bay,,,Plettenberg Bay,review,unknown state/country 'Z.A.',1
+"Kindersley, Saskatchewan, Cana","Kindersley, Saskatchewan",,,"Kindersley, Saskatchewan",review,unknown state/country 'Cana',1
+"Vrchlabi, Czech Reupublic",Vrchlabi,,,Vrchlabi,review,unknown state/country 'Czech Reupublic',1
+"Saint-Louis, Reunion Island",Saint-Louis,,,Saint-Louis,review,unknown state/country 'Reunion Island',1
+Middleburg South Africa,Middleburg South,,,Middleburg South,review,unknown state/country 'Africa',1
+Pretoria South Africa,Pretoria South,,,Pretoria South,review,unknown state/country 'Africa',1
+Men's Golf,Men's,,,Men's,review,unknown state/country 'Golf',1
+Nova Scotia,Nova,,,Nova,review,unknown state/country 'Scotia',1
+"Norway, Oslo, Nordstrand","Norway, Oslo",,,"Norway, Oslo",review,unknown state/country 'Nordstrand',1
+Trabuco Hills,Trabuco,,,Trabuco,review,unknown state/country 'Hills',1
+"Wolongong, Autralia",Wolongong,,,Wolongong,review,unknown state/country 'Autralia',1
+"Port of Spain, Trinadad and Tabago",Port of Spain,,,Port of Spain,review,unknown state/country 'Trinadad and Tabago',1
+"Uvaly, Czech Repiblic",Uvaly,,,Uvaly,review,unknown state/country 'Czech Repiblic',1
+"Port of Spain, Trinidad and Tabago",Port of Spain,,,Port of Spain,review,unknown state/country 'Trinidad and Tabago',1
+"Cairo, Eqypt",Cairo,,,Cairo,review,unknown state/country 'Eqypt',1
+"Svedala, Skane",Svedala,,,Svedala,review,unknown state/country 'Skane',1
+"La Antilla, Huelva, Andalucía","La Antilla, Huelva",,,"La Antilla, Huelva",review,unknown state/country 'Andalucía',1
+"Linkoping, Ostergotland",Linkoping,,,Linkoping,review,unknown state/country 'Ostergotland',1
+"St. Brélade, Jersey, Channel Islands","St. Brélade, Jersey",,,"St. Brélade, Jersey",review,unknown state/country 'Channel Islands',1
+"Quito, Pichincha",Quito,,,Quito,review,unknown state/country 'Pichincha',1
+Mira Costa,Mira,,,Mira,review,unknown state/country 'Costa',1
+Ierra Madre,Ierra,,,Ierra,review,unknown state/country 'Madre',1
+"Belgium, Ott.",Belgium,,,Belgium,review,unknown state/country 'Ott.',1
+"Bakersfield, Calif. Bakersfield Christian HS /Chico State",Bakersfield,,,Bakersfield,review,unknown state/country 'Calif. Bakersfield Christian HS',1
+"Woodcroft, South Austrailia",Woodcroft,,,Woodcroft,review,unknown state/country 'South Austrailia',1
+"Tvarred, Vastergotland (Sweden)",Tvarred,,,Tvarred,review,unknown state/country 'Vastergotland',1
+North Rhine-Westphalia (Germany),North,,,North,review,unknown state/country 'Rhine-Westphalia',1
+Newent School,Newent,,,Newent,review,unknown state/country 'School',1
+"Springfield, P.",Springfield,,,Springfield,review,unknown state/country 'P.',1
+"The Vines, Perth",The Vines,,,The Vines,review,unknown state/country 'Perth',1
+"Annapolis, Mid.",Annapolis,,,Annapolis,review,unknown state/country 'Mid.',1
+"Puurs-Sint-Amands, Antwerp",Puurs-Sint-Amands,,,Puurs-Sint-Amands,review,unknown state/country 'Antwerp',1
+"Rathfarnham, Dublin /",Rathfarnham,,,Rathfarnham,review,unknown state/country 'Dublin',1
+"Rohatec, Czech Rupublic",Rohatec,,,Rohatec,review,unknown state/country 'Czech Rupublic',1
+"De Doorns, W. Cape, South Afri","De Doorns, W. Cape",,,"De Doorns, W. Cape",review,unknown state/country 'South Afri',1
+"Opava-Vavrovice, Czech Republi",Opava-Vavrovice,,,Opava-Vavrovice,review,unknown state/country 'Czech Republi',1
+"Saladillo, Buenos Aires, Argen","Saladillo, Buenos Aires",,,"Saladillo, Buenos Aires",review,unknown state/country 'Argen',1
+"Johannnesburg, Z.A.",Johannnesburg,,,Johannnesburg,review,unknown state/country 'Z.A.',1
+"England, Thames Ditton",England,,,England,review,unknown state/country 'Thames Ditton',1
+"Vossem, Brussels",Vossem,,,Vossem,review,unknown state/country 'Brussels',1
+"Edmond, Olka.",Edmond,,,Edmond,review,unknown state/country 'Olka.',1
+Granita Hills,Granita,,,Granita,review,unknown state/country 'Hills',1
+"Markkleeberg, Saxony",Markkleeberg,,,Markkleeberg,review,unknown state/country 'Saxony',1
+Sierra Canyon,Sierra,,,Sierra,review,unknown state/country 'Canyon',1
+"Almancil, Protugal",Almancil,,,Almancil,review,unknown state/country 'Protugal',1
+"Vila Nova de Famalicao, PT",Vila Nova de Famalicao,,,Vila Nova de Famalicao,review,unknown state/country 'PT',1
+"Okinawa, Japana",Okinawa,,,Okinawa,review,unknown state/country 'Japana',1
+"Gomez Palacio, Durango",Gomez Palacio,,,Gomez Palacio,review,unknown state/country 'Durango',1
+"Caracas, Venuzuela",Caracas,,,Caracas,review,unknown state/country 'Venuzuela',1
+"Maldon, Essex",Maldon,,,Maldon,review,unknown state/country 'Essex',1
+Canford Cliffs,Canford,,,Canford,review,unknown state/country 'Cliffs',1
+East Ripon,East,,,East,review,unknown state/country 'Ripon',1
+Thailand & Samutprakarn,Thailand &,,,Thailand &,review,unknown state/country 'Samutprakarn',1
+"Redditch, Birmingham",Redditch,,,Redditch,review,unknown state/country 'Birmingham',1
+"Guernsey, Channel Islands (U.K.)",Guernsey,,,Guernsey,review,unknown state/country 'Channel Islands',1
+Yuca Valley,Yuca,,,Yuca,review,unknown state/country 'Valley',1
+"Woldingham, Surrey",Woldingham,,,Woldingham,review,unknown state/country 'Surrey',1
+"Vilnius, Lithuainia",Vilnius,,,Vilnius,review,unknown state/country 'Lithuainia',1
+"Torreon, Coahuila, Mexio","Torreon, Coahuila",,,"Torreon, Coahuila",review,unknown state/country 'Mexio',1
+"San Luis Potosí, SLP",San Luis Potosí,,,San Luis Potosí,review,unknown state/country 'SLP',1
+"Madrid, ES",Madrid,,,Madrid,review,unknown state/country 'ES',1
+"Milton Keynes, GB",Milton Keynes,,,Milton Keynes,review,unknown state/country 'GB',1
+"Porto Seguro, BR",Porto Seguro,,,Porto Seguro,review,unknown state/country 'BR',1
+"Barnsley, GB",Barnsley,,,Barnsley,review,unknown state/country 'GB',1
+South Hadely,South,,,South,review,unknown state/country 'Hadely',1
+N. Attleboro,N.,,,N.,review,unknown state/country 'Attleboro',1
+"Baton Rouge, Lou",Baton Rouge,,,Baton Rouge,review,unknown state/country 'Lou',1
+"Houma, Lou.",Houma,,,Houma,review,unknown state/country 'Lou.',1
+"Chester, Cheshire",Chester,,,Chester,review,unknown state/country 'Cheshire',1
+"Fergus Hills, Minn.",Fergus Hills,MN,USA,"Fergus Hills, MN, USA",review,"spelling? 'Fergus Hills' -> Fergus Falls (starts differently: often another place, not a typo)",1
+"Hay, Kan.",Hay,KS,USA,"Hay, KS, USA",review,spelling? 'Hay' -> Hays or hays,1
+"Iamsville, MD",Iamsville,MD,USA,"Iamsville, MD, USA",review,spelling? 'Iamsville' -> Ijamsville or Daysville,1
+"Des Plaines, Wis.",Des Plaines,WI,USA,"Des Plaines, WI, USA",review,state? no Des Plaines in WI; the only US town with this name is in IL,1
+"Downers, Ill.",Downers,IL,USA,"Downers, IL, USA",review,state? no Downers in IL; the only US town with this name is in VT,1
+"Shaver, Pa.",Shaver,PA,USA,"Shaver, PA, USA",review,spelling? 'Shaver' -> Shaler or Shaner,1
+"Carrville, Va.",Carrville,VA,USA,"Carrville, VA, USA",review,spelling? 'Carrville' -> Carrsville or Capeville,1
+"Crocket Mills, Tenn.",Crocket Mills,TN,USA,"Crocket Mills, TN, USA",review,spelling? 'Crocket Mills' -> Crockett Mills or Crockett Hills,1
+"Kahalui, HI",Kahalui,HI,USA,"Kahalui, HI, USA",review,spelling? 'Kahalui' -> Kahului or Kahaluu,1
+"E Liverpool, Ohio",E Liverpool,OH,USA,"E Liverpool, OH, USA",review,"spelling? 'E Liverpool' -> Liverpool (starts differently: often another place, not a typo)",1
+"Scherville, Indiana",Scherville,IN,USA,"Scherville, IN, USA",review,spelling? 'Scherville' -> Schererville or Somerville,1
+"Arlington Hills, Illinois",Arlington Hills,IL,USA,"Arlington Hills, IL, USA",review,"spelling? 'Arlington Hills' -> Barrington Hills (starts differently: often another place, not a typo)",1
+"Westerfield, OH",Westerfield,OH,USA,"Westerfield, OH, USA",review,"spelling? 'Westerfield' -> Chesterfield (starts differently: often another place, not a typo)",1
+"Nangatuck, CT",Nangatuck,CT,USA,"Nangatuck, CT, USA",review,spelling? 'Nangatuck' -> Naugatuck or Saugatuck,1
+"Wekingston, PA",Wekingston,PA,USA,"Wekingston, PA, USA",review,"spelling? 'Wekingston' -> Kingston (starts differently: often another place, not a typo)",1
+"Wrightown, Wis.",Wrightown,WI,USA,"Wrightown, WI, USA",review,spelling? 'Wrightown' -> Wrightstown or Brighton,1
+"Maryville, Texas",Maryville,TX,USA,"Maryville, TX, USA",review,spelling? 'Maryville' -> Marysville or Lacyville,1
+"Mainesville, Ohio",Mainesville,OH,USA,"Mainesville, OH, USA",review,spelling? 'Mainesville' -> Maineville or Painesville,1
+"Glen Clove, NY",Glen Clove,NY,USA,"Glen Clove, NY, USA",review,spelling? 'Glen Clove' -> Glen Cove or Glen Grove,1
+"Highlands Branch, Colo.",Highlands Branch,CO,USA,"Highlands Branch, CO, USA",review,"spelling? 'Highlands Branch' -> Highlands Ranch (starts differently: often another place, not a typo)",1
+"South Williamson, W. Va.",South Williamson,WV,USA,"South Williamson, WV, USA",review,state? no South Williamson in WV; the only US town with this name is in KY,1
+"Herman, MO",Herman,MO,USA,"Herman, MO, USA",review,spelling? 'Herman' -> Hermann or Sherman,1
+"Oxford Hills, Maine",Oxford Hills,ME,USA,"Oxford Hills, ME, USA",review,state? no Oxford Hills in ME; the only US town with this name is in TN,1
+"Highland Mill, NY",Highland Mill,NY,USA,"Highland Mill, NY, USA",review,spelling? 'Highland Mill' -> Highland Mills or Highland Hills,1
+"Neymar, Md.",Neymar,MD,USA,"Neymar, MD, USA",review,"spelling? 'Neymar' -> Keymar (starts differently: often another place, not a typo)",1
+"Showertown, Pa.",Showertown,PA,USA,"Showertown, PA, USA",review,"spelling? 'Showertown' -> Howertown (starts differently: often another place, not a typo)",1
+"Grove Heights, Minn.",Grove Heights,MN,USA,"Grove Heights, MN, USA",review,state? no Grove Heights in MN; the only US town with this name is in FL,1
+"Beaver Dam Lake, Ind.",Beaver Dam Lake,IN,USA,"Beaver Dam Lake, IN, USA",review,state? no Beaver Dam Lake in IN; the only US town with this name is in NY,1
+"N Palm Beach, Fla.",N Palm Beach,FL,USA,"N Palm Beach, FL, USA",review,"spelling? 'N Palm Beach' -> Palm Beach (starts differently: often another place, not a typo)",1
+"Tyron, NC",Tyron,NC,USA,"Tyron, NC, USA",review,spelling? 'Tyron' -> Tryon or Tyro,1
+"Leeburg, Va.",Leeburg,VA,USA,"Leeburg, VA, USA",review,spelling? 'Leeburg' -> Leesburg or Fleeburg,1
+"Poplerville, Miss",Poplerville,MS,USA,"Poplerville, MS, USA",review,spelling? 'Poplerville' -> Poplarville or Porterville,1
 ,,,,,unfixable,blank hometown,36363
 Hometown/ Previous School,,,,,unfixable,column header scraped as data,1429
 Hometown,,,,,unfixable,column header scraped as data,524
@@ -3685,6 +3910,19 @@ Westmont High School,,,,,unfixable,"a school name, not a town",2
 Winston-Salem HS,,,,,unfixable,"a school name, not a town",2
 Wilimington,,,,,unfixable,checked by hand Oct 30: no state,2
 Missouri,,,,,unfixable,"state only, no town",2
+McPherson High School,,,,,unfixable,"a school name, not a town",1
+Jefferson High School,,,,,unfixable,"a school name, not a town",1
+Folsom HS,,,,,unfixable,"a school name, not a town",1
+Covenant Christian,,,,,unfixable,"a school name, not a town",1
+Grand Island Central Catholic High School,,,,,unfixable,"a school name, not a town",1
+Lewis-Palmer High School,,,,,unfixable,"a school name, not a town",1
+Saratoga Catholic,,,,,unfixable,"a school name, not a town",1
+Excelsior HS,,,,,unfixable,"a school name, not a town",1
+Rappahannock High School,,,,,unfixable,"a school name, not a town",1
+Spring Creek Academy,,,,,unfixable,"a school name, not a town",1
+Exeter HS,,,,,unfixable,"a school name, not a town",1
+Racine HS,,,,,unfixable,"a school name, not a town",1
+Council Rock High School North,,,,,unfixable,"a school name, not a town",1
 Kaufman HS,,,,,unfixable,"a school name, not a town",1
 Grandview Prep,,,,,unfixable,"a school name, not a town",1
 Cheverus High School,,,,,unfixable,"a school name, not a town",1
@@ -6721,7 +6959,7 @@ Las Vegas Nev.,Las Vegas,NV,USA,"Las Vegas, NV, USA",fixed,state 'Nev.' -> NV,4
 "Laurenceville, Ga.",Lawrenceville,GA,USA,"Lawrenceville, GA, USA",fixed,spelling 'Laurenceville' -> Lawrenceville,4
 "Laurinburg, S.C.",Laurinburg,NC,USA,"Laurinburg, NC, USA",fixed,"state SC -> NC: no Laurinburg in SC, the only US town with this name",4
 "Lawerence,KS",Lawrence,KS,USA,"Lawrence, KS, USA",fixed,spelling 'Lawerence' -> Lawrence,4
-"LeGrange, Ky.",LeGrange,KY,USA,"LeGrange, KY, USA",fixed,state 'Ky.' -> KY,4
+"LeGrange, Ky.",LeGrande,KY,USA,"LeGrande, KY, USA",fixed,spelling 'LeGrange' -> LeGrande,4
 Lee Summit MO,Lee's Summit,MO,USA,"Lee's Summit, MO, USA",fixed,spelling 'Lee Summit' -> Lee's Summit,4
 Lee's Summit Mo.,Lee's Summit,MO,USA,"Lee's Summit, MO, USA",fixed,state 'Mo.' -> MO,4
 "Lees Summi, MO",Lees Summit,MO,USA,"Lees Summit, MO, USA",fixed,spelling 'Lees Summi' -> Lees Summit (closer than Lee's Summit),4
@@ -7415,6 +7653,8 @@ Zoarville,Zoarville,OH,USA,"Zoarville, OH, USA",fixed,state from the only US tow
 Whittier CA,Whittier,CA,USA,"Whittier, CA, USA",fixed,,4
 "Analy, Sebastopol, CA","Analy, Sebastopol",CA,USA,"Analy, Sebastopol, CA, USA",fixed,,4
 "Poly/Riverside, CA",Poly,,,Poly,fixed,dropped school text,4
+LOS ANGELES CA,LOS ANGELES,CA,USA,"LOS ANGELES, CA, USA",fixed,,4
+GLENDALE CA,GLENDALE,CA,USA,"GLENDALE, CA, USA",fixed,,4
 Archbishop Riordan,San Francisco,CA,USA,"San Francisco, CA, USA",fixed,checked by hand Oct 30,3
 Cape Town South Africa,Cape Town,,South Africa,"Cape Town, South Africa",fixed,checked by hand Oct 30,3
 El Cajon Valley,El Cajon,CA,USA,"El Cajon, CA, USA",fixed,checked by hand Oct 30,3
@@ -12845,6 +13085,27 @@ Morroco,Morroco,,,Morroco,fixed,,2
 Columbia MS,Columbia,MS,USA,"Columbia, MS, USA",fixed,,2
 Greendale Ind.,Greendale,IN,USA,"Greendale, IN, USA",fixed,state 'Ind.' -> IN,2
 Quebec Canada,Quebec,,Canada,"Quebec, Canada",fixed,state 'Canada' -> Canada,2
+Santa Fe. Argentina,Santa Fe.,,Argentina,"Santa Fe., Argentina",fixed,state 'Argentina' -> Argentina,2
+"Southlake, Teas",Southlake,TX,USA,"Southlake, TX, USA",fixed,state 'Teas' -> TX,2
+Riverside CA,Riverside,CA,USA,"Riverside, CA, USA",fixed,,2
+Macao,,,Macao,Macao,fixed,checked by hand Oct 30: the country,2
+"Mickelton, N.J.",Mickleton,NJ,USA,"Mickleton, NJ, USA",fixed,spelling 'Mickelton' -> Mickleton,2
+"Pleasant Hills, IA",Pleasant Hill,IA,USA,"Pleasant Hill, IA, USA",fixed,spelling 'Pleasant Hills' -> Pleasant Hill,2
+"Ventura, Cali.",Ventura,CA,USA,"Ventura, CA, USA",fixed,state 'Cali.' -> CA,2
+Hominy OK,Hominy,OK,USA,"Hominy, OK, USA",fixed,,2
+Carbondale KS,Carbondale,KS,USA,"Carbondale, KS, USA",fixed,,2
+Onaga KS,Onaga,KS,USA,"Onaga, KS, USA",fixed,,2
+Griggsville IL,Griggsville,IL,USA,"Griggsville, IL, USA",fixed,,2
+"Headlton, Okla.",Healdton,OK,USA,"Healdton, OK, USA",fixed,spelling 'Headlton' -> Healdton,2
+"Headwater, N.J.",Headwater,NJ,USA,"Headwater, NJ, USA",fixed,state 'N.J.' -> NJ,2
+"Cranbury Township, Pennsylvania",Cranberry Twp,PA,USA,"Cranberry Twp, PA, USA",fixed,spelling 'Cranbury Township' -> Cranberry Twp,2
+"Casco, Mainne",Casco,ME,USA,"Casco, ME, USA",fixed,town and state read from the text,1
+"Euclid, Ohi",Euclid,OH,USA,"Euclid, OH, USA",fixed,town and state read from the text,1
+"Jupiter, Flordia",Jupiter,FL,USA,"Jupiter, FL, USA",fixed,town and state read from the text,1
+"Long Beach, Califonia",Long Beach,CA,USA,"Long Beach, CA, USA",fixed,town and state read from the text,1
+"Dupont, Was.",Dupont,WA,USA,"Dupont, WA, USA",fixed,town and state read from the text,1
+Rotterdam Junction,Rotterdam Junction,NY,USA,"Rotterdam Junction, NY, USA",fixed,state from the only US town with this name,1
+St. Simons Island,Saint Simons Island,GA,USA,"Saint Simons Island, GA, USA",fixed,state from the only US town with this name,1
 Edison N. J.,Edison,NJ,USA,"Edison, NJ, USA",fixed,town and state read from the text,1
 "Andover, Hampshire",Andover,NH,USA,"Andover, NH, USA",fixed,town and state read from the text,1
 Saint Malo,Saint Malo,LA,USA,"Saint Malo, LA, USA",fixed,state from the only US town with this name,1
@@ -17677,7 +17938,6 @@ LAURENS SC,LAURENS,SC,USA,"LAURENS, SC, USA",fixed,,1
 LEE'S SUMMIT MO,LEE'S SUMMIT,MO,USA,"LEE'S SUMMIT, MO, USA",fixed,,1
 LENEXA KS,LENEXA,KS,USA,"LENEXA, KS, USA",fixed,,1
 LITTLE ROCK AR,LITTLE ROCK,AR,USA,"LITTLE ROCK, AR, USA",fixed,,1
-LOS ANGELES CA,LOS ANGELES,CA,USA,"LOS ANGELES, CA, USA",fixed,,1
 "La Ca&ntilde;ada Flintridge, Calif.",La Cañada Flintridge,CA,USA,"La Cañada Flintridge, CA, USA",fixed,state 'Calif.' -> CA,1
 "La Ca?ada, CA",La Ca?ada,CA,USA,"La Ca?ada, CA, USA",fixed,,1
 "La Canada Flintridge, California",La Canada Flintridge,CA,USA,"La Canada Flintridge, CA, USA",fixed,state 'California' -> CA,1
@@ -18191,7 +18451,6 @@ Mabletom GA,Mabletom,GA,USA,"Mabletom, GA, USA",fixed,,1
 Mableton GA,Mableton,GA,USA,"Mableton, GA, USA",fixed,,1
 "Mablevale, Arkansas",Mabelvale,AR,USA,"Mabelvale, AR, USA",fixed,spelling 'Mablevale' -> Mabelvale,1
 "MacDonough, Ga.",Mcdonough,GA,USA,"Mcdonough, GA, USA",fixed,spelling 'MacDonough' -> Mcdonough,1
-Macao,,,Macao,Macao,fixed,checked by hand Oct 30: the country,1
 "Macdeon, N.Y.",Macedon,NY,USA,"Macedon, NY, USA",fixed,spelling 'Macdeon' -> Macedon,1
 "Machesny Park, Ill.",Machesney Park,IL,USA,"Machesney Park, IL, USA",fixed,spelling 'Machesny Park' -> Machesney Park,1
 Machester England,Machester,,England,"Machester, England",fixed,state 'England' -> England,1
@@ -18551,7 +18810,6 @@ Miami. FL,Miami.,FL,USA,"Miami., FL, USA",fixed,,1
 Miami. Fla,Miami.,FL,USA,"Miami., FL, USA",fixed,state 'Fla' -> FL,1
 MiamiFL,MiamiFL,,,MiamiFL,fixed,,1
 "Miamsburg, Ohio",Miamisburg,OH,USA,"Miamisburg, OH, USA",fixed,spelling 'Miamsburg' -> Miamisburg,1
-"Mickelton, N.J.",Mickleton,NJ,USA,"Mickleton, NJ, USA",fixed,spelling 'Mickelton' -> Mickleton,1
 "Midddletown, DE",Middletown,DE,USA,"Middletown, DE, USA",fixed,spelling 'Midddletown' -> Middletown,1
 Middeburg,Middeburg,,,Middeburg,fixed,,1
 "Middeltown, Del.",Middletown,DE,USA,"Middletown, DE, USA",fixed,spelling 'Middeltown' -> Middletown,1
@@ -19342,7 +19600,7 @@ Osawatomie KS,Osawatomie,KS,USA,"Osawatomie, KS, USA",fixed,,1
 "Osmond, Nebraksa",Osmond,NE,USA,"Osmond, NE, USA",fixed,town and state read from the text,1
 "Ossinging, N.Y.",Ossining,NY,USA,"Ossining, NY, USA",fixed,spelling 'Ossinging' -> Ossining,1
 "Ostego, MN",Otsego,MN,USA,"Otsego, MN, USA",fixed,spelling 'Ostego' -> Otsego,1
-"Ostego, Mich.",Ostego,MI,USA,"Ostego, MI, USA",fixed,state 'Mich.' -> MI,1
+"Ostego, Mich.",Otsego,MI,USA,"Otsego, MI, USA",fixed,spelling 'Ostego' -> Otsego,1
 "Ostego, Michigan",Otsego,MI,USA,"Otsego, MI, USA",fixed,spelling 'Ostego' -> Otsego,1
 Osterburg,Osterburg,PA,USA,"Osterburg, PA, USA",fixed,state from the only US town with this name,1
 Osthammar Sweden,Osthammar,,Sweden,"Osthammar, Sweden",fixed,state 'Sweden' -> Sweden,1
@@ -19676,7 +19934,6 @@ Plattsburgh NY,Plattsburgh,NY,USA,"Plattsburgh, NY, USA",fixed,,1
 "Pleasant Gardne, NC",Pleasant Garden,NC,USA,"Pleasant Garden, NC, USA",fixed,spelling 'Pleasant Gardne' -> Pleasant Garden,1
 Pleasant Hill CA (De la Salle),Pleasant Hill,CA,USA,"Pleasant Hill, CA, USA",fixed,dropped school text,1
 Pleasant Hill IA,Pleasant Hill,IA,USA,"Pleasant Hill, IA, USA",fixed,,1
-"Pleasant Hills, IA",Pleasant Hills,IA,USA,"Pleasant Hills, IA, USA",fixed,,1
 Pleasant Hope MO,Pleasant Hope,MO,USA,"Pleasant Hope, MO, USA",fixed,,1
 Pleasant Valley NY,Pleasant Valley,NY,USA,"Pleasant Valley, NY, USA",fixed,,1
 Pleasant View UT,Pleasant View,UT,USA,"Pleasant View, UT, USA",fixed,,1
@@ -21288,7 +21545,6 @@ Venice CA,Venice,CA,USA,"Venice, CA, USA",fixed,,1
 "Vensalem, Pa.",Bensalem,PA,USA,"Bensalem, PA, USA",fixed,spelling 'Vensalem' -> Bensalem (checked by hand Nov 1: right),1
 "Ventor, NJ",Ventnor,NJ,USA,"Ventnor, NJ, USA",fixed,spelling 'Ventor' -> Ventnor,1
 Ventura CA,Ventura,CA,USA,"Ventura, CA, USA",fixed,,1
-"Ventura, Cali.",Ventura,CA,USA,"Ventura, CA, USA",fixed,state 'Cali.' -> CA,1
 "Ventura, Louisiana",Ventura,LA,USA,"Ventura, LA, USA",fixed,state 'Louisiana' -> LA,1
 "Venura, Calif.",Ventura,CA,USA,"Ventura, CA, USA",fixed,spelling Venura -> Ventura; state 'Calif.' -> CA,1
 Vermillion- Ohio,Vermillion-,OH,USA,"Vermillion-, OH, USA",fixed,state 'Ohio' -> OH,1
@@ -24354,3 +24610,433 @@ Urayasu-Shi,Urayasu-Shi,,,Urayasu-Shi,fixed,,1
 "Envigado, Col.",Envigado,CO,USA,"Envigado, CO, USA",fixed,state 'Col.' -> CO,1
 "New Mildford, NJ",New Milford,NJ,USA,"New Milford, NJ, USA",fixed,spelling 'New Mildford' -> New Milford,1
 Woerden. The Netherlands,Woerden. The,,Netherlands,"Woerden. The, Netherlands",fixed,state 'Netherlands' -> Netherlands,1
+"Plainfields, Ill.",Plainfield,IL,USA,"Plainfield, IL, USA",fixed,spelling 'Plainfields' -> Plainfield,1
+"Wanye, Pa.",Wayne,PA,USA,"Wayne, PA, USA",fixed,spelling 'Wanye' -> Wayne,1
+"Veneita, Pa.",Venetia,PA,USA,"Venetia, PA, USA",fixed,spelling 'Veneita' -> Venetia,1
+Idonesia,Idonesia,,,Idonesia,fixed,,1
+"Soisy - Sur - Siene, France",Soisy,,,Soisy,fixed,dropped school text,1
+Izmir-Turkey,Izmir-Turkey,,,Izmir-Turkey,fixed,,1
+"Grayson, Mich.",Grayson,MI,USA,"Grayson, MI, USA",fixed,state 'Mich.' -> MI,1
+"Reservoir, Austrailia",Reservoir,,Australia,"Reservoir, Australia",fixed,state 'Austrailia' -> Australia,1
+Cali. Columbia,Cali.,,Colombia,"Cali., Colombia",fixed,state 'Columbia' -> Colombia,1
+"Lenexas, KS",Lenexa,KS,USA,"Lenexa, KS, USA",fixed,spelling 'Lenexas' -> Lenexa,1
+"Colarado Springs, CO.",Colorado Springs,CO,USA,"Colorado Springs, CO, USA",fixed,spelling 'Colarado Springs' -> Colorado Springs,1
+"Waxham, NC",Waxhaw,NC,USA,"Waxhaw, NC, USA",fixed,spelling 'Waxham' -> Waxhaw,1
+"Bellle Plaine, MN",Belle Plaine,MN,USA,"Belle Plaine, MN, USA",fixed,spelling 'Bellle Plaine' -> Belle Plaine,1
+"Jacskon, TN",Jackson,TN,USA,"Jackson, TN, USA",fixed,spelling 'Jacskon' -> Jackson,1
+"N. Dinwiddle, Va.",N. Dinwiddle,VA,USA,"N. Dinwiddle, VA, USA",fixed,state 'Va.' -> VA,1
+"Eddison, N.J.",Edison,NJ,USA,"Edison, NJ, USA",fixed,spelling 'Eddison' -> Edison,1
+"St. Adamstown, PA",St. Adamstown,PA,USA,"St. Adamstown, PA, USA",fixed,,1
+"Pine Groove Mills, Penn.",Pine Grove Mills,PA,USA,"Pine Grove Mills, PA, USA",fixed,spelling 'Pine Groove Mills' -> Pine Grove Mills,1
+"Audobon, PA",Audubon,PA,USA,"Audubon, PA, USA",fixed,spelling 'Audobon' -> Audubon,1
+"Bradforsville, Ky.",Bradfordsville,KY,USA,"Bradfordsville, KY, USA",fixed,spelling 'Bradforsville' -> Bradfordsville,1
+Puerto del Rosario. Spain,Puerto del Rosario.,,Spain,"Puerto del Rosario., Spain",fixed,state 'Spain' -> Spain,1
+"Fresno, Calf.",Fresno,CA,USA,"Fresno, CA, USA",fixed,state 'Calf.' -> CA,1
+"Cyrpess, Calif.",Cypress,CA,USA,"Cypress, CA, USA",fixed,spelling 'Cyrpess' -> Cypress,1
+"Las Vegas, Calif.",Las Vegas,CA,USA,"Las Vegas, CA, USA",fixed,state 'Calif.' -> CA,1
+"Vladikavkaz, Georgia",Vladikavkaz,GA,USA,"Vladikavkaz, GA, USA",fixed,state 'Georgia' -> GA,1
+"Tblisi, Georgia",Tblisi,GA,USA,"Tblisi, GA, USA",fixed,state 'Georgia' -> GA,1
+"Latana, Fla.",Lantana,FL,USA,"Lantana, FL, USA",fixed,spelling 'Latana' -> Lantana,1
+San Fernando Argentina,San Fernando,,Argentina,"San Fernando, Argentina",fixed,state 'Argentina' -> Argentina,1
+"Grosse Point Shores, Michigan",Grosse Pointe Shores,MI,USA,"Grosse Pointe Shores, MI, USA",fixed,spelling 'Grosse Point Shores' -> Grosse Pointe Shores,1
+Etters,Etters,PA,USA,"Etters, PA, USA",fixed,state from the only US town with this name,1
+"Huston, Mass.",Huston,MA,USA,"Huston, MA, USA",fixed,state 'Mass.' -> MA,1
+"Tres Cantos, Mass.",Tres Cantos,MA,USA,"Tres Cantos, MA, USA",fixed,state 'Mass.' -> MA,1
+Turkmenistan,Turkmenistan,,,Turkmenistan,fixed,,1
+"Oion/Alava, Spain",Oion,,,Oion,fixed,dropped school text,1
+Vsalia,Vsalia,,,Vsalia,fixed,,1
+"Chestnut, MA",Chestnut,MA,USA,"Chestnut, MA, USA",fixed,,1
+"Hinkley, Ohio.",Hinckley,OH,USA,"Hinckley, OH, USA",fixed,spelling 'Hinkley' -> Hinckley,1
+Unterhaching Germany,Unterhaching,,Germany,"Unterhaching, Germany",fixed,state 'Germany' -> Germany,1
+"Winton Woods, OH",Winton Woods,OH,USA,"Winton Woods, OH, USA",fixed,,1
+Burma,Burma,AR,USA,"Burma, AR, USA",fixed,state from the only US town with this name,1
+"Brigintine, N.J.",Brigantine,NJ,USA,"Brigantine, NJ, USA",fixed,spelling 'Brigintine' -> Brigantine,1
+Arusha Tanzania,Arusha,,Tanzania,"Arusha, Tanzania",fixed,state 'Tanzania' -> Tanzania,1
+"Hilcrest, TX",Hillcrest,TX,USA,"Hillcrest, TX, USA",fixed,spelling 'Hilcrest' -> Hillcrest,1
+Hermitage. PA,Hermitage.,PA,USA,"Hermitage., PA, USA",fixed,,1
+Duluth Ga.,Duluth,GA,USA,"Duluth, GA, USA",fixed,state 'Ga.' -> GA,1
+Trieste Italy,Trieste,,Italy,"Trieste, Italy",fixed,state 'Italy' -> Italy,1
+Idrija Slovenia,Idrija,,Slovenia,"Idrija, Slovenia",fixed,state 'Slovenia' -> Slovenia,1
+"Snow Creek, Va.",Snow Creek,VA,USA,"Snow Creek, VA, USA",fixed,state 'Va.' -> VA,1
+"Mantomedi, Minn.",Mahtomedi,MN,USA,"Mahtomedi, MN, USA",fixed,spelling 'Mantomedi' -> Mahtomedi,1
+Reston VA,Reston,VA,USA,"Reston, VA, USA",fixed,,1
+Bhubaneswar India,Bhubaneswar,,India,"Bhubaneswar, India",fixed,state 'India' -> India,1
+"Aliso Viejo, Cali.",Aliso Viejo,CA,USA,"Aliso Viejo, CA, USA",fixed,state 'Cali.' -> CA,1
+"Pointe Farms, Mich.",Pointe Farms,MI,USA,"Pointe Farms, MI, USA",fixed,state 'Mich.' -> MI,1
+Glendal,Glendal,,,Glendal,fixed,,1
+EAGLE ROCK CA,EAGLE ROCK,CA,USA,"EAGLE ROCK, CA, USA",fixed,,1
+SYLMAR CA,SYLMAR,CA,USA,"SYLMAR, CA, USA",fixed,,1
+PASADENA CA,PASADENA,CA,USA,"PASADENA, CA, USA",fixed,,1
+Cumberland Maine,Cumberland,ME,USA,"Cumberland, ME, USA",fixed,state 'Maine' -> ME,1
+"Fort Morgon, CO",Fort Morgan,CO,USA,"Fort Morgan, CO, USA",fixed,spelling 'Fort Morgon' -> Fort Morgan,1
+"Kolua, Hawai`i / Kauai HS",Koloa,HI,USA,"Koloa, HI, USA",fixed,spelling 'Kolua' -> Koloa,1
+"Talahassee, Fla.",Tallahassee,FL,USA,"Tallahassee, FL, USA",fixed,spelling 'Talahassee' -> Tallahassee,1
+Peoria Az.,Peoria,AZ,USA,"Peoria, AZ, USA",fixed,state 'Az.' -> AZ,1
+Pascagoula MS,Pascagoula,MS,USA,"Pascagoula, MS, USA",fixed,,1
+Lena MS,Lena,MS,USA,"Lena, MS, USA",fixed,,1
+Vicksburg MS,Vicksburg,MS,USA,"Vicksburg, MS, USA",fixed,,1
+Forest. MS,Forest.,MS,USA,"Forest., MS, USA",fixed,,1
+Grosse Ilse Michigan,Grosse Ilse,MI,USA,"Grosse Ilse, MI, USA",fixed,state 'Michigan' -> MI,1
+"Wellsvile, NY",Wellsville,NY,USA,"Wellsville, NY, USA",fixed,spelling 'Wellsvile' -> Wellsville,1
+Cornwallville,Cornwallville,NY,USA,"Cornwallville, NY, USA",fixed,state from the only US town with this name,1
+"Orange Country, CA",Orange Country,CA,USA,"Orange Country, CA, USA",fixed,,1
+Odesa Ukraine,Odesa,,Ukraine,"Odesa, Ukraine",fixed,state 'Ukraine' -> Ukraine,1
+"Maraval, FL",Maraval,FL,USA,"Maraval, FL, USA",fixed,,1
+"Olate, KS",Olathe,KS,USA,"Olathe, KS, USA",fixed,spelling 'Olate' -> Olathe,1
+"Lenxa, KS",Lenexa,KS,USA,"Lenexa, KS, USA",fixed,spelling 'Lenxa' -> Lenexa,1
+Ohlsdorf,Ohlsdorf,,,Ohlsdorf,fixed,,1
+"Conowingo, Pa.",Conewango,PA,USA,"Conewango, PA, USA",fixed,spelling 'Conowingo' -> Conewango,1
+"Kailu Kona, Hawaii",Kailua Kona,HI,USA,"Kailua Kona, HI, USA",fixed,spelling 'Kailu Kona' -> Kailua Kona,1
+"Ferdinanina Beach, Fla.",Fernandina Beach,FL,USA,"Fernandina Beach, FL, USA",fixed,spelling 'Ferdinanina Beach' -> Fernandina Beach,1
+"Sunneyside, NY",Sunnyside,NY,USA,"Sunnyside, NY, USA",fixed,spelling 'Sunneyside' -> Sunnyside,1
+"Whitman Hanson, MA",Whitman Hanson,MA,USA,"Whitman Hanson, MA, USA",fixed,,1
+"Tazwell, TN",Tazewell,TN,USA,"Tazewell, TN, USA",fixed,spelling 'Tazwell' -> Tazewell,1
+Republic of Cameroon,Republic of,,Cameroon,"Republic of, Cameroon",fixed,state 'Cameroon' -> Cameroon,1
+Rome Italy,Rome,,Italy,"Rome, Italy",fixed,state 'Italy' -> Italy,1
+"River Ridge, Minnesota",River Ridge,MN,USA,"River Ridge, MN, USA",fixed,state 'Minnesota' -> MN,1
+Newport News. Va.,Newport News.,VA,USA,"Newport News., VA, USA",fixed,state 'Va.' -> VA,1
+Bowling Green. Va.,Bowling Green.,VA,USA,"Bowling Green., VA, USA",fixed,state 'Va.' -> VA,1
+Warsaw Poland,Warsaw,,Poland,"Warsaw, Poland",fixed,state 'Poland' -> Poland,1
+"Ranches, Fla.",Ranches,FL,USA,"Ranches, FL, USA",fixed,state 'Fla.' -> FL,1
+"Brookyln Park, Minn.",Brooklyn Park,MN,USA,"Brooklyn Park, MN, USA",fixed,spelling 'Brookyln Park' -> Brooklyn Park,1
+Surrey. England,Surrey.,,England,"Surrey., England",fixed,state 'England' -> England,1
+"Lattingtown Harbor, NY",Lattingtown Harbor,NY,USA,"Lattingtown Harbor, NY, USA",fixed,,1
+Bogota Columbia,Bogota,,Colombia,"Bogota, Colombia",fixed,state 'Columbia' -> Colombia,1
+"Panchkula, IND",Panchkula,IN,USA,"Panchkula, IN, USA",fixed,state 'IND' -> IN,1
+"Sumneytownn, Pa.",Sumneytown,PA,USA,"Sumneytown, PA, USA",fixed,spelling 'Sumneytownn' -> Sumneytown,1
+"Nicholsville, Ky.",Nicholasville,KY,USA,"Nicholasville, KY, USA",fixed,spelling 'Nicholsville' -> Nicholasville,1
+West Fargo N.D.,West Fargo,ND,USA,"West Fargo, ND, USA",fixed,state 'N.D.' -> ND,1
+"Covington Twsp., PA",Covington Twsp.,PA,USA,"Covington Twsp., PA, USA",fixed,,1
+"Hazle Twsp., PA",Hazle Twsp.,PA,USA,"Hazle Twsp., PA, USA",fixed,,1
+Moscow Russia,Moscow,,Russia,"Moscow, Russia",fixed,state 'Russia' -> Russia,1
+Harare Zimbabwe,Harare,,Zimbabwe,"Harare, Zimbabwe",fixed,state 'Zimbabwe' -> Zimbabwe,1
+Meridian MS,Meridian,MS,USA,"Meridian, MS, USA",fixed,,1
+"Winter Haven, NC",Winter Haven,NC,USA,"Winter Haven, NC, USA",fixed,,1
+Brick N.J.,Brick,NJ,USA,"Brick, NJ, USA",fixed,state 'N.J.' -> NJ,1
+"Surrattsville, Md.",Surrattsville,MD,USA,"Surrattsville, MD, USA",fixed,state 'Md.' -> MD,1
+Montgomery. N.Y.,Montgomery.,NY,USA,"Montgomery., NY, USA",fixed,state 'N.Y.' -> NY,1
+"Engelwood, N.J.",Englewood,NJ,USA,"Englewood, NJ, USA",fixed,spelling 'Engelwood' -> Englewood,1
+Bronxm NY,Bronxm,NY,USA,"Bronxm, NY, USA",fixed,,1
+New Braunfels. Texas,New Braunfels.,TX,USA,"New Braunfels., TX, USA",fixed,state 'Texas' -> TX,1
+Mijas,Mijas,,,Mijas,fixed,,1
+"Willingborough, NJ",Willingboro,NJ,USA,"Willingboro, NJ, USA",fixed,spelling 'Willingborough' -> Willingboro,1
+"Pauanui/Waikato, New Zealand",Pauanui,,,Pauanui,fixed,dropped school text,1
+"Lake Forest Park, CA",Lake Forest Park,CA,USA,"Lake Forest Park, CA, USA",fixed,,1
+"New Dehli, Ind.",New Dehli,IN,USA,"New Dehli, IN, USA",fixed,state 'Ind.' -> IN,1
+Bravos Romania,Bravos,,Romania,"Bravos, Romania",fixed,state 'Romania' -> Romania,1
+Edmond Okla.,Edmond,OK,USA,"Edmond, OK, USA",fixed,state 'Okla.' -> OK,1
+Roseburg. Ore.,Roseburg.,OR,USA,"Roseburg., OR, USA",fixed,state 'Ore.' -> OR,1
+"Mililani (O'ahu), HI",Mililani,,,Mililani,fixed,dropped school text,1
+"Lake Wallenpaupack, PA",Lake Wallenpaupack,PA,USA,"Lake Wallenpaupack, PA, USA",fixed,,1
+"Melbourne, Georgia",Melbourne,GA,USA,"Melbourne, GA, USA",fixed,state 'Georgia' -> GA,1
+Saranac. N.Y.,Saranac.,NY,USA,"Saranac., NY, USA",fixed,state 'N.Y.' -> NY,1
+"Ellenburgh Depot, N.Y.",Ellenburg Depot,NY,USA,"Ellenburg Depot, NY, USA",fixed,spelling 'Ellenburgh Depot' -> Ellenburg Depot,1
+O’ahu Hawai’i,O’ahu,HI,USA,"O’ahu, HI, USA",fixed,state 'Hawai’i' -> HI,1
+Rutherford NJ,Rutherford,NJ,USA,"Rutherford, NJ, USA",fixed,,1
+Minisink Valley NY,Minisink Valley,NY,USA,"Minisink Valley, NY, USA",fixed,,1
+Grove City OH,Grove City,OH,USA,"Grove City, OH, USA",fixed,,1
+"Smithvile, NJ",Smithville,NJ,USA,"Smithville, NJ, USA",fixed,spelling 'Smithvile' -> Smithville,1
+"Village of Loch Lloyd, Mo.",Village of Loch Lloyd,MO,USA,"Village of Loch Lloyd, MO, USA",fixed,state 'Mo.' -> MO,1
+"West Sandy Lake, NY",West Sand Lake,NY,USA,"West Sand Lake, NY, USA",fixed,spelling 'West Sandy Lake' -> West Sand Lake,1
+"Deham Springs, La.",Denham Springs,LA,USA,"Denham Springs, LA, USA",fixed,spelling 'Deham Springs' -> Denham Springs,1
+"Londonderry, N.Y.",Londonderry,NY,USA,"Londonderry, NY, USA",fixed,state 'N.Y.' -> NY,1
+Sanremo Italy,Sanremo,,Italy,"Sanremo, Italy",fixed,state 'Italy' -> Italy,1
+"No. Dartmouth, Mass.",North Dartmouth,MA,USA,"North Dartmouth, MA, USA",fixed,spelling 'No. Dartmouth' -> North Dartmouth,1
+Dampierre,Dampierre,,,Dampierre,fixed,,1
+"Millegeville, Ga",Milledgeville,GA,USA,"Milledgeville, GA, USA",fixed,spelling 'Millegeville' -> Milledgeville,1
+"Big Canoe, Ga.",Big Canoe,GA,USA,"Big Canoe, GA, USA",fixed,state 'Ga.' -> GA,1
+Altoetting Germany,Altoetting,,Germany,"Altoetting, Germany",fixed,state 'Germany' -> Germany,1
+Bosina/Heregovina,Bosina,,,Bosina,fixed,dropped school text,1
+"Grander, Indiana",Granger,IN,USA,"Granger, IN, USA",fixed,spelling 'Grander' -> Granger,1
+"Tibilisi, Georgia",Tibilisi,GA,USA,"Tibilisi, GA, USA",fixed,state 'Georgia' -> GA,1
+"Spokan, Wash.",Spokane,WA,USA,"Spokane, WA, USA",fixed,spelling 'Spokan' -> Spokane,1
+Cologne Germany,Cologne,,Germany,"Cologne, Germany",fixed,state 'Germany' -> Germany,1
+"Souix Falls, S.D.",Sioux Falls,SD,USA,"Sioux Falls, SD, USA",fixed,spelling 'Souix Falls' -> Sioux Falls,1
+Chennai India,Chennai,,India,"Chennai, India",fixed,state 'India' -> India,1
+"Coimbatore, Tenn.",Coimbatore,TN,USA,"Coimbatore, TN, USA",fixed,state 'Tenn.' -> TN,1
+"Kennelon, N.J.",Kinnelon,NJ,USA,"Kinnelon, NJ, USA",fixed,spelling 'Kennelon' -> Kinnelon,1
+"Durhan, PA",Durham,PA,USA,"Durham, PA, USA",fixed,spelling 'Durhan' -> Durham,1
+Jassowal,Jassowal,,,Jassowal,fixed,,1
+"Coral Springs, Texas",Cold Springs,TX,USA,"Cold Springs, TX, USA",fixed,spelling 'Coral Springs' -> Cold Springs,1
+"New Richmond, Ky.",New Richmond,KY,USA,"New Richmond, KY, USA",fixed,state 'Ky.' -> KY,1
+Cleveland Hts.- Ohio,Cleveland Hts.-,OH,USA,"Cleveland Hts.-, OH, USA",fixed,state 'Ohio' -> OH,1
+New Port Richey- Fla.,New Port Richey-,FL,USA,"New Port Richey-, FL, USA",fixed,state 'Fla.' -> FL,1
+Kirkby in Cleveland- U.K.,Kirkby in Cleveland-,,United Kingdom,"Kirkby in Cleveland-, United Kingdom",fixed,state 'U.K.' -> United Kingdom,1
+Ashbourne- U.K.,Ashbourne-,,United Kingdom,"Ashbourne-, United Kingdom",fixed,state 'U.K.' -> United Kingdom,1
+St. Louis- Mo.,St. Louis-,MO,USA,"St. Louis-, MO, USA",fixed,state 'Mo.' -> MO,1
+Woodford Co.,Woodford,CO,USA,"Woodford, CO, USA",fixed,state 'Co.' -> CO,1
+Frankfort Ky,Frankfort,KY,USA,"Frankfort, KY, USA",fixed,state 'Ky' -> KY,1
+"Elmhurts, IL",Elmhurst,IL,USA,"Elmhurst, IL, USA",fixed,spelling 'Elmhurts' -> Elmhurst,1
+Kirksville Mo.,Kirksville,MO,USA,"Kirksville, MO, USA",fixed,state 'Mo.' -> MO,1
+Springfield Mo.,Springfield,MO,USA,"Springfield, MO, USA",fixed,state 'Mo.' -> MO,1
+"Glyn Ellyn, Ill.",Glen Ellyn,IL,USA,"Glen Ellyn, IL, USA",fixed,spelling 'Glyn Ellyn' -> Glen Ellyn,1
+Marietta. Ga.,Marietta.,GA,USA,"Marietta., GA, USA",fixed,state 'Ga.' -> GA,1
+Lake Tahoe CA,Lake Tahoe,CA,USA,"Lake Tahoe, CA, USA",fixed,,1
+Ulan,Ulan,,,Ulan,fixed,,1
+O'Fallon. Mo.,O'Fallon.,MO,USA,"O'Fallon., MO, USA",fixed,state 'Mo.' -> MO,1
+"Tbilsi, Georgia",Tbilsi,GA,USA,"Tbilsi, GA, USA",fixed,state 'Georgia' -> GA,1
+Bulawayo Zimbabwe,Bulawayo,,Zimbabwe,"Bulawayo, Zimbabwe",fixed,state 'Zimbabwe' -> Zimbabwe,1
+"Edward, Colo.",Edwards,CO,USA,"Edwards, CO, USA",fixed,spelling 'Edward' -> Edwards,1
+"Eden Praire, MN",Eden Prairie,MN,USA,"Eden Prairie, MN, USA",fixed,spelling 'Eden Praire' -> Eden Prairie,1
+"Sherood, Ore.",Sherwood,OR,USA,"Sherwood, OR, USA",fixed,spelling 'Sherood' -> Sherwood,1
+Hihei Hawaii,Hihei,HI,USA,"Hihei, HI, USA",fixed,state 'Hawaii' -> HI,1
+"North Bay, Ontario, Canda","North Bay, Ontario",,Canada,"North Bay, Ontario, Canada",fixed,state 'Canda' -> Canada,1
+"Paradise Vally, Ariz.",Paradise Valley,AZ,USA,"Paradise Valley, AZ, USA",fixed,spelling 'Paradise Vally' -> Paradise Valley,1
+"Prarie du Sac, Wis.",Prairie Du Sac,WI,USA,"Prairie Du Sac, WI, USA",fixed,spelling 'Prarie du Sac' -> Prairie Du Sac,1
+"Atllanta, Ga.",Atlanta,GA,USA,"Atlanta, GA, USA",fixed,spelling 'Atllanta' -> Atlanta,1
+"Port Saint Lucie, Fl.",Port St. Lucie,FL,USA,"Port St. Lucie, FL, USA",fixed,spelling 'Port Saint Lucie' -> Port St. Lucie,1
+"San Antoino, Texas",San Antonio,TX,USA,"San Antonio, TX, USA",fixed,spelling 'San Antoino' -> San Antonio,1
+Perriuton,Perriuton,,,Perriuton,fixed,,1
+"Biddleford, Maine",Biddeford,ME,USA,"Biddeford, ME, USA",fixed,spelling 'Biddleford' -> Biddeford,1
+"Wyodotte, Mich.",Wyodotte,MI,USA,"Wyodotte, MI, USA",fixed,state 'Mich.' -> MI,1
+West Newton Pa,West Newton,PA,USA,"West Newton, PA, USA",fixed,state 'Pa' -> PA,1
+"Broadhead, KY",Brodhead,KY,USA,"Brodhead, KY, USA",fixed,spelling 'Broadhead' -> Brodhead,1
+Peachtree Corners GA,Peachtree Corners,GA,USA,"Peachtree Corners, GA, USA",fixed,,1
+Milton GA,Milton,GA,USA,"Milton, GA, USA",fixed,,1
+"Singer Island, Fla.",Singer Island,FL,USA,"Singer Island, FL, USA",fixed,state 'Fla.' -> FL,1
+"Andove,Kan.",Andover,KS,USA,"Andover, KS, USA",fixed,spelling 'Andove' -> Andover,1
+Medin,Medin,,,Medin,fixed,,1
+"Bakersfield, Caif.",Bakersfield,CA,USA,"Bakersfield, CA, USA",fixed,state 'Caif.' -> CA,1
+"Edawards, Col.",Edwards,CO,USA,"Edwards, CO, USA",fixed,spelling 'Edawards' -> Edwards,1
+"Tompkinisville, KY",Tompkinsville,KY,USA,"Tompkinsville, KY, USA",fixed,spelling 'Tompkinisville' -> Tompkinsville,1
+"Lata, Wy.",Lata,WY,USA,"Lata, WY, USA",fixed,state 'Wy.' -> WY,1
+"Hudsonville, Illinois",Hutsonville,IL,USA,"Hutsonville, IL, USA",fixed,spelling 'Hudsonville' -> Hutsonville,1
+"Reedley, Cali.",Reedley,CA,USA,"Reedley, CA, USA",fixed,state 'Cali.' -> CA,1
+"Cimmaron, Kan.",Cimarron,KS,USA,"Cimarron, KS, USA",fixed,spelling 'Cimmaron' -> Cimarron,1
+"Pollock, TX",Pollok,TX,USA,"Pollok, TX, USA",fixed,spelling 'Pollock' -> Pollok,1
+"Brookhaven, MO",Brookhaven,MO,USA,"Brookhaven, MO, USA",fixed,,1
+"Matheney, W.Va.",Matheny,WV,USA,"Matheny, WV, USA",fixed,spelling 'Matheney' -> Matheny,1
+Portland. Conn.,Portland.,CT,USA,"Portland., CT, USA",fixed,state 'Conn.' -> CT,1
+"Freemont, Ohio",Fremont,OH,USA,"Fremont, OH, USA",fixed,spelling 'Freemont' -> Fremont,1
+Santa Ana. Calif.,Santa Ana.,CA,USA,"Santa Ana., CA, USA",fixed,state 'Calif.' -> CA,1
+"Guyman, Okla.",Guymon,OK,USA,"Guymon, OK, USA",fixed,spelling 'Guyman' -> Guymon,1
+Shepherdsville. Ky.,Shepherdsville.,KY,USA,"Shepherdsville., KY, USA",fixed,state 'Ky.' -> KY,1
+"Appelton, Wis.",Appleton,WI,USA,"Appleton, WI, USA",fixed,spelling 'Appelton' -> Appleton,1
+Fond du Lac Wis.,Fond du Lac,WI,USA,"Fond du Lac, WI, USA",fixed,state 'Wis.' -> WI,1
+"North Auora, Ill.",North Aurora,IL,USA,"North Aurora, IL, USA",fixed,spelling 'North Auora' -> North Aurora,1
+Minneapolis Minn.,Minneapolis,MN,USA,"Minneapolis, MN, USA",fixed,state 'Minn.' -> MN,1
+Stevenson Ranch. Calif.,Stevenson Ranch.,CA,USA,"Stevenson Ranch., CA, USA",fixed,state 'Calif.' -> CA,1
+"Millford, Conn.",Milford,CT,USA,"Milford, CT, USA",fixed,spelling 'Millford' -> Milford,1
+"Buchannon, W.Va.",Buckhannon,WV,USA,"Buckhannon, WV, USA",fixed,spelling 'Buchannon' -> Buckhannon,1
+Mechanicsville VA,Mechanicsville,VA,USA,"Mechanicsville, VA, USA",fixed,,1
+Cheasapeake Va.,Cheasapeake,VA,USA,"Cheasapeake, VA, USA",fixed,state 'Va.' -> VA,1
+"Monterrey Park, CA",Monterey Park,CA,USA,"Monterey Park, CA, USA",fixed,spelling 'Monterrey Park' -> Monterey Park,1
+"Thonwood, NY",Thornwood,NY,USA,"Thornwood, NY, USA",fixed,spelling 'Thonwood' -> Thornwood,1
+"Blanchardsville, Wis.",Blanchardville,WI,USA,"Blanchardville, WI, USA",fixed,spelling 'Blanchardsville' -> Blanchardville,1
+Pawhuska Oklahoma,Pawhuska,OK,USA,"Pawhuska, OK, USA",fixed,state 'Oklahoma' -> OK,1
+Diamond Missouri,Diamond,MO,USA,"Diamond, MO, USA",fixed,state 'Missouri' -> MO,1
+Fort Scott Kansas,Fort Scott,KS,USA,"Fort Scott, KS, USA",fixed,state 'Kansas' -> KS,1
+Web City Missouri,Web City,MO,USA,"Web City, MO, USA",fixed,state 'Missouri' -> MO,1
+Monnett Missouri,Monnett,MO,USA,"Monnett, MO, USA",fixed,state 'Missouri' -> MO,1
+Burlington Kansas,Burlington,KS,USA,"Burlington, KS, USA",fixed,state 'Kansas' -> KS,1
+Ralston OK,Ralston,OK,USA,"Ralston, OK, USA",fixed,,1
+Nevada MO,Nevada,MO,USA,"Nevada, MO, USA",fixed,,1
+Fairfax OK,Fairfax,OK,USA,"Fairfax, OK, USA",fixed,,1
+Piedmont OK,Piedmont,OK,USA,"Piedmont, OK, USA",fixed,,1
+Clay Center KS,Clay Center,KS,USA,"Clay Center, KS, USA",fixed,,1
+Tecumseh KS,Tecumseh,KS,USA,"Tecumseh, KS, USA",fixed,,1
+Lago Vista TX,Lago Vista,TX,USA,"Lago Vista, TX, USA",fixed,,1
+Mounds OK,Mounds,OK,USA,"Mounds, OK, USA",fixed,,1
+Wann OK,Wann,OK,USA,"Wann, OK, USA",fixed,,1
+Fort Scott KS,Fort Scott,KS,USA,"Fort Scott, KS, USA",fixed,,1
+Collinsville OK,Collinsville,OK,USA,"Collinsville, OK, USA",fixed,,1
+"Broolkine, Mass.",Brookline,MA,USA,"Brookline, MA, USA",fixed,spelling 'Broolkine' -> Brookline,1
+"Ridgfield, Conn.",Ridgefield,CT,USA,"Ridgefield, CT, USA",fixed,spelling 'Ridgfield' -> Ridgefield,1
+"Lake Sherwood, Mo.",Lake Sherwood,MO,USA,"Lake Sherwood, MO, USA",fixed,state 'Mo.' -> MO,1
+"Anstead, W.Va.",Ansted,WV,USA,"Ansted, WV, USA",fixed,spelling 'Anstead' -> Ansted,1
+"Pasedena, Texas",Pasadena,TX,USA,"Pasadena, TX, USA",fixed,spelling 'Pasedena' -> Pasadena,1
+"Combine Locks, Wis.",Combined Locks,WI,USA,"Combined Locks, WI, USA",fixed,spelling 'Combine Locks' -> Combined Locks,1
+"Mourovia, CA",Monrovia,CA,USA,"Monrovia, CA, USA",fixed,spelling 'Mourovia' -> Monrovia,1
+"Torsfield, MA",Topsfield,MA,USA,"Topsfield, MA, USA",fixed,spelling 'Torsfield' -> Topsfield,1
+"Monvtille, CT",Montville,CT,USA,"Montville, CT, USA",fixed,spelling 'Monvtille' -> Montville,1
+"Millybury, Mass.",Millbury,MA,USA,"Millbury, MA, USA",fixed,spelling 'Millybury' -> Millbury,1
+"Mahonoy City, PA",Mahanoy City,PA,USA,"Mahanoy City, PA, USA",fixed,spelling 'Mahonoy City' -> Mahanoy City,1
+"Waikahalulu, Hawaii",Waikahalulu,HI,USA,"Waikahalulu, HI, USA",fixed,state 'Hawaii' -> HI,1
+"Woodcliff Lakes, N.J.",Woodcliff Lake,NJ,USA,"Woodcliff Lake, NJ, USA",fixed,spelling 'Woodcliff Lakes' -> Woodcliff Lake,1
+Shelby Township Michigan,Shelby Township,MI,USA,"Shelby Township, MI, USA",fixed,state 'Michigan' -> MI,1
+"East Northport, N.J.",East Northport,NJ,USA,"East Northport, NJ, USA",fixed,state 'N.J.' -> NJ,1
+Richmond Ky.,Richmond,KY,USA,"Richmond, KY, USA",fixed,state 'Ky.' -> KY,1
+"Ozawki, Kan.",Ozawkie,KS,USA,"Ozawkie, KS, USA",fixed,spelling 'Ozawki' -> Ozawkie,1
+"Monfort, Wis.",Montfort,WI,USA,"Montfort, WI, USA",fixed,spelling 'Monfort' -> Montfort,1
+"Elizabeth Cty, N.C.",Elizabeth City,NC,USA,"Elizabeth City, NC, USA",fixed,spelling 'Elizabeth Cty' -> Elizabeth City,1
+"Córdoba, Ver",Córdoba,VT,USA,"Córdoba, VT, USA",fixed,state 'Ver' -> VT,1
+Foley Ala.,Foley,AL,USA,"Foley, AL, USA",fixed,state 'Ala.' -> AL,1
+Halmstad Sweden,Halmstad,,Sweden,"Halmstad, Sweden",fixed,state 'Sweden' -> Sweden,1
+"Atanta, Ga.",Atlanta,GA,USA,"Atlanta, GA, USA",fixed,spelling 'Atanta' -> Atlanta,1
+"Amboy, N.J.",Amboy,NJ,USA,"Amboy, NJ, USA",fixed,state 'N.J.' -> NJ,1
+"Springs Valley, Ind.",Springs Valley,IN,USA,"Springs Valley, IN, USA",fixed,state 'Ind.' -> IN,1
+"Manhesset, N.Y.",Manhasset,NY,USA,"Manhasset, NY, USA",fixed,spelling 'Manhesset' -> Manhasset,1
+"Moultonbourough, N.H.",Moultonborough,NH,USA,"Moultonborough, NH, USA",fixed,spelling 'Moultonbourough' -> Moultonborough,1
+"Soutfield, Mass.",Southfield,MA,USA,"Southfield, MA, USA",fixed,spelling 'Soutfield' -> Southfield,1
+"Wichta, Kan.",Wichita,KS,USA,"Wichita, KS, USA",fixed,spelling 'Wichta' -> Wichita,1
+Farewell,Farewell,,,Farewell,fixed,,1
+"Daniels Island, S.C.",Daniels Island,SC,USA,"Daniels Island, SC, USA",fixed,state 'S.C.' -> SC,1
+Reitaku,Reitaku,,,Reitaku,fixed,,1
+"Canyon Lakes, Calif.",Canyon Lake,CA,USA,"Canyon Lake, CA, USA",fixed,spelling 'Canyon Lakes' -> Canyon Lake,1
+"Reasonor, Iowa",Reasnor,IA,USA,"Reasnor, IA, USA",fixed,spelling 'Reasonor' -> Reasnor,1
+"Harrtland, WI",Hartland,WI,USA,"Hartland, WI, USA",fixed,spelling 'Harrtland' -> Hartland,1
+"Diamondale, MI",Dimondale,MI,USA,"Dimondale, MI, USA",fixed,spelling 'Diamondale' -> Dimondale,1
+Hull IL,Hull,IL,USA,"Hull, IL, USA",fixed,,1
+Barry IL,Barry,IL,USA,"Barry, IL, USA",fixed,,1
+Quincy IL,Quincy,IL,USA,"Quincy, IL, USA",fixed,,1
+Mendon MO,Mendon,MO,USA,"Mendon, MO, USA",fixed,,1
+Waynesville MO,Waynesville,MO,USA,"Waynesville, MO, USA",fixed,,1
+"McAlister, OK",Mcalester,OK,USA,"Mcalester, OK, USA",fixed,spelling 'McAlister' -> Mcalester,1
+"Littlewound, SD",Littlewound,SD,USA,"Littlewound, SD, USA",fixed,,1
+"Ft Washockie, WY",Fort Washakie,WY,USA,"Fort Washakie, WY, USA",fixed,spelling 'Ft Washockie' -> Fort Washakie,1
+"Yakama, WA",Yakima,WA,USA,"Yakima, WA, USA",fixed,spelling 'Yakama' -> Yakima,1
+"Fort Berthold Indian Reservation, ND",Fort Berthold Indian Reservation,ND,USA,"Fort Berthold Indian Reservation, ND, USA",fixed,,1
+Commerce City CO,Commerce City,CO,USA,"Commerce City, CO, USA",fixed,,1
+"New Washignton, Ohio",New Washington,OH,USA,"New Washington, OH, USA",fixed,spelling 'New Washignton' -> New Washington,1
+"Praire Grove, Ark.",Prairie Grove,AR,USA,"Prairie Grove, AR, USA",fixed,spelling 'Praire Grove' -> Prairie Grove,1
+"Lake Shore, NY",Lake Shore,NY,USA,"Lake Shore, NY, USA",fixed,,1
+"O'Fallen, IL",O'Fallon,IL,USA,"O'Fallon, IL, USA",fixed,spelling 'O'Fallen' -> O'Fallon,1
+Wyantskill,Wyantskill,,,Wyantskill,fixed,,1
+"Watersound, Fla.",Watersound,FL,USA,"Watersound, FL, USA",fixed,state 'Fla.' -> FL,1
+"Glen Ellen, Ill.",Glen Ellyn,IL,USA,"Glen Ellyn, IL, USA",fixed,spelling 'Glen Ellen' -> Glen Ellyn,1
+"Goldwaite, Texas",Goldthwaite,TX,USA,"Goldthwaite, TX, USA",fixed,spelling 'Goldwaite' -> Goldthwaite,1
+"Bruston, NY",Brushton,NY,USA,"Brushton, NY, USA",fixed,spelling 'Bruston' -> Brushton,1
+"Glen St. Mary's, FL",Glen St. Mary,FL,USA,"Glen St. Mary, FL, USA",fixed,spelling 'Glen St. Mary's' -> Glen St. Mary,1
+"Plumas Lakes, CA",Plumas Lake,CA,USA,"Plumas Lake, CA, USA",fixed,spelling 'Plumas Lakes' -> Plumas Lake,1
+Prospect Hts. IL,Prospect Hts.,IL,USA,"Prospect Hts., IL, USA",fixed,,1
+Bedford OH,Bedford,OH,USA,"Bedford, OH, USA",fixed,,1
+Castries,Castries,,,Castries,fixed,,1
+"Baltimore, IL",Baltimore,IL,USA,"Baltimore, IL, USA",fixed,,1
+"Audobon, Penn.",Audubon,PA,USA,"Audubon, PA, USA",fixed,spelling 'Audobon' -> Audubon,1
+Bilthoven (NETHERLANDS),Bilthoven,,,Bilthoven,fixed,dropped school text,1
+"Northbrook, N.J.",Northbrook,NJ,USA,"Northbrook, NJ, USA",fixed,state 'N.J.' -> NJ,1
+"Plainfeild, Ill.",Plainfield,IL,USA,"Plainfield, IL, USA",fixed,spelling 'Plainfeild' -> Plainfield,1
+"Bensensville, Ill.",Bensenville,IL,USA,"Bensenville, IL, USA",fixed,spelling 'Bensensville' -> Bensenville,1
+"Russell Spring, Ky.",Russell Springs,KY,USA,"Russell Springs, KY, USA",fixed,spelling 'Russell Spring' -> Russell Springs,1
+"La Cresenta-Montrose, Calif.",La Crescenta-Montrose,CA,USA,"La Crescenta-Montrose, CA, USA",fixed,spelling 'La Cresenta-Montrose' -> La Crescenta-Montrose,1
+null / University of Liverpool,null,,,null,fixed,dropped school text,1
+"Renfew, Pa.",Renfrew,PA,USA,"Renfrew, PA, USA",fixed,spelling 'Renfew' -> Renfrew,1
+"Paterson, LA",Patterson,LA,USA,"Patterson, LA, USA",fixed,spelling 'Paterson' -> Patterson,1
+South Denmark,South,,Denmark,"South, Denmark",fixed,state 'Denmark' -> Denmark,1
+"Buccholz in der Norheide, .de",Buccholz in der Norheide,DE,USA,"Buccholz in der Norheide, DE, USA",fixed,state '.de' -> DE,1
+"Progressive Lakes, Texas",Progressive Lakes,TX,USA,"Progressive Lakes, TX, USA",fixed,state 'Texas' -> TX,1
+Stokholm Sweden,Stokholm,,Sweden,"Stokholm, Sweden",fixed,state 'Sweden' -> Sweden,1
+"Naples, Forida",Naples,FL,USA,"Naples, FL, USA",fixed,state 'Forida' -> FL,1
+"Lead Hills, AR",Lead Hill,AR,USA,"Lead Hill, AR, USA",fixed,spelling 'Lead Hills' -> Lead Hill,1
+"Indian Island, ME",Indian Island,ME,USA,"Indian Island, ME, USA",fixed,,1
+"Conard, CT",Conard,CT,USA,"Conard, CT, USA",fixed,,1
+"Herbon, Maryland",Hebron,MD,USA,"Hebron, MD, USA",fixed,spelling 'Herbon' -> Hebron,1
+"Galatin, Tenn.",Gallatin,TN,USA,"Gallatin, TN, USA",fixed,spelling 'Galatin' -> Gallatin,1
+"Blythwood, SC",Blythewood,SC,USA,"Blythewood, SC, USA",fixed,spelling 'Blythwood' -> Blythewood,1
+"Chareroi, Pa.",Charleroi,PA,USA,"Charleroi, PA, USA",fixed,spelling 'Chareroi' -> Charleroi,1
+"Niagra Falls, NY",Niagara Falls,NY,USA,"Niagara Falls, NY, USA",fixed,spelling 'Niagra Falls' -> Niagara Falls,1
+"Genona City, Wis.",Genoa City,WI,USA,"Genoa City, WI, USA",fixed,spelling 'Genona City' -> Genoa City,1
+Necaise,Necaise,MS,USA,"Necaise, MS, USA",fixed,state from the only US town with this name,1
+"Laz Vegas, Nev.",Las Vegas,NV,USA,"Las Vegas, NV, USA",fixed,spelling 'Laz Vegas' -> Las Vegas,1
+"Benton, AK",Benton,AK,USA,"Benton, AK, USA",fixed,,1
+"El Pasa, TX",El Paso,TX,USA,"El Paso, TX, USA",fixed,spelling 'El Pasa' -> El Paso,1
+"Van Hornsville, NY",Van Hornesville,NY,USA,"Van Hornesville, NY, USA",fixed,spelling 'Van Hornsville' -> Van Hornesville,1
+"Annvile, PA",Annville,PA,USA,"Annville, PA, USA",fixed,spelling 'Annvile' -> Annville,1
+"Hanies Falls, N.Y.",Haines Falls,NY,USA,"Haines Falls, NY, USA",fixed,spelling 'Hanies Falls' -> Haines Falls,1
+Uniontwon,Uniontwon,,,Uniontwon,fixed,,1
+Frenso,Frenso,,,Frenso,fixed,,1
+Chandlersville,Chandlersville,OH,USA,"Chandlersville, OH, USA",fixed,state from the only US town with this name,1
+"Ranchos Palos Verdes, CA",Rancho Palos Verdes,CA,USA,"Rancho Palos Verdes, CA, USA",fixed,spelling 'Ranchos Palos Verdes' -> Rancho Palos Verdes,1
+"Glean Head, NY",Glen Head,NY,USA,"Glen Head, NY, USA",fixed,spelling 'Glean Head' -> Glen Head,1
+Temecula. Calif.,Temecula.,CA,USA,"Temecula., CA, USA",fixed,state 'Calif.' -> CA,1
+Kingdom of Morocco,Kingdom of,,Morocco,"Kingdom of, Morocco",fixed,state 'Morocco' -> Morocco,1
+"Certer Moriches, N.Y.",Center Moriches,NY,USA,"Center Moriches, NY, USA",fixed,spelling 'Certer Moriches' -> Center Moriches,1
+"Mont Holly, N.C.",Mount Holly,NC,USA,"Mount Holly, NC, USA",fixed,spelling 'Mont Holly' -> Mount Holly,1
+Vohenstrauß,Vohenstrauß,,,Vohenstrauß,fixed,,1
+"Laingburg, Mich.",Laingsburg,MI,USA,"Laingsburg, MI, USA",fixed,spelling 'Laingburg' -> Laingsburg,1
+"Brysden, Mich.",Brysden,MI,USA,"Brysden, MI, USA",fixed,state 'Mich.' -> MI,1
+"Carrolll, Ohio",Carroll,OH,USA,"Carroll, OH, USA",fixed,spelling 'Carrolll' -> Carroll,1
+Castallia,Castallia,,,Castallia,fixed,,1
+"Brian, Ohio",Bryan,OH,USA,"Bryan, OH, USA",fixed,spelling 'Brian' -> Bryan,1
+Brownston,Brownston,,,Brownston,fixed,,1
+Sears,Sears,,,Sears,fixed,,1
+"Reno, Neb.",Reno,NE,USA,"Reno, NE, USA",fixed,state 'Neb.' -> NE,1
+"Rouge River, Oregon",Rogue River,OR,USA,"Rogue River, OR, USA",fixed,spelling 'Rouge River' -> Rogue River,1
+"Croton on the Hudson, N.Y.",Croton On Hudson,NY,USA,"Croton On Hudson, NY, USA",fixed,spelling 'Croton on the Hudson' -> Croton On Hudson,1
+"Onartio, OR",Ontario,OR,USA,"Ontario, OR, USA",fixed,spelling 'Onartio' -> Ontario,1
+Esserts-Saleve,Esserts-Saleve,,,Esserts-Saleve,fixed,,1
+"Priest Lake, Idaho",Priest Lake,ID,USA,"Priest Lake, ID, USA",fixed,state 'Idaho' -> ID,1
+"Sherrils Ford, N.C.",Sherrills Ford,NC,USA,"Sherrills Ford, NC, USA",fixed,spelling 'Sherrils Ford' -> Sherrills Ford,1
+"Mclure, Pa.",McClure,PA,USA,"McClure, PA, USA",fixed,spelling 'Mclure' -> McClure,1
+"Middlebry Center, Pa.",Middlebury Center,PA,USA,"Middlebury Center, PA, USA",fixed,spelling 'Middlebry Center' -> Middlebury Center,1
+"Gray Eagle, Minn.",Grey Eagle,MN,USA,"Grey Eagle, MN, USA",fixed,spelling 'Gray Eagle' -> Grey Eagle,1
+"Sundury, Pa",Sunbury,PA,USA,"Sunbury, PA, USA",fixed,spelling 'Sundury' -> Sunbury,1
+Mingo Co.,Mingo,CO,USA,"Mingo, CO, USA",fixed,state 'Co.' -> CO,1
+Letcher Co.,Letcher,CO,USA,"Letcher, CO, USA",fixed,state 'Co.' -> CO,1
+"Shelby Valley, Ky.",Shelby Valley,KY,USA,"Shelby Valley, KY, USA",fixed,state 'Ky.' -> KY,1
+"Allegheny, N.Y.",Allegany,NY,USA,"Allegany, NY, USA",fixed,spelling 'Allegheny' -> Allegany,1
+Warwick NY,Warwick,NY,USA,"Warwick, NY, USA",fixed,,1
+"Rennselear, Ind.",Rensselaer,IN,USA,"Rensselaer, IN, USA",fixed,spelling 'Rennselear' -> Rensselaer,1
+"Medofrd, N.J.",Medford,NJ,USA,"Medford, NJ, USA",fixed,spelling 'Medofrd' -> Medford,1
+"Manhatten, Mont.",Manhattan,MT,USA,"Manhattan, MT, USA",fixed,spelling 'Manhatten' -> Manhattan,1
+"Whitko, Ind.",Whitko,IN,USA,"Whitko, IN, USA",fixed,state 'Ind.' -> IN,1
+"Sharons Springs, NY",Sharon Springs,NY,USA,"Sharon Springs, NY, USA",fixed,spelling 'Sharons Springs' -> Sharon Springs,1
+"Wyalusing, NY",Wyalusing,NY,USA,"Wyalusing, NY, USA",fixed,,1
+Portage Mich.,Portage,MI,USA,"Portage, MI, USA",fixed,state 'Mich.' -> MI,1
+Sharon PA,Sharon,PA,USA,"Sharon, PA, USA",fixed,,1
+"Cortlan, OH",Cortland,OH,USA,"Cortland, OH, USA",fixed,spelling 'Cortlan' -> Cortland,1
+"Millford, MA",Milford,MA,USA,"Milford, MA, USA",fixed,spelling 'Millford' -> Milford,1
+Stockholm. Sweden,Stockholm.,,Sweden,"Stockholm., Sweden",fixed,state 'Sweden' -> Sweden,1
+"Madrid, Spain | Coronado, Calif.","Madrid, Spain | Coronado",CA,USA,"Madrid, Spain | Coronado, CA, USA",fixed,state 'Calif.' -> CA,1
+"Goldwaite, TX",Goldthwaite,TX,USA,"Goldthwaite, TX, USA",fixed,spelling 'Goldwaite' -> Goldthwaite,1
+London Ohio,London,OH,USA,"London, OH, USA",fixed,state 'Ohio' -> OH,1
+"Rohersville, Md.",Rohrersville,MD,USA,"Rohrersville, MD, USA",fixed,spelling 'Rohersville' -> Rohrersville,1
+"Fayettville,GA",Fayetteville,GA,USA,"Fayetteville, GA, USA",fixed,spelling Fayettville -> Fayetteville,1
+"Detroits Lakes, Minnesota",Detroit Lakes,MN,USA,"Detroit Lakes, MN, USA",fixed,spelling 'Detroits Lakes' -> Detroit Lakes,1
+"Glendale, Ari.",Glendale,AZ,USA,"Glendale, AZ, USA",fixed,state 'Ari.' -> AZ,1
+"Muphysboro, Ill.",Murphysboro,IL,USA,"Murphysboro, IL, USA",fixed,spelling 'Muphysboro' -> Murphysboro,1
+"Houston, ME",Houlton,ME,USA,"Houlton, ME, USA",fixed,spelling 'Houston' -> Houlton,1
+"Water Sound, Fla.",Water Sound,FL,USA,"Water Sound, FL, USA",fixed,state 'Fla.' -> FL,1
+"So. Setauket, N.Y.",So. Setauket,NY,USA,"So. Setauket, NY, USA",fixed,state 'N.Y.' -> NY,1
+Clayton Calif.,Clayton,CA,USA,"Clayton, CA, USA",fixed,state 'Calif.' -> CA,1
+Brentwood. CA,Brentwood.,CA,USA,"Brentwood., CA, USA",fixed,,1
+"Indio, Cali.",Indio,CA,USA,"Indio, CA, USA",fixed,state 'Cali.' -> CA,1
+Kingsville Texas,Kingsville,TX,USA,"Kingsville, TX, USA",fixed,state 'Texas' -> TX,1
+"Sudbry, Mass.",Sudbury,MA,USA,"Sudbury, MA, USA",fixed,spelling 'Sudbry' -> Sudbury,1
+Commack NY,Commack,NY,USA,"Commack, NY, USA",fixed,,1
+Yaphank Ny,Yaphank,NY,USA,"Yaphank, NY, USA",fixed,state 'Ny' -> NY,1
+Appleton WI.,Appleton,WI,USA,"Appleton, WI, USA",fixed,,1
+Tartan,Tartan,,,Tartan,fixed,,1
+"Colt Neck, N.J.",Colts Neck,NJ,USA,"Colts Neck, NJ, USA",fixed,spelling 'Colt Neck' -> Colts Neck,1
+"Amber, Pa.",Ambler,PA,USA,"Ambler, PA, USA",fixed,spelling 'Amber' -> Ambler,1
+"Loudon, N.J.",Louden,NJ,USA,"Louden, NJ, USA",fixed,spelling 'Loudon' -> Louden,1
+Bussy,Bussy,,,Bussy,fixed,,1
+"Delwood, MN",Dellwood,MN,USA,"Dellwood, MN, USA",fixed,spelling 'Delwood' -> Dellwood,1
+Hendersonville. Tenn.,Hendersonville.,TN,USA,"Hendersonville., TN, USA",fixed,state 'Tenn.' -> TN,1
+Canton- Ohio,Canton-,OH,USA,"Canton-, OH, USA",fixed,state 'Ohio' -> OH,1
+Kirtland- Ohio,Kirtland-,OH,USA,"Kirtland-, OH, USA",fixed,state 'Ohio' -> OH,1
+McCutchenville- Ohio,McCutchenville-,OH,USA,"McCutchenville-, OH, USA",fixed,state 'Ohio' -> OH,1
+Kenton- Ohio,Kenton-,OH,USA,"Kenton-, OH, USA",fixed,state 'Ohio' -> OH,1
+Powell- Ohio,Powell-,OH,USA,"Powell-, OH, USA",fixed,state 'Ohio' -> OH,1
+Grand Blanc- Michigan,Grand Blanc-,MI,USA,"Grand Blanc-, MI, USA",fixed,state 'Michigan' -> MI,1
+Grove City- Ohio,Grove City-,OH,USA,"Grove City-, OH, USA",fixed,state 'Ohio' -> OH,1
+"Brookton, Ind.",Brookston,IN,USA,"Brookston, IN, USA",fixed,spelling 'Brookton' -> Brookston,1
+"Pendelton, Ind.",Pendleton,IN,USA,"Pendleton, IN, USA",fixed,spelling 'Pendelton' -> Pendleton,1
+Cork Ireland,Cork,,Ireland,"Cork, Ireland",fixed,state 'Ireland' -> Ireland,1
+"Rougemount, N.C.",Rougemont,NC,USA,"Rougemont, NC, USA",fixed,spelling 'Rougemount' -> Rougemont,1
+Liege Belgium,Liege,,Belgium,"Liege, Belgium",fixed,state 'Belgium' -> Belgium,1
+St. Matthews S.C.,St. Matthews,SC,USA,"St. Matthews, SC, USA",fixed,state 'S.C.' -> SC,1
+"Chesness, S.C.",Chesness,SC,USA,"Chesness, SC, USA",fixed,state 'S.C.' -> SC,1
+"Aguora Hills, California",Agoura Hills,CA,USA,"Agoura Hills, CA, USA",fixed,spelling 'Aguora Hills' -> Agoura Hills,1
+"Heart River, N.D.",Heart River,ND,USA,"Heart River, ND, USA",fixed,state 'N.D.' -> ND,1
+"Lovettesville, Va.",Lovettsville,VA,USA,"Lovettsville, VA, USA",fixed,spelling 'Lovettesville' -> Lovettsville,1
+"Indian Trails, NC",Indian Trail,NC,USA,"Indian Trail, NC, USA",fixed,spelling 'Indian Trails' -> Indian Trail,1
+"St. Charles, MS",St. Charles,MS,USA,"St. Charles, MS, USA",fixed,,1
+Bahrain,Bahrain,,,Bahrain,fixed,,1
+"Calloden, W.Va.",Culloden,WV,USA,"Culloden, WV, USA",fixed,spelling 'Calloden' -> Culloden,1
+"Paterson, N.Y.",Patterson,NY,USA,"Patterson, NY, USA",fixed,spelling 'Paterson' -> Patterson,1
+"Mombasa, KEN",Mombasa,KY,USA,"Mombasa, KY, USA",fixed,state 'KEN' -> KY,1
+Boardman OH,Boardman,OH,USA,"Boardman, OH, USA",fixed,,1
+"Cottonwwood, California",Cottonwood,CA,USA,"Cottonwood, CA, USA",fixed,spelling 'Cottonwwood' -> Cottonwood,1
+Columbia Miss.,Columbia,MS,USA,"Columbia, MS, USA",fixed,state 'Miss.' -> MS,1
+"St. Michaels, MN",Saint Michael,MN,USA,"Saint Michael, MN, USA",fixed,spelling 'St. Michaels' -> Saint Michael,1
+"Springs, TX",Spring,TX,USA,"Spring, TX, USA",fixed,spelling 'Springs' -> Spring,1
+"Hamstead, NC",Hampstead,NC,USA,"Hampstead, NC, USA",fixed,spelling 'Hamstead' -> Hampstead,1
+"Rollings Hills, CA",Rolling Hills,CA,USA,"Rolling Hills, CA, USA",fixed,spelling 'Rollings Hills' -> Rolling Hills,1
+"Baltimmore, Md.",Baltimore,MD,USA,"Baltimore, MD, USA",fixed,spelling 'Baltimmore' -> Baltimore,1
+"Gross Pointe Farms, Mich.",Grosse Pointe Farms,MI,USA,"Grosse Pointe Farms, MI, USA",fixed,spelling 'Gross Pointe Farms' -> Grosse Pointe Farms,1
+"Alexandia, VA",Alexandria,VA,USA,"Alexandria, VA, USA",fixed,spelling 'Alexandia' -> Alexandria,1
+Rockford. Ill.,Rockford.,IL,USA,"Rockford., IL, USA",fixed,state 'Ill.' -> IL,1
+"Cimmarron, Kan.",Cimarron,KS,USA,"Cimarron, KS, USA",fixed,spelling 'Cimmarron' -> Cimarron,1
+"Breinigville, Pa.",Breinigsville,PA,USA,"Breinigsville, PA, USA",fixed,spelling 'Breinigville' -> Breinigsville,1
+"Canfied, Ohio",Canfield,OH,USA,"Canfield, OH, USA",fixed,spelling 'Canfied' -> Canfield,1
