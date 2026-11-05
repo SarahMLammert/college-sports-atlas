@@ -173,7 +173,7 @@
   .legend span { display: inline-flex; align-items: center; gap: 8px; }
 
   /* A clicked sport's maps, in the globe */
-  .center.menu .kicker, .center.menu .title, .center.menu .hint { display: none; }
+  .center.menu .kicker, .center.menu .title, .center.menu .hint, .center.menu .hsopen { display: none; }
   .gmaps { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%; }
   .gmaps[hidden] { display: none; }
   .gname { font-size: 25px; letter-spacing: 0.08em; line-height: 1; color: var(--ink); }
@@ -187,20 +187,34 @@
   .gcol a:hover { background: var(--accent); color: var(--paper-hi); }
   .gcol .soon { font-style: italic; color: var(--muted); }
 
-  /* Find a school */
-  .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-  .finder { position: absolute; z-index: 20; top: 28px; left: 32px; width: 270px; }
-  #findSchool { width: 100%; height: 42px; padding: 0 16px; border: 1px solid var(--line); border-radius: 21px; background: var(--panel); color: var(--ink); font: inherit; font-size: 15px; }
-  #findSchool:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
-  .fresults { margin-top: 6px; max-height: min(66vh, 560px); overflow: auto; padding: 8px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); box-shadow: 0 12px 30px -14px rgba(58, 46, 34, 0.5); }
-  .fhit { padding: 7px 0; border-top: 1px solid var(--edge); }
-  .fhit:first-child { border-top: 0; }
-  .fname { font-weight: 600; font-size: 15px; color: var(--ink); }
-  .fsports { display: flex; flex-wrap: wrap; gap: 3px 9px; margin-top: 3px; }
-  .fsports a { font-size: 13px; color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
-  .fsports a.men { color: var(--men); }
-  .fsports a.women { color: var(--women); }
-  .fnone { margin: 2px 0; font-size: 14px; color: var(--muted); }
+  /* Search by high school: a button in the globe (and atop the phone list) that opens a panel at full size.
+     The globe scales with the window, so the button's words grow as it shrinks (--k, set in fit()). */
+  .hsopen { min-height: 30px; padding: 3px 14px; border: 1px solid var(--ink); border-radius: 999px; background: var(--panel); color: var(--ink); cursor: pointer; white-space: nowrap;
+    font: 600 max(15px, calc(11.5px / var(--k, 1)))/1.2 'Barlow', system-ui, sans-serif; transition: background 0.2s, color 0.2s; }
+  .hsopen:hover { background: var(--accent); border-color: var(--accent); color: var(--paper-hi); }
+  .hsopen:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+  .list-head .hsopen { min-height: 44px; margin-top: 10px; }
+  .hs-short, #ring.tight .hs-long { display: none; }
+  #ring.tight .hs-short { display: inline; }      /* a small globe's curve would cut off the long words */
+  dialog.hsq { width: min(620px, calc(100vw - 32px)); max-height: min(84dvh, 720px); margin: 6vh auto auto; padding: 18px 20px 20px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper-hi); color: var(--ink); box-shadow: 0 24px 60px -24px rgba(58, 46, 34, 0.6); }
+  dialog.hsq[open] { display: flex; flex-direction: column; gap: 12px; }
+  dialog.hsq::backdrop { background: rgba(58, 46, 34, 0.32); }
+  .hsq-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .hsq-head h2 { margin: 0; font-size: 20px; line-height: 1.1; }
+  .hsq-x { flex: none; width: 44px; height: 44px; margin: -8px -10px -8px 0; border: 0; border-radius: 50%; background: none; color: var(--muted); font-size: 26px; line-height: 1; cursor: pointer; }
+  .hsq-x:hover { color: var(--ink); }
+  #hsInput { width: 100%; height: 46px; padding: 0 16px; border: 1px solid var(--line); border-radius: 23px; background: var(--panel); color: var(--ink); font: inherit; font-size: 16px; }
+  #hsInput:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .hsq-out { overflow: auto; min-height: 0; }
+  .hsq-note { margin: 2px 0; font-size: 14px; color: var(--muted); }
+  .hsq-hit { padding: 9px 0; border-top: 1px solid var(--edge); }
+  .hsq-hit:first-child { border-top: 0; }
+  .hsq-name { font-weight: 600; font-size: 16px; }
+  .hsq-name small { font-weight: 400; font-size: 14px; color: var(--muted); }
+  .hsq-sports { display: flex; flex-wrap: wrap; gap: 3px 12px; margin-top: 3px; }
+  .hsq-sports a { font-size: 14px; color: var(--accent); text-underline-offset: 2px; }
+  .hsq-sports a.men { color: var(--men); }
+  .hsq-sports a.women { color: var(--women); }
 
   /* ---------- List (phones) ---------- */
   #list-view { display: none; flex: 1; flex-direction: column; gap: 14px; padding: 28px 22px 24px; width: 100%; max-width: 520px; margin: 0 auto; }
@@ -230,7 +244,6 @@
   a.btn:hover { filter: brightness(1.08); }
 
   @media (max-width: 700px) {
-    .finder { position: relative; top: auto; left: auto; width: auto; margin: 22px 22px -14px; max-width: 476px; }
     #ring-view { display: none; }
     #list-view { display: flex; }
   }
@@ -257,12 +270,6 @@
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
 <script src="sports.js"></script>
 
-<div class="finder" id="finder" role="search">
-  <label class="vh" for="findSchool">Find a school in every sport</label>
-  <input id="findSchool" type="search" placeholder="Find a school" autocomplete="off" spellcheck="false">
-  <div class="fresults" id="findResults" hidden></div>
-</div>
-
 <main id="ring-view">
   <div id="stage">
     <div id="ring">
@@ -279,6 +286,7 @@
         <div class="kicker">College</div>
         <h1 class="title cond" data-role="title"></h1>
         <p class="hint" data-role="hint"></p>
+        <button type="button" class="hsopen" data-hs-open aria-label="Search by high school" title="Search by high school"><span class="hs-long">Search by high school</span><span class="hs-short">High schools</span></button>
         <div class="gmaps" id="globeMaps" hidden></div>
       </div>
     </div>
@@ -291,11 +299,19 @@
     <div class="kicker">College</div>
     <h1 class="title cond" data-role="title"></h1>
     <p class="hint" data-role="hint"></p>
+    <button type="button" class="hsopen" data-hs-open aria-label="Search by high school" title="Search by high school"><span class="hs-long">Search by high school</span><span class="hs-short">High schools</span></button>
   </div>
   <div class="rows" id="rows"></div>
 </main>
 
 <div class="vh" id="say" aria-live="polite"></div>
+
+<dialog class="hsq" id="hsq" aria-labelledby="hsqTitle">
+  <div class="hsq-head"><h2 class="cond" id="hsqTitle">Search by high school</h2><button type="button" class="hsq-x" id="hsqClose" aria-label="Close">×</button></div>
+  <label class="vh" for="hsInput">High school, and a state if you like</label>
+  <input id="hsInput" type="search" placeholder="High school, and a state if you like" autocomplete="off" spellcheck="false">
+  <div class="hsq-out" id="hsOut" aria-live="polite"></div>
+</dialog>
 
 <footer><a class="src-btn" href="sources.html">Information about the data <span aria-hidden="true">→</span></a></footer>
 
@@ -649,33 +665,44 @@
 
   render();
 
-  // ---- Find a school ----
-  // Each built sport's school list, read the first time the box is used; a result links to the school in each sport.
-  (function finder() {
-    const box = document.getElementById('findSchool'), out = document.getElementById('findResults');
-    const schools = new Map();
-    let ready = null;
-    const load = () => ready || (ready = Promise.all(SPORTS.flatMap((s) => s.teams.filter((t) => t.built).map((t) =>
-      fetch(`${t.id}/school_locations.json`).then((r) => r.ok ? r.json() : { schools: {} }).then((j) => {
-        Object.keys(j.schools).forEach((name) => {
-          if (!schools.has(name)) schools.set(name, []);
-          schools.get(name).push({ s, t });
-        });
-      }).catch(() => {})))));
-    function show() {
-      const q = box.value.trim().toLowerCase();
-      if (q.length < 2) { out.hidden = true; return; }
-      const hits = [...schools.keys()].filter((n) => n.toLowerCase().includes(q))
-        .sort((a, b) => a.toLowerCase().startsWith(q) === b.toLowerCase().startsWith(q) ? a.localeCompare(b) : a.toLowerCase().startsWith(q) ? -1 : 1).slice(0, 8);
-      out.innerHTML = hits.length ? hits.map((n) => `<div class="fhit"><div class="fname">${esc(n)}</div><div class="fsports">${schools.get(n).sort((a, b) => SPORTS.indexOf(a.s) - SPORTS.indexOf(b.s)).map(({ s, t }) =>
-        `<a class="${t.sex ? SEX[t.sex].cls : ''}" href="players-dotmap.html?sport=${t.id}#school=${encodeURIComponent(n)}">${s.name}${t.sex ? ` (${t.sex === 'm' ? 'M' : 'W'})` : ''}</a>`).join('')}</div></div>`).join('')
-        : `<p class="fnone">No school by that name yet.</p>`;
-      out.hidden = false;
+  // ---- Search by high school ----
+  // docs/high_schools.json (from build.py pages) is about 1.5 MB, so it's read the first time the panel opens.
+  // A result links to that school on each sport's Recruiting Map; a row is [name, state, [sport, players, spelling?], ...].
+  (function hsSearch() {
+    const dlg = document.getElementById('hsq'), box = document.getElementById('hsInput'), out = document.getElementById('hsOut');
+    const HOW = 'Type at least two letters. Results list every sport with a player from that school.';
+    const LIMIT = 25;
+    let rows = null, teams = [], ready = null;
+    const load = () => ready || (ready = fetch('high_schools.json').then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }).then((j) => {
+      teams = j.sports.map((id) => { const s = SPORTS.find((x) => x.teams.some((t) => t.id === id)); return s && { s, t: s.teams.find((t) => t.id === id) }; });
+      rows = j.schools.map((r) => ({ r, q: `${r[0]} ${r[1]}`.toLowerCase() }));
+    }).catch((e) => { ready = null; throw e; }));
+    const note = (text) => { out.innerHTML = `<p class="hsq-note">${esc(text)}</p>`; };
+    function link([name, st], [i, n, own]) {
+      const team = teams[i];
+      if (!team) return '';
+      const { s, t } = team, where = (own || name) + (st ? `~${st}` : '');
+      return `<a class="${t.sex ? SEX[t.sex].cls : ''}" href="players-dotmap.html?sport=${t.id}#hs=${encodeURIComponent(where)}">${esc(s.name)}${t.sex ? ` (${t.sex === 'm' ? 'M' : 'W'})` : ''} ${n}</a>`;
     }
-    box.addEventListener('focus', load);
-    box.addEventListener('input', () => { load().then(show); });
-    box.addEventListener('keydown', (e) => { if (e.key === 'Escape') { box.value = ''; out.hidden = true; } });
-    document.addEventListener('pointerdown', (e) => { if (!e.target.closest('#finder')) out.hidden = true; });
+    function show() {
+      const typed = box.value.trim().toLowerCase(), toks = typed.split(/[\s,]+/).filter(Boolean);
+      if (typed.length < 2 || !toks.length) return note(HOW);
+      if (!rows) return note('Loading the high schools…');
+      const starts = (e) => e.q.startsWith(toks[0]) ? 0 : 1;
+      const hits = rows.filter((e) => toks.every((t) => e.q.includes(t))).sort((a, b) => starts(a) - starts(b));   // the list is already most players first
+      if (!hits.length) return note('No high school by that name yet.');
+      const shown = hits.slice(0, LIMIT).map(({ r }) => {
+        const total = r.slice(2).reduce((sum, x) => sum + x[1], 0);
+        return `<div class="hsq-hit"><div class="hsq-name">${esc(r[0])}${r[1] ? ` <small>${esc(r[1])}</small>` : ''} <small>· ${total.toLocaleString('en-US')} player${total === 1 ? '' : 's'}</small></div>`
+          + `<div class="hsq-sports">${r.slice(2).sort((a, b) => b[1] - a[1]).map((x) => link(r, x)).join('')}</div></div>`;
+      }).join('');
+      out.innerHTML = shown + (hits.length > LIMIT ? `<p class="hsq-note">Showing ${LIMIT} of ${hits.length.toLocaleString('en-US')}. Add a state or more of the name to narrow it.</p>` : '');
+    }
+    const retry = () => load().then(show).catch(() => note("The high schools didn't load. Close this and try again."));
+    document.querySelectorAll('[data-hs-open]').forEach((b) => b.addEventListener('click', () => { dlg.showModal(); box.focus(); show(); retry(); }));
+    box.addEventListener('input', show);
+    document.getElementById('hsqClose').addEventListener('click', () => dlg.close());
+    dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });   // a click on the dimmed page around it
   })();
 
   // ---- Scale the ring to fit the window ----
@@ -690,6 +717,8 @@
     const roomW = ringViewEl.clientWidth - 32;
     scaleK = Math.max(0.3, Math.min(1, roomW / W, roomH / H));
     ring.style.transform = `scale(${scaleK})`;
+    ring.style.setProperty('--k', scaleK);
+    ring.classList.toggle('tight', scaleK < 0.62);
     stage.style.width = W * scaleK + 'px';
     stage.style.height = H * scaleK + 'px';
   }

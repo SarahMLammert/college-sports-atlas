@@ -946,7 +946,7 @@ def compare_seasons_main(argv=None) -> int:
 PAGES_DOC = """Write docs/sports.js from every sport's settings, and make each sport's old page addresses forward to
 the shared pages.
 
-    python3 scripts/build.py pages            # write docs/sports.js and docs/<sport>/<page>.html for every sport
+    python3 scripts/build.py pages            # write docs/sports.js, docs/high_schools.json and docs/<sport>/<page>.html
     python3 scripts/build.py pages --check    # only say what is missing or out of date
 
 Since Oct 30 the site has one set of pages for every sport: docs/players-dotmap.html, players-heatmap.html,
@@ -1053,6 +1053,42 @@ def sports_js(docs: Path) -> tuple[str, list]:
     return "\n".join(lines), problems + more
 
 
+# Roster labels that landed in the high school column ("High School", "High School City: Simi Valley, CA",
+# "Previous School", "NA"), as hs_keys. They stay out of the search; the roster data still has them.
+_NOT_A_HIGH_SCHOOL = re.compile(r"(hs|hs city\b.*|previous school|n a|na|none)")
+
+
+def high_schools_json(docs: Path) -> str:
+    """docs/high_schools.json as build.py pages writes it: every high school in every built sport's map data, for the
+    front page's search (Nov 4). {"sports": [team ids], "schools": [[name, state, [sport, players, spelling?], ...], ...]},
+    most players first. A school is its hs_key plus its players' hometown state, as on the dot map, which
+    keeps two Lincoln HSs apart. A sport's own spelling is listed when it differs, because the dot map's
+    #hs= link has to match that sport's list."""
+    sports = [s.name for s in site_sports(docs) if (docs / s.name / "map_data.json").exists()]
+    found: dict[tuple, dict] = {}
+    for i, sport in enumerate(sports):
+        d = json.loads((docs / sport / "map_data.json").read_text(encoding="utf-8"))
+        states = [t[2].rsplit(", ", 1)[-1] for t in d["towns"]]
+        for h, t in zip(d["players"]["h"], d["players"]["t"]):
+            name, key = d["hs"][h], hs_key(d["hs"][h])
+            if name and not _NOT_A_HIGH_SCHOOL.fullmatch(key):
+                team = found.setdefault((key, states[t] if t >= 0 else ""), {}).setdefault(i, Counter())
+                team[name] += 1
+    rows = []
+    for (_, st), teams in found.items():
+        spelled = Counter()
+        for team in teams.values():
+            spelled.update(team)
+        shown = min(spelled, key=lambda n: (-spelled[n], len(n), n))
+        row = [shown, st]
+        for i in sorted(teams):
+            own = teams[i].most_common(1)[0][0]
+            row.append([i, sum(teams[i].values())] + ([own] if own != shown else []))
+        rows.append(row)
+    rows.sort(key=lambda r: (-sum(x[1] for x in r[2:]), r[0], r[1]))
+    return json.dumps({"sports": sports, "schools": rows}, ensure_ascii=False, separators=(",", ":"))
+
+
 def site_pages_main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=PAGES_DOC, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--check", action="store_true", help="don't write: list what is missing or out of date")
@@ -1074,6 +1110,15 @@ def site_pages_main(argv=None) -> int:
             tmp.write_text(text, encoding="utf-8")
             tmp.replace(js)
             print("written: docs/sports.js")
+    index, hs_text = docs / "high_schools.json", high_schools_json(docs)
+    if not index.exists() or index.read_text(encoding="utf-8") != hs_text:
+        if args.check:
+            print("out of date: docs/high_schools.json (run python3 scripts/build.py pages)"); problems += 1
+        else:
+            tmp = index.with_suffix(".json.tmp")
+            tmp.write_text(hs_text, encoding="utf-8")
+            tmp.replace(index)
+            print("written: docs/high_schools.json")
     for sport in (s.name for s in site_sports(docs)):
         for page in PAGES:
             path, want = docs / sport / page, forwarding_page(sport, page)

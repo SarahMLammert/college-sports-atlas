@@ -62,8 +62,7 @@ pages for every sport, opened with the sport in the address (`players-dotmap.htm
 
 Every page shares one strip of maps in its title bar (`MAPS` in `docs/common.js`, grouped into Players, Coaches and
 Schools), and a map opens on the school the page is showing. A sport dropdown beside it keeps the same map and school.
-Active filters show as chips with a ×. The front page has a Find a school box, read in the browser from each built
-sport's `school_locations.json`; clicking a sport lists all its maps in the globe. `docs/sources.html` builds its list
+Active filters show as chips with a ×. On the front page, clicking a sport lists all its maps in the globe, and Search by high school looks through `docs/high_schools.json` (written by `build.py pages`) and links to that school on each sport's Recruiting Map. `docs/sources.html` builds its list
 of sports from `sports.js` and each `summary.json`, so it needs no hand editing. Inside a page, `GP.tabsHTML` makes a set of tabs; the open
 tab is kept in the address (`tab=`). Styles and helpers used by more than one page belong in `docs/common.css` and
 `docs/common.js`. Staff Directory shows its two tabs side by side on wide windows.
