@@ -119,7 +119,7 @@ button.nmb:focus-visible { outline: 2px solid var(--focus); }
   const people = data.people.split("\n"), ROLES = data.roles, RL = data.roleLabels, ST = data.stints, MV = data.moves;
   const HEAD = ROLES.indexOf("head"), SUPPORT = ROLES.indexOf("support");
   const FIRST = Math.min(...ST.y), LAST = Math.max(...ST.y);
-  const SPRING = GP.springOf(data), lab = (y) => GP.seasonLabel(y, SPRING), span = (a, b) => GP.seasonSpan(a, b, SPRING);
+  const SPRING = GP.springOf(), lab = (y) => GP.seasonLabel(y, SPRING), span = (a, b) => GP.seasonSpan(a, b, SPRING);
   $("sub").textContent = `Every school's coaches and staff, season by season, ${span(FIRST, LAST)}`;
   const { swatch } = GP.makePalette(data);
   const schoolIndex = new Map(data.schools.map((s, i) => [s[0].toLowerCase(), i]));

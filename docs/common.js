@@ -1,4 +1,4 @@
-// Shared by every page of every sport (docs/players-*.html and staff-*.html, one set for all sports since Oct 30):
+// Shared by every page of every sport (docs/players-*.html and staff-*.html, one set for all sports):
 // which sport the page shows, constants, loading the data, school colors, and the Filters dropdown (its
 // controls, logic and link format). Load after d3 and sports.js.
 (function () {
@@ -15,7 +15,7 @@
   }
   const dataUrl = (file) => `${encodeURIComponent(sport)}/${file}`;
   const women = !!SPORT_PAGES[sport].women;
-  const pronoun = { he: women ? "she" : "he", his: women ? "her" : "his", him: women ? "her" : "him" };
+  const pronoun = { he: women ? "she" : "he", his: women ? "her" : "his" };
   // The sport's own words on this page (sports.js): title, description, heading, subtitle.
   const pageName = location.pathname.split("/").pop().replace(/\.html$/, "") || "players-dotmap";
   const words = SPORT_PAGES[sport][pageName];
@@ -173,14 +173,10 @@
     e.preventDefault();
   });
   if (document.body) startPage(); else document.addEventListener("DOMContentLoaded", startPage);
-  // Each sport's map_data.json says how it writes its positions and divisions (from config/<sport>.json):
+  // Each sport's map_data.json says how it writes its positions and divisions (from config/<sport>/settings.json):
   //   data.posLabels  position group -> chip text ("FO" -> "Faceoff")
   //   data.d1         the divisions that make up D1 (football: FBS and FCS; lacrosse: D1)
   //   data.divLabels  division -> its full name ("D2" -> "Division II")
-  // Data built before these existed gets football's, so older map_data.json files still work.
-  const POS_LABEL = { DEF: "Def (unlisted)", ST: "K/P/LS", ATH: "ATH/other" };
-  const D1_DIVS = ["FBS", "FCS"];
-  const DIV_TITLE = { FBS: "FBS (Division I)", FCS: "FCS (Division I)", D2: "Division II", D3: "Division III", NAIA: "NAIA", JUCO: "Junior college (NJCAA and California CCCAA)" };
   const STATE_ABBR = {"Alabama":"AL","Alaska":"AK","Arizona":"AZ","Arkansas":"AR","California":"CA","Colorado":"CO","Connecticut":"CT","Delaware":"DE","District of Columbia":"DC","Florida":"FL","Georgia":"GA","Hawaii":"HI","Idaho":"ID","Illinois":"IL","Indiana":"IN","Iowa":"IA","Kansas":"KS","Kentucky":"KY","Louisiana":"LA","Maine":"ME","Maryland":"MD","Massachusetts":"MA","Michigan":"MI","Minnesota":"MN","Mississippi":"MS","Missouri":"MO","Montana":"MT","Nebraska":"NE","Nevada":"NV","New Hampshire":"NH","New Jersey":"NJ","New Mexico":"NM","New York":"NY","North Carolina":"NC","North Dakota":"ND","Ohio":"OH","Oklahoma":"OK","Oregon":"OR","Pennsylvania":"PA","Rhode Island":"RI","South Carolina":"SC","South Dakota":"SD","Tennessee":"TN","Texas":"TX","Utah":"UT","Vermont":"VT","Virginia":"VA","Washington":"WA","West Virginia":"WV","Wisconsin":"WI","Wyoming":"WY","Puerto Rico":"PR"};
   const ABBR_STATE = Object.fromEntries(Object.entries(STATE_ABBR).map(([k, v]) => [v, k]));
   const fmt = d3.format(",");
@@ -190,7 +186,7 @@
   const narrow = () => matchMedia("(max-width: 760px)").matches;
 
   // ---------- data ----------
-  // map_data.json since Oct 28 packs the players' columns (scripts/build.py, pack_players): school, first season and
+  // map_data.json packs the players' columns (scripts/build.py, pack_players): school, first season and
   // division as runs [value, count, ...], the last season as seasons after the first ("len"), and transfer, previous
   // school and its level as [gap, value, ...] for the players they apply to. Unpacked here into plain columns.
   function unpackPlayers(Q) {
@@ -201,7 +197,7 @@
     return { s: runs(Q.s), t: Q.t, p: Q.p, f, l: f.map((v, i) => v + Q.len[i]), x: sparse(Q.x, 0), o: sparse(Q.o, -1),
              v: sparse(Q.v, 0), d: runs(Q.d), h: Q.h };
   }
-  // Big sports (football, baseball) split their players in two (Oct 28): map_data.json has the D1 schools'
+  // Big sports (football, baseball) split their players in two: map_data.json has the D1 schools'
   // players, data.more the files with the rest. loadData() waits for all of them unless asked for
   // { all: false } (the dot map, which opens on D1 and calls data.loadAll() when a view needs the others).
   // data.complete says whether everything is in; data.loadAll() adds the rest to the same columns, in place.
@@ -216,7 +212,7 @@
     };
     data.N = P.s.length;
     seasons();
-    // Players' names: in names.txt since Oct 28 (only the dot map needs them, and it draws before they arrive).
+    // Players' names: in names.txt (only the dot map needs them, and it draws before they arrive).
     // data.nameList is filled in place when they load, so code holding it sees them; data.loadNames() fetches
     // them once and resolves when they're in. Data built before then still has them in map_data.json.
     data.nameList = new Array(data.N).fill("");
@@ -243,12 +239,11 @@
         return data;
       }));
     if (data.complete) allLoad = Promise.resolve(data);
-    data.spring = springOf(data);
+    data.spring = springOf();
     data.seasonLabel = (y) => seasonLabel(y, data.spring);
     data.seasonSpan = (a, b) => seasonSpan(a, b, data.spring);
-    data.posLabel = data.posLabels || POS_LABEL;
-    data.d1 = data.d1 || D1_DIVS;
-    data.divLabel = data.divLabels || DIV_TITLE;
+    data.posLabel = data.posLabels;
+    data.divLabel = data.divLabels;
     data.posName = (p) => data.posLabel[p] || p;
     data.tState = data.towns.map((t) => { const parts = t[2].split(", "); return parts[parts.length - 1]; });   // state abbr, or a country
     data.schoolIndex = new Map(data.schools.map((s, i) => [s[0].toLowerCase(), i]));
@@ -624,7 +619,7 @@
     new ResizeObserver(() => document.documentElement.style.setProperty("--bar-h", bar.getBoundingClientRect().height + "px")).observe(bar);
   }
 
-  // staff_data.json since Oct 28 packs its stints (scripts/staff.py, pack_stints): per person the number of seasons
+  // staff_data.json packs its stints (scripts/staff.py, pack_stints): per person the number of seasons
   // ("n"), the first season - 2000 then the gap to the next ("y"), and school, role and title as 0 when the same as
   // the season before, else value + 1. Unpacked here into plain columns p, s, y, r, t.
   function unpackStints(q) {
@@ -642,9 +637,9 @@
     return st;
   }
   // Seasons are shown as school years: "2023-24". A season number is the year it starts for fall sports (football,
-  // volleyball, soccer: 2023 = 2023-24) and the year it ends for the rest (2024 = 2023-24). data.spring says which;
-  // for data built before Oct 29, which doesn't say, the sport's settings do (sports.js, from spring_season).
-  const springOf = (d) => d.spring !== undefined ? !!d.spring : !!(SPORT_PAGES[sport] || {}).spring;   // d.sport is the display name, not the id
+  // volleyball, soccer: 2023 = 2023-24) and the year it ends for the rest (2024 = 2023-24). The sport's
+  // settings say which (sports.js, from spring_season).
+  const springOf = () => !!(SPORT_PAGES[sport] || {}).spring;
   function seasonLabel(y, spring) {
     const a = spring ? y - 1 : y;
     return `${a}-${String((a + 1) % 100).padStart(2, "0")}`;
@@ -665,6 +660,130 @@
     const dx = b[0] - a[0], dy = b[1] - a[1], len = Math.hypot(dx, dy) || 1, bend = Math.min(.22 * len, 90);
     return { a, b, c: [(a[0] + b[0]) / 2 + dy / len * bend, (a[1] + b[1]) / 2 - dx / len * bend] };
   }
+  // ---------- the route map: Transfer Map, Coaching Moves and School Influence ----------
+  // Campuses on a US map in a <canvas id="cv"> inside #tmap, with a tooltip #ttip. The page draws its own
+  // content in draw(); this keeps the canvas sized, the states and campuses projected, and has the drawing
+  // and pointing helpers the three pages share. hover: {move(mx, my), leave(), click(mx, my)} in map pixels.
+  function routeMap(campus, draw, hover, failed) {
+    const box = $("tmap"), cv = $("cv"), tip = $("ttip"), g = cv.getContext("2d"), albers = d3.geoAlbersUsa();
+    let stateFeatures = [];
+    const m = { g, size: { w: 0, h: 0, dpr: 1 }, xy: [], statePaths: [] };
+    m.layout = () => {
+      const r = box.getBoundingClientRect();
+      if (!r.width) return;
+      const dpr = Math.min(devicePixelRatio || 1, 2);
+      m.size = { w: r.width, h: r.height, dpr };
+      cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr);
+      albers.fitExtent([[12, 12], [r.width - 12, r.height - 12]], US_FIT);
+      const path = d3.geoPath(albers);
+      m.statePaths = stateFeatures.map((f) => new Path2D(path(f) || ""));
+      m.xy = campus.map((c) => c ? albers([c.lon, c.lat]) : null);
+      draw();
+    };
+    // a cleared canvas with the states on it; false before the map has a size
+    m.clear = () => {
+      const { w, h, dpr } = m.size;
+      if (!w) return false;
+      g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, w, h);
+      g.fillStyle = css("--land"); for (const p of m.statePaths) g.fill(p);
+      g.strokeStyle = css("--border"); g.lineWidth = .7; for (const p of m.statePaths) g.stroke(p);
+      return true;
+    };
+    m.stroke = (q) => { g.beginPath(); g.moveTo(q.a[0], q.a[1]); g.quadraticCurveTo(q.c[0], q.c[1], q.b[0], q.b[1]); g.stroke(); };
+    m.arrow = (q, color, w) => {              // direction at the end of a quadratic curve is b - c
+      const ang = Math.atan2(q.b[1] - q.c[1], q.b[0] - q.c[0]), s = 4 + w * 1.6, tip = [q.b[0] - Math.cos(ang) * 5, q.b[1] - Math.sin(ang) * 5];
+      g.beginPath(); g.moveTo(tip[0], tip[1]);
+      g.lineTo(tip[0] - Math.cos(ang - .45) * s, tip[1] - Math.sin(ang - .45) * s);
+      g.lineTo(tip[0] - Math.cos(ang + .45) * s, tip[1] - Math.sin(ang + .45) * s);
+      g.closePath(); g.fillStyle = color; g.fill();
+    };
+    m.dot = (p, r, fill, ring, strong, fillAlpha) => {   // a campus; strong: hovered or picked
+      const alpha = g.globalAlpha;
+      g.beginPath(); g.arc(p[0], p[1], r, 0, Math.PI * 2); g.fillStyle = fill;
+      if (fillAlpha !== undefined) g.globalAlpha = fillAlpha;
+      g.fill(); g.globalAlpha = alpha;
+      g.lineWidth = strong ? 2.5 : 1; g.strokeStyle = ring; g.stroke();
+    };
+    m.label = (i, text) => {                  // a school's name beside its campus
+      const p = m.xy[i]; if (!p) return;
+      g.font = `600 13px ${css("--body")}`; g.textBaseline = "middle";
+      const tw = g.measureText(text).width, x = Math.min(p[0] + 12, m.size.w - tw - 8);
+      g.lineWidth = 4; g.strokeStyle = css("--panel"); g.strokeText(text, x, p[1]); g.fillStyle = css("--fg"); g.fillText(text, x, p[1]);
+    };
+    // The routes between campuses (Transfer Map, Coaching Moves): r.from -> r.to, r.n people, busiest first.
+    // look: {width: [min, extra], all: [alpha, extra], sel: [alpha, extra], arrowFrom: share of the busiest}.
+    m.flows = (routes, sel, hoverRoute, look) => {
+      const cIn = css("--in"), cOut = css("--out"), muted = css("--muted"), xy = m.xy;
+      const drawable = routes.filter((r) => xy[r.from] && xy[r.to]);
+      const shown = sel >= 0 ? drawable : drawable.slice(0, look.max);
+      const maxN = Math.max(1, ...shown.map((r) => r.n)), width = (n) => look.width[0] + look.width[1] * Math.sqrt(n / maxN);
+      const [a0, a1] = sel < 0 ? look.all : look.sel;
+      g.lineCap = "round";
+      for (let i = shown.length - 1; i >= 0; i--) {   // busiest last, so they draw on top
+        const r = shown[i], q = curve(xy[r.from], xy[r.to]), color = sel < 0 ? muted : r.to === sel ? cIn : cOut;
+        g.globalAlpha = a0 + a1 * Math.sqrt(r.n / maxN);
+        g.strokeStyle = color; g.lineWidth = width(r.n); m.stroke(q);
+        if (sel >= 0 && r.n / maxN > look.arrowFrom) m.arrow(q, color, width(r.n));
+      }
+      g.globalAlpha = 1;
+      if (hoverRoute && xy[hoverRoute.from] && xy[hoverRoute.to]) {   // the route under the pointer, on top with an arrow
+        const hr = hoverRoute, q = curve(xy[hr.from], xy[hr.to]), color = sel < 0 ? css("--accent") : hr.to === sel ? cIn : cOut;
+        const lw = Math.max(2.5, width(hr.n) + 1);
+        g.strokeStyle = css("--panel"); g.lineWidth = lw + 3; m.stroke(q);
+        g.strokeStyle = color; g.lineWidth = lw; m.stroke(q); m.arrow(q, color, lw);
+      }
+    };
+    // Every campus, sized by busy(i) (people in and out with these filters); the picked one big and named.
+    m.campuses = (busy, sel, hoverSchool, pal, name) => {
+      const fg = css("--fg"), panel = css("--panel"), muted = css("--muted");
+      const ids = campus.map((_, i) => i).filter((i) => m.xy[i]), maxB = Math.max(1, ...campus.map((_, i) => busy(i)));
+      for (const i of ids.sort((a, b) => busy(a) - busy(b))) {
+        const b = busy(i), r = i === sel ? 7 : b ? 2.2 + 4.3 * Math.sqrt(b / maxB) : 1.6;
+        g.globalAlpha = sel < 0 || i === sel || b > 0 ? 1 : .35;
+        m.dot(m.xy[i], r, b || i === sel ? pal[i].fill : muted, i === hoverSchool ? fg : panel, i === sel || i === hoverSchool);
+      }
+      g.globalAlpha = 1;
+      if (sel >= 0) m.label(sel, name(sel));
+    };
+    // the nearest campus within 14 px for which ok(i), or -1
+    m.schoolAt = (mx, my, ok) => {
+      let best = -1, bd = 14 * 14;
+      m.xy.forEach((p, i) => { if (!p) return; const d = (p[0] - mx) ** 2 + (p[1] - my) ** 2; if (d < bd && ok(i)) { bd = d; best = i; } });
+      return best;
+    };
+    // the route within 8 px of the pointer, or null
+    m.routeAt = (routes, mx, my) => {
+      let best = null, bd = 8;
+      for (const r of routes) {
+        const a = m.xy[r.from], b = m.xy[r.to]; if (!a || !b) continue;
+        const q = curve(a, b);
+        for (let t = 0; t <= 1; t += .05) {
+          const x = (1 - t) ** 2 * q.a[0] + 2 * (1 - t) * t * q.c[0] + t * t * q.b[0], y = (1 - t) ** 2 * q.a[1] + 2 * (1 - t) * t * q.c[1] + t * t * q.b[1];
+          const d = Math.hypot(x - mx, y - my); if (d < bd) { bd = d; best = r; }
+        }
+      }
+      return best;
+    };
+    m.tip = (html, x, y) => {
+      tip.innerHTML = html; tip.hidden = false;
+      const tw = tip.offsetWidth, th = tip.offsetHeight;
+      tip.style.left = Math.max(6, Math.min(x + 14, m.size.w - tw - 6)) + "px";
+      tip.style.top = Math.max(6, y - th - 10 < 6 ? y + 16 : y - th - 10) + "px";
+    };
+    m.hideTip = () => { tip.hidden = true; };
+    m.hot = (on) => cv.classList.toggle("hot", on);
+    const at = (e) => { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+    cv.addEventListener("pointermove", (e) => { if (m.size.w) hover.move(...at(e)); });
+    cv.addEventListener("pointerleave", () => { tip.hidden = true; hover.leave(); });
+    cv.addEventListener("click", (e) => hover.click(...at(e)));
+    // Start: size the map now; the states' outlines load in the background (campuses and routes draw without them).
+    m.start = async () => {
+      new ResizeObserver(m.layout).observe(box);
+      m.layout();
+      try { stateFeatures = await usStates(); m.layout(); } catch (e) { failed(); }
+    };
+    return m;
+  }
   function loadFailed(what) {
     $("loading").classList.add("failed");
     $("loading").textContent = `${what} didn't load. If you opened this file directly, serve the folder instead (python -m http.server), or reload to try again.`;
@@ -673,5 +792,5 @@
   function setHash(h) {
     try { history.replaceState(null, "", location.pathname + location.search + (h ? "#" + h : "")); } catch (e) { /* stays as it was */ }
   }
-  window.GP = { showChips, tabCount, dropdown, tabsHTML, tabToParams, tabFromParams, showTab, plural, US_FIT, usStates, curve, loadFailed, setHash, $, sport, dataUrl, he: pronoun.he, his: pronoun.his, him: pronoun.him, saveKey, readSaved, POS_LABEL, STATE_ABBR, ABBR_STATE, fmt, pct, esc, css, narrow, loadData, unpackStints, springOf, seasonLabel, seasonSpan, makePalette, makeFilters, copyLink, trackBar, miles, median };
+  window.GP = { showChips, tabCount, dropdown, tabsHTML, tabToParams, tabFromParams, showTab, plural, US_FIT, usStates, curve, routeMap, loadFailed, setHash, $, dataUrl, he: pronoun.he, his: pronoun.his, saveKey, readSaved, STATE_ABBR, ABBR_STATE, fmt, pct, esc, css, narrow, loadData, unpackStints, springOf, seasonLabel, seasonSpan, makePalette, makeFilters, copyLink, trackBar, miles, median };
 })();

@@ -8526,7 +8526,6 @@ Courtney Spriggs
 Ella Caudill
 Emily Demartino
 Kelsie Kreutzer
-Manager Kaila Torres
 Sadie Jensen
 Shaylee Riggs
 Abrial Ramirez
@@ -8621,7 +8620,6 @@ Olivia Dubois
 Angela Dabu
 Calli Maki
 Cortney Hokanson
-Elaina Haglund
 Ellie Rogers
 Grace Halvorson
 Katlyn Huff
@@ -16628,7 +16626,6 @@ Hannah Clear
 Maddison Ellis
 Olivia Munro
 Riley McCue
-Emma Mattingly
 Sawyer Lecius
 Abby Duncan
 Andrea Searcy
@@ -30109,7 +30106,6 @@ Mackie Chandler
 Mariana Pereira
 ReAnne Drayton
 Callie Rodriguez
-Essie Bass
 Jamie Mead
 Lia Johnson
 Meritxell Blesa
@@ -41709,7 +41705,6 @@ Brooke Ventrelle
 Caroline Higgins
 Emma Pietrzak
 Maya Gallagher
-Chloe Moody
 Emily McCandless
 Jordan Goedel
 Kate Trudgen
@@ -67599,7 +67594,6 @@ Seleste Compian
 Taylor Snow
 Alina Ortiz
 Amanda Croteau
-Bria Garcia
 Brooke Umali
 DeNae Vasquez-Dickson
 Emily Brouse
@@ -70836,7 +70830,6 @@ Jordan Jenkins
 Kit Rocco
 Taylor Hoover
 Caitlin Karo
-Destiny Owen
 Jenna O'Hair
 Kaylee McGinn
 Lauryn Hicks
@@ -75226,7 +75219,6 @@ Jayci Bradley
 Jorden Hodges
 Kristen Rhine
 Kyndal Garner
-Laney Emmert (Student Manager)
 Madison Sadler
 Rylee Bevers
 Anna Southerland
@@ -85240,7 +85232,6 @@ Brooke Bishop
 Ella Nickerson
 Emma Nordahl
 Kate Parker
-Katie Guy
 Maddy Booska
 Maddy Eaton
 Sophia Underfer
@@ -92141,7 +92132,6 @@ Scottie Metrejean
 Terrah Nelson
 Tia Bussey
 Tyranesha Davis
-Gina Van Norman, Manager
 Hannah Fewell
 Janiah Talbert
 Jayden Davis
@@ -93706,7 +93696,6 @@ Courtney Harrison
 Daisy Pallares
 Fallan Everett
 Jasmine Sierra
-Lucia Gonzalez
 Mia Avila
 Peyton Welker
 Tazia Blake
@@ -99890,15 +99879,12 @@ Anna Thomas
 Ansley Jarvis
 Ashleigh Lawson
 Kyleigh Sanders
-MANAGER Hannah Hogan
 Brianna McCarty
 Camryn Halliday
 Emma Vessell
 Isabelle Sullivan
 Kyndall Gipson
 Lexi Simonton
-MANAGER Kataryna Fuller
-MANAGER Marlo McBrayer
 Morgan Chancey
 Rachel Morgan
 Cassie Boatright
@@ -99906,7 +99892,6 @@ Courtney Stewart
 Grace Folds
 Hailey Cronic
 Jenna O'Brien
-MANAGER Maggie Schandera
 Macy Brown
 Makaela Davis
 Olivia Haag
@@ -99916,8 +99901,6 @@ Abby Reed
 Anslee Pittman
 Emme Souter
 Jayden Thomas
-MANAGER Courtney Stewart
-MANAGER Rachael Arnold
 Madelyn Vincent
 Rebecca Graham
 Ashley Fitts
@@ -99936,10 +99919,7 @@ Emma Skipper
 Gabby Hughes
 Julianna York
 Kinsley Tout
-MANAGER Anslee Pittman
-MANAGER Rebecca Graham
 Maggie McGaughey
-Manager Sarah Miller
 Payten DeMeester
 Reagan Chizek
 Rylee Walker
@@ -99952,7 +99932,6 @@ Isabella Higman
 Jaidyn Denney
 Lianna Rodriguez
 Logan Fain
-Manager Madelyn Vincent
 Olivia Jutras
 Reece Meadows
 Sydney Snowden
@@ -105768,7 +105747,6 @@ Jaya Diggs-Hagwood
 Jordyn Bradshaw
 Lauren Parham
 Makari Carter
-Manager Benedicte Nseliema
 Mylia Knight
 Shamya Hankins
 Daya McGee

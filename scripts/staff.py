@@ -22,6 +22,7 @@ import csv
 import json
 import os
 import re
+import signal
 import sys
 from collections import defaultdict
 from concurrent.futures import ProcessPoolExecutor
@@ -32,19 +33,24 @@ from bs4 import BeautifulSoup
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))   # so the files here import each other
 
-from core import add_sport_argument, Fetcher, load_sport, read_csv, ROOT, season_files
+from core import add_sport_argument, Fetcher, load_sport, read_csv, ROOT, run_command, season_files
 
 # ==============================================================================================================
-# Reading staff from pages   (was scripts/staff.py)
+# Reading staff from pages
 # ==============================================================================================================
 
-STAFF_DOC = 'Coaches and staff from a team\'s roster page (Sidearm classic and cards, WMT/Nuxt) or its separate coaches page\n(PrestoSports). Shared by staff.py scrape and the tests.\n\nEvery layout links each coach to a bio page: /sports/<sport>/roster/coaches/<name>/<id> (Sidearm),\n/sports/<sport>/roster/season/<year>/staff/<name> (WMT), /sports/<sport>/coaches/<name> (Presto). parse_staff()\nstarts from those links, takes the name from the link (or its aria-label when the link says "Full Bio") and the\njob title from the card or table row the link sits in.\n'
+# Coaches and staff from a team's roster page (Sidearm classic and cards, WMT/Nuxt) or its separate coaches page
+# (PrestoSports). Shared by staff.py scrape and the tests.
+#
+# Every layout links each coach to a bio page: /sports/<sport>/roster/coaches/<name>/<id> (Sidearm),
+# /sports/<sport>/roster/season/<year>/staff/<name> (WMT), /sports/<sport>/coaches/<name> (Presto). parse_staff()
+# starts from those links, takes the name from the link (or its aria-label when the link says "Full Bio") and the
+# job title from the card or table row the link sits in.
 
 
 _BIO_LINK = re.compile(r"/(?:roster/)?coaches/[^/?#]+|/roster/(?:season/[^/]+/)?staff/[^/?#]+|/coach/[^/?#]+", re.I)
 _TITLE_CLASS = re.compile(r"title|position|role|job", re.I)
 _NAME_CLASS = re.compile(r"name|heading|person-link", re.I)
-_CARD = re.compile(r"coach|staff|person|card|member", re.I)
 _NOT_NAME = re.compile(r"^(full bio|bio|view( full)? bio|read more|more|email|e-mail|phone|twitter|x|instagram|"
                        r"headshot|photo|coaches|coaching staff|staff|support staff|meet the staff)$", re.I)
 _NAME_OK = re.compile(r"^[A-Z][\w'’.\-]*(?:\s+[\w'’.\-()]+){1,4}$", re.U)
@@ -240,7 +246,7 @@ def role_of(title: str, sport_label: str = "") -> str:
 
 
 # ==============================================================================================================
-# Scraping staff (scrape)   (was scripts/scrape_staff.py)
+# Scraping staff (scrape)
 # ==============================================================================================================
 
 SCRAPE_STAFF_DOC = """Coaches and staff for every school-season, read from the roster pages the scraper already downloaded.
@@ -306,7 +312,6 @@ _WORKER: dict = {}
 
 
 def _init(sport_name: str, offline: bool, index: dict) -> None:
-    import signal
     signal.signal(signal.SIGINT, signal.SIG_IGN)
     sport = load_sport(sport_name)
     _WORKER.update(fetcher=Fetcher(CACHE, delay=1.5, timeout=10), offline=offline, index=index,
@@ -404,10 +409,25 @@ def scrape_staff_main(argv=None) -> int:
 
 
 # ==============================================================================================================
-# The staff data (build)   (was scripts/build_staff_data.py)
+# The staff data (build)
 # ==============================================================================================================
 
-BUILD_STAFF_DATA_DOC = 'Coaches and staff for the staff pages: one person per name across a sport\'s schools and seasons, their\nseasons at each school, and their moves between schools.\n\n    python3 scripts/staff.py build --sport football     # rosters/football/staff_*.csv -> docs/football/staff_data.json\n\nReads rosters/<sport>/staff_<season>.csv (staff.py scrape) and the schools, conferences and divisions from\ndocs/<sport>/map_data.json (build.py map, so run that first).\n\nPeople: the same name in the same sport is the same person ("Mike Smith Jr." and "Mike Smith" too, and "Mike A. Smith"\nwhen "Mike Smith" is listed somewhere). A name seen\nat two schools in the same season more than once is two people (a common name), and gets no moves. One season\nat two schools is fine: coaches change jobs mid-year and both pages list them.\n\nA move: the last season at one school, then the first season at the next (at most two seasons later), each with\nthe person\'s role there.\n'
+BUILD_STAFF_DATA_DOC = """Coaches and staff for the staff pages: one person per name across a sport's schools and seasons, their
+seasons at each school, and their moves between schools.
+
+    python3 scripts/staff.py build --sport football     # rosters/football/staff_*.csv -> docs/football/staff_data.json
+
+Reads rosters/<sport>/staff_<season>.csv (staff.py scrape) and the schools, conferences and divisions from
+docs/<sport>/map_data.json (build.py map, so run that first).
+
+People: the same name in the same sport is the same person ("Mike Smith Jr." and "Mike Smith" too, and "Mike A. Smith"
+when "Mike Smith" is listed somewhere). A name seen
+at two schools in the same season more than once is two people (a common name), and gets no moves. One season
+at two schools is fine: coaches change jobs mid-year and both pages list them.
+
+A move: the last season at one school, then the first season at the next (at most two seasons later), each with
+the person's role there.
+"""
 
 
 COACHING = {"head", "associate", "assistant", "coordinator", "graduate", "volunteer"}
@@ -494,7 +514,7 @@ def build(rows: list[dict], schools: list[str]) -> dict:
     return {"people": "\n".join(names), "titles": titles, "stints": st, "moves": mv, "shared": shared}
 
 
-# ---- the stints, packed (Oct 28) ----
+# ---- the stints, packed ----
 # Each person's seasons are together and in order, so staff_data.json writes per person how many seasons ("n"), the
 # first season (minus 2000) and then the gap to the next ("y"), and school, role and title as 0 when the same as the
 # person's season before, else the value + 1. Football's file went from 3.9 MB to about 2.6 MB. docs/common.js
@@ -571,14 +591,5 @@ def build_staff_data_main(argv=None) -> int:
 COMMANDS = {"scrape": scrape_staff_main, "build": build_staff_data_main}
 
 
-def command_line(argv=None) -> int:
-    """python3 scripts/staff.py <command> [options]"""
-    argv = list(sys.argv[1:] if argv is None else argv)
-    if argv and argv[0] in COMMANDS:
-        sys.argv[0] = f"{Path(sys.argv[0]).name} {argv[0]}"     # so --help says "build.py map"
-        return COMMANDS[argv[0]](argv[1:]) or 0
-    sys.exit("commands: " + ", ".join(COMMANDS) + " (add --help to one for its options)")
-
-
 if __name__ == "__main__":
-    raise SystemExit(command_line())
+    raise SystemExit(run_command(COMMANDS))

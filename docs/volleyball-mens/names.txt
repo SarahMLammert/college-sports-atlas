@@ -1260,7 +1260,6 @@ Zachary Kay
 Adam Sheppard
 Arthur Barreto
 Ben Ritzema
-Chance Lipscomb
 David Brandt
 Ege Gul
 Erik Malek
@@ -11364,7 +11363,6 @@ Bryce Walker
 Hunter Clasen
 Vicente Ibarra
 Axel Melendez Watts
-Cree Thompson
 Davey Singer
 KJ Glab
 Mark Frazier

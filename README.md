@@ -7,34 +7,36 @@ site in `docs/` (GitHub Pages).
 | sport | folder | schools | players | seasons |
 |---|---|---|---|---|
 | Football | `football` | 831 (FBS, FCS, D2, D3, NAIA, JUCO) | 446K | 2016–2019, 2021–2026 (no 2020) |
-| Baseball | `baseball` | 1,082 (D1, D2, D3, NAIA, JUCO) | 218K | 2016–2027 |
+| Baseball | `baseball` | 1,083 (D1, D2, D3, NAIA, JUCO) | 219K | 2016–2027 |
 | Softball | `softball` | 1,118 (D1, D2, D3, NAIA, JUCO) | 115K | 2016–2027 |
 | Lacrosse (Men's) | `lacrosse-mens` | 431 (D1, D2, D3, NAIA, JUCO) | 69K | 2016–2027 |
 | Lacrosse (Women's) | `lacrosse-womens` | 583 (D1, D2, D3, NAIA, JUCO) | 58K | 2016–2027 |
 | Hockey (Men's) | `hockey-mens` | 162 (NCAA D1, D2, D3) | 20K | 2016–2027 |
 | Hockey (Women's) | `hockey-womens` | 126 (National Collegiate = D1 and D2 schools, D3) | 12K | 2016–2027 |
-| Basketball (Men's) | `basketball-mens` | 1,215 (D1, D2, D3, NAIA, JUCO) | 120K | 2016–2027 |
+| Basketball (Men's) | `basketball-mens` | 1,216 (D1, D2, D3, NAIA, JUCO) | 120K | 2016–2027 |
 | Basketball (Women's) | `basketball-womens` | 1,220 | 99K | 2016–2027 |
 | Volleyball (Women's) | `volleyball-womens` | 1,192 | 98K | 2016–2026 (fall) |
+| Volleyball (Men's) | `volleyball-mens` | 260 | 16K | 2016–2027 |
 | Soccer (Men's) | `soccer-mens` | 950 | 152K | 2016–2026 (fall) |
 | Soccer (Women's) | `soccer-womens` | 1,161 | 149K | 2016–2026 (fall) |
 | Wrestling (Men's) | `wrestling-mens` | 321 | 44K | 2016–2027 |
-| Wrestling (Women's) | `wrestling-womens` | 177 | 9K | 2016–2027 |
-| Volleyball (Men's) | `volleyball-mens` | 260 | 16K | 2016–2027 |
+| Wrestling (Women's) | `wrestling-womens` | 178 | 9K | 2016–2027 |
+| Field Hockey | `field-hockey` | 276 (NCAA) | 26K | 2016–2026 (fall) |
+| Water Polo (Men's) | `water-polo-mens` | 50 (NCAA) | 5K | 2016–2026 (fall) |
+| Water Polo (Women's) | `water-polo-womens` | 59 (NCAA) | 5K | 2016–2026 |
+| Rowing (Men's) | `rowing-mens` | 54 (NCAA) | 9K | 2016–2026 |
+| Rowing (Women's) | `rowing-womens` | 137 (NCAA) | 25K | 2016–2026 |
+| Tennis (Men's) | `tennis-mens` | 737 | 36K | 2016–2026 |
+| Tennis (Women's) | `tennis-womens` | 880 | 38K | 2016–2026 |
+| Golf (Men's) | `golf-mens` | 939 | 43K | 2016–2026 |
+| Golf (Women's) | `golf-womens` | 844 | 27K | 2016–2026 |
+| Cross Country (Men's) | `cross-country-mens` | 1,138 | 75K | 2016–2026 (fall) |
+| Cross Country (Women's) | `cross-country-womens` | 1,188 | 75K | 2016–2026 (fall) |
+| Track & Field (Men's) | `track-mens` | 959 (indoor and outdoor together) | 150K | 2016–2026 |
 
-Set up on Nov 2, 2026 and waiting for their first run (they show as "coming soon" on the front page until built).
-Programs are the schools with a site to try:
-
-| sport | folder | programs | seasons |
-|---|---|---|---|
-| Field Hockey | `field-hockey` | 281 (NCAA) | fall |
-| Water Polo | `water-polo-mens`, `water-polo-womens` | 54, 66 (NCAA) | men's fall, women's spring-named |
-| Rowing | `rowing-mens`, `rowing-womens` | 57, 148 (NCAA) | spring-named |
-| Tennis | `tennis-mens`, `tennis-womens` | 891, 1,033 | spring-named |
-| Golf | `golf-mens`, `golf-womens` | 1,035, 959 | spring-named |
-| Cross Country | `cross-country-mens`, `cross-country-womens` | 1,206, 1,271 | fall |
-| Track & Field | `track-mens`, `track-womens` | 1,118, 1,206 | spring-named; indoor and outdoor together |
-| Swimming & Diving | `swimming-mens`, `swimming-womens` | 668, 770 | spring-named |
+Schools are the ones with players in the data. Set up but not built yet (they show as "coming soon" on the front
+page until built): Track & Field (Women's) `track-womens` (1,206 programs to try), Swimming & Diving `swimming-mens`,
+`swimming-womens` (668, 770).
 
 Football, volleyball and soccer are named by the fall they're played in. Spring and winter sports are named by the
 spring the season ends in (2025-26 = 2026); from August the current season is next spring's. A sport appears on the
@@ -137,10 +139,11 @@ docs/                  the site: the six pages, common.js, common.css, index.htm
                        build.py pages from the settings);
                        docs/<sport>/ has map_data.json, names.txt, summary.json, school_locations.json,
                        staff_data.json and the old addresses' forwarding pages
-scripts/               new_sports.py (the settings and schools files of the sports added Nov 2), core.py (paths, downloads, season files, levels), sidearm.py (reading roster pages),
+scripts/               new_sports.py (the settings and schools files of the sports added Nov 2), core.py (paths,
+                       downloads, season files, levels, and run_command: each file's sub-commands), sidearm.py (reading roster pages),
                        hometowns.py (reading hometown, class, height and weight fields), scrape_rosters.py,
                        scrape_reports.py (attempts.csv, the problem list, MISSING_ROSTERS.md), geocode.py (placing
-                       hometowns), hometown_fixes.py, build.py, staff.py, pipeline.py
+                       hometowns), hometown_fixes.py, build.py, staff.py, pipeline.py, pro_rosters.py (below)
 tests/                 test_atlas.py: the code (also checked with pyflakes), the parsers, the builds
                        roster_pages.zip + roster_pages_expected.json: nine real roster pages, one per kind of
                        site, and what the parser reads from each
@@ -192,6 +195,12 @@ tests/                 test_atlas.py: the code (also checked with pyflakes), the
 - **Staff.** Coaches are read from the roster pages (or the coaches page). People are matched by name; a
   move is a person's last season at one school followed by their first at another within two seasons.
   Titles become roles (head, associate, assistant, coordinator, graduate, volunteer, support).
+
+- **Pro rosters (started Nov 8).** `python3 scripts/pro_rosters.py nfl` reads the 32 NFL team rosters from nfl.com
+  (cached like the college pages; `--refresh` downloads again, `--match-only` redoes the matching) and writes
+  `rosters/pro/nfl_<season>.csv` and `nfl_<season>_matched.csv`: each player with his college matched to that school's
+  football roster, so hometown and high school come from the college data (about 93% matched). A roster page lists
+  current players only, so each run is a snapshot of one season. No page shows it yet.
 
 ## Adding a sport
 

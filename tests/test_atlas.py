@@ -30,7 +30,7 @@ import scrape_rosters as sr
 import sidearm
 import staff
 import hometown_fixes as sug
-from hometowns import normalize_class, not_a_place, parse_hometown, split_labeled_hometown
+from hometowns import is_label_only, normalize_class, not_a_place, parse_hometown, split_labeled_hometown
 from core import Levels, is_major, key, ROOT
 from core import load_sport
 from sidearm import parse_roster, parse_sidearm_classic
@@ -602,6 +602,40 @@ def test_staff_titles_in_player_fields_dropped():
     assert len(drop_staff(rows)) == 20
 
 
+def test_honorary_members_and_helpers_are_not_players():
+    # all seen on saved rosters (Nov 8)
+    from sidearm import is_staff, not_a_player
+    for rec in ({"name": "Zoe White", "hometown": "Team IMPACT Honorary Member"},
+                {"name": "Suki Bateh", "high_school": "Team IMPACT"}, {"name": "Arianna (Team IMPACT)"},
+                {"name": "Mary Austing", "position": "Honorary Lion"}, {"name": "Colton Simmons", "position": "Ball Boy"},
+                {"name": "In Memory of John Bloomfield"}, {"name": "Retired in Honor of Dave Dickenson"},
+                {"name": "Danny Crane Memorial Jersey"}, {"name": "Chuck French", "hometown": "Retired Number"},
+                {"name": "MANAGER Logan Horne"}, {"name": "Ashlyn Martin - Manager"}, {"name": "Pat Lee (Manager)"},
+                {"name": "Lucy Barnes, Student Assistant"}):
+        assert not_a_player(rec) and is_staff(rec), rec
+    for rec in ({"name": "Therese Trainer"}, {"name": "Charleen Mascote"}, {"name": "Ben Manager", "position": "OL"},
+                {"name": "Paola Bodano", "high_school": "Floral Park Memorial"}):
+        assert not not_a_player(rec) and not is_staff(rec), rec
+
+
+def test_pro_roster_page_is_read_by_its_headers():
+    import pro_rosters
+    html = """<table class="d3-o-table"><thead><tr><th>Player</th><th>No</th><th>Pos</th><th>Status</th><th>Height</th>
+      <th>Weight</th><th>Experience</th><th>College</th></tr></thead><tbody>
+      <tr><td><img alt=""><a href="/players/aaron-banks/">Aaron Banks</a></td><td>65</td><td>G</td><td>ACT</td>
+          <td>6-5</td><td>325</td><td>5</td><td>Notre Dame</td></tr>
+      <tr><td><a href="/players/lenny-krieg/">Lenny Krieg</a></td><td>6</td><td>K</td><td>PS</td><td>6-1</td>
+          <td>200</td><td>R</td><td></td></tr></tbody></table>"""
+    got = pro_rosters.parse_roster_page(html, "https://www.nfl.com")
+    assert [(p["name"], p["number"], p["position"], p["college"], p["profile_url"]) for p in got] == [
+        ("Aaron Banks", "65", "G", "Notre Dame", "https://www.nfl.com/players/aaron-banks/"),
+        ("Lenny Krieg", "6", "K", "", "https://www.nfl.com/players/lenny-krieg/")]
+    import datetime as dt
+    assert pro_rosters.season_now(dt.date(2026, 11, 8)) == 2026 and pro_rosters.season_now(dt.date(2027, 1, 20)) == 2026
+    assert [pro_rosters._pro_years(e) for e in ("R", "5", "", "x")] == [0, 5, None, None]
+    assert pro_rosters._last_name_key("Pat Surtain II") == pro_rosters._last_name_key("Patrick Surtain") == "surtain"
+
+
 def test_staff_table_with_hometown_column_ignored():
     html = """<table><thead><tr><th>Name</th><th>Title</th><th>Hometown</th></tr></thead>
       <tbody><tr><td>Sam Boss</td><td>Head Coach</td><td>Tulsa, Okla.</td></tr></tbody></table>"""
@@ -870,6 +904,83 @@ def test_a_cell_label_with_several_slashes_isnt_read_as_the_hometown():
     found = sidearm.parse_html_tables(html, BeautifulSoup(html, "lxml"))
     assert [(p["hometown"], p["high_school"]) for p in found] == [
         ("Detroit, Mich.", "Northwestern HS"), ("St. Louis, Mo.", "Lift for Life Academy")]
+
+
+def _table(header: str, *cells: str) -> list[dict]:
+    rows = "".join(f"<tr><td>Player {i}</td><td>{c}</td></tr>" for i, c in enumerate(cells))
+    html = f"<table><thead><tr><th>Name</th><th>{header}</th></tr></thead><tbody>{rows}</tbody></table>"
+    return sidearm.parse_html_tables(html, BeautifulSoup(html, "lxml"))
+
+
+def test_combined_headers_split_in_the_sites_order():
+    # Tusculum: three fields; the previous school used to be dropped
+    p = _table("Hometown/ Previous School / High School",
+               "Hometown/ Previous School / High School: Tarpon Springs, Fla. / Valdosta St. / Tarpon Springs HS")[0]
+    assert (p["hometown"], p["previous_school"], p["high_school"]) == ("Tarpon Springs, Fla.", "Valdosta St.", "Tarpon Springs HS")
+    # Mt. SAC: "HS City State/High School" was read as a high school column, so the table was skipped
+    p = _table("HS City State/High School", "HS City State/High School: Walnut, CA / Walnut")[0]
+    assert (p["hometown"], p["high_school"]) == ("Walnut, CA", "Walnut")
+    # Butler CC: an empty last part
+    p = _table("Hometown/High School/Previous College", "Reading, KS / Osage City High School /")[0]
+    assert (p["hometown"], p["high_school"], p["previous_school"]) == ("Reading, KS", "Osage City High School", "")
+    # Cerritos: school first, town second
+    p = _table("High School / HS City (State)", "High School / HS City (State) : Santa Fe HS / Santa Fe Springs (CA)")[0]
+    assert (p["hometown"], p["high_school"]) == ("Santa Fe Springs, CA", "Santa Fe HS")
+    # ... where a college sometimes takes the town's place
+    p = _table("High School / HS City (State)", "High School / HS City (State): Gahr/West Los Angeles College")[0]
+    assert (p["hometown"], p["high_school"], p["previous_school"]) == ("", "Gahr", "West Los Angeles College")
+    # Fresno City: a stray "/" in front; Louisburg: colons inside the header
+    p = _table("Hometown/High School", "Hometown/High School: / Jonesboro, GA. / Mt. Zion HS")[0]
+    assert (p["hometown"], p["high_school"]) == ("Jonesboro, GA.", "Mt. Zion HS")
+    p = _table("Hometown:/:Prev. School", "Hometown:/:Prev. School: Barcelona, Spain /")[0]
+    assert (p["hometown"], p["previous_school"]) == ("Barcelona, Spain", "")
+    # Olivet: "Wyoming" is Wyoming HS (Michigan), not a hometown in the state of Wyoming
+    p = _table("Hometown / High School", "Hometown / High School: Grand Rapids / Wyoming")[0]
+    assert (p["hometown"], p["high_school"]) == ("Grand Rapids", "Wyoming")
+    # a country alone is still a hometown; a town named for its university is still a town
+    p = _table("Hometown/High School", "Hometown/High School: Lithuania / St. Laurence (IL)")[0]
+    assert (p["hometown"], p["high_school"]) == ("Lithuania", "St. Laurence (IL)")
+    p = _table("Hometown/High School", "Hometown/High School: Lincoln University, Pa. / Salesianum")[0]
+    assert (p["hometown"], p["high_school"]) == ("Lincoln University, Pa.", "Salesianum")
+    assert sidearm._header_field("Bats/Throws") is None and sidearm._header_field("Ht./Wt.") == "height"
+    assert sidearm._header_field("Hometown / High School / Club") == ("hometown", "high_school", None)
+
+
+def test_a_label_in_an_empty_cell_isnt_a_value():
+    html = """<table><thead><tr><th>Name</th><th>High School City</th><th>High School</th><th>Hometown</th>
+    <th>Previous College</th></tr></thead><tbody><tr><td>Michael Jester</td><td>High School City:</td>
+    <td>High School: Oxnard High</td><td>Hometown: Ventura, Calif.</td><td>Previous College:</td></tr></tbody></table>"""
+    p = sidearm.parse_html_tables(html, BeautifulSoup(html, "lxml"))[0]
+    assert (p["hometown"], p["high_school"], p["previous_school"]) == ("Ventura, Calif.", "Oxnard High", "")
+    # Moorpark's own Hometown column wins over its high school's town; the town fills in when there's no hometown
+    html = html.replace("High School City:</td>", "High School City: Oxnard, Calif.</td>")
+    assert sidearm.parse_html_tables(html, BeautifulSoup(html, "lxml"))[0]["hometown"] == "Ventura, Calif."
+    html = html.replace("Hometown: Ventura, Calif.", "Hometown:")
+    assert sidearm.parse_html_tables(html, BeautifulSoup(html, "lxml"))[0]["hometown"] == "Oxnard, Calif."
+    for v in ("Previous College:", "High School", "High School City:", "Hometown/ Previous School", "Previous:", "NA", "/", "--", "HS"):
+        assert is_label_only(v), v
+    for v in ("Central High School", "Garden City", "Previous School Academy", "Kansas City, Mo.", "Hometown Christian"):
+        assert not is_label_only(v), v
+
+
+def test_the_high_schools_town_is_a_fallback_hometown():
+    # Mt. SAC cross country: the page's own Hometown column wins, unless it names only a state
+    head = "<tr><th>Name</th><th>High School/High School City</th><th>Hometown</th></tr>"
+    rows = ("<tr><td>A B</td><td>High School/High School City: South Hills / West Covina</td><td>Hometown: Walnut</td></tr>"
+            "<tr><td>C D</td><td>High School/High School City: Whittier / Hacienda Heights</td><td>Hometown: California</td></tr>"
+            "<tr><td>E F</td><td>High School/High School City: Arroyo / El Monte</td><td>Hometown:</td></tr>")
+    html = f"<table><thead>{head}</thead><tbody>{rows}</tbody></table>"
+    got = [(p["hometown"], p["high_school"]) for p in sidearm.parse_html_tables(html, BeautifulSoup(html, "lxml"))]
+    assert got == [("Walnut", "South Hills"), ("Hacienda Heights", "Whittier"), ("El Monte", "Arroyo")]
+
+
+def test_saved_rows_lose_label_only_values():
+    row = {"name": "Jason Givens", "hometown": "HS City (State) : Santa Fe HS / Santa Fe Springs (CA)",
+           "high_school": "High School", "previous_school": "Previous College:"}
+    sr.clean_row(row)
+    assert (row["hometown"], row["high_school"], row["previous_school"]) == ("Santa Fe Springs, CA", "Santa Fe HS", "")
+    row = {"name": "Justice Parham", "hometown": "Hometown/ Previous School", "high_school": "Tarpon Springs HS", "previous_school": ""}
+    assert sr.clean_row(row)["hometown"] == ""
 
 
 def test_a_run_of_seasons_with_no_roster_ends_where_expected():
@@ -1441,7 +1552,8 @@ def test_every_sport_has_its_pages():
     words = build.sport_words(build.site_sports(ROOT / "docs"))
     for sport, w in words.items():
         assert "College" in w["players-dotmap"]["title"], sport
-        assert w["women"] == sport.endswith("-womens") or sport == "softball" or w["women"] is False, sport
+        women_only = sport.endswith("-womens") or sport in ("softball", "field-hockey")
+        assert w["women"] == women_only or w["women"] is False, sport
     # the shared pages use the sport's pronouns, not football's
     for page in ("players-dotmap.html", "players-transfers.html"):
         text = (ROOT / "docs" / page).read_text(encoding="utf-8")

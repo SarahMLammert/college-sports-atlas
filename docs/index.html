@@ -373,7 +373,7 @@
     ['staff-moves', 'Coaching Moves'], ['staff-directory', 'Staff Directory'], ['school-influence', 'School Influence']];
 
   // ---- State: which sport is lit, which one a click pinned ----
-  // The numbers come from each team's summary.json, written by build.py map with its map data (Oct 28);
+  // The numbers come from each team's summary.json, written by build.py map with its map data;
   // the stats typed in above are only a fallback for when it can't load.
   const short = (n) => n >= 10000 ? `${Math.round(n / 1000)}K` : n.toLocaleString('en-US');
   SPORTS.forEach((s) => s.teams.filter((t) => t.built).forEach((t) => {
@@ -430,7 +430,7 @@
   const at = (deg, dist) => ({ x: CX + dist * Math.sin(rad(deg)), y: CY - dist * Math.cos(rad(deg)) });
 
   const ring = document.getElementById('ring');
-  // The lit sport's page buttons sit on a small ring of their own around its disc (Oct 30), at these compass
+  // The lit sport's page buttons sit on a small ring of their own around its disc, at these compass
   // angles (0 = up), the same wherever the disc is: players to the left and coaches to the right; with both
   // teams, men's on the left (players above, coaches below) and women's on the right.
   const MINI_R = 84;

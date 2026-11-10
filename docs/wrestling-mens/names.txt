@@ -24291,6 +24291,190 @@ Owen Dreher
 Owen Edwards
 Stephen Patterson
 Tristan Aldridge
+Adrian Cisneros
+Andrew Bowen-Albo
+Andrew Cruz
+Anthony Briones
+Blake Stevenson
+Blas Canobbio
+Bradley Pearce
+David Clancy
+Dean Parker
+George Taylor
+Giovanni Castillo
+Hector Vargas
+Isaiah Coates
+Jesse Jaime
+Jessica Toledo
+Jonathan Atherton
+Jonathan Parada
+Jose Rugama
+Kolton Martin
+Mario Lopez
+Nathan Aragon
+Nathan Pesquera
+Nicholas Viramontes
+Raymond Olvera
+Reed South
+Ryan Padilla
+Terrill Sidner
+Triunfo Torres
+Vernon Willis
+Adam Padilla
+Angel Alcantar
+Anthony Teitelbaum
+Anthony Torres
+Apollo Santos
+Barnabas Yi
+Caleb Bosia
+Casper Sherow
+Christopher Alvizures
+Cody Fahamokioa
+Elijah Diaz
+Ferdaws Ashrati
+Freddie Garcia
+George Torres
+Guillermo Padilla
+John Whisner
+Joseph Dominguez
+Joshua Sapien
+Julian Melecio
+Kevin Hope
+Kevin Kelly
+Manuel Flores
+Omar Nava
+Roy Galvan
+Vincent Herrera
+Adam Valdez
+Andrew Saucedo
+Brenden Frierson
+Daniel Lopez
+Danny Astorga
+David Chavarria
+Daylon Walker
+Demitrius Lopez
+Gabriel Herrera
+Hector Mora
+Hector Vargas
+Javier Cibrian
+John Martinez
+Joseph Valdez
+Joshua Adams
+Karianne Tschantre
+Kody McGauran
+Luis Melecio
+Manuel Salcedo
+Matthew Mejia
+Nathan Barragan
+Ryan Marquez
+Sean Casillas Breceda
+Shawheen Ghalambor
+Aaron Diaz
+Alan Jimenez
+Christopher Chacon
+Colby Huynh
+Cristian Ayala
+David Chavarria
+Eric Carrillo
+Ethan Diaz
+Hector Mora
+Ian Vasquez
+Jacklyn Mireles
+Jackson Serna
+Jessie Martinez
+Jesus Garduno
+Jordan Rabadi
+Luis Garcia
+Melad Ayyoub
+Miguel Gallardo
+Nathan Barragan
+Thomas Chapman
+Zachary Cunningham
+Alejandro Alba
+Alejandro Negrete
+Alexander Marin
+Alexis Pineda
+Andrew Pinero
+Antonio Collazo
+Benjamin Garza
+Blake Van Laar
+Carlos Mejia
+Conner Diamond
+Darrien Javier
+David Martinez
+Daymeond Molina
+Denice Vargas
+Emmanuel Rodriguez-Gomez
+Gage Nicely
+Gwen McDonald
+Ian Vasquez
+Issac Hernandez
+Jackson Clark
+Jesse Marquez
+Jimmy Adams
+Joseph Abeyta
+Joseph Flores II
+Julie Anne Garcia
+Kevin Ayala
+Lee Martinez
+Marco Zuniga
+Marieanne Pineda
+Mark Martinez
+Melanie Iraheta-Aguilar
+Nathatic Kendricks
+Nicholas Weissinger
+Oscar Chirino
+Oscar Pedroza
+Sandra Cortez Contreras
+Victor Andrade
+Wetzel Hill
+Ahmed Khattab
+Alexa Pineda
+Alexis Gasper Martinez
+Angel Hernandez
+Billy Looney
+Brandon Fairman
+Brandon Leon
+Carlos Lopez
+Christopher Betancourt
+Daisy Aguiar
+David Saenz
+Denice Vargas
+Elijah Lopez
+Evan Azurdia
+Gabriel Gutierrez
+Isiah Vazquez
+Jason Valencia
+Jerry Rubio-Carrillo
+Jesse Garcia
+Jhonny Angarita
+Josh Schroeder
+Juan Lopez
+Julie Garcia
+Michael Morán
+Nate Kendricks
+Rene Torres
+Sofia Vergara
+Zachariah McIlvain
+Aldo Silva
+Caidence Turner
+Chris Betancourt
+Chris Calderon
+Diego Villalobos
+Dylan Moreno
+Enrique Veleta
+Gavin Ibarra
+Gerardo Roman
+Jacob Lora
+Jakob Hand
+Jeicatl Alonso
+Jeremy Moreno
+Jesse Herrera
+Jonathan Urena
+Julian Rubi
+Marcus Lobato
+Patrick Pardorla
+Xavier Nonas
 Adrian Limon
 Adrian Magana
 Alex Ramirez
@@ -24299,23 +24483,16 @@ Andrew Gonzalez
 Angel Fuentes
 Brandon Duran
 Brian Geiger
-Caidence Turner
-Chris Calderon
 Devin Thompson
 Dib Sawaya
 Diego Ornelas
-Dylan Moreno
 Efrain Rodriguez
 Emilio Medina
-Gavin Ibarra
 Giovanni Coss
 Isaac Lopez
 Jacob Gamino
 Jacob Lora
-Jakob Hand
-Jeicatl Alonso
 Jeremiah Strauss
-Jesse Herrera
 John Gonzalez
 Jorge Monge
 Kevin Camacho
@@ -29376,7 +29553,6 @@ Orion Ruddy
 Ramon Colon
 Sam Radez
 Titus Callahan
-Amanda Bazan - Manager
 Armando Contreras
 Ashton Rocker
 Ben DeJarnett
@@ -29395,7 +29571,6 @@ Khalil Bryant
 Landon Harmon
 Marcus Thomas
 Mark Smith
-Miranda Hemmert - Manager
 Noah McGinnis
 Todd DeBato
 Tyler Hinton
@@ -29405,7 +29580,6 @@ Vergil Reed
 Zach Sanders
 Antonio Sandoval
 Arnoldo Mendoza
-Ashlyn Martin - Manager
 Blake Hollandsworth
 Caelan McMahon
 Carden Busby
@@ -37976,14 +38150,12 @@ Jiovanni Forbes
 Joel Compton
 John Gaines
 Joseph O'Dell
-MANAGER Caleb James
 Mitchell Thompson
 Anthony Greear
 Avery Sullivan
 Breighton Flores
 Elijah Hester
 Josh Stapleton
-MANAGER Preston Sartain
 Mason Johnson
 Matthew Johnson
 Nate Bennett
@@ -37994,7 +38166,6 @@ Frankie Salcedo
 Joshua Bledsoe
 Khrystian Anderson
 Lester Jaimes
-MANAGER Joel Compton
 Miguel Jaimes
 Phillip Terrell
 Ryan Figlow
@@ -38010,7 +38181,6 @@ Jonah Lavendar
 Kellon Walley
 Levi Bishop
 Levi Herrington
-MANAGER Logan Horne
 Russell Ford
 Seth Hogan
 Tate Thomas
@@ -38018,8 +38188,6 @@ Tyler Roth
 Boone Pope
 Elijah Mullins
 Justin Cody
-MANAGER Jonah Lavendar
-MANAGER Ryan Figlow
 Nysir Witt
 Tim Lund Jr.
 Toby House
@@ -38029,8 +38197,6 @@ Caleb Benton
 Draike McDonald
 Kadin McDonald
 Karter Nolan
-MANAGER Alexa Paniagua
-MANAGER Dakota Mincey
 Matthew Watts
 Mikai Brinson
 Miles Mason

@@ -1,6 +1,6 @@
 """Reading the hometown, class, height and weight fields of a roster: "Atlanta, Ga. / Westlake HS" -> city,
 state, country and high school. The scraper cleans every player with these, and geocode.py reads the
-hometowns it places with them. (Part of geocode.py from Oct 28 to Nov 1; scripts/hometowns.py before that.)
+hometowns it places with them.
 """
 from __future__ import annotations
 
@@ -226,6 +226,18 @@ def _key(part: str) -> str:
 
 
 _PLACEHOLDERS = {"hometown", "n/a", "na", "-", "--", "tbd", "none", "unknown", "/"}
+
+# A hometown or school field that holds only a roster's column label or a placeholder: the site printed
+# its label in an empty cell ("Previous College:", "High School City:", "Hometown/ Previous School") or
+# filled it with "NA", "/", "--". About 20,000 saved rows had one on Nov 7.
+_LABEL_WORD = r"(?:hs|high\s*school|hometown|home\s*town|previous|prev\.?|last|former|prior)" \
+              r"(?:\s*(?:schools?|colleges?|city|state|town|\(state\)|\(s\)))*"
+_LABEL_ONLY = re.compile(rf"(?i)^(?:{_LABEL_WORD}(?:\s*/\s*{_LABEL_WORD})*|n\s*/\s*a|na|none|tbd|tba|unknown|-+|/+|\.+)\s*:?$")
+
+
+def is_label_only(text: str) -> bool:
+    """'Previous College:', 'High School', 'Hometown/ Previous School', 'NA', '/' -> True (no value in it)."""
+    return bool(_LABEL_ONLY.match(clean(text)))
 
 # Text from another column that some rosters put where the hometown goes: bats/throws ("R/R", "L/R"),
 # a height ("5-7", "5'7\""), a role ("Manager"). Never a town.

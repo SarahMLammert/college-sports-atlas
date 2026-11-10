@@ -1640,7 +1640,6 @@ Eric Chamberlain
 Kevin Holland Jr.
 Arterio Williams
 Connor Fields
-David Sullivan
 Dezmyn Nicholson
 Jeremiah Stanton
 KaRaun Russell
@@ -10650,7 +10649,6 @@ Kourosh Kahn-Adle
 Ryan Power
 Sam Adusei
 Griffin Walbridge
-Jack Dollar
 Terrell Brown
 Toby Harris
 Tommy Eastman
@@ -11427,7 +11425,6 @@ Malcolm Wrisby-Jefferson
 N'famara Dabo
 Symeon Efstathiou
 David Rochester
-Gavin Silva
 Jeremiah Jenkins
 Jerrell Barron Jr.
 Wyatt DeGraaf
@@ -20557,7 +20554,6 @@ Lavon Montgomery
 Nate Trevino
 Travis Coppinger
 Andrew Kovacs
-Charlie Reeve
 Franky Garcia
 Giannis Bechlivanos
 Kostas Inglezos
@@ -20734,8 +20730,6 @@ Michael Medious
 Nate Fiori
 Payton Moore
 Ramone Enis
-Student Manager Erica Sanchez
-Student Manager Ryan Kielbasa
 Terence Spencer
 Amarri Ford
 Ethan Howard
@@ -24494,7 +24488,6 @@ Dylan Fasoyiro
 Jackson Kulik
 Josh Haskell
 Justin Glover
-Logan Wilson
 Payton Shumpert
 Phil Nwugwo
 Preston Shumpert
@@ -24504,7 +24497,6 @@ Zach Philipkoski
 Anthony Follett
 Benjamin Guy
 Ivan Yhomby
-Jeremy Cusick
 Matt Becker
 Ronnie Williams
 Santana Sinvilcin
@@ -32478,7 +32470,6 @@ Nicola Mitarotonda
 Shawn Summers Jr.
 Aidan Newman
 Carson Woods
-Jaeden Prince
 Jamal Santana
 Luke Infurna
 Michael Morrissey
@@ -36022,7 +36013,6 @@ RS Trey Armstrong
 Toby Christensen
 Tyler Harris
 Alex Ferguson
-D.J. Bledsaw
 Kevin Howland
 Nate Kendricks
 Nehemiah Allen
@@ -41569,7 +41559,6 @@ Ryan Willsie
 Zach Perry
 Jackson Juzang
 Will Hatfield
-Alexander Bangura
 Ali Kaan Bek
 Gaven Marr
 Logan Brown
@@ -43267,7 +43256,6 @@ Caleb Kenney
 Kyrell Luc
 Nolan Dorsey
 Tomer Oron
-William Doherty
 Ben Capron
 Jade Tse
 Jaden Kirkwood
@@ -43652,7 +43640,6 @@ Destin Randall
 Evan Griffin
 Giannis Galanis
 Malachi Lewis
-Manager JD Bialek
 Manos Manolopoulos
 Tyson Clark
 Zach Sisson
@@ -49964,7 +49951,6 @@ Omer Hamama
 Quinn Woidke
 Rayvon Griffith
 Rob Whaley Jr.
-Alex (Team IMPACT)
 Cameron Williams
 Chansey Willis Jr.
 Christian Henry
@@ -53048,7 +53034,6 @@ Chandler Benson
 Connor Mahoney
 Daniel Kaigler
 Eriq Jenkins
-Nathaniel Henry
 Panagiotis Zaraidonis
 Qwadere Lovell
 Russell Sangster
@@ -56888,7 +56873,6 @@ Jett McCasland
 Lee Van der Westhuizen
 Leo Nordberg
 Lucas Mercandino
-TI Thomas Rodriguez
 Brendan Ballard
 Charlie Onana
 Dallas Jones
@@ -57653,7 +57637,6 @@ Mario Lacy Jr.
 Marzouq Ibn Abdur-Razaaq
 Ryan Maslow
 Amare Bethel
-Benny Segura
 Brayden Carter
 Jacob Barker
 Jamil Safieddine
@@ -58860,7 +58843,6 @@ Carter Kent
 Jack Edelen
 Joey Garwood
 KJ Avery
-Kayden - Team Impact
 Kody Clancy
 Liam Mann
 Mason Bales
@@ -62080,7 +62062,6 @@ Cam Carter
 Dawit Hutter
 EJ Porter
 Kyle Elton
-Sam Erikson
 Stephen Worden
 Tyler Penley
 Zach McDonough
@@ -68440,7 +68421,6 @@ Blake Salice-Mitchell
 Eric Woodberry
 Jack Hayward
 Josiah Basket
-Loukas Castillo
 Matt Gerrity
 Max DePina
 Nick Rivera
@@ -68559,7 +68539,6 @@ Eric Brenner
 Griffen Derry
 Jay Bilton
 Landon Kidwell
-Landon Wagner
 Landon Warner
 Bode Stone
 Joel Katembo
@@ -68767,6 +68746,140 @@ Kevin Hamilton
 Landon Lear
 Ryen Romigh
 Zach Davis
+Ashton McLaurin
+Charlie Evans IV
+Cristian Galindo
+Daniel Olivas
+Darrell Williams
+Gregory Bennett
+Jamaal Logan
+Jason Jamie
+Lamarquis Thompson
+Marquis Reed
+Sam Bide
+Andrew Hill
+Corey Grant
+Damarcus Carter
+Desmond Knox
+Isaiah Watson
+Jason Grant
+Josh Johnson
+Nick Brown
+Nikita Ussenov
+Ryon O'Quinn
+TreVonn Wells
+Aaron Dutcher
+Brandon Ortiz
+Bryce Knox
+Darrell Williams
+Derrick Irenen
+Evan Council
+Israel Mansker
+Josiah Yarde
+Marc Howard Jr
+Michael Ridley
+Minfeke Sanoe
+Nicholas Williams
+Akinola Branco
+Carleton Williams
+Cyree Dunnell
+Daniel DeJoya
+Gabe Ontiveros
+Jawad Daghlawi
+Joseph Gonzalez
+Keith Stewart
+Myles Allen
+Shallamar Poole
+Todd Rigsby
+Yahshua Smith
+Adrian Ragland
+Agustin Fernandez
+Collin Reed
+D'Shawn Harbor
+Gerald Jordan
+Govan Wike
+Hamza Sidiqi
+Josh Jastrab
+Kalique Mitchell
+Maliq Neurell
+Ralphie Macias
+Sharodd Lewis
+Christian Jones
+David Mealancon Jr
+Demetri Woodmore
+Dyren Brown
+Gage ValVerde
+Isa Al juraishi
+Jalen Lattimore
+Jamal Edmonson
+Joshua Humphrey
+Justyn Hunter
+Keith Stewart
+Khalid Wilkins
+Lowrance McClain
+Matthew Brown
+Micah Myricks
+Noah Laurie
+Saafir Moore
+Shaquil Bender
+Arturo Angeles
+Braeden Zemetra
+Christopher Bongo
+Dante Victor
+Dejon Clark
+Jay Milner
+Jeffrey Chang
+LJ McClain
+Marvel Chambers
+Mikah Gardner
+Nick Hopkins
+Pearce Johnson
+Tremont Brewer
+Tyler Terry
+Anthony Addie
+CJ Fisher
+Elijah Cirilo
+Ernest Love
+Jerimiyah Smith
+Joel Gado
+Jon McCullough
+Marvel Chambers
+Michael Ejumeta
+Carson White
+Deng Adak
+Immanuel Taylor
+Jaidyn Simpson
+Jeremy Williams
+Jimmy Baker
+Kenneth Brown
+Noah Layne
+Robert Buckenberger
+Ryan Wheeler
+Sir-Trenton Vaughn
+Alejandro Munoz
+Antonio Camarao
+Aron Hernandez
+Caleb Wright
+Dayvon Gates
+Derek Moreland
+Dominic Copenhagen
+Ethan Nelson
+Omari Abdallah
+Osami Maciel
+Zion Booker
+Baraka Thompson
+Corey Ching
+Dario Johnson
+Dayvion Gates
+De Shawn Lacy
+Devin Turner
+Earnest Johnson
+Jeremiah Davis
+Josh Smith
+Julius Brower
+Logan Dorsey
+Tiekoro Sidibe
+Xzavier Miller
 Aidan Cole
 Alec Stavetski
 Alex Mitton
@@ -68841,7 +68954,6 @@ Justin Buck
 Nathan Comerford
 Caden Kopay
 Chris Woodard
-Nate Borger
 Santiago Dos Santos
 A.J. Patty
 Brion Sanchious
@@ -74778,7 +74890,6 @@ CJ Richardson
 Canaan Magness
 Drew Fisher
 Jayden Smoot
-Kase Blaine Jay
 Nick Corbett
 Reece Dent
 Aaron Falzon
@@ -83166,7 +83277,6 @@ Deangelo Elisee
 Dow Dunton
 Eric Mulder
 Keaton Dukes
-Bolton Richardson
 Corey Hadnot II
 Destin Whitaker
 Jalen Jackson
@@ -83826,8 +83936,6 @@ Ryan Jackson
 Suley Shah
 Tucker Tharpe
 Kellen Driscoll
-MANAGER Jordan Collar
-MANAGER Zach Hart
 Noah Daniel
 Patrick Faughnan
 Payne Wood
@@ -85521,7 +85629,6 @@ Nick Qualls
 Colton Reed
 Dillon Thomas
 Douglas Elks
-Elijah Oltmanns
 JD Costulis
 Jeremy Littlejohn
 Jorden Davis
@@ -90224,7 +90331,6 @@ Braden Brochu
 Brady Spencer
 James McCarthy
 Jesse Doherty
-Lucas Magnelli
 Miles Fiore
 Noah Earl
 Ryan Svendsen
@@ -94873,7 +94979,6 @@ Desmond Williams
 Dominic Migliaro
 Eric Ross
 Isaiah McLeod
-Jack Larsen
 Jack McCarthy
 Joey Wallace
 Jonathan Paul
@@ -98031,7 +98136,6 @@ Jai Chisolm
 Jonathan Wenthe
 KD Davis
 Liam Switzer
-Marcos Valadez
 Paora Winitana
 Sean Parks
 Tristan Garza
@@ -100023,7 +100127,6 @@ Roman Hinds
 Cal Hanson
 Devin Burger
 Eddie Paquette
-Joy Emmanuel
 Matt Ward
 Quaye Agoyo
 Toby Thornburg
@@ -100043,7 +100146,6 @@ Aaron Weiss
 Andrew Park
 Jackson Scott
 Matthew Maloney
-Zion Lawton
 Adam Perdue
 Will Gasink
 Adrian Autry
@@ -103983,8 +104085,6 @@ Isaac Brito-Vasquez
 Jadon Yeh
 Jerry Meder
 Landon Allen
-MANAGER Abi Adams
-MANAGER Enocka Franky
 Noah Williams
 Rishard Money
 Spencer Carter
@@ -103992,11 +104092,6 @@ Trace Wilhite
 Connor Schutt
 Emanuel Befekadu
 Jeremy Kent
-MANAGER Angel Wright
-MANAGER Brooke Blackburn
-MANAGER Caleb Stockdale
-MANAGER Emmanuel Taylor
-MANAGER Mark Chukhvitskyy
 Mason Smith
 Myles McCrary
 Omari Joseph
@@ -104014,9 +104109,6 @@ Jacob Lee
 Joshua Prows
 Justice Lewis
 K'Cari Mercer
-MANAGER Jack Vines
-MANAGER Kevin Hull
-MANAGER Preston Smith
 Mark Chukhvitskyy
 Peyton Rice
 Ryan Neal
@@ -104770,7 +104862,6 @@ Cyril "CJ" Franklin Jr.
 Jalen Stokes
 Jonathan Noudjihidi
 Marcus Wilson
-Myles Team IMPACT
 Omer Suljanovic
 Ylan Esso-Essis
 Aleks Szymczyk
@@ -105114,7 +105205,6 @@ Milos Vicentic
 Nordin Kapic
 Ryder Elisaldez
 Alex Chaikin
-Baylen Team IMPACT
 Bol Dengdit
 Dimitrije Vukicevic
 Emanuel Prospere II
@@ -108741,7 +108831,6 @@ Nick Nocito
 Luke Nieman
 Matthew Field
 Patrick Downes
-Connor Engstrom
 Jamie Murphy
 Nico Gordon
 Porter Kelly

@@ -41,17 +41,17 @@ from core import (
     players,
     read_csv,
     ROOT,
+    run_command,
     season_files,
     season_rows,
     failure_kind,
-    reason_code,
     roster_db,
     db_rows,
 )
 from sidearm import Rules, clean_name, sort_schools
 
 # ==============================================================================================================
-# The map data (map)   (was scripts/build_map_data.py)
+# The map data (map)
 # ==============================================================================================================
 
 BUILD_MAP_DATA_DOC = """Pack a sport's players into the JSON its pages (docs/<sport>/) load.
@@ -84,7 +84,6 @@ It reads frozen_class_seasons.csv from rosters/<sport>/ and writes transfer_leve
 
 # Position groups come from the sport's settings (config/<sport>/settings.json): the groups, the roster
 # abbreviations in each, words a spelled-out position starts with, and the group for anything else.
-# (Until Oct 31 these were module variables that use_positions(sport) set; now each build makes its own.)
 @dataclass(frozen=True)
 class Positions:
     groups: tuple[str, ...]
@@ -269,7 +268,7 @@ def placed_players(sport) -> list[dict]:
     return rows
 
 
-# ---- the players' columns, packed (Oct 28) ----
+# ---- the players' columns, packed ----
 # Football's map_data.json was 15.5 MB, almost all of it the players' columns written out in full. Columns that
 # repeat (school, first season, division: the players are in school order) are written as runs, the last season as
 # the number of seasons after the first, and the columns that are mostly empty (transfer, previous school, level
@@ -438,8 +437,9 @@ def make_map_data(src, dst, sport):
         "divLabels": {d: sport.division_label(d) for d in divs}, "posLabels": dict(sport.position_labels),
     }
     # Big sports (football, baseball) come in two files: map_data.json with the D1 schools' players, which the dot
-    # map opens on, and map_data_more.json with everyone else, which it loads when a view needs them (Oct 28).
+    # map opens on, and map_data_more.json with everyone else, which it loads when a view needs them.
     # The players are put D1 schools first; names.txt follows the same order.
+    Path(dst).parent.mkdir(parents=True, exist_ok=True)
     if len(P["s"]) > SPLIT_ABOVE:
         d1_school = [div_now[sc][1] in sport.d1_divisions for sc in schools]
         order = sorted(range(len(P["s"])), key=lambda k: (not d1_school[P["s"][k]], k))
@@ -453,10 +453,9 @@ def make_map_data(src, dst, sport):
     else:
         out["players"] = pack_players({k: v for k, v in P.items() if k != "n"})
         Path(dst).with_name("map_data_more.json").unlink(missing_ok=True)
-    Path(dst).parent.mkdir(parents=True, exist_ok=True)
     with open(dst, "w", encoding="utf-8") as fh:
         json.dump(out, fh, separators=(",", ":"), ensure_ascii=False)
-    # The players' names, one per line in the same order (Oct 28: a file of their own, since only the dot map
+    # The players' names, one per line in the same order (a file of their own, since only the dot map
     # uses them; the heatmap and transfer pages no longer download them, and the dot map draws before they arrive)
     Path(dst).with_name("names.txt").write_text("\n".join(n.replace("\n", " ") for n in P["n"]), encoding="utf-8")
     # The numbers on the front page (docs/index.html reads these instead of figures typed in by hand)
@@ -503,7 +502,7 @@ def build_map_data_main(argv=None):
 
 
 # ==============================================================================================================
-# Campus locations (locations)   (was scripts/build_school_locations.py)
+# Campus locations (locations)
 # ==============================================================================================================
 
 BUILD_SCHOOL_LOCATIONS_DOC = """Pack config/shared/school_locations.csv into docs/<sport>/school_locations.json for the website.
@@ -545,10 +544,31 @@ def build_school_locations_main(argv=None):
 
 
 # ==============================================================================================================
-# Frozen class years (frozen)   (was scripts/check_frozen_classes.py)
+# Frozen class years (frozen)
 # ==============================================================================================================
 
-CHECK_FROZEN_CLASSES_DOC = 'Find school-seasons whose class labels don\'t advance from year to year.\n\nSome schools\' archive roster pages show every player\'s class as of a later\nseason (Ohio State 2017-2022, for one). Newcomers then look like juniors or\nolder, and build.py map\'s "arrived as a junior or older" rule reads them\nas transfers. This script finds those seasons.\n\nFor each pair of a school\'s consecutive seasons in the data (2019 -> 2021\ncounts as consecutive), it takes the players on both rosters and checks\nwhether their class moved up. Two measures are printed:\n\n  all     every returning player\n  no_sr   only players who were FR, SO or JR the season before, so seniors and\n          grads repeating a year (often the COVID free year) don\'t count\n\nA frozen archive scores ~90-100% on both. A season inflated by COVID repeats\nscores high on "all" but normal on "no_sr".\n\nRun:  python scripts/build.py frozen          # add --sport <name> for another sport\nReads the season files (rosters_<season>.csv) in rosters/<sport>/ and writes rosters/<sport>/frozen_class_seasons.csv\n(school, season, share) for the build.\n'
+CHECK_FROZEN_CLASSES_DOC = """Find school-seasons whose class labels don't advance from year to year.
+
+Some schools' archive roster pages show every player's class as of a later
+season (Ohio State 2017-2022, for one). Newcomers then look like juniors or
+older, and build.py map's "arrived as a junior or older" rule reads them
+as transfers. This script finds those seasons.
+
+For each pair of a school's consecutive seasons in the data (2019 -> 2021
+counts as consecutive), it takes the players on both rosters and checks
+whether their class moved up. Two measures are printed:
+
+  all     every returning player
+  no_sr   only players who were FR, SO or JR the season before, so seniors and
+          grads repeating a year (often the COVID free year) don't count
+
+A frozen archive scores ~90-100% on both. A season inflated by COVID repeats
+scores high on "all" but normal on "no_sr".
+
+Run:  python scripts/build.py frozen          # add --sport <name> for another sport
+Reads the season files (rosters_<season>.csv) in rosters/<sport>/ and writes rosters/<sport>/frozen_class_seasons.csv
+(school, season, share) for the build.
+"""
 
 
 CUTOFF = 0.6        # flag a pair of seasons when this share of players didn't advance
@@ -670,7 +690,7 @@ def check_frozen_classes_main(argv=None):
 
 
 # ==============================================================================================================
-# Checking the rosters (check)   (was scripts/check_rosters.py)
+# Checking the rosters (check)
 # ==============================================================================================================
 
 CHECK_ROSTERS_DOC = """Check a sport's saved rosters after a run, and print where it stands.
@@ -687,8 +707,8 @@ scripts/pipeline.py runs it as its last step. It only reads; it changes nothing.
   repeated      school-seasons whose roster is nearly the same as the season before, class years and all:
                 usually an archive page that quietly shows another season's roster
   current       spring sports only: seasons taken from a school's main roster page that showed no year.
-                Until Oct 27 the scraper took the main page in the autumn as this spring's season, though
-                sites already show next spring's roster then. pipeline.py --redo-current scrapes those again.
+                In the autumn that page may already show next spring's roster; pipeline.py --redo-current
+                scrapes those again.
 
 The oversized and repeated lists are also written to rosters/<sport>/roster_checks.csv, with the page
 address each one came from, for checking in a browser.
@@ -700,13 +720,6 @@ OVERSIZED_MIN_EXTRA = 10   # ... and at least this many players over it (small r
 REPEATED = 0.9       # this share of a roster's names on the season before's roster ...
 SAME_CLASS = 0.8     # ... with this share of them still in the same class year is listed (a real roster
                      # keeps 60-80% of its players, and nearly all of them move up a class)
-
-
-def status_of(r: dict) -> str:
-    st = r.get("status", "")
-    if st == "failed" and reason_code(r) == "left_out":
-        return "left_out"      # reports written before Oct 27
-    return st
 
 
 def check_rosters_main(argv=None) -> int:
@@ -733,7 +746,7 @@ def check_rosters_main(argv=None) -> int:
         counts: dict[str, Counter] = defaultdict(Counter)
         saved = {(r["school"], int(r["season"])) for r in reports if r.get("status") in ("ok", "partial")}
         for r in reports:
-            st = status_of(r)
+            st = r.get("status", "")
             if st == "failed":     # not posted yet, or the COVID season: not missing data (core.failure_kind)
                 st = failure_kind(r, lambda school, season: (school, season) in saved, spring=sport.spring_season)
             if st != "no_program":
@@ -754,7 +767,7 @@ def check_rosters_main(argv=None) -> int:
         print(f"\nhometowns not placed: {len(unmatched):,} places, {n:,} players"
               + (" (see unmatched_hometowns.csv)" if unmatched else ""))
 
-    # ---- oversized and repeated rosters (SQL on rosters.db since Oct 30)
+    # ---- oversized and repeated rosters (SQL on rosters.db)
     # One row per school-season (players, and the roster address of its first row), and one per player name
     # per school-season (the class year and player page of the last row with that name, as the old Python did).
     con.executescript("""
@@ -848,7 +861,7 @@ def check_rosters_main(argv=None) -> int:
     # ---- spring seasons taken from a main page with no year on it
     if sport.spring_season and reports:
         current = sorted({(int(r["season"]), r["school"]) for r in reports
-                          if r.get("season_check") == "current" and status_of(r) in ("ok", "partial")})
+                          if r.get("season_check") == "current" and r.get("status", "") in ("ok", "partial")})
         if current:
             seasons = sorted({s for s, _ in current})
             print(f"\n{len(current)} school-seasons ({', '.join(map(str, seasons))}) came from a main roster page "
@@ -868,8 +881,8 @@ def check_rosters_main(argv=None) -> int:
 # The site's pages (pages)
 # ==============================================================================================================
 
-COMPARE_DOC = """Compare a school's roster for one season with its season before, player by player (Nov 1; the
-check used on Oct 30 for the rosters build.py check flags as repeated).
+COMPARE_DOC = """Compare a school's roster for one season with its season before, player by player (for the
+rosters build.py check flags as repeated).
 
     python3 scripts/build.py compare --sport basketball-womens --school "Michigan State" --season 2018
     python3 scripts/build.py compare --sport softball --school Syracuse --season 2027 --before 2025
@@ -949,16 +962,14 @@ the shared pages.
     python3 scripts/build.py pages            # write docs/sports.js, docs/high_schools.json and docs/<sport>/<page>.html
     python3 scripts/build.py pages --check    # only say what is missing or out of date
 
-Since Oct 30 the site has one set of pages for every sport: docs/players-dotmap.html, players-heatmap.html,
+The site has one set of pages for every sport: docs/players-dotmap.html, players-heatmap.html,
 players-transfers.html, staff-moves.html and staff-directory.html, opened as players-dotmap.html?sport=softball
-(and school-influence.html since Nov 2, which never had a docs/<sport>/ address, so it has no forwarding page).
+(and school-influence.html, which never had a docs/<sport>/ address, so it has no forwarding page).
 Edit those files directly. A sport's words on them (title, description, heading, subtitle, she/her) and its
 place on the front page are in the "site" part of config/<sport>/settings.json; this command copies them into
-docs/sports.js, which the pages read (Nov 1; before that docs/sports.js and the list in docs/index.html were
-typed by hand). A sport is on the site once docs/<sport>/ exists (build.py map makes it); pipeline.py's build
-step runs this command after the map. The old addresses (docs/softball/players-dotmap.html, in links people
-have saved) are small pages that forward to the new one, keeping the #view part of the link.
-(Before Oct 30 every sport had its own copy of the five pages, kept in step by a sync command.)"""
+docs/sports.js, which the pages read. A sport is on the site once docs/<sport>/ exists (build.py map makes
+it); pipeline.py's build step runs this command after the map. The old addresses (docs/softball/players-dotmap.html, in links people
+have saved) are small pages that forward to the new one, keeping the #view part of the link."""
 
 PAGES = ["players-dotmap.html", "players-heatmap.html", "players-transfers.html", "staff-moves.html",
          "staff-directory.html"]
@@ -1137,14 +1148,5 @@ def site_pages_main(argv=None) -> int:
 COMMANDS = {"map": build_map_data_main, "locations": build_school_locations_main, "frozen": check_frozen_classes_main, "check": check_rosters_main, "pages": site_pages_main, "compare": compare_seasons_main}
 
 
-def command_line(argv=None) -> int:
-    """python3 scripts/build.py <command> [options]"""
-    argv = list(sys.argv[1:] if argv is None else argv)
-    if argv and argv[0] in COMMANDS:
-        sys.argv[0] = f"{Path(sys.argv[0]).name} {argv[0]}"     # so --help says "build.py map"
-        return COMMANDS[argv[0]](argv[1:]) or 0
-    sys.exit("commands: " + ", ".join(COMMANDS) + " (add --help to one for its options)")
-
-
 if __name__ == "__main__":
-    raise SystemExit(command_line())
+    raise SystemExit(run_command(COMMANDS))

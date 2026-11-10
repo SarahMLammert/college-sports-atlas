@@ -629,7 +629,7 @@ body { background: var(--sea); }
   }
   function top(map, n) { return [...map.entries()].sort((a, b) => b[1] - a[1]).slice(0, n); }
   function seasonsText(k) { return data.seasonSpan(P.f[k] + 2000, P.l[k] + 2000); }   // "2023-24 to 2025-26"
-  // A player's whole college career (Oct 29): every roster record with the same name and hometown, oldest first.
+  // A player's whole college career: every roster record with the same name and hometown, oldest first.
   // Same rule as build.py's find_moves, so it agrees with the transfer lines; two records at different schools
   // in the same season are probably two people, so those are left out.
   const LEVELS = data.levels || [];

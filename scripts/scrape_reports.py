@@ -1,12 +1,12 @@
 """The scraper's failure reports: attempts.csv (school-seasons that keep failing, so later runs stop trying
 them), the problem list printed at the end of a run, and MISSING_ROSTERS.md (the failed and partial schools
 of a sport by division, with the reason in words). scrape_rosters.py calls these.
-(Part of scrape_rosters.py until Nov 1.)
 """
 from __future__ import annotations
 
 import logging
 import re
+from datetime import date
 from pathlib import Path
 
 import core
@@ -34,25 +34,14 @@ def counts_as_try(report: dict) -> bool:
     return code != "no_archive" and (code != "time_limit" or "this season took over" in (report.get("error") or ""))
 
 
-def read_attempts(rosters_dir: Path, rules: sidearm.Rules = sidearm.DEFAULT) -> dict[tuple[str, int], dict]:
-    """(school, season) -> its row in attempts.csv. The first time (no file yet), it starts from the saved
-    scrape reports: each failed or partial school-season counts as 1 try, so the next pipeline run (a quick
-    pass and the browser retry) is its last chance."""
-    path = Path(rosters_dir) / ATTEMPTS_FILE
+def read_attempts(rosters_dir: Path) -> dict[tuple[str, int], dict]:
+    """(school, season) -> its row in attempts.csv (none yet before a sport's first run)."""
     out: dict[tuple[str, int], dict] = {}
-    if path.exists():
-        for r in read_csv(path):
-            try:
-                out[(r["school"], int(r["season"]))] = {**r, "tries": int(r.get("tries") or 0)}
-            except (KeyError, ValueError):
-                continue
-        return out
-    for rp in sorted(Path(rosters_dir).glob("scrape_report_*.csv")):
-        for r in read_csv(rp):
-            if counts_as_try(r) and not is_left_out(r) and str(r.get("season", "")).isdigit():
-                out[(r["school"], int(r["season"]))] = {
-                    "school": r["school"], "season": int(r["season"]), "tries": 1, "status": r["status"],
-                    "reason": plain_reason(r, rules), "last_try": "before Oct 27"}
+    for r in read_csv(Path(rosters_dir) / ATTEMPTS_FILE):
+        try:
+            out[(r["school"], int(r["season"]))] = {**r, "tries": int(r.get("tries") or 0)}
+        except (KeyError, ValueError):
+            continue
     return out
 
 
@@ -64,7 +53,6 @@ def write_attempts(rosters_dir: Path, attempts: dict[tuple[str, int], dict]) -> 
 def update_attempts(attempts: dict[tuple[str, int], dict], results: dict[tuple[str, int], dict],
                     rules: sidearm.Rules = sidearm.DEFAULT) -> None:
     """Count this run's results in: an ok season is forgotten, a failed or partial one gets one more try."""
-    from datetime import date
     today = date.today().isoformat()
     for key, report in results.items():
         if report.get("status") == "ok":
@@ -125,8 +113,7 @@ def short_reason(error: str) -> str:
 
 
 def is_left_out(report: dict) -> bool:
-    """A school-season skipped on purpose (a "left out" note). Reports written before Oct 27 call these
-    "failed", with the note as the error."""
+    """A school-season skipped on purpose (a "left out" note)."""
     return core.reason_code(report) == "left_out"
 
 
@@ -264,7 +251,6 @@ def write_missing_rosters(report_dir: Path, schools_csv: Path, sport_label: str,
         if status in ("failed", "partial", "left_out"):
             groups.setdefault((div, status), {}).setdefault(r["school"], []).append((int(r["season"]), r))
 
-    from datetime import date
     out_dir = Path(out_dir or report_dir)
     where = ("this folder" if out_dir.resolve() == Path(report_dir).resolve()
              else f"`{report_dir}` (a test run with --out)")

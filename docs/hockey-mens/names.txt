@@ -1403,7 +1403,6 @@ Hunter McCoy
 Joey Baez
 Josh Bohlin
 Michael Sacco
-Seff Villanueva
 Joey Dosan
 John Driscoll
 Jude Brower
@@ -1578,7 +1577,6 @@ Cayden Miceli
 Christopher Hanifan
 Jack McEleney
 Ryan Finn
-Talon Stewart
 Tyler Bourgea
 2/(a) Lucas Hendrickson
 26/(a) Drew Allen
@@ -3808,7 +3806,6 @@ Carter Rose
 Cody Monds
 Daimon Gardner
 Emmett Croteau
-Emmitt Laramay
 Eric Ciccolini
 Jack Judson
 Jesse Tucker
@@ -4883,7 +4880,6 @@ Andrew DellaDonna
 Andrew Morton
 Andrew Piccirillo
 Blake Rothstein
-Brayden Gero
 Cameron Smith
 Chance Uzzell
 Charles Dey
@@ -4911,7 +4907,6 @@ Alex Jasiek
 Brad Schierhorn
 Brandon Kirk
 Brett Patterson
-Caleb Nelson
 Cameron Roth
 Carl Hesler
 Charles Grant
@@ -4984,7 +4979,6 @@ Sean Chisholm
 Steven Townley
 Trym Løkkeberg
 Alex Krause
-Andrew Riley
 Cam MacDonald
 Cooper Black
 Cooper Flinton
@@ -6990,9 +6984,7 @@ Liam McLinskey
 Louden Hogg
 Mack Oliphant
 Matt DeBoer
-Brodie Linton
 Brody Gagno
-Bryce Linton
 Connor Welsh
 Jack Stockfish
 Michael Hodge
@@ -8055,7 +8047,6 @@ Eddie Shepler
 Ethan Mann
 Ethan Thombs
 Nikolai Charchenko
-Oliver O'Hagan
 Philip Rondina
 Rylan Jockims
 Sam Lyons
@@ -8625,7 +8616,6 @@ Boris Skalos
 Cameron Ricotta
 Connor Pelc
 Davis Fry
-Jace Keeley
 Jackson McCarthy
 Jaryd Sych
 Sean James
@@ -8685,7 +8675,6 @@ Mathieu Tibbet
 Matt Cronin
 Michael Babcock
 Teddy McCarran
-Tim Burke
 Cole McBride
 Jeff Solow
 Johnathan Kovacevic
@@ -8695,7 +8684,6 @@ Ryan Cook
 Sami Tavernier
 Tyler Drevitch
 Tyler Irvine
-Caleb Hassan
 Dominic Dockery
 Jackson Bales
 Laine McKay
@@ -10649,7 +10637,6 @@ Cam Cook
 Chad Veltri
 Croix Evingson
 Grant Zell
-Jack Marchetta
 Jason Pineo
 Ryan Cook
 Ryan Naumovski
@@ -13352,7 +13339,6 @@ Jagger Tapper
 Jordan Tonelli
 Mathieu Bourgault
 Noah Giesbrecht
-Patrick Buffaline | Team IMPACT Member
 Rainers Rullers
 Will Gilson
 Alfred Lindberg
@@ -13987,7 +13973,6 @@ Chikara Hanzawa
 Dylan Robbins
 Julian Kislin
 Marcus Joughin
-Oban Birmingham
 Blake Dangos
 Brendan Dumas
 Chase Clark
@@ -17115,7 +17100,6 @@ Mikey Adamson
 Noah Ellis
 Owen Murray
 Tyson Dyck
-Adrian Diaz
 Aydar Suniev
 Bo Cosman
 Cam O'Neill
@@ -17995,7 +17979,6 @@ Conor O'Neil
 Craig Puffer
 Dan Senkbeil
 Drew Best
-Jack Lyman
 Jake Kearley
 Jarrid Privitera
 Jonathan Turk

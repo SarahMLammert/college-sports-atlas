@@ -3,14 +3,14 @@ from __future__ import annotations
 import json
 import re
 from dataclasses import dataclass, field as dc_field
-from itertools import zip_longest
 from typing import Any, Callable, Iterable
 
 from bs4 import BeautifulSoup, Tag
 
 import core
 from core import clean
-from hometowns import _PLACEHOLDERS, clean_weight, format_height, not_a_place, parse_hometown, split_hometown_highschool
+from hometowns import (_LABEL_WORD, _PLACEHOLDERS, clean_weight, format_height, is_label_only, not_a_place, parse_hometown,
+                       split_hometown_highschool)
 
 """Reading Sidearm, WMT and PrestoSports athletics pages: building roster URLs, checking which season a page
 shows, and pulling players out of it (five parsers, best result kept). Also the rules for telling a
@@ -20,11 +20,8 @@ Sport-specific settings (roster URL paths, minimum roster size, junior-college n
 config/<sport>/settings.json through Rules.for_sport(sport), passed to the functions that need them."""
 
 
-# ---- a sport's rules for reading its pages (Oct 31) ----
-# Until Oct 31 these were module variables that configure(sport) set at startup (ROSTER_PATHS, MIN_PLAYERS,
-# SPRING, ...), and every function read them: one sport's settings could stay behind for the next one in the same
-# process (the tests reset some by hand). Now each function that needs them is given a Rules, made once per sport
-# with Rules.for_sport(sport). Rules() alone is football's defaults with no known colleges, for quick use.
+# ---- a sport's rules for reading its pages ----
+# Each function that needs them is given a Rules, made once per sport with Rules.for_sport(sport). Rules() alone is football's defaults with no known colleges, for quick use.
 
 @dataclass(frozen=True)
 class Rules:
@@ -64,9 +61,8 @@ DEFAULT = Rules()
 
 # ---- whose roster is this page? ---------------------------------------------------------------------------
 # Sport names in roster addresses: /sports/<code>/roster (Sidearm, WMT), /sports/<code>/2024-25/roster (Presto),
-# roster.aspx?path=<code> (old Sidearm). Before Oct 28 a lacrosse scrape could follow a site's menu to its
-# football roster (/sports/fball/...) and save 90 football players as the lacrosse team; and a failed retry kept
-# them. A page whose address names another sport is never used, and rows saved from one are dropped.
+# roster.aspx?path=<code> (old Sidearm). A site's menu can lead a lacrosse scrape to its football roster
+# (/sports/fball/...). A page whose address names another sport is never used, and rows saved from one are dropped.
 _CODE_IN_URL = re.compile(r"/sports/([^/?#]+)/|[?&]path=([^&#]+)", re.I)
 # Codes of the sports set up here (from their settings) and of other college sports, as sites spell them.
 # A code missing from this list is never treated as another sport's ("sb" for softball on some sites).
@@ -116,7 +112,7 @@ def normal_size(n: int, rules: Rules) -> bool:
     return n >= rules.min_players and (not rules.max_players or n <= rules.max_players)
 
 
-_fill = core.fill_season          # season names live in core.py (Oct 30)
+_fill = core.fill_season          # season names live in core.py
 
 
 def candidate_urls(domain: str, override: str = "", season: int | None = None, rules: Rules = DEFAULT) -> list[str]:
@@ -414,10 +410,39 @@ def staff_text_hit(*texts: str) -> bool:
     return any(t and STAFF_WORDS.search(t) for t in texts)
 
 
+# Not players either, wherever they show up on a roster (found in the saved rosters, Nov 8):
+# Team IMPACT members (children made honorary teammates), honorary positions ("Honorary Owl"),
+# retired numbers and memorial jerseys, and helpers whose role is written into the name.
+_HONORARY = re.compile(r"team\s*impact|\bhonorary\b", re.I)
+_NOT_PLAYER_POSITION = re.compile(r"\b(ball|bat)\s*(boy|girl)\b|videograph", re.I)
+_NOT_PLAYER_NAME = re.compile(
+    r"^(in (loving )?memory of|retired (in honor of|number|jersey)|in honor of)\b|memorial jersey|"
+    r"^(team |student |marketing )?manager\b|[-–,(/]\s*(team |student )?manager\)?\s*$|"
+    r"\bstudent assistant\b",
+    re.I,
+)
+
+
+def not_a_player(rec: dict) -> str:
+    """Why a roster row isn't a player ('' when it is one): Team IMPACT and other honorary members,
+    a retired number or memorial jersey, a manager or student assistant named as such."""
+    fields = [rec.get(f, "") or "" for f in ("name", "position", "class_year", "hometown", "high_school",
+                                             "previous_school")]
+    if any(_HONORARY.search(t) for t in fields):
+        return "honorary member"
+    if _NOT_PLAYER_POSITION.search(rec.get("position", "") or ""):
+        return "team helper"
+    if _NOT_PLAYER_NAME.search(rec.get("name", "") or "") or (rec.get("hometown", "") or "").strip().lower() == "retired number":
+        return "not a person on the team"
+    return ""
+
+
 def is_staff(rec: dict) -> bool:
     """A scraped record whose position or class column holds a job title ("Head Coach",
-    "Student Manager", "Director of Football Operations") is staff, not a player."""
-    return staff_text_hit(rec.get("position", ""), rec.get("class_year", ""), rec.get("staff_title", ""))
+    "Student Manager", "Director of Football Operations") is staff, not a player; so is anyone
+    not_a_player() picks out (Team IMPACT members, "In Memory of ...", "Ashlyn Martin - Manager")."""
+    return staff_text_hit(rec.get("position", ""), rec.get("class_year", ""), rec.get("staff_title", "")) \
+        or bool(not_a_player(rec))
 
 
 def drop_staff(rows: list[dict]) -> list[dict]:
@@ -653,11 +678,116 @@ def parse_sidearm_cards(html: str, soup: BeautifulSoup) -> list[dict]:
 # 4. Generic HTML table
 # ---------------------------------------------------------------------------
 
+# One part of a header that joins several fields with "/" ("Hometown / Previous School / High School").
+_PART_FIELDS = [
+    (r"^(hs|high\s*school)\s*(city|hometown|town)", "hs_city"),       # the high school's town: a fallback
+    (r"hometown|home\s*town|^city\b", "hometown"),
+    (r"previous|^prev\b|prior|transfer|former|college", "previous_school"),
+    (r"high\s*school|^hs$|last\s*school", "high_school"),
+]
+
+
+def _part_field(text: str) -> str | None:
+    t = clean(text).lower()
+    for pattern, field in _PART_FIELDS:
+        if re.search(pattern, t):
+            return field
+    return None
+
+
+def _combined_fields(text: str) -> tuple[str | None, ...] | None:
+    """('hometown', 'previous_school', 'high_school') for "Hometown/ Previous School / High School": a header
+    that joins two or more hometown and school fields with "/", in the site's order. None for anything else."""
+    parts = [re.sub(r"^[\W_]+|[\W_]+$", "", p) for p in re.split(r"\s*/\s*", clean(text).lower())]   # "Hometown:/:Prev. School"
+    parts = [p for p in parts if p]
+    if len(parts) < 2:
+        return None
+    fields = tuple(_part_field(p) for p in parts)      # None: a part that isn't one of these ("Club"), skipped
+    known = [f for f in fields if f]
+    if len(known) < 2 or len(set(known)) < len(known):
+        return None
+    return fields
+
+
+_COLLEGE_WORD = re.compile(r"\b(college|university|univ|cc|jc)\b", re.I)
+_COLLEGE_TOWN = re.compile(r"\b(college|university)\s+(park|station|place|heights|city|hills|point)\b", re.I)
+
+
+def _is_town(v: str) -> bool:
+    """'Riverside, Calif.', 'Barcelona, Spain' -> True; 'Wyoming' (a state, or Wyoming HS), 'Poly' -> False."""
+    h = parse_hometown(v)
+    return bool(h["city"] and (h["state"] or h["country"]))
+
+
+def _is_place(v: str) -> bool:
+    """A town, or a state or country on its own ('Lithuania'): what a hometown part can be."""
+    h = parse_hometown(v)
+    return bool(h["state"] or h["country"])
+
+
+def _is_college(v: str) -> bool:
+    """'West Los Angeles College', 'Cal State University, East Bay' -> True; 'College Station, Texas',
+    'Lincoln University, Pa.' (towns) -> False."""
+    if not _COLLEGE_WORD.search(v) or _COLLEGE_TOWN.search(v):
+        return False
+    return not ("," in v and parse_hometown(v)["state"])
+
+
+def _home_or_hs_city(hometown: str, hs_city: str) -> str:
+    """The player's hometown; the high school's town when there's none, or only a state ('California')."""
+    if hs_city and (not hometown or not parse_hometown(hometown)["city"]):
+        return hs_city
+    return hometown
+
+
+def fill_combined(rec: dict, fields: tuple, value: str) -> None:
+    """Split a value under a combined header into its fields, in the header's order, filling only blanks.
+
+        ('hometown', 'previous_school', 'high_school'), 'Tarpon Springs, Fla. / Valdosta St. / Tarpon Springs HS'
+        ('hometown', 'high_school'), 'Chino Hills / Chino Hills'
+        ('high_school', 'hometown'), 'Santa Fe HS / Santa Fe Springs (CA)'
+
+    Fewer parts than fields fill the first fields, except that a lone school that isn't a college is the high
+    school ("Maryville, Tenn. / William Blount HS" under the three above); more parts than fields go into
+    the last. A school part that reads as a place while the hometown part doesn't are swapped back."""
+    value = clean(value)
+    # Split on slashes with a space beside them when there are any, so "St. Pius X/Marist" stays one school
+    sep = r"\s+/\s*|\s*/\s+" if re.search(r"\s/|/\s", value) else r"/"
+    parts = [clean(x).strip("/ ") for x in re.split(sep, value)] if value else []
+    while parts and not parts[-1]:
+        parts.pop()                                    # "Reading, KS / Osage City High School /"
+    while len(parts) > len(fields) and not parts[0]:
+        parts.pop(0)                                   # "/ Jonesboro, GA. / Mt. Zion HS" (Fresno City)
+    if not parts:
+        return
+    n = len(fields)
+    if len(parts) > n:
+        parts = parts[:n - 1] + [" / ".join(parts[n - 1:])]
+    got = {f: v for f, v in zip(fields, parts) if f and v and not is_label_only(v)}
+    home = next((f for f in ("hometown", "hs_city") if f in got), None)
+    if home:
+        if _is_college(got[home]):
+            # "Gahr / West Los Angeles College" under "High School / HS City" (Cerritos): a college, no town
+            college = got.pop(home)
+            if not got.get("previous_school") and not rec.get("previous_school"):
+                got["previous_school"] = college
+        elif not _is_place(got[home]):
+            other = next((f for f in ("high_school", "previous_school") if f in got and _is_town(got[f])), None)
+            if other:                                   # "Poly / Riverside, Calif." under "City / High School"
+                got[home], got[other] = got[other], got[home]
+        if home in got:
+            got[home] = re.sub(r"^([^,()]+?)\s*\(([A-Za-z]{2})\)$", r"\1, \2", got[home])   # "Lakewood (CA)" -> "Lakewood, CA"
+    if len(parts) < n and "previous_school" in got and "high_school" in fields and "high_school" not in got \
+            and not looks_like_college(got["previous_school"]):
+        got["high_school"] = got.pop("previous_school")   # a part short: the school given is his high school
+    for f, v in got.items():
+        if not rec.get(f):
+            rec[f] = v
+
+
 _HEADER_FIELDS = [
-    (r"hometown\s*/\s*(high school|last school|previous school)", "hometown_hs"),
-    (r"(high\s*school|^hs)\s*/\s*(hs\s*)?(city|hometown)", "hs_hometown"),   # Riverside: "High School/HS City"
+    (r"^(hs|high\s*school)\s*(city|hometown|town)", "hs_city"),     # Moorpark: "High School City" (see parse_html_tables)
     (r"hometown", "hometown"),
-    (r"(high\s*school|^hs).*/.*(previous|prior|transfer|college)", "hs_prev"),
     (r"high\s*school|last\s*school|^hs$", "high_school"),
     (r"previous|transfer|prior|former|^college$|^last college$", "previous_school"),
     (r"^(#|no\.?|num|number|jersey)$", "jersey"),
@@ -671,8 +801,12 @@ _HEADER_FIELDS = [
 ]
 
 
-def _header_field(text: str) -> str | None:
+def _header_field(text: str) -> str | tuple[str, ...] | None:
+    """The field a column header names; a tuple of fields for a header that joins several (_combined_fields)."""
     t = clean(text).lower()
+    combined = _combined_fields(t)
+    if combined:
+        return combined
     for pattern, field in _HEADER_FIELDS:
         if re.search(pattern, t):
             return field
@@ -697,6 +831,34 @@ def _name_from_link(cell: Tag) -> str:
     return ""
 
 
+_HOME_FIELDS = ("hometown", "high_school", "previous_school")
+_LABEL_FIELDS = _HOME_FIELDS + ("hs_city",)
+_ANY_LABEL = re.compile(r"^([A-Za-z#][A-Za-z#.()/ ]{0,60}?)\s*:\s*")
+
+
+def _cell_value(cell: Tag, header: str) -> tuple[str, str | tuple | None]:
+    """A table cell's text without the label some sites print inside it, and the field that label names
+    (None when the label is the cell's own column header, or there is none).
+
+        'Previous College:' under "Previous College"       -> ('', None)      (an empty cell)
+        'High School: Oxnard High' under "High School"     -> ('Oxnard High', None)
+        'Hometown/High School: Mantua, N.J. / Gloucester' -> ('Mantua, N.J. / Gloucester', ('hometown', 'high_school'))"""
+    val = clean(cell.get_text(" "))
+    if header and val.lower().startswith(header):
+        rest = val[len(header):].lstrip()
+        if not rest or rest.startswith(":"):
+            return rest.lstrip(":").strip(), None          # the column's own label, whatever it says
+    m = _CELL_LABEL.match(val)
+    if m:
+        return val[m.end():].strip(), _header_field(m.group(1))
+    m = _ANY_LABEL.match(val)                               # another hometown or school label ("Previous:")
+    if m:
+        named = _header_field(m.group(1))
+        if named in _LABEL_FIELDS or isinstance(named, tuple):
+            return val[m.end():].strip(), named
+    return val, None
+
+
 def parse_html_tables(html: str, soup: BeautifulSoup) -> list[dict]:
     best: list[dict] = []
     for table in soup.find_all("table"):
@@ -712,7 +874,7 @@ def parse_html_tables(html: str, soup: BeautifulSoup) -> list[dict]:
         cap = table.find("caption")
         if (cap is not None and _STAFF_SECTIONS.search(cap.get_text(" "))) or _in_staff_section(table):
             continue
-        if not {"hometown", "hometown_hs", "hs_hometown"} & set(headers):
+        if not any(h in ("hometown", "hs_city") or (isinstance(h, tuple) and {"hometown", "hs_city"} & set(h)) for h in headers):
             continue
         if "name" not in headers and "last_name" not in headers:
             continue
@@ -734,34 +896,24 @@ def parse_html_tables(html: str, soup: BeautifulSoup) -> list[dict]:
             if same >= 2:
                 continue
             rec = _blank()
-            for field, cell in zip_longest(headers, cells):
-                if cell is None:
-                    continue
-                val = clean(cell.get_text(" "))
-                m = _CELL_LABEL.match(val)
-                if m:  # PrestoSports-style responsive cells carry their own label; trust it
-                    field = _header_field(m.group(1)) or field
-                    val = val[m.end():].strip()
+            for i, cell in enumerate(cells):
+                field = headers[i] if i < len(headers) else None
+                val, label_field = _cell_value(cell, header_text[i] if i < len(header_text) else "")
+                if label_field:  # PrestoSports-style responsive cells carry their own label; trust it
+                    field = label_field
                 if not field:
                     continue
                 if field == "name" and not val:
                     val = _name_from_link(cell)
-                if field == "hometown_hs":
-                    rec["hometown"], rec["high_school"] = split_hometown_highschool(val)
-                elif field == "hs_hometown":           # school first, town second ("Poly / Riverside, Calif.")
-                    school, town = split_hometown_highschool(val)
-                    h1, h2 = parse_hometown(school), parse_hometown(town)
-                    if (h1["state"] or h1["country"]) and not (h2["state"] or h2["country"]):
-                        school, town = town, school    # written town first after all
-                    rec["high_school"], rec["hometown"] = school, town
-                elif field == "hs_prev":
-                    rec["high_school"], rec["previous_school"] = split_hometown_highschool(val)
-                elif not rec.get(field):
+                if isinstance(field, tuple):
+                    fill_combined(rec, field, val)
+                elif not rec.get(field) and not (field in _LABEL_FIELDS and is_label_only(val)):
                     rec[field] = val
                 if field == "name":
                     a = cell.find("a")
                     if a and a.get("href"):
                         rec["bio_url"] = a["href"]
+            rec["hometown"] = _home_or_hs_city(rec["hometown"], rec.pop("hs_city", ""))
             if not rec["name"] and (rec["first_name"] or rec["last_name"]):
                 rec["name"] = clean(f"{rec['first_name']} {rec['last_name']}")
             rec["height"] = format_height(raw=rec["height"])
@@ -881,7 +1033,6 @@ def parse_ardor_cards(html: str, soup: BeautifulSoup) -> list[dict]:
 # hometown and schools are read: they don't change from season to season, while position and class
 # might (the page can show a later season than the roster).
 
-_BIO_WANTED = {"hometown", "hometown_hs", "hs_hometown", "high_school", "previous_school", "hs_prev"}
 _BIO_LABEL_TAGS = ["dt", "th", "span", "strong", "b", "label", "div", "p", "h3", "h4", "h5"]
 
 
@@ -909,31 +1060,22 @@ def parse_bio(html: str) -> dict:
     # Not <header>: Sidearm puts the player's details in one (Morehouse); menus are in <nav>.
     for junk in soup(["script", "style", "nav", "footer", "noscript"]):
         junk.decompose()
-    out = {"hometown": "", "high_school": "", "previous_school": ""}
+    out = {"hometown": "", "high_school": "", "previous_school": "", "hs_city": ""}
     for el in soup.find_all(_BIO_LABEL_TAGS):
         label = clean(el.get_text(" ")).rstrip(":").strip()
         if not label or len(label) > 40 or el.find(_BIO_LABEL_TAGS):
             continue                               # not a label: long text, or a wrapper around one
         field = _header_field(label)
-        if field not in _BIO_WANTED:
+        if not (field in _LABEL_FIELDS or isinstance(field, tuple)):
             continue
         val = _bio_value(el)
-        if not val or val.lower() == label.lower() or len(val) > 120:
+        if not val or val.lower() == label.lower() or len(val) > 120 or is_label_only(val):
             continue
-        if field == "hometown_hs":
-            ht, hs = split_hometown_highschool(val)
-            out["hometown"] = out["hometown"] or ht
-            out["high_school"] = out["high_school"] or hs
-        elif field == "hs_hometown":
-            hs, ht = split_hometown_highschool(val)
-            out["hometown"] = out["hometown"] or ht
-            out["high_school"] = out["high_school"] or hs
-        elif field == "hs_prev":
-            hs, prev = split_hometown_highschool(val)
-            out["high_school"] = out["high_school"] or hs
-            out["previous_school"] = out["previous_school"] or prev
+        if isinstance(field, tuple):
+            fill_combined(out, field, val)
         elif not out[field]:
             out[field] = val
+    out["hometown"] = _home_or_hs_city(out["hometown"], out.pop("hs_city"))
     if out["hometown"].strip().lower().rstrip(":. ") in _PLACEHOLDERS or _CLASS_ONLY.fullmatch(out["hometown"]):
         out["hometown"] = ""
     return out
@@ -982,8 +1124,7 @@ STRATEGIES: list[tuple[str, Callable[[str, BeautifulSoup], list[dict]]]] = [
 
 _CELL_LABEL = re.compile(
     r"^(No\.?|#|Jersey|Name|Full Name|Pos\.?|Position|Cl\.?|Class|Yr\.?|Year|Academic Year|Elig\.?|"
-    r"Ht\.?|Height|Wt\.?|Weight|Hometown(?:\s*/\s*[A-Za-z ]+)*|High School(?:\s*/\s*[A-Za-z ]+)?|Last School|"
-    r"Previous Schools?|Prev\. School|Former School|College|Experience|Exp\.?)\s*:\s*",
+    rf"Ht\.?|Height|Wt\.?|Weight|{_LABEL_WORD}(?:\s*/\s*{_LABEL_WORD})*|College|Experience|Exp\.?)\s*:\s*",
     re.I,
 )
 _CLASS_ONLY = re.compile(
@@ -1012,7 +1153,7 @@ def _college_key(v: str) -> str:
 
 def college_keys(schools: list[dict], junior_colleges=()) -> frozenset:
     """The colleges known by name (Rules.colleges): D1 schools from the sport's schools.csv plus its junior
-    colleges. (Until Oct 31 load_known_colleges() added them to one set shared by every sport in the process.)"""
+    colleges."""
     return frozenset(_college_key(s["school"]) for s in schools) | frozenset(_college_key(n) for n in junior_colleges)
 
 
@@ -1130,6 +1271,9 @@ def tidy_players(players: list[dict], rules: Rules = DEFAULT) -> list[dict]:
         for f in ("position", "class_year", "hometown", "high_school", "previous_school", "height", "weight", "jersey"):
             if p.get(f):
                 p[f] = _CELL_LABEL.sub("", p[f]).strip()
+        for f in _HOME_FIELDS:
+            if p.get(f) and is_label_only(p[f]):
+                p[f] = ""                            # only the column's label, or "NA", "/"
         # A class year is never a hometown ("R-Fr.", "Sophomore", "Gr."), and neither is bats/throws,
         # a height or "Manager" read from the wrong column
         if p.get("hometown") and (_CLASS_ONLY.fullmatch(p["hometown"].strip()) or not_a_place(p["hometown"])):

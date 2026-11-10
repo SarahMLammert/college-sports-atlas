@@ -33,7 +33,43 @@ from hometowns import (US_STATES, _CONTINENTS, _COUNTRY_FIXES, _key, _lookup, _r
 # Placing hometowns on the map
 # ==============================================================================================================
 
-GEOCODE_HOMETOWNS_DOC = 'Add latitude/longitude to scraped rosters so hometowns can be mapped.\n\nOffline sources (downloaded once into .cache/):\n  1. US Census Gazetteer places + county subdivisions (cities, towns, CDPs, townships)\n  2. USGS GNIS Populated Places (unincorporated communities and neighborhoods:\n     Cypress TX, Ellenwood GA, Kingwood TX, Pacoima CA, ...)\n  3. US Census Gazetteer counties ("Stafford, Va.", "Broward County, Fla.")  -> county centroid\n  4. Built-in centroids for US territories and common foreign countries      -> coarse fallback\nOptional online source (--online): OpenStreetMap Nominatim for whatever is left\n(foreign cities, typos), 1 request/second, cached in .cache/nominatim.json.\n\n    python scripts/geocode.py                       # the season files in rosters/football/\n    python scripts/geocode.py --online --contact you@example.com\n    python scripts/geocode.py --sport mens-basketball\n\nHometowns that don\'t match get a suggested fix (typos, wrong state, school text mixed in).\nSuggestions marked "fixed" are applied in the same run; "review" ones are applied only with\n--use-review. All suggestions are saved to config/<sport>/hometown_corrections.csv, where your\nhand edits are kept from run to run and win over the built-in rules.\n\nReads every player from the season files (rosters_<season>.csv), one row per player per school\n(built in memory, the same way scrape_rosters.py --combined writes players_unique.csv).\n\nWrites config/<sport>/hometown_corrections.csv (the fix table: status fixed / review / unfixable),\nand in rosters/<sport>/:\n  hometowns.csv               one row per hometown: what the roster said, the town it was read as,\n                              lat/lon, where the answer came from, and how many players. Open it\n                              to look anything up. Re-runs reuse it, so only new hometowns are\n                              looked up. To move a dot by hand, change its lat/lon and set its\n                              source to "manual"; manual rows are always kept. build.py map\n                              reads each player\'s dot from here.\n  unmatched_hometowns.csv     what still couldn\'t be placed, most common first\nGiven a CSV instead (geocode.py some.csv), it also writes some_geocoded.csv next to it: the\nrows + home_lat, home_lon, geo_source, geo_precision, with each hometown\'s corrected city/state/country.\n\nAfter changing the parser or this script, run with --refresh to look every hometown up again.\n'
+GEOCODE_HOMETOWNS_DOC = """Add latitude/longitude to scraped rosters so hometowns can be mapped.
+
+Offline sources (downloaded once into .cache/):
+  1. US Census Gazetteer places + county subdivisions (cities, towns, CDPs, townships)
+  2. USGS GNIS Populated Places (unincorporated communities and neighborhoods:
+     Cypress TX, Ellenwood GA, Kingwood TX, Pacoima CA, ...)
+  3. US Census Gazetteer counties ("Stafford, Va.", "Broward County, Fla.")  -> county centroid
+  4. Built-in centroids for US territories and common foreign countries      -> coarse fallback
+Optional online source (--online): OpenStreetMap Nominatim for whatever is left
+(foreign cities, typos), 1 request/second, cached in .cache/nominatim.json.
+
+    python scripts/geocode.py                       # the season files in rosters/football/
+    python scripts/geocode.py --online --contact you@example.com
+    python scripts/geocode.py --sport mens-basketball
+
+Hometowns that don't match get a suggested fix (typos, wrong state, school text mixed in).
+Suggestions marked "fixed" are applied in the same run; "review" ones are applied only with
+--use-review. All suggestions are saved to config/<sport>/hometown_corrections.csv, where your
+hand edits are kept from run to run and win over the built-in rules.
+
+Reads every player from the season files (rosters_<season>.csv), one row per player per school
+(built in memory, the same way scrape_rosters.py --combined writes players_unique.csv).
+
+Writes config/<sport>/hometown_corrections.csv (the fix table: status fixed / review / unfixable),
+and in rosters/<sport>/:
+  hometowns.csv               one row per hometown: what the roster said, the town it was read as,
+                              lat/lon, where the answer came from, and how many players. Open it
+                              to look anything up. Re-runs reuse it, so only new hometowns are
+                              looked up. To move a dot by hand, change its lat/lon and set its
+                              source to "manual"; manual rows are always kept. build.py map
+                              reads each player's dot from here.
+  unmatched_hometowns.csv     what still couldn't be placed, most common first
+Given a CSV instead (geocode.py some.csv), it also writes some_geocoded.csv next to it: the
+rows + home_lat, home_lon, geo_source, geo_precision, with each hometown's corrected city/state/country.
+
+After changing the parser or this script, run with --refresh to look every hometown up again.
+"""
 
 
 # In the repo folder (this script lives in scripts/), not the folder it's run from, so every run
@@ -973,10 +1009,7 @@ def save_corrections(path: Path, table: dict[str, dict]) -> None:
 
 def load_sport_corrections(sport) -> tuple[dict[str, dict], set[str]]:
     """The fixes a sport uses: config/shared/hometown_corrections.csv, with the sport's own rows
-    (config/<sport>/hometown_corrections.csv) on top. Also returns which hometowns are the sport's own.
-
-    Until Oct 30 every sport had a full file of its own, most of it copied from football's: a fix made in one
-    sport never reached the others (108,280 rows in 11 files; 20,776 once merged)."""
+    (config/<sport>/hometown_corrections.csv) on top. Also returns which hometowns are the sport's own."""
     table = load_corrections(sport.shared_hometown_corrections_csv)
     own = load_corrections(sport.hometown_corrections_csv)
     table.update(own)
@@ -1076,9 +1109,8 @@ def main(argv=None) -> int:
             homes[raw] = {"city": k.get("city", ""), "state": k.get("state", ""), "country": k.get("country", "")}
             resolved[raw] = (k.get("lat", ""), k.get("lon", ""), k.get("source", ""), k.get("precision", ""))
             continue
-        # Everything else is looked up again on every run (Oct 28). The lookups are quick, and before, a
-        # hometown kept whatever it got the first time: towns the US town list or a parser fix could now
-        # place stayed unplaced, and Toronto, Ontario stayed on the dot in the middle of Canada.
+        # Everything else is looked up again on every run (quick), so a parser fix or a new town list
+        # reaches hometowns placed before.
         todo.append(raw)
     guess_missing = any(resolved[raw][3] == "city_guess" and (raw, sch) not in known
                         for (raw, sch) in players_per_key if raw in resolved)

@@ -2433,7 +2433,6 @@ Niklas von Hellens
 Gabriel Sardo
 Riccardo Trione
 Benton Drake
-David Skalicky Team IMPACT
 Ruben Busch
 Charlie Robin
 Eli Mizerski
@@ -18268,7 +18267,6 @@ Danial Rakhmatullayev
 Matthew Forbes
 Mitchell Sheldon
 Vuk Radjenovic
-Nolan W.
 Built Yumuang
 Illiya Chibirev
 Jacob Prochnow
@@ -22703,9 +22701,7 @@ Adam Barnett
 Akevion Cunningham
 Bryce Johnson
 Cole Lankford
-Dax Clark - Manager
 Jonah Martinez
-Rafael Perez - Student Assistant of Marketing and Game Day
 Reid Birch
 Sebastien Ricard
 Spencer Turner
@@ -27042,7 +27038,6 @@ Tobias Sonne
 Alvin Tudorica
 Manuel Goncalves
 Bruno Oliveira
-Declan Patrick
 Sandeep Mohandoss
 Tom Pisane
 Davide Tortora

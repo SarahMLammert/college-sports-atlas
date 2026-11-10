@@ -804,7 +804,6 @@ Mason Russell
 Preston Deno
 Reid Vender
 Ritten Gross
-Troy Young
 Cameron Crawford
 David Spuhl
 Devon Roberts
@@ -7226,7 +7225,6 @@ Gibson Linnehan
 Harry Laferriere
 John Parsons
 Kieran Anzelone
-Luke Colannino
 Luke Dellicicchi
 Marcus Wertheim
 Matteo Corsi
@@ -10214,7 +10212,6 @@ Joseph Zelaya-Fiallos
 Maxwell Biondi
 Michael Berman Annunziata
 Owen McNally
-Paul Sund
 Riley Joyce
 Spencer Arzanipour
 Thomas Sheehan
@@ -10403,7 +10400,6 @@ Rocco Albanese
 Steve Getsie
 Tristen Dillon
 Tyler Hutcheson
-Wyatt Berkman
 Zach Tiffany
 Aidan Grahn
 Ben Keens
@@ -19865,7 +19861,6 @@ Tajee Mobley
 Thomas Gribben
 Tommy Bowser
 Tyler Oblong
-Will Bush (Team Impact)
 Austin Smith
 Austin Thompson
 Brandon Harry
@@ -20668,7 +20663,6 @@ Austin Linn
 Bubba Love
 Cade Price
 Chase Buckwalter
-Connor Walker
 Dominic Ceresini
 Dylan Griffiths
 Evan Dere
@@ -21253,7 +21247,6 @@ Nicky Solomon
 Patrick Crogan
 Tucker Dordevic
 Wilson Van Buren
-Zach Hirsch
 Aidan Carrello
 Alexander Vardaro
 Anderson Moore
@@ -35477,7 +35470,6 @@ Willy Deines
 Zach Martin
 Bradley Hodoval
 Brady Berman
-Bryson Stephens (Team Impact)
 Jackson Harris
 Jake Nelson
 Justyn Jean-Felix
@@ -36670,7 +36662,6 @@ Justice Vail
 Kaleb Simpson
 Michael Tucker
 Nick Garza
-Ryan Rosinski
 Brett Redmond
 Calvin Flippin
 Christian Brown
@@ -44008,7 +43999,6 @@ Chase Fisher
 Cody Roberts
 Connor Ferrantelli
 Cooper Endicott
-Gabe Eberhard
 George Whitney
 Guy King
 Hassan Radda
@@ -45760,7 +45750,6 @@ Mac Eldridge
 Marco Firmender
 Matthew Till
 Pasha Hakimi
-Toren Mehta
 Will Roberts
 Chris Patterson
 Dante Vardaro
@@ -47667,7 +47656,6 @@ Drew Edwards
 Gibson Linnehan
 Gregg Dennison
 Jack Horrigan
-Nolan Mancuso
 Patrick McAleavey
 Quinn McConnaughey
 Richie Hughson
@@ -47806,7 +47794,6 @@ Zach Collins
 Aiden Thomas
 Brendon Truex
 Devonte Dawson
-GianRaul Moreno Olivo
 Jack Gjokaj
 Kevon Joseph
 Quran Langston
@@ -60809,7 +60796,6 @@ Brooks Hauser
 Chris Tsetsekos
 Cole Friedlander
 Declan Murphy
-Dermot Tynan
 Erik Helgeson
 Ethan O'Neill
 Garrett Kelly
@@ -67391,7 +67377,6 @@ Kevin Stump
 Matthew Seligson
 Maxwell Stukalin
 Noah McCoy
-Parker Langenback
 Rock Stewart
 Ryan Gibbs
 Ryan Pruss

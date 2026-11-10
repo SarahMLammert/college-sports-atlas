@@ -1726,7 +1726,6 @@ Abby O'Connell
 Alyssa Williamson
 Belle Beman
 Brooke McNab
-Carly Skougard
 Ella Jeske
 Mattie Stanton
 Micaela Hohlbein
@@ -12284,7 +12283,6 @@ Mackenzie Smith
 Maura Koehler
 Willa Molho
 Ali Lapioli
-Annelizabeth Jeanbaptiste
 Ashley Pettet
 Caroline Steuart
 Juliette Carreiro
@@ -25350,7 +25348,6 @@ Shari Rainville
 Shelby Kantor
 Stevie Klein
 Taylor Aines
-Addyson Stadler
 Haley Thurber
 Hannah Fields
 Izzy Diaz
@@ -26623,7 +26620,6 @@ Annelise Rojo
 Carly Walter
 Emma Thomas
 Jordan Bowermaster
-Lily L.
 Sam Forde
 Avery Kelley
 Caelan DeBolt
@@ -30230,7 +30226,6 @@ Lovisa Nilsson
 Madayia Simons
 Manta Socada
 Melia La
-Naliaka Masika
 Paige Krygier
 Alegra Black
 Amanda Kit
@@ -31501,7 +31496,6 @@ Tessa Fagerson
 Alexandra Valiotis
 Briley Hill
 Ella Rentz
-Emily Flood
 Fabienne Doerig
 Kate Weber
 Katelyn Jamie
@@ -37795,7 +37789,6 @@ Eva Jonsdottir
 Natalie Allen
 Saba Amiri
 Savanna Sheahan
-TI Emmy Herrick
 Anita Agustsdottir
 Isabelle Navren
 Marie Myhrvold Seim
@@ -41147,7 +41140,6 @@ Lorena Lopez
 Mia Pencak
 Sara Carr
 Sara Sandberg
-Savannah Lahtinen
 Shannon Matthaei
 Elizabeth Hall
 Emelie Brandt
@@ -43225,7 +43217,6 @@ Katarina Charles
 Katie Rittger
 Kaylana Davis
 Kyra Magerko
-Lexi Landers
 Riley Guzo
 Sicily Cucciniello
 Aimee Malboeuf
@@ -48030,8 +48021,6 @@ Mackenzie Scholz
 Madison Holland
 Alycia Wright
 Kylie Gierach
-Manager Erin Schmitt
-Manager Taylor Howe
 McKayla Kertscher
 Natalie Tyriver
 Taylor Reichow
@@ -52846,7 +52835,6 @@ Annaleis Milne
 Cora Cowell
 Emily Purgason
 Kaylin Fox
-Manager Rethy Armes
 Preslee Miller
 Sarah Seeling
 Zoey Torppey
@@ -52864,7 +52852,6 @@ Cassandra Armstrong
 Katelyn Winderl
 Leah Jackson
 Lilly Rautenstrauch
-Manager Addison Fisher
 Olivia Short
 Talia O'Connor
 Alex Slomcheck
@@ -57374,7 +57361,6 @@ Lola Negrete
 Mya Stolarski
 Olivia Abdallah
 Rachel Walters
-Savannah Dockins
 Shelby Brim
 Alexys Nowak
 Anna Remensnyder
@@ -72768,7 +72754,6 @@ Allison Verville
 Ashley Pogue
 Bailey Doerflinger
 Casey Gonzales
-Coryn Barks (Team IMPACT)
 Danielle Schmitz
 Elizabeth Harrington
 Erika Cross
@@ -76993,7 +76978,6 @@ Haley Johnson
 Haley Steel
 Jelena Sever
 Jessica Schoenfeldt
-Jordan Moore
 Julia Barajas
 Kelsey Gallagher
 Maggie Woods
@@ -79928,7 +79912,6 @@ Alexandra Chmela
 Emily Scali
 Jennah Farooki
 Marisa Ruland
-Penny Team Impact
 Ysabelle Perillo
 Alexis McTamney
 Alli DeLuca
@@ -94660,7 +94643,6 @@ Ashley Alonzo
 Ashlynn Chargualaf
 Cacey Villa
 Caitlan Thorne
-Camila Mercado - Manager
 Caroline Jenkins
 Caty Gonzalez
 Clare Yurchak
@@ -102263,7 +102245,6 @@ Wesley Flood
 Abbey Wester
 Carly Bych
 Cate Parchinski
-Jamie Crook
 Julia Coombs
 Julia Masciarelli
 Kalianna Crosby
@@ -107243,7 +107224,6 @@ Catherine Carmon
 Katlyn Perna
 Laiken Parent
 Makenna Snow
-Raven T.
 Samantha Roux
 Sarah Mendoza
 Scarlett Flint
@@ -109073,7 +109053,6 @@ Jules Peterson
 Julia Palmese
 Kallan Malabad
 Lola Follansbee
-Mariella Desjardin
 Paige Barnett
 Sadie Stone
 Sam McDonough
@@ -109679,7 +109658,6 @@ Macy Hudzik
 Sydney Durkin
 Abuk Teng
 Allie Vaillancourt
-Caroline Swearengin
 Cheyenne Frazier
 Eryn Ward
 Jasmin Moran
@@ -118010,7 +117988,6 @@ Ellisha Clough
 Jayme-Dawn Walker
 Karlee Price
 Leigha Romero
-Lucy Barnes, Student Assistant
 Luz Arellano
 Tori Dronet
 Victoria Scarbrough
@@ -123113,7 +123090,6 @@ Aimee Lee
 Aminah Evans
 Anwen Reed
 Celia Kanellakos
-Eva Boudreau
 Haley Lewinski
 Nicole Jensen
 Paige Scheinberg
@@ -134134,7 +134110,6 @@ Taylor Pezulich
 Abby Godown
 Alyssa Perez
 Anna Pascale
-Bella Corey-McCoy
 Chelsea Renna
 Cora Kim
 Fiona Sanders
@@ -134503,7 +134478,6 @@ Summer Diamond
 Ally Yoshimura
 Austin Miller
 Ava Gotchy
-Azra Soyer
 Cora Brendle
 Ellie Hendrix
 Faith Hines
@@ -135840,7 +135814,6 @@ Amelia Cherry
 Anna Mayor
 Ava Cipolla
 Claire Vrahoretis
-Harper Best
 Maddie Harmon
 Morgan Signore
 Reese Yowell
@@ -144634,9 +144607,7 @@ Sarah Scire
 Tressa Palcheck
 Whitney Lincoln
 Ana Alvarenga
-Anna Fairfield
 Aspen Pierson
-Cady Fairfield
 Georgia Lord
 Hanna Kaeser
 Ilana Albert

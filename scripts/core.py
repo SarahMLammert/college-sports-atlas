@@ -20,11 +20,14 @@ import json
 import os
 import re
 import socket
+import sqlite3
 import subprocess
 import sys
 import threading
 import time
 from dataclasses import dataclass, field
+from datetime import date
+from importlib import metadata
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -43,29 +46,25 @@ def clean(text) -> str:
 
 
 # ==============================================================================================================
-# Paths and settings   (was scripts/paths.py)
+# Paths and settings
 # ==============================================================================================================
 
-PATHS_DOC = """Where each sport's files live, and its settings from config/<sport>/settings.json.
-
-    config/shared/school_colors.csv, school_locations.csv     shared by every sport
-    config/<sport>/settings.json                               a sport's settings (football, lacrosse-mens, ...)
-    config/<sport>/schools.csv                                 its colleges: D1, their seasons in another
-                                                               division, and D2/D3/NAIA/JUCO
-    config/shared/hometown_corrections.csv                     hometown fixes for every sport (yours and the geocoder's)
-    config/<sport>/hometown_corrections.csv                    a sport's own fixes, only where it differs (optional)
-    config/<sport>/wrong_seasons.csv, season_pages.csv         roster pages to skip, or to use, for a season (optional)
-    rosters/<sport>/                                           the rosters (cleaned) and everything else the scripts
-                                                               write: scrape reports, the geocoder's hometown table,
-                                                               lists for checking (not committed)
-    docs/<sport>/                                              the website pages for a sport, and the data they load
-
-Until Oct 28 config/ was flat (config/<sport>.json, config/<sport>_schools.csv, ...); load_sport() says so if it
-finds that layout.
-
-Every script takes --sport (default: football) and gets its paths from here, so it doesn't matter
-which folder a script is run from.
-"""
+# Where each sport's files live, and its settings from config/<sport>/settings.json.
+#
+#     config/shared/school_colors.csv, school_locations.csv     shared by every sport
+#     config/<sport>/settings.json                               a sport's settings (football, lacrosse-mens, ...)
+#     config/<sport>/schools.csv                                 its colleges: D1, their seasons in another
+#                                                                division, and D2/D3/NAIA/JUCO
+#     config/shared/hometown_corrections.csv                     hometown fixes for every sport (yours and the geocoder's)
+#     config/<sport>/hometown_corrections.csv                    a sport's own fixes, only where it differs (optional)
+#     config/<sport>/wrong_seasons.csv, season_pages.csv         roster pages to skip, or to use, for a season (optional)
+#     rosters/<sport>/                                           the rosters (cleaned) and everything else the scripts
+#                                                                write: scrape reports, the geocoder's hometown table,
+#                                                                lists for checking (not committed)
+#     docs/<sport>/                                              the website pages for a sport, and the data they load
+#
+# Every script takes --sport (default: football) and gets its paths from here, so it doesn't matter
+# which folder a script is run from.
 
 ROOT = Path(__file__).resolve().parent.parent          # the repo folder (this file is scripts/core.py)
 CONFIG = ROOT / "config"
@@ -119,7 +118,7 @@ class Sport:
     # The seasons scripts/pipeline.py scrapes when none are given, e.g. "2016-2026". Blank: 2016 to the current
     # season, without 2020 for football (default_seasons()).
     seasons: str = ""
-    # The website's words and front-page place for this sport (Nov 1). build.py pages writes docs/sports.js from
+    # The website's words and front-page place for this sport. build.py pages writes docs/sports.js from
     # these, which the map pages and the front page read, so a new sport needs nothing typed into docs/:
     #   front_page: {"disc": "lacrosse", "name": "Lacrosse", "icon": "lacrosse", "ring": "spring", "order": 23, "sex": "m"}:
     #     the front page shows one disc per "disc", on its "ring" (fall, winter or spring: the season people know the
@@ -173,7 +172,6 @@ class Sport:
         path = self.wrong_seasons_csv
         if not path.exists():
             return {}
-        import csv
         with open(path, newline="", encoding="utf-8") as fh:
             return {(r["school"].strip(), int(r["season"])): (r.get("reason") or "").strip()
                     for r in csv.DictReader(fh) if r.get("school") and str(r.get("season", "")).strip().isdigit()}
@@ -189,7 +187,6 @@ class Sport:
         path = self.season_pages_csv
         if not path.exists():
             return {}
-        import csv
         with open(path, newline="", encoding="utf-8") as fh:
             return {(r["school"].strip(), int(r["season"])): r["url"].strip()
                     for r in csv.DictReader(fh) if r.get("url") and str(r.get("season", "")).strip().isdigit()}
@@ -228,10 +225,6 @@ def available_sports() -> list[str]:
 
 def load_sport(name: str = DEFAULT_SPORT) -> Sport:
     path = _settings_json(name)
-    if not path.exists() and (CONFIG / f"{name}.json").exists():
-        raise SystemExit(f"config/ is in its old flat layout (config/{name}.json). Since Oct 28 each sport has a folder: "
-                         f"config/{name}/settings.json, schools.csv, hometown_corrections.csv, and config/shared/ for "
-                         "the school colors and locations. Move the files (README: 'The config folder').")
     if not path.exists():
         have = ", ".join(available_sports()) or "none yet"
         raise SystemExit(f"No settings for sport '{name}' ({path} is missing). Sports set up: {have}.")
@@ -405,10 +398,9 @@ def division_for(school: dict, season: int, history: dict[str, list[dict]]) -> s
 
 
 # ==============================================================================================================
-# Downloading pages   (was scripts/fetch.py)
+# Downloading pages
 # ==============================================================================================================
 
-FETCH_DOC = ''
 """Downloading roster and staff pages: retries, polite pacing per site, an on-disk cache, and an
 optional headless-browser fallback. Shared by every sport."""
 
@@ -419,16 +411,13 @@ USER_AGENT = (
 )
 
 
-# ---- season names, in one place (Oct 30) ---------------------------------------------------------------------
+# ---- season names, in one place ----------------------------------------------------------------------------
 # A season is one number. A fall sport (football, volleyball, soccer) names it by the fall it's played in:
 # season 2024 = 2024-25. Every other sport ("spring": baseball, softball, lacrosse, and the winter sports
 # basketball and hockey) names it by the spring it ends in: season 2024 = 2023-24. Everything that turns a
 # season into a label, an address or a page's year back into a season goes through the functions below
-# (docs/common.js seasonLabel() is the same rule for the site). Before Oct 30 each script had its own copy,
-# and a bare year on a basketball page was read the wrong way (claude/wrong-seasons-oct30.md).
-
-# Every function here is told whether the sport is a spring one (sport.spring_season). Until Oct 31 they read a
-# module variable, SPRING_SEASON, that sidearm.configure() set: whichever sport configured last decided.
+# (docs/common.js seasonLabel() is the same rule for the site). Every function here is told whether the sport
+# is a spring one (sport.spring_season).
 
 def season_first_year(season: int, spring: bool) -> int:
     """The calendar year the season starts in: fall 2024 -> 2024; spring season 2024 (2023-24) -> 2023."""
@@ -473,14 +462,13 @@ def current_season(today=None, *, spring: bool) -> int:
     spring it ends in, and sites put up next spring's roster when school starts, so from August 2026 the
     main page is the 2027 roster. (This used to answer 2026 all autumn for spring sports, so a main page
     with no year on it was saved as 2026 while it already showed 2027.)"""
-    from datetime import date
     today = today or date.today()
     if spring:
         return today.year + 1 if today.month >= 8 else today.year
     return today.year if today.month >= 3 else today.year - 1
 
 
-# ---- failures that aren't missing rosters (Oct 30) ----
+# ---- failures that aren't missing rosters ----
 # A failed school-season usually means no roster could be saved. Two kinds aren't missing data, so the counts
 # (MISSING_ROSTERS.md, build.py check) show them on their own:
 #   not_posted  the current season, when the site has no roster for it yet (its pages still show last season's
@@ -494,12 +482,11 @@ def covid_season(spring: bool) -> int:
     return 2021 if spring else 2020
 
 
-# ---- why a school-season failed, as a code (Oct 31) ----
+# ---- why a school-season failed, as a code ----
 # Every scrape report row has a "reason" column. The scraper sets it where it decides (a newer season's roster,
 # the time limit, a left-out school, ...); a failed download gets the code of its most telling error. Decisions
-# (keep a saved roster when a retry fails, count a try, "not posted yet") read the code. Before Oct 31 they
-# searched the error text, and a reworded message would have changed them without a word; reason_code() still
-# works the code out from the text for reports written before then.
+# (keep a saved roster when a retry fails, count a try, "not posted yet") read the code, not the
+# error text. reason_code() works the code out from the text for report rows that have none.
 REASONS = {
     "": "saved",
     "not_found": "no roster page, or no players on it",
@@ -588,7 +575,7 @@ def failure_kind(report: dict, has_season=None, *, spring: bool, today=None) -> 
     return "failed"
 
 
-# ---- the packages a step needs (Oct 31) ----
+# ---- the packages a step needs ----
 # Two packages used to fail quietly: without geonamescache the geocoder put every town abroad on its province's
 # dot (Toronto 100 miles off), and without Playwright every browser retry became a "failed" season. A step now
 # stops at once when a package it needs is missing, and says so when a version differs from requirements.txt.
@@ -605,10 +592,31 @@ def pinned_versions() -> dict[str, str]:
     return out
 
 
+def _switch_to_project_venv(missing: list[str]) -> None:
+    """If packages are missing but the project's .venv exists, start this same command again with the
+    .venv's Python (a new Terminal window gives the Mac's own python3, which has none of them). Steps the
+    pipeline runs after that use the .venv too, since they're started with sys.executable."""
+    for name in ("python3", "python"):
+        venv_py = ROOT / ".venv" / "bin" / name
+        if venv_py.exists():
+            break
+    else:
+        return
+    if os.environ.get("ATLAS_VENV_SWITCHED") or Path(sys.prefix).resolve() == (ROOT / ".venv").resolve():
+        return  # already in the .venv (or already tried): show the install message instead
+    print(f"note: {', '.join(missing)} {'is' if len(missing) == 1 else 'are'} not installed in {sys.executable}; "
+          "using the project's .venv instead",
+          file=sys.stderr)
+    os.environ["ATLAS_VENV_SWITCHED"] = "1"
+    try:
+        os.execv(str(venv_py), [str(venv_py), *sys.argv])
+    except OSError:
+        return
+
+
 def check_packages(needed: list[str], step: str) -> None:
     """Stop with a clear message if a package `step` needs isn't installed; warn if its version isn't the
     pinned one (the data was built with those)."""
-    from importlib import metadata
     pins, missing = pinned_versions(), []
     for name in needed:
         try:
@@ -621,6 +629,7 @@ def check_packages(needed: list[str], step: str) -> None:
             print(f"note: {name} {have} is installed; requirements.txt has {want} (results may differ slightly)",
                   file=sys.stderr)
     if missing:
+        _switch_to_project_venv(missing)
         raise SystemExit(f"{step} needs {', '.join(missing)}, which isn't installed in this Python ({sys.executable}).\n"
                          f"  Install everything with:  {Path(sys.executable).name} -m pip install -r requirements.txt"
                          + ("\n  then once:  python3 -m playwright install chromium" if "playwright" in missing else "")
@@ -680,7 +689,7 @@ class Fetcher:
         return s
 
     def _cache_path(self, url: str, rendered: bool) -> Path:
-        """The page's name in the cache, as <host>_<hash>.html. Since Oct 28 it is saved compressed, next to
+        """The page's name in the cache, as <host>_<hash>.html. It is saved compressed, next to
         that name as .html.gz (pages shrink ~14x: the cache went from 64 GB to ~5 GB); read_cached() reads
         either."""
         host = urlparse(url).netloc.replace(":", "_")
@@ -961,16 +970,15 @@ open(out, "w", encoding="utf-8").write(html)
 
 
 # ==============================================================================================================
-# Season files   (was scripts/seasons.py)
+# Season files
 # ==============================================================================================================
 
-SEASONS_DOC = """Shared: a sport's season roster files (rosters_<season>.csv) and the one-row-per-player list built from them.
-
-The scraper writes one cleaned file per season. The geocoder, build.py frozen and build.py map
-read those files directly; players() turns them into one row per player per school, in memory, so no
-combined file has to be kept on disk (scrape_rosters.py --combined still writes rosters_all_seasons.csv
-and players_unique.csv for opening in a spreadsheet).
-"""
+# Shared: a sport's season roster files (rosters_<season>.csv) and the one-row-per-player list built from them.
+#
+# The scraper writes one cleaned file per season. The geocoder, build.py frozen and build.py map
+# read those files directly; players() turns them into one row per player per school, in memory, so no
+# combined file has to be kept on disk (scrape_rosters.py --combined still writes rosters_all_seasons.csv
+# and players_unique.csv for opening in a spreadsheet).
 
 # (clean() is defined at the top of this file)
 
@@ -1008,7 +1016,7 @@ def season_files(out_dir: Path) -> dict[int, Path]:
 
 
 def season_rows(rosters_dir: Path) -> list[dict]:
-    """Every row of every saved season file, oldest season first (read from rosters.db since Oct 30)."""
+    """Every row of every saved season file, oldest season first (read from rosters.db)."""
     if not season_files(rosters_dir):
         raise SystemExit(f"No season roster files (rosters_<season>.csv) in {rosters_dir}. Run scrape_rosters.py first.")
     con = roster_db(rosters_dir)
@@ -1018,7 +1026,7 @@ def season_rows(rosters_dir: Path) -> list[dict]:
         con.close()
 
 
-# ---- the roster database (Oct 30) --------------------------------------------------------------------------
+# ---- the roster database ---------------------------------------------------------------------------------
 # rosters/<sport>/rosters.db holds a sport's season files, scrape reports and hometown tables in one SQLite file,
 # for the checks (build.py check, frozen) and the map build. The CSV files stay the source: scrape_rosters.py and
 # geocode.py write them, and the database is rebuilt from them whenever one of them has changed (or is new or
@@ -1052,7 +1060,6 @@ def _db_files(rosters_dir: Path) -> dict[str, list[Path]]:
 
 def _db_stamp(files: dict[str, list[Path]]) -> str:
     """What the database was built from: every file's name, size and modification time."""
-    import json
     parts = [_DB_VERSION] + [f"{t}:{p.name}:{p.stat().st_size}:{p.stat().st_mtime_ns}"
                              for t, paths in files.items() for p in paths]
     return json.dumps(parts)
@@ -1064,8 +1071,6 @@ def _db_functions(con) -> None:
 
 
 def _build_db(path: Path, files: dict[str, list[Path]], stamp: str) -> None:
-    import os
-    import sqlite3
     tmp = path.with_name(path.name + ".tmp")
     tmp.unlink(missing_ok=True)
     con = sqlite3.connect(tmp)
@@ -1102,7 +1107,6 @@ def _build_db(path: Path, files: dict[str, list[Path]], stamp: str) -> None:
 def roster_db(rosters_dir: Path):
     """An open connection to rosters/<sport>/rosters.db, rebuilt first if a CSV changed. Rows come back as
     sqlite3.Row (by name or position); db_rows() turns a query into plain dicts like read_csv's."""
-    import sqlite3
     rosters_dir = Path(rosters_dir)
     path = rosters_dir / DB_FILE
     files = _db_files(rosters_dir)
@@ -1182,10 +1186,26 @@ def players(rosters_dir: Path) -> list[dict]:
 
 
 # ==============================================================================================================
-# Transfer levels   (was scripts/levels.py)
+# Transfer levels
 # ==============================================================================================================
 
-LEVELS_DOC = 'Which level a transfer\'s previous school was at: D1, D2, D3, NAIA, JUCO, club or unknown.\n\nEvery college is a row in config/<sport>/schools.csv: the D1 schools, the seasons some of them spent in\nanother division, and the D2, D3, NAIA and junior colleges, with other spellings in its aliases column\n(separated by "|"). A row can be limited to a range of seasons, so "Tarleton State" means Division II\nfor a player who left before 2020 and D1 after. Rows with division HS are high schools whose name looks\nlike a college ("St. John\'s College"), so they stay unknown. Rows with division CLUB are club (non-varsity)\nteams, such as lacrosse\'s MCLA teams: never scraped, only a level for transfers.\n\n    levels = Levels.load(sport)\n    levels.level("Valdosta St.", 2018)        -> ("D2", "Valdosta State")\n    levels.level("Hutchinson (Kan.) CC", 2022) -> ("JUCO", "")\n\nSpellings are compared by key(): lowercase words without "University", "the", "of", "at" or punctuation,\n"St." read as "State" at the end of a name and "Saint" elsewhere, "UW-" as "Wisconsin", and a\nparenthetical state ("(Kan.)", "(MO)") kept as a postal code. A name that fits schools at two different\nlevels ("Bethel", "Concordia") comes back unknown rather than guessed.'
+# Which level a transfer's previous school was at: D1, D2, D3, NAIA, JUCO, club or unknown.
+#
+# Every college is a row in config/<sport>/schools.csv: the D1 schools, the seasons some of them spent in
+# another division, and the D2, D3, NAIA and junior colleges, with other spellings in its aliases column
+# (separated by "|"). A row can be limited to a range of seasons, so "Tarleton State" means Division II
+# for a player who left before 2020 and D1 after. Rows with division HS are high schools whose name looks
+# like a college ("St. John's College"), so they stay unknown. Rows with division CLUB are club (non-varsity)
+# teams, such as lacrosse's MCLA teams: never scraped, only a level for transfers.
+#
+#     levels = Levels.load(sport)
+#     levels.level("Valdosta St.", 2018)        -> ("D2", "Valdosta State")
+#     levels.level("Hutchinson (Kan.) CC", 2022) -> ("JUCO", "")
+#
+# Spellings are compared by key(): lowercase words without "University", "the", "of", "at" or punctuation,
+# "St." read as "State" at the end of a name and "Saint" elsewhere, "UW-" as "Wisconsin", and a
+# parenthetical state ("(Kan.)", "(MO)") kept as a postal code. A name that fits schools at two different
+# levels ("Bethel", "Concordia") comes back unknown rather than guessed.
 
 LEVELS = ["D1", "D2", "D3", "NAIA", "JUCO", "CLUB", "unknown"]
 
@@ -1432,10 +1452,16 @@ def _read_schools(path: Path) -> list[dict]:
 
 
 # ==============================================================================================================
-# Long lists to a notes file   (was scripts/notes.py)
+# Long lists to a notes file
 # ==============================================================================================================
 
-NOTES_DOC = 'Long lists of schools go to a notes file instead of the terminal.\n\n    from notes import Notes\n    notes = Notes(sport.rosters_dir / "notes_build.txt")      # rewritten on each run\n    notes.listed("no colors in config/shared/school_colors.csv for", missing)\n\nFive names or fewer are printed as before. More print one line with the count and where the names are.'
+# Long lists of schools go to a notes file instead of the terminal.
+#
+#     from core import Notes
+#     notes = Notes(sport.rosters_dir / "notes_build.txt")      # rewritten on each run
+#     notes.listed("no colors in config/shared/school_colors.csv for", missing)
+#
+# Five names or fewer are printed as before. More print one line with the count and where the names are.
 
 SHOWN = 5
 
@@ -1464,13 +1490,13 @@ class Notes:
 
 
 # ==============================================================================================================
-# Compressing the page cache (compress-cache)   (was scripts/compress_cache.py)
+# Compressing the page cache (compress-cache)
 # ==============================================================================================================
 
 COMPRESS_CACHE_DOC = """Compress the downloaded pages in .cache/html (each <name>.html becomes <name>.html.gz, ~14x smaller).
 
-Since Oct 28 the scraper saves pages compressed and reads both kinds, so this only frees the space the
-pages saved before then take (64 GB -> ~5 GB). Safe to stop at any time and run again: it carries on
+The scraper saves pages compressed and reads both kinds, so this only frees the space older plain pages
+take (64 GB -> ~5 GB). Safe to stop at any time and run again: it carries on
 where it stopped. Don't run it while a scrape of any sport is running.
 
     python3 scripts/core.py compress-cache               # everything (about 10-20 minutes)
@@ -1515,17 +1541,17 @@ def compress_cache_main(argv=None) -> int:
     return 0
 
 
+def run_command(commands: dict, argv=None) -> int:
+    """python3 scripts/<file>.py <command> [options]: run that command, or list the commands."""
+    argv = list(sys.argv[1:] if argv is None else argv)
+    if argv and argv[0] in commands:
+        sys.argv[0] = f"{Path(sys.argv[0]).name} {argv[0]}"     # so --help says "build.py map"
+        return commands[argv[0]](argv[1:]) or 0
+    sys.exit("commands: " + ", ".join(commands) + " (add --help to one for its options)")
+
+
 COMMANDS = {"compress-cache": compress_cache_main}
 
 
-def command_line(argv=None) -> int:
-    """python3 scripts/core.py <command> [options]"""
-    argv = list(sys.argv[1:] if argv is None else argv)
-    if argv and argv[0] in COMMANDS:
-        sys.argv[0] = f"{Path(sys.argv[0]).name} {argv[0]}"     # so --help says "build.py map"
-        return COMMANDS[argv[0]](argv[1:]) or 0
-    sys.exit("commands: " + ", ".join(COMMANDS) + " (add --help to one for its options)")
-
-
 if __name__ == "__main__":
-    raise SystemExit(command_line())
+    raise SystemExit(run_command(COMMANDS))

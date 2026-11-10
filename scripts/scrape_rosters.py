@@ -34,13 +34,16 @@ from __future__ import annotations
 
 import argparse
 import logging
+import multiprocessing
 import os
 import re
+import signal
 import sys
 import threading
 import time
 import warnings
-from concurrent.futures import ThreadPoolExecutor
+from collections import Counter
+from concurrent.futures import FIRST_COMPLETED, ProcessPoolExecutor, ThreadPoolExecutor, wait
 from dataclasses import dataclass, field as dc_field
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
@@ -68,7 +71,7 @@ from core import (
     UNIQUE_FIELDS,
     write_csv,
 )
-from hometowns import normalize_class, not_a_place, parse_hometown, split_labeled_hometown
+from hometowns import is_label_only, normalize_class, not_a_place, parse_hometown, split_labeled_hometown
 from scrape_reports import (
     ATTEMPTS_FILE,
     given_up,
@@ -113,9 +116,7 @@ NO_ROSTER_REASONS = {"wrong_season", "not_found", "newer_roster"}   # the site's
 
 @dataclass
 class Job:
-    """One scrape's settings, given to every function that needs them. Until Oct 31 these were module variables
-    (WRONG_SEASONS, SEASON_PAGES, SCHOOL_MINUTES, and sidearm's ROSTER_PATHS, MIN_PLAYERS, ...) that run() and
-    each worker process set: one sport's could stay behind for the next in the same process."""
+    """One scrape's settings, given to every function that needs them."""
     rules: sidearm.Rules = dc_field(default_factory=sidearm.Rules)
     wrong_seasons: dict = dc_field(default_factory=dict)   # config/<sport>/wrong_seasons.csv: (school, season) -> why
     season_pages: dict = dc_field(default_factory=dict)    # config/<sport>/season_pages.csv: (school, season) -> page
@@ -151,7 +152,7 @@ OUT_FIELDS = (
     + ["class_norm", "home_city", "home_state", "home_country", "strategy", "bio_url", "roster_url"]
 )
 REPORT_FIELDS = ["season", "school", "division", "current_conference", "status", "reason", "season_check",
-                 "strategy", "players", "with_hometown", "url", "error"]     # reason: core.REASONS (Oct 31)
+                 "strategy", "players", "with_hometown", "url", "error"]     # reason: core.REASONS
 
 
 # ---------------------------------------------------------------------------
@@ -591,7 +592,6 @@ _WORKER: dict = {}
 
 def _init_worker(sport_name: str, schools_csv: str, history_csv: str, job_settings: dict,
                  fetch_args: dict, verbose: bool) -> None:
-    import signal
     signal.signal(signal.SIGINT, signal.SIG_IGN)    # Ctrl-C is the main process's to handle
     logging.basicConfig(level=logging.DEBUG if verbose else logging.INFO,
                         format="%(asctime)s %(levelname)s %(message)s", datefmt="%H:%M:%S")
@@ -652,6 +652,11 @@ def clean_row(r: dict, colleges: frozenset = frozenset()) -> dict:
     """Clean one saved roster row with the current rules, so parser fixes (names, hometowns, high school
     vs. previous school) reach seasons scraped earlier too."""
     r["name"] = clean_name(r.get("name", ""))
+    for f in ("hometown", "high_school", "previous_school"):
+        if is_label_only(r.get(f, "")):         # only the column's label ("Previous College:") or "NA", "/"
+            r[f] = ""
+    if r.get("hometown"):                      # "Chicago (Il)" -> "Chicago, Il", as the rest are written
+        r["hometown"] = re.sub(r"^([^,()]+?)\s*\(([A-Za-z]{2})\)$", r"\1, \2", r["hometown"])
     # A roster label saved with the hometown ("Hometown/Prev. School: Wilson, NC / Beddingfield"):
     # keep the town, and move the school to the high school field when that's empty (sort_schools
     # below moves it on to previous_school if it's a college).
@@ -767,8 +772,8 @@ def build_parser() -> argparse.ArgumentParser:
                     help="ask again for past-season addresses that answered 'not found' before (normally remembered "
                          f"for {core.MISS_DAYS} days)")
     ap.add_argument("--threads", action="store_true",
-                    help="run the schools as threads in one process, like before Oct 27 (slower: one page is parsed "
-                         "at a time); the default is one process per worker")
+                    help="run the schools as threads in one process (slower: one page is parsed at a time; the tests "
+                         "use it); the default is one process per worker")
     ap.add_argument("--report", action="store_true",
                     help="also write scrape_report_<season>.csv (per school: status, URL, errors) and MISSING_ROSTERS.md")
     ap.add_argument("--recombine", action="store_true",
@@ -824,7 +829,7 @@ def run(ap: argparse.ArgumentParser, args, sport) -> int:
         if not args.report:
             return
         if gave_up is None:
-            gave_up = given_up(read_attempts(sport.rosters_dir, job.rules), args.give_up_after)
+            gave_up = given_up(read_attempts(sport.rosters_dir), args.give_up_after)
         path = write_missing_rosters(report_dir, args.schools, getattr(sport, "label", args.sport), no_site,
                                      out_dir=sport.rosters_dir, division_order=divisions,
                                      division_labels={d: sport.division_label(d) for d in divisions},
@@ -865,7 +870,7 @@ def run(ap: argparse.ArgumentParser, args, sport) -> int:
     prev_rows_all: dict[int, list[dict]] = {}
     prev_reports_all: dict[int, dict[str, dict]] = {}
     skip: set[tuple[str, int]] = set()
-    attempts = read_attempts(sport.rosters_dir, job.rules)
+    attempts = read_attempts(sport.rosters_dir)
     stop = set() if args.retry_given_up or args.only else given_up(attempts, args.give_up_after)
     # The current season is always tried: its roster can go up any day
     stop = {(k, y) for k, y in stop if k in selected and y in seasons and y != sport.current_season()}
@@ -943,8 +948,6 @@ def run(ap: argparse.ArgumentParser, args, sport) -> int:
                                references.get(s["school"]), known.get(s["school"], (None, None))): s
                    for s in schools}
     else:
-        import multiprocessing
-        from concurrent.futures import ProcessPoolExecutor
         # "spawn" on every system (the macOS default): a fresh Python per worker, set up by _init_worker
         pool = ProcessPoolExecutor(max_workers=workers, mp_context=multiprocessing.get_context("spawn"),
                                    initializer=_init_worker,
@@ -957,9 +960,7 @@ def run(ap: argparse.ArgumentParser, args, sport) -> int:
     interrupted = False
     def finished_in_order():
         # as_completed(), plus a line every minute naming the schools still running, so a slow one is visible
-        from concurrent.futures import FIRST_COMPLETED, wait
         # (one line: how many are running and the one running longest, not a list of names)
-        import time
         pending, since = set(futures), {}
         while pending:
             done, pending = wait(pending, timeout=60, return_when=FIRST_COMPLETED)
@@ -1001,7 +1002,6 @@ def run(ap: argparse.ArgumentParser, args, sport) -> int:
                 finished.add(school["school"])
                 # Schools whose seasons were all skipped (--retry-failed and already ok, or left out) print nothing
                 if summary:      # "[ 12/1088] Adrian  11 ok, 1 failed" (each season is in the reports)
-                    from collections import Counter
                     c = Counter(summary)
                     log.info("[%3d/%d] %-26s %s", i, len(schools), school["school"],
                              ", ".join(f"{n} {k}" for k, n in sorted(c.items(), key=lambda kv: ("ok", "partial").index(kv[0])
@@ -1067,17 +1067,5 @@ def run(ap: argparse.ArgumentParser, args, sport) -> int:
     return 0
 
 
-COMMANDS: dict = {}     # sub-commands (find-domains, a one-time football tool, was removed Oct 30)
-
-
-def command_line(argv=None) -> int:
-    """python3 scripts/scrape_rosters.py <command> [options]"""
-    argv = list(sys.argv[1:] if argv is None else argv)
-    if argv and argv[0] in COMMANDS:
-        sys.argv[0] = f"{Path(sys.argv[0]).name} {argv[0]}"     # so --help says "build.py map"
-        return COMMANDS[argv[0]](argv[1:]) or 0
-    return main(argv) or 0
-
-
 if __name__ == "__main__":
-    raise SystemExit(command_line())
+    raise SystemExit(main() or 0)
