@@ -632,8 +632,82 @@ def test_pro_roster_page_is_read_by_its_headers():
         ("Lenny Krieg", "6", "K", "", "https://www.nfl.com/players/lenny-krieg/")]
     import datetime as dt
     assert pro_rosters.season_now(dt.date(2026, 11, 8)) == 2026 and pro_rosters.season_now(dt.date(2027, 1, 20)) == 2026
-    assert [pro_rosters._pro_years(e) for e in ("R", "5", "", "x")] == [0, 5, None, None]
+    assert [pro_rosters._years_in_league(e) for e in ("R", "5", "", "x")] == [0, 5, None, None]
     assert pro_rosters._last_name_key("Pat Surtain II") == pro_rosters._last_name_key("Patrick Surtain") == "surtain"
+
+
+def test_pro_league_rosters_are_read_from_their_data():
+    import pro_rosters as pr
+    nba = ('<html><script id="__NEXT_DATA__" type="application/json">' + json.dumps({"props": {"pageProps": {"team": {
+        "roster": [{"PLAYER": "Jayson Tatum", "NUM": "0", "POSITION": "F-G", "HEIGHT": "6-8", "WEIGHT": "229",
+                    "EXP": "9", "SCHOOL": "Duke", "PLAYER_ID": 1628369, "PLAYER_SLUG": "jayson-tatum"},
+                   {"PLAYER": "Chris Cenac Jr.", "EXP": "R", "SCHOOL": "Houston"}]}}}}) + "</script></html>")
+    got = pr.parse_nba_page(nba)
+    assert [(p["name"], p["college"], p["experience"]) for p in got] == [("Jayson Tatum", "Duke", "9"),
+                                                                        ("Chris Cenac Jr.", "Houston", "R")]
+    assert got[0]["profile_url"] == "https://www.nba.com/player/1628369/jayson-tatum"
+    assert pr.parse_nba_page("<html>no data</html>") == []
+    # an NBA rookie of 2026-27 last played college basketball in 2025-26 (season 2026); an NFL one in fall 2025
+    assert pr.college_until("nba", 2026, "R") == 2026 and pr.college_until("nfl", 2026, "R") == 2025
+    assert pr.college_until("nba", 2026, "9") == 2017 and pr.college_until("nba", 2026, "") is None
+
+    mlb = json.dumps({"roster": [
+        {"person": {"id": 592450, "fullName": "Aaron Judge", "birthCity": "Linden", "birthStateProvince": "CA",
+                    "birthCountry": "USA", "height": "6' 7\"", "weight": 282, "draftYear": 2013,
+                    "mlbDebutDate": "2016-08-13",
+                    "education": {"highschools": [{"name": "Linden", "state": "CA"}], "colleges": [{"name": "Fresno State"}]}},
+         "jerseyNumber": "99", "position": {"abbreviation": "RF"}, "status": {"description": "Active"}},
+        {"person": {"id": 683011, "fullName": "Anthony Volpe", "draftYear": 2019,
+                    "education": {"highschools": [{"name": "Delbarton", "city": "Morristown", "state": "NJ"}]}},
+         "position": {"abbreviation": "SS"}}]})
+    judge, volpe = pr.parse_mlb_roster(mlb)
+    assert (judge["college"], judge["college_until"], judge["pro_high_school"], judge["birth_city"]) == (
+        "Fresno State", 2013, "Linden, CA", "Linden")
+    assert (volpe["college"], volpe["college_until"], volpe["pro_high_school"]) == ("", "", "Delbarton, Morristown, NJ")
+
+    nhl = json.dumps({"forwards": [{"id": 8479591, "firstName": {"default": "Michael"}, "lastName": {"default": "Eyssimont"},
+                                    "sweaterNumber": 81, "positionCode": "C", "heightInInches": 72, "weightInPounds": 196,
+                                    "birthCity": {"default": "Littleton"}, "birthStateProvince": {"default": "CO"},
+                                    "birthCountry": "USA"}], "defensemen": [], "goalies": []})
+    (p,) = pr.parse_nhl_roster(nhl)
+    assert (p["name"], p["height"], p["birth_city"], p["birth_state"]) == ("Michael Eyssimont", "6-0", "Littleton", "CO")
+    career = json.dumps({"seasonTotals": [
+        {"season": 20142015, "gameTypeId": 2, "leagueAbbrev": "USHL", "teamName": {"default": "Fargo"}},
+        {"season": 20152016, "gameTypeId": 2, "leagueAbbrev": "NCAA", "teamName": {"default": "St. Cloud State Univ."}},
+        {"season": 20172018, "gameTypeId": 2, "leagueAbbrev": "NCAA", "teamName": {"default": "St. Cloud State Univ."}},
+        {"season": 20172018, "gameTypeId": 3, "leagueAbbrev": "NCAA", "teamName": {"default": "Playoffs"}},
+        {"season": 20212022, "gameTypeId": 2, "leagueAbbrev": "NHL", "teamName": {"default": "Winnipeg Jets"}}]})
+    assert pr.nhl_college(career) == ("St. Cloud State Univ.", 2018, 2022)
+    assert pr.nhl_college(json.dumps({"seasonTotals": [{"season": 20202021, "gameTypeId": 2, "leagueAbbrev": "WHL",
+                                                        "teamName": {"default": "Calgary Hitmen"}}]})) == ("", None, None)
+    import datetime as dt
+    assert pr.season_now(dt.date(2026, 11, 10), "nba") == 2026 and pr.season_now(dt.date(2026, 6, 1), "nhl") == 2025
+    assert pr.season_now(dt.date(2026, 11, 10), "mlb") == 2027 and pr.season_now(dt.date(2026, 9, 1), "mlb") == 2026
+
+
+def test_pro_players_are_matched_by_name_last_name_or_hometown(tiny, monkeypatch):
+    import pro_rosters as pr
+    with open(tiny.schools_csv, "a", newline="") as f:
+        csv.writer(f).writerow(["Beta State", "D2", "Z", "beta.edu", "", "", "", "Beta St.", ""])
+    write_season(tiny, 2023, [
+        {"school": "Alpha", "name": "Patrick Surtain", "home_city": "Plantation", "home_state": "FL", "hometown": "Plantation, Fla."},
+        {"school": "Alpha", "name": "Sam Same", "home_city": "Tulsa", "home_state": "OK", "hometown": "Tulsa, Okla."},
+        {"school": "Beta State", "name": "Joe Moved", "home_city": "Linden", "home_state": "CA", "hometown": "Linden, Calif.",
+         "high_school": "Linden HS"},
+        {"school": "Beta State", "name": "Al Twin", "home_city": "Reno", "home_state": "NV"},
+        {"school": "Alpha", "name": "Al Twin", "home_city": "Reno", "home_state": "NV"}])
+    monkeypatch.setitem(pr.LEAGUES, "mlb", {**pr.LEAGUES["mlb"], "college_sport": "softball"})
+    rows = [{"league": "MLB", "season": 2026, "name": n, "college": c, "college_until": 2023, "birth_city": b,
+             "birth_state": st} for n, c, b, st in [
+        ("Sam Same", "Some JC | Alpha", "", ""),                 # found at the second college listed
+        ("Pat Surtain II", "Alpha", "", ""),                     # last name, first names fit
+        ("Joe Moved", "Gamma Tech", "Linden", "CA"),             # college not known: his birthplace is his hometown
+        ("Joe Moved", "Gamma Tech", "Fresno", "CA"),             # born somewhere else: not him
+        ("Al Twin", "Gamma Tech", "Reno", "NV"),                 # two players fit: left unmatched
+        ("Nobody Here", "", "Linden", "CA")]]
+    got = [(r["matched"], r["college_school"], r.get("high_school", "")) for r in pr.match(rows, "mlb")]
+    assert got == [("yes", "Alpha", ""), ("likely", "Alpha", ""), ("hometown", "Beta State", "Linden HS"),
+                   ("", "", ""), ("", "", ""), ("", "", "")]
 
 
 def test_staff_table_with_hometown_column_ignored():
