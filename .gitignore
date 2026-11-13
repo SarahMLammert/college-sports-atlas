@@ -20,3 +20,4 @@ rosters_all_seasons.csv
 # only needs docs/). Kept out of git from Oct 28; earlier commits still have the old copies.
 rosters/
 .ruff_cache/
+node_modules/

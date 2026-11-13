@@ -112,7 +112,7 @@ button.nmb:focus-visible { outline: 2px solid var(--focus); }
   const { $, fmt, esc } = GP;
   let data;
   try { data = await fetch(GP.dataUrl("staff_data.json")).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }); data.stints = GP.unpackStints(data.stints); }
-  catch (e) { GP.loadFailed("The coaches' data"); return; }
+  catch { GP.loadFailed("The coaches' data"); return; }
   const sportWords = data.sport.replace(/^(.*) \((.*)\)$/, "$2 $1");
   $("sportName").textContent = sportWords;
   document.title = `College ${sportWords} Coaching Staffs`;
@@ -265,7 +265,7 @@ button.nmb:focus-visible { outline: 2px solid var(--focus); }
   function update() {
     renderSchool(); renderPerson();
     const h = hashNow(); lastHash = h;
-    try { localStorage.setItem(GP.saveKey("staff-directory:last"), h); } catch (e) {}
+    try { localStorage.setItem(GP.saveKey("staff-directory:last"), h); } catch { /* storage blocked (a private window) */ }
     GP.setHash(h);
   }
   addEventListener("hashchange", () => { if (location.hash.slice(1) !== lastHash) { readUrl(); update(); } });

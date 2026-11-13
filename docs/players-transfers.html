@@ -121,7 +121,7 @@
 
   let data;
   try { data = await GP.loadData(); }
-  catch (e) { GP.loadFailed("The player data"); return; }
+  catch { GP.loadFailed("The player data"); return; }
   const P = data.players, N = data.N, S = data.schools.length;
   const { schoolPalette, swatch } = GP.makePalette(data);
   const F = GP.makeFilters(data, { onChange: refresh, onSchool: (i) => pick(i) });
@@ -366,7 +366,7 @@
   }
   function writeUrl() {
     const h = hashNow(); lastHash = h;
-    try { localStorage.setItem(SAVE_KEY, h); } catch (e) {}
+    try { localStorage.setItem(SAVE_KEY, h); } catch { /* storage blocked (a private window): the address keeps the view */ }
     GP.setHash(h);
   }
   function readUrl(firstLoad) {

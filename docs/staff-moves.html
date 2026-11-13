@@ -117,9 +117,9 @@ a.nmb:hover { border-bottom-color: var(--fg); }
   let data;
   try {
     data = await fetch(GP.dataUrl("staff_data.json")).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }); data.stints = GP.unpackStints(data.stints);
-  } catch (e) { GP.loadFailed("The coaches' data"); return; }
+  } catch { GP.loadFailed("The coaches' data"); return; }
   let loc = null;
-  try { loc = await fetch(GP.dataUrl("school_locations.json")).then((r) => r.ok ? r.json() : null); } catch (e) {}
+  try { loc = await fetch(GP.dataUrl("school_locations.json")).then((r) => r.ok ? r.json() : null); } catch { /* no campus locations: the map works without them */ }
   data.campus = data.schools.map((s) => { const v = loc && loc.schools[s[0]]; return v ? { city: v[0], state: v[1], lat: v[2], lon: v[3] } : null; });
 
   // "Lacrosse (Men's)" -> "Men's Lacrosse"
@@ -218,7 +218,6 @@ a.nmb:hover { border-bottom-color: var(--fg); }
     map.campuses((i) => M.inn[i] + M.out[i], M.sel, hoverSchool, schoolPalette(), (i) => data.schools[i][0]);
   }
   const schoolAt = (mx, my) => map.schoolAt(mx, my, (i) => M.inn[i] || M.out[i] || i === M.sel);
-  const { plural } = GP;
   // the people on a route, for its tooltip (up to four names)
   function routePeople(r) {
     const ks = M.list.filter((k) => MV.a[k] === r.from && MV.b[k] === r.to);
@@ -347,7 +346,7 @@ a.nmb:hover { border-bottom-color: var(--fg); }
   }
   function writeUrl() {
     const h = hashNow(); lastHash = h;
-    try { localStorage.setItem(SAVE_KEY, h); } catch (e) {}
+    try { localStorage.setItem(SAVE_KEY, h); } catch { /* storage blocked (a private window): the address keeps the view */ }
     GP.setHash(h);
   }
   function readUrl(firstLoad) {

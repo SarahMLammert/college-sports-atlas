@@ -92,6 +92,7 @@ an SVG. A new page needs the same three `<link>` lines under its title.
 ## Running it
 
 Setup once: `python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt`
+(and `npm install` for the site's linter; it needs Node.js, `brew install node`)
 (add `pip install playwright && playwright install chromium` for the browser retries).
 
 ```
@@ -102,6 +103,7 @@ python3 scripts/pipeline.py football --from geocode        # start at a step
 python3 scripts/pipeline.py softball --dry-run             # print the commands only
 python3 -m pytest tests -q                                 # the tests (about 1 minute with the page test)
 python3 -m ruff check scripts tests                         # the linter (rules in ruff.toml; --fix fixes the simple ones)
+npm run lint                                               # the site's linter, ESLint (rules in eslint.config.js)
 ```
 
 Steps, in order: `scrape` (quick pass) → `retry` (slow pass with a browser) → `redo-current` (only with

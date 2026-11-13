@@ -1,0 +1,15 @@
+{
+  "name": "college-sports-atlas",
+  "private": true,
+  "type": "module",
+  "description": "Only for the linters: the site in docs/ has no build step.",
+  "scripts": {
+    "lint": "eslint docs"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "eslint": "10.13.0",
+    "eslint-plugin-html": "8.2.1",
+    "globals": "17.13.0"
+  }
+}

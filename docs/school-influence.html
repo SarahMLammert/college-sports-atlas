@@ -183,7 +183,7 @@
     [data, staff] = await Promise.all([GP.loadData(),
       fetch(GP.dataUrl("staff_data.json")).then((r) => r.ok ? r.json() : null).catch(() => null)]);
     await data.loadNames();
-  } catch (e) { GP.loadFailed("The data"); return; }
+  } catch { GP.loadFailed("The data"); return; }
   const sportWords = data.sport.replace(/^(.*) \((.*)\)$/, "$2 $1");
   $("sportName").textContent = sportWords;
   document.title = `College ${sportWords} School Influence Map`;
@@ -736,7 +736,7 @@
     $("hint").innerHTML = M ? leadText() : "Pick a school, here or on the map, to see where its people went.";
     renderSide(); renderPeople(); drawKey(); draw();
     const h = hashNow(); lastHash = h;
-    try { localStorage.setItem(GP.saveKey("school-influence:last"), h); } catch (e) {}
+    try { localStorage.setItem(GP.saveKey("school-influence:last"), h); } catch { /* storage blocked (a private window) */ }
     GP.setHash(h);
   }
   addEventListener("hashchange", () => { if (location.hash.slice(1) !== lastHash) { readUrl(); update(); } });

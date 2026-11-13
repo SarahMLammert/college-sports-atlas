@@ -1619,6 +1619,17 @@ def test_code_is_clean():
     assert not repeats, repeats
 
 
+def test_site_code_is_clean():
+    # The site's linter, ESLint, over the JavaScript in docs/ (common.js and the scripts inside the pages), with
+    # the rules in eslint.config.js. Needs Node.js and, once, npm install; to see the problems: npm run lint.
+    import subprocess
+    eslint = ROOT / "node_modules" / ".bin" / "eslint"
+    if not eslint.exists():
+        pytest.skip("ESLint isn't installed: npm install (needs Node.js: brew install node)")
+    done = subprocess.run([str(eslint), "docs"], cwd=ROOT, capture_output=True, text=True)
+    assert done.returncode == 0, done.stdout + done.stderr
+
+
 def test_every_sport_has_its_pages():
     # One set of pages for every sport (docs/players-dotmap.html?sport=...), the sport's words in docs/sports.js,
     # and its old addresses forwarding (python3 scripts/build.py pages writes them).

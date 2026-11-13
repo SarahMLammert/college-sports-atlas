@@ -248,7 +248,7 @@ body { background: var(--sea); }
   let data;
   try {
     data = await GP.loadData({ all: false });   // big sports: the D1 schools' players first (see moreData below)
-  } catch (e) {
+  } catch {
     GP.loadFailed("The player data");
     return;
   }
@@ -298,7 +298,6 @@ body { background: var(--sea); }
   // allSchools: dot map shows every school instead of waiting for one to be picked
   // hs: { h: index into data.hs, st: hometown state abbr, or null for every state }
   const schoolIndex = data.schoolIndex;
-  const { FIRST, LAST } = data;
   $("schoolClear").addEventListener("click", () => { state.allSchools = false; setSchool(-1); });
   $("schoolAll").addEventListener("click", () => { state.allSchools = true; setSchool(-1); });   // every school's dots at once
   function setSchool(i) {
@@ -407,7 +406,7 @@ body { background: var(--sea); }
       if (x < -100 || y < -30 || x > w + 100 || y > h + 30) continue;
       const fs = px > 60000 ? 14 : px > 12000 ? 12.5 : 11;
       ctx.font = `italic 600 ${fs + 2}px ${css("--display")}`;   // country names in an atlas serif
-      try { ctx.letterSpacing = ".14em"; } catch (e) {}
+      try { ctx.letterSpacing = ".14em"; } catch { /* a browser without it draws the letters closer */ }
       const text = l.name.toUpperCase(), tw = ctx.measureText(text).width;
       if (tw > Math.sqrt(px) * 2.2) continue;           // the name would spill far past the country
       const box = [x - tw / 2 - 4, y - fs / 2 - 3, x + tw / 2 + 4, y + fs / 2 + 3];
@@ -963,7 +962,7 @@ body { background: var(--sea); }
   function writeUrl() {
     clearTimeout(urlTimer);
     const h = hashFor();
-    try { localStorage.setItem(SAVE_KEY, h); } catch (e) {}
+    try { localStorage.setItem(SAVE_KEY, h); } catch { /* storage blocked (a private window): the address keeps the view */ }
     if (h === lastHash) return;
     lastHash = h;
     GP.setHash(h);
@@ -1041,7 +1040,7 @@ body { background: var(--sea); }
 
   const startHash = location.hash.slice(1) || GP.readSaved("recruiting-map:last");
   if (/(^|&)player=/.test(startHash)) {
-    try { await Promise.all([data.loadNames(), data.loadAll()]); N = data.N; countTowns(); } catch (e) { /* the player just isn't found */ }
+    try { await Promise.all([data.loadNames(), data.loadAll()]); N = data.N; countTowns(); } catch { /* the player just isn't found */ }
   }
   let pendingMap = readUrl(true);
   syncControls();

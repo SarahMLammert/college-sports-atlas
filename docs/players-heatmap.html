@@ -189,7 +189,7 @@ table.st td.best { font-weight: 700; }
 
   let data;
   try { data = await GP.loadData(); }
-  catch (e) { GP.loadFailed("The player data"); return; }
+  catch { GP.loadFailed("The player data"); return; }
   const P = data.players, N = data.N, tState = data.tState;
   const { schoolPalette, swatch } = GP.makePalette(data);
   const F = GP.makeFilters(data, { onChange: refresh });
@@ -413,7 +413,7 @@ table.st td.best { font-weight: 700; }
   const SAVE_KEY = GP.saveKey("recruiting-footprints:last");   // per sport (see common.js)
   function writeUrl() {
     const h = hashNow(); lastHash = h;
-    try { localStorage.setItem(SAVE_KEY, h); } catch (e) {}
+    try { localStorage.setItem(SAVE_KEY, h); } catch { /* storage blocked (a private window): the address keeps the view */ }
     GP.setHash(h);
     // "Dot map" opens that page plainly; it reopens however you last left it
   }
@@ -620,7 +620,7 @@ table.st td.best { font-weight: 700; }
   try {
     stateFeatures = await GP.usStates(true);
     layout();
-  } catch (e) {
+  } catch {
     $("hint").textContent = "The state outlines didn't load, so the maps can't be drawn. The state rankings below each box still work; reload to try again.";
   }
 })();

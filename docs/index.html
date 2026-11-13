@@ -421,7 +421,7 @@
 
   // ---- Build the rings once (positions in a 1180×1020 box, scaled to fit) ----
   // Three rings around the globe, one per season, fall nearest. Neighbouring rings turn opposite ways.
-  const W = 1180, H = 1020, CX = W / 2, CY = H / 2, SAT_DEG = 15, GLOBE = 200;
+  const W = 1180, H = 1020, CX = W / 2, CY = H / 2, GLOBE = 200;
   const DISC = 32;                 // a disc's radius
   const SHOWN = 160;               // the globe's radius on the stage (GLOBE is its map's, inside the svg's 400×400)
   const RINGS = [{ id: 'fall', R: 262, turn: 1, start: 30 }, { id: 'winter', R: 354, turn: -1, start: 45 }, { id: 'spring', R: 446, turn: 1, start: 26 }];
@@ -584,7 +584,7 @@
     const changed = id !== lit;
     lit = id;
     showHint();
-    if (changed) { try { place(rot); } catch (e) { /* before the turning starts */ } }
+    if (changed) { try { place(rot); } catch { /* before the turning starts */ } }
     document.querySelectorAll('[data-id]').forEach((el) => el.classList.toggle('lit', el.dataset.id === id));
     globeMaps();
     keepTagsOnScreen();

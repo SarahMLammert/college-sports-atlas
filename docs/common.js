@@ -251,7 +251,7 @@
     let loc = null;
     const locLoad = fetch(dataUrl("school_locations.json")).then((r) => r.ok ? r.json() : null).catch(() => null);
     if (all) await data.loadAll();
-    try { loc = await locLoad; } catch (e) {}
+    try { loc = await locLoad; } catch { /* no campus locations: the map works without them */ }
     data.campus = data.schools.map((s) => { const v = loc && loc.schools[s[0]]; return v ? { city: v[0], state: v[1], lat: v[2], lon: v[3] } : null; });
     return data;
   }
@@ -605,13 +605,13 @@
   const saveKey = (name) => `${sport}:${name}`;
   function readSaved(name) {
     try { return localStorage.getItem(saveKey(name)) || ""; }
-    catch (e) { return ""; }
+    catch { return ""; }
   }
 
   // Copy the page's link and say so under the button.
   async function copyLink(toast) {
     try { await navigator.clipboard.writeText(location.href); toast.textContent = "Link to this view copied"; }
-    catch (e) { toast.textContent = "Copy the link from the address bar"; }
+    catch { toast.textContent = "Copy the link from the address bar"; }
     toast.hidden = false; clearTimeout(toast._t); toast._t = setTimeout(() => { toast.hidden = true; }, 2200);
   }
   // Keep --bar-h equal to the title bar's height, so panels and pages can start just under it.
@@ -780,7 +780,7 @@
     m.start = async () => {
       new ResizeObserver(m.layout).observe(box);
       m.layout();
-      try { stateFeatures = await usStates(); m.layout(); } catch (e) { failed(); }
+      try { stateFeatures = await usStates(); m.layout(); } catch { failed(); }
     };
     return m;
   }
@@ -790,7 +790,7 @@
   }
   // Put the view in the address without adding a history step (sandboxed previews can refuse).
   function setHash(h) {
-    try { history.replaceState(null, "", location.pathname + location.search + (h ? "#" + h : "")); } catch (e) { /* stays as it was */ }
+    try { history.replaceState(null, "", location.pathname + location.search + (h ? "#" + h : "")); } catch { /* stays as it was */ }
   }
   window.GP = { showChips, tabCount, dropdown, tabsHTML, tabToParams, tabFromParams, showTab, plural, US_FIT, usStates, curve, routeMap, loadFailed, setHash, $, dataUrl, he: pronoun.he, his: pronoun.his, saveKey, readSaved, STATE_ABBR, ABBR_STATE, fmt, pct, esc, css, narrow, loadData, unpackStints, springOf, seasonLabel, seasonSpan, makePalette, makeFilters, copyLink, trackBar, miles, median };
 })();
