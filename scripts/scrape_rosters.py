@@ -126,7 +126,7 @@ class Job:
     save_dir: Path | None = None
 
     @classmethod
-    def for_sport(cls, sport, schools: list[dict] | None = None, **settings) -> "Job":
+    def for_sport(cls, sport, schools: list[dict] | None = None, **settings) -> Job:
         return cls(rules=sidearm.Rules.for_sport(sport, schools), wrong_seasons=sport.wrong_seasons(),
                    season_pages=sport.season_pages(), **settings)
 # A site's own link to a season roster in PrestoSports style: /sports/fball/2026-27/roster (Mars Hill),
@@ -1044,7 +1044,7 @@ def run(ap: argparse.ArgumentParser, args, sport) -> int:
     update_attempts(attempts, tried, job.rules)
     write_attempts(sport.rosters_dir, attempts)
     gave_up_now = given_up(attempts, args.give_up_after)
-    all_saved, combined, unique = write_combined(season_dir, args.combined, job)
+    write_combined(season_dir, args.combined, job)
     write_missing(gave_up_now)
     log.info("season  players    ok  partial  failed  left out")
     for season, n, ok, part, fail, out in totals:

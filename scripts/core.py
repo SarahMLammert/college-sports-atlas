@@ -279,7 +279,7 @@ def sport_lock(sport: Sport, what: str = "a scrape"):
             fh.seek(0)
             who = fh.read().strip() or "another run"
             fh.close()
-            raise SportBusy(f"{sport.name} is busy: {who}. Wait for it to finish (or stop it) and run this again.")
+            raise SportBusy(f"{sport.name} is busy: {who}. Wait for it to finish (or stop it) and run this again.") from None
     except ImportError:            # Windows: no flock; carry on without the check
         fcntl = None
     fh.seek(0)
@@ -347,7 +347,7 @@ def load_schools(path: Path, divisions: set[str] | None = None) -> list[dict]:
         if r["division"].strip() in SCRAPED:
             groups.setdefault(r["school"], []).append((i, r))
     picked = []
-    for name, rows in groups.items():
+    for rows in groups.values():
         main, plain = _main_row([r for _, r in rows])
         if divisions and main["division"].strip() not in divisions:
             continue
@@ -882,7 +882,7 @@ class Fetcher:
         except subprocess.TimeoutExpired:   # subprocess.run kills the child (and its browser goes with it)
             tmp.unlink(missing_ok=True)
             self._mark_slow(url)
-            raise RuntimeError(f"browser gave up after {self.RENDER_LIMIT}s")
+            raise RuntimeError(f"browser gave up after {self.RENDER_LIMIT}s") from None
         if done.returncode != 0 or not tmp.exists():
             tmp.unlink(missing_ok=True)
             last = (done.stderr or "").strip().splitlines()
@@ -1384,7 +1384,7 @@ class Levels:
         return ("unknown", "")
 
     @classmethod
-    def load(cls, sport, schools: list[dict] | None = None) -> "Levels":
+    def load(cls, sport, schools: list[dict] | None = None) -> Levels:
         """Every college in the sport's schools.csv (or the rows given), and the sport's junior colleges."""
         lv = cls()
         if schools is None:
@@ -1426,8 +1426,8 @@ def _level_spans(rows, level_of=None):
 
     def level(d):
         return level_of.get(d.upper(), "")
-    usual = next((level(d) for f, l, d in rows if f is None and l is None), None)
-    ranged = sorted(((f, l, level(d)) for f, l, d in rows if f is not None or l is not None),
+    usual = next((level(d) for f, last, d in rows if f is None and last is None), None)
+    ranged = sorted(((f, last, level(d)) for f, last, d in rows if f is not None or last is not None),
                     key=lambda r: -1 if r[0] is None else r[0])
     if usual is None:
         return ranged

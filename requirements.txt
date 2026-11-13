@@ -11,5 +11,5 @@ geonamescache==3.0.2
 playwright==1.64.0
 # the tests:  python3 -m pytest tests -q   (tests/test_pages.py also uses playwright's chromium)
 pytest==9.1.1
-# the tests check the code with it (test_code_is_clean)
-pyflakes==4.0.3
+# the linter (settings in ruff.toml); the tests run it too (test_code_is_clean):  python3 -m ruff check scripts tests
+ruff==0.16.9

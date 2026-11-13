@@ -312,7 +312,7 @@ def school_rows(s: dict, colleges: Colleges, conferences: dict, new: dict) -> li
             directory = rec.get("conferenceName") or ""
             conf = conferences.get(directory, directory)
         site = (colleges.site.get(name) or host(rec.get("athleticWebUrl") if rec else "")).strip()
-        return {**{k: "" for k in FIELDS}, "school": name, "division": DIV[rec["division"]] if rec else row["division"],
+        return {**dict.fromkeys(FIELDS, ""), "school": name, "division": DIV[rec["division"]] if rec else row["division"],
                 "conference": conf, "domain": site, "aliases": row.get("aliases") or colleges.aliases.get(name, ""),
                 "note": colleges.left_out.get(name, "")}
 

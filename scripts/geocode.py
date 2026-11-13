@@ -19,6 +19,7 @@ import time
 import unicodedata
 import zipfile
 from pathlib import Path
+from typing import ClassVar
 
 import requests
 
@@ -319,7 +320,9 @@ class Gazetteer:
         sums: dict[str, list] = {}
         for (_, st), (lat, lon, _) in self.places.items():
             t = sums.setdefault(st, [0.0, 0.0, 0])
-            t[0] += lat; t[1] += lon; t[2] += 1
+            t[0] += lat
+            t[1] += lon
+            t[2] += 1
         self.state_center = {st: (a / n, b / n) for st, (a, b, n) in sums.items() if n}
 
     def _add_place(self, key, lat, lon, rank):
@@ -473,7 +476,7 @@ class WorldCities:
     package: pip install geonamescache). Without it, places abroad get their province's or country's dot."""
 
     # The geocoder's country names -> ISO codes, where GeoNames calls the country something else
-    EXTRA = {"England": "GB", "Scotland": "GB", "Wales": "GB", "Northern Ireland": "GB", "United Kingdom": "GB",
+    EXTRA: ClassVar[dict[str, str]] = {"England": "GB", "Scotland": "GB", "Wales": "GB", "Northern Ireland": "GB", "United Kingdom": "GB",
              "South Korea": "KR", "Czech Republic": "CZ", "Ivory Coast": "CI", "Democratic Republic of the Congo": "CD",
              "Congo": "CG", "Bahamas": "BS", "Russia": "RU", "Vietnam": "VN", "Taiwan": "TW", "Iran": "IR",
              "Syria": "SY", "Curacao": "CW", "Hong Kong": "HK", "Samoa": "WS", "American Samoa": "AS",
@@ -484,7 +487,7 @@ class WorldCities:
              "Saint Vincent and the Grenadines": "VC", "Turks and Caicos Islands": "TC", "Sint Maarten": "SX",
              "Cayman Islands": "KY", "Bonaire": "BQ", "Myanmar": "MM", "Burkina Faso": "BF", "Kosovo": "XK"}
     # GeoNames' codes for the Canadian provinces -> the postal codes the parser gives
-    CA_ADMIN1 = {"01": "AB", "02": "BC", "03": "MB", "04": "NB", "05": "NL", "07": "NS", "08": "ON", "09": "PE",
+    CA_ADMIN1: ClassVar[dict[str, str]] = {"01": "AB", "02": "BC", "03": "MB", "04": "NB", "05": "NL", "07": "NS", "08": "ON", "09": "PE",
                  "10": "QC", "11": "SK", "12": "YT", "13": "NT", "14": "NU"}
     BIG = 100_000      # a town given with no state or country is only looked up abroad if it's this big (Tokyo)
 
@@ -498,7 +501,7 @@ class WorldCities:
             import geonamescache
         except ImportError:                       # main() checks first; this is for other callers
             raise SystemExit("geonamescache isn't installed: without it every town abroad would get its province's "
-                             "dot. python3 -m pip install -r requirements.txt")
+                             "dot. python3 -m pip install -r requirements.txt") from None
         gc = geonamescache.GeonamesCache(min_city_population=500)
         for code, c in gc.get_countries().items():
             self.iso[c["name"].lower()] = code
@@ -827,7 +830,7 @@ def norm_state(tok):
     key = t.lower().rstrip(".")
     if key in STATE_ALIASES:
         return STATE_ALIASES[key], "USA"
-    if key in COUNTRY_ALIASES and COUNTRY_ALIASES[key]:
+    if COUNTRY_ALIASES.get(key):
         return "", COUNTRY_ALIASES[key]
     region = _region(t)             # the parser's tables: "Illi.", "Virg.", "MB", "B.C. Canada", "Curacao", ...
     if region and (region["country"] in ("USA", "Canada") or region["country"] in COUNTRIES):

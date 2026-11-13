@@ -118,7 +118,7 @@ def test_real_towns_are_places(raw):
 
 
 def test_bats_throws_never_kept_as_hometown_or_position():
-    p = {f: "" for f in sidearm.FIELDS}
+    p = dict.fromkeys(sidearm.FIELDS, "")
     p.update(name="Jane Doe", hometown="R/R")
     assert sidearm.tidy_players([p])[0]["hometown"] == ""
     row = {"name": "Jane Doe", "hometown": "L/L", "position": "OF R/R", "high_school": "", "previous_school": "",
@@ -288,7 +288,7 @@ def test_fixer(towns):
 
 
 def test_fixer_wrong_state(towns):
-    what, new = sug.suggest(row("Murrieta, GA", "Murrieta", "GA", "USA", "fixed"), *towns)
+    _what, new = sug.suggest(row("Murrieta, GA", "Murrieta", "GA", "USA", "fixed"), *towns)
     assert new["status"] == "review" and "CA" in new["note"]
     assert sug.suggest(row("Rockaway, Pa.", "Rockaway", "PA", "USA", "fixed"), *towns) is None   # two states
     assert sug.suggest(row("Darie, GA", "Darie", "GA", "USA", "fixed"), *towns) is None           # too short
@@ -883,7 +883,7 @@ def test_key_and_majors():
 # Running a scrape: sizes, addresses, seasons, reasons, downloads, the lock, pipeline.py, checks
 # ==================================================================================================
 
-@functools.lru_cache(maxsize=None)
+@functools.cache
 def use(name) -> sidearm.Rules:
     """A sport's scraper rules, handed to the functions under test."""
     return sidearm.Rules.for_sport(core.load_sport(name))
@@ -1480,8 +1480,10 @@ def test_hometown_fixes_are_shared_with_a_sports_own_on_top(tiny):
     def write(path, rows):
         path.parent.mkdir(parents=True, exist_ok=True)
         with open(path, "w", newline="") as f:
-            w = csv.DictWriter(f, fieldnames=fields); w.writeheader()
-            for r in rows: w.writerow({k: r.get(k, "") for k in fields})
+            w = csv.DictWriter(f, fieldnames=fields)
+            w.writeheader()
+            for r in rows:
+                w.writerow({k: r.get(k, "") for k in fields})
     write(tiny.shared_hometown_corrections_csv, [
         {"hometown_raw": "Oahu, HI", "city": "Honolulu", "state": "HI", "country": "USA", "status": "fixed", "players": "5"},
         {"hometown_raw": "Woodlands, Texas", "city": "The Woodlands", "state": "TX", "country": "USA", "status": "fixed"}])
@@ -1591,20 +1593,18 @@ def test_season_pages_list_the_page_to_use(tiny, monkeypatch):
 
 
 def test_code_is_clean():
-    # Nov 1: pyflakes over the scripts and tests: unused imports, undefined names, a name defined twice, a dictionary
-    # key given twice with different values. Star imports are gone, so it can tell which names are real.
-    import io
-    try:
-        from pyflakes.api import checkPath
-        from pyflakes.reporter import Reporter
-    except ImportError:
-        pytest.fail("pyflakes isn't installed: python3 -m pip install -r requirements.txt", pytrace=False)
-    out = io.StringIO()
+    # The linter, ruff, over the scripts and tests, with the rules in ruff.toml. To see and fix the problems:
+    # python3 -m ruff check scripts tests (--fix fixes the simple ones).
+    import subprocess
+    import sys
+    done = subprocess.run([sys.executable, "-m", "ruff", "check", "--no-cache", "scripts", "tests"], cwd=ROOT,
+                          capture_output=True, text=True)
+    if "No module named ruff" in done.stderr:
+        pytest.fail("ruff isn't installed: python3 -m pip install -r requirements.txt", pytrace=False)
+    assert done.returncode == 0, done.stdout + done.stderr
     files = sorted((ROOT / "scripts").glob("*.py")) + sorted((ROOT / "tests").glob("*.py"))
-    count = sum(checkPath(str(f), Reporter(out, out)) for f in files)
-    assert count == 0, out.getvalue()
-    # pyflakes lets a key given twice with the same value pass ("Puerto Rico" and "Rwanda" in geocode.py's
-    # country table until Nov 1); a repeat is still a slip, so look for those too
+    # ruff lets a dictionary key given twice with the same value pass ("Puerto Rico" and "Rwanda" were in
+    # geocode.py's country table twice); a repeat is still a slip, so look for those too
     import ast
     repeats = []
     for f in files:

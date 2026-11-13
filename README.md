@@ -101,6 +101,7 @@ python3 scripts/pipeline.py baseball --steps geocode,build # some steps
 python3 scripts/pipeline.py football --from geocode        # start at a step
 python3 scripts/pipeline.py softball --dry-run             # print the commands only
 python3 -m pytest tests -q                                 # the tests (about 1 minute with the page test)
+python3 -m ruff check scripts tests                         # the linter (rules in ruff.toml; --fix fixes the simple ones)
 ```
 
 Steps, in order: `scrape` (quick pass) → `retry` (slow pass with a browser) → `redo-current` (only with
@@ -144,7 +145,7 @@ scripts/               new_sports.py (the settings and schools files of the spor
                        hometowns.py (reading hometown, class, height and weight fields), scrape_rosters.py,
                        scrape_reports.py (attempts.csv, the problem list, MISSING_ROSTERS.md), geocode.py (placing
                        hometowns), hometown_fixes.py, build.py, staff.py, pipeline.py, pro_rosters.py (below)
-tests/                 test_atlas.py: the code (also checked with pyflakes), the parsers, the builds
+tests/                 test_atlas.py: the code (also checked with the linter, ruff), the parsers, the builds
                        roster_pages.zip + roster_pages_expected.json: nine real roster pages, one per kind of
                        site, and what the parser reads from each
                        test_pages.py: opens the site's pages in a headless browser and fails on any error

@@ -287,7 +287,7 @@ def scrape(league: str, season: int, refresh: bool) -> list[dict]:
                  "nhl": NHL_TEAMS.get(team, "")}.get(league) or str(team).replace("-", " ").title()
         try:
             status, _, text = fetcher.get(url, remember_miss=False)
-        except Exception as exc:  # noqa: BLE001  (network trouble: say which team, keep going)
+        except Exception as exc:  # network trouble: say which team, keep going
             problems.append(f"{label}: {exc}")
             continue
         if status != 200:
@@ -306,7 +306,7 @@ def scrape(league: str, season: int, refresh: bool) -> list[dict]:
             if league == "nhl" and p.get("id"):
                 try:
                     st, _, career = careers.get(conf["player_url"].format(id=p["id"]), remember_miss=False)
-                except Exception as exc:  # noqa: BLE001
+                except Exception as exc:  # network trouble: say which team, keep going
                     problems.append(f"{label}, {p['name']}: {exc}")
                     st, career = 0, ""
                 if st == 200:

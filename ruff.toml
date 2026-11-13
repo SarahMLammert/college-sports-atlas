@@ -1,0 +1,25 @@
+# The linter: python3 -m ruff check scripts tests     (tests/test_atlas.py runs it too: test_code_is_clean)
+# --fix fixes the simple ones. Rules: https://docs.astral.sh/ruff/rules/
+line-length = 120
+target-version = "py313"          # the .venv's Python
+
+[lint]
+select = [
+    "F",      # pyflakes: unused imports and variables, undefined names, a name or dictionary key given twice
+    "E", "W", # pycodestyle: statements run together with ";", ambiguous names like "l", stray whitespace
+    "B",      # bugbear: likely bugs (a loop variable caught in a lambda, an exception that hides its cause)
+    "UP",     # pyupgrade: older spellings this Python has a newer one for
+    "PIE",    # small slips (an unnecessary "pass", a dictionary key repeated)
+    "C4",     # list, set and dictionary comprehensions written the long way
+    "RUF",    # ruff's own (unused "noqa" notes, mutable class constants)
+]
+ignore = [
+    "E501",   # line length: long lines are fine here
+    "E731",   # a lambda given a name
+    "B905",   # zip() without strict=
+    "C408",   # dict(a=1) instead of {"a": 1}
+    "RUF005", # [*a, b] instead of a + [b]
+    "RUF001", "RUF002", "RUF003",   # characters that look like others (×, –, ’ in names and messages are meant)
+]
+# Not "I" (import sorting): core.py has to be imported before the packages, since it switches to the .venv
+# when they're missing.

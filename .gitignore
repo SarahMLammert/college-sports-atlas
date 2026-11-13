@@ -19,3 +19,4 @@ rosters_all_seasons.csv
 # The scripts' working folder: season files, reports, geocoder tables (rebuilt by the scripts; the site
 # only needs docs/). Kept out of git from Oct 28; earlier commits still have the old copies.
 rosters/
+.ruff_cache/

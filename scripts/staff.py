@@ -332,7 +332,7 @@ def _page(url: str, rendered: bool) -> str | None:
 
 def one(job: tuple) -> tuple[tuple, list[dict], str]:
     """(season, school, url, strategy, row) -> (job, staff, where they came from: page, coaches, none, no-page)."""
-    season, school, url, strategy, base = job
+    season, _school, url, strategy, base = job
     html = _page(url, strategy.startswith("rendered:"))
     people, source, how = [], url, "no-page"
     if html is not None:
@@ -389,7 +389,7 @@ def scrape_staff_main(argv=None) -> int:
     heads = 0
     with ProcessPoolExecutor(max_workers=args.workers, initializer=_init,
                              initargs=(sport.name, args.offline, index)) as pool:
-        for (season, school, *_), rows, how in pool.map(one, jobs, chunksize=8):
+        for (season, *_), rows, how in pool.map(one, jobs, chunksize=8):
             by_season[season] += rows
             how_count[how] = how_count.get(how, 0) + 1
             heads += any(r["role"] == "head" for r in rows)
@@ -471,7 +471,7 @@ def build(rows: list[dict], schools: list[str]) -> dict:
             titles.append(t)
         return tidx[t]
 
-    for key, rs in sorted(by_key.items()):
+    for _key, rs in sorted(by_key.items()):
         per_season: dict[int, set] = defaultdict(set)
         for r in rs:
             per_season[int(r["season"])].add(r["school"])
@@ -488,7 +488,9 @@ def build(rows: list[dict], schools: list[str]) -> dict:
                 if k in seen:
                     continue
                 seen.add(k)
-                st["p"].append(pid); st["s"].append(sidx[r["school"]]); st["y"].append(int(r["season"]))
+                st["p"].append(pid)
+                st["s"].append(sidx[r["school"]])
+                st["y"].append(int(r["season"]))
                 st["r"].append(ROLES.index(r["role"]) if r["role"] in ROLES else ROLES.index("support"))
                 st["t"].append(title_id(r["title"]))
             if len(groups) > 1:
@@ -504,8 +506,11 @@ def build(rows: list[dict], schools: list[str]) -> dict:
                 if prev and prev[0] not in schools_now:
                     new = here[0]
                     if y - prev[1] <= 2:
-                        mv["p"].append(pid); mv["a"].append(sidx[prev[0]]); mv["b"].append(sidx[new["school"]])
-                        mv["y"].append(y); mv["ra"].append(ROLES.index(prev[2]) if prev[2] in ROLES else 6)
+                        mv["p"].append(pid)
+                        mv["a"].append(sidx[prev[0]])
+                        mv["b"].append(sidx[new["school"]])
+                        mv["y"].append(y)
+                        mv["ra"].append(ROLES.index(prev[2]) if prev[2] in ROLES else 6)
                         mv["rb"].append(ROLES.index(new["role"]) if new["role"] in ROLES else 6)
                     prev = (new["school"], y, new["role"])
                 else:

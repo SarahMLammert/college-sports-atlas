@@ -3,7 +3,8 @@ from __future__ import annotations
 import json
 import re
 from dataclasses import dataclass, field as dc_field
-from typing import Any, Callable, Iterable
+from typing import Any
+from collections.abc import Callable, Iterable
 
 from bs4 import BeautifulSoup, Tag
 
@@ -43,7 +44,7 @@ class Rules:
         return sport_codes(list(self.roster_paths) + list(self.presto_paths))
 
     @classmethod
-    def for_sport(cls, sport, schools: list[dict] | None = None) -> "Rules":
+    def for_sport(cls, sport, schools: list[dict] | None = None) -> Rules:
         """The sport's rules. Its known colleges are the D1 schools of its schools.csv (or `schools`) and its junior
         colleges: smaller colleges share their names with high schools, so only those count by name alone."""
         if schools is None:
@@ -234,7 +235,7 @@ FIELDS = [
 
 
 def _blank() -> dict:
-    return {f: "" for f in FIELDS}
+    return dict.fromkeys(FIELDS, "")
 
 
 # ---------------------------------------------------------------------------
@@ -657,7 +658,7 @@ def parse_sidearm_cards(html: str, soup: BeautifulSoup) -> list[dict]:
         rec["name"] = clean(a.get_text(" "))
         if a.name == "a":
             rec["bio_url"] = a.get("href", "")
-        g = lambda tid: _strip_label(card.select_one(f'[data-test-id="{tid}"]'))
+        g = lambda tid, card=card: _strip_label(card.select_one(f'[data-test-id="{tid}"]'))
         rec["position"] = g("s-person-details__bio-stats-person-position-short")
         rec["class_year"] = g("s-person-details__bio-stats-person-title")
         rec["height"] = format_height(raw=g("s-person-details__bio-stats-person-season"))

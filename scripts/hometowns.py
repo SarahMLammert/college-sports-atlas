@@ -363,7 +363,7 @@ def _canadian_without_comma(text: str) -> dict | None:
         if len(words) <= n:
             continue
         tail = " ".join(words[-n:])
-        if tail.upper() in _PROVINCE_CODES and tail.upper() == tail or tail.lower() in _PROVINCE_NAMES:
+        if (tail.upper() in _PROVINCE_CODES and tail.upper() == tail) or tail.lower() in _PROVINCE_NAMES:
             code = _lookup(_CANADIAN_PROVINCES, _key(tail))
             if code:
                 return {"city": " ".join(words[:-n]).rstrip(" ,."), "state": code, "country": "Canada"}

@@ -560,7 +560,7 @@ def fix_hometown_spellings_main(argv=None):
             by_raw[raw].update(fix)
             updated += 1
         else:
-            row = {f: "" for f in fields}
+            row = dict.fromkeys(fields, "")
             row.update(fix, hometown_raw=raw)
             rows.append(row)
             by_raw[raw] = row

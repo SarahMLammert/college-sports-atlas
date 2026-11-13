@@ -22,6 +22,7 @@ import statistics
 import sys
 from collections import Counter, defaultdict
 from dataclasses import dataclass
+from itertools import pairwise
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))   # so the files here import each other
@@ -92,7 +93,7 @@ class Positions:
     fallback: str
 
     @classmethod
-    def for_sport(cls, sport) -> "Positions":
+    def for_sport(cls, sport) -> Positions:
         groups = tuple(sport.position_groups)
         return cls(groups=groups,
                    abbr={a: g for g, v in sport.position_abbreviations.items() for a in v.split()},
@@ -148,7 +149,7 @@ def find_moves(rows: list[dict]) -> dict[int, str]:
         if len({rows[i]["school"] for i in idx}) < 2:
             continue
         idx.sort(key=lambda i: (int(rows[i]["first_season"]), int(rows[i]["last_season"])))
-        for a, b in zip(idx, idx[1:]):
+        for a, b in pairwise(idx):
             ra, rb = rows[a], rows[b]
             if (ra["school"] != rb["school"] and int(rb["first_season"]) > int(ra["first_season"])
                     and int(rb["first_season"]) >= int(ra["last_season"])):
@@ -316,7 +317,7 @@ def _unsparse(a, n, empty):
 def pack_players(P: dict) -> dict:
     n = len(P["s"])
     return {"packed": PACKED, "n": n, "s": _runs(P["s"]), "f": _runs(P["f"]), "d": _runs(P["d"]),
-            "len": [l - f for f, l in zip(P["f"], P["l"])], "p": P["p"], "t": P["t"], "h": P["h"],
+            "len": [last - f for f, last in zip(P["f"], P["l"])], "p": P["p"], "t": P["t"], "h": P["h"],
             "x": _sparse(P["x"], 0), "o": _sparse(P["o"], -1), "v": _sparse(P["v"], 0)}
 
 
@@ -459,7 +460,7 @@ def make_map_data(src, dst, sport):
     # uses them; the heatmap and transfer pages no longer download them, and the dot map draws before they arrive)
     Path(dst).with_name("names.txt").write_text("\n".join(n.replace("\n", " ") for n in P["n"]), encoding="utf-8")
     # The numbers on the front page (docs/index.html reads these instead of figures typed in by hand)
-    seasons = sorted({f for f in P["f"]} | {l for l in P["l"]})
+    seasons = sorted(set(P["f"]) | set(P["l"]))
     summary = {"sport": sport.label or sport.name, "players": len(P["s"]), "schools": len(schools),
                "hometowns": len(towns), "first": 2000 + seasons[0] if seasons else None,
                "last": 2000 + seasons[-1] if seasons else None}
@@ -617,7 +618,7 @@ def check_frozen_classes_main(argv=None):
     results = []                    # (school, prev, cur, share_all, n_all, share_no_sr, n_no_sr)
     for school, ys in years.items():
         ys.sort()
-        for prev, cur in zip(ys, ys[1:]):
+        for prev, cur in pairwise(ys):
             if cur - prev > 2:
                 continue
             before, after = by[(school, prev)], by[(school, cur)]
@@ -662,7 +663,7 @@ def check_frozen_classes_main(argv=None):
                 for school, prev, cur, sa, na, sy, ny in sorted(covid, key=lambda r: -r[3])] or ["  none"]
 
     flagged = {}
-    for school, prev, cur, sa, na, sy, ny in results:
+    for school, prev, cur, sa, _na, sy, _ny in results:
         measure = sy if sy is not None else sa
         if measure >= CUTOFF:
             for key in ((school, prev), (school, cur)):
@@ -1021,7 +1022,8 @@ def front_page_discs(sports: list, docs: Path) -> tuple[list, list]:
         fp = s.site.get("front_page") or {}
         where = f"config/{s.name}/settings.json"
         if not fp.get("disc") or not fp.get("name") or "order" not in fp or fp.get("ring") not in RINGS:
-            problems.append(f'{where}: "site" needs a "front_page" with disc, name, icon, order and ring (fall, winter or spring)'); continue
+            problems.append(f'{where}: "site" needs a "front_page" with disc, name, icon, order and ring (fall, winter or spring)')
+            continue
         if set(fp) - FRONT_PAGE_KEYS:
             problems.append(f"{where}: unknown front_page settings {', '.join(sorted(set(fp) - FRONT_PAGE_KEYS))}")
         stats = None
@@ -1111,11 +1113,13 @@ def site_pages_main(argv=None) -> int:
     problems = len(problems)
     for page in PAGES:
         if not (docs / page).exists():
-            print(f"missing: docs/{page}"); problems += 1
+            print(f"missing: docs/{page}")
+            problems += 1
     js = docs / "sports.js"
     if not js.exists() or js.read_text(encoding="utf-8") != text:
         if args.check:
-            print("out of date: docs/sports.js (run python3 scripts/build.py pages)"); problems += 1
+            print("out of date: docs/sports.js (run python3 scripts/build.py pages)")
+            problems += 1
         else:
             tmp = js.with_suffix(".js.tmp")       # a pipeline of another sport may be writing it at the same time
             tmp.write_text(text, encoding="utf-8")
@@ -1124,7 +1128,8 @@ def site_pages_main(argv=None) -> int:
     index, hs_text = docs / "high_schools.json", high_schools_json(docs)
     if not index.exists() or index.read_text(encoding="utf-8") != hs_text:
         if args.check:
-            print("out of date: docs/high_schools.json (run python3 scripts/build.py pages)"); problems += 1
+            print("out of date: docs/high_schools.json (run python3 scripts/build.py pages)")
+            problems += 1
         else:
             tmp = index.with_suffix(".json.tmp")
             tmp.write_text(hs_text, encoding="utf-8")
