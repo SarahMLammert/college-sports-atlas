@@ -295,6 +295,9 @@ def scrape_school_season(school: dict, fetcher: Fetcher, season: int, division: 
         if other:
             errors.append(f"{url}: another sport's page ({other})")
             continue
+        if sidearm.stand_in_page(html):
+            errors.append(f"{url}: another sport's page (a General Roster stand-in)")
+            continue
         if not is_current and str(season) in url and str(season) not in final_url:
             # e.g. liuathletics.com/.../roster/2019 quietly redirects to the current roster
             errors.append(f"{url}: redirected to {final_url}")
@@ -663,6 +666,7 @@ def clean_row(r: dict, colleges: frozenset = frozenset()) -> dict:
     if not_a_place(r.get("hometown", "")):     # bats/throws, a height or "Manager" read as the hometown
         r["hometown"] = ""
     r["position"] = strip_bats_throws(r.get("position", ""))   # "OF R/R" saved before Oct 27
+    r["jersey"] = sidearm.clean_jersey(r.get("jersey", ""))
     town, school = split_labeled_hometown(r.get("hometown", ""))
     if town != clean(r.get("hometown", "")) or school:
         r["hometown"] = town
@@ -788,6 +792,164 @@ def build_parser() -> argparse.ArgumentParser:
     return ap
 
 
+def _setup_logging(verbose: bool) -> None:
+    logging.basicConfig(level=logging.DEBUG if verbose else logging.INFO,
+                        format="%(asctime)s %(levelname)s %(message)s", datefmt="%H:%M:%S")
+    logging.getLogger("urllib3").setLevel(logging.ERROR)
+    if not verbose:
+        # Only the scraper's own lines on screen: no library warnings (BeautifulSoup's parser notices,
+        # urllib3's "connection pool is full", certificate warnings, ...). -v shows everything.
+        warnings.simplefilter("ignore")
+        logging.getLogger().setLevel(logging.ERROR)
+        log.setLevel(logging.INFO)
+
+
+def _select_schools(all_schools: list[dict], args) -> list[dict]:
+    """The schools this run is for: --division, --conference and --only narrow the list."""
+    schools = list(all_schools)
+    if args.division != "all":
+        schools = [s for s in schools if s["division"].upper() == args.division]
+    if args.conference:
+        schools = [s for s in schools if s["conference"].lower() == args.conference.lower()]
+    if args.only:
+        wanted = {w.strip().lower() for w in args.only.split(",")}
+        schools = [s for s in schools if s["school"].lower() in wanted]
+    return schools
+
+
+def _previous_results(seasons, season_dir: Path, report_dir: Path, job: Job, args, selected: set, stop: set):
+    """What earlier runs saved, per season: (kept_rows, kept_reports) for the schools this run leaves alone,
+    (prev_rows_all, prev_reports_all) for everything (a Ctrl-C keeps them for the schools that didn't finish),
+    and skip: the (school, season)s not to scrape (already ok with --retry-failed, or given up)."""
+    kept_rows: dict[int, list[dict]] = {}
+    kept_reports: dict[int, dict[str, dict]] = {}
+    prev_rows_all: dict[int, list[dict]] = {}
+    prev_reports_all: dict[int, dict[str, dict]] = {}
+    skip: set[tuple[str, int]] = set()
+    for season in seasons:
+        # Rows from another sport's page don't count as saved: those school-seasons are scraped again
+        prev_rows_all[season] = [r for r in read_csv(season_dir / f"rosters_{season}.csv") if not from_other_sport(r, job)]
+        # What's done comes from the saved rosters, so --retry-failed works without report files. A saved
+        # report (from a --report run) adds the details (errors, season check) for schools it still matches.
+        from_rows = saved_reports(prev_rows_all[season], job.rules)
+        old = {r["school"]: r for r in read_csv(report_dir / f"scrape_report_{season}.csv")} if args.report else {}
+        prev_reports = {k: (old[k] if k in old and old[k].get("status") == r["status"] else r) for k, r in from_rows.items()}
+        # Failed and no-program rows have no roster to come from; keep them from the saved report.
+        prev_reports.update({k: r for k, r in old.items()
+                             if k not in prev_reports and r.get("status") in ("failed", "no_program", "left_out")})
+        done = {k for k, r in prev_reports.items() if r["status"] == "ok"} if args.retry_failed else set()
+        # Given up (failed or partial every time): not tried, and whatever was saved for it is kept
+        done |= {k for k, y in stop if y == season}
+        keep_schools = {k for k in prev_reports if k not in selected} | done
+        skip.update((k, season) for k in done)
+        prev_reports_all[season] = prev_reports
+        kept_reports[season] = {k: r for k, r in prev_reports.items() if k in keep_schools}
+        kept_rows[season] = [r for r in prev_rows_all[season] if r["school"] in keep_schools]
+    return kept_rows, kept_reports, prev_rows_all, prev_reports_all, skip
+
+
+def _references(season_dir: Path, current_season: int) -> dict:
+    """school -> (season, names) of its newest saved roster, for the fallback check; and for the current season's
+    check_current_is_new(), (season, names, {name: class}) with the roster of the season before the current one."""
+    # The newest saved roster per school includes seasons inside the requested range, so --retry-failed still has
+    # the newest roster to compare against when that season is skipped as already done.
+    references: dict[str, tuple] = {}
+    for season, path in sorted(season_files(season_dir).items(), reverse=True):
+        for r in read_csv(path):
+            if r["school"] not in references or references[r["school"]][0] == season:
+                references.setdefault(r["school"], (season, set()))[1].add(r["name"].lower())
+    before_path = season_files(season_dir).get(current_season - 1)
+    if before_path:
+        before_rows: dict[str, dict[str, str]] = {}
+        for r in read_csv(before_path):
+            before_rows.setdefault(r["school"], {})[r["name"].lower()] = (r.get("class_norm") or "").upper()
+        for school_name, roster in before_rows.items():
+            ref = references.get(school_name)
+            references[school_name] = (ref[0], ref[1], roster) if ref else (None, None, roster)
+    return references
+
+
+def _start_pool(schools, seasons, skip, references, known, history, job, args, sport, job_settings, fetch_args):
+    """Send each school to a worker: one process per worker, or threads with --threads (or a single worker).
+    Returns (pool, {future: school})."""
+    skip_of: dict[str, set] = {}
+    for k in skip:
+        skip_of.setdefault(k[0], set()).add(k)
+    workers = max(1, min(args.workers, len(schools) or 1))
+    if args.threads or workers == 1:
+        fetcher = Fetcher(**fetch_args)
+        pool = ThreadPoolExecutor(max_workers=workers)
+        futures = {pool.submit(scrape_school_all, s, seasons, fetcher, history, job, skip_of.get(s["school"], set()),
+                               references.get(s["school"]), known.get(s["school"], (None, None))): s
+                   for s in schools}
+    else:
+        # "spawn" on every system (the macOS default): a fresh Python per worker, set up by _init_worker
+        pool = ProcessPoolExecutor(max_workers=workers, mp_context=multiprocessing.get_context("spawn"),
+                                   initializer=_init_worker,
+                                   initargs=(sport.name, str(args.schools), str(args.division_history),
+                                             job_settings, fetch_args, args.verbose))
+        futures = {pool.submit(_scrape_in_worker, s, seasons, skip_of.get(s["school"], set()),
+                               references.get(s["school"]), known.get(s["school"], (None, None))): s
+                   for s in schools}
+    return pool, futures
+
+
+def _finished_in_order(futures: dict):
+    """as_completed(), plus a line every minute naming the schools still running, so a slow one is visible
+    (one line: how many are running and the one running longest, not a list of names)."""
+    pending, since = set(futures), {}
+    while pending:
+        done, pending = wait(pending, timeout=60, return_when=FIRST_COMPLETED)
+        now = time.monotonic()
+        running = [f for f in pending if f.running()]
+        for f in running:
+            since.setdefault(f, now)
+        if not done and running:
+            slow = min(running, key=lambda f: since[f])
+            log.info("still working on %d school%s; longest: %s (%d min)", len(running), "" if len(running) == 1 else "s",
+                     futures[slow]["school"], (now - since[slow]) // 60)
+        yield from done
+
+
+def _write_seasons(seasons, all_schools, kept_rows, new_rows, kept_reports, new_reports, season_dir: Path,
+                   report_dir: Path, with_reports: bool) -> list[tuple]:
+    """Write each season's roster file (and report, with --report), schools in the schools file's order. Returns
+    (season, players, ok, partial, failed, left out) per season."""
+    order = {s["school"]: i for i, s in enumerate(all_schools)}
+    totals = []
+    for season in seasons:
+        rows = kept_rows[season] + new_rows[season]
+        rows.sort(key=lambda r: (order.get(r["school"], 9999), r["school"]))
+        reports = {**kept_reports[season], **new_reports[season]}
+        write_csv(season_dir / f"rosters_{season}.csv", OUT_FIELDS, rows)
+        if with_reports:
+            # every row gets its reason code, rows kept from a run before Oct 31 too (worked out from their text)
+            write_csv(report_dir / f"scrape_report_{season}.csv", REPORT_FIELDS,
+                      sorted(({**r, "reason": core.reason_code(r)} for r in reports.values()),
+                             key=lambda r: order.get(r["school"], 9999)))
+        st = ["left_out" if is_left_out(r) else r.get("status") for r in reports.values()]
+        totals.append((season, len(rows), st.count("ok"), st.count("partial"), st.count("failed"),
+                       st.count("left_out")))
+    return totals
+
+
+def _print_summary(totals, seasons, new_reports, with_reports: bool, report_dir: Path) -> None:
+    """The table of seasons, then this run's failed and partial schools in a few words. new_reports is None when
+    a Ctrl-C came before any school finished (nothing of this run's to list)."""
+    log.info("season  players    ok  partial  failed  left out")
+    for season, n, ok, part, fail, out in totals:
+        log.info("%6d  %7d  %4d  %7d  %6d  %8d", season, n, ok, part, fail, out)
+    if any(t[3] or t[4] for t in totals):
+        if new_reports is not None:
+            print_problems([r for season in seasons for r in new_reports[season].values()], this_run=True)
+        if with_reports:
+            log.info("Details (with web addresses) are in scrape_report_<season>.csv in %s. "
+                     "--problems lists all of them again without scraping.", report_dir)
+        else:
+            log.info("Add --report to save these with their web addresses (scrape_report_<season>.csv "
+                     "and MISSING_ROSTERS.md).")
+
+
 def run(ap: argparse.ArgumentParser, args, sport) -> int:
     divisions = list(sport.d1_divisions) + [d for d in sport.other_divisions if d not in sport.d1_divisions]
     args.division = args.division.upper() if args.division.lower() != "all" else "all"
@@ -797,16 +959,7 @@ def run(ap: argparse.ArgumentParser, args, sport) -> int:
     args.division_history = args.division_history or sport.division_history_csv
     args.out = args.out or sport.rosters_dir
 
-    logging.basicConfig(level=logging.DEBUG if args.verbose else logging.INFO,
-                        format="%(asctime)s %(levelname)s %(message)s", datefmt="%H:%M:%S")
-    logging.getLogger("urllib3").setLevel(logging.ERROR)
-    if not args.verbose:
-        # Only the scraper's own lines on screen: no library warnings (BeautifulSoup's parser notices,
-        # urllib3's "connection pool is full", certificate warnings, ...). -v shows everything.
-        warnings.simplefilter("ignore")
-        logging.getLogger().setLevel(logging.ERROR)
-        log.setLevel(logging.INFO)
-
+    _setup_logging(args.verbose)
     save_dir = args.save_pages.expanduser() if args.save_pages else None
     # This run's settings, given to the functions that need them (D1 names only for the known colleges: smaller
     # colleges share names with high schools)
@@ -841,14 +994,7 @@ def run(ap: argparse.ArgumentParser, args, sport) -> int:
         write_missing()
         return 0
 
-    schools = list(all_schools)
-    if args.division != "all":
-        schools = [s for s in schools if s["division"].upper() == args.division]
-    if args.conference:
-        schools = [s for s in schools if s["conference"].lower() == args.conference.lower()]
-    if args.only:
-        wanted = {w.strip().lower() for w in args.only.split(",")}
-        schools = [s for s in schools if s["school"].lower() in wanted]
+    schools = _select_schools(all_schools, args)
     if not schools:
         log.error("No schools selected.")
         return 1
@@ -863,36 +1009,12 @@ def run(ap: argparse.ArgumentParser, args, sport) -> int:
         write_missing()
         return 0
 
-    # Keep previous results for schools/seasons not being re-scraped in this run.
-    kept_rows: dict[int, list[dict]] = {}
-    kept_reports: dict[int, dict[str, dict]] = {}
-    # Everything saved before this run, for schools a Ctrl-C stops before they finish.
-    prev_rows_all: dict[int, list[dict]] = {}
-    prev_reports_all: dict[int, dict[str, dict]] = {}
-    skip: set[tuple[str, int]] = set()
     attempts = read_attempts(sport.rosters_dir)
     stop = set() if args.retry_given_up or args.only else given_up(attempts, args.give_up_after)
     # The current season is always tried: its roster can go up any day
     stop = {(k, y) for k, y in stop if k in selected and y in seasons and y != sport.current_season()}
-    for season in seasons:
-        # Rows from another sport's page don't count as saved: those school-seasons are scraped again
-        prev_rows_all[season] = [r for r in read_csv(season_dir / f"rosters_{season}.csv") if not from_other_sport(r, job)]
-        # What's done comes from the saved rosters, so --retry-failed works without report files. A saved
-        # report (from a --report run) adds the details (errors, season check) for schools it still matches.
-        from_rows = saved_reports(prev_rows_all[season], job.rules)
-        old = {r["school"]: r for r in read_csv(report_dir / f"scrape_report_{season}.csv")} if args.report else {}
-        prev_reports = {k: (old[k] if k in old and old[k].get("status") == r["status"] else r) for k, r in from_rows.items()}
-        # Failed and no-program rows have no roster to come from; keep them from the saved report.
-        prev_reports.update({k: r for k, r in old.items()
-                             if k not in prev_reports and r.get("status") in ("failed", "no_program", "left_out")})
-        done = {k for k, r in prev_reports.items() if r["status"] == "ok"} if args.retry_failed else set()
-        # Given up (failed or partial every time): not tried, and whatever was saved for it is kept
-        done |= {k for k, y in stop if y == season}
-        keep_schools = {k for k in prev_reports if k not in selected} | done
-        skip.update((k, season) for k in done)
-        prev_reports_all[season] = prev_reports
-        kept_reports[season] = {k: r for k, r in prev_reports.items() if k in keep_schools}
-        kept_rows[season] = [r for r in prev_rows_all[season] if r["school"] in keep_schools]
+    prev = _previous_results(seasons, season_dir, report_dir, job, args, selected, stop)
+    kept_rows, kept_reports, prev_rows_all, prev_reports_all, skip = prev
 
     if stop:
         log.info("Not trying %d school-seasons (%d schools) that failed or came back partial %d times already "
@@ -910,24 +1032,7 @@ def run(ap: argparse.ArgumentParser, args, sport) -> int:
     # Schools with nothing left to do aren't sent to a worker at all
     schools = [s for s in schools if any((s["school"], y) not in skip for y in seasons)]
 
-    # Newest saved roster per school (from earlier runs) for the fallback check. This includes
-    # seasons inside the requested range, so --retry-failed still has the newest roster to
-    # compare against when that season is skipped as already done.
-    references: dict[str, tuple[int, set[str]]] = {}
-    for season, path in sorted(season_files(season_dir).items(), reverse=True):
-        for r in read_csv(path):
-            if r["school"] not in references or references[r["school"]][0] == season:
-                references.setdefault(r["school"], (season, set()))[1].add(r["name"].lower())
-
-    # The saved roster of the season before the current one, for check_current_is_new()
-    before_path = season_files(season_dir).get(sport.current_season() - 1)
-    if before_path:
-        before_rows: dict[str, dict[str, str]] = {}
-        for r in read_csv(before_path):
-            before_rows.setdefault(r["school"], {})[r["name"].lower()] = (r.get("class_norm") or "").upper()
-        for school_name, roster in before_rows.items():
-            ref = references.get(school_name)
-            references[school_name] = (ref[0], ref[1], roster) if ref else (None, None, roster)
+    references = _references(season_dir, sport.current_season())
     if save_dir:
         save_dir.mkdir(parents=True, exist_ok=True)
     fetch_args = dict(cache_dir=args.cache, delay=args.delay, refresh=args.refresh, timeout=args.timeout,
@@ -937,45 +1042,12 @@ def run(ap: argparse.ArgumentParser, args, sport) -> int:
     tried: dict[tuple[str, int], dict] = {}     # this run's own result per school-season, for attempts.csv
     lock = threading.Lock()
 
-    skip_of: dict[str, set] = {}
-    for k in skip:
-        skip_of.setdefault(k[0], set()).add(k)
-    workers = max(1, min(args.workers, len(schools) or 1))
-    if args.threads or workers == 1:
-        fetcher = Fetcher(**fetch_args)
-        pool = ThreadPoolExecutor(max_workers=workers)
-        futures = {pool.submit(scrape_school_all, s, seasons, fetcher, history, job, skip_of.get(s["school"], set()),
-                               references.get(s["school"]), known.get(s["school"], (None, None))): s
-                   for s in schools}
-    else:
-        # "spawn" on every system (the macOS default): a fresh Python per worker, set up by _init_worker
-        pool = ProcessPoolExecutor(max_workers=workers, mp_context=multiprocessing.get_context("spawn"),
-                                   initializer=_init_worker,
-                                   initargs=(sport.name, str(args.schools), str(args.division_history),
-                                             job_settings, fetch_args, args.verbose))
-        futures = {pool.submit(_scrape_in_worker, s, seasons, skip_of.get(s["school"], set()),
-                               references.get(s["school"]), known.get(s["school"], (None, None))): s
-                   for s in schools}
+    pool, futures = _start_pool(schools, seasons, skip, references, known, history, job, args, sport,
+                                job_settings, fetch_args)
     finished: set[str] = set()
     interrupted = False
-    def finished_in_order():
-        # as_completed(), plus a line every minute naming the schools still running, so a slow one is visible
-        # (one line: how many are running and the one running longest, not a list of names)
-        pending, since = set(futures), {}
-        while pending:
-            done, pending = wait(pending, timeout=60, return_when=FIRST_COMPLETED)
-            now = time.monotonic()
-            running = [f for f in pending if f.running()]
-            for f in running:
-                since.setdefault(f, now)
-            if not done and running:
-                slow = min(running, key=lambda f: since[f])
-                log.info("still working on %d school%s; longest: %s (%d min)", len(running), "" if len(running) == 1 else "s",
-                         futures[slow]["school"], (now - since[slow]) // 60)
-            yield from done
-
     try:
-        for i, fut in enumerate(finished_in_order(), 1):
+        for i, fut in enumerate(_finished_in_order(futures), 1):
             school = futures[fut]
             try:
                 results = fut.result()
@@ -1025,40 +1097,15 @@ def run(ap: argparse.ArgumentParser, args, sport) -> int:
                         kept_reports[season][name] = prev_reports_all[season][name]
                         kept_rows[season] += [r for r in prev_rows_all[season] if r["school"] == name]
 
-    order = {s["school"]: i for i, s in enumerate(all_schools)}
-    totals = []
-    for season in seasons:
-        rows = kept_rows[season] + new_rows[season]
-        rows.sort(key=lambda r: (order.get(r["school"], 9999), r["school"]))
-        reports = {**kept_reports[season], **new_reports[season]}
-        write_csv(season_dir / f"rosters_{season}.csv", OUT_FIELDS, rows)
-        if args.report:
-            # every row gets its reason code, rows kept from a run before Oct 31 too (worked out from their text)
-            write_csv(report_dir / f"scrape_report_{season}.csv", REPORT_FIELDS,
-                      sorted(({**r, "reason": core.reason_code(r)} for r in reports.values()),
-                             key=lambda r: order.get(r["school"], 9999)))
-        st = ["left_out" if is_left_out(r) else r.get("status") for r in reports.values()]
-        totals.append((season, len(rows), st.count("ok"), st.count("partial"), st.count("failed"),
-                       st.count("left_out")))
+    totals = _write_seasons(seasons, all_schools, kept_rows, new_rows, kept_reports, new_reports, season_dir,
+                            report_dir, args.report)
 
     update_attempts(attempts, tried, job.rules)
     write_attempts(sport.rosters_dir, attempts)
     gave_up_now = given_up(attempts, args.give_up_after)
     write_combined(season_dir, args.combined, job)
     write_missing(gave_up_now)
-    log.info("season  players    ok  partial  failed  left out")
-    for season, n, ok, part, fail, out in totals:
-        log.info("%6d  %7d  %4d  %7d  %6d  %8d", season, n, ok, part, fail, out)
-    if any(t[3] or t[4] for t in totals):
-        # The schools scraped in this run that still failed or came back partial, in a few words.
-        if finished:     # Ctrl-C before any school finished: nothing of this run's to list
-            print_problems([r for season in seasons for r in new_reports[season].values()], this_run=True)
-        if args.report:
-            log.info("Details (with web addresses) are in scrape_report_<season>.csv in %s. "
-                     "--problems lists all of them again without scraping.", report_dir)
-        else:
-            log.info("Add --report to save these with their web addresses (scrape_report_<season>.csv "
-                     "and MISSING_ROSTERS.md).")
+    _print_summary(totals, seasons, new_reports if finished else None, args.report, report_dir)
     if interrupted:
         # Everything is saved. Leave now instead of waiting for the schools still downloading.
         log.info("Saved. Re-run with --retry-failed to finish the schools that were cut off.")

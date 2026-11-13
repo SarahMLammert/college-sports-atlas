@@ -108,6 +108,15 @@ def other_sport_page(url: str, rules: Rules) -> str:
     return ""
 
 
+_STAND_IN_TITLE = re.compile(r"<title[^>]*>[^<]*\bgeneral roster\b", re.I)
+
+
+def stand_in_page(html: str) -> bool:
+    """A Sidearm site's stand-in page ("2019-20 General Roster"), shown at a sport's address for a season it has no
+    roster for. It lists some other team (Nov 13: 202 saved school-seasons were one, most copying another sport)."""
+    return bool(_STAND_IN_TITLE.search(html[:100_000]))
+
+
 def normal_size(n: int, rules: Rules) -> bool:
     """True when n players is a normal roster for the sport (min_players to max_players)."""
     return n >= rules.min_players and (not rules.max_players or n <= rules.max_players)
@@ -1267,11 +1276,28 @@ def clean_name(name: str) -> str:
     return _undouble(n.strip(" -,"))
 
 
+_JERSEY = re.compile(r"^\d{1,3}[A-Za-z]?(?:/\d{1,3}[A-Za-z]?)?$")
+
+
+def clean_jersey(value: str) -> str:
+    """A jersey number as the roster gives it, or "" when the column holds something else.
+    'Number: 4' -> '4', '#12' -> '12', '9/c' and '19 (a)' (captain, alternate) -> '9', '19', '4 / 14' -> '4/14';
+    two numbers ('11/44') and water polo caps ('1A', '1 A') stay. 'RS', 'INJ', 'NA', 'MGR', a year ('2026'), '9999' and
+    '-1' are not numbers: about 10,500 of the 3.27 million saved values on Nov 13."""
+    v = clean(value or "")
+    v = re.sub(r"^(?:jersey|number|no\.?|num|#)\s*:?\s*#?\s*", "", v, flags=re.I)
+    v = re.sub(r"\s*(?:/\s*|\(\s*)[ca]\s*\)?$", "", v, flags=re.I)
+    v = re.sub(r"\s*/\s*", "/", v)
+    v = re.sub(r"^(\d{1,3}) ([A-Za-z])$", r"\1\2", v)          # water polo's "1 A" -> "1A"
+    return v if _JERSEY.match(v) else ""
+
+
 def tidy_players(players: list[dict], rules: Rules = DEFAULT) -> list[dict]:
     for p in players:
         for f in ("position", "class_year", "hometown", "high_school", "previous_school", "height", "weight", "jersey"):
             if p.get(f):
                 p[f] = _CELL_LABEL.sub("", p[f]).strip()
+        p["jersey"] = clean_jersey(p.get("jersey", ""))
         for f in _HOME_FIELDS:
             if p.get(f) and is_label_only(p[f]):
                 p[f] = ""                            # only the column's label, or "NA", "/"

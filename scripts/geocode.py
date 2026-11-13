@@ -1061,6 +1061,134 @@ def load_lookup(path: Path, refresh: bool) -> dict[tuple, dict]:
     return out
 
 
+def _look_up(todo, table, statuses, known, gaz, nom, homes: dict, resolved: dict) -> int:
+    """Pass 1: place each hometown, from its correction (hometown_corrections.csv) if it has one, otherwise from the
+    parser's reading. Fills homes and resolved; returns how many kept the dot an earlier run gave them."""
+    kept_old = 0
+    for raw in todo:
+        homes[raw] = corrected_home(table.get(raw), statuses) or parse_hometown(raw)
+        resolved[raw] = resolve(homes[raw], gaz, nom)
+        if not resolved[raw][0] and homes[raw] != parse_hometown(raw):
+            # A correction that places nothing (many were written by an older, simpler reading: "Maui" as a
+            # town with no state) doesn't stop the parser's own reading from being tried
+            alt = parse_hometown(raw)
+            hit = resolve(alt, gaz, nom)
+            if hit[0]:
+                homes[raw], resolved[raw] = alt, hit
+        old = known.get((raw, ""))
+        if old is not None and old.get("lat") and old.get("source") == "nominatim" and \
+                _FINENESS.get(old.get("precision", ""), 5) < _FINENESS.get(resolved[raw][3], 5):
+            # An online answer (--online) finer than what the offline lists give: keep it
+            homes[raw] = {"city": old.get("city", ""), "state": old.get("state", ""), "country": old.get("country", "")}
+            resolved[raw] = (old["lat"], old["lon"], old["source"], old.get("precision", ""))
+            continue
+        if not resolved[raw][0] and old is not None and old.get("lat"):
+            # Placed by an earlier run (an older version guessed close spellings: "Wauwautosa" -> Wauwatosa),
+            # and nothing places it now: keep that dot rather than lose it
+            homes[raw] = {"city": old.get("city", ""), "state": old.get("state", ""), "country": old.get("country", "")}
+            resolved[raw] = (old["lat"], old["lon"], old.get("source", ""), old.get("precision", ""))
+            kept_old += 1
+    return kept_old
+
+
+def _suggest_fixes(todo, table, statuses, gaz, nom, homes: dict, resolved: dict) -> tuple[int, int]:
+    """Pass 2: suggest a fix for each hometown that didn't place and has no correction yet, added to the table, and
+    use it right away if it's confident. Returns (suggested, applied)."""
+    suggested = applied = 0
+    for raw in todo:
+        if resolved[raw][0] or raw in table or not raw.strip() or not_a_place(raw):   # nothing to fix
+            continue
+        city, state, country, status, note = suggest_correction(raw)
+        if status != "unfixable" and not (city or state or country):
+            status = "unfixable"
+        table[raw] = {"hometown_raw": raw, "city": city, "state": state, "country": country,
+                      "query": ", ".join(p for p in (city, state, country) if p),
+                      "status": status, "note": note, "players": 0}
+        suggested += 1
+        fix = corrected_home(table[raw], statuses)
+        if fix:
+            hit = resolve(fix, gaz, nom)
+            if hit[0]:
+                homes[raw], resolved[raw] = fix, hit
+                applied += 1
+    return suggested, applied
+
+
+def _per_school_guesses(players_per_key, homes, resolved, known, todo: set, gaz) -> dict[tuple, tuple]:
+    """Pass 3: a town with no state ("Pleasant Grove") is guessed per school. A BYU player from "Pleasant Grove" is
+    from Utah, not Alabama, so prefer the campus's state, then the states that school recruits most.
+    (hometown, school) -> (lat, lon, source, precision)."""
+    school_states: dict[str, dict[str, int]] = {}
+    for (raw, sch), n in players_per_key.items():
+        h = homes[raw]
+        if h["country"] == "USA" and h["state"] and resolved[raw][0]:
+            c = school_states.setdefault(sch, {})
+            c[h["state"]] = c.get(h["state"], 0) + n
+    top_states = {sch: [st for st, _ in sorted(c.items(), key=lambda kv: -kv[1])[:5]]
+                  for sch, c in school_states.items()}
+    # The campus's own state comes first (Oct 28): players who give only a town are mostly from near the
+    # school, and a school whose listed players come mostly from elsewhere put Ohio towns in Pennsylvania.
+    for sch, st in campus_states().items():
+        top_states[sch] = [st] + [x for x in top_states.get(sch, []) if x != st]
+    per_school: dict[tuple, tuple] = {}
+    for (raw, sch) in players_per_key:
+        h = homes[raw]
+        if not (h["city"] and not h["state"] and not h["country"] and resolved[raw][3] == "city_guess"):
+            continue
+        k = known.get((raw, sch))
+        if k is not None and raw not in todo and k.get("lat"):
+            per_school[(raw, sch)] = (k["lat"], k["lon"], k.get("source", ""), k.get("precision", ""))
+        else:
+            gaz = gaz or Gazetteer()   # not loaded yet when every hometown was reused from hometowns.csv
+            per_school[(raw, sch)] = gaz.lookup_no_state(h["city"], top_states.get(sch, ())) or resolved[raw]
+    return per_school
+
+
+def _with_guessed_state(h: dict, src: str) -> dict:
+    h = dict(h)
+    if src.startswith("census_guess_") and not h["state"]:
+        h["state"], h["country"] = src.rsplit("_", 1)[1], "USA"  # so the map can label and filter it
+    return h
+
+
+def _write_geocoded_copy(path: Path, rows, per_school, resolved, homes) -> Path:
+    """<name>_geocoded.csv next to a CSV given by hand (the map build reads hometowns.csv)."""
+    out_path = path.with_name(path.stem + "_geocoded.csv")
+    extra = ["home_city", "home_state", "home_country", "home_lat", "home_lon", "geo_source", "geo_precision"]
+    fields = ([f for f in rows[0].keys() if f not in extra] if rows else []) + extra
+    with open(out_path, "w", newline="", encoding="utf-8") as fh:
+        w = csv.DictWriter(fh, fieldnames=fields)
+        w.writeheader()
+        for r in rows:
+            raw = r.get("hometown", "")
+            lat, lon, src, prec = per_school.get((raw, r["school"]), resolved[raw])
+            h = _with_guessed_state(homes[raw], src)
+            w.writerow({**r, "home_city": h["city"], "home_state": h["state"], "home_country": h["country"],
+                        "home_lat": lat, "home_lon": lon, "geo_source": src, "geo_precision": prec})
+    return out_path
+
+
+def _write_lookup(lookup_path: Path, players_per_raw, players_per_key, resolved, homes, per_school, known) -> list[dict]:
+    """hometowns.csv: one row per hometown string, plus one per school for towns given without a state, plus the
+    rows moved by hand that no player gives any more. Returns the rows."""
+    lookup_rows = []
+    for raw, n in players_per_raw.items():
+        lat, lon, src, prec = resolved[raw]
+        lookup_rows.append({"hometown": raw, "school": "", **homes[raw], "lat": lat, "lon": lon,
+                            "source": src, "precision": prec, "players": n})
+    for (raw, sch), (lat, lon, src, prec) in per_school.items():
+        lookup_rows.append({"hometown": raw, "school": sch, **_with_guessed_state(homes[raw], src), "lat": lat,
+                            "lon": lon, "source": src, "precision": prec, "players": players_per_key[(raw, sch)]})
+    written = {(r["hometown"], r["school"]) for r in lookup_rows}
+    lookup_rows += [k for key, k in known.items() if k.get("source") == "manual" and key not in written]
+    lookup_rows.sort(key=lambda r: (-int(r["players"] or 0), r["hometown"], r["school"]))
+    with open(lookup_path, "w", newline="", encoding="utf-8") as fh:
+        w = csv.DictWriter(fh, fieldnames=LOOKUP_FIELDS, extrasaction="ignore")
+        w.writeheader()
+        w.writerows(lookup_rows)
+    return lookup_rows
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=GEOCODE_HOMETOWNS_DOC, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("rosters", type=Path, nargs="?",
@@ -1106,7 +1234,6 @@ def main(argv=None) -> int:
     todo: list[str] = []
     for raw in players_per_raw:
         k = known.get((raw, ""))
-        fix = corrected_home(table.get(raw), statuses)
         if k is not None and k.get("source") == "manual":
             # Moved by hand: kept as it is
             homes[raw] = {"city": k.get("city", ""), "state": k.get("state", ""), "country": k.get("country", "")}
@@ -1122,80 +1249,15 @@ def main(argv=None) -> int:
     gaz = Gazetteer() if (todo or guess_missing) else None
     nom = Nominatim(args.contact) if (args.online and todo) else None
 
-    # Pass 1: new hometowns. Existing corrections first, otherwise the normal parser.
-    kept_old = 0
-    for raw in todo:
-        homes[raw] = corrected_home(table.get(raw), statuses) or parse_hometown(raw)
-        resolved[raw] = resolve(homes[raw], gaz, nom)
-        if not resolved[raw][0] and homes[raw] != parse_hometown(raw):
-            # A correction that places nothing (many were written by an older, simpler reading: "Maui" as a
-            # town with no state) doesn't stop the parser's own reading from being tried
-            alt = parse_hometown(raw)
-            hit = resolve(alt, gaz, nom)
-            if hit[0]:
-                homes[raw], resolved[raw] = alt, hit
-        old = known.get((raw, ""))
-        if old is not None and old.get("lat") and old.get("source") == "nominatim" and \
-                _FINENESS.get(old.get("precision", ""), 5) < _FINENESS.get(resolved[raw][3], 5):
-            # An online answer (--online) finer than what the offline lists give: keep it
-            homes[raw] = {"city": old.get("city", ""), "state": old.get("state", ""), "country": old.get("country", "")}
-            resolved[raw] = (old["lat"], old["lon"], old["source"], old.get("precision", ""))
-            continue
-        if not resolved[raw][0] and old is not None and old.get("lat"):
-            # Placed by an earlier run (an older version guessed close spellings: "Wauwautosa" -> Wauwatosa),
-            # and nothing places it now: keep that dot rather than lose it
-            homes[raw] = {"city": old.get("city", ""), "state": old.get("state", ""), "country": old.get("country", "")}
-            resolved[raw] = (old["lat"], old["lon"], old.get("source", ""), old.get("precision", ""))
-            kept_old += 1
+    kept_old = _look_up(todo, table, statuses, known, gaz, nom, homes, resolved)
     if kept_old:
         print(f"  {kept_old} hometowns nothing places now kept the dot an earlier run gave them")
 
-    # Pass 2: suggest a fix for each new string that didn't place, and use it right away if confident.
-    suggested = applied = 0
-    for raw in todo:
-        if resolved[raw][0] or raw in table or not raw.strip() or not_a_place(raw):   # nothing to fix
-            continue
-        city, state, country, status, note = suggest_correction(raw)
-        if status != "unfixable" and not (city or state or country):
-            status = "unfixable"
-        table[raw] = {"hometown_raw": raw, "city": city, "state": state, "country": country,
-                      "query": ", ".join(p for p in (city, state, country) if p),
-                      "status": status, "note": note, "players": 0}
-        suggested += 1
-        fix = corrected_home(table[raw], statuses)
-        if fix:
-            hit = resolve(fix, gaz, nom)
-            if hit[0]:
-                homes[raw], resolved[raw] = fix, hit
-                applied += 1
+    suggested, applied = _suggest_fixes(todo, table, statuses, gaz, nom, homes, resolved)
     if nom:
         nom.save()
 
-    # Pass 3: a town with no state ("Pleasant Grove") is guessed per school. A BYU player from
-    # "Pleasant Grove" is from Utah, not Alabama, so prefer the states that school recruits most.
-    school_states: dict[str, dict[str, int]] = {}
-    for (raw, sch), n in players_per_key.items():
-        h = homes[raw]
-        if h["country"] == "USA" and h["state"] and resolved[raw][0]:
-            c = school_states.setdefault(sch, {})
-            c[h["state"]] = c.get(h["state"], 0) + n
-    top_states = {sch: [st for st, _ in sorted(c.items(), key=lambda kv: -kv[1])[:5]]
-                  for sch, c in school_states.items()}
-    # The campus's own state comes first (Oct 28): players who give only a town are mostly from near the
-    # school, and a school whose listed players come mostly from elsewhere put Ohio towns in Pennsylvania.
-    for sch, st in campus_states().items():
-        top_states[sch] = [st] + [x for x in top_states.get(sch, []) if x != st]
-    per_school: dict[tuple, tuple] = {}
-    for (raw, sch) in players_per_key:
-        h = homes[raw]
-        if not (h["city"] and not h["state"] and not h["country"] and resolved[raw][3] == "city_guess"):
-            continue
-        k = known.get((raw, sch))
-        if k is not None and raw not in todo and k.get("lat"):
-            per_school[(raw, sch)] = (k["lat"], k["lon"], k.get("source", ""), k.get("precision", ""))
-        else:
-            gaz = gaz or Gazetteer()   # not loaded yet when every hometown was reused from hometowns.csv
-            per_school[(raw, sch)] = gaz.lookup_no_state(h["city"], top_states.get(sch, ())) or resolved[raw]
+    per_school = _per_school_guesses(players_per_key, homes, resolved, known, set(todo), gaz)
 
     for raw, row in table.items():  # keep hand edits, refresh the counts
         if raw in players_per_raw:
@@ -1206,43 +1268,8 @@ def main(argv=None) -> int:
         else:
             save_sport_corrections(sport, table, own)
 
-    def with_guessed_state(h: dict, src: str) -> dict:
-        h = dict(h)
-        if src.startswith("census_guess_") and not h["state"]:
-            h["state"], h["country"] = src.rsplit("_", 1)[1], "USA"  # so the map can label and filter it
-        return h
-
-    out_path = None
-    if args.rosters:   # only for a CSV given by hand; the map build reads hometowns.csv
-        out_path = args.rosters.with_name(args.rosters.stem + "_geocoded.csv")
-        extra = ["home_city", "home_state", "home_country", "home_lat", "home_lon", "geo_source", "geo_precision"]
-        fields = ([f for f in rows[0].keys() if f not in extra] if rows else []) + extra
-        with open(out_path, "w", newline="", encoding="utf-8") as fh:
-            w = csv.DictWriter(fh, fieldnames=fields)
-            w.writeheader()
-            for r in rows:
-                raw = r.get("hometown", "")
-                lat, lon, src, prec = per_school.get((raw, r["school"]), resolved[raw])
-                h = with_guessed_state(homes[raw], src)
-                w.writerow({**r, "home_city": h["city"], "home_state": h["state"], "home_country": h["country"],
-                            "home_lat": lat, "home_lon": lon, "geo_source": src, "geo_precision": prec})
-
-    # hometowns.csv: one row per hometown string, plus one per school for towns given without a state.
-    lookup_rows = []
-    for raw, n in players_per_raw.items():
-        lat, lon, src, prec = resolved[raw]
-        lookup_rows.append({"hometown": raw, "school": "", **homes[raw], "lat": lat, "lon": lon,
-                            "source": src, "precision": prec, "players": n})
-    for (raw, sch), (lat, lon, src, prec) in per_school.items():
-        lookup_rows.append({"hometown": raw, "school": sch, **with_guessed_state(homes[raw], src), "lat": lat,
-                            "lon": lon, "source": src, "precision": prec, "players": players_per_key[(raw, sch)]})
-    written = {(r["hometown"], r["school"]) for r in lookup_rows}
-    lookup_rows += [k for key, k in known.items() if k.get("source") == "manual" and key not in written]
-    lookup_rows.sort(key=lambda r: (-int(r["players"] or 0), r["hometown"], r["school"]))
-    with open(lookup_path, "w", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=LOOKUP_FIELDS, extrasaction="ignore")
-        w.writeheader()
-        w.writerows(lookup_rows)
+    out_path = _write_geocoded_copy(args.rosters, rows, per_school, resolved, homes) if args.rosters else None
+    lookup_rows = _write_lookup(lookup_path, players_per_raw, players_per_key, resolved, homes, per_school, known)
 
     # Players whose roster gives no hometown are counted on their own line: they aren't a town that
     # failed to place, so they stay out of the success rate and out of unmatched_hometowns.csv.

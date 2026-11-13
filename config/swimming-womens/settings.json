@@ -9,7 +9,9 @@
   "/sports/swimming-and-diving/roster",
   "/sports/swimming/roster",
   "/sports/swim/roster",
-  "/sports/c-swim/roster"
+  "/sports/c-swim/roster",
+  "/sports/swimming-diving/roster",
+  "/sports/sd/roster"
  ],
  "presto_paths": [
   "/sports/wswimdive/{prev_season}-{yy}/roster",
@@ -36,7 +38,9 @@
   "/sports/swimming-and-diving/roster",
   "/sports/swimming/roster",
   "/sports/swim/roster",
-  "/sports/c-swim/roster"
+  "/sports/c-swim/roster",
+  "/sports/swimming-diving/roster",
+  "/sports/sd/roster"
  ],
  "position_groups": [
   "FREE",

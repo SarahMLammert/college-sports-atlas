@@ -215,9 +215,18 @@
     // Players' names: in names.txt (only the dot map needs them, and it draws before they arrive).
     // data.nameList is filled in place when they load, so code holding it sees them; data.loadNames() fetches
     // them once and resolves when they're in. Data built before then still has them in map_data.json.
+    // A line can carry the player's jersey numbers after a tab ("Ann Lee\t7, 12"): those go to data.jerseyList.
     data.nameList = new Array(data.N).fill("");
+    data.jerseyList = new Array(data.N).fill("");
     let allNames = null, namesLoad = null;
-    const fillNames = () => { if (allNames) for (let i = 0; i < data.N; i++) data.nameList[i] = allNames[i] || ""; };
+    const fillNames = () => {
+      if (!allNames) return;
+      for (let i = 0; i < data.N; i++) {
+        const [name, jersey] = (allNames[i] || "").split("\t");
+        data.nameList[i] = name;
+        data.jerseyList[i] = jersey || "";
+      }
+    };
     data.loadNames = () => namesLoad || (namesLoad = (typeof data.names === "string" ? Promise.resolve(data.names)
       : fetch(dataUrl("names.txt")).then((r) => { if (!r.ok) throw new Error(r.status); return r.text(); }))
       .then((text) => { allNames = text.split("\n"); fillNames(); data.namesLoaded = true; delete data.names; }));

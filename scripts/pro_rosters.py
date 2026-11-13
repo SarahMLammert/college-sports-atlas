@@ -92,7 +92,10 @@ LEAGUES = {
     "nba": {"teams": list(NBA_TEAMS), "url": "https://www.nba.com/team/{team}/{slug}", "college_sport": "basketball-mens",
             "new_season_month": 7, "colleges": {"Miami": "Miami (FL)", "St. Mary's": "Saint Mary's (CA)"}},
     "mlb": {"teams": list(MLB_TEAMS), "college_sport": "baseball", "new_season_month": 11,
-            "colleges": {"Miami": "Miami (FL)"},
+            "colleges": {"Miami": "Miami (FL)", "St. Mary's": "Saint Mary's (CA)", "Cal State Stanislaus": "Stanislaus State",
+                         "Centenary College of Louisiana": "Centenary", "Sacramento CC": "Sacramento City College",
+                         "State College of Florida": "State College of Florida, Manatee-Sarasota",
+                         "Caldwell Tech CC": "Caldwell CC"},
             "url": "https://statsapi.mlb.com/api/v1/teams/{team}/roster?rosterType=40Man&hydrate=person(education)"},
     "nhl": {"teams": list(NHL_TEAMS), "url": "https://api-web.nhle.com/v1/roster/{team}/current",
             "player_url": "https://api-web.nhle.com/v1/player/{id}/landing", "college_sport": "hockey-mens",
@@ -351,6 +354,16 @@ def college_index(sport_name: str) -> dict[tuple[str, str], dict]:
     return idx
 
 
+def college_spellings(text: str) -> list[str]:
+    """The league's name for a college, then the ways schools.csv may write it: MLB writes "Chipola JC",
+    "Miami Dade CC", "JC of Central Florida" and "Aurora U" for Chipola College, Miami Dade College, College of
+    Central Florida and Aurora (University)."""
+    out = [text]
+    of = re.sub(r"^(?:JC|CC) of\b", "College of", text)
+    out += [of, re.sub(r"\b(?:JC|CC)$", "College", of), re.sub(r"\s*\b(?:JC|CC)$", "", of), re.sub(r"\bU$", "University", of)]
+    return list(dict.fromkeys(x.strip() for x in out if x.strip()))
+
+
 def _first_names_fit(pro: str, college: str) -> bool:
     """Could these be the same person's first names? Same first letter (Pat/Patrick, Mike/Michael), one inside
     the other (Riq/Tariq, Cobie/Decobie), or the pro name written into the college one (Ahmad "Sauce")."""
@@ -403,10 +416,11 @@ def match(rows: list[dict], league: str) -> list[dict]:
         listed = [x.strip() for x in (r.get("college") or "").split("|") if x.strip()]
         schools = []
         for text in listed:
-            text = conf.get("colleges", {}).get(text, text)
-            lvl, school = levels.level(text, (until or season - 1))
-            if school:
-                schools.append((lvl, school))
+            for name in college_spellings(conf.get("colleges", {}).get(text, text)):
+                lvl, school = levels.level(name, (until or season - 1))
+                if school:
+                    schools.append((lvl, school))
+                    break
         level, school = schools[-1] if schools else ("", "")
         hit, how = None, ""
         for lvl, sch in schools:

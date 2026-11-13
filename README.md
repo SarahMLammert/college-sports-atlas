@@ -174,6 +174,14 @@ tests/                 test_atlas.py: the code (also checked with the linter, ru
   some have an empty or years-old men's page. With `roster_sex` in the settings, `sidearm.keep_own_sex` keeps this
   team's athletes, using the page's own marks (a person list with gender, player records, separate Men and Women
   tables, or a heading above each list). A page from a `combined_paths` address with no such marks is refused rather than guessed at.
+  Checked Nov 13: wherever one page served both teams (1,873 track, 1,966 cross country, 715 swimming school-seasons),
+  the split worked, except on two addresses missing from `combined_paths` (`track-field`, `swimming-diving`; added).
+- **Stand-in pages.** For a season a sport has no roster, some Sidearm sites show a "General Roster" page listing
+  another team. The scraper refuses it (`sidearm.stand_in_page`); the 202 saved before Nov 13 are listed in each
+  sport's `wrong_seasons.csv`, so the next run drops them and tries those seasons again.
+- **Jersey numbers.** Read with each player and tidied (`sidearm.clean_jersey`: "Number: 4" is 4; "RS", "INJ" or
+  a year are not numbers). The map build puts a player's numbers at a school after his name in `names.txt`
+  ("Ann Lee<tab>7, 12"), and the Recruiting Map shows them in player lists and careers.
 - **Seasons a team doesn't have.** Seasons are scraped newest first. Once a team's roster page lists its seasons (a
   dropdown, links or its data), seasons older than the list are recorded as no team and not tried. A retry reads the
   list from the saved pages first, without downloading. It also skips seasons older than three seasons in a row with

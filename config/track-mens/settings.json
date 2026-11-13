@@ -8,7 +8,9 @@
   "/sports/track-and-field/roster",
   "/sports/track/roster",
   "/sports/trackfield/roster",
-  "/sports/c-track/roster"
+  "/sports/c-track/roster",
+  "/sports/track-field/roster",
+  "/sports/tf/roster"
  ],
  "presto_paths": [
   "/sports/mtrack/{prev_season}-{yy}/roster",
@@ -35,7 +37,9 @@
   "/sports/track-and-field/roster",
   "/sports/track/roster",
   "/sports/trackfield/roster",
-  "/sports/c-track/roster"
+  "/sports/c-track/roster",
+  "/sports/track-field/roster",
+  "/sports/tf/roster"
  ],
  "position_groups": [
   "SPR",

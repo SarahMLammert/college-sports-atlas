@@ -254,7 +254,8 @@ body { background: var(--sea); }
   }
   const P = data.players;
   let N = data.N;            // grows when a big sport's other divisions arrive (moreData)
-  const names = data.nameList;
+  const names = data.nameList, jerseys = data.jerseyList;
+  const jersey = (k) => jerseys[k] ? "#" + jerseys[k].replace(/, /g, ", #") : "";   // "7, 12" -> "#7, #12"
   const towns = data.towns;
   const T = towns.length;
   const tx = new Float32Array(T), ty = new Float32Array(T), tState = data.tState;
@@ -652,11 +653,11 @@ body { background: var(--sea); }
       ? `<li class="pre"><span class="yr">Before</span><span>Another college<br><span class="meta">${P.v[first] > 0 && LEVELS[P.v[first] - 1] && LEVELS[P.v[first] - 1] !== "unknown" ? esc(LEVELS[P.v[first] - 1]) + " · " : ""}not in this data</span></span></li>` : "";
     return `<ol class="career">${before}${list.map((j) => `<li${j === k ? ' class="me"' : ""}><span class="yr">${seasonsText(j)}</span>
       <span>${swatch(P.s[j])}${j === k ? esc(data.schools[P.s[j]][0]) : `<button type="button" class="link" data-pick="${j}">${esc(data.schools[P.s[j]][0])}</button>`}<br>
-      <span class="meta">${esc(data.pos[P.p[j]])} · ${esc(data.divs[P.d[j]] || data.divs[data.schools[P.s[j]][2]])}</span></span></li>`).join("")}</ol>`;
+      <span class="meta">${esc(data.pos[P.p[j]])} · ${esc(data.divs[P.d[j]] || data.divs[data.schools[P.s[j]][2]])}${jersey(j) ? " · " + esc(jersey(j)) : ""}</span></span></li>`).join("")}</ol>`;
   }
   function personLi(k, withTown) {
     const t = P.t[k];
-    return `<li${k === state.player ? ' class="me"' : ""}><span class="pos">${esc(data.pos[P.p[k]])}</span><span><button type="button" class="link" data-pick="${k}">${esc(names[k])}</button><br><span class="meta">${esc(data.schools[P.s[k]][0])} · ${seasonsText(k)}${withTown && t >= 0 ? " · " + esc(towns[t][2]) : !withTown && data.hs[P.h[k]] ? " · " + esc(data.hs[P.h[k]]) : ""}${P.x[k] ? " · transfer" : ""}</span></span></li>`;
+    return `<li${k === state.player ? ' class="me"' : ""}><span class="pos">${esc(data.pos[P.p[k]])}</span><span><button type="button" class="link" data-pick="${k}">${esc(names[k])}</button>${jersey(k) ? ` <span class="meta">${esc(jersey(k))}</span>` : ""}<br><span class="meta">${esc(data.schools[P.s[k]][0])} · ${seasonsText(k)}${withTown && t >= 0 ? " · " + esc(towns[t][2]) : !withTown && data.hs[P.h[k]] ? " · " + esc(data.hs[P.h[k]]) : ""}${P.x[k] ? " · transfer" : ""}</span></span></li>`;
   }
   const head = (label, close) => `<div class="row" style="justify-content:space-between"><span class="label">${label}</span><button type="button" class="link" data-close="${close}">Clear</button></div>`;
   function renderFindings() {

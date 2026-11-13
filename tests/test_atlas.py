@@ -683,6 +683,10 @@ def test_pro_league_rosters_are_read_from_their_data():
     import datetime as dt
     assert pr.season_now(dt.date(2026, 11, 10), "nba") == 2026 and pr.season_now(dt.date(2026, 6, 1), "nhl") == 2025
     assert pr.season_now(dt.date(2026, 11, 10), "mlb") == 2027 and pr.season_now(dt.date(2026, 9, 1), "mlb") == 2026
+    # MLB's spellings of junior colleges and universities, then schools.csv's
+    assert pr.college_spellings("Chipola JC")[:2] == ["Chipola JC", "Chipola College"]
+    assert "College of Central Florida" in pr.college_spellings("JC of Central Florida")
+    assert "Aurora University" in pr.college_spellings("Aurora U") and pr.college_spellings("Duke") == ["Duke"]
 
 
 def test_pro_players_are_matched_by_name_last_name_or_hometown(tiny, monkeypatch):
@@ -708,6 +712,13 @@ def test_pro_players_are_matched_by_name_last_name_or_hometown(tiny, monkeypatch
     got = [(r["matched"], r["college_school"], r.get("high_school", "")) for r in pr.match(rows, "mlb")]
     assert got == [("yes", "Alpha", ""), ("likely", "Alpha", ""), ("hometown", "Beta State", "Linden HS"),
                    ("", "", ""), ("", "", ""), ("", "", "")]
+
+
+def test_stand_in_general_roster_page_is_not_a_roster():
+    assert sidearm.stand_in_page("<html><head><title>2019-20 General Roster - College of Idaho Athletics</title>")
+    assert sidearm.stand_in_page("<title>2020-21 1-General Roster - Barry University Athletics</title>")
+    assert not sidearm.stand_in_page("<title>2019-20 Men's Tennis Roster - College of Idaho Athletics</title>")
+    assert not sidearm.stand_in_page("<title>Roster</title><p>General Roster notes</p>")    # only the title counts
 
 
 def test_staff_table_with_hometown_column_ignored():
@@ -1743,7 +1754,8 @@ def test_map_data_packing_round_trip():
 
 def test_map_data_names_and_summary_files(tiny, tmp_path):
     # Oct 28: names in names.txt (only the dot map loads them), front-page numbers in summary.json
-    write_season(tiny, 2025, [player("Alpha", "Ann Lee"), player("Alpha", "Bea Diaz", town="Dallas, TX")])
+    write_season(tiny, 2024, [{**player("Alpha", "Ann Lee"), "jersey": "7"}])
+    write_season(tiny, 2025, [{**player("Alpha", "Ann Lee"), "jersey": "12"}, player("Alpha", "Bea Diaz", town="Dallas, TX")])
     with open(tiny.rosters_dir / "hometowns.csv", "w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=geo.LOOKUP_FIELDS)
         w.writeheader()
@@ -1754,9 +1766,16 @@ def test_map_data_names_and_summary_files(tiny, tmp_path):
     build.make_map_data(None, dst, tiny)
     data = json.loads(dst.read_text())
     assert "names" not in data and data["players"]["packed"] and len(build.unpack_players(data["players"])["s"]) == 2
-    assert dst.with_name("names.txt").read_text().split("\n") == ["Ann Lee", "Bea Diaz"]
+    # a player's jersey numbers follow the name after a tab, oldest first
+    assert dst.with_name("names.txt").read_text().split("\n") == ["Ann Lee\t7, 12", "Bea Diaz"]
     summary = json.loads(dst.with_name("summary.json").read_text())
-    assert (summary["players"], summary["schools"], summary["first"], summary["last"]) == (2, 1, 2025, 2025)
+    assert (summary["players"], summary["schools"], summary["first"], summary["last"]) == (2, 1, 2024, 2025)
+
+
+def test_jersey_numbers_are_tidied():
+    got = [sidearm.clean_jersey(v) for v in ("12", "Number: 4", "#7", "9/c", "19 (a)", "4 / 14", "11/44", "1A", "1 B",
+                                             "RS", "RS/RS", "INJ", "NA", "MGR", "2026", "9999", "-1", "")]
+    assert got == ["12", "4", "7", "9", "19", "4/14", "11/44", "1A", "1B", "", "", "", "", "", "", "", "", ""]
 
 
 # ---------------------------------------------------------------------------- staff pages (Oct 28)

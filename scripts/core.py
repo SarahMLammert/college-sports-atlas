@@ -982,7 +982,7 @@ open(out, "w", encoding="utf-8").write(html)
 
 # (clean() is defined at the top of this file)
 
-UNIQUE_FIELDS = ["school", "name", "position", "weight", "hometown", "home_city", "home_state", "home_country",
+UNIQUE_FIELDS = ["school", "name", "jersey", "position", "weight", "hometown", "home_city", "home_state", "home_country",
                  "high_school", "previous_school", "first_season", "last_season", "n_seasons", "seasons",
                  "first_class", "division_first_season", "current_conference"]
 
@@ -1165,6 +1165,8 @@ def build_unique(rows: list[dict]) -> list[dict]:
         seasons = sorted({int(r["season"]) for r in grp})
         out.append({
             "school": first["school"], "name": last["name"],
+            # every number worn there, oldest first ("7, 12" after a change)
+            "jersey": ", ".join(dict.fromkeys(r["jersey"] for r in grp if r.get("jersey"))),
             # The newest season that lists one: wrestling's position column is often blank, with the class as weight
             "position": next((r["position"] for r in reversed(grp) if r["position"]), ""),
             "weight": next((r.get("weight") or "" for r in reversed(grp) if r.get("weight")), ""),

@@ -384,7 +384,7 @@ def make_map_data(src, dst, sport):
     if unclean:
         print(f"cleaned {unclean} player names here; run scrape_rosters.py --recombine and geocode again"
               " to clean them in the roster files too")
-    P = {k: [] for k in ("s", "t", "p", "f", "l", "x", "o", "v", "d", "h", "n")}
+    P = {k: [] for k in ("s", "t", "p", "f", "l", "x", "o", "v", "d", "h", "n", "j")}
     for i, r in enumerate(rows):
         if r["home_lat"]:
             key = (round(float(r["home_lat"]), 4), round(float(r["home_lon"]), 4))
@@ -429,6 +429,7 @@ def make_map_data(src, dst, sport):
         P["d"].append(divs.index(r["division_first_season"]) if r["division_first_season"] in divs else 0)
         P["h"].append(hidx[hs])
         P["n"].append(clean_name(r["name"]))
+        P["j"].append(r.get("jersey", ""))
     out = {
         "schools": [[s, confs.index(conf[s]), divs.index(div_now[s][1]) if div_now[s][1] in divs else 0,
                      *colors.get(s, ("#777777", "#FFFFFF"))] for s in schools],
@@ -457,8 +458,10 @@ def make_map_data(src, dst, sport):
     with open(dst, "w", encoding="utf-8") as fh:
         json.dump(out, fh, separators=(",", ":"), ensure_ascii=False)
     # The players' names, one per line in the same order (a file of their own, since only the dot map
-    # uses them; the heatmap and transfer pages no longer download them, and the dot map draws before they arrive)
-    Path(dst).with_name("names.txt").write_text("\n".join(n.replace("\n", " ") for n in P["n"]), encoding="utf-8")
+    # uses them; the heatmap and transfer pages no longer download them, and the dot map draws before they arrive).
+    # A player's jersey numbers follow his name after a tab ("Ann Lee\t7, 12"), when the roster gave any.
+    lines = (n.replace("\n", " ").replace("\t", " ") + (f"\t{j}" if j else "") for n, j in zip(P["n"], P["j"]))
+    Path(dst).with_name("names.txt").write_text("\n".join(lines), encoding="utf-8")
     # The numbers on the front page (docs/index.html reads these instead of figures typed in by hand)
     seasons = sorted(set(P["f"]) | set(P["l"]))
     summary = {"sport": sport.label or sport.name, "players": len(P["s"]), "schools": len(schools),
@@ -723,52 +726,32 @@ SAME_CLASS = 0.8     # ... with this share of them still in the same class year 
                      # keeps 60-80% of its players, and nearly all of them move up a class)
 
 
-def check_rosters_main(argv=None) -> int:
-    ap = argparse.ArgumentParser(description=CHECK_ROSTERS_DOC, formatter_class=argparse.RawDescriptionHelpFormatter)
-    add_sport_argument(ap)
-    args = ap.parse_args(argv)
-    sport = load_sport(args.sport)
-    files = season_files(sport.rosters_dir)
-    if not files:
-        print(f"No season files in {sport.rosters_dir} yet: nothing to check.")
-        return 0
-
-    # Everything below reads rosters/<sport>/rosters.db (core.roster_db: rebuilt from the CSVs when they change)
-    con = roster_db(sport.rosters_dir)
-    rows = db_rows(con, "SELECT * FROM rosters ORDER BY rowid")
-    unique = build_unique(rows)
-    print(f"{sport.label or sport.name}: {len(unique):,} players ({len(rows):,} player-seasons, "
-          f"seasons {min(files)}-{max(files)})")
-
-    # ---- scrape status by division, from the reports
-    reports = db_rows(con, "SELECT * FROM reports ORDER BY rowid")
-    if reports:
-        order = list(sport.d1_divisions) + [d for d in sport.other_divisions if d not in sport.d1_divisions]
-        counts: dict[str, Counter] = defaultdict(Counter)
-        saved = {(r["school"], int(r["season"])) for r in reports if r.get("status") in ("ok", "partial")}
-        for r in reports:
-            st = r.get("status", "")
-            if st == "failed":     # not posted yet, or the COVID season: not missing data (core.failure_kind)
-                st = failure_kind(r, lambda school, season: (school, season) in saved, spring=sport.spring_season)
-            if st != "no_program":
-                counts[r.get("division") or "?"][st] += 1
-        divs = [d for d in order if d in counts] + sorted(d for d in counts if d not in order)
-        print("\nschool-seasons      ok  partial  failed  not posted   COVID  left out")
-        for d in divs:
-            c = counts[d]
-            print(f"  {d:<12} {c['ok']:7,} {c['partial']:8,} {c['failed']:7,} {c['not_posted']:11,} {c['covid']:7,} "
-                  f"{c['left_out']:9,}")
-    else:
+def _print_status(reports: list[dict], sport) -> None:
+    """The scrape status by division, from the reports: ok, partial, failed, not posted yet, COVID, left out."""
+    if not reports:
         print("\n(no scrape reports yet: scrape with --report to get the ok/partial/failed table)")
+        return
+    order = list(sport.d1_divisions) + [d for d in sport.other_divisions if d not in sport.d1_divisions]
+    counts: dict[str, Counter] = defaultdict(Counter)
+    saved = {(r["school"], int(r["season"])) for r in reports if r.get("status") in ("ok", "partial")}
+    for r in reports:
+        st = r.get("status", "")
+        if st == "failed":     # not posted yet, or the COVID season: not missing data (core.failure_kind)
+            st = failure_kind(r, lambda school, season: (school, season) in saved, spring=sport.spring_season)
+        if st != "no_program":
+            counts[r.get("division") or "?"][st] += 1
+    divs = [d for d in order if d in counts] + sorted(d for d in counts if d not in order)
+    print("\nschool-seasons      ok  partial  failed  not posted   COVID  left out")
+    for d in divs:
+        c = counts[d]
+        print(f"  {d:<12} {c['ok']:7,} {c['partial']:8,} {c['failed']:7,} {c['not_posted']:11,} {c['covid']:7,} "
+              f"{c['left_out']:9,}")
 
-    # ---- hometowns
-    unmatched = db_rows(con, "SELECT * FROM unmatched")
-    if unmatched or (sport.rosters_dir / "unmatched_hometowns.csv").exists():
-        n = sum(int(r.get("players") or 0) for r in unmatched)
-        print(f"\nhometowns not placed: {len(unmatched):,} places, {n:,} players"
-              + (" (see unmatched_hometowns.csv)" if unmatched else ""))
 
-    # ---- oversized and repeated rosters (SQL on rosters.db)
+def _roster_flags(con, sport) -> list[tuple]:
+    """Oversized and repeated rosters, from rosters.db: (kind, school, season, players, detail, roster address), kind
+    "oversized", "repeated" (read from the season before's page) or "school_copy" (the school's own page repeats it).
+    """
     # One row per school-season (players, and the roster address of its first row), and one per player name
     # per school-season (the class year and player page of the last row with that name, as the old Python did).
     con.executescript("""
@@ -818,7 +801,6 @@ def check_rosters_main(argv=None) -> int:
         WHERE p.prev IS NOT NULL
         GROUP BY p.school, p.cur, p.prev
     """).fetchall()
-    con.close()
     for school, cur, prev, names, both, same_class_n, with_bio, same_bio in pairs:
         if names < sport.min_players or both < REPEATED * names:
             continue
@@ -840,6 +822,11 @@ def check_rosters_main(argv=None) -> int:
         else:
             found.append(("school_copy", school, cur, size[(school, cur)],
                           detail + " (the school's own page for this season)", url[(school, cur)]))
+    return found
+
+
+def _print_roster_flags(found: list[tuple], out: Path) -> None:
+    """Print the oversized and repeated rosters (40 of each), count the school copies, and write roster_checks.csv."""
     for kind, title in (("oversized", f"Rosters at least {OVERSIZED:g}x the school's usual size"),
                         ("repeated", "Rosters read from another season's page (same players and player pages as "
                                      "the season before)")):
@@ -853,11 +840,42 @@ def check_rosters_main(argv=None) -> int:
     if copies:
         print(f"\n{copies} more school-seasons repeat the season before on the school's own page (class years not "
               "moved up); rescraping can't change them. Listed in roster_checks.csv as school_copy.")
-    out = sport.rosters_dir / "roster_checks.csv"
     with open(out, "w", newline="", encoding="utf-8") as fh:
         w = csv.writer(fh)
         w.writerow(["check", "school", "season", "players", "detail", "roster_url"])
         w.writerows(sorted(found))
+
+
+def check_rosters_main(argv=None) -> int:
+    ap = argparse.ArgumentParser(description=CHECK_ROSTERS_DOC, formatter_class=argparse.RawDescriptionHelpFormatter)
+    add_sport_argument(ap)
+    args = ap.parse_args(argv)
+    sport = load_sport(args.sport)
+    files = season_files(sport.rosters_dir)
+    if not files:
+        print(f"No season files in {sport.rosters_dir} yet: nothing to check.")
+        return 0
+
+    # Everything below reads rosters/<sport>/rosters.db (core.roster_db: rebuilt from the CSVs when they change)
+    con = roster_db(sport.rosters_dir)
+    rows = db_rows(con, "SELECT * FROM rosters ORDER BY rowid")
+    unique = build_unique(rows)
+    print(f"{sport.label or sport.name}: {len(unique):,} players ({len(rows):,} player-seasons, "
+          f"seasons {min(files)}-{max(files)})")
+
+    reports = db_rows(con, "SELECT * FROM reports ORDER BY rowid")
+    _print_status(reports, sport)
+
+    # ---- hometowns
+    unmatched = db_rows(con, "SELECT * FROM unmatched")
+    if unmatched or (sport.rosters_dir / "unmatched_hometowns.csv").exists():
+        n = sum(int(r.get("players") or 0) for r in unmatched)
+        print(f"\nhometowns not placed: {len(unmatched):,} places, {n:,} players"
+              + (" (see unmatched_hometowns.csv)" if unmatched else ""))
+
+    found = _roster_flags(con, sport)
+    con.close()
+    _print_roster_flags(found, sport.rosters_dir / "roster_checks.csv")
 
     # ---- spring seasons taken from a main page with no year on it
     if sport.spring_season and reports:
