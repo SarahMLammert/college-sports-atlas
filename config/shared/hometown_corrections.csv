@@ -2135,6 +2135,8 @@ East Freetown,East,,,East,review,"town name in several states: MA, NY",1
 Webster Thomas,Webster,,,Webster,review,unknown state/country 'Thomas',1
 "Barrington, Mass.",Barrington,MA,USA,"Barrington, MA, USA",review,"spelling? 'Barrington' -> Arlington (starts differently: often another place, not a typo)",1
 "Uralsk, KZ.",Uralsk,,,Uralsk,review,unknown state/country 'KZ.',1
+"Willemstad, Netherlands Antilles",Willemstad,,,Willemstad,review,unknown state/country 'Netherlands Antilles',1
+"Jockessin, Del.",Jockessin,DE,USA,"Jockessin, DE, USA",review,"spelling? 'Jockessin' -> Hockessin (starts differently: often another place, not a typo)",1
 ,,,,,unfixable,blank hometown,36363
 Hometown/ Previous School,,,,,unfixable,column header scraped as data,1429
 Hometown,,,,,unfixable,column header scraped as data,524
@@ -2410,6 +2412,7 @@ Missouri,,,,,unfixable,"state only, no town",2
 "APO, AE",,,,,unfixable,"checked by hand Nov 8: military APO address, no place",2
 Woodcrest Christian,,,,,unfixable,"a school name, not a town",2
 Patriot HS,,,,,unfixable,"a school name, not a town",2
+Cypress HS,,,,,unfixable,"a school name, not a town",1
 Ardsley HS,,,,,unfixable,"a school name, not a town",1
 Osceola High School,,,,,unfixable,"a school name, not a town",1
 Daytona Beach High School,,,,,unfixable,"a school name, not a town",1
@@ -26537,7 +26540,7 @@ Huron Michigan,Huron,MI,USA,"Huron, MI, USA",fixed,state 'Michigan' -> MI,1
 Wiley Texas,Wiley,TX,USA,"Wiley, TX, USA",fixed,state 'Texas' -> TX,1
 Cherryvale Kansas,Cherryvale,KS,USA,"Cherryvale, KS, USA",fixed,state 'Kansas' -> KS,1
 LaMarque Texas,LaMarque,TX,USA,"LaMarque, TX, USA",fixed,state 'Texas' -> TX,1
-Lee Summit Missouri,Lee Summit,MO,USA,"Lee Summit, MO, USA",fixed,state 'Missouri' -> MO,1
+Lee Summit Missouri,Lee's Summit,MO,USA,"Lee's Summit, MO, USA",fixed,spelling 'Lee Summit' -> Lee's Summit,1
 Hershey PA,Hershey,PA,USA,"Hershey, PA, USA",fixed,,1
 Del Ray Beach FL,Del Ray Beach,FL,USA,"Del Ray Beach, FL, USA",fixed,,1
 Charlton Alexandria Jamaica,Charlton Alexandria,,Jamaica,"Charlton Alexandria, Jamaica",fixed,state 'Jamaica' -> Jamaica,1
@@ -28645,3 +28648,7 @@ Newhall Calif.,Newhall,CA,USA,"Newhall, CA, USA",fixed,state 'Calif.' -> CA,1
 "Level, Pa.",Level,PA,USA,"Level, PA, USA",fixed,state 'Pa.' -> PA,1
 Schaumburg Ill.,Schaumburg,IL,USA,"Schaumburg, IL, USA",fixed,state 'Ill.' -> IL,1
 "Homewodd, Ill.",Homewood,IL,USA,"Homewood, IL, USA",fixed,spelling 'Homewodd' -> Homewood,1
+"Pfluggerville, Texas",Pflugerville,TX,USA,"Pflugerville, TX, USA",fixed,spelling 'Pfluggerville' -> Pflugerville,1
+Trialago,Trialago,,,Trialago,fixed,,1
+"Bluff, Va.",Bluff,VA,USA,"Bluff, VA, USA",fixed,state 'Va.' -> VA,1
+"Cairns, Queensland, Austrailia","Cairns, Queensland",,Australia,"Cairns, Queensland, Australia",fixed,state 'Austrailia' -> Australia,1

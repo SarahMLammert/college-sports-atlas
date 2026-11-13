@@ -1,2651 +1,2651 @@
 Alec Niederland
-Brett Fogelberg
-Bryce Leiter
-Edward Smet
-Eric Curia
-Eric Kawecki
-Erik Whyte
-Garrett Fisk
-George Millard
-Jack Empey
-Jacob Roberts
-James Rydjeski
-Justin Harrison
-Kevin Hansen
-Luke Andres
-Max Benson
-Max McDonald
-Mike Miller
-Nathan Kuypers
-Owen Sedej
-Phillip Rich
-Reagan Pittman
-Riley Quinlan
-Riley Thomas
-Ryan Dorris
-Stanley Ocheskey
-Zack Kamai
-Aiden Sandhu
-Ben Gomez
-Campbell Harris
-Fabio Salvioni
-Jack Alexander
-James Burke
-Jason Hires
-Neil Reynolds
+Brett Fogelberg	10
+Bryce Leiter	24
+Edward Smet	23
+Eric Curia	11
+Eric Kawecki	14
+Erik Whyte	5
+Garrett Fisk	6
+George Millard	8
+Jack Empey	18
+Jacob Roberts	13
+James Rydjeski	1
+Justin Harrison	20
+Kevin Hansen	4, 2
+Luke Andres	9
+Max Benson	1
+Max McDonald	17
+Mike Miller	12
+Nathan Kuypers	1
+Owen Sedej	19
+Phillip Rich	1
+Reagan Pittman	7
+Riley Quinlan	2
+Riley Thomas	15
+Ryan Dorris	25
+Stanley Ocheskey	21
+Zack Kamai	3
+Aiden Sandhu	1
+Ben Gomez	4
+Campbell Harris	21
+Fabio Salvioni	11
+Jack Alexander	3
+James Burke	1
+Jason Hires	16
+Neil Reynolds	10
 Anthony Cruz
-Anthony Tolbert
-Corey Tanis
+Anthony Tolbert	1
+Corey Tanis	5
 Devin Verma
 Francesco Cico
-Gavin Jones
-Henry Yavitt
-Ian Shepherd
-Jimbo Daugherty
-Kazu Gavin
-Luke Hughes
-Sam Fuller
-Zach Shelley
-A.J. Kuypers
+Gavin Jones	17
+Henry Yavitt	15, 13
+Ian Shepherd	6
+Jimbo Daugherty	22, 3
+Kazu Gavin	24
+Luke Hughes	1
+Sam Fuller	18, 8
+Zach Shelley	11, 9
+A.J. Kuypers	1
 Adam Watson
-Alex Hirjoi
+Alex Hirjoi	12, 11
 Bennett Brewer
-Dylan Sinclair
-Grant Snyder
-Larsen McCarroll
+Dylan Sinclair	7, 3
+Grant Snyder	15, 2
+Larsen McCarroll	20, 21, 13
 Max Deihl
-Sebastian Sak
-Cole Kopperud
-David Gobora
-Ian Christie
-Joey Schell
-Sam De La Cruz
-Srboljub Filipovic
-David Brown
-Jacob Yi
-Joe Sabo
-Kaito Ham
-Ryan McLaughlin
-Sage Brady
-Zack Rath
-Bruce Kim
-Colin Chase
-Ethan Smith
-Fisher Pruitt
-Jackson Carter
-Jake Dixon
-Luca Smith
-Matthew Kwon
-Thomas Newell
-Trevor Zimlich
-Alex Zarcu
-Jack Richards
-Jonah Vander Veen
-Kaleb Abouelghar
-Liam Markus
-Michael Gao
-Nicholas Cuenco
-Owen Imasaki
-Sam Cherry
-Tom Leggett
-Aiden Blatt
-Alexander Lyukmanov
-Benny Swanson
-Brady Kopperud
-Dante Nocetti
-Gavin Carter
-Gavin Honken
-Jay Pyle
-Luke Logan
-Owen Steckmest
-Aidan Forehand
-Blake Fuchslin
-Bode Farren
-Derek Hymer
-Matt Oravetz
-Max Ellis
-Olin Kusevskis
-Shane Borunda
-Brandon Hansen
-Brandon Walton
-Colin Sullivan
-John Cowles
-Matthew Woodroof
-Nolan Hicks
-Pierce Bateman
-Sam Storrs
-Tobin Hunt
-Wesley Musgrove
-William Stewart
-Wyatt Sturgeon
-Andrew Oliger
-Colin McDowell
-Harris Dibek
-Henry Sothern
-Hunter Craft
-JP Sutton
-Jack Blumenfeld
-Jake Fisher
-Jeremy Sherpa
-Joseph Addison
-Kyle Lejman
-Lucas Osborn
-Max Mees
-McKinley Bierman
-Mikel Navajas
-Ryan Kostelnik
-Will Riebel
-Zander O'Dwyer
-Zion Thomas
-Declan Hutton
-Mark Addison
-Oskar Bannister
-Stevan Rasic
-Tyler Leslie
-Alden Brinkmeier
-Chris Bajda
-Dean Marolda
-Harrison Cook
-Ian Palmroos
-Ian Root
-James Davis
-Rhys Lomax
-Ryan DeLand
-Ben Symington
-Cam Censullo
-Carter Meier
-Cole Faux
-Henry Chapon
-Mason Landes
-Trentin Lechleitner
-Bence Kovacs-Siklosi
-Connor Logan
-Lawson Soukup
-Ronin Araucto
-Ryan Roth
-Tristan Hernandez Djukanovic
-Tyler Steinberg
-Uros Ramic
-Wilson Smith
-Adam Rashed
-Diego Ferrer
-Ethan Hutton
-Jules Nagayama
-Lincoln Nicholson
-Logan Waldron
-Luke Burger
-Malte Faltstrom
-Marcos Moret Roldan
-Mauro Monso
-Braeden Marsolini
-Brett Hanke
-Casey Cazanjian
-Christian Trapp
-Dominic Hidalgo-Valecillo
-Jackson Sumwalt
-James Osborn
-John Grasso
-Jonas Huckabay
-Josiah Brimmage
-Kenny Wulf
-Luke Franklin
-Matthew Rodriguez
-Matthew Vinson
-Maxwell Osborn
-Mitchell Carpenter
-Nolan Rapp
-Riley Bagley
-Will Tibbetts
-Adam LaVoy
-Beau Gendron
-Caleb Hernandez
-Dylan Diaz
-Gavin Oliver
-Joshua Dachenhausen
-Joshua Halopoff
-Kyle Seifen
-Nick Murray
-Eric Hizon
+Sebastian Sak	18
+Cole Kopperud	10
+David Gobora	19
+Ian Christie	4
+Joey Schell	15, 12, 17
+Sam De La Cruz	14, 6
+Srboljub Filipovic	22
+David Brown	25, 7
+Jacob Yi	20, 8
+Joe Sabo	1
+Kaito Ham	15, 3
+Ryan McLaughlin	14
+Sage Brady	16
+Zack Rath	18
+Bruce Kim	20
+Colin Chase	18, 4
+Ethan Smith	19
+Fisher Pruitt	14
+Jackson Carter	9
+Jake Dixon	5
+Luca Smith	1
+Matthew Kwon	11, 19, 13, 14
+Thomas Newell	12
+Trevor Zimlich	21
+Alex Zarcu	22
+Jack Richards	2
+Jonah Vander Veen	14, 6
+Kaleb Abouelghar	23
+Liam Markus	1
+Michael Gao	24
+Nicholas Cuenco	15, 12, 5
+Owen Imasaki	13, 10
+Sam Cherry	27
+Tom Leggett	11
+Aiden Blatt	17, 7
+Alexander Lyukmanov	24
+Benny Swanson	19
+Brady Kopperud	16, 3
+Dante Nocetti	14, 8
+Gavin Carter	23
+Gavin Honken	21
+Jay Pyle	1
+Luke Logan	18, 15
+Owen Steckmest	15
+Aidan Forehand	18
+Blake Fuchslin	16, 14
+Bode Farren	1
+Derek Hymer	24
+Matt Oravetz	17
+Max Ellis	25, 4
+Olin Kusevskis	13
+Shane Borunda	23
+Brandon Hansen	28
+Brandon Walton	25
+Colin Sullivan	15
+John Cowles	16
+Matthew Woodroof	21
+Nolan Hicks	12
+Pierce Bateman	20
+Sam Storrs	18
+Tobin Hunt	9
+Wesley Musgrove	26
+William Stewart	29
+Wyatt Sturgeon	1
+Andrew Oliger	19
+Colin McDowell	15
+Harris Dibek	1
+Henry Sothern	1A, 1
+Hunter Craft	6
+JP Sutton	2
+Jack Blumenfeld	13
+Jake Fisher	7
+Jeremy Sherpa	4
+Joseph Addison	20
+Kyle Lejman	14
+Lucas Osborn	11, 5
+Max Mees	1B, 1
+McKinley Bierman	18
+Mikel Navajas	12
+Ryan Kostelnik	8
+Will Riebel	9
+Zander O'Dwyer	3
+Zion Thomas	10
+Declan Hutton	1B, 1A, 1
+Mark Addison	5, 10
+Oskar Bannister	8, 12
+Stevan Rasic	22, 2
+Tyler Leslie	13
+Alden Brinkmeier	23, 3
+Chris Bajda	24, 8, 7, 11
+Dean Marolda	18
+Harrison Cook	14
+Ian Palmroos	6
+Ian Root	1B
+James Davis	16, 8
+Rhys Lomax	17, 9
+Ryan DeLand	25
+Ben Symington	22, 4
+Cam Censullo	20
+Carter Meier	11, 7
+Cole Faux	18, 5
+Henry Chapon	14
+Mason Landes	19, 2
+Trentin Lechleitner	30
+Bence Kovacs-Siklosi	23
+Connor Logan	25
+Lawson Soukup	1A, 1
+Ronin Araucto	24, 18
+Ryan Roth	1B, 1A
+Tristan Hernandez Djukanovic	22
+Tyler Steinberg	21
+Uros Ramic	17
+Wilson Smith	16, 10
+Adam Rashed	13
+Diego Ferrer	19
+Ethan Hutton	1C
+Jules Nagayama	20
+Lincoln Nicholson	15
+Logan Waldron	28
+Luke Burger	12
+Malte Faltstrom	14
+Marcos Moret Roldan	1B
+Mauro Monso	1D
+Braeden Marsolini	9
+Brett Hanke	5
+Casey Cazanjian	1A
+Christian Trapp	8
+Dominic Hidalgo-Valecillo	2, 10
+Jackson Sumwalt	14
+James Osborn	18
+John Grasso	12
+Jonas Huckabay	21
+Josiah Brimmage	6
+Kenny Wulf	13
+Luke Franklin	4
+Matthew Rodriguez	7
+Matthew Vinson	3
+Maxwell Osborn	16
+Mitchell Carpenter	1
+Nolan Rapp	11
+Riley Bagley	10
+Will Tibbetts	15
+Adam LaVoy	6
+Beau Gendron	19, 23
+Caleb Hernandez	2, 11
+Dylan Diaz	23
+Gavin Oliver	22
+Joshua Dachenhausen	1B, 1
+Joshua Halopoff	17
+Kyle Seifen	20
+Nick Murray	18
+Eric Hizon	21
 RS/RS Gavin McKenzie
-Roman Saroyan
-Ryan Previch
-Ryle Hibbard
-Brandt McBride
-Colton Brown
-Cooper Smith
-Gavin McKenzie
-Jacob DeJong
-Jake Burns
-Kevin Slack
-Koen Vos
-Owen Curtiss
-Alec Abrahamian
-Caden Digby
-Dean Witt
-Isaac Demski
-Ivan Tkach
-John Winters
-Levi Bengelink
-Mason Pellens
-Noah Ryznar
-Sebastian Reed
-Xander Trevitt
-Aiden Ortiz
-Asher Brunner
-Ayden Cisneros
-Carson Crocket
-Gavin Starling
-Igor Pinheiro
-Jayden Rose
-Kacper Landowski
-Landon Heuer
-Maddox Levandusky
-Micah Hernandez
-Myles Long
-Ryder Imbriani
-Armen Deirmenjian
-Austin Hwang
-Christian Cooper
-Doug Barber
-Galen Hu
-Hudson Rawlings
-Jack Wilson
-Jake Wyatt
-James Thygesen
-Luke Irwin
-Luke Weiser
-Rico Burke
-Santiago Nunez
-Spencer Carroll
-Tommy Bush
-Travis Bouscaren
-Tyler Kirchberg
-Warren Smith
-Will Collier
-Will Renken
-Yahel Murvitz-Lahav
-Adam Fuller
-Aidan Reilly
-Charlie Pang
-Daniel Hu
-Paul Kalandiak
-Riad Hallal
-Andrew Penner
-Gabe Kaplan
-Matt Simko
-Niko Bhatia
-Stephen Salle
-Ugo Piovan
-Cole Atwell
-Daniel McDermott
-Leo Berkman
-Maxwell Patterson
-Nick Berry
-Connor Enright
-Evan Moore
-Filip Aleksic
-Joe Gallagher
-Max Boucher
-Thomas Hoffmeister
-Anderson Todd
-Ben Kirshon
-Ben Resko
-Gabe Chang
-Simeon Dong
-Daniel Hadar
-Daniel Khristich
-Ilias Stothart
-Kole Newman
-Mike Winther
-Roberto Serrano
-Trey Rogers
-Goran Narancic
-Isaac Fernandez-Lopez
-Jaxson Tierney
-Mac Berry
-Máté Tymcyna
-Ramzi Megalli
-Ryan Miele
-Theo Pliner
-Dimitrios Kratimenos
-Dominik Balla
-Jeremy Tachiki
+Roman Saroyan	25
+Ryan Previch	13, 5
+Ryle Hibbard	3
+Brandt McBride	13
+Colton Brown	21, 4
+Cooper Smith	1C, 1A, 1
+Gavin McKenzie	10
+Jacob DeJong	16, 2
+Jake Burns	24, 2
+Kevin Slack	17/22, 8
+Koen Vos	19, 7
+Owen Curtiss	23
+Alec Abrahamian	22
+Caden Digby	3
+Dean Witt	24, 10
+Isaac Demski	15
+Ivan Tkach	17, 6
+John Winters	1D
+Levi Bengelink	14, 11
+Mason Pellens	1C
+Noah Ryznar	9, 7
+Sebastian Reed	1B, 1A
+Xander Trevitt	12, 9
+Aiden Ortiz	18
+Asher Brunner	23
+Ayden Cisneros	24
+Carson Crocket	25
+Gavin Starling	16
+Igor Pinheiro	1C
+Jayden Rose	14
+Kacper Landowski	12
+Landon Heuer	17
+Maddox Levandusky	1B
+Micah Hernandez	22
+Myles Long	19
+Ryder Imbriani	21
+Armen Deirmenjian	9, 24
+Austin Hwang	5
+Christian Cooper	19
+Doug Barber	12
+Galen Hu	21, 13
+Hudson Rawlings	14, 10, 23
+Jack Wilson	15, 11
+Jake Wyatt	11
+James Thygesen	18, 15, 5
+Luke Irwin	13
+Luke Weiser	1
+Rico Burke	17
+Santiago Nunez	4
+Spencer Carroll	2
+Tommy Bush	8
+Travis Bouscaren	3
+Tyler Kirchberg	7
+Warren Smith	6
+Will Collier	20, 6
+Will Renken	1
+Yahel Murvitz-Lahav	10
+Adam Fuller	18, 11
+Aidan Reilly	16, 8, 9, 7
+Charlie Pang	1
+Daniel Hu	14
+Paul Kalandiak	20
+Riad Hallal	1
+Andrew Penner	21
+Gabe Kaplan	7
+Matt Simko	12
+Niko Bhatia	18, 8
+Stephen Salle	15, 3
+Ugo Piovan	1
+Cole Atwell	10
+Daniel McDermott	15, 6
+Leo Berkman	2
+Maxwell Patterson	17, 22
+Nick Berry	4, 22
+Connor Enright	9
+Evan Moore	13
+Filip Aleksic	5
+Joe Gallagher	1
+Max Boucher	16, 3
+Thomas Hoffmeister	15, 7
+Anderson Todd	11
+Ben Kirshon	15, 8
+Ben Resko	6
+Gabe Chang	14
+Simeon Dong	1
+Daniel Hadar	18, 9
+Daniel Khristich	24
+Ilias Stothart	20, 32
+Kole Newman	1
+Mike Winther	17
+Roberto Serrano	21
+Trey Rogers	15, 4
+Goran Narancic	3
+Isaac Fernandez-Lopez	6
+Jaxson Tierney	10, 13
+Mac Berry	23, 5
+Máté Tymcyna	2, 10
+Ramzi Megalli	11
+Ryan Miele	1
+Theo Pliner	12
+Dimitrios Kratimenos	1
+Dominik Balla	23
+Jeremy Tachiki	18
 Shea Mathewson
-William Griswold
-William Vranesh
-Brody Paine
-Filip Josipovic
-Griffin Tunney
-Hugo Molnar
-Jackson Meleney
-Andrew Gao
-Colton Bell
-Ethan Kittredge
-Neveh Yechiely
-Oliver Chu
-Robert Norell
-Roland Csendes
-Santiago Soza
-Will Corr
-Willem Anton
-Alex Pullin
-Borna Bolanca
-Charlie Niehaus
-Cooper Dolan
-Cullen Jacuzzi
-Danny Farmer
-Jeff Hagen
-Johnathan Coleman
-Jordan White
-Logan Schofield
-Marko Djordjevic
-Nate Hunter
-R.J. Moore
-Rade Joksimovic
-Ratimir Babic
-Sean Daley
-Tommy Stupp
-Caio Jordao
-Jared Stanley
-Kyle Poland
-Matt Blackwell
-Oliver McClymonds
-Scott Little
-T.J. Morton
-Bence Fazekas
-Jack Lewis
-Jack Otto
-Mitchell Scott
-Adrien Touzot
-Andu Vlasceanu
-Colby Paine
-Jeff Brill
-NikI de la Sierra
-Will Gildea
-Doruk Ozar
-Ethan Jones
-Josh Yardley
-Liam Stott
-Ryan Stanley
-Walker Butler
-Hasan Mogultay
-Jack Bruce
-Jason Hackett
-Matt Ryckman
-Mitchell Bugalski
-Shay Gillearn
-Zachary Yardley
-Aleksa Stefanovic
-Ian Shultz
-Jack Murad
-Mateo Herrera
-Maxime Touzot
-David Dumitru
-Greg Nordheim
-Sean Tunnicliff
-Jack Dillane
-Jake Wedding
-Jovan Udovicic
-Ned Smith
-Tyler Hedblad
-Aidan Stone
-Andrew Hunyady
-Kai Johnson
-Nick Karamian
-Ori Raz
-Charles Koven
-Harley Haveman
-Hudson Tweed
-JR Lindberg
-Pier Giorgio Cicchetti
-Thomas Singleton
-Ben Russell
-Camron Hauer
-Chris Gardhouse
-Davis Thomas
-George French
-George Lundgren
-Hans Cole
-Jack Kirby
-Kevin Oetken
-Liam McCallum
-Mats Albins
-Matt Fong
-Matt Paxton
-Nick Loomis
-Seth Hightower
-Taggart Diehl
-Zack Card
-Andre Laserna
-Andre Rivas
-Davy Thomas
-Jake Venckus
-Jonathan Salandi
-Justin English
-Parker Jory
-Ramon Olivier V
-Stephen Blaauw
-Thomas Randles
-Wyatt Lowe
-Zach Zamecki
-Angelo Devito
-Ben Brown
-Dillon Goldsmith
-Eli Grimaldi
-Ethan Wlaschin
-Johnny Hirn
-Justin Krause
-Kaleo Lee
-Kyle Crist
-Matt Binckley
-Nathan March
-Stone Parker
-Tanner Kaplan
-Taylor Garcia
-Tommy Corey
-Zach Alford
-Cole Weiderman
-David Brandt
-Holden Crosina-Sahm
-Jackson Bottenberg
-Cole Ackerly
-Donald Nicol
-Justin Boals
-Nathan Flynn
-Tommy Riffle
-Trevor Campbell
-Cormac Flanders
-Daniel Johnson
-Greg Olsen
-Johnny Wotawa
-Lincoln Hall
-Luke Matthies
-Adam Dow
-Aidan Allamian
-Alex Wild
-Bo DuBois
-Brody Swarm
-Bryan Lynch
-Daniel Parr
-Eric Klang
-Jack Bradbury
-Matthew Knudsen
-Nic Mastropoalo
-Tyler Haug
-Zane Hermann
-Adam Scrivner
-Alan Castillo
-Caden Carlson
-Ethan Guereca
-Giulio Viviani
-Jack Germann
-Jacob Taff
-Kayden Sourbeer
-Levi Cook
-Luke Chang
-McKay Nelms
-Noah Carreon
-Tate Hirayama
-Tre Eade
-Valentino Soroor
-Zachary Isaac
-Alex Fewtrell
-Dylan Bassler
-Dylan Villanueva
-Jaeger Gonzales
-Jude Solis
-Max Gerdeman
-Merrick Giles
-Paul Patterson
-Ceasar Nava
-Bennett Bayha
-Callan Kluck-Hodgins
-Carson DaKroob
-Dylan Moscoso
-Eric Shea
-Isaac Townsend
-Landon Cleveland
-Logan Edwards
-Luke Larson
-Nate Lanier
-Ryder Lippman
-Shane Koki
-Aaron Ayala
-Alec Isaacman
-Bende Aubeli
-Bradley Pearce
-Cy Hammerstrom
-Dominic Hernandez
-Ethan Cooney
-Francisco Paredes
-Garrett Henderson
-Jacob Hatch
-Julian Nichols
-Kai Kubo
-Nico D'Angelo
-Noah Stark
-Reese Starkey
-Seth Zarn
-Shelby Johnson
-Togan Ozbek
-Tony Benedetti
-Will Johnson
-Zack Ewing
-Bo Brown
-Andrew Barnuevo
-Carmelo Bangs
-Ethan Ivey
-Ethan MacLeod
-Ethan Merritt
-Francesco Schiaffino
-Jace Peterson
-Luke Vargas
-Marton Thuroczy
-Ryan O'Donovan
-Samuel Branco
-Beau Gendron
-Cade Zeilinger
-Denes Dobi
-Dustin Drobeck
-Gavin Shea
-Jason Honey
-Jason Joseph
-Justin Hemara
-Luke Porter
-Zachary Shouka
-Bernardo Carelli
-Cade Kruse
-Chandler Jarrels
-Chase Hamming
-Connor Reid
-Conor Neumann
+William Griswold	7
+William Vranesh	6
+Brody Paine	2
+Filip Josipovic	3
+Griffin Tunney	22
+Hugo Molnar	8
+Jackson Meleney	14, 7
+Andrew Gao	21
+Colton Bell	19
+Ethan Kittredge	1
+Neveh Yechiely	15
+Oliver Chu	14
+Robert Norell	24
+Roland Csendes	9
+Santiago Soza	1
+Will Corr	1
+Willem Anton	17
+Alex Pullin	1
+Borna Bolanca	4
+Charlie Niehaus	1
+Cooper Dolan	6
+Cullen Jacuzzi	7
+Danny Farmer	18
+Jeff Hagen	10
+Johnathan Coleman	16, 1
+Jordan White	14
+Logan Schofield	12
+Marko Djordjevic	8
+Nate Hunter	2
+R.J. Moore	5
+Rade Joksimovic	22
+Ratimir Babic	11
+Sean Daley	9
+Tommy Stupp	3
+Caio Jordao	11
+Jared Stanley	9
+Kyle Poland	5
+Matt Blackwell	15, 2
+Oliver McClymonds	17
+Scott Little	16, 8
+T.J. Morton	2
+Bence Fazekas	4
+Jack Lewis	3
+Jack Otto	1
+Mitchell Scott	10
+Adrien Touzot	1
+Andu Vlasceanu	23
+Colby Paine	14
+Jeff Brill	11
+NikI de la Sierra	21
+Will Gildea	15
+Doruk Ozar	22
+Ethan Jones	12, 2
+Josh Yardley	6, 24
+Liam Stott	11, 10
+Ryan Stanley	24
+Walker Butler	7
+Hasan Mogultay	21
+Jack Bruce	9
+Jason Hackett	24
+Matt Ryckman	8, 4
+Mitchell Bugalski	11
+Shay Gillearn	12
+Zachary Yardley	13
+Aleksa Stefanovic	6
+Ian Shultz	8
+Jack Murad	11
+Mateo Herrera	1
+Maxime Touzot	20
+David Dumitru	1
+Greg Nordheim	14
+Sean Tunnicliff	3
+Jack Dillane	7
+Jake Wedding	5, 4
+Jovan Udovicic	10
+Ned Smith	2
+Tyler Hedblad	15
+Aidan Stone	1
+Andrew Hunyady	13
+Kai Johnson	9
+Nick Karamian	12
+Ori Raz	5
+Charles Koven	18
+Harley Haveman	21
+Hudson Tweed	8
+JR Lindberg	1
+Pier Giorgio Cicchetti	19
+Thomas Singleton	12
+Ben Russell	21
+Camron Hauer	19
+Chris Gardhouse	11, 9
+Davis Thomas	2
+George French	15, 12
+George Lundgren	17, 19, 9
+Hans Cole	2
+Jack Kirby	4
+Kevin Oetken	11
+Liam McCallum	16
+Mats Albins	3
+Matt Fong	22, 7
+Matt Paxton	20
+Nick Loomis	1
+Seth Hightower	8
+Taggart Diehl	14
+Zack Card	18
+Andre Laserna	13
+Andre Rivas	1
+Davy Thomas	6
+Jake Venckus	1
+Jonathan Salandi	1, 1A
+Justin English	16, 12
+Parker Jory	20, 10, 3
+Ramon Olivier V	10
+Stephen Blaauw	18
+Thomas Randles	17
+Wyatt Lowe	15, 5
+Zach Zamecki	5
+Angelo Devito	23, 16
+Ben Brown	15, 11, 10
+Dillon Goldsmith	11, 7
+Eli Grimaldi	16
+Ethan Wlaschin	1, 1C
+Johnny Hirn	1
+Justin Krause	17, 12
+Kaleo Lee	1, 1C
+Kyle Crist	20
+Matt Binckley	6, 13
+Nathan March	13, 17
+Stone Parker	19
+Tanner Kaplan	3
+Taylor Garcia	14, 6
+Tommy Corey	21, 15
+Zach Alford	22
+Cole Weiderman	14, 2
+David Brandt	19, 3, 13
+Holden Crosina-Sahm	4
+Jackson Bottenberg	1B
+Cole Ackerly	13
+Donald Nicol	11
+Justin Boals	9
+Nathan Flynn	1
+Tommy Riffle	4, 12
+Trevor Campbell	8
+Cormac Flanders	20, 6
+Daniel Johnson	1, 1C
+Greg Olsen	14
+Johnny Wotawa	22, 8
+Lincoln Hall	15, 24
+Luke Matthies	16
+Adam Dow	14
+Aidan Allamian	18
+Alex Wild	17
+Bo DuBois	1
+Brody Swarm	13
+Bryan Lynch	22
+Daniel Parr	1A
+Eric Klang	4
+Jack Bradbury	21
+Matthew Knudsen	19
+Nic Mastropoalo	23, 10
+Tyler Haug	1B
+Zane Hermann	5, 8
+Adam Scrivner	27, 15, 6
+Alan Castillo	7, 17
+Caden Carlson	26
+Ethan Guereca	15, 5
+Giulio Viviani	11
+Jack Germann	1, 1A
+Jacob Taff	1, 1B, 1A
+Kayden Sourbeer	4
+Levi Cook	17, 7
+Luke Chang	18, 22
+McKay Nelms	5
+Noah Carreon	19
+Tate Hirayama	25, 11
+Tre Eade	2, 3
+Valentino Soroor	23
+Zachary Isaac	20, 4
+Alex Fewtrell	23
+Dylan Bassler	1D, 1C, 1B
+Dylan Villanueva	22, 8
+Jaeger Gonzales	1C, 1A, 1
+Jude Solis	18
+Max Gerdeman	2
+Merrick Giles	14, 11
+Paul Patterson	16, 12
+Ceasar Nava	9
+Bennett Bayha	21
+Callan Kluck-Hodgins	17
+Carson DaKroob	10
+Dylan Moscoso	8
+Eric Shea	18
+Isaac Townsend	3
+Landon Cleveland	13
+Logan Edwards	14
+Luke Larson	20
+Nate Lanier	4
+Ryder Lippman	15
+Shane Koki	16
+Aaron Ayala	11
+Alec Isaacman	3
+Bende Aubeli	2
+Bradley Pearce	16
+Cy Hammerstrom	1C, 1A, 1
+Dominic Hernandez	7
+Ethan Cooney	14
+Francisco Paredes	22
+Garrett Henderson	1
+Jacob Hatch	10
+Julian Nichols	5
+Kai Kubo	23, 12
+Nico D'Angelo	8
+Noah Stark	1A, 1
+Reese Starkey	18
+Seth Zarn	1B
+Shelby Johnson	12
+Togan Ozbek	9
+Tony Benedetti	15, 5
+Will Johnson	13
+Zack Ewing	6
+Bo Brown	20
+Andrew Barnuevo	21
+Carmelo Bangs	16
+Ethan Ivey	1B
+Ethan MacLeod	7
+Ethan Merritt	6, 10
+Francesco Schiaffino	23, 11
+Jace Peterson	4
+Luke Vargas	17
+Marton Thuroczy	13
+Ryan O'Donovan	18, 6
+Samuel Branco	19, 8
+Beau Gendron	23
+Cade Zeilinger	24
+Denes Dobi	2
+Dustin Drobeck	17
+Gavin Shea	20
+Jason Honey	3
+Jason Joseph	21
+Justin Hemara	9
+Luke Porter	25
+Zachary Shouka	1A
+Bernardo Carelli	1
+Cade Kruse	20, 9
+Chandler Jarrels	3
+Chase Hamming	18
+Connor Reid	12
+Conor Neumann	19
 Duncan Froomer
-Farrel South
-Garrett Felix
-Gianni Taranto
-J.D. Ratchford
-Jack Pickard
-Jackson Hettler
-Johnny Hooper
-Jordan Hoover
-Kevin Le Vine
-Lazar Andric
-Luca Cupido
+Farrel South	4
+Garrett Felix	24
+Gianni Taranto	23
+J.D. Ratchford	11
+Jack Pickard	22
+Jackson Hettler	25
+Johnny Hooper	17
+Jordan Hoover	15, 12
+Kevin Le Vine	1
+Lazar Andric	1
+Luca Cupido	6
 Luka Milicevic
-Matt Sherburne
-Mikey Williams
-Nicholas Carniglia
-Nick Bisconti
-Odysseas Masmanidis
-Pedro Stellet
-Safak Simsek
-Spencer Tagg
-Thomas Carroll
-Timothy Simenc
-Vassilis Tzavaras
-Cameron Wright
-David Feingold
+Matt Sherburne	20
+Mikey Williams	8
+Nicholas Carniglia	7
+Nick Bisconti	9
+Odysseas Masmanidis	13, 21
+Pedro Stellet	2
+Safak Simsek	5
+Spencer Tagg	1
+Thomas Carroll	10
+Timothy Simenc	16
+Vassilis Tzavaras	14, 4
+Cameron Wright	11
+David Feingold	10
 Ethan Barnhart
-Ethan Wojciechowski
+Ethan Wojciechowski	10
 Kellan Grant
-Miles O'Brien-Schridde
-Nikos Delagrammatikas
-Ryan Hurst
-Spencer Farrar
-Tamir Avital
-Anthony Rethans
-Jack Deely
-Joe Molina
-Kaan Gezguc
-Marko Valecic
-Mateus Stellet
-Sam Murphy
-Adrian Weinberg
-Chris Ball
-Frederick Houghton
-Garrett Dunn
-Ian Minsterman
-Jake Stone
-James Parker Allen
-Jasmin Kolasinac
-Nikolaos Papanikolaou
-Sam Untrecht
-Warren Loth
-Alika Naone
-Blake Hoover
-Brady Hoover
-George Avakian
-Tommy Kennedy
-Will Kieckhafer
-George Chalkias
-Jordi Gascon
-Max Casabella
-Roberto Valera
-Wyatt Mundelius
-Xavier Casabella
-Albert Ponferrada
-Easton Hamm
-Jake Howerton
-Marci Szatmary
-Max LaGrange
-Nik Mirkovic
-Piero Arienti
-Ryder Hagan
-William Kelly
-Bende Pardi
-Carsten Peters
-Carter Loth
-Itay Batito
-Kai Seed
-Kama Morton
-Riley Clansen
-Alex Oprea
-Brennan Fuchslin
-Chris Calis
-Dante Ianora
-James Peace III
-Maddox Arlett
-Patrik Kolak
-Seth Bousfield
-Aran Pina
-Beso Akhvlediani
-Chase Wilson
-Dominic Brown
-Gigo Sarimsakci
-Kai Inoue
-Loui Schuler
-Luke Bachler
-Milan Sumich
-Patrick Stice
-Tomas Perrone
-Amir Shafrir
-Ilias Angelopoulos
-João Leme
-Mason Netzer
-Wyatt Williamson
-Brent Teraoka
-Caleb Rogers
-Christian Britton
-Dominick Nevarez
-Elad Gunya
+Miles O'Brien-Schridde	7
+Nikos Delagrammatikas	13, 9
+Ryan Hurst	14
+Spencer Farrar	3
+Tamir Avital	2
+Anthony Rethans	1
+Jack Deely	19
+Joe Molina	6
+Kaan Gezguc	20, 3
+Marko Valecic	8, 3
+Mateus Stellet	15, 23
+Sam Murphy	1
+Adrian Weinberg	1
+Chris Ball	22, 5
+Frederick Houghton	1
+Garrett Dunn	15, 8
+Ian Minsterman	17
+Jake Stone	16
+James Parker Allen	20
+Jasmin Kolasinac	4
+Nikolaos Papanikolaou	11, 4
+Sam Untrecht	21, 6
+Warren Loth	14
+Alika Naone	13
+Blake Hoover	22
+Brady Hoover	20
+George Avakian	24
+Tommy Kennedy	12
+Will Kieckhafer	1
+George Chalkias	13
+Jordi Gascon	15, 11, 6
+Max Casabella	2, 10
+Roberto Valera	11, 2
+Wyatt Mundelius	18, 3
+Xavier Casabella	1
+Albert Ponferrada	7
+Easton Hamm	26, 19
+Jake Howerton	9
+Marci Szatmary	12
+Max LaGrange	1
+Nik Mirkovic	15
+Piero Arienti	23
+Ryder Hagan	27, 17
+William Kelly	25
+Bende Pardi	28, 21
+Carsten Peters	26
+Carter Loth	18
+Itay Batito	13, 16
+Kai Seed	1
+Kama Morton	21, 13
+Riley Clansen	1
+Alex Oprea	11
+Brennan Fuchslin	14
+Chris Calis	28
+Dante Ianora	8
+James Peace III	1
+Maddox Arlett	4, 10
+Patrik Kolak	5, 13
+Seth Bousfield	27, 22
+Aran Pina	1
+Beso Akhvlediani	8
+Chase Wilson	6, 12
+Dominic Brown	5, 3
+Gigo Sarimsakci	16
+Kai Inoue	3, 5
+Loui Schuler	10, 15
+Luke Bachler	20
+Milan Sumich	9
+Patrick Stice	19
+Tomas Perrone	2
+Amir Shafrir	6
+Ilias Angelopoulos	4
+João Leme	21
+Mason Netzer	24
+Wyatt Williamson	7
+Brent Teraoka	6
+Caleb Rogers	11
+Christian Britton	20, 12
+Dominick Nevarez	24, 13, 11
+Elad Gunya	12
 Gibson Fleming
-JP Syfacunda
-Jonny Lotero
-Joseph Moorman
+JP Syfacunda	11, 1
+Jonny Lotero	10
+Joseph Moorman	1
 Justin Rohn
-Kyle Johnson
-Kyle Rasmussen
-Logan Mena
-Luke Schuler
-Matt Diacono
-Matt Miller
-Royce Daniel Laverne
-Ryan Sargis
-Shane Spees
-Tanner Shore
-Teddy Forte
-Thomas Henline
-Tyler Strabel
-Wesley Hertel
-Gabe Thorne
-Joseph Galgani
-Kyle Christian
-Michael Baker
-PJ McDonough
-Reilley Waterman
-Tommy Lotero
-Zach Lowery
-Harrison Carter
-Hunter Barnett
-Jacob Olsen
-Joseph Mireles
-Nick Johnson
-Riley Bumgardner
-Angel Sanchez
-David Romero
-Joseph Griffin
-Nicholas Flemington
-Thomas de Wit
-Tristan Felberg
-Woody Gates
-Cabot Ferguson
-Caleb Teraoka
-Cameron Cullen
-Ian Escoto
-Jacob Bullock
-Joseph Starr
-Matt Olsen
-Nikolas Photopolus
-Toby Bumgardner
-Trevor Benge
-Zach Zetz
-Andrew Hausoul
-Bryce Dickinson
-Gavin McKenzie
-George Rice
-Jonathan Rosenberg
-Marcus Lodewyk
-Simon Taylor
-Alex Righetti
-Bodhi Bowden
-Jacob Sill
-Logan Conover
-Logan Puhl
-Luca Imbriolo
-Stephen Partsch
-Toring Stanley
-William Whitstone
-Aidan Olson
-Ben Hecht
-Collin White
-Jaedan Calder
-Tanner Overbeck
-Trent De Leuuw
-Trevor Alamilo
-Wyatt Bugbee
-Aiden Neuron
-Andrea Nuzzo
-Asher Eaton
-Michael Abshier
-Owen Fonua
-Owen Rauth
-Paulo Hernandez
-Rafa Martinez
-Trent De Leeuw
-Edric Scott
-Hayes Beamon
-Jason Honey
-Lucas Warner
-Micah Grantham
-Nic Fall
-Phil Portisch
-Quintin Hoffman
-Tanner McCreary
-Tyler Carson
-Whitley Beamon
-Alessandro Tiberio
-Logan Hetland
-Sawyer McCormick
-Sullevan Kirtz
-Tanner Alford
-Ty VanderWall
-Zander Montoya
-Anuj Chadha
-Bradley Justice
-Charles Ross
-Chris Bradley
-Connor Lee
-Eshan Govil
-Harry Putterman
-John Lloyd
-Jordan Bonilla
-Parth Shah
-Richard May
-Shaurya Gilani
-Tim Menninger
-Tomas Tussie
-Alex Janosi
-David Berger Maneiro
-John Wang
-Neil Sanderson
-Nick Clausen
-Rahul Arun
-Steven Csaposs
-Alex Wang
-Andy Rothstein
-Austin Harvard
-Randall Pulido
-James Bowden
-Juan Arvelo
-Matthew Hajjar
-Max Bricken
-Wei Foo
-Eric Han
-Perry Samimy
-Andrew Graven
-Sean Zheng
-Bram Schork
-Colton Johnston
-Sujit Iyer
-Alexi Stapf
-Axel Haydt
-Eric Verheyden
-Hebu Patil
-Joshua Braun
-Justin Hong
-Kaleb Dy
-Rex Liu
-Shuhul Mujoo
-Andrés Heredia
-Carl Crum
-Maxwell Woodruff Vale
-Evan Dickson
-Kirby Fung
-Noah Van Beurden
-Alex Alexandrov
-Dane Torgerson
-Daniel Ott
-Ethan Hale
-Patrick Feng
-Tim Zhang
-Zaid Munir
-A Ivan Shikhelman
-B Derek Benison
-Bennett Royce
-Brady Hoskins
-Cameron Genetti
-Christian Connella
-Christopher Garau
-Corey Plaster
-Eric Sichak
-Ian Decker
-Ivo Ivanis
-Jack Hillman
-Jack Hocker
-Jacob Lepp
-Jared Bernardi
-Jeff O'Brien
-John Macdonald
-Joshua Bittick
-Justin Cooper
-Keith Kulick
-Louis Campbell
-Mark Brueggeman
-Matt Deterling
-Michael Garcia
-Nathaniel Fernandez
-Nick Parino
-Peter Dales
-Trent Sokol
-Wilson Parnell
-Garrett Wilson
-Hayden Reider
-Holt Fundament
-Hunter Ramaekers
-Jack Gregov
+Kyle Johnson	4
+Kyle Rasmussen	15, 6
+Logan Mena	9, 919
+Luke Schuler	16
+Matt Diacono	18, 8
+Matt Miller	11, 1
+Royce Daniel Laverne	3
+Ryan Sargis	7
+Shane Spees	13
+Tanner Shore	14
+Teddy Forte	8
+Thomas Henline	5
+Tyler Strabel	2
+Wesley Hertel	11
+Gabe Thorne	1
+Joseph Galgani	15
+Kyle Christian	2
+Michael Baker	19
+PJ McDonough	21, 10, 5
+Reilley Waterman	22
+Tommy Lotero	1
+Zach Lowery	20
+Harrison Carter	1
+Hunter Barnett	5, 7
+Jacob Olsen	13, 10
+Joseph Mireles	21
+Nick Johnson	19, 6
+Riley Bumgardner	17
+Angel Sanchez	3, 2
+David Romero	1
+Joseph Griffin	11
+Nicholas Flemington	14
+Thomas de Wit	13
+Tristan Felberg	1
+Woody Gates	16
+Cabot Ferguson	1
+Caleb Teraoka	6
+Cameron Cullen	3
+Ian Escoto	18, 10
+Jacob Bullock	19
+Joseph Starr	9, 7
+Matt Olsen	4
+Nikolas Photopolus	16
+Toby Bumgardner	15
+Trevor Benge	1
+Zach Zetz	8
+Andrew Hausoul	22
+Bryce Dickinson	14, 9
+Gavin McKenzie	19, 8
+George Rice	12
+Jonathan Rosenberg	1
+Marcus Lodewyk	21, 22, 11
+Simon Taylor	16, 14, 21
+Alex Righetti	5
+Bodhi Bowden	19, 9
+Jacob Sill	18
+Logan Conover	17
+Logan Puhl	16, 7
+Luca Imbriolo	19, 4
+Stephen Partsch	21
+Toring Stanley	20, 3
+William Whitstone	1
+Aidan Olson	22, 8
+Ben Hecht	18
+Collin White	14, 10
+Jaedan Calder	8
+Tanner Overbeck	17
+Trent De Leuuw	1
+Trevor Alamilo	1
+Wyatt Bugbee	2
+Aiden Neuron	21
+Andrea Nuzzo	14, 7
+Asher Eaton	19, 15
+Michael Abshier	20
+Owen Fonua	22, 12
+Owen Rauth	16, 14
+Paulo Hernandez	15, 11
+Rafa Martinez	13, 9
+Trent De Leeuw	1
+Edric Scott	1
+Hayes Beamon	3
+Jason Honey	21
+Lucas Warner	17, 14
+Micah Grantham	19
+Nic Fall	13
+Phil Portisch	6, 3
+Quintin Hoffman	16, 5
+Tanner McCreary	1
+Tyler Carson	1
+Whitley Beamon	22
+Alessandro Tiberio	12
+Logan Hetland	13
+Sawyer McCormick	6
+Sullevan Kirtz	21
+Tanner Alford	18
+Ty VanderWall	16
+Zander Montoya	17
+Anuj Chadha	5
+Bradley Justice	1/11, 1
+Charles Ross	15
+Chris Bradley	2
+Connor Lee	7
+Eshan Govil	10
+Harry Putterman	4
+John Lloyd	1/13
+Jordan Bonilla	16
+Parth Shah	9
+Richard May	14
+Shaurya Gilani	1/6, 1
+Tim Menninger	8
+Tomas Tussie	3
+Alex Janosi	8
+David Berger Maneiro	16
+John Wang	7
+Neil Sanderson	2
+Nick Clausen	4
+Rahul Arun	19
+Steven Csaposs	3
+Alex Wang	6, 5
+Andy Rothstein	11
+Austin Harvard	12
+Randall Pulido	9
+James Bowden	6, 2
+Juan Arvelo	11
+Matthew Hajjar	10
+Max Bricken	9
+Wei Foo	1A, 1/5
+Eric Han	16
+Perry Samimy	8
+Andrew Graven	4/1A
+Sean Zheng	14
+Bram Schork	3, 4
+Colton Johnston	7
+Sujit Iyer	1/6, 1
+Alexi Stapf	12
+Axel Haydt	15
+Eric Verheyden	5
+Hebu Patil	7
+Joshua Braun	10
+Justin Hong	2, 13, 8
+Kaleb Dy	9
+Rex Liu	6
+Shuhul Mujoo	8, 1A, 1
+Andrés Heredia	2
+Carl Crum	14
+Maxwell Woodruff Vale	16
+Evan Dickson	11
+Kirby Fung	3
+Noah Van Beurden	2
+Alex Alexandrov	17
+Dane Torgerson	6
+Daniel Ott	21
+Ethan Hale	4
+Patrick Feng	13
+Tim Zhang	1A
+Zaid Munir	20
+A Ivan Shikhelman	1A
+B Derek Benison	1B
+Bennett Royce	13
+Brady Hoskins	11
+Cameron Genetti	2
+Christian Connella	16, 20
+Christopher Garau	4
+Corey Plaster	3
+Eric Sichak	18, 3, 14
+Ian Decker	1
+Ivo Ivanis	8
+Jack Hillman	7
+Jack Hocker	27
+Jacob Lepp	20
+Jared Bernardi	23, 12, 10
+Jeff O'Brien	6
+John Macdonald	24, 16
+Joshua Bittick	12
+Justin Cooper	22
+Keith Kulick	17, 14, 13
+Louis Campbell	10
+Mark Brueggeman	25
+Matt Deterling	9
+Michael Garcia	15
+Nathaniel Fernandez	5, 9
+Nick Parino	26
+Peter Dales	14, 4, 21
+Trent Sokol	19
+Wilson Parnell	21
+Garrett Wilson	15, 8
+Hayden Reider	8, 3
+Holt Fundament	17
+Hunter Ramaekers	5, 7
+Jack Gregov	1A, 1
 Kevin Bowers
-Kevin Dayan
-Wesley Hertel
-Andy Anguiano
-Brad Wilson
-Daniel Kavesh
-Ethan Walter
-Evan Belli
-Graham Asalone
-Jack Denny
-Mark Balcarcel
-Philip MacLean
-Vasil Halchev
-Andy Colmignoli
-Danny Meisel
-Garrett Hernandez
-Joshua Benitez
-Max Schoening
-Noah Brooks
-Owen McNicholas
-Ryan Nielsen
-Tanner Frost
-Wes Hertel
-Elijah Clark
-Everett Prussak
-Hudson Pak
-Jacob Bullock
-Mark Mechtovich
-Nate Randolph
-Noah Baird
-Peter Frisell
-Ryan Baumann
-Spencer Snow
-Tanner McMillen
-Andrea Colmignoli
-Andrew Blanco
-Ben Blatt
-Brady DiMaria
-Daniel Franks
-Dylan Gallegos
-Kenan Kalabic
-Levi Davis
-Luke Stiebel
-Maks Popov
-Tommy Richards
-Davin Castillo
-Devan Charamuga
-Drake MacNichols
-Jack Griffith
-Jacob Press
-Jayce Gallegos
-Joshua Brown
-Kosta Radoman
-Sahak Abrahamyan
-Sam Everlove
-Sammy Hendrickson
-Steven Rubly
-Thatcher Lytel
-Truman Inglis
-Alex Cacos
-Brendan Canada
-Christian Gotterup
-Ian Jones
-Jack Baker
-Jackson Sanders
-Jason Pieracci
-Matthew Cormican
-Nathan Jones
-Oliver Chelsom
-Aka Pietsch
-Boston Fisher
-Charles Cain
-David Yacoub
-Isaac Solberg
-Owen Levine
-River Lyon
-Rylan Takahashi
-Rylind Butler
-Weston Hamson
-Bryce Winters
-Carter Carano
-Garrett Gendron
-Jake Johnson
-Julian Bastick
-Leo Scheiner
-Matteo Tortoc
-Matthew Arellano
-Seneca Wahab-Holles
-Tyler Bird
-Tyler Dayton
-Alex Waggoner
-Arya Nakhjavani
-Brett Newman
-Charlie Thomson
-Ellison Taylor
-Eric Bakar
-Eric Thvedt
-Ethan Lewis
-Evan Pauletich
-Graham Fullerton
-Harrison Miller
-Matt Daruty
-Nick Bailey
-Noah Deer
-Peter Tilton
-Rye Newman
-Zack Rossman
-Barron Banta
-CJ Box
-Christian Thornton
-Eric Weiner
-Justin Law
-Koss Klobucher
-Nick Britt
-Robert Driscoll
-Sean Pine
-Andrew Wraith
-Eric Warmoth
-Matt Tran
-Noah Smith
-Peter Blumberg
-Sam Harrison
-William Clark
-Ben Weldon
-Kyle Ballack
-Nick Hernandez
-Nick Maramica
-Noah Weldon
-Rob Driscoll
-Will Clark
-Aidan Nettekoven
-Ashwin Rhodes
-Auggie Aliaga
-Cristian Pang
-Eli Schwarz
-Gavin Rosser
-Harry Rinker
-Len Korol
-Theodore Pasquesi
-William Thomas
-Donovan Davidson
-Jaden Lind
-Jake Taylor
-Luke (Bear) Weigle
-Thomas Walker
-Gavin Netherton
-Hassen Hove
-Ivey Gehring
-Jack Bryant
-Jeffrey Koretz
-Nick Kennedy
-Rohan Rhodes
-Stryker Scales
-Asher Engelberg
-Chase Campbell
-Jordan Lind
-Luke Leonard
-Tobias Schoenwald
-Caiden Titus
-Calvin Donat
-Christopher Petrossian
-Liam Luinenburg
-Nelson Harris
-Weston Hartel
-Akash Singh
-Connor Burks
-Evan Liberatore
-Fletcher Appeldorn
-Jack Balas
-Oliver Geheb
-Pete Ryan
-Tor Martin
-Alex Ramirez
-Andrew Parese
-Chasen Gaunt
-Cristiano Tomassetti
-Cullen Mooers
-Jacob Saduddin
-Jake Snyder
-Jeff Rubino
-Jeff Wheeler
-John Roberts
-Matthew Lange
-Messan Moore
-Michael Marr
-Nick Walker
+Kevin Dayan	18
+Wesley Hertel	1
+Andy Anguiano	16, 6
+Brad Wilson	4
+Daniel Kavesh	18, 11, 5
+Ethan Walter	8
+Evan Belli	6, 7
+Graham Asalone	9
+Jack Denny	20
+Mark Balcarcel	1
+Philip MacLean	5, 20, 2
+Vasil Halchev	12
+Andy Colmignoli	14, 10
+Danny Meisel	1
+Garrett Hernandez	18, 21
+Joshua Benitez	10
+Max Schoening	16, 18, 8
+Noah Brooks	17
+Owen McNicholas	1
+Ryan Nielsen	2
+Tanner Frost	13
+Wes Hertel	1
+Elijah Clark	22, 17
+Everett Prussak	14
+Hudson Pak	16, 4
+Jacob Bullock	17, 3
+Mark Mechtovich	13
+Nate Randolph	12
+Noah Baird	11
+Peter Frisell	9
+Ryan Baumann	15
+Spencer Snow	20
+Tanner McMillen	1
+Andrea Colmignoli	2
+Andrew Blanco	22, 26
+Ben Blatt	1
+Brady DiMaria	9
+Daniel Franks	13
+Dylan Gallegos	7, 24, 8
+Kenan Kalabic	23
+Levi Davis	10, 5
+Luke Stiebel	16
+Maks Popov	18, 22
+Tommy Richards	6
+Davin Castillo	3
+Devan Charamuga	2, 21
+Drake MacNichols	23, 4
+Jack Griffith	11
+Jacob Press	19
+Jayce Gallegos	25, 20
+Joshua Brown	18, 9
+Kosta Radoman	27, 23, 7
+Sahak Abrahamyan	7, 19
+Sam Everlove	1
+Sammy Hendrickson	15
+Steven Rubly	10
+Thatcher Lytel	8, 6
+Truman Inglis	21
+Alex Cacos	1, 1A
+Brendan Canada	1
+Christian Gotterup	2
+Ian Jones	24, 8, 17
+Jack Baker	18
+Jackson Sanders	1
+Jason Pieracci	7, 2
+Matthew Cormican	22, 14, 2
+Nathan Jones	17
+Oliver Chelsom	1, 1B
+Aka Pietsch	12, 24
+Boston Fisher	24, 5
+Charles Cain	22
+David Yacoub	1C, 1A
+Isaac Solberg	11, 21
+Owen Levine	4
+River Lyon	5, 3
+Rylan Takahashi	6
+Rylind Butler	21, 19
+Weston Hamson	23
+Bryce Winters	26
+Carter Carano	13
+Garrett Gendron	11
+Jake Johnson	25
+Julian Bastick	1B
+Leo Scheiner	16
+Matteo Tortoc	23
+Matthew Arellano	4
+Seneca Wahab-Holles	8
+Tyler Bird	12
+Tyler Dayton	14
+Alex Waggoner	19
+Arya Nakhjavani	5
+Brett Newman	1
+Charlie Thomson	7
+Ellison Taylor	3
+Eric Bakar	16
+Eric Thvedt	11
+Ethan Lewis	14, 17
+Evan Pauletich	1
+Graham Fullerton	8
+Harrison Miller	9
+Matt Daruty	6
+Nick Bailey	17
+Noah Deer	12
+Peter Tilton	4
+Rye Newman	1
+Zack Rossman	10
+Barron Banta	20
+CJ Box	15
+Christian Thornton	13, 10
+Eric Weiner	14
+Justin Law	21
+Koss Klobucher	18
+Nick Britt	16
+Robert Driscoll	2, 4
+Sean Pine	3
+Andrew Wraith	12
+Eric Warmoth	5
+Matt Tran	1
+Noah Smith	1
+Peter Blumberg	4
+Sam Harrison	19, 11
+William Clark	8
+Ben Weldon	7
+Kyle Ballack	6, 5
+Nick Hernandez	19
+Nick Maramica	21, 3, 6
+Noah Weldon	4, 2
+Rob Driscoll	2
+Will Clark	8
+Aidan Nettekoven	1
+Ashwin Rhodes	20, 15, 2
+Auggie Aliaga	17, 11, 6
+Cristian Pang	16
+Eli Schwarz	18, 17, 7
+Gavin Rosser	13, 10
+Harry Rinker	14, 8, 4
+Len Korol	9
+Theodore Pasquesi	22
+William Thomas	21, 3
+Donovan Davidson	12, 7
+Jaden Lind	14
+Jake Taylor	1
+Luke (Bear) Weigle	13
+Thomas Walker	4, 25, 5
+Gavin Netherton	14, 20
+Hassen Hove	23, 10
+Ivey Gehring	8, 4
+Jack Bryant	15, 11, 2
+Jeffrey Koretz	21, 3
+Nick Kennedy	24, 12
+Rohan Rhodes	1
+Stryker Scales	17, 23
+Asher Engelberg	8
+Chase Campbell	1/1A, 1
+Jordan Lind	14
+Luke Leonard	21
+Tobias Schoenwald	15
+Caiden Titus	16, 7
+Calvin Donat	14
+Christopher Petrossian	11
+Liam Luinenburg	1/1A, 1
+Nelson Harris	6
+Weston Hartel	9
+Akash Singh	15
+Connor Burks	1
+Evan Liberatore	18
+Fletcher Appeldorn	13
+Jack Balas	5
+Oliver Geheb	17
+Pete Ryan	19
+Tor Martin	4
+Alex Ramirez	3, 14
+Andrew Parese	1
+Chasen Gaunt	14
+Cristiano Tomassetti	15
+Cullen Mooers	1A
+Jacob Saduddin	16
+Jake Snyder	8
+Jeff Rubino	10
+Jeff Wheeler	7, 4, 12
+John Roberts	5, 13
+Matthew Lange	12
+Messan Moore	17, 10
+Michael Marr	11, 8
+Nick Walker	6
 RS Blake Grove
 RS Joshua Mundell
-Spencer Hosch
-Trenton Pressley
-Vincent Giacalone
-Zackary Schall
-Alfredo De La Mora
-Angel Rojas
-Dan Maleski
-Daniel Castagnola
-Daniel Devine
-Doug Kazmier
-Gibson Gerace
-Joshua Mundell
-Patrik Zsiros
-Alberto Cortes
-Alberto Gonzalez
-Austin Barton
-Christian Bowley
-Christian Manalo
-Kaimi Medina
-Marius Jakimcikas
-Mitchell Iunker
-Braden Lee
-Alex Newberg
-Austin Wade
-Hunter Osgood
+Spencer Hosch	13
+Trenton Pressley	2, 12
+Vincent Giacalone	4
+Zackary Schall	1B
+Alfredo De La Mora	1
+Angel Rojas	7
+Dan Maleski	11, 2
+Daniel Castagnola	14, 5
+Daniel Devine	18
+Doug Kazmier	21
+Gibson Gerace	19
+Joshua Mundell	2
+Patrik Zsiros	9
+Alberto Cortes	16
+Alberto Gonzalez	8
+Austin Barton	4
+Christian Bowley	11
+Christian Manalo	20
+Kaimi Medina	22
+Marius Jakimcikas	18
+Mitchell Iunker	17
+Braden Lee	3
+Alex Newberg	9
+Austin Wade	2, 11
+Hunter Osgood	1
 Jacob Markle
-Jeff Runyan
+Jeff Runyan	5
 Justin Rothermich
 Ryder Wade
-Shaine Sargis
+Shaine Sargis	3
 Shako Khizanishvili
-Andrew Dimino
-Callin Chimilar
-Connor McElwee
-Dawson Brummett
-Gordy Cucullu
-Griffin Beth
-Harry Nixon
-Jackson Milius
-Jacob Stuart
-Kevin Shearer
-Tanner Powell
-Xander Luckett
-Charlie Johnson
-Harry Bentham
-Leo Erickson
-Luke Addington
-Matthew Hall
-Micah McGranahan
-Oscar Garcia Blomback
-Sam Diamond
-Cade Peterson
-Carlos Olat
-Jace Peterson
-Kaliq Khan
-Kanoa Stoddard
-Stan De Mey
-Hale Durbiano
-Kai Young
-Konstantinos Koulouris
-Lucas Rodriguez
-Ruben Montoya
-Thomas Kelly
-Canyon Johnson
-Carter Clenney
-Derek Maddox
-Dimitrios Koritsas
-Dylan Poladian
-Ethan Sutherland
-Hugo Wouters
-Levi Riegelmann
-Luc Chapman
-Nicolas Fuchs
-Pablo de Souza
-Porter Rosenlof
-Caleb Luby
-Dante Soldati Ianora
-Jadon Pendergrass
-Joao Goncalves
-Jordan Martinez
-Noah Castillo
-Wes Brazda
-Aidan Kelso
-Arturo Freitas
-Calvin Frye
-Carlos Heros
-Chase Lesniak
-Dylan Pinckert
-Henry McMillan
-Isaih Porter
-Jake Pescatore
-Jake Smith
-Matthew Wagman
-Rahul Gill
-Sean King
-Stephan Cress
-Timofey Belobordov
-Tanner Michaelis
-Timofey Beloborodov
-Ulas Cini
-Danny Meisel
-Jake Florio
-John Krill
-Lucas Verrilli
-Mike Gertsik
-Tim Beloborodov
-Christian Jacobsen
-Sam Guy
-Sean King
-Alex Turnquest
-Caden Heinze
-Grant Archer
-George Gould
-Jonathan Rojas
-Siaki Nelson
-Carson Neidert
-Chase Fichtner
-Cully MacPherson
-Graham Stuart
-Isaac Merwin
-Jack Haddad
-Matthew Maischoss
-Sebastian Parilov
-Brevin Master
-Cormac Stevens
-Edwin Smilack
-Ethan Hipsky
-Jeffrey Harrington
-Jesse Ellis
-Liam Merrill
-Artem Kyselov
-Augie Loredo
-Keegan Kosiba
-Paul Podrebarac
-Thomas McDonough
-Adam Teryek
-Kale Halfacre
-Topher Cook
-Zach Dixon
-1A/17 Graham Hege
-1B/19 Baxter Bertozzi
-Andrew Rose
-Benjamin Turner
-Bruno Beznos
-Connor McLean
-Jack Dillon
-Laird Welch
-Alex Jahns
-Cameron Shewchuck
-Cole Donnelly
-Diego Delgado
-Ethan Vandeventer
-George Maltby
-Grant Keesling
-Ian Watson
-J.J. Meador
-Jacob Alexander
-Jake Brogan
-Jake Miller-Tolt
-Joseph Agabs
-Magnus Sims
-Patrick Coffey
-R.J. Simmons
-Samuel Varshisky
-Tristen Knoflick
-Will Smoot
-Yuki Saito
-August Weyandt
-Massimiliano Mirarchi
-Nikolai Kapetan
-Phillip Wang
-Sam Wheeler
-Bailey O'Mara
-Dimitris Koukias
-Evan Simpson
-Gordon Rowland
-Joseph Jellinek
-Aldo Ordoñez
-Daniel Lynch
-Jason Hiremath
-Matthew Hahn
-Oscar Nomura
-Quinn Wagner
-Sebastian Zapatero
-Skyler Knoflick
-Stephen Judge
-Christos Loupakis
-Curtis Vidinoff
-Hans Zdolsek
-Henrique Giangrande
-Jack Brodersen
-John Belov
-Michael Rahner
-Gabriel Melillo
-George Papanikolaou
-Jacopo Parrella
-Lucas Nieto Jasny
-Mark Katsev
-Nacho Ariste
-Riccardo Di Giuseppe
-Thomas Lercari
-Victor Schultz
-Balazs Berenyi
-Brendan Cassidy
-Jagger McMannis
-Luca Silvestri
-Nir Gross
-Paul Pittion
-Barnabas Eppel
-Berk Oral
-Christian Gotterup
-Christopher Gray
-Gabriel Guinane
-Panayiotis Giannas
-Paul Armingol
-Reid Thorson
-Andras Toth
-Csongor Bartuszek
-Ioane Maglakelidze
-James Oriskovich
-Kristof Magony
-Luca Provenziani
-Marco Napolitano
-Reggie Robles
-Sean O'Neill
-Tyler Fahey
-West Gartland
-Alessandro Salipante
-Charlie Martin
-Diego Tresa
-Gianni Farrugia
-Kyle Thomas
-Mark Dyck
-Matthew Bonello DuPuis
-Soren Jessen
-Alejandro Cheline
-Balazs Bathory
-Bern Kent
-Karlo Dragosevic
-Laszlo Strasser
-Liam Rogers
-Oktavian Veklyuk
-Petar Kulas
-Viktor Savic
-Vuk Kojic
-David Maes
-Dillon Robinson
-Erik Brown
-Garrett Pickford
-Garth Verdegaal
-Gavin Jette
-George Dimitroulis
-Jacob Fairchild
-James Tombaugh
-Jamison Shapland
-Joseph Costa
-Joshua Ramage
-Kyle Eoff
-Kyle Madel
-Mitch Clark
-Nathan Olson
-Nick Stegall
-Paul Siebenaler
-Steven Kaufmann
-Taylor Heckathorn
-Zach Koch
-Zach Weaver
-Cal Bruening
-Jonathan Bagley
-Jorel Sabado
-Lazar Raca
+Andrew Dimino	6
+Callin Chimilar	12
+Connor McElwee	19, 7
+Dawson Brummett	20, 10, 2
+Gordy Cucullu	17
+Griffin Beth	1C, 1B, 1
+Harry Nixon	4
+Jackson Milius	8
+Jacob Stuart	15, 5
+Kevin Shearer	14
+Tanner Powell	1A
+Xander Luckett	18, 16, 7
+Charlie Johnson	18, 12
+Harry Bentham	22, 10
+Leo Erickson	17
+Luke Addington	20, 6, 24
+Matthew Hall	19
+Micah McGranahan	23
+Oscar Garcia Blomback	2, 15, 11, 4
+Sam Diamond	9
+Cade Peterson	21
+Carlos Olat	4
+Jace Peterson	22
+Kaliq Khan	13
+Kanoa Stoddard	17, 7
+Stan De Mey	3, 24
+Hale Durbiano	1A
+Kai Young	15, 3
+Konstantinos Koulouris	3
+Lucas Rodriguez	23
+Ruben Montoya	22
+Thomas Kelly	20
+Canyon Johnson	20
+Carter Clenney	19
+Derek Maddox	1B
+Dimitrios Koritsas	6
+Dylan Poladian	16
+Ethan Sutherland	1C
+Hugo Wouters	5
+Levi Riegelmann	15
+Luc Chapman	14
+Nicolas Fuchs	11
+Pablo de Souza	1
+Porter Rosenlof	2
+Caleb Luby	7
+Dante Soldati Ianora	22
+Jadon Pendergrass	12
+Joao Goncalves	17
+Jordan Martinez	8
+Noah Castillo	10
+Wes Brazda	4
+Aidan Kelso	2
+Arturo Freitas	5, 10
+Calvin Frye	10
+Carlos Heros	20
+Chase Lesniak	4
+Dylan Pinckert	3
+Henry McMillan	11
+Isaih Porter	9
+Jake Pescatore	13
+Jake Smith	7
+Matthew Wagman	1
+Rahul Gill	18, 2
+Sean King	17
+Stephan Cress	6
+Timofey Belobordov	15
+Tanner Michaelis	1A, 1
+Timofey Beloborodov	9
+Ulas Cini	22
+Danny Meisel	1A
+Jake Florio	4
+John Krill	3
+Lucas Verrilli	5
+Mike Gertsik	12
+Tim Beloborodov	9
+Christian Jacobsen	21, 10
+Sam Guy	6
+Sean King	17
+Alex Turnquest	11
+Caden Heinze	7
+Grant Archer	3
+George Gould	7
+Jonathan Rojas	8
+Siaki Nelson	10, 4
+Carson Neidert	13, 4
+Chase Fichtner	14
+Cully MacPherson	1, 18
+Graham Stuart	16
+Isaac Merwin	1B
+Jack Haddad	11
+Matthew Maischoss	12
+Sebastian Parilov	1A
+Brevin Master	15
+Cormac Stevens	2
+Edwin Smilack	19
+Ethan Hipsky	13
+Jeffrey Harrington	6
+Jesse Ellis	14
+Liam Merrill	5
+Artem Kyselov	1, 1/10
+Augie Loredo	11
+Keegan Kosiba	9
+Paul Podrebarac	3
+Thomas McDonough	7
+Adam Teryek	19
+Kale Halfacre	8
+Topher Cook	10
+Zach Dixon	20
+1A/17 Graham Hege	1A/17
+1B/19 Baxter Bertozzi	1B/19
+Andrew Rose	4
+Benjamin Turner	5
+Bruno Beznos	12
+Connor McLean	16
+Jack Dillon	18
+Laird Welch	15
+Alex Jahns	1
+Cameron Shewchuck	7
+Cole Donnelly	12
+Diego Delgado	9
+Ethan Vandeventer	6
+George Maltby	17, 16, 7
+Grant Keesling	11
+Ian Watson	14
+J.J. Meador	16
+Jacob Alexander	19
+Jake Brogan	18
+Jake Miller-Tolt	3
+Joseph Agabs	4
+Magnus Sims	10
+Patrick Coffey	1A, 1
+R.J. Simmons	8
+Samuel Varshisky	15, 16, 8
+Tristen Knoflick	5
+Will Smoot	13
+Yuki Saito	2, 15, 9
+August Weyandt	11, 10
+Massimiliano Mirarchi	2
+Nikolai Kapetan	19, 18
+Phillip Wang	8, 7, 6, 3
+Sam Wheeler	18, 17, 11, 4
+Bailey O'Mara	1A, 1
+Dimitris Koukias	2
+Evan Simpson	19
+Gordon Rowland	6, 13, 10
+Joseph Jellinek	20
+Aldo Ordoñez	1A, 1B
+Daniel Lynch	19, 18, 17, 16
+Jason Hiremath	14, 6, 5
+Matthew Hahn	18, 16
+Oscar Nomura	8
+Quinn Wagner	16, 8, 15
+Sebastian Zapatero	15, 11
+Skyler Knoflick	17, 19
+Stephen Judge	20, 15, 21
+Christos Loupakis	5, 4
+Curtis Vidinoff	9, 7
+Hans Zdolsek	7, 3
+Henrique Giangrande	13
+Jack Brodersen	14, 20
+John Belov	1B
+Michael Rahner	12, 16, 15, 13
+Gabriel Melillo	12, 10, 7
+George Papanikolaou	8, 6
+Jacopo Parrella	6, 12
+Lucas Nieto Jasny	9, 8, 10
+Mark Katsev	18, 14, 11
+Nacho Ariste	10, 9
+Riccardo Di Giuseppe	1C, 1A
+Thomas Lercari	1A, 1
+Victor Schultz	14, 13
+Balazs Berenyi	17, 2
+Brendan Cassidy	19, 18, 17
+Jagger McMannis	20, 5
+Luca Silvestri	2, 8
+Nir Gross	3
+Paul Pittion	18
+Barnabas Eppel	3, 10
+Berk Oral	19
+Christian Gotterup	14
+Christopher Gray	15, 9, 8
+Gabriel Guinane	17
+Panayiotis Giannas	1B
+Paul Armingol	9
+Reid Thorson	16, 7, 2
+Andras Toth	20, 3
+Csongor Bartuszek	19, 12
+Ioane Maglakelidze	21
+James Oriskovich	4
+Kristof Magony	1A, 1
+Luca Provenziani	18
+Marco Napolitano	22, 11
+Reggie Robles	1B
+Sean O'Neill	23
+Tyler Fahey	13
+West Gartland	14
+Alessandro Salipante	22, 11
+Charlie Martin	16
+Diego Tresa	15, 9
+Gianni Farrugia	20, 12
+Kyle Thomas	6
+Mark Dyck	4, 7
+Matthew Bonello DuPuis	1A
+Soren Jessen	21, 15
+Alejandro Cheline	1C
+Balazs Bathory	17
+Bern Kent	13
+Karlo Dragosevic	20
+Laszlo Strasser	4
+Liam Rogers	21
+Oktavian Veklyuk	14
+Petar Kulas	19
+Viktor Savic	1B
+Vuk Kojic	5
+David Maes	5
+Dillon Robinson	1
+Erik Brown	7
+Garrett Pickford	9
+Garth Verdegaal	11
+Gavin Jette	10, 5
+George Dimitroulis	13
+Jacob Fairchild	18
+James Tombaugh	8, 4
+Jamison Shapland	12
+Joseph Costa	1
+Joshua Ramage	1
+Kyle Eoff	21
+Kyle Madel	14
+Mitch Clark	15
+Nathan Olson	19, 12
+Nick Stegall	20
+Paul Siebenaler	2
+Steven Kaufmann	6
+Taylor Heckathorn	4
+Zach Koch	16
+Zach Weaver	3
+Cal Bruening	16, 7, 3
+Jonathan Bagley	14
+Jorel Sabado	15
+Lazar Raca	8, 9
 RS Jacob Fairchild
 RS Taylor Heckathorn
-Richard Szepesi
-Uros Pelemis
-Cody Wickman
-Drew Parsley
-Michael Hicks
-Michael Mason
-Miguel Diaz
+Richard Szepesi	10
+Uros Pelemis	6
+Cody Wickman	20, 2
+Drew Parsley	15, 5
+Michael Hicks	1
+Michael Mason	17
+Miguel Diaz	16
 RS Cameron Olson
-Cameron Olson
-Clay Maroney
-Conner Schink
-Curtis Vidinoff
-Matt Ross
-Tyler Gentry
-William Green
-Zach Zetz
-Cole Duffett
-Philip Dinis
-Steven Chapman
-Trevor Riley
-Bodhi Bowden
-Ethan McLaughlin
-Eugenio Maldonado
-Inocencio Salazar
-Jacob Renevier
-Lucas Wilkinson
-Max Dieterle
-Nikita Kravtsov
-Pietro Cattano
-Thilo Popp
-Blake Johnson
-Christian Clark
-Cole Sjoblom
-Forrest Gray
-Martin Angelov
-Nicholas Murilo
-Sabelo Mlaba
-Samuel Ramos
-William Hoyle
-Andrew Duncan
-Cameron Reynolds
-Chase Hammes
-Mathew Kamykowski
-Scott Tashima
-Timothy Prentice
-Brendan Terra
-Chris Sandino
-Jake Canales
-Jordan Lambert
-Luke Young
-Tristin Fox
-Ben Brockmeier
-Ben Rapley
-Colton Parks
-Jimmy Johnston
-Joey Brocar
-Jonah Mutchler
-Jordan Gonzales
-Matthew Dillsaver
-Nathaniel Tuell
-Aricin Marshall
-Eliot Vilanova
-Giacomo Hernandez
-Jesse Bryan
-Lukas Hoopes
-Mason Curry
-Roberto Perez-Puente
-Ryan Nasalroad
-Ryan Scott
-Ryder Stermer
-Yanti Quijada
-Zack Lovick
-1A/15 Nicholas Fagen
+Cameron Olson	7
+Clay Maroney	1
+Conner Schink	1
+Curtis Vidinoff	5
+Matt Ross	21
+Tyler Gentry	11
+William Green	9, 3
+Zach Zetz	8
+Cole Duffett	5
+Philip Dinis	13
+Steven Chapman	4
+Trevor Riley	7, 13
+Bodhi Bowden	6
+Ethan McLaughlin	1A, 1
+Eugenio Maldonado	7, 5
+Inocencio Salazar	9
+Jacob Renevier	8
+Lucas Wilkinson	12
+Max Dieterle	21
+Nikita Kravtsov	11
+Pietro Cattano	10
+Thilo Popp	16
+Blake Johnson	2
+Christian Clark	18
+Cole Sjoblom	7
+Forrest Gray	6
+Martin Angelov	13
+Nicholas Murilo	1, 1A
+Sabelo Mlaba	9
+Samuel Ramos	4
+William Hoyle	15
+Andrew Duncan	9
+Cameron Reynolds	21
+Chase Hammes	1B, 1
+Mathew Kamykowski	16
+Scott Tashima	20
+Timothy Prentice	14
+Brendan Terra	16
+Chris Sandino	24
+Jake Canales	3
+Jordan Lambert	17
+Luke Young	9, 7
+Tristin Fox	12
+Ben Brockmeier	1a
+Ben Rapley	1b, 1A
+Colton Parks	10
+Jimmy Johnston	11
+Joey Brocar	5, 18
+Jonah Mutchler	5
+Jordan Gonzales	16
+Matthew Dillsaver	8
+Nathaniel Tuell	9
+Aricin Marshall	20
+Eliot Vilanova	23
+Giacomo Hernandez	25
+Jesse Bryan	2
+Lukas Hoopes	15
+Mason Curry	19
+Roberto Perez-Puente	4
+Ryan Nasalroad	21
+Ryan Scott	14
+Ryder Stermer	6
+Yanti Quijada	13
+Zack Lovick	1B
+1A/15 Nicholas Fagen	1A/15
 Angel Ruiz
-Brett Rehrer
-Bryan McNitt
-Evan Wujcik
-Gilberto Millan
-Ian Roth
-Jack Donnelly
-Jake Rehrer
-Joey Dempsey
-Kyle Rodewald
-Marko Sadikovic
-Michael Squeglia
-Nick Williams
-Riley Hinkley
-Thomas Squeglia
-Vladimir Diaz
-Zarko Sadikovic
-Ethan Hamp
-Kaden Conley
-Lucas Petzold
-Mason Baez
-Nate Winkler
-Tim Baer
-Tony Squeglia
-Alex Headley
-Brenden Anderson
-David Gallion
-Drago Marjanovic
-John Vieira
-Robert Bolmanski
-Thomas Uht
-Garrett Takei
-Jacob Hollo
-Marty Kaverman Jr.
-Seth Johnson
-Dylan Schmitzerle
-Ruairi Murphy
-Tommy Koelling
-Vladimir Mickic
-Alvaro Marco
-Ben Fribourg
-Grant Simeone
-Jordan Kraus
-Matthew Harkrader
-Matthew Marks
-Alexandros Kotskar
-Paco Palacian
-Parker Wilk
-Sebastian Gallo
-Donovan Lavery
-Hewson Morphy
-Ian Dovydaitis
-Nathaniel Castellon
-Ryan Davis
-Bator Mohacsi
-Dillon Shaw
-Dominic Demeritte
-Mathieu Bordet
-Michael McGarry
-Nikiforos Liantziris
-Petar Markovic
-Rajmund Farsang
-Victor Volant
-Callum Snider-Mills
-Djordje Stefanovic
-Mateja Zjacic
-Daniel Madrid
-Giacomo Peretti
-Nick Thompson
-Nikita Rudoi
-Alex Swart
-Andrew Mavis
-Atakan Destici
-Austin Pyrch
-Bogdan Petkovic
-Brett Else
-Connor Rosenberg
-Dennis Gut
-Duke Becker
-Jack Kerwin
-Joe Behun
-Jordan Blosser
-Matt Taylor
-Noah Braun
-Pierce Deamer
-Quentin Montgomery
-Sander Profaci
-Zach Slaughter
-Andras Levai
-Isher Gill
-Vaios Vlahotasios
-DJ Davis
-Finn Lillis
-Heath Faulkner
-Henry Maas
-Josh Yardley
-Nicholas Polydefkis
-Nick Schroeder
-Zachary Pendolino
-Antonin Kralj
-Bender Russo
-Chris Lee
-Gabriele Simonti
-Ford Bruggen
-Kalan Smith
-Luca Castorina
-Nik Schoening
-Viktor Jovanovic
-Andrija Sekulic
-Bruno Rebessi
-Leo Lueddemann
-Logan Kalish
-Michael Fearon
-Nolan Bannerton
-Mateus Stellet
-Michael Wheeler
-Peter Durkovic
-Theodoros Pateros
-Alec Posluszny
-Kai De Orbeta
-Karim Nasr
-Patrick McCann
-Adonis Vlassis
-Andrei Khudiakov
-Antonio Florena
-Connor Jermain
-Griffin Yamaoka
-Joseph McCreary
-Rowan Keane
-Yam Kabakov
-Andrea Forno
-Anthony Ferneini
-Austin Nelson
-Ben McDade
-David Sambolin
-Evan Agapiou
-Gabriele Molfino
-Vasilije Marinkovic
-Konstantinos Kapragkos
-Solt Horvath
-Alex Guerra
-Andres Guerra
-Andrew Judge
-Anthony Zdanavicius
-Bailey Lyons
-Blake Ballantyne
-Cullen Seipp
-Dan Fleck
-Hudson Grieve
-Jason Hill
-Jay Pagano
-Jonathan Hulbert
-Jorge Andres Torres
-Kade Ramirez
-Marc Stauble
-Matthew Rothman
-Michael Banks
-Patrick Judge
-Philip Wachowski
-Quinn Lloyd
-Roche Pretorius
-Sebastian van Reeken
-Spencer Anthony
-Zach Roper
-Andrew Brozovic
-Brett Hofer
-Dalton Hansten
-Daniel Savage
-Patrick Hudak
-German Rodriguez
-Justin Ginsberg
-Michael Feeley
-Kyle Laufenberg
-Lester Machado
-Mohamed Refaat
-Phillip Richman
-Ryan Lunsford
-Timothy Bergamini
-Andrew Miller
-Diego Gomez
-Jack Fitzpatrick
-Jack Folan
-James DiSalle
-Trippe Bauman
-Aidan Finkler
-Edward Howaniec
-Luka Nastic
-Luksa Vlasic
-Nathan Mendes
-William Harrington
-Aleksandar Slavkovic
-Coby Scanlon
-Edward Imm
-Matthew Mischlich
-Rastko Jevdjovic
-Robert Freece
-Schuyler Newberger
-Sole Fratila
-Tyler White
-Christian Stecco
-Jayden Arana
-Orlando Hernandez
-Sean Mulcrone
-Zachary McAllister-Sim
-Brett Grady
-Daniel Raz
-Eric Caplener
-Hugh Coyle
-John Barrett
-PJ Bartzen
-Pavle Musikic
-Roberto Perez-Puente
-Ryan Tannus
-Carter Williamson
-Colin Minehan
-Jakob Villasenor
-Kale Arena
-Kyle Chin Lee
-Samson Williams
-Toni Vlasic
-Zayden Garner
-Boldizsar Valics
-Charlie Harbour
-Christian Couch
-Jack Robison
-Logan Hardel
-Sage Mack
-Tate Wilson
-Adrian Suarez
-Andreas Katsis
-Andres White
-Bret Pinsker
-Carter Young
-Connor Johnson
-Finn Banks
-Giorgio Cico
-Giovanni Cragnotti
-John Wilson
-Josh Kurtz
-Matt Fraser
-Ryan Greenwald
-Ryan Masi
-Spencer Witte
-Surya Ram
-John Murphy
-Jono Gillette
-Nico Ivanov
-Olin Shipstead
-Oscar Goodell
-Stephen Schmidt
-Tim Peterson
-Emerson Sullivan
-Jacob Whitaker
-Jake Pearson
-Jayden Kunwar
-Chris Freese
-Kami Eslami
-Max Fleming
-Alastair Powers
-Cameron Burns
-Liam Housenbold
-Paul Gensbigler
-Seth Berke
-Shayan Sadiq
-Chris Lo
-Connor Mechelke
-Ian Raley
-Isaac Thorman
-Kyle Pearson
-Mark Poisler
-Dado Soares
-Daniel Palfi
-Gavin Brooke
-Iason Mihalopoulos
-Quint Steffey
-Alec Baker
-Chris Poisler
-Ethan Babel
-Max Blecher
-Owen Bartlett
-Saahil Naik
-Andrew Lee
-Patrick Rooney
-Phillip Long
-Ben Lucas
-Brody Mars
-Luke Mendelsohn
-Mason Hofmann
-Matthieu Giauque
-Sebastian Isaacs
-Blake Lowe
-David Edelman
-Dom Simopoulos
-Jasper Hirt
-Simon Burtnyk
-Angelos Koutsogeorgas
-Ben LeClair
-Charlie Downey
-Charlie Wallace
-Ethan Zirh
-Gavin Garrett
-Kyle Cohead
-Liam Schlosser
-Logan Morgan
-Sam Odenkirk
-Anthony Gauna
-Josep Jodra Muñoz
-Karl Lovett
-Riyad Shehadeh
-Tony Franco
-Ben Livak
-Carter Dickerson
-David Shalman
-Derek Hanel
-Jack French
-Llewyn Thurston
-Manuel Diez Teran
-Ryan Roth
-Aiden Salimi
-Aku Kaukinen
-Blake Duggan
-Dylan Rothenberg
-Edward Carpenter
-Francisco de Zengotita Rodriguez
-Logan Baumann
-Lucas Ramirez
-Maddex Thornton
-Mark Malamud
-Weston Carballar
-Csanad Varga
-César Burgos
-Daniel Mirejovsky
-Gavin Goode
-Oliver Knoflick
-Sam Katz
-Sebastiano Figari
-Thomaz Figueiredo
-Tom Sloman
-Domenic D'Andrea
-Elias Acosta
-Evan Monterroso
-Guillermo Ocasio
-Ian Hernandez
-Jared Hopley
-Jeremy Rocha
-Jessie Iniquez
-Joey Sabers
-Joshua Vega
-Mason Fox
-Rex Sample
-Rey Julian Castillo
-Tyler Bennett
-Brian Wilder
-Dario Mariani
-Jason Russum
-Mike Meza
-Charles Lewandowski
-Charles Ortega
-Cristian Gonzalez
-Danilo Lugli
-Jason Soo Hoo
-Jose Lopez
-Michael Staine
-Mitchell Montenegro
-Myles Storms
-Ryan Lehotsky
-Wesley Hovanesian
-Alam Barnuevo
-Brandon Pham
-Gage Unsoeld
-Jonah Alvarado
-Kristofer Grigorian
-Vasil Halchev
-Asher Kocalis
-Cody Lehotsky
-Jason Shultenburg
-Peter Trinh
-Tristan Tippett
-Alam Chang-Barnuevo
-Allen Soto-Lopez
-Damien Lopez
-Jacob Hackbarth
-Jaden Javier
-James Cano
-Joe Lamson
-Ryan Lebrun
-David Gutierrez
-Eric Bates
-Jordan Baker
-Nicolo Buono
-Ryan Beery
-Sawyer Nering
-Steven Rios
-Angel Pena
-Esteban Rivera
-Logan Haberle
-Nicholas Winsor
-Thomas Gonzales
-Vaughn Freiermuth
-Caleb Dephouse
-Dominic Esparza
-Ethan Estephan
-Henry De Luna
-Josh Lamberton
-Peyton O'Steen
-Richard Montanez
-Solomon Smalley
-Timothy Robles
-Tommy Gibson
-William Roby Unkovich
-Zachariah Barclay
-Aiden Sepulveda
-Antonio Finianos
-Christian Acosta
-Johan Gaytan
-Josh Rovira
-Luciano Gutierrez
-Matthew Kingston
-Raul Rico
-Xavier Turla
-Zack Montoya
+Brett Rehrer	1
+Bryan McNitt	14
+Evan Wujcik	8
+Gilberto Millan	7
+Ian Roth	21
+Jack Donnelly	3
+Jake Rehrer	12, 2
+Joey Dempsey	4
+Kyle Rodewald	5
+Marko Sadikovic	10
+Michael Squeglia	2
+Nick Williams	11
+Riley Hinkley	16
+Thomas Squeglia	13
+Vladimir Diaz	6
+Zarko Sadikovic	9, 5
+Ethan Hamp	12
+Kaden Conley	20
+Lucas Petzold	4
+Mason Baez	21
+Nate Winkler	1A, 1
+Tim Baer	10, 11
+Tony Squeglia	9
+Alex Headley	19
+Brenden Anderson	1B
+David Gallion	6
+Drago Marjanovic	18
+John Vieira	11, 10
+Robert Bolmanski	8
+Thomas Uht	7, 21, 17
+Garrett Takei	5
+Jacob Hollo	1
+Marty Kaverman Jr.	2
+Seth Johnson	7
+Dylan Schmitzerle	3
+Ruairi Murphy	14
+Tommy Koelling	15
+Vladimir Mickic	6, 13
+Alvaro Marco	1, 1A
+Ben Fribourg	4, 5
+Grant Simeone	16
+Jordan Kraus	14
+Matthew Harkrader	20
+Matthew Marks	19
+Alexandros Kotskar	6, 10
+Paco Palacian	4, 7
+Parker Wilk	11
+Sebastian Gallo	24
+Donovan Lavery	17
+Hewson Morphy	1A
+Ian Dovydaitis	8
+Nathaniel Castellon	15, 5
+Ryan Davis	21
+Bator Mohacsi	1B, 1
+Dillon Shaw	22, 20
+Dominic Demeritte	2
+Mathieu Bordet	11, 8
+Michael McGarry	13
+Nikiforos Liantziris	9, 10
+Petar Markovic	6, 7
+Rajmund Farsang	4
+Victor Volant	12
+Callum Snider-Mills	17, 6
+Djordje Stefanovic	1B
+Mateja Zjacic	3
+Daniel Madrid	9
+Giacomo Peretti	8
+Nick Thompson	18
+Nikita Rudoi	11
+Alex Swart	2
+Andrew Mavis	3
+Atakan Destici	8, 2
+Austin Pyrch	1
+Bogdan Petkovic	12
+Brett Else	5, 4
+Connor Rosenberg	14, 12
+Dennis Gut	10
+Duke Becker	6
+Jack Kerwin	15, 5
+Joe Behun	11, 10
+Jordan Blosser	18, 9
+Matt Taylor	1
+Noah Braun	9
+Pierce Deamer	13
+Quentin Montgomery	7
+Sander Profaci	1
+Zach Slaughter	16, 7, 6
+Andras Levai	8
+Isher Gill	16, 10
+Vaios Vlahotasios	1
+DJ Davis	17, 5, 3, 2
+Finn Lillis	12
+Heath Faulkner	11
+Henry Maas	7
+Josh Yardley	15
+Nicholas Polydefkis	16
+Nick Schroeder	14, 6
+Zachary Pendolino	13, 3
+Antonin Kralj	17, 9
+Bender Russo	15, 4
+Chris Lee	14
+Gabriele Simonti	20, 2
+Ford Bruggen	20, 12, 13
+Kalan Smith	10, 9
+Luca Castorina	1
+Nik Schoening	15, 5
+Viktor Jovanovic	11
+Andrija Sekulic	18, 8
+Bruno Rebessi	21
+Leo Lueddemann	9, 3
+Logan Kalish	16
+Michael Fearon	15
+Nolan Bannerton	1
+Mateus Stellet	21, 12
+Michael Wheeler	15
+Peter Durkovic	14
+Theodoros Pateros	10
+Alec Posluszny	4
+Kai De Orbeta	7
+Karim Nasr	10
+Patrick McCann	13
+Adonis Vlassis	10, 3
+Andrei Khudiakov	16, 13
+Antonio Florena	5
+Connor Jermain	1
+Griffin Yamaoka	12, 10
+Joseph McCreary	11
+Rowan Keane	6, 7
+Yam Kabakov	2
+Andrea Forno	17
+Anthony Ferneini	14, 6
+Austin Nelson	12
+Ben McDade	8
+David Sambolin	15
+Evan Agapiou	18, 14
+Gabriele Molfino	9, 3
+Vasilije Marinkovic	1
+Konstantinos Kapragkos	9
+Solt Horvath	1
+Alex Guerra	3
+Andres Guerra	9
+Andrew Judge	14
+Anthony Zdanavicius	23
+Bailey Lyons	5
+Blake Ballantyne	6
+Cullen Seipp	12
+Dan Fleck	21
+Hudson Grieve	13
+Jason Hill	8
+Jay Pagano	20
+Jonathan Hulbert	25
+Jorge Andres Torres	1
+Kade Ramirez	24
+Marc Stauble	11
+Matthew Rothman	2
+Michael Banks	1
+Patrick Judge	7
+Philip Wachowski	19
+Quinn Lloyd	4
+Roche Pretorius	16
+Sebastian van Reeken	1
+Spencer Anthony	10
+Zach Roper	18
+Andrew Brozovic	21, 6
+Brett Hofer	17
+Dalton Hansten	23
+Daniel Savage	9
+Patrick Hudak	3
+German Rodriguez	11
+Justin Ginsberg	5
+Michael Feeley	7
+Kyle Laufenberg	1
+Lester Machado	2
+Mohamed Refaat	10, 3
+Phillip Richman	8
+Ryan Lunsford	13
+Timothy Bergamini	24
+Andrew Miller	12
+Diego Gomez	1A
+Jack Fitzpatrick	14
+Jack Folan	15
+James DiSalle	19
+Trippe Bauman	13, 7
+Aidan Finkler	18
+Edward Howaniec	11
+Luka Nastic	10
+Luksa Vlasic	9
+Nathan Mendes	6
+William Harrington	4, 15
+Aleksandar Slavkovic	1B, 1
+Coby Scanlon	13
+Edward Imm	17
+Matthew Mischlich	8
+Rastko Jevdjovic	23
+Robert Freece	21
+Schuyler Newberger	16, 6
+Sole Fratila	14
+Tyler White	20
+Christian Stecco	14
+Jayden Arana	2
+Orlando Hernandez	1B
+Sean Mulcrone	5
+Zachary McAllister-Sim	3
+Brett Grady	11
+Daniel Raz	22
+Eric Caplener	1B, 1A
+Hugh Coyle	12
+John Barrett	14
+PJ Bartzen	1A, 1
+Pavle Musikic	4
+Roberto Perez-Puente	16
+Ryan Tannus	18
+Carter Williamson	7, 10
+Colin Minehan	21
+Jakob Villasenor	24
+Kale Arena	5
+Kyle Chin Lee	1C, 1B
+Samson Williams	15
+Toni Vlasic	9
+Zayden Garner	6
+Boldizsar Valics	7
+Charlie Harbour	8
+Christian Couch	5
+Jack Robison	24
+Logan Hardel	20
+Sage Mack	13
+Tate Wilson	17
+Adrian Suarez	2
+Andreas Katsis	10
+Andres White	9
+Bret Pinsker	19
+Carter Young	11
+Connor Johnson	4, 6
+Finn Banks	15, 3
+Giorgio Cico	8, 2
+Giovanni Cragnotti	6
+John Wilson	1
+Josh Kurtz	7
+Matt Fraser	5
+Ryan Greenwald	13
+Ryan Masi	12
+Spencer Witte	1A, 1
+Surya Ram	3
+John Murphy	14, 2, 7
+Jono Gillette	8
+Nico Ivanov	16, 5
+Olin Shipstead	17, 8
+Oscar Goodell	15, 6
+Stephen Schmidt	4, 10
+Tim Peterson	5, 9
+Emerson Sullivan	13, 3
+Jacob Whitaker	14, 6
+Jake Pearson	11, 4
+Jayden Kunwar	15, 2
+Chris Freese	14, 13
+Kami Eslami	11, 9
+Max Fleming	1
+Alastair Powers	10
+Cameron Burns	7, 3
+Liam Housenbold	20
+Paul Gensbigler	12
+Seth Berke	5
+Shayan Sadiq	6
+Chris Lo	21, 2
+Connor Mechelke	1A
+Ian Raley	11
+Isaac Thorman	18
+Kyle Pearson	1
+Mark Poisler	14, 8, 9
+Dado Soares	19, 7
+Daniel Palfi	18
+Gavin Brooke	15, 12
+Iason Mihalopoulos	14, 10
+Quint Steffey	4, 5
+Alec Baker	16, 6
+Chris Poisler	1A, 1
+Ethan Babel	8
+Max Blecher	14, 4
+Owen Bartlett	17, 3, 2
+Saahil Naik	1
+Andrew Lee	17
+Patrick Rooney	7
+Phillip Long	14
+Ben Lucas	15
+Brody Mars	16
+Luke Mendelsohn	11
+Mason Hofmann	3
+Matthieu Giauque	9
+Sebastian Isaacs	1B, 1A
+Blake Lowe	12
+David Edelman	13
+Dom Simopoulos	20
+Jasper Hirt	5
+Simon Burtnyk	18
+Angelos Koutsogeorgas	8
+Ben LeClair	13
+Charlie Downey	7
+Charlie Wallace	3
+Ethan Zirh	1
+Gavin Garrett	17
+Kyle Cohead	5
+Liam Schlosser	1A, 12
+Logan Morgan	2
+Sam Odenkirk	10
+Anthony Gauna	15
+Josep Jodra Muñoz	8
+Karl Lovett	9
+Riyad Shehadeh	4
+Tony Franco	14
+Ben Livak	6, 14
+Carter Dickerson	13
+David Shalman	3
+Derek Hanel	9
+Jack French	5
+Llewyn Thurston	1B, 1A
+Manuel Diez Teran	1
+Ryan Roth	1A
+Aiden Salimi	1C
+Aku Kaukinen	17
+Blake Duggan	11
+Dylan Rothenberg	12
+Edward Carpenter	6
+Francisco de Zengotita Rodriguez	10
+Logan Baumann	8
+Lucas Ramirez	4
+Maddex Thornton	16
+Mark Malamud	13
+Weston Carballar	1B, 1
+Csanad Varga	8
+César Burgos	21
+Daniel Mirejovsky	1D
+Gavin Goode	23
+Oliver Knoflick	20
+Sam Katz	18
+Sebastiano Figari	2
+Thomaz Figueiredo	7
+Tom Sloman	22
+Domenic D'Andrea	15
+Elias Acosta	9
+Evan Monterroso	4
+Guillermo Ocasio	6
+Ian Hernandez	1
+Jared Hopley	5
+Jeremy Rocha	18
+Jessie Iniquez	12
+Joey Sabers	13
+Joshua Vega	7
+Mason Fox	1
+Rex Sample	16
+Rey Julian Castillo	8
+Tyler Bennett	11, 6
+Brian Wilder	1
+Dario Mariani	2, 10
+Jason Russum	3
+Mike Meza	9
+Charles Lewandowski	14
+Charles Ortega	7
+Cristian Gonzalez	2, 5
+Danilo Lugli	9
+Jason Soo Hoo	18, 8
+Jose Lopez	1
+Michael Staine	22
+Mitchell Montenegro	6
+Myles Storms	11
+Ryan Lehotsky	17, 1
+Wesley Hovanesian	8
+Alam Barnuevo	2, 7
+Brandon Pham	8, 15, 9
+Gage Unsoeld	4, 11
+Jonah Alvarado	1
+Kristofer Grigorian	3
+Vasil Halchev	12
+Asher Kocalis	11
+Cody Lehotsky	10, 7
+Jason Shultenburg	16
+Peter Trinh	3
+Tristan Tippett	2, 5
+Alam Chang-Barnuevo	10
+Allen Soto-Lopez	1
+Damien Lopez	6, 9
+Jacob Hackbarth	8
+Jaden Javier	12
+James Cano	21
+Joe Lamson	1
+Ryan Lebrun	4
+David Gutierrez	11
+Eric Bates	1
+Jordan Baker	4
+Nicolo Buono	7
+Ryan Beery	2
+Sawyer Nering	13
+Steven Rios	19
+Angel Pena	1
+Esteban Rivera	15
+Logan Haberle	8
+Nicholas Winsor	6
+Thomas Gonzales	5
+Vaughn Freiermuth	17
+Caleb Dephouse	1
+Dominic Esparza	15
+Ethan Estephan	13
+Henry De Luna	1
+Josh Lamberton	5
+Peyton O'Steen	1
+Richard Montanez	8
+Solomon Smalley	2
+Timothy Robles	9
+Tommy Gibson	3
+William Roby Unkovich	14
+Zachariah Barclay	19
+Aiden Sepulveda	21
+Antonio Finianos	12
+Christian Acosta	8
+Johan Gaytan	11
+Josh Rovira	10
+Luciano Gutierrez	15
+Matthew Kingston	17
+Raul Rico	20
+Xavier Turla	6
+Zack Montoya	18
 Alex Zamanian
-Andras Telegdy
-Andrew Goodenough
-Austin Stevenson
-Austin Stewart
-Chandler Kaltenbach
-Curtis Casper
-Duncan Lynde
+Andras Telegdy	7
+Andrew Goodenough	8
+Austin Stevenson	2
+Austin Stewart	20
+Chandler Kaltenbach	10
+Curtis Casper	19, 12
+Duncan Lynde	12
 Dusan Ivanovic
-Jack Dodson
-Jacob Fujioka
-James Rozsypal
-Keegan Wicken
-Kyle Alhart
-Lee Griffin
-Lovro Miocevic
-Luke Ritter
-Max Cusator
-Mitchell Holden
-Nemanja Bakic
-Nolan McConnell
-Patrick Goodenough
-Sretan Latkovic
-Steven Cagle
-Thomas Freeman
-Troy Kaltenbach
-Zachary Minott
-Jack McLaughlin
+Jack Dodson	17
+Jacob Fujioka	4
+James Rozsypal	16, 5
+Keegan Wicken	9
+Kyle Alhart	1
+Lee Griffin	21
+Lovro Miocevic	6
+Luke Ritter	15
+Max Cusator	11
+Mitchell Holden	14
+Nemanja Bakic	16, 5, 4, 11
+Nolan McConnell	22
+Patrick Goodenough	5
+Sretan Latkovic	8
+Steven Cagle	1
+Thomas Freeman	1
+Troy Kaltenbach	3
+Zachary Minott	18
+Jack McLaughlin	21
 Joseph Orozco
-Joshua Spence
-Marwan Darwish
+Joshua Spence	22
+Marwan Darwish	1
 Peter Brassinga
 Troy Boydstun
-Aaron Arias
-Alessio Brunochelli
-Cole Dixon
-Drake Charamuga
-Garrett Zaan
-Johnathan Wong
+Aaron Arias	18, 22, 10
+Alessio Brunochelli	9
+Cole Dixon	10
+Drake Charamuga	4, 2, 24
+Garrett Zaan	14
+Johnathan Wong	7, 3
 Kai Hanson
-Matt Morris
+Matt Morris	19, 16
 Seth Bowers
-Theodoros Pateros
-Andrej Bosanac
+Theodoros Pateros	17, 10
+Andrej Bosanac	1
 Clayton Allen
-Eduardo Wainberg
-Elijah Graves
-Garrett Potter
+Eduardo Wainberg	5
+Elijah Graves	6
+Garrett Potter	12, 17
 Hector Martinez
-Liam Ward
-Makana Sanita
-Quinten Osborne
-Rafael Real Vergara
-Raul Morales
+Liam Ward	1
+Makana Sanita	23
+Quinten Osborne	2
+Rafael Real Vergara	7
+Raul Morales	20
 Riley Rosales
-Santiago Riley
+Santiago Riley	24, 22
 Wyatt Meckelborg
-Abdelrahman Soliman
-Cooper Haddad
+Abdelrahman Soliman	17, 11, 10
+Cooper Haddad	13
 Dishan Dias
 Ethan Dyas
-Evan Cain
-Felipe Carsalade
-Frank Hulick
-JJ Loubriel
-Joe Palmblade
+Evan Cain	5, 6
+Felipe Carsalade	15
+Frank Hulick	6
+JJ Loubriel	11, 19
+Joe Palmblade	1
 Luke Malecka
 Mac Darin
-Riley Catino
+Riley Catino	8
 Brennis Lidecis
-Caden Noreen
-Connor Mannion
-Jackson Sanders
-Justin Weidl
-Samuel Arshadi
-Zach Frazier
-Aleksandar Timotijevic
-Alexander Makshanoff
-Botond Hajdu
-Bruno Chiappini
+Caden Noreen	12
+Connor Mannion	3, 8
+Jackson Sanders	1
+Justin Weidl	1
+Samuel Arshadi	25
+Zach Frazier	4
+Aleksandar Timotijevic	23
+Alexander Makshanoff	2
+Botond Hajdu	2, 7
+Bruno Chiappini	21
 Bryce Biglin
-Caleb Francisco
-Gabe Haddad
-Jason O'Donnell
-Konstantinos Koulouris
-Reed Pantaleon
+Caleb Francisco	3, 6
+Gabe Haddad	1
+Jason O'Donnell	4, 10
+Konstantinos Koulouris	5
+Reed Pantaleon	4
 Trevor Knapp
-Guillermo Ocasio
+Guillermo Ocasio	20
 Jack Hayes
 Jake Hoss
-Joe Jenness
-Jovan Mandic
-Keegan Moore
-Marc Frigola Navarro
+Joe Jenness	1
+Jovan Mandic	12, 18
+Keegan Moore	15, 2
+Marc Frigola Navarro	5
 Matthew Casas
-Michael Soybel
-Nicolas Fuchs
-Nikola Jancic
+Michael Soybel	17
+Nicolas Fuchs	22
+Nikola Jancic	11
 Patrik Feher
-Robert Lopez Duart
-Aaron Wilson
-Alec Johnson
-Artur Diaz
-Ash Keshvara
-Corbin Stanley
-Gabi Acosta
-Harper Stewart
-Itai Roth
-Jackson Bryson
-Konstantinos Kapragkos
-Sergi Ramon
-Chase Krupitzer
-Ivan Zivaljevic
-Olivér Sudár
-Sandro Pueyo Caballero
-Toring Stanley
-William Whitstone
-Zalán Nagy
-Charles Montano
-Dante D'Sa
-Federico Gulisano
-Jacob Duong
-Mason Pellens
-Sam Abbott
-Shayan Rezvani
-Alexandros Athymaritis
-Austin Clark
-Christian Huhn
-Collin Sohn
-Cory McGee
-Daniel Arellano
-Davis Waugh
-Dayne Jagga
-Dominick Beaudine
-Edward Moss
-Eric Hernandez
-Eric Reitmeir
-Ford Witman
-Gunnar White
-Jon Beck
-Kian Lofti
-Matt Braun
-Neil LeVecke
-Riley Smith
-Tim Shaw
-Zach Gleason
-Alessio Brunochelli
-Andrew Koustoumbardis
-Daniel Roth
-Jacob Markle
-Joseph Shaw
-Kian Lotfi
-Matthew Knoedler
+Robert Lopez Duart	9
+Aaron Wilson	1
+Alec Johnson	25, 22
+Artur Diaz	14, 11
+Ash Keshvara	24
+Corbin Stanley	4
+Gabi Acosta	12, 21, 10
+Harper Stewart	20, 8
+Itai Roth	9
+Jackson Bryson	23
+Konstantinos Kapragkos	16
+Sergi Ramon	1
+Chase Krupitzer	6
+Ivan Zivaljevic	14
+Olivér Sudár	12, 7
+Sandro Pueyo Caballero	23
+Toring Stanley	3
+William Whitstone	1
+Zalán Nagy	20, 9
+Charles Montano	17
+Dante D'Sa	3
+Federico Gulisano	20
+Jacob Duong	23
+Mason Pellens	1
+Sam Abbott	15
+Shayan Rezvani	16
+Alexandros Athymaritis	10
+Austin Clark	12
+Christian Huhn	3, 4, 7
+Collin Sohn	19, 17
+Cory McGee	14
+Daniel Arellano	8, 7
+Davis Waugh	23
+Dayne Jagga	21
+Dominick Beaudine	1
+Edward Moss	11
+Eric Hernandez	7
+Eric Reitmeir	20
+Ford Witman	2, 14
+Gunnar White	6
+Jon Beck	15
+Kian Lofti	13
+Matt Braun	9
+Neil LeVecke	5
+Riley Smith	17
+Tim Shaw	1A
+Zach Gleason	4
+Alessio Brunochelli	18
+Andrew Koustoumbardis	16
+Daniel Roth	18, 22
+Jacob Markle	15
+Joseph Shaw	19, 8
+Kian Lotfi	7
+Matthew Knoedler	24, 15
 Milan Vitorovic
-Nicolaus Rimlinger
-Robert Halligan
-Rylan Russell
-Scott Thomas
-Tyler Haugh
-Alex Davis
-Blazo Mitrovic
+Nicolaus Rimlinger	16, 6
+Robert Halligan	1, 1A
+Rylan Russell	2, 3
+Scott Thomas	19
+Tyler Haugh	1B
+Alex Davis	3
+Blazo Mitrovic	5, 23, 26
 Collin Kapecki
-Jon Lien
-Luke Chandler
-Zach Zemliak
-Carter Knutson
-Connor Settem
-David Carrasco
-Jack Baumgardner
-Jack Dunbar
-Jonny Rimlinger
-Joseph Cavazos
-Makoa Gutierez
-Zander Zemliak
-Aden Mina
-Alex Marlow
-Augie Renezeder
-Max Walsworth
-Rafael Salonikios
-Tommy Lien
-Tyler Harvey
-Brodie Sladek
-Bruno Salonikios
-Dimitriy Kobets
-Jeff Muller
-Kade Margain
-Kai Scarlet
-Milan Sarkadi
+Jon Lien	1A, 1
+Luke Chandler	9
+Zach Zemliak	1A, 1
+Carter Knutson	4, 12, 13
+Connor Settem	20, 25
+David Carrasco	11
+Jack Baumgardner	5, 13, 2
+Jack Dunbar	14
+Jonny Rimlinger	17, 8, 24
+Joseph Cavazos	18, 21
+Makoa Gutierez	16
+Zander Zemliak	13, 20
+Aden Mina	10, 12, 8
+Alex Marlow	18, 4
+Augie Renezeder	4, 3
+Max Walsworth	5
+Rafael Salonikios	23, 17, 2
+Tommy Lien	24, 6
+Tyler Harvey	7
+Brodie Sladek	20, 22
+Bruno Salonikios	15, 9
+Dimitriy Kobets	21
+Jeff Muller	1B
+Kade Margain	19, 10, 8
+Kai Scarlet	6
+Milan Sarkadi	16, 13
 RS Gavin Grosz
 RS Jay Mills
 RS Patrick Powers
 RS Ryan Lichlyter
 RS Tom Aldridge
-Stelios Dalmaras
-Andrew Vernon
-Can Caglar
-Denzel Tate
-Dom Haggard
-Dylan Zorn
-Finn Friedland
-Patrick Powers
-Richie Rimlinger
-Santiago Jimenez Donovan
-Tom Aldridge
-Weston Lorenzo
-Abel Romero Corbalan
-Chassen Corlett
-Nick Leung
-Ryan Boschken
-Tom Diaz
-Tommaso Baldineti
-Asher Smith
-Bence Barics
-Caden Carpenter
-Caden Poulleau
-Jaxon Hoover
-Johnny Mendiburu
-Jonah Allan
-Josiah Yeager
-Kaden Breaux
-Max Diaz
-Mitchell Bugalski
-Roman Saroyan
-Soren Martin
-Travers Clark
-Adrian Ramirez
-Alex Sharp
-Alika Naone
-Dylan King
-Eduardo Carraresi
-Ian Moore
-Jake Bonavia
-Mateo Obando
-Nico Furneaux
-Roberto Barrera Sanchez
-Ben Fuhrer
-Gabrijel Burburan
-Luka Dimic
-Owen Malone
-Pablo De Souza
-A Hayden Niederreiter
-Anuj Khandelwal
-B Anders Khaykin
-Ben Teitscheid
-Bill Kusters
-Clyde Huibregtse
-Daniel Yahalomi
-Easton Manson
-Emilio Lamar
-Federico Bescotti
-Jeremy Bogle
-Joe Kusters
-Justin Xiang
-Kelly McGee
-Kevin Shen
-Kyle Archer
-Lucas Novak
-Luka Knezevic
-Nikhil Bhatia
-Nolan Kruse
-Patrick Everett
-Patroklos Stefanou
-Peter Calvaresi
-Ward Weldon
-Zach Churukian
-Anders Khaykin
-Chris Womack
-Christian Schillinger
-Evan Kim
-Hayden Niederreiter
-Kevin Downey
-Miguel Lamar
-Myles Stapelberg
-Pat Stefanou
-Raymond Wynne
-A Miguel Lamar
-Christian Hwa
-Conrad Oakes
-Griffin Leonard
-John Steele
-Kaden DiMarco
-Kyle Sandell
-Miller Geschke
-A Conrad Oakes
-Sawyer Koetters
-Alex Freedline
-Colin Weaver
-Evan Kowal
-Henry Asa
-Jack King
-Richard Yun
-Samuel Tafoya
-Adam Ivatorov
-Alec Sheres
-David Keller
-Kai Edick
-Kush Khamesra
-Luke Apostolides
-Vik Neni
-Andras Beleznay
-Bo Tignol
-Jackson Kay
-Kieran Kearns
-Kunal Rajadhyax
-Matthew Pryce
-Rick Lundh
-Victor Perez
-William Ewald
-Armaan Gill
-Avi Narula
-Derek Schaffer
-Joshua Woren
-Thomas Ewald
-Caspar Lightner
-David Ranaudo
-Ethan Kim
-Nicholas Soule
-Armeet Gill
-Charlie Baker
-Jae Wykoff
-Jake Schweizer
-Luca Morocco
-Anthony Murat
-Daniel Peralta
-Izaya Owotor
-Jackson Smith
-Jarad Wahl
-Joseph Mahan
-Luc Gregory
-Marko Vucetic
-Michael Krause
-Nichita Hristev
-Robert Esson
-Terrence Woods
-Toby Stewart
-Abraham Allen
-Alex Portnoy
-Brandon Kavanaugh
-Ori Scanlon
-Sean Legg
-Aaron Jacobs
-Adrian Maher
+Stelios Dalmaras	1
+Andrew Vernon	15
+Can Caglar	1A, 1C
+Denzel Tate	16, 6
+Dom Haggard	13
+Dylan Zorn	19
+Finn Friedland	1B, 1A, 1
+Patrick Powers	20, 9
+Richie Rimlinger	15, 16, 3
+Santiago Jimenez Donovan	17
+Tom Aldridge	22
+Weston Lorenzo	1C, 1A
+Abel Romero Corbalan	11, 24, 12
+Chassen Corlett	12
+Nick Leung	18, 4
+Ryan Boschken	23
+Tom Diaz	20
+Tommaso Baldineti	10
+Asher Smith	13, 3
+Bence Barics	6
+Caden Carpenter	11
+Caden Poulleau	8
+Jaxon Hoover	20, 22
+Johnny Mendiburu	7, 9, 19
+Jonah Allan	2
+Josiah Yeager	15
+Kaden Breaux	17, 24
+Max Diaz	21
+Mitchell Bugalski	14
+Roman Saroyan	22, 25
+Soren Martin	12, 21
+Travers Clark	1C, 1A, 1B
+Adrian Ramirez	1B, 1A
+Alex Sharp	19, 11
+Alika Naone	5
+Dylan King	18, 14
+Eduardo Carraresi	17, 9
+Ian Moore	20, 13
+Jake Bonavia	7
+Mateo Obando	16, 5
+Nico Furneaux	14, 10
+Roberto Barrera Sanchez	1C
+Ben Fuhrer	16
+Gabrijel Burburan	20
+Luka Dimic	12
+Owen Malone	1C
+Pablo De Souza	1
+A Hayden Niederreiter	1A
+Anuj Khandelwal	11
+B Anders Khaykin	1B
+Ben Teitscheid	14, 8
+Bill Kusters	16
+Clyde Huibregtse	15, 5
+Daniel Yahalomi	13, 9
+Easton Manson	8
+Emilio Lamar	2
+Federico Bescotti	18, 4
+Jeremy Bogle	3
+Joe Kusters	10
+Justin Xiang	22, 24, 18
+Kelly McGee	5
+Kevin Shen	24
+Kyle Archer	17
+Lucas Novak	6, 3, 10
+Luka Knezevic	7
+Nikhil Bhatia	12
+Nolan Kruse	1
+Patrick Everett	9
+Patroklos Stefanou	23
+Peter Calvaresi	21
+Ward Weldon	20, 2
+Zach Churukian	4
+Anders Khaykin	1B
+Chris Womack	16
+Christian Schillinger	6
+Evan Kim	5, 4, 3
+Hayden Niederreiter	1
+Kevin Downey	10, 9
+Miguel Lamar	1A
+Myles Stapelberg	11
+Pat Stefanou	23, 12
+Raymond Wynne	20
+A Miguel Lamar	1A
+Christian Hwa	11
+Conrad Oakes	13, 1
+Griffin Leonard	14, 4
+John Steele	16, 10, 6
+Kaden DiMarco	17
+Kyle Sandell	8
+Miller Geschke	15, 7, 5, 5/15
+A Conrad Oakes	1A
+Sawyer Koetters	24
+Alex Freedline	13, 4
+Colin Weaver	1, 1A
+Evan Kowal	11
+Henry Asa	12, 2
+Jack King	10, 8
+Richard Yun	7
+Samuel Tafoya	12
+Adam Ivatorov	2
+Alec Sheres	10
+David Keller	16, 14, 4
+Kai Edick	14
+Kush Khamesra	6
+Luke Apostolides	3
+Vik Neni	9
+Andras Beleznay	15, 9
+Bo Tignol	5
+Jackson Kay	13, 3
+Kieran Kearns	22, 10
+Kunal Rajadhyax	21, 7
+Matthew Pryce	12, 5
+Rick Lundh	24, 11
+Victor Perez	23
+William Ewald	25
+Armaan Gill	1A
+Avi Narula	14
+Derek Schaffer	17
+Joshua Woren	1
+Thomas Ewald	8
+Caspar Lightner	5
+David Ranaudo	21, 2
+Ethan Kim	18
+Nicholas Soule	12
+Armeet Gill	24
+Charlie Baker	20
+Jae Wykoff	16
+Jake Schweizer	4
+Luca Morocco	6
+Anthony Murat	1
+Daniel Peralta	10
+Izaya Owotor	6, 3
+Jackson Smith	14, 20
+Jarad Wahl	8
+Joseph Mahan	7
+Luc Gregory	9
+Marko Vucetic	1B, 1, 1A
+Michael Krause	4
+Nichita Hristev	3
+Robert Esson	12
+Terrence Woods	11
+Toby Stewart	2
+Abraham Allen	6
+Alex Portnoy	15
+Brandon Kavanaugh	11
+Ori Scanlon	1, 1C
+Sean Legg	14
+Aaron Jacobs	16
+Adrian Maher	9
 Andrew Ruelas
-Ben Brauer
-Brad Nelms
-Bryce Tully
-Chava Osorio
-Jackson Spencer
+Ben Brauer	5
+Brad Nelms	15
+Bryce Tully	1B
+Chava Osorio	21
+Jackson Spencer	13, 12, 11
 Jesse Mondragon
-Kyle Moore
-Matthew Haygood
-Nico Rodriguez
-Owen Martin
-Pedro Osorio
-Peter Germuska
-Tony Sunagawa
-Andrew Serrano
-Josh Carlson
-Sam Guffey
-Tristen Clue
-Adam Serrano
-CJ Brushwood
-Connor Pulido
-Ethan Hansen
-Ethan Kochel
+Kyle Moore	17
+Matthew Haygood	21, 20
+Nico Rodriguez	2, 10
+Owen Martin	11
+Pedro Osorio	14
+Peter Germuska	8
+Tony Sunagawa	14, 17, 7
+Andrew Serrano	18
+Josh Carlson	8, 2
+Sam Guffey	13, 7
+Tristen Clue	15
+Adam Serrano	19, 9
+CJ Brushwood	8
+Connor Pulido	4, 11
+Ethan Hansen	16
+Ethan Kochel	3
 Jack Baughman
-Jimmy Cronin
+Jimmy Cronin	1, 1A
 Josh Kasalko
 Liam Bleuher
-Michael Rojas
-Noah Slack
-Vlad Puskovitch
-Alex Napawan
-Jespyn Bishop
-Schuyler Cramer
-Torin Ferguson
-Uros Pelemis
-Breno Tebet
-Cale Koester
-Caleb Dunbar
-Dylan Veccio
-James Ramey
-Justice Lamboy
-Kris Eylofson
-Quinten Gallagher
-Xander McWhorter
-Zach Callejas
-Blake Wind
-Duncan Munro
-Emiliano Martinez
-Gavin Haight
-Isaac Demski
-Yannick Robertson
-Benton Fonner
-Brayden Ogle
-Brody Loftin
-Eli Grande
-Ethan Gray
-Joshua Gibson
-Kevin Kehoe
-Kris Eyolfson
-Luke Schmidt
-Nathan Weintraub
-Noah Schott
-Riccardo Vettore
-Rowan Daughtrey
-Sawyer Maddox
-T.J. Joubert
-Tymek Wlodek
-Alexandros Prokopis
-Armand Le Goff
-Davion Nichols
-Gennaro Pecoraro
-Jayden Del Campo
-Joaquin Vazquez
-Tonny Simon
-Alexander Guzman
-Ben Meier
-Jacob Fowlkes
-Jacob Orr
-Jonas King
-Marsel Saripov
-Paxton Miller
-Tristan Grimett
-Alec Diaz
-Alex Cappuccio
-Andrew Too-A-Foo
-Connor Schmitz
-Cooper Lein
-Gene Bilbao
-Jack Howe
-Jackson Rehmet
-Joey Ryan
-John Reyes
-Matt Bachler
-Matthew Virzi
-Nebyat Mamo
-Noah Ratliff
-Otis Tyson
-Philip Jenny
-Ryan Mercando
-Ryan Witoslawski
-Andrew Howe
-Brennan Russell
-Christian Chee-Foon
-Daniel Alvarez
-Jonathan Merkley
-Spencer Saban
-Charlie Freedman
-Joel Parnell
-Mathieu Davis
-Michael Gutman
-Nash Greeven
-Shaquille Mitchell
-Conor Cross Duncan
-Derek Kagen
-Dylan Shaffer
-Jacob Tanner
-Luke Tanner
-Paul Goddard
-Reed Bearden
-Teagan Thomas
-Aleksa Vucurovic
-Benjamin Villareal
-Brennan Cumby
-Nicholas Miller
-Erich Fuhrman
-JP Kirouac
-Kywann Jagaroo
-Parker Wood
-Tony Golin
-Danilo Vujovic
-Joe Reinsma
-Nate Cheney
-Nate Lutz
-Owen Hardner
-Alex Gyde
-Asher Jones
-Ben Gavran
-Grant Girts
-Ian Baca
-Jacob Hopkins
-Keller Sens
-Matej Kovacevic
-Petar Vujovic
-Aidan Parrish
-Alessio Sampedro
-Caden Stover
-Joshua Wormley
-Mason McKenzie
-Will Cheney
-Aidan Ivory
-Aiden Botterill
-Auggie Paredes
-Cooper Venneman
-Daniel Goldgisser
-Declan Puacz
-Elijah Linman
-Ethan Green
-Luke Larson
-Bryce English
-Constantine Romanov
-Jason Longoria
-Kane Macklin
-Marcos Loen
-Mason Grzybowski
-Peter Bodoki
-Porter Austin
-Ricky Barnes
-William Faloon
-Ben Dable
-Brock Cudahy
-Eli Thalos
-Jason Fitch
-Jason O'Donnell
-Joseph Maxson
-Kacper Cieplik
-Marko Kruska
-Matthew Schwanke
-Will Twizell
-Alex Hoy
-Carter Zwirz
-Jaden McNeal-Villafana
-Kiahi Horan
-Michael Lemishko
-Nate Hopkins
-Nicholas Wallace-Whitfield
-Zach Fischer
-Aidan Zieger
-Alexandros Belesis
-Ayden Hess
-Chrysostomos Valavanis
-Frederick Brown
-Gunner Lanquist
-Nolan Williams
-Sherif Hosni
-Tommaso Baldineti
-Wes Reising
-Aaron Tarr
-Gabe Cieplik
-Ivan Morales
-Jack Fox
-Jacob German
-Nathan Valentine
-Bryce Broadway
-Drasko Sekaric
-Josh Foster
-Max Economy
-Tommy Houck
-Vasilije Marinkovic
-Andrew Norris
-Carson Owens
-Giannis Skliras
-John Zingo
-Nikos Agritelis
-Will Matthews
-AJ Waldfogel
-Aleksandar Radosavljevic
-Danko Kesic
-Darrion Phelps
-Giacomo Graff
-Israel Bratton
-James Robinson
-Linc Smith
-Luka Urosevic
-Matias Miranda
-Matthew Royer
-Milan Miskolczi
-Neven Cerkez
-Nick Harper
-Alex Piecuch
-Brandon Shields
-Brendan Metcalf
-Conor Sullivan
-David Huber
-Evan Staresinic
-Francis Kim
-Gabe Gaspar
-Ian Bagent
-J.B. Lee
-Jack Orchard
-Jack Robinson
-Jared Castillo
-Joe Orr
-Jordan Hay
-Kevin Volkov
-Matt Skowronski
-Nate Reiff
-Nik Galvan
-Patrick Carmody
-Ronan Williams
-Shepherd Warren
-Taylor Peterson
-Trevor Clark
-Tyler Zimmerman
-William Lowdon
-Aidan Crouch
-Andrew Shashin
-Bobby Lee
-Bobby Wall
-Cole Jacobs
-Crawford Smith
-Jacob Paiva
-Jake Haines
-Jason Dompke
-Jesse Hainze
-Carson Miller
-Declan Harrison
-Isaac Salinas
-Jack Weggeland
-John Bernhardt
-Kenny McKinlay
-Max Sandberg
-Nick Grinnell
-Connor Simpson
-Graham Lindner
-Jake Altmayer
-Jamie Cassidy
-John Nelligan
-Jonas Greer
-Justin Chu
-Kyle Faison
-Merle Richman
-Payton Comstock
-Peter Hillen
-Sean Douglas McDonough
-Tiernan Brunner
-Will Clark
-Zach Luci
-Caden Capobianco
-Hayden Hallett
-Hayden Kahn
-Ivan Pang
-Jordan Corpuz
-Kyle Yelensky
-Nathan Duchez
-Owen Gurich
-Spencer Shelley
-Travis Berzins
-Chris Kim
-Cole McKechnie
-Danny Taylor
-Erik Nordquist
-Henry Williams
-Liam McInerney
-Michael Heller
-Sean O'Boyle
-Sullivan Lundy
-Tommy McKnew
-Holden Seybold
-Jack Hightower
-Jacques Dutton
-Rory Begin
-Shaan Sandhoo
-Adam Wuthrich
-Aiden Day
-Alejandro Schmidt Corujo
-Billy Zech
-Connor Cashman
-Francis Hendrickson
-Kiefer Black
-Luka Sekulic
-Max Fino
-Nihal Sandhoo
-Peter Davids
-Sam Collingwood
-William True
-Austin Kahn
-Ethan Gao
-Jack Clark
-Jack Rodoni
-Jackson Snapp
-Maddox Garrahy
-Matt Mai-Prasarnsuk
-Orion Erwin
-Quinn Bartlett
-Ryan Munch
-Aiden Berry
-Charlie Child
-Chase Riesenfeld
-Jack Mason
-Jack Reif
-Jackson Sales
-James Mulvey
-Luke Kirincich
-Ramsay Letteau Stallings
-Ryan Mondzelewski
-Tyler Ter Keurst
-Colin McPhail
-Declan Bartlett
-Declan Murphy
-Gavin Linton
-Hudson Parks
-JB Bergstedt
-Jack Pointner
-Maximus Arnold
-Oren Penning
-Saul Biddle
-Tanner Lustig
-Adam Florsheim
-Alexander Zim
-Dominic Rodriguez
-Kevin Bowers
-Luke Boyer
-Matt Munet
-Matt Otsuka
-Matt Weiser
-Mo Mills
-Nicholas Lakon
-Nicolas Lipari
-Paul Bergevin
-Tanner Nickles
-Theo Bass
-William Kim
-Alex Marlott
-Elijah Havens
-Ishan Pherwani
-Joseph Cox
-Peter Blumberg
-Walter Sandbloom
-Cian Concannon
-Hayden Comerford
-Henry Grady
-Jason Teng
-Jasper Lee
-Wilson Noll
-Akom Khera
-Christian Guillaume
-Cole Ivie
-Daniel Cruz
-Dominic Rios
-Jarrod Norton
-Keegan Klein
-Kellen Radtkey
-Nate Fisher
-Shea Grosz
-Tanner Jones
-Aiden Cawley
-Brandon Yeh
-Daniel Cassel
-James Derrod
-Matt Arredondo
-Oliver Wilkins
-Pete Buinauskas
-Tate Miller
-Jack Schroeder
-Max Stone
-Raul Rodriguez
-Travis Hughes
-Danny Miller
-Jack Davis
-Jake Eulenhoefer
-Lars Schubert
-Ryan Tang
-Zane Derrod
-Atticus Wahab-Holles
-Calvin Anderson
-Jacob Carlson
-Kevin Castellanos
-Lucas Washburn
-Noa Dolejsi
-Noah Emmitt
-Ocean Pogorel
-Quin Concannon
-Will Garcia
-Dominic Lopez
-Evan Morisky
-Loron Washburn
-Patrick Gardner
-Steven McDonald
-Tait Landswick
-Tyler Leung
-Vincent Ryser
-Alex Pacchini
-Andre Milasincic
-Daron Alexanians
-Ethan Kim
-Jackson Frediani
-Joey Gutierrez
-Mark Chou
-Max Sauers
-Miles McDaniel
-Nicholas Karamian
-Preston Cho
-Sebastian Brine
-Thomas Hua
-Aleksandar Petrovic
-Alen Osmanovic
-Andrea De Nardi
-Andres Schmidt
-Ben Stevenson
-Decker Dempsey
-Derek Clappis
-Devon Thumwood
-Dom Hummel
-Dylan Becker
-Eli Lule
-Engin Ege Colak
-Ethan Hansen
-Ikko Saito
-Kale Ai
-Lucas Hastie
-Luis Araya
-Luke Pavillard
-Tim Reeves
-Andre Galvez
-Caleb Sandberg
-Christian Murphy
-Cody Sharar
-Jay Halva
-John Hedges
-Wyatt Barker
-Aidan Jang
-Beau Pasquier
-Bogdan Djerkovic
-Dylan Bernardi
-Eli Thalos
-Ethan Ross
-Joey MacLeane
-Jonathan Barry
-Jonathan Cooper
-Michail Melnik
-Sebastian Di Giampolo
-Tyler Breen
-Djordje Stanic
-Jeremie Cote
-Lewis Gale
-Matthew Hosmer
+Michael Rojas	9
+Noah Slack	13
+Vlad Puskovitch	5
+Alex Napawan	16
+Jespyn Bishop	4
+Schuyler Cramer	3
+Torin Ferguson	5
+Uros Pelemis	6
+Breno Tebet	12
+Cale Koester	5
+Caleb Dunbar	14
+Dylan Veccio	6
+James Ramey	21, 20
+Justice Lamboy	19
+Kris Eylofson	18
+Quinten Gallagher	17, 3
+Xander McWhorter	13
+Zach Callejas	8
+Blake Wind	2
+Duncan Munro	6
+Emiliano Martinez	7, 2
+Gavin Haight	1A, 1B, 1
+Isaac Demski	13
+Yannick Robertson	10
+Benton Fonner	1C
+Brayden Ogle	1A, 1B
+Brody Loftin	17
+Eli Grande	5
+Ethan Gray	19
+Joshua Gibson	23, 5
+Kevin Kehoe	12
+Kris Eyolfson	11
+Luke Schmidt	14
+Nathan Weintraub	9
+Noah Schott	24
+Riccardo Vettore	15
+Rowan Daughtrey	8
+Sawyer Maddox	18
+T.J. Joubert	21
+Tymek Wlodek	22
+Alexandros Prokopis	4
+Armand Le Goff	7
+Davion Nichols	13, 11
+Gennaro Pecoraro	1C
+Jayden Del Campo	14, 3
+Joaquin Vazquez	16, 21
+Tonny Simon	18
+Alexander Guzman	15
+Ben Meier	19
+Jacob Fowlkes	17
+Jacob Orr	20
+Jonas King	13
+Marsel Saripov	16
+Paxton Miller	14
+Tristan Grimett	6
+Alec Diaz	8
+Alex Cappuccio	4
+Andrew Too-A-Foo	1
+Connor Schmitz	2
+Cooper Lein	1
+Gene Bilbao	1
+Jack Howe	7
+Jackson Rehmet	16
+Joey Ryan	20
+John Reyes	5, 7
+Matt Bachler	11
+Matthew Virzi	3
+Nebyat Mamo	15, 18
+Noah Ratliff	12
+Otis Tyson	14
+Philip Jenny	10
+Ryan Mercando	18, 6
+Ryan Witoslawski	9
+Andrew Howe	17
+Brennan Russell	20
+Christian Chee-Foon	21
+Daniel Alvarez	5
+Jonathan Merkley	13
+Spencer Saban	19
+Charlie Freedman	22
+Joel Parnell	23, 11, 5
+Mathieu Davis	15, 7, 9
+Michael Gutman	21, 2
+Nash Greeven	1
+Shaquille Mitchell	7
+Conor Cross Duncan	17
+Derek Kagen	10
+Dylan Shaffer	6
+Jacob Tanner	1
+Luke Tanner	14
+Paul Goddard	16
+Reed Bearden	12
+Teagan Thomas	15, 8, 3
+Aleksa Vucurovic	4
+Benjamin Villareal	13, 6
+Brennan Cumby	11
+Nicholas Miller	7, 17
+Erich Fuhrman	20
+JP Kirouac	8, 9
+Kywann Jagaroo	7
+Parker Wood	13, 1A
+Tony Golin	1A, 1
+Danilo Vujovic	2
+Joe Reinsma	4
+Nate Cheney	14, 10
+Nate Lutz	1B, 13
+Owen Hardner	8, 11
+Alex Gyde	1B, 1A, 1
+Asher Jones	7, 13
+Ben Gavran	19
+Grant Girts	12
+Ian Baca	5
+Jacob Hopkins	8
+Keller Sens	18
+Matej Kovacevic	6, 11
+Petar Vujovic	3
+Aidan Parrish	15
+Alessio Sampedro	4
+Caden Stover	16, 6
+Joshua Wormley	14
+Mason McKenzie	1B
+Will Cheney	12
+Aidan Ivory	16, 8
+Aiden Botterill	4
+Auggie Paredes	5, 22
+Cooper Venneman	21, 11
+Daniel Goldgisser	9
+Declan Puacz	14
+Elijah Linman	15
+Ethan Green	17
+Luke Larson	22
+Bryce English	5
+Constantine Romanov	7
+Jason Longoria	10
+Kane Macklin	16
+Marcos Loen	21
+Mason Grzybowski	2
+Peter Bodoki	12
+Porter Austin	18
+Ricky Barnes	1B
+William Faloon	1A
+Ben Dable	9
+Brock Cudahy	2
+Eli Thalos	8
+Jason Fitch	14
+Jason O'Donnell	5
+Joseph Maxson	1
+Kacper Cieplik	11
+Marko Kruska	1/10
+Matthew Schwanke	6
+Will Twizell	4
+Alex Hoy	4
+Carter Zwirz	9
+Jaden McNeal-Villafana	12
+Kiahi Horan	7, 27
+Michael Lemishko	6
+Nate Hopkins	2
+Nicholas Wallace-Whitfield	3
+Zach Fischer	13
+Aidan Zieger	16
+Alexandros Belesis	14, 2
+Ayden Hess	17
+Chrysostomos Valavanis	5
+Frederick Brown	1B
+Gunner Lanquist	20, 7, 8
+Nolan Williams	19, 10
+Sherif Hosni	1A, 1B
+Tommaso Baldineti	10
+Wes Reising	21, 12, 13
+Aaron Tarr	18, 8
+Gabe Cieplik	22, 21
+Ivan Morales	20, 23, 11
+Jack Fox	19, 10
+Jacob German	21
+Nathan Valentine	15, 9
+Bryce Broadway	22
+Drasko Sekaric	7
+Josh Foster	20
+Max Economy	24, 4
+Tommy Houck	25
+Vasilije Marinkovic	1A
+Andrew Norris	14
+Carson Owens	15
+Giannis Skliras	12
+John Zingo	7
+Nikos Agritelis	3
+Will Matthews	21
+AJ Waldfogel	2
+Aleksandar Radosavljevic	22
+Danko Kesic	7
+Darrion Phelps	18
+Giacomo Graff	19
+Israel Bratton	17
+James Robinson	15
+Linc Smith	1B
+Luka Urosevic	5
+Matias Miranda	14
+Matthew Royer	1A
+Milan Miskolczi	1
+Neven Cerkez	6
+Nick Harper	13
+Alex Piecuch	4
+Brandon Shields	1B, 1A
+Brendan Metcalf	27
+Conor Sullivan	25, 9
+David Huber	24
+Evan Staresinic	5
+Francis Kim	1
+Gabe Gaspar	8
+Ian Bagent	7
+J.B. Lee	2
+Jack Orchard	12
+Jack Robinson	9, 3
+Jared Castillo	21, 14
+Joe Orr	17
+Jordan Hay	14
+Kevin Volkov	20
+Matt Skowronski	11
+Nate Reiff	18, 11
+Nik Galvan	6
+Patrick Carmody	22
+Ronan Williams	1A, 1
+Shepherd Warren	23, 5
+Taylor Peterson	3
+Trevor Clark	16, 3
+Tyler Zimmerman	26, 12
+William Lowdon	19, 7
+Aidan Crouch	26, 14
+Andrew Shashin	21
+Bobby Lee	15, 2
+Bobby Wall	13
+Cole Jacobs	17, 12
+Crawford Smith	23, 8
+Jacob Paiva	28
+Jake Haines	22, 5
+Jason Dompke	25, 15
+Jesse Hainze	27, 10
+Carson Miller	19
+Declan Harrison	18
+Isaac Salinas	6
+Jack Weggeland	9
+John Bernhardt	23
+Kenny McKinlay	24
+Max Sandberg	1C, 1B, 1
+Nick Grinnell	22
+Connor Simpson	8
+Graham Lindner	26, 7, 9
+Jake Altmayer	5
+Jamie Cassidy	28
+John Nelligan	23
+Jonas Greer	1C
+Justin Chu	27
+Kyle Faison	25
+Merle Richman	19, 33, 18
+Payton Comstock	4
+Peter Hillen	16
+Sean Douglas McDonough	17
+Tiernan Brunner	18
+Will Clark	15
+Zach Luci	14
+Caden Capobianco	1A, 1
+Hayden Hallett	31
+Hayden Kahn	30, 10
+Ivan Pang	11, 4
+Jordan Corpuz	19, 10
+Kyle Yelensky	29, 2
+Nathan Duchez	26, 13
+Owen Gurich	1B
+Spencer Shelley	3
+Travis Berzins	20, 7, 27
+Chris Kim	21
+Cole McKechnie	14
+Danny Taylor	32
+Erik Nordquist	26
+Henry Williams	19, 8
+Liam McInerney	31, 25
+Michael Heller	12
+Sean O'Boyle	27, 7
+Sullivan Lundy	29
+Tommy McKnew	17, 15
+Holden Seybold	6
+Jack Hightower	1A, 1
+Jacques Dutton	20
+Rory Begin	22
+Shaan Sandhoo	1D, 1C
+Adam Wuthrich	1E
+Aiden Day	9
+Alejandro Schmidt Corujo	21
+Billy Zech	14
+Connor Cashman	19
+Francis Hendrickson	1D
+Kiefer Black	11
+Luka Sekulic	5
+Max Fino	16, 27
+Nihal Sandhoo	1F
+Peter Davids	17
+Sam Collingwood	23
+William True	24
+Austin Kahn	13
+Ethan Gao	18, 30
+Jack Clark	4
+Jack Rodoni	1A
+Jackson Snapp	16
+Maddox Garrahy	3
+Matt Mai-Prasarnsuk	10
+Orion Erwin	2
+Quinn Bartlett	17
+Ryan Munch	1B
+Aiden Berry	7
+Charlie Child	20
+Chase Riesenfeld	31
+Jack Mason	23
+Jack Reif	12
+Jackson Sales	26
+James Mulvey	8
+Luke Kirincich	15
+Ramsay Letteau Stallings	21
+Ryan Mondzelewski	24
+Tyler Ter Keurst	25
+Colin McPhail	18
+Declan Bartlett	3
+Declan Murphy	25
+Gavin Linton	1C
+Hudson Parks	20
+JB Bergstedt	26
+Jack Pointner	4
+Maximus Arnold	10
+Oren Penning	1
+Saul Biddle	6
+Tanner Lustig	22
+Adam Florsheim	1
+Alexander Zim	4, 2
+Dominic Rodriguez	10
+Kevin Bowers	19
+Luke Boyer	15, 3
+Matt Munet	3
+Matt Otsuka	6
+Matt Weiser	2, 1
+Mo Mills	14
+Nicholas Lakon	11
+Nicolas Lipari	8, 6
+Paul Bergevin	9
+Tanner Nickles	12, 1A
+Theo Bass	7
+William Kim	5
+Alex Marlott	14, 11
+Elijah Havens	13
+Ishan Pherwani	12
+Joseph Cox	15
+Peter Blumberg	21
+Walter Sandbloom	9, 10
+Cian Concannon	9
+Hayden Comerford	5
+Henry Grady	1
+Jason Teng	12
+Jasper Lee	7
+Wilson Noll	8
+Akom Khera	23, 6
+Christian Guillaume	16, 12
+Cole Ivie	1A
+Daniel Cruz	18, 3
+Dominic Rios	19, 15
+Jarrod Norton	21
+Keegan Klein	17, 11
+Kellen Radtkey	14
+Nate Fisher	22, 10
+Shea Grosz	4
+Tanner Jones	2
+Aiden Cawley	5, 6
+Brandon Yeh	1B
+Daniel Cassel	1C
+James Derrod	1D, 1B, 1
+Matt Arredondo	22
+Oliver Wilkins	16, 8
+Pete Buinauskas	13
+Tate Miller	2
+Jack Schroeder	1D, 1A, 1
+Max Stone	23, 10
+Raul Rodriguez	3
+Travis Hughes	19, 4
+Danny Miller	11
+Jack Davis	17, 14, 8
+Jake Eulenhoefer	14, 16, 20, 4
+Lars Schubert	7
+Ryan Tang	13
+Zane Derrod	6
+Atticus Wahab-Holles	18, 5
+Calvin Anderson	1B, 1A
+Jacob Carlson	17
+Kevin Castellanos	3
+Lucas Washburn	9, 10
+Noa Dolejsi	13
+Noah Emmitt	15, 12
+Ocean Pogorel	20, 2
+Quin Concannon	12
+Will Garcia	1C, 1A, 1
+Dominic Lopez	19, 9
+Evan Morisky	22, 13
+Loron Washburn	14, 2
+Patrick Gardner	23, 18
+Steven McDonald	1C
+Tait Landswick	17, 20
+Tyler Leung	1D, 1B
+Vincent Ryser	18
+Alex Pacchini	16
+Andre Milasincic	22
+Daron Alexanians	23
+Ethan Kim	25
+Jackson Frediani	28
+Joey Gutierrez	24
+Mark Chou	27
+Max Sauers	21
+Miles McDaniel	17
+Nicholas Karamian	15
+Preston Cho	19
+Sebastian Brine	26
+Thomas Hua	14
+Aleksandar Petrovic	2
+Alen Osmanovic	1
+Andrea De Nardi	7
+Andres Schmidt	12
+Ben Stevenson	9
+Decker Dempsey	15
+Derek Clappis	3
+Devon Thumwood	11
+Dom Hummel	17, 13
+Dylan Becker	1
+Eli Lule	14
+Engin Ege Colak	4
+Ethan Hansen	20
+Ikko Saito	13
+Kale Ai	8
+Lucas Hastie	16, 10
+Luis Araya	6
+Luke Pavillard	5
+Tim Reeves	10, 2
+Andre Galvez	17
+Caleb Sandberg	19, 8
+Christian Murphy	16
+Cody Sharar	20
+Jay Halva	18, 15
+John Hedges	1
+Wyatt Barker	15, 2
+Aidan Jang	17
+Beau Pasquier	21
+Bogdan Djerkovic	3
+Dylan Bernardi	18
+Eli Thalos	19, 12
+Ethan Ross	12
+Joey MacLeane	1, 1A
+Jonathan Barry	1A, 1
+Jonathan Cooper	9
+Michail Melnik	1, 1C
+Sebastian Di Giampolo	20, 19
+Tyler Breen	13
+Djordje Stanic	11, 6
+Jeremie Cote	8, 4
+Lewis Gale	1B, 1, 1A
+Matthew Hosmer	10
 RS Gianluca Caltagirone
 RS John Dickerson
 RS Liam Egan
@@ -2653,969 +2653,969 @@ RS Noah Scholar
 RS Noah Schor
 RS Quinlan Plukas
 RS Steven Casas
-Rene Peralta
-Calvin Behm
-Cooper Gaderson
-Gianluca Caltagirone
-John Dickerson
-Liam Egan
+Rene Peralta	21, 9
+Calvin Behm	13
+Cooper Gaderson	21, 5
+Gianluca Caltagirone	20
+John Dickerson	22
+Liam Egan	15
 Noah Scholar
-Noah Schor
+Noah Schor	2
 Peter Poirier
 Quinlan Plukas
-Reuel D'Souza
+Reuel D'Souza	12
 Robert Bettencourt
 Ryan Reardon
-Steven Casas
+Steven Casas	5
 William Ennis
-Daniel Viscia
-Declan McJilton
-Filip Norell
-Gil Gvishi
+Daniel Viscia	14, 11
+Declan McJilton	18, 14, 2
+Filip Norell	16, 13
+Gil Gvishi	11, 2
 Lochan Zwaschka
-Manuel Pembertty
-Mihailo Vukazic
-Alek Newman
-Bae Fountain
-Charlie Donlin
-Daniel Warman
-Eli Sternweiler
-Flynn Howarth
-Nash Brandon
-Patrick Wooler
-Ran Souva
-Benjamin Gronbach
-Blake Bausch
-Ethan Braga
-John Winters
-Jonah Martorana
+Manuel Pembertty	8, 24
+Mihailo Vukazic	7
+Alek Newman	4, 20, 16
+Bae Fountain	1A, 1
+Charlie Donlin	17, 15, 20
+Daniel Warman	12, 16, 21
+Eli Sternweiler	1B, 1, 1C
+Flynn Howarth	17
+Nash Brandon	21, 18
+Patrick Wooler	23, 18, 17
+Ran Souva	19, 8
+Benjamin Gronbach	1, 1D, 1A
+Blake Bausch	1, 1E
+Ethan Braga	16, 24
+John Winters	1, 1B
+Jonah Martorana	15, 19
 Jordan Lambert
-Noah Wendt
-Olivér Fodor
-Ryan Smith
-Spencer Burdack
-Srboljub Filipovic
-Stefan Vavic
-Thomas Colpo
+Noah Wendt	23, 22, 3
+Olivér Fodor	6
+Ryan Smith	19, 22
+Spencer Burdack	3, 9
+Srboljub Filipovic	21
+Stefan Vavic	6, 3
+Thomas Colpo	20
 Jack Gee
 Nathan Rasmussen
-Ori Buzaglo
-Petar Stjepanovic
+Ori Buzaglo	11
+Petar Stjepanovic	24
 Seth Fischer
-Yoav Rendler
-Zsombor Gyemant
-Apostolos Georgaras
-Borisz Kasa-Gal
-Brody Biedermann
-Ethan Carrington
-Gergely Kiss
-Landon Mauge
-Lukas Peters
-Petar Popovic
+Yoav Rendler	19, 10
+Zsombor Gyemant	23
+Apostolos Georgaras	4
+Borisz Kasa-Gal	12
+Brody Biedermann	6
+Ethan Carrington	7
+Gergely Kiss	1
+Landon Mauge	23
+Lukas Peters	17
+Petar Popovic	5
 RS Nathan Rasmussen
-Saul Biddle
-Tamas Otto Voros
-Andrew Sawin
-Dane Fox
-Dylan Spence
-Eli Hamm
-Enzo Fernandez
-Gabor Holl
-Gavin Little
-Grant Huston
-Kalman Tomozi
-Marc Comabella
-Max Jakle
-Renzo Archer
-Samuel Eastaugh
-Samuel Macias
-Artak Arzumanyan
-Brock Liebhardt
-Charles Olsen
-Chris Dilworth
-Cristian Bridley
-Evan Staton
-Garrett Spruth
-George Mooney
-Jens Cole
-Jonathan Hirsch
-Justin Cowan
-Kenneth Keller
-Mark Urban
-Marko Asic
-Mate Toth
-Nolan Strout
-Philippe Marco
-Robert Beck
-Ryan Taylor
-Sam Paur
-Sean Thomas
-Spencer Lupin
-Zack Rhodes
-Zack Trotter
-Blake Brutocao
-Chandler Rockwell
-Coleman Carpenter
-Ian Holder
-John Claude Marco
-Kyle McKenney
-Matthew Sturtevant
-Balazs Kosa
-Brian Barez
-Conrad Gordon
-Curtis Jarvis
-Jacob Watson
-Jake Gordon
-Matt Outcalt
-Max Sprute
-Michael Dakis
-Sean Ferrari
-Austin Smit
-Kaden Kaneko
-Kent Emden
-Xavier Marco
-Zach Arthur
-Andrew Outcalt
-Anthony D'Ambra
-Christian Hosea
-Jake Howerton
-Justin Edward
-Nicholas Fichman
-Nico Tierney
-Rocco Cuttone
-Spencer Tybur
-Travis Reynolds
-Clay Kaneko
-Connor Cohen
-Kyle Thomas
-Matty Walsh
-Adam Csapo
-Adam Humbert
-Conor Brough
-Dennis Blyashov
-Milo Joseph
-Nathan James
-Ryan Reagan
-Sandor Gal
-Tanner Turrall
-Zach Cwiertnia
-Adam Yost
-Antonio Knez
-Bronson Birdsall
-Chase Wilson
-Dane Howell
-Jackson Benners
-Jon Carcarey
-Nick Bryant
-Ryan Brosnan
-Tanner McCreary
-Cade Anderton
-Charles Warmington
-Erik Ionescu
-Gabe Lewis
-Jack McCann
-Jaxon Leach
-Max Smirnov
-Owen Tift
-Reed Pantaleon
-Adam Blum
-Alex Piccin
-Brian Barnuevo
-Cameron Bench
-Csanád Bella
-Garrett Chivers
-Max Burstein
-Woden Chompff
-George Gayner
-Hunter Danko
-Ivan Khramtsov
-Sameer Gowda
-Tyce di Pretoro
-Will Stuart
-Zach Moore
-Adam Ward
-Cade Curry
-Daniel Diemer
-Ian Jaime
-Jacob Niskey
-James Baker
-James Kelbert
-Joseph Schafer
-Mark Hallman
-Matt Alexander
-Max Ries
-Nic Lanker
-Pedro Martinez
-Riley Mangan
-Sam Gorcey-Biblowitz
-Timmy Hardman
-Tommy Turner
-Zach Senator
-Adam Gross
-Cole Maizel
-Douglas Webster
-Dylan Elliott
-Keegan Coleman
-Maxwell Bethel
-Noah Sasaki
-Alex Figueras
-Jack Mallery
-Jacob Cohn
-Kellan Grant
-Sam Sasaki
-Timothy Mangan
-Tony Murphy
-Alexander Peterson
-Max Bass
-Kyle Green
-Matija Jancic
-Andrew Plaschke
-Cole Kendrick
-Jack Ryan
-Luca Bozzo
-Maxim Koretsky
-Patrick Hughes
-William Byrne
-Zachary Kaplan
-Conrad Hugar
-Dillon Joyce
-Jacob Shimon
-Jacob Whiting
-Liam Byrne
-Lukas Schoenwald
-Nico Perna
-Sam Szycowny
-Stavros Panos
-Chase Barman
-Greg Moore
-Hudson Schneider
-Indigo Lee
-John Possman
-John Shafer
-Julian Montoya
-Miles Chiang
-Theo Bass
-Tommy Ryan
-Zach Whitfield
-Alden Pfau
-Chris Childs
-Connor Sullivan
-Darragh Flanders
-Kai Baker
-Logan Colman
-Max Distaso
-Micah Webber
-Stavros Zografos
-Alex Erickson
-Baye Breene
-Dylan Bird
-Emerson LaPorta
-Harrison Siegel
-Jaden Winters
-Jake Lee
-Justin Topol
-Leo DiLascia
-Nick Grandinetti
-Ryan Kreutzkamp
-Ryan Rich
-Alex Minton
-Ari Schechtman
-Colin DuBois
-John Plaschke
-Michael Soybel
-Shota Eskin
-Tiernan Braun
-Tucker Gavin
-Warren Luc
-Alex Essig
-Christopher Xi
-Curtis Fink
-Davis Wachtell
-Eric Bowen
-Jordan Colina
-Jovan Jeremic
-Logan MacDonell
-Matt Payne
-Michael Swart
-Ryan Hammarskjold
-Ryan Melosini
-Ryan Wilson
-Sean Duncan
-Vojislav Mitrovic
-Alec Mendelsohn
-Andrew Lin
-Casey Conrad
-Kyle MacMillan
-Miles Cole
-Will Ueberroth
-Andy Paul
-Billy Motherway
-Keller Maloney
-Miles Wilson
-Mitchell Cooper
-Oliver Schmickel
-P.J. Greenbaum
-Wyatt Benson
-Alex Roose
-Antonio Knez
-Christian Hartch
-Harry Foster
-Joan Coloma
-Nick Hovsmith
-Pierce Maloney
-Ryan Neapole
-Yurian Quinones
-George Caras
-Mason Killion
-Matej Sekulic
-Touma Mack
-Chris Armstrong
-Gavin Molloy
-Harry Moross
-Isaac Rotenberg
-Luke Hammarskjold
-Ned Bless
-Roko Pozaric
-Vladan Mitrovic
-Will Garlinghouse
-Aidan Bruno
-Bhavan Aulakh
-Daniel Rodriguez
-JP Ohl
-Logan McCarroll
-Luke Johnston
-Rees Barnes
-West Temkin
-Finn LeSieur
-Kristóf Kovács
-Rayan Elahmadi
-Tigran Sennett
-William Swart
-Enrique Nuño
-Gavin Appeldorn
-Hayk Yengibaryan
-Nathan Banos
-Tas Palcza
-Teddy Rountree-Shtulman
-Ádám Peocz
-Andrew Tu
-Luka Franulovic
-Otto Stothart
-Pierre du Plessis
-Taylor Bell
-Andrew Li
-Boti Kovács
-Gus von Metzsch
-Joseph Hwang
-Luke Weichert
-Oliver Marcin
-Tibi Cojocariu
-Aki Andersen
-Alex Nitinthorn
-Austin Kent
-Billy Clifford
-Blake Burney
-Braeden Shaw
-Brandon Yee
-Bryce Hurick
-Carter Kerwin
-Chris Sekula
-Cole Kammerer
-Cooper Krause
-Danny Hartwig
-Kevin Chapa
-Kyle Jackson
-Kyle Murata
-Logan Wright
-Mark Zikov
-Matt Shippen
-Max Taylor
-Mitchell Walker
-Reece Koe
-Sean Todd
-Spencer Allen
-Ty Williams
-Zac Polmanteer
-Aaron White
-Chris Frejlach
-Chris Martinez
-Grant Curry
-Ilan Dayan
-Jacob Guedel
-Jasen Swan
-Michael Goldbach
-Alec Todd
-Bradley Clinton
-Carl Matthews
-Chris Allen
-Jason Gates
-Karan Akcan
-Tor Cole
-Tyler Strabel
-Brandon Khalil
-Bryce Elsner
-Conner Strabel
-Drake Moody
-Ethan Beaty
-Garrett Tully
-Jesse Kimie-Brylka
-Kevin Bellamy
-Liam Murphy
-Michael Driscoll
-Michael Maher
-Nathaniel Rucker-Jensen
-Reed Caron
-Ryan Pilotte
-Brett Peoples
-Christopher Allen
-Curren McCarthy
+Saul Biddle	15
+Tamas Otto Voros	9
+Andrew Sawin	1B
+Dane Fox	13
+Dylan Spence	15
+Eli Hamm	18
+Enzo Fernandez	7
+Gabor Holl	8
+Gavin Little	21
+Grant Huston	14
+Kalman Tomozi	2
+Marc Comabella	4
+Max Jakle	1A
+Renzo Archer	24
+Samuel Eastaugh	16
+Samuel Macias	20
+Artak Arzumanyan	16, 2
+Brock Liebhardt	4
+Charles Olsen	5
+Chris Dilworth	14
+Cristian Bridley	3
+Evan Staton	21, 13
+Garrett Spruth	17
+George Mooney	15, 12, 11
+Jens Cole	24, 6, 5
+Jonathan Hirsch	12
+Justin Cowan	8
+Kenneth Keller	7
+Mark Urban	11
+Marko Asic	9
+Mate Toth	18
+Nolan Strout	1
+Philippe Marco	1
+Robert Beck	13
+Ryan Taylor	1
+Sam Paur	20
+Sean Thomas	10, 4
+Spencer Lupin	2
+Zack Rhodes	1
+Zack Trotter	14, 4
+Blake Brutocao	3
+Chandler Rockwell	15
+Coleman Carpenter	16, 6
+Ian Holder	21, 10, 5
+John Claude Marco	1
+Kyle McKenney	1
+Matthew Sturtevant	19, 15
+Balazs Kosa	12
+Brian Barez	22
+Conrad Gordon	1
+Curtis Jarvis	21, 22
+Jacob Watson	2
+Jake Gordon	16, 10, 19
+Matt Outcalt	17, 4, 11
+Max Sprute	13
+Michael Dakis	7
+Sean Ferrari	8
+Austin Smit	20, 9
+Kaden Kaneko	15, 22, 18, 6
+Kent Emden	1
+Xavier Marco	17, 2, 8
+Zach Arthur	19, 21, 11
+Andrew Outcalt	14
+Anthony D'Ambra	5
+Christian Hosea	23, 7
+Jake Howerton	15
+Justin Edward	1
+Nicholas Fichman	3
+Nico Tierney	4
+Rocco Cuttone	17
+Spencer Tybur	1
+Travis Reynolds	24
+Clay Kaneko	16, 2, 6
+Connor Cohen	20
+Kyle Thomas	22, 2
+Matty Walsh	10, 8
+Adam Csapo	23
+Adam Humbert	18
+Conor Brough	13, 4
+Dennis Blyashov	21
+Milo Joseph	12
+Nathan James	1
+Ryan Reagan	15, 14
+Sandor Gal	20, 21, 3
+Tanner Turrall	19, 9
+Zach Cwiertnia	1
+Adam Yost	26, 24
+Antonio Knez	1
+Bronson Birdsall	20
+Chase Wilson	10
+Dane Howell	19, 5
+Jackson Benners	11
+Jon Carcarey	16, 2
+Nick Bryant	25, 14
+Ryan Brosnan	3
+Tanner McCreary	1
+Cade Anderton	16, 6
+Charles Warmington	18, 9
+Erik Ionescu	22
+Gabe Lewis	13, 3
+Jack McCann	17
+Jaxon Leach	1
+Max Smirnov	1
+Owen Tift	15, 5
+Reed Pantaleon	21
+Adam Blum	17
+Alex Piccin	18, 8
+Brian Barnuevo	28
+Cameron Bench	25, 15
+Csanád Bella	10
+Garrett Chivers	16
+Max Burstein	7
+Woden Chompff	19, 13
+George Gayner	1
+Hunter Danko	17
+Ivan Khramtsov	20
+Sameer Gowda	25
+Tyce di Pretoro	18
+Will Stuart	27
+Zach Moore	19
+Adam Ward	2
+Cade Curry	13
+Daniel Diemer	1
+Ian Jaime	16
+Jacob Niskey	10, 7
+James Baker	12
+James Kelbert	1, 1A
+Joseph Schafer	8
+Mark Hallman	11, 10
+Matt Alexander	7
+Max Ries	3
+Nic Lanker	6
+Pedro Martinez	17, 14
+Riley Mangan	14, 4
+Sam Gorcey-Biblowitz	15, 12, 3
+Timmy Hardman	4
+Tommy Turner	9
+Zach Senator	18, 5, 24
+Adam Gross	15
+Cole Maizel	21
+Douglas Webster	20, 21
+Dylan Elliott	6
+Keegan Coleman	17, 7
+Maxwell Bethel	16
+Noah Sasaki	9
+Alex Figueras	18
+Jack Mallery	14, 2
+Jacob Cohn	20, 5, 4
+Kellan Grant	1A, 1
+Sam Sasaki	11, 10, 7
+Timothy Mangan	12
+Tony Murphy	5, 20
+Alexander Peterson	14, 3, 6
+Max Bass	18
+Kyle Green	5, 2
+Matija Jancic	14, 15
+Andrew Plaschke	21
+Cole Kendrick	13
+Jack Ryan	24
+Luca Bozzo	16, 4
+Maxim Koretsky	22, 3
+Patrick Hughes	11
+William Byrne	1
+Zachary Kaplan	17, 7
+Conrad Hugar	18
+Dillon Joyce	20, 8
+Jacob Shimon	1A, 1D
+Jacob Whiting	19, 6
+Liam Byrne	1
+Lukas Schoenwald	22
+Nico Perna	9
+Sam Szycowny	5
+Stavros Panos	10
+Chase Barman	17, 5, 7
+Greg Moore	1B, 1
+Hudson Schneider	5, 4
+Indigo Lee	14, 6
+John Possman	1C, 1B, 1E
+John Shafer	12, 2
+Julian Montoya	15, 12
+Miles Chiang	20
+Theo Bass	16
+Tommy Ryan	23, 25, 24
+Zach Whitfield	19
+Alden Pfau	14
+Chris Childs	22
+Connor Sullivan	13
+Darragh Flanders	3, 11
+Kai Baker	10
+Logan Colman	28
+Max Distaso	17
+Micah Webber	23
+Stavros Zografos	15
+Alex Erickson	27, 9
+Baye Breene	5
+Dylan Bird	26
+Emerson LaPorta	21
+Harrison Siegel	24, 27
+Jaden Winters	29, 30
+Jake Lee	3
+Justin Topol	1C, 1A
+Leo DiLascia	1A, 1B
+Nick Grandinetti	22
+Ryan Kreutzkamp	13
+Ryan Rich	23
+Alex Minton	29
+Ari Schechtman	1C
+Colin DuBois	15
+John Plaschke	25
+Michael Soybel	8
+Shota Eskin	21
+Tiernan Braun	16
+Tucker Gavin	5
+Warren Luc	1D
+Alex Essig	1
+Christopher Xi	3
+Curtis Fink	6
+Davis Wachtell	4
+Eric Bowen	14
+Jordan Colina	8
+Jovan Jeremic	11
+Logan MacDonell	9
+Matt Payne	12
+Michael Swart	10
+Ryan Hammarskjold	15
+Ryan Melosini	1
+Ryan Wilson	7
+Sean Duncan	2
+Vojislav Mitrovic	1
+Alec Mendelsohn	6
+Andrew Lin	16, 15, 5
+Casey Conrad	5, 3
+Kyle MacMillan	13, 8
+Miles Cole	11
+Will Ueberroth	17
+Andy Paul	19
+Billy Motherway	1
+Keller Maloney	16, 7
+Miles Wilson	1
+Mitchell Cooper	18, 10
+Oliver Schmickel	20
+P.J. Greenbaum	13
+Wyatt Benson	14
+Alex Roose	20, 11
+Antonio Knez	1
+Christian Hartch	1
+Harry Foster	19
+Joan Coloma	23
+Nick Hovsmith	12
+Pierce Maloney	18, 8
+Ryan Neapole	22, 11
+Yurian Quinones	17
+George Caras	6
+Mason Killion	4
+Matej Sekulic	9
+Touma Mack	2
+Chris Armstrong	21
+Gavin Molloy	16
+Harry Moross	24
+Isaac Rotenberg	15, 10
+Luke Hammarskjold	18, 12
+Ned Bless	22
+Roko Pozaric	5
+Vladan Mitrovic	3
+Will Garlinghouse	13, 7
+Aidan Bruno	22
+Bhavan Aulakh	26, 16
+Daniel Rodriguez	25
+JP Ohl	14
+Logan McCarroll	30
+Luke Johnston	2
+Rees Barnes	28, 18
+West Temkin	1
+Finn LeSieur	23, 7
+Kristóf Kovács	1
+Rayan Elahmadi	19
+Tigran Sennett	13, 8
+William Swart	15
+Enrique Nuño	11, 12
+Gavin Appeldorn	24, 3, 2
+Hayk Yengibaryan	17
+Nathan Banos	20
+Tas Palcza	13, 10
+Teddy Rountree-Shtulman	21
+Ádám Peocz	9
+Andrew Tu	22
+Luka Franulovic	6
+Otto Stothart	5
+Pierre du Plessis	1
+Taylor Bell	27
+Andrew Li	10
+Boti Kovács	11
+Gus von Metzsch	1
+Joseph Hwang	14
+Luke Weichert	23
+Oliver Marcin	3
+Tibi Cojocariu	4
+Aki Andersen	19, 9
+Alex Nitinthorn	27
+Austin Kent	13
+Billy Clifford	10
+Blake Burney	16, 7
+Braeden Shaw	1A, 1
+Brandon Yee	3
+Bryce Hurick	26
+Carter Kerwin	15, 3
+Chris Sekula	1
+Cole Kammerer	21
+Cooper Krause	20, 15, 4
+Danny Hartwig	25
+Kevin Chapa	4
+Kyle Jackson	23, 9, 6
+Kyle Murata	12
+Logan Wright	22
+Mark Zikov	8
+Matt Shippen	2
+Max Taylor	6
+Mitchell Walker	11, 12
+Reece Koe	18, 14, 5
+Sean Todd	14, 5, 6
+Spencer Allen	24, 2
+Ty Williams	17
+Zac Polmanteer	9
+Aaron White	19
+Chris Frejlach	18, 7
+Chris Martinez	1A
+Grant Curry	8
+Ilan Dayan	11
+Jacob Guedel	20
+Jasen Swan	16
+Michael Goldbach	21
+Alec Todd	14
+Bradley Clinton	20, 9, 6
+Carl Matthews	13
+Chris Allen	24, 12
+Jason Gates	1, 1A
+Karan Akcan	18
+Tor Cole	23, 8, 3
+Tyler Strabel	15
+Brandon Khalil	1, 1A
+Bryce Elsner	1
+Conner Strabel	15
+Drake Moody	10, 5
+Ethan Beaty	23, 6, 7
+Garrett Tully	20
+Jesse Kimie-Brylka	19
+Kevin Bellamy	22
+Liam Murphy	1
+Michael Driscoll	18, 4
+Michael Maher	21, 12
+Nathaniel Rucker-Jensen	11
+Reed Caron	17, 5
+Ryan Pilotte	14
+Brett Peoples	10, 25
+Christopher Allen	12
+Curren McCarthy	2
 Daniel Bajda
-Elliot Sesma
-Emerson Kropp
-Nathaniel Rucker-Jensen
-Adrian Trejo
-Andrew Sorensen
-Austin Galanski
-Dan Bajda
-Jack Everett
-Jack Ryan
-Kian Jang
-Luca Buono
-Max Wagener
-Owen Nishimura
-Parker Murai
-Ron Gvishi
-Seamus Heaney
-Spencer Clinton
-Tanner Whitson
-Thomas Byrne
-Alec Abrahamian
-Andrew Higginson
-Callum Norman
-Eamon Greathouse
-Harrison DeCourcy
-Jake Rose
-Spencer Sellwood
-Adam Lambert
-Aidan Murphy
-Brady Bumgardner
-Dean Moody
-Nicolas Fedotov
-Roberto Barrera
-Ryan Brennen
-Tanner Stagner
-Troy Barker
-Brody Nielsen
-Cameron Jones
-Hunter Starkey
-Joseph Madigan
-Kalani Nelson
-Liam Gore
-Michael Bannister
-Michael Villagran
-Stephen Ramirez
-Brady Bailey
-Camilo Solis
-Jake Simpson
-Lennon Franklin
-Matthew Wheeler
-Nathan Gattorna
-Noah Tikoo
-Oliver Child
-Oliver Finley
-Ossie Joplin
-Sebas Maccalla
-Tim Jensen
-Antonio Drioane
-Blake Minkler
-Christian Newberry
-Evan Keene
-Johnny Starr
-Kainoa Villalon
-Kenny Weisner
-Mathieu Bordet
-Matias Sheridan
-Nick Davidson
-Ryan Motta
-Samson Casem
-Septime De Bonnafos
-Tate Hudson
-Zach Dortch
-Alessandro Fumo
-Andrew Donlin
-Christian Renzuto
-Domenico Barillà
-Donovan Swann
-Ethan Klerck
-Federico Castrucci
-Ferran de Witt
-Griffin Lagsdin
-Hamish Ellison
-Harry Irwin
-Hugo Riley
-Jacob Carlson
-Jake Nielsen
-Kyle Stilinovich
-Leo Hachem
-Mason Black
-Mateo McKay
-Nicholas Valente
-Noah Bigara
+Elliot Sesma	13, 10
+Emerson Kropp	3, 8
+Nathaniel Rucker-Jensen	11, 9, 27
+Adrian Trejo	18
+Andrew Sorensen	14, 21, 5
+Austin Galanski	16
+Dan Bajda	11
+Jack Everett	13, 26, 3
+Jack Ryan	27, 20, 4
+Kian Jang	28
+Luca Buono	15
+Max Wagener	23, 13
+Owen Nishimura	19
+Parker Murai	29
+Ron Gvishi	20, 6
+Seamus Heaney	21
+Spencer Clinton	30
+Tanner Whitson	24, 12
+Thomas Byrne	22, 13, 11
+Alec Abrahamian	3, 7
+Andrew Higginson	5
+Callum Norman	15, 7
+Eamon Greathouse	9
+Harrison DeCourcy	25, 7
+Jake Rose	18
+Spencer Sellwood	14
+Adam Lambert	17, 8, 15
+Aidan Murphy	22, 2
+Brady Bumgardner	20
+Dean Moody	10
+Nicolas Fedotov	9
+Roberto Barrera	1
+Ryan Brennen	24
+Tanner Stagner	18, 14, 12
+Troy Barker	1A, 1
+Brody Nielsen	27, 2
+Cameron Jones	17
+Hunter Starkey	15
+Joseph Madigan	18, 8
+Kalani Nelson	23
+Liam Gore	29, 9, 14
+Michael Bannister	1B
+Michael Villagran	20, 2
+Stephen Ramirez	26, 10
+Brady Bailey	16
+Camilo Solis	3
+Jake Simpson	6
+Lennon Franklin	5
+Matthew Wheeler	24, 4
+Nathan Gattorna	1A
+Noah Tikoo	11
+Oliver Child	13
+Oliver Finley	21, 9
+Ossie Joplin	14, 7
+Sebas Maccalla	22
+Tim Jensen	4
+Antonio Drioane	17
+Blake Minkler	27
+Christian Newberry	20
+Evan Keene	19
+Johnny Starr	13
+Kainoa Villalon	1C
+Kenny Weisner	21
+Mathieu Bordet	28
+Matias Sheridan	1B
+Nick Davidson	26
+Ryan Motta	30
+Samson Casem	24
+Septime De Bonnafos	1D
+Tate Hudson	22
+Zach Dortch	18
+Alessandro Fumo	20
+Andrew Donlin	13
+Christian Renzuto	21
+Domenico Barillà	19
+Donovan Swann	7
+Ethan Klerck	8
+Federico Castrucci	1
+Ferran de Witt	18
+Griffin Lagsdin	1
+Hamish Ellison	10
+Harry Irwin	9
+Hugo Riley	4
+Jacob Carlson	17
+Jake Nielsen	1
+Kyle Stilinovich	23
+Leo Hachem	5
+Mason Black	3
+Mateo McKay	11
+Nicholas Valente	15
+Noah Bigara	2
 Oier Aguirre
-Rocco Di Rosa
-Stryder Stelck
-Aaron Sebok
-Andrew Perry
-Chad Doerrman
-David Roake
-Djordje Stavrevski
-Inigo Velasco
-Manuel Gallegos
-Marton Dudok
-Mateo Kozomara
-Mike Roake
-Milos Popovic
-Paul Irving
-Robert Juhas
-David Romero
-Jacob Moore
-Marino Chorro
-Michael Rojas
-Mike Diaz
-Petar Leontijevic
-Seth Lodge
-Steven de Neergaard
-Uros Jevtic
-Alvaro Leon Parra
-Austin Kephart
-Saequan Miller
-Salvador Orozco
-Adam Hudson
-Chad Rowley
-Jacob Badough
-Julen Alonso
-Manuel Soto Estela
-Nephtali Rivera
-Carson Hicks
-Dallas Williams
-Ethan Hinz
-Goncalo Silva
-Greyson Campbell
-Ivan Zivojinovic
-Nicholas Ervin
+Rocco Di Rosa	6
+Stryder Stelck	24
+Aaron Sebok	7
+Andrew Perry	1
+Chad Doerrman	10
+David Roake	2
+Djordje Stavrevski	3
+Inigo Velasco	8
+Manuel Gallegos	1A
+Marton Dudok	11
+Mateo Kozomara	13, 1
+Mike Roake	15
+Milos Popovic	4
+Paul Irving	5
+Robert Juhas	9
+David Romero	1
+Jacob Moore	6
+Marino Chorro	7
+Michael Rojas	2, 10
+Mike Diaz	5, 13, 7
+Petar Leontijevic	14
+Seth Lodge	1
+Steven de Neergaard	12, 11
+Uros Jevtic	16, 6
+Alvaro Leon Parra	2
+Austin Kephart	7, 5
+Saequan Miller	3
+Salvador Orozco	12
+Adam Hudson	6
+Chad Rowley	8, 5
+Jacob Badough	1
+Julen Alonso	1
+Manuel Soto Estela	11
+Nephtali Rivera	13
+Carson Hicks	17
+Dallas Williams	16
+Ethan Hinz	18
+Goncalo Silva	1, 1A, 1/12
+Greyson Campbell	9
+Ivan Zivojinovic	2
+Nicholas Ervin	20
 Samuel Pietta
-Blake Wind
-Duarte Costa
-Misha Holtzkamp
-Nikola Krstonosic
-Reabetswe Theledi
-Tyrese Clement
-1A/6 Goncalo Silva
-James Fenner
-Marko Zivojinovic
-Mitchell Griffith
-Nikola Cvetkovic
-Triston McKay
-Antonio Sablic
-Fernando Gomez Perez
-Marko Jovanovic
-Matthew Romero
-Connor McAlister
-Danko Kesic
-Fulop Zsombor
-Ivan Petkovski
-Keaton Boatwright
-Kelvin Ceasar
-Marko Vuksanovic
-Mateja Cerovic
-Timothy Fischer
-Brayden Thayer
-Caleb Beach
-David Socks II
-Elias Maurer
-Ewan Rios
-Gabriel Balmelle
-Gage Buttice
-Medun Arsovic
-Nandor Voros
-Nicholas Duncan
-Samson Hurey
-Andrew Duncan
-Connor Murray
-Jelle van Rossum
-Patrik Petlyanszki
-Rade Milosevic
-Riquelio Joseph
-Veer Kassan
-Akos Balazs
-Alek Dendall
-Ashley Castle
-Ben Hauschild
-Cade Baldridge
-Cole Williams
-Conor Shuey
-Conrad Gordon
-Corey Valencia
-Davor Koret
-Esteban Vasquez
-Finn Pardon
-Giacomo Lovatelli
-Ivan Stefanovic
-Jackson Kennedy
-John Moon
-Marc Weber
-TJ Palmer
-Tyler Jamieson
-Zachary Scudder
-Abraham Santana
-Alan Viollier
-Bendeguz Toth
-Crispin Hawkins
-Cristian Tanase
-Jacob Lee
-Jacob Mercep
-Justin Pickering
-Luka Cupic
-Rion Parenteau
-Sam Yavitt
-Seanan McManus
-Stefan Petkovic
-Adam Bado
-Antonios Giannatsis
-Ary Kamen
-Brad Dennis
-Collin Murphy
-Emerson Trout
-Griffin O'Brien
-Henry Smith
-Neil Arnett
-Niels Hofmeijer
-Utku Binkanat
-Utku Karhan
-Yahav Fire
-Ethan Koch
-Finn Garfield
-Gage Pranajaya
-Harry Nixon
-Michael Burgess
-Nick Marchione
-Noah Pendleton
-Connor Macmillan
-Gal Haimovich
-Guillermo Aguirre
-Jack Felsted
-Jacob Hatch
-John Reid
-Mason Smith
-Mateo Lema
-Márk Kis
-Oliver Grant
-Zachary Tucker
-Zak Keysaw
-Bence Szabo
-Bende Pardi
-Bendeguz Melkuhn
-Eric Ellison
-Itay Nemet
-Jamie Steingraf
-László Szieben
-Marko Radanovich
-Tommaso Ramacciotti
-Willem Simon
-Zoltan Der
+Blake Wind	6, 9
+Duarte Costa	1B, 1A
+Misha Holtzkamp	10
+Nikola Krstonosic	4
+Reabetswe Theledi	12, 20
+Tyrese Clement	1C
+1A/6 Goncalo Silva	1A/6
+James Fenner	17
+Marko Zivojinovic	23, 3
+Mitchell Griffith	18
+Nikola Cvetkovic	12
+Triston McKay	7
+Antonio Sablic	6
+Fernando Gomez Perez	23
+Marko Jovanovic	9
+Matthew Romero	5
+Connor McAlister	7
+Danko Kesic	23
+Fulop Zsombor	14, 4
+Ivan Petkovski	8
+Keaton Boatwright	15
+Kelvin Ceasar	11
+Marko Vuksanovic	21
+Mateja Cerovic	1C
+Timothy Fischer	13
+Brayden Thayer	14
+Caleb Beach	22
+David Socks II	2
+Elias Maurer	19
+Ewan Rios	1
+Gabriel Balmelle	15, 17
+Gage Buttice	21
+Medun Arsovic	24
+Nandor Voros	12
+Nicholas Duncan	10
+Samson Hurey	20
+Andrew Duncan	14
+Connor Murray	16
+Jelle van Rossum	1
+Patrik Petlyanszki	8
+Rade Milosevic	5
+Riquelio Joseph	18
+Veer Kassan	3
+Akos Balazs	10
+Alek Dendall	5
+Ashley Castle	2, 8
+Ben Hauschild	15
+Cade Baldridge	12, 13
+Cole Williams	1
+Conor Shuey	6
+Conrad Gordon	1
+Corey Valencia	1
+Davor Koret	9
+Esteban Vasquez	11
+Finn Pardon	16, 3
+Giacomo Lovatelli	20
+Ivan Stefanovic	19
+Jackson Kennedy	18
+John Moon	13
+Marc Weber	3, 13
+TJ Palmer	1
+Tyler Jamieson	8
+Zachary Scudder	14
+Abraham Santana	14
+Alan Viollier	3
+Bendeguz Toth	24
+Crispin Hawkins	1
+Cristian Tanase	6
+Jacob Lee	2
+Jacob Mercep	19
+Justin Pickering	4, 10
+Luka Cupic	5
+Rion Parenteau	6
+Sam Yavitt	21
+Seanan McManus	11
+Stefan Petkovic	17
+Adam Bado	18, 12
+Antonios Giannatsis	15
+Ary Kamen	2, 7
+Brad Dennis	16
+Collin Murphy	4
+Emerson Trout	9
+Griffin O'Brien	1
+Henry Smith	7
+Neil Arnett	17, 11
+Niels Hofmeijer	14
+Utku Binkanat	5
+Utku Karhan	12, 18, 9
+Yahav Fire	1
+Ethan Koch	17
+Finn Garfield	1
+Gage Pranajaya	22
+Harry Nixon	23
+Michael Burgess	2
+Nick Marchione	4, 6
+Noah Pendleton	1
+Connor Macmillan	2, 3
+Gal Haimovich	10
+Guillermo Aguirre	8
+Jack Felsted	13
+Jacob Hatch	23
+John Reid	6
+Mason Smith	1
+Mateo Lema	20
+Márk Kis	5
+Oliver Grant	4, 15
+Zachary Tucker	16
+Zak Keysaw	12, 4
+Bence Szabo	13
+Bende Pardi	21
+Bendeguz Melkuhn	17, 20
+Eric Ellison	22, 11
+Itay Nemet	16, 11
+Jamie Steingraf	1, 8
+László Szieben	8, 7
+Marko Radanovich	2
+Tommaso Ramacciotti	20, 6
+Willem Simon	1
+Zoltan Der	1
 Colton Boyd
-Erik Duesund
-Garrett Duardo
-Garrett Johnson
-Javi Ibanez
-Kai Young
-Mael Suchet
-Maro Tiozzo
-Nikki Matheisen
-Nikola Nikolic
-Alexey Poletaev
-Brendon Gyapjas
-Giancarlo Marquez
-Louis Fehrensen
-Mateja Bosić
-Michael Montoro
-Mitchell Keightley
-Nathan Correia
-Péter Kolos Kohári
-Rafael Ventura
-Austin Hexter
-Dishan Dias
-Hamish Bonnar
-Luke Burns
-Mattin Sarhaddi
-Ryder Adams
-Samu Biros
-Terence O'Donnell
-Zac Newman
-Zach Ramans
-Aidan Johnson
-Bence Kristok
-Declan Goldstein
-Liam Dodunski
-Michael Minera
-Sam Keightley
-Zalan Hegedus
-Aron Sárfalvi
-Grant Anderson
-Jack Elder
-Kai Lewis
-Kai Nelson
-Mateja Cetkovic
-Palmer Macbeth
-Stellen Karkazis
-Sy Lazzaroni
-Vince Biros
-Dane Estrella
-DeMarco Orella
-Dylan Fara
-Emil Huebner
-Garrat Johnson
-Graham McClone
-Jack Larkin
-Jake Rendina
-Julian Fraser
-Keaton Fox
-Luca Pagano
-Mac Carey
-Matt Godar
-Nate Miller
-Patrick Collins
-Patrick Kirk
-Reilley May
-Ryan Werner
-Sam Toriggino
-Scott Zurnacian
-Shane Hughes
-Vinny Sicat
-Will Grant
-Adam Low
-Arvin Bahia
-Camden Benson
+Erik Duesund	16, 21
+Garrett Duardo	12, 9
+Garrett Johnson	17
+Javi Ibanez	18
+Kai Young	23
+Mael Suchet	15, 4
+Maro Tiozzo	22, 2
+Nikki Matheisen	8
+Nikola Nikolic	4, 6
+Alexey Poletaev	1
+Brendon Gyapjas	1
+Giancarlo Marquez	15, 6, 3
+Louis Fehrensen	20, 10
+Mateja Bosić	23
+Michael Montoro	22
+Mitchell Keightley	19, 5
+Nathan Correia	14
+Péter Kolos Kohári	12, 2
+Rafael Ventura	18
+Austin Hexter	18, 12
+Dishan Dias	12
+Hamish Bonnar	9
+Luke Burns	16
+Mattin Sarhaddi	7, 15
+Ryder Adams	15, 12
+Samu Biros	19, 13
+Terence O'Donnell	24
+Zac Newman	17
+Zach Ramans	20
+Aidan Johnson	17, 14
+Bence Kristok	18, 9
+Declan Goldstein	1
+Liam Dodunski	6
+Michael Minera	9
+Sam Keightley	8
+Zalan Hegedus	19, 4
+Aron Sárfalvi	17
+Grant Anderson	1
+Jack Elder	24
+Kai Lewis	23
+Kai Nelson	22
+Mateja Cetkovic	7
+Palmer Macbeth	15
+Stellen Karkazis	1
+Sy Lazzaroni	11
+Vince Biros	19
+Dane Estrella	21
+DeMarco Orella	6
+Dylan Fara	11
+Emil Huebner	1
+Garrat Johnson	4
+Graham McClone	8
+Jack Larkin	12
+Jake Rendina	20
+Julian Fraser	7
+Keaton Fox	1B, 1
+Luca Pagano	17, 4
+Mac Carey	24
+Matt Godar	19
+Nate Miller	10
+Patrick Collins	1A
+Patrick Kirk	14, 8
+Reilley May	9
+Ryan Werner	16, 6
+Sam Toriggino	2
+Scott Zurnacian	5
+Shane Hughes	23
+Vinny Sicat	13, 3
+Will Grant	22
+Adam Low	16
+Arvin Bahia	17, 22
+Camden Benson	14
 Campbell Gorlinski
-Jack Rottman
-Jake Landrum
-John Raineri
-Judge Washer
-Matthew Churchman
+Jack Rottman	22, 15
+Jake Landrum	25, 5
+John Raineri	13
+Judge Washer	18, 3
+Matthew Churchman	1
 Robbie Nunes
-Snapper Gulick
-Blake D'Souza
-Carter Reeves
-Jake Taylor
-Sean Tehaney
-Caedmon Fisher
-Chase Zamborelli
-Dominick Kirk
-Ford Eldredge
-Nicky Fontes
-Patrick Guinn
-Andrew Carter
-Bennett Stafford
-Billy Barry
-Chase Raisin
-Cody Ferguson
-Jack Gannaway
-Matt McKim
-Matt Peterson
-Matt Somers
-Michael Kreienkamp
-Nico Valls
-Thomas Lennox
-Ben Kyrillos
-Connor Long
-Gavin Fisher
-Jack Palmer
-John Shepherd
-Mason Jaeger
-Max Hendrickson
-Wyatt Stenson
-Zach Fales
-Ethan Evans
-Harrison Villella
-Jackson Westerman
-Kyto Fraley
-Owen Van Stralen
-Reese Jenican
-Ryan Henderson
-1B/1B Harrison Labrosse
-Charlie Engs
-Charlie Kosinski
-Gojko Kapovic
-Grant Roesch
-Jason Alietti
-Luke Baird
-Reece Hammond
-Thomas Wisdom
-Harrison Labrosse
-Henry Engs
-Jack Fisher
-Jensen Welton
-Julien Chow
-Riccardo De Simon
-Tyler Swensen
-Weston Bancroft
-Ashton Brown
-Beck Early
-Dylan Hazen
-Hank Woodman
-Imme van der Schaaf
-Jamie De Zwart
-Misha Popov
-Ryland Pierce
-Caleb Yost
-Connor Clougherty
-Darion Wang
-Finn Swanson
-Marco Rizof
-Mathijs Dirven
-Nick Zimmerman
-Adam Warmoth
-Andrew Chun
-Ben Hallock
-Bennett Williams
-Blake Parrish
-Cody Smith
-Connor Stapleton
-Drew Holland
-Duncan Mactavish
-Dylan Woodhead
-Grady Williams
-Harrison Enright
-Jackson Kimbell
-Justin Roberto
-Kyle Weikert
-Marco Stanchi
-Mitchell Mendoza
-Nelson Perla-Ward
-Oliver Lewis
-Reid Chase
-Sam Pfeil
-Spencer Rogers
-Josh Orrick
-Parker Killion
-Spencer Nelson
-Tyler Abramson
-Zack LaGrange
-AJ Rossman
-George Hagestad
-Jackson Seybold
-Nik Caryotakis
-Quinn Woodhead
-Spencer Hanson
-Wyatt Hanson
-Andrew Churukian
-Beck Jurasius
-Larsen Weigle
-Troy Gleason
-Walker Seymour
-Ethan Parrish
-Ike Love
-Jackson Painter
-Nolan Krutonog
-Riley Pittman
-Soren Jensen
-CJ Indart
-Grant Watson
-Jack Martin
-Liam Harrison
-Speedy Laster
-Chase McFarland
-Griffen Price
-Guido Leonardi
-Jack Merrill
-Alex Gheorghe
-Christopher Arakelian
-Daniel Mnatsakanian
-Elai Ben-Gal
-Gavin West
-Harrison Rohlen
-Konstantinos Mathiopoulos
-Tanner Pulice
-Ben Forer
-Botond Balogh
-Dash McFarland
-Max Zelikov
-Orestis Zervoudakis
-Ryan Ohl
-West Temkin
-Will Schneider
-Ben Oerlemans
-Collin Caras
-Cormac Mulloy
-Gianpiero Di Martire
-Jordan De Sousa
-Simone De Vecchis
-Vincent Krilanovich
-Bernardo Herzer
-Connor Ohl
-Dimitris Chatzis
-Evan Wu
-James Rozolis-Hill
-Kai Kaneko
-Nic Austen
-Brock Gordon
-Carlo Burney
-Colter Knight
-Cory Laidig
-Eric Martel
-George Kuesis
-Holden Tamblyn
-Ido Goldschmidt
-Jack Stafford
-Jake Becker
-Joseph Gomez
+Snapper Gulick	18, 1
+Blake D'Souza	11
+Carter Reeves	2
+Jake Taylor	12, 6
+Sean Tehaney	1
+Caedmon Fisher	19, 9
+Chase Zamborelli	1
+Dominick Kirk	14, 23, 24
+Ford Eldredge	18, 10, 3
+Nicky Fontes	21
+Patrick Guinn	13, 8
+Andrew Carter	13
+Bennett Stafford	22
+Billy Barry	20, 10
+Chase Raisin	14
+Cody Ferguson	26, 2
+Jack Gannaway	27, 23, 15
+Matt McKim	25, 20
+Matt Peterson	4
+Matt Somers	12, 6, 3
+Michael Kreienkamp	19, 5
+Nico Valls	24, 17
+Thomas Lennox	18, 15
+Ben Kyrillos	25, 9, 8
+Connor Long	16, 18, 13
+Gavin Fisher	12, 6
+Jack Palmer	11
+John Shepherd	28, 21
+Mason Jaeger	19, 15, 5
+Max Hendrickson	17, 4
+Wyatt Stenson	1
+Zach Fales	25, 8, 2
+Ethan Evans	1, 1C
+Harrison Villella	24, 19, 3, 8
+Jackson Westerman	13
+Kyto Fraley	20, 17
+Owen Van Stralen	1, 1A
+Reese Jenican	26, 16, 9
+Ryan Henderson	16
+1B/1B Harrison Labrosse	1B/1B
+Charlie Engs	23
+Charlie Kosinski	10, 6
+Gojko Kapovic	12
+Grant Roesch	20, 12, 27
+Jason Alietti	27, 14, 2
+Luke Baird	22
+Reece Hammond	26
+Thomas Wisdom	17, 10
+Harrison Labrosse	1B, 1
+Henry Engs	28, 3
+Jack Fisher	24
+Jensen Welton	4
+Julien Chow	16, 11
+Riccardo De Simon	21, 12
+Tyler Swensen	1, 1A
+Weston Bancroft	24
+Ashton Brown	5
+Beck Early	13
+Dylan Hazen	15, 8
+Hank Woodman	20
+Imme van der Schaaf	14
+Jamie De Zwart	16
+Misha Popov	28, 9
+Ryland Pierce	1C
+Caleb Yost	18
+Connor Clougherty	1B
+Darion Wang	17
+Finn Swanson	21
+Marco Rizof	19
+Mathijs Dirven	25
+Nick Zimmerman	15
+Adam Warmoth	15
+Andrew Chun	1
+Ben Hallock	6
+Bennett Williams	7, 17
+Blake Parrish	9
+Cody Smith	10
+Connor Stapleton	7
+Drew Holland	1
+Duncan Mactavish	18, 12
+Dylan Woodhead	13, 10
+Grady Williams	8
+Harrison Enright	14
+Jackson Kimbell	2
+Justin Roberto	11
+Kyle Weikert	6
+Marco Stanchi	4, 21
+Mitchell Mendoza	3
+Nelson Perla-Ward	5
+Oliver Lewis	1
+Reid Chase	12
+Sam Pfeil	16
+Spencer Rogers	21
+Josh Orrick	13
+Parker Killion	8
+Spencer Nelson	3
+Tyler Abramson	4, 2
+Zack LaGrange	5
+AJ Rossman	4
+George Hagestad	1
+Jackson Seybold	17
+Nik Caryotakis	15
+Quinn Woodhead	11, 22
+Spencer Hanson	9
+Wyatt Hanson	14
+Andrew Churukian	16, 10
+Beck Jurasius	21, 5, 11
+Larsen Weigle	20
+Troy Gleason	7
+Walker Seymour	9
+Ethan Parrish	6, 9
+Ike Love	13
+Jackson Painter	17
+Nolan Krutonog	1
+Riley Pittman	12, 8
+Soren Jensen	15
+CJ Indart	7
+Grant Watson	2
+Jack Martin	4
+Liam Harrison	1A, 1B
+Speedy Laster	16
+Chase McFarland	5, 4
+Griffen Price	1A, 1
+Guido Leonardi	21
+Jack Merrill	3
+Alex Gheorghe	6, 10
+Christopher Arakelian	14
+Daniel Mnatsakanian	11
+Elai Ben-Gal	4
+Gavin West	13
+Harrison Rohlen	23, 1
+Konstantinos Mathiopoulos	22, 4
+Tanner Pulice	12, 24
+Ben Forer	30
+Botond Balogh	12
+Dash McFarland	5
+Max Zelikov	18, 8
+Orestis Zervoudakis	23
+Ryan Ohl	20, 2
+West Temkin	1
+Will Schneider	26
+Ben Oerlemans	6
+Collin Caras	15
+Cormac Mulloy	1
+Gianpiero Di Martire	9
+Jordan De Sousa	1
+Simone De Vecchis	8, 9
+Vincent Krilanovich	3
+Bernardo Herzer	1
+Connor Ohl	20
+Dimitris Chatzis	16
+Evan Wu	5
+James Rozolis-Hill	7
+Kai Kaneko	22
+Nic Austen	24
+Brock Gordon	3
+Carlo Burney	7
+Colter Knight	13
+Cory Laidig	2
+Eric Martel	12, 6
+George Kuesis	12, 4
+Holden Tamblyn	10, 21
+Ido Goldschmidt	8
+Jack Stafford	11
+Jake Becker	1A
+Joseph Gomez	17
 Joseph Robson
-Keenan Anderson
-Kyle Reilly
-Marcus Anderson
-Max Somple
-Morgan Olson-Fabbro
-Nick Coufal
-R.J. Quigley
-Riley Venne
-Sasa Antunovic
-Spencer Creed
-Spencer Galli
-Tennyson May
-Yurii Hanley
-Ian Ambidge
-Jonah Addington
-Matthew Whipple
-Michael Plastino
-Patrick Burke
-Spencer Towill
-Nir Gross
+Keenan Anderson	24, 3
+Kyle Reilly	7, 5
+Marcus Anderson	23
+Max Somple	20
+Morgan Olson-Fabbro	21, 10
+Nick Coufal	5
+R.J. Quigley	1B, 1
+Riley Venne	4
+Sasa Antunovic	6
+Spencer Creed	1
+Spencer Galli	9
+Tennyson May	24
+Yurii Hanley	15
+Ian Ambidge	17, 8
+Jonah Addington	1
+Matthew Whipple	9
+Michael Plastino	24, 11
+Patrick Burke	2
+Spencer Towill	19, 7
+Nir Gross	10
 RS Dillon Mannion
 RS Duncan Creed
 RS Levi Murtaugh
 RS Stefan Venne
-Duncan Creed
-Lee Hildinger
-Levi Murtaugh
-Logan Anderson
+Duncan Creed	13, 1
+Lee Hildinger	1, 1A
+Levi Murtaugh	23, 6, 12, 10
+Logan Anderson	22, 2
 RS Aaron Voggenthaler
 RS Aaron Wilson
 RS Max Stryker
 RS Paul Gouchon
-Seif Elmankabadi
-Stefan Venne
-Aaron Voggenthaler
-Aaron Wilson
-Aleix Aznar Beltran
-Connor Norton
-Dylan Mann
-Holden Neach
-JT Kujawa
-Max Stryker
-Vanya Soshnikov
-Will Nomura
-Ben Fleming
-Hal Goulter
+Seif Elmankabadi	12
+Stefan Venne	14
+Aaron Voggenthaler	3, 9
+Aaron Wilson	1B, 1A, 1
+Aleix Aznar Beltran	18, 8
+Connor Norton	15
+Dylan Mann	23
+Holden Neach	19
+JT Kujawa	20, 5
+Max Stryker	21, 3
+Vanya Soshnikov	16
+Will Nomura	17, 4
+Ben Fleming	6
+Hal Goulter	20
 RS Adam Ting
 RS Andrew Hitchcock
 RS Colin Nicholls
@@ -3623,382 +3623,382 @@ RS Johnny Kujawa
 RS Josh Davis
 RS Sam Monette
 RS Tyler Mrkaich
-Andrew Hitchcock
-Brody Crouch
-Colin Nicholls
-Frank Laptin
-Johnny Kujawa
-Josh Davis
-Leo Giessmann
-Matt Morgan
-Sam Monette
-Tyler Mrkaich
-Waylon Fox
-Will Stryker
-William Fosselman
-Adam Ting
-Andrew Bonelli
-Baxter Chelsom
-Thomas Kiesling
-Timothy Kerr
-Austin Quick
-Brady Simon
-Colton Fine
-Gabe Bensen
-JT Doughty
-Ned Ginoti
-Oleg Shatskikh
-Thomas Marr
-Cassius Wolf
-Jacob Carrera
-Jaden Joemtree
-Luka Palavra
-Lyle Weitz
-Mateo Ruano
-Max Prokhin
-Oliver Wilmink
-Oriol Viñas
-William McKeon
-Andonis Petroutsas
-Cameron Hellar
-Lucas Ruano
-Lucas Wulfhorst
-Andrew Fisher
-Antoine Lena
-Benoit Viollier
-Brendan Duffy
-Brendan Fisher
-Brock Ivancovich
-Bryant Joudrie
-Byron Rivers
-Christian Macias
-Foster Hoose
-Greg Porter
-Ian Fleenor
-Jack Trush
-Jon Polos
-Jovan Gojkovich
-Kyle Trush
-Lovre Milos
-Matej Matijevic
-Miles Kalbus
-Robby Stiefel
-Ryan Warde
-Sven Davidson
-Thomas Vandiver
+Andrew Hitchcock	11, 3
+Brody Crouch	12, 6, 4
+Colin Nicholls	7
+Frank Laptin	1A, 1
+Johnny Kujawa	18, 11
+Josh Davis	22
+Leo Giessmann	14
+Matt Morgan	15, 18
+Sam Monette	1B
+Tyler Mrkaich	17
+Waylon Fox	24
+Will Stryker	21, 2
+William Fosselman	20
+Adam Ting	12
+Andrew Bonelli	14, 8
+Baxter Chelsom	1A, 1
+Thomas Kiesling	9
+Timothy Kerr	10
+Austin Quick	11, 4
+Brady Simon	1C, 1A
+Colton Fine	22, 3
+Gabe Bensen	13
+JT Doughty	16
+Ned Ginoti	21, 7
+Oleg Shatskikh	23
+Thomas Marr	18
+Cassius Wolf	25
+Jacob Carrera	5
+Jaden Joemtree	24
+Luka Palavra	5, 2
+Lyle Weitz	14
+Mateo Ruano	6
+Max Prokhin	15, 12
+Oliver Wilmink	20
+Oriol Viñas	19
+William McKeon	1B, 1A
+Andonis Petroutsas	11
+Cameron Hellar	21
+Lucas Ruano	15
+Lucas Wulfhorst	22
+Andrew Fisher	14
+Antoine Lena	5
+Benoit Viollier	1
+Brendan Duffy	7
+Brendan Fisher	15
+Brock Ivancovich	4
+Bryant Joudrie	8
+Byron Rivers	1
+Christian Macias	11
+Foster Hoose	17
+Greg Porter	24
+Ian Fleenor	16
+Jack Trush	9
+Jon Polos	10
+Jovan Gojkovich	20, 6, 18
+Kyle Trush	2
+Lovre Milos	3
+Matej Matijevic	1
+Miles Kalbus	12
+Robby Stiefel	23, 4
+Ryan Warde	6
+Sven Davidson	13
+Thomas Vandiver	18
 Arash Izadmanesh
-Carlo Silvestre
-Casey Lynton
-Daniel Norman
-Fynn Schuetze
-JD Barker
-Jack Baumgardner
-Jared Gornay
-Michael Swieca
+Carlo Silvestre	23
+Casey Lynton	21, 5, 13
+Daniel Norman	2
+Fynn Schuetze	11
+JD Barker	14
+Jack Baumgardner	15
+Jared Gornay	4
+Michael Swieca	14, 12
 Trenton Rivers
-Chandler Mankins
-Grant Chiponis
-Jake Huynen
-Jason Evezard
-Jason Grew
-Lazar Manojlovic
-Samuel Worley
-Skylar Lee
-Zlatan Nikocevic
-Carson Arnett
-Chad Gornay
-Collin Winters
-Harrison Land
-Ivan Mercep
+Chandler Mankins	1
+Grant Chiponis	20, 9
+Jake Huynen	1
+Jason Evezard	7
+Jason Grew	19, 21
+Lazar Manojlovic	3
+Samuel Worley	18, 23
+Skylar Lee	21, 3
+Zlatan Nikocevic	11
+Carson Arnett	6
+Chad Gornay	15
+Collin Winters	1
+Harrison Land	1
+Ivan Mercep	4, 3
 Jack Green
-Jake Liechty
-Kiyan Mohebbizadeh
-Nick Rogers
-Aidan Byrne
-Archer Sauer
-Dylan Patist
-Garrett Selby
-Jacob Pyle
+Jake Liechty	5
+Kiyan Mohebbizadeh	12, 2
+Nick Rogers	13
+Aidan Byrne	1
+Archer Sauer	14
+Dylan Patist	8
+Garrett Selby	1
+Jacob Pyle	1
 Parker Fife
-Ryan Greenlee
-Whittaker Worland
-Zachary Baxter
-Samuel Otta
-Solan Kedzie
-Stewart Campbell
-Thomas Cass
-Tyler Padua
-William Oliver
-Zayd Mahmoud
-Ethan Shipman
-Jack Stevens
-Jackson Matos
-Jasper Dale
-John Billington
-Luka Krstic
+Ryan Greenlee	19
+Whittaker Worland	20
+Zachary Baxter	17
+Samuel Otta	19, 3
+Solan Kedzie	21
+Stewart Campbell	16, 9
+Thomas Cass	18, 2
+Tyler Padua	4
+William Oliver	1
+Zayd Mahmoud	1
+Ethan Shipman	6
+Jack Stevens	12
+Jackson Matos	7
+Jasper Dale	18, 6
+John Billington	15
+Luka Krstic	10
 Owen Younger
-Ben Youngblood
-Brody Luke
-Gage Verdegaal
-Johann Thrall
-Nolan Cary
-Tyler Laymon
-Wyley Dale
-Alex Lopez
-Blake Borders
-Cole Francisco
-Ethan Spoon
-Jayson Hubbard
-Keegan McGann
-Maddox McEwen
-Vincent Vega
-Andrew Bockstahler
-Ben Atkinson
-Charlie Jones
-Dylan Rosmann
-Nico Assalian
-Samuel Bowman
-Aiden Sexton
-Declan Murphy
-JT Moss
-Luke Kalynij
-Noah Jurgensen
-River Davis
-Ryan Fresca
-Adrian Martinez
-Andrew DeMello
-Andrew Ore
-Armando Hernandez
-Brandon Quach
-Cheyenne Bennmarie
-Devin Verma
-Ethan Chou
-Fernando Campos Chavez
-Jacob Wyman
-Kai Etz
-Laith Darras
-Marc Martinez
-Mark Woodall
-Nic Puckett
-Omar Lopez
-Renato Santome-Guembes
-Andrew Jones
-Camden Peterson
-Ethan Stocker
-Evan Ladeairous
-Howie Zeff
-James Soto
-Killian Nguyen
-Matthew Lloyd
-Noah Hernandez
-Oscar Luna
-Sebastian Palomera
-Thomas Bauer
-William Pezold
-Aidan Chirica
-Aydann Hambruch
-Christopher Mouchmouchian
-Hayden Markell
-Justice Hose
-Misha Golovatyi
-Roman Montalvo
-Vincent Labonte
-Altug Misirli Jr.
-Brayden Shively
-Christian Soto
-Christopher Bettencourt
-Jacob Henshaw
-Jacob Hernandez
-Jakee Chacon
-Mason Lindstrom
-Mathias McCarthy
-Matthew King
-Patrick Jones
-Weston Oliver
-Alexey Malkov
-Finn Moss
-Joseph Rodriguez
-Noah Defaii
-Andreas Stathatos
-Andy Moore
-Ari Wayne
-Arman Momdzhyan
-Calder Hilde-Jones
-Carson Ivancovich
-Cole Martinez
-Collin Sullivan
-Cooper Milton
-David Albers
-Jack Ellinthorpe
+Ben Youngblood	20
+Brody Luke	14, 8
+Gage Verdegaal	11
+Johann Thrall	13
+Nolan Cary	1
+Tyler Laymon	16
+Wyley Dale	21, 4
+Alex Lopez	8, 2
+Blake Borders	1
+Cole Francisco	5
+Ethan Spoon	19, 9
+Jayson Hubbard	23
+Keegan McGann	15, 6
+Maddox McEwen	17
+Vincent Vega	1
+Andrew Bockstahler	24, 12
+Ben Atkinson	21, 10
+Charlie Jones	19, 21
+Dylan Rosmann	18, 3
+Nico Assalian	1
+Samuel Bowman	14, 7
+Aiden Sexton	15
+Declan Murphy	18
+JT Moss	25
+Luke Kalynij	22
+Noah Jurgensen	19
+River Davis	14
+Ryan Fresca	24
+Adrian Martinez	9, 12
+Andrew DeMello	12, 19
+Andrew Ore	14
+Armando Hernandez	8
+Brandon Quach	13, 16
+Cheyenne Bennmarie	6
+Devin Verma	10
+Ethan Chou	1, 1B
+Fernando Campos Chavez	4
+Jacob Wyman	7, 11
+Kai Etz	2
+Laith Darras	11
+Marc Martinez	5
+Mark Woodall	20
+Nic Puckett	1, 17
+Omar Lopez	15, 23
+Renato Santome-Guembes	16
+Andrew Jones	3
+Camden Peterson	9
+Ethan Stocker	1, 1A
+Evan Ladeairous	4
+Howie Zeff	8
+James Soto	7
+Killian Nguyen	10
+Matthew Lloyd	1
+Noah Hernandez	6
+Oscar Luna	1, 11
+Sebastian Palomera	1
+Thomas Bauer	5
+William Pezold	2
+Aidan Chirica	1C
+Aydann Hambruch	10
+Christopher Mouchmouchian	21, 8
+Hayden Markell	12
+Justice Hose	15
+Misha Golovatyi	14
+Roman Montalvo	19
+Vincent Labonte	13
+Altug Misirli Jr.	18, 15
+Brayden Shively	22
+Christian Soto	17
+Christopher Bettencourt	2, 17
+Jacob Henshaw	1B
+Jacob Hernandez	9
+Jakee Chacon	5, 10
+Mason Lindstrom	23
+Mathias McCarthy	15
+Matthew King	11, 2
+Patrick Jones	20
+Weston Oliver	16
+Alexey Malkov	1B
+Finn Moss	23
+Joseph Rodriguez	24
+Noah Defaii	25
+Andreas Stathatos	12
+Andy Moore	21
+Ari Wayne	2, 3
+Arman Momdzhyan	10
+Calder Hilde-Jones	12
+Carson Ivancovich	13
+Cole Martinez	6
+Collin Sullivan	19, 7
+Cooper Milton	14
+David Albers	15
+Jack Ellinthorpe	3
 Jack Harper
-Jack Ranj
-Jack Turner
+Jack Ranj	6, 19, 9
+Jack Turner	1
 John Tony Murphy
-Kacper Langiewicz
-Kevin Asplund
-Luka Vasiljevic
-Nassim Hmeidan
-Nick Alexander
-Noah Carniglia
-Oleg Koujikov
+Kacper Langiewicz	4
+Kevin Asplund	9
+Luka Vasiljevic	11, 5
+Nassim Hmeidan	7
+Nick Alexander	22
+Noah Carniglia	16
+Oleg Koujikov	1
 Perry Brandes
-Rich Farley
-Sam Thompson
-Skyler Munatones
-Thomas Higginson
-Alessandro Valania
-Boris Rubel
-Brad Robison
-Brett Candioty
-Connor Turnbow-Lindenstadt
-Konstantin Karlov
-Michael Gelnak
-Nolan Ortega
-Ronald Ginoti
-Ryan Rodriguez
-Sam Gallo
-Alexander Nemeth
-Bennett Kienast
+Rich Farley	8
+Sam Thompson	1
+Skyler Munatones	17, 2
+Thomas Higginson	5
+Alessandro Valania	18, 8
+Boris Rubel	24, 21
+Brad Robison	17, 3
+Brett Candioty	21, 20, 5
+Connor Turnbow-Lindenstadt	11
+Konstantin Karlov	23, 10
+Michael Gelnak	23, 10
+Nolan Ortega	20, 18
+Ronald Ginoti	22
+Ryan Rodriguez	15
+Sam Gallo	19, 17
+Alexander Nemeth	1
+Bennett Kienast	1, 1A
 Gonzalo Rivera
 Jorge Rivera
-Myles Martinez
-Nathan Ellinthorpe
-Robert Hamblin
-Alex Zamanian
-Aram Nordanyan
-Brendan Nugent
-Connor King
-Connor McManigal
+Myles Martinez	5, 8
+Nathan Ellinthorpe	22, 6
+Robert Hamblin	16
+Alex Zamanian	23
+Aram Nordanyan	21, 10
+Brendan Nugent	13, 14
+Connor King	20
+Connor McManigal	19, 5
 Frank Lozinski
-Jake Marquez
-Kaden Likins
-Karlo Krmek
-Max Carrillo
-Narayan Sharma
-Ty Matson
-Will Riley
-Berk Aksoy
+Jake Marquez	3
+Kaden Likins	24
+Karlo Krmek	7, 11
+Max Carrillo	15, 6, 9
+Narayan Sharma	17
+Ty Matson	18
+Will Riley	2
+Berk Aksoy	17
 Conor Elliot
-Jack Martin
-Logan Estes
-Manuel Augusto
-Max Abravanel
-Miles Wilson
-Vedran Latkovic
-Brendon Fezzey
-Collin Tournat
-Connor Macmitchell
-Connor Stauffer
-Matthew Wastila
-Nikita Valajev
-Rhys Bugelli
-Trevor Moore
-Bennett Axline
-Braden Clark
-Franco Scalamandre
-Jakob Tallman
-Luca Rago
+Jack Martin	22, 3, 5
+Logan Estes	1B, 1
+Manuel Augusto	8
+Max Abravanel	16, 6
+Miles Wilson	7, 9
+Vedran Latkovic	4
+Brendon Fezzey	26, 17, 13
+Collin Tournat	25, 20, 2
+Connor Macmitchell	21, 11
+Connor Stauffer	18
+Matthew Wastila	19, 12, 10
+Nikita Valajev	1C, 1, 1A
+Rhys Bugelli	15, 5
+Trevor Moore	13, 23, 8
+Bennett Axline	16, 12
+Braden Clark	23
+Franco Scalamandre	25, 14
+Jakob Tallman	19
+Luca Rago	22, 11
 RS Emiliano Castro
-Reef Lippa
-Alex Hegeman
-Ante Buzov
-Augi Macchi
-Eamon Hennessey
-Emiliano Castro
-Felipe Ferreira
-Finn Bugelli
-Jaime Bhattacharyya
-Landon Akerstrom
-Lucas Romaguera
-Mason Presley
-Nolan Roberts
-Parker George
-Christian Hammonds
-Grant Kurtz
-Lachlan Rossi
-Mark Laurlund
+Reef Lippa	21, 10
+Alex Hegeman	1C, 1
+Ante Buzov	4
+Augi Macchi	3, 9
+Eamon Hennessey	8, 3
+Emiliano Castro	2
+Felipe Ferreira	11, 6
+Finn Bugelli	19, 14, 5
+Jaime Bhattacharyya	16, 9, 3
+Landon Akerstrom	18, 22, 2
+Lucas Romaguera	7
+Mason Presley	25, 24
+Nolan Roberts	17, 18, 14
+Parker George	1B
+Christian Hammonds	17, 4
+Grant Kurtz	23, 15, 9
+Lachlan Rossi	20, 18, 12
+Mark Laurlund	15, 8
 RS Cole Harman
 RS Jaime Bhattacharyya
 RS Liam Amburgey
 RS Razvan Alistar
-Cole Harman
-Davidka Skov
-Dusan Djordjevic
-Jackson Boettner
-Kyson Becker
-Liam Amburgey
+Cole Harman	16
+Davidka Skov	25, 11
+Dusan Djordjevic	20
+Jackson Boettner	21
+Kyson Becker	22
+Liam Amburgey	19
 RS Caleb Harrison
-Razvan Alistar
-Winston Loh
-Boston Frost
-Bryan Shapirshteyn
-Caleb Harrison
-Chase Martsolf
-Jack Elder
-Jack Wright
-Lucas Pearce
-Michael Rodgers
-Nolan Anderson
-Orlando Mina
-Adam Lott
-Alden Geller
+Razvan Alistar	23
+Winston Loh	1A
+Boston Frost	1A
+Bryan Shapirshteyn	16
+Caleb Harrison	17
+Chase Martsolf	7
+Jack Elder	1B
+Jack Wright	6
+Lucas Pearce	23
+Michael Rodgers	8
+Nolan Anderson	14
+Orlando Mina	15
+Adam Lott	14
+Alden Geller	11
 Alexander Brown
-Anthony Buljan
-Blake Spiller
-Borislav Jovanovic
-Brannan Haket
-Cameron Yates
-Cole Middleton
-Connor Wilde
-Ivan Gvozdanovic
-Jack Winther
-Jacob Halle
+Anthony Buljan	23
+Blake Spiller	15
+Borislav Jovanovic	10
+Brannan Haket	21, 7
+Cameron Yates	19
+Cole Middleton	1
+Connor Wilde	5
+Ivan Gvozdanovic	9
+Jack Winther	16
+Jacob Halle	24, 6
 Jeffery Sherer II
-Josh Jordan
-Justyn Barrios
-Liam Lenihan III
+Josh Jordan	2
+Justyn Barrios	1
+Liam Lenihan III	1
 Lukas Sheckherd
 Max Hartmann
-Max Schaum
-Mitch Young
-Mitchell Hamilton
-Nick Wiley
-Reed Cotterill
-Samer Alkateb
-Shane Hauschild
+Max Schaum	13
+Mitch Young	14, 22
+Mitchell Hamilton	6
+Nick Wiley	7
+Reed Cotterill	4, 11
+Samer Alkateb	12
+Shane Hauschild	8
 Shane Mayer
-Spencer Likins
-Thomas Martinho
-Tommy Fellner
-Tor Jensen
-Alan Peoples
-Albert Khanipov
-Boris Jovanovic
-Chad Nelson
-Cole Brosnan
-Connor MacDonald
-Jack Bignell
-Jamie Taylor
-Jesse Morrison
-Leo Yuno
-Mason McQuet
-Quinn Stoneman
-Spencer Wood
+Spencer Likins	3
+Thomas Martinho	17
+Tommy Fellner	22, 4, 2
+Tor Jensen	15
+Alan Peoples	16, 4
+Albert Khanipov	22
+Boris Jovanovic	10
+Chad Nelson	20, 11
+Cole Brosnan	5
+Connor MacDonald	1, 1A
+Jack Bignell	12
+Jamie Taylor	16
+Jesse Morrison	3
+Leo Yuno	24
+Mason McQuet	24, 8
+Quinn Stoneman	4
+Spencer Wood	18, 11
 Taylor Gustason
-Tiago Bonchristiano
-Will Rodosky
-Ben Miller
-Connor Moynihan
-John Rankin
-Nathan Puentes
-Ryan Brosnan
-Sam Nangle
-Sean Rosenberg
-Tommy Hawkins
-Colton Gregory
-Danny Roland
-Logan Sutter
-Mason Chambliss
+Tiago Bonchristiano	1
+Will Rodosky	13
+Ben Miller	1
+Connor Moynihan	19, 13
+John Rankin	10
+Nathan Puentes	17
+Ryan Brosnan	3
+Sam Nangle	7
+Sean Rosenberg	16
+Tommy Hawkins	20, 12, 5
+Colton Gregory	19, 6
+Danny Roland	1
+Logan Sutter	22, 4
+Mason Chambliss	23, 9
 RS Anton Petrik
 RS Benjamin Barrett
 RS James Oriskovich
@@ -4006,23 +4006,23 @@ RS John Erbstoesser
 RS Jonathan Matarangas
 RS Trevor Ricci
 Chris McCarron
-Dash McFarland
-Gavin Pierce
-Henry Allen
+Dash McFarland	14, 2, 5
+Gavin Pierce	26
+Henry Allen	20, 11
 Jacob Newbill
-Jonah Albers
-Perry Mikic
+Jonah Albers	25
+Perry Mikic	28
 Ray Holmberg
-Ryan Strauss
+Ryan Strauss	27, 17
 Ryan Wahl
-Shane Hoover
-Wyatt Clark
-Adam Gyenis
-Casey Conrad
-James Oriskovich
-John Erbstoesser
-Jonathan Matarangas
-Kian Sadeghi Garmaroudi
+Shane Hoover	21, 8
+Wyatt Clark	29
+Adam Gyenis	13, 10
+Casey Conrad	18
+James Oriskovich	15, 14, 7
+John Erbstoesser	19
+Jonathan Matarangas	23, 12
+Kian Sadeghi Garmaroudi	30
 RS Brock Zamanian
 RS Hayes Beamon
 RS Jordan Hayes
@@ -4033,493 +4033,493 @@ RS Marko Maramica
 RS Ryan Matarangas
 RS Will Coons
 RS Zach Green
-Sawyer Rhodes
-Billy Rankin
-Brock Zamanian
-Charles Kingsmill
-Eric Quiggle
-Greg Hilderbrand
-Griffin Pieretti
-Hayes Beamon
-Kyle Rosenblatt
-Leif Lacy
-Leo Ohannessian
-Levi Lentin
-Luke Redoutey
-Marko Maramica
-Nathan Darby
-Ryan Matarangas
-Ryan McManigal
-Sam McKenzie
-Sean O'Brien
-Ty Case
-Will Coons
-Wyatt Pieretti
-Zac Green
-Dom Brown
-Finn Genc
-Landon Lassahn
-Luke Bachler
-Nico Furneaux
-Camren Simoncelli
-Danilo Dragovic
-Haakon Lacy
-Kai Ross
-Marko Ilic
-Oliver Sherwood
-Tyler Roller
-Charlie Johnson
-Finn Byrne
-Jake Reinke
-Sean Keane
-Thomas Colpo
-William Pezold
-Dash D'Ambrosia
-Dylan Morris
-Fellipe Resende
-Hayden Tully
-Kyle Franks
-Luigi Canepa
-Luka Spasic
-Noah Loo
-Preston Bouch
-Sloan Brown
-Alec Zwaneveld
-Aleksandar Ruzic
-Alex Roelse
-Alex Wolf
-Austin Rone
-Chancellor Ramirez
-David Stiling
-Elliot Ordway
-Eric Goldenberg
-Evan Feller
-Garrett Danner
-Gordon Marshall
-Jack Grover
-Jake Simpson
-James Robinson
-James Vlachonassios
-Joey Fuentes
-Jonathan Van De Velde
-Kent Inoue
-Matt Farmer
-Max Irving
-Patrick Fellner
-Patrick Woepse
-Raphael Raede
-Ryder Roberts
-Warren Snyder
-Bailey Jarvis
-Chasen Travisano
-Evan Rosenfeld
-Felix Brozyna-Vilim
-Jesse Camou
-Luke Henriksson
-Nicolas Saveljic
+Sawyer Rhodes	2
+Billy Rankin	24, 11
+Brock Zamanian	21, 2, 7
+Charles Kingsmill	26
+Eric Quiggle	17
+Greg Hilderbrand	27
+Griffin Pieretti	23, 7
+Hayes Beamon	22, 12, 3
+Kyle Rosenblatt	25, 17, 6
+Leif Lacy	1/1B, 1A, 1
+Leo Ohannessian	19, 15
+Levi Lentin	1/1A, 1
+Luke Redoutey	20, 4, 15
+Marko Maramica	18
+Nathan Darby	21
+Ryan Matarangas	13
+Ryan McManigal	18, 4
+Sam McKenzie	16, 14, 6, 8
+Sean O'Brien	13, 18, 9, 6
+Ty Case	23
+Will Coons	15, 3, 2
+Wyatt Pieretti	1B, 1
+Zac Green	24, 16
+Dom Brown	28, 5
+Finn Genc	19, 9, 41
+Landon Lassahn	30, 21, 5, 8
+Luke Bachler	20, 12
+Nico Furneaux	29, 14
+Camren Simoncelli	77, 10
+Danilo Dragovic	20
+Haakon Lacy	1, 1A
+Kai Ross	22, 2
+Marko Ilic	16
+Oliver Sherwood	78, 23, 11
+Tyler Roller	32, 12
+Charlie Johnson	3, 5
+Finn Byrne	1, 1B
+Jake Reinke	99, 20
+Sean Keane	98, 17
+Thomas Colpo	13, 15
+William Pezold	16
+Dash D'Ambrosia	4
+Dylan Morris	18
+Fellipe Resende	16
+Hayden Tully	22
+Kyle Franks	13
+Luigi Canepa	7
+Luka Spasic	23
+Noah Loo	21
+Preston Bouch	14
+Sloan Brown	3
+Alec Zwaneveld	3
+Aleksandar Ruzic	1
+Alex Roelse	11
+Alex Wolf	1
+Austin Rone	20
+Chancellor Ramirez	2
+David Stiling	10
+Elliot Ordway	1
+Eric Goldenberg	25, 15, 5
+Evan Feller	25
+Garrett Danner	1
+Gordon Marshall	9
+Jack Grover	4
+Jake Simpson	14
+James Robinson	8
+James Vlachonassios	17, 7, 23
+Joey Fuentes	6
+Jonathan Van De Velde	1, 1A
+Kent Inoue	24
+Matt Farmer	12
+Max Irving	19
+Patrick Fellner	23
+Patrick Woepse	18
+Raphael Raede	26, 14, 8
+Ryder Roberts	5
+Warren Snyder	15, 6
+Bailey Jarvis	15
+Chasen Travisano	17
+Evan Rosenfeld	3, 2
+Felix Brozyna-Vilim	13
+Jesse Camou	5
+Luke Henriksson	9
+Nicolas Saveljic	21
 Patrick Saunders
-Peter Lovas
-Quinten Osborne
-Ashworth Molthen
-Brock Petersen
-Chase Petersen
-Danny Roland
-Henry Wilde
+Peter Lovas	22
+Quinten Osborne	2
+Ashworth Molthen	19
+Brock Petersen	9
+Chase Petersen	25
+Danny Roland	1A
+Henry Wilde	18
 Jackson Westerman
-Jake Cavano
-Matthew Kacura
-Michael Graner
-Morio Saito
-Tega Cheishvili
-Will Morgan
-Andy Rodgers
-Bernardo Maurizi
-Cameron Reagan
-Chase Honaker
-Gabe Discipulo
-Giorgio Alessandria
-Jack Larsen
-Jack White
-Levon Gukasyan
-Max Berg
-Ryan Sawyer
-Sam Krutonog
-Tommy Gruwell
-Alec Johnson
-Ethan Shipman
-Garret Griggs
-Gianpiero Di Martire
-Guillermo Ocasio
-Hayden Nightingale
-Jake Leonard
-Luke Makshanoff
-Makoto Kenney
-Maximo Rossi
-Tanner Pulice
-Anthony Gross
-Chase Dodd
-Eli Liechty
-Eli Wirth
+Jake Cavano	4
+Matthew Kacura	25, 5
+Michael Graner	12
+Morio Saito	16, 22
+Tega Cheishvili	20
+Will Morgan	2
+Andy Rodgers	6
+Bernardo Maurizi	1A, 1
+Cameron Reagan	8
+Chase Honaker	1, 1B
+Gabe Discipulo	3
+Giorgio Alessandria	25
+Jack Larsen	5, 10
+Jack White	7
+Levon Gukasyan	11
+Max Berg	14
+Ryan Sawyer	10
+Sam Krutonog	1
+Tommy Gruwell	24
+Alec Johnson	12
+Ethan Shipman	11
+Garret Griggs	1, 1A
+Gianpiero Di Martire	9, 5
+Guillermo Ocasio	16
+Hayden Nightingale	20
+Jake Leonard	9
+Luke Makshanoff	18
+Makoto Kenney	22
+Maximo Rossi	19
+Tanner Pulice	23
+Anthony Gross	17
+Chase Dodd	15
+Eli Liechty	12, 3
+Eli Wirth	1C, 1
 Ethan Crooks
-Grant Loth
-Griffin Engstrom
-Mark Laurlund
-Trey Doten
-Ben Larsen
+Grant Loth	21
+Griffin Engstrom	16
+Mark Laurlund	8
+Trey Doten	23
+Ben Larsen	6
 Brett Honaker
-Frederico Jucá Carsalade
-Gray Carson
-Jack Hilinski
-Noah Rowe
-Vinnie Merk
-Ben Liechty
-Marcell Szécsi
-Max Matthews
-Nate Tauscher
-Rafael Real Vergara
-Wade Sherlock
-Aaron Voggenthaler
-Alex Heenan
-Andrew Spencer
-Bode Brinkema
-Harry Tucker
-Joey Kent
-Nick Tovani
-Nico Tierney
-Peter Castillo
-Ryder Dodd
-Harper Gardner
-Hayden O'Hare
-Jackson Harlan
-Santino Rossi
-Zac Miller
-Andrew Wallace
-Chase McFarland
-Connor Colman
-Danilo Dragović
-Flynn Guenther
-Griffen Price
-Jack Merrill
-Luka Gladović
-Tristan Tucker
+Frederico Jucá Carsalade	2
+Gray Carson	9
+Jack Hilinski	14
+Noah Rowe	11
+Vinnie Merk	24, 25
+Ben Liechty	13
+Marcell Szécsi	4
+Max Matthews	16, 10
+Nate Tauscher	1
+Rafael Real Vergara	7
+Wade Sherlock	12, 5
+Aaron Voggenthaler	7
+Alex Heenan	20, 7
+Andrew Spencer	17
+Bode Brinkema	12
+Harry Tucker	18, 16
+Joey Kent	1
+Nick Tovani	1
+Nico Tierney	24
+Peter Castillo	8
+Ryder Dodd	19, 24, 11
+Harper Gardner	1
+Hayden O'Hare	21
+Jackson Harlan	14
+Santino Rossi	22
+Zac Miller	20, 25
+Andrew Wallace	19
+Chase McFarland	15
+Connor Colman	23
+Danilo Dragović	20
+Flynn Guenther	22
+Griffen Price	1
+Jack Merrill	3
+Luka Gladović	9
+Tristan Tucker	18
 Ben Brooks
-Blake Edwards
-Brendan Hack
-Brock Hudnut
-Bryce Hoerman
-Chas Hornecker
-Chase Koplow
-Colin Porter
-Daniel Leong
-Grant Stein
-James Walters
-Lachlan Edwards
-Lazar Pasuljevic
-Luka Karaman
-Luke Wyatt
-Marin Dasic
+Blake Edwards	12
+Brendan Hack	27
+Brock Hudnut	22
+Bryce Hoerman	9
+Chas Hornecker	23
+Chase Koplow	13
+Colin Porter	29
+Daniel Leong	19, 12
+Grant Stein	15
+James Walters	11
+Lachlan Edwards	14
+Lazar Pasuljevic	18
+Luka Karaman	21, 7
+Luke Wyatt	13
+Marin Dasic	8, 4, 6
 Marko Vukojevic
-Matt Ambrose
-Matt Maier
-Matteo Morelli
-McQuin Baron
-Mihajlo Milicevic
-Mitch Embrey
-Murphy Slater
-Nick Bell
+Matt Ambrose	1
+Matt Maier	10
+Matteo Morelli	17
+McQuin Baron	1
+Mihajlo Milicevic	5
+Mitch Embrey	16
+Murphy Slater	24
+Nick Bell	2
 Nick Silvers
-Sam Slobodien
-Simon Wu
-Thomas Dunstan
-Tim Leong
-Will Rubschlager
-Zach D'Sa
-Christian Emerson
-Christian Hockenbury
-Marko Vavic
-Matt Moran-Flores
-Troy Furniss
-Alexander Lansill
-Bennett Winther
-Corey Allan
-Hannes Daube
-Jacob Mercep
-Jake Ehrhardt
-James Kolenda
-Mason Farley
-Nic Porter
-Orestis Apergi
-Paul Matt
-Sam Krutonog
-Sawyer Rhodes
-Vaios Vlahotasios
-Chris Agliozzo
-Chris Sturtevant
-Emmett Pernecky
-Garrett Allen
-Grayden Reynolds
-Henry Saunders
-Jere Ashby
-Marcus Longton
-Matt Harrison
-Patrick Burke
-Payne Fama
-Stefan Vavic
-Ashworth Molthen
-Blake Jackson
-Carson Kranz
-Joshua Waldoch
-Marko Karaman
-Max Miller
-Reed Stemler
-Tom McGuire
-Tony Nardelli
-Wyatt Barker
-Aidan Wattson
-Eric Hubner
-Jake Carter
-Kyle McKenney
-Luka Brnetic
-Thor Olafson
-Tommy O'Connor
-Andrej Grgurevic
-Bernardo Herzer
-Charlie Saunders
-Evan Ausmus
-Jack Vort
-Massimo Di Martire
-Zac Crenshaw
-Charles Mills
-Chase Landa
-Connor Cohen
-Cooper Mathisrud
-Jack Martin
-Luke Nelson
-Spencer Averitt
-Stefan Brankovic
-Will Sanchez
-Zach Bettino
-Ben Mirisch
-Nemo Pavoggi
-Robert López Duart
-Spencer Williams
-Taj Whitehead
-Breydon Congo
-Colt Bradley
-Efe Naipoglu
-Gavin Conant
-Luke Harris
-Mihailo Vukazic
-Reed Hanna
-Strahinja Krstic
-Adrian Senciac
-Ante Jerkovic
-Apostolos Georgaras
-Camden Kocur
-Marc Angelescu
-Nate Simoncelli
-Tyler Anderson
-Chonghwi Yoon
-Dylan Gwinn
-Ian Geister
-Jack King
-Joshua Emde
-Mac Hennessy
-Nicholas Willison
-Nick Spehar
-Owen Hanna
-Patrick Fredrick
-Troy Smith
-Tyler Willison
-Zach Bacchus
-David Boyer
-Ethan Moy
-Tyler Francis
-Cam Spicer
-Dustin Reinke
-Jason Wright
-Jeremy Glasner
-Kyle Rubenstein
-Robert Koch
-Will Kitsch
-Alex Lee
-Andrew Edwards
-Anthony Ames
-Caine Dusza
-Elijah Muzzi
-Keegan McLaughlin
-Ostin Woodfin
-Robert Niino
-Ryan Bannon
-Zishuo Ma
-AJ Alderman
-Chris Edwards
-Mitchell Rubio
-Aidan Johnson
-Kieran Shannon
-Lazar Marsenic
-Aidan Miller
-Christopher Furlong
-Isaac Kay
-Kailer Spicer
-Adam Brock
-Sean McClellan
-Timothy Deutsch
-Andrew Rippke
-Brody Souder
-Dillon Parker
-Hector Santaella
-Joseph Aranda
-Parker Elliott
-Christopher Mitchell
-Ciro Pro
-Connor Tuegel
-Jonah Richardson
-Layne Evans
-Leo Carter
-Luke Jacques
-Michael Stefanko
-Connor Tompkins
-Dylan Boccali
-Hugh Gregg
-Jack Ruggiero
-Jared Safren
-Josh Vander Wagen
-Michael Ruemelin
-Spyros Rapsomanikis
-Tristan Harrington
-1A/20 Nic Boyer
-Austin Honeycutt
-Ayden Guess
-Aziz Abdulaziz
-Bray Turner
-Charles Jacoby
-Gavin Johnson
-Hudson Kosiba
-Jackson Kesserman
-Brian Otto
-Ethan Vince
-Leo Upson
-Nic Boyer
-Sean Spooner
-Stefan Kecman
-Aidan Tol
-Andrew Breeden
-Andrew Wettstead
-Carlos Campos-Moya
-Christopher Ibarra
-Emilio Maldonado
-Hunter Manson
-Hunter Pelletier
-Julian Droetti
-Marko Miocic
-Marko Monic
-Massimiliano Mirarchi
-Mihailo Vuja
-Murat Ersoz
-Nick Hyden
-Nikolas Gregov
-Riley Bloom
-Tim Aakhus
-Tucker Vejsicky
-Tyler Fields
-Wedge Molthen
-William DePrez
-Zane Janich
-Alfonso Gonzalez
-Andrew Valencia
-Carlos Heredia Viteri
-Chad Portugal
-Cornelis Kriek
-Eliott Bergerson
-Hans Zdolsek
-Justin Contreras
-Kalani Fouts
-Kyle Aguilar
-Marc-Andre Roy
-Quinn LaCoursiere
-Ryan Flores
-Toby Chung
-Youssef Zaaza
-Eric Borunda
-Malcolm Niskey
-Paul Pittion
-Ricardo Reyes Jr.
-Spencer LaCoursiere
-Trevor Seifen
-Tyler Chung
-Adan De La Loza
-Amad Helwani
-Dominick Nevarez
-Dylan Woodhouse
-Enrico Antunes
-Jesus Padilla
-Kaan Hamurculu
-Mackenzie Aakhus
-Matthew Townsend
-Maxwell Murphy
-Micah Kamai
-Patrick Seelhorst
-Austin Dale
-Ben Ramans
-Ethan Saenz
-Fabio Mujica
-Gabriel Montoya
-Govani Santos-Cantu
-Jasper Wang
-Lars Van Os
-Thomas Baier
-AJ de la Loza
-Harrison Eaton
-Jackson Chamberlain
-Luke Shropshire
-Max McConville
-Owen Printup
-Pierre-Louis Pinchaud
-Alberto Seva
-Allen Soto Lopez
-Andrew Muro
-Brody Haney
-Cardin Chavez
-Dylan Zeledon
-Elish Sansyzbay
-Ethan Gates
-Julien Breck
-Kenshiro Matsuzawa
-Nick Coltrin
-Aitor Moreno
-Alvaro Oliveros Criado
-EVAN BORUNDA
-Ethan Klerck
-Ivan Cubelic
-Ko Kusachi
-Loronzo Angolucci
-Marton Thuroczy
-Noah Bigara
-Relja Mitic
-ZANDER HUYNH
-Zander Montoya
-Alvaro Oliveros
-CONNER ROCHA
-Jaime Ariste
-Jordan Northcutt
-Jose Silva Zito
-Lorenzo Angelucci
-Louis Grandi
-Matheo Loilliet
-Pedro Carvalho
-Tomas Franco
-DANIEL TOTEV
-DYLAN ZELEDON
-IVAN CARDENAS
-JASON DICKSON
-JOAQUIN MERCADO
-JUSTICE LAMBOY
-LOUIS HACKETT
-MATTHEW HUACUJA
-MIKE HALE
-PEDRO CARVALHO
-SEBASTIAN CADENA
-SPENCER CARTY
-TAL FOTIN
-TOMAS FRANCO
+Sam Slobodien	3, 2
+Simon Wu	1
+Thomas Dunstan	7
+Tim Leong	20
+Will Rubschlager	1
+Zach D'Sa	4, 8, 6
+Christian Emerson	28, 20
+Christian Hockenbury	26, 14
+Marko Vavic	3
+Matt Moran-Flores	1
+Troy Furniss	25, 16, 12
+Alexander Lansill	15, 4
+Bennett Winther	23, 17
+Corey Allan	21
+Hannes Daube	5
+Jacob Mercep	9
+Jake Ehrhardt	8
+James Kolenda	19, 2
+Mason Farley	22
+Nic Porter	1
+Orestis Apergi	18, 11
+Paul Matt	1
+Sam Krutonog	1
+Sawyer Rhodes	11
+Vaios Vlahotasios	1
+Chris Agliozzo	20
+Chris Sturtevant	16, 6
+Emmett Pernecky	28
+Garrett Allen	1
+Grayden Reynolds	22, 29
+Henry Saunders	24, 23, 22, 4
+Jere Ashby	1
+Marcus Longton	18, 10, 9
+Matt Harrison	23, 18
+Patrick Burke	27
+Payne Fama	25, 21, 10
+Stefan Vavic	26
+Ashworth Molthen	23
+Blake Jackson	1
+Carson Kranz	24, 7, 2, 6
+Joshua Waldoch	14, 16, 18, 9
+Marko Karaman	27, 31
+Max Miller	12
+Reed Stemler	16, 28, 3, 8
+Tom McGuire	7, 13
+Tony Nardelli	19
+Wyatt Barker	15
+Aidan Wattson	24, 25, 15
+Eric Hubner	1
+Jake Carter	25, 15, 4
+Kyle McKenney	1
+Luka Brnetic	14, 5
+Thor Olafson	30
+Tommy O'Connor	27, 17, 20
+Andrej Grgurevic	11, 23, 10, 7
+Bernardo Herzer	1
+Charlie Saunders	13, 14
+Evan Ausmus	16, 3
+Jack Vort	14, 15, 11, 6
+Massimo Di Martire	24, 10
+Zac Crenshaw	21, 17, 8
+Charles Mills	1
+Chase Landa	11, 23
+Connor Cohen	21
+Cooper Mathisrud	1
+Jack Martin	18, 14, 4
+Luke Nelson	24, 13, 10
+Spencer Averitt	27
+Stefan Brankovic	2
+Will Sanchez	22
+Zach Bettino	28
+Ben Mirisch	16
+Nemo Pavoggi	1
+Robert López Duart	9
+Spencer Williams	1
+Taj Whitehead	22
+Breydon Congo	15
+Colt Bradley	14
+Efe Naipoglu	17
+Gavin Conant	5, 2
+Luke Harris	1
+Mihailo Vukazic	12
+Reed Hanna	13, 3
+Strahinja Krstic	11
+Adrian Senciac	13
+Ante Jerkovic	8
+Apostolos Georgaras	4
+Camden Kocur	5
+Marc Angelescu	21
+Nate Simoncelli	18
+Tyler Anderson	12
+Chonghwi Yoon	4, 9
+Dylan Gwinn	15, 17
+Ian Geister	12
+Jack King	5
+Joshua Emde	22
+Mac Hennessy	1
+Nicholas Willison	2
+Nick Spehar	13, 1
+Owen Hanna	14
+Patrick Fredrick	7
+Troy Smith	3
+Tyler Willison	11
+Zach Bacchus	1A
+David Boyer	7, 3
+Ethan Moy	5
+Tyler Francis	2, 9
+Cam Spicer	11
+Dustin Reinke	8
+Jason Wright	6
+Jeremy Glasner	21
+Kyle Rubenstein	4
+Robert Koch	14, 10
+Will Kitsch	2
+Alex Lee	21
+Andrew Edwards	18
+Anthony Ames	15
+Caine Dusza	1B, 1
+Elijah Muzzi	7, 5
+Keegan McLaughlin	3
+Ostin Woodfin	13
+Robert Niino	8
+Ryan Bannon	14, 3
+Zishuo Ma	1A, 5, 1
+AJ Alderman	6
+Chris Edwards	7, 4
+Mitchell Rubio	16, 14
+Aidan Johnson	19, 9, 4
+Kieran Shannon	20
+Lazar Marsenic	9, 3
+Aidan Miller	17
+Christopher Furlong	20
+Isaac Kay	1A
+Kailer Spicer	10
+Adam Brock	18
+Sean McClellan	11
+Timothy Deutsch	1A, 1, 11/1
+Andrew Rippke	1A
+Brody Souder	3
+Dillon Parker	14, 13
+Hector Santaella	9, 10
+Joseph Aranda	6
+Parker Elliott	19, 20, 7
+Christopher Mitchell	12
+Ciro Pro	2
+Connor Tuegel	14
+Jonah Richardson	1
+Layne Evans	1
+Leo Carter	21
+Luke Jacques	4
+Michael Stefanko	1A
+Connor Tompkins	4
+Dylan Boccali	1, 8
+Hugh Gregg	15
+Jack Ruggiero	7
+Jared Safren	13
+Josh Vander Wagen	10
+Michael Ruemelin	14
+Spyros Rapsomanikis	2
+Tristan Harrington	5
+1A/20 Nic Boyer	1A/20
+Austin Honeycutt	8
+Ayden Guess	6
+Aziz Abdulaziz	11
+Bray Turner	5
+Charles Jacoby	15
+Gavin Johnson	12
+Hudson Kosiba	9
+Jackson Kesserman	21
+Brian Otto	4
+Ethan Vince	3
+Leo Upson	1A
+Nic Boyer	1/20
+Sean Spooner	12
+Stefan Kecman	17
+Aidan Tol	7
+Andrew Breeden	11
+Andrew Wettstead	1
+Carlos Campos-Moya	12
+Christopher Ibarra	1
+Emilio Maldonado	5, 21
+Hunter Manson	15
+Hunter Pelletier	3
+Julian Droetti	16
+Marko Miocic	4
+Marko Monic	20
+Massimiliano Mirarchi	14
+Mihailo Vuja	2
+Murat Ersoz	1
+Nick Hyden	6, 14
+Nikolas Gregov	1
+Riley Bloom	1
+Tim Aakhus	8, 2
+Tucker Vejsicky	9
+Tyler Fields	19
+Wedge Molthen	30
+William DePrez	18, 9
+Zane Janich	13, 4
+Alfonso Gonzalez	13
+Andrew Valencia	22, 10
+Carlos Heredia Viteri	14, 4
+Chad Portugal	12
+Cornelis Kriek	6, 5
+Eliott Bergerson	1
+Hans Zdolsek	3
+Justin Contreras	10
+Kalani Fouts	15, 2
+Kyle Aguilar	16, 7
+Marc-Andre Roy	8
+Quinn LaCoursiere	21, 11
+Ryan Flores	17
+Toby Chung	18, 8
+Youssef Zaaza	25
+Eric Borunda	19, 11
+Malcolm Niskey	16
+Paul Pittion	15, 10, 7
+Ricardo Reyes Jr.	22, 2
+Spencer LaCoursiere	21
+Trevor Seifen	1
+Tyler Chung	18
+Adan De La Loza	1, 1B
+Amad Helwani	24
+Dominick Nevarez	22
+Dylan Woodhouse	1
+Enrico Antunes	13
+Jesus Padilla	15
+Kaan Hamurculu	18, 6
+Mackenzie Aakhus	6
+Matthew Townsend	17
+Maxwell Murphy	23, 3
+Micah Kamai	20
+Patrick Seelhorst	14, 15
+Austin Dale	1
+Ben Ramans	8
+Ethan Saenz	5
+Fabio Mujica	10
+Gabriel Montoya	23
+Govani Santos-Cantu	9
+Jasper Wang	16
+Lars Van Os	1A
+Thomas Baier	22
+AJ de la Loza	4
+Harrison Eaton	13
+Jackson Chamberlain	7, 2
+Luke Shropshire	10
+Max McConville	9
+Owen Printup	1B
+Pierre-Louis Pinchaud	1A
+Alberto Seva	9, 3
+Allen Soto Lopez	1B
+Andrew Muro	12, 18
+Brody Haney	3, 23
+Cardin Chavez	19
+Dylan Zeledon	10
+Elish Sansyzbay	18
+Ethan Gates	1A
+Julien Breck	13
+Kenshiro Matsuzawa	1
+Nick Coltrin	14
+Aitor Moreno	12
+Alvaro Oliveros Criado	9
+EVAN BORUNDA	21
+Ethan Klerck	8
+Ivan Cubelic	3
+Ko Kusachi	5, 12
+Loronzo Angolucci	1A
+Marton Thuroczy	6
+Noah Bigara	4, 2
+Relja Mitic	11
+ZANDER HUYNH	17
+Zander Montoya	7
+Alvaro Oliveros	6
+CONNER ROCHA	19
+Jaime Ariste	11
+Jordan Northcutt	5
+Jose Silva Zito	1A
+Lorenzo Angelucci	1
+Louis Grandi	4
+Matheo Loilliet	13
+Pedro Carvalho	9
+Tomas Franco	1B
+DANIEL TOTEV	8
+DYLAN ZELEDON	10
+IVAN CARDENAS	13
+JASON DICKSON	4
+JOAQUIN MERCADO	14
+JUSTICE LAMBOY	2
+LOUIS HACKETT	11
+MATTHEW HUACUJA	15
+MIKE HALE	1a
+PEDRO CARVALHO	7
+SEBASTIAN CADENA	3
+SPENCER CARTY	9
+TAL FOTIN	5
+TOMAS FRANCO	1

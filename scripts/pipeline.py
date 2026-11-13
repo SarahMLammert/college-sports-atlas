@@ -6,6 +6,7 @@ build the map data, campuses, and a check at the end.
     python3 scripts/pipeline.py baseball softball lacrosse-mens
     python3 scripts/pipeline.py all
     python3 scripts/pipeline.py softball --only "Arkansas,LSU"
+    python3 scripts/pipeline.py baseball softball --only "Arkansas,LSU"   # each sport scrapes the ones it has
     python3 scripts/pipeline.py softball --from geocode
     python3 scripts/pipeline.py softball --skip scrape
     python3 scripts/pipeline.py softball --steps check
@@ -65,7 +66,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))   # so the files here import each other
 
-from core import available_sports, check_packages, load_sport, LOCK_ENV, read_csv, ROOT, season_files, sport_lock, SportBusy
+from core import (available_sports, check_packages, load_schools, load_sport, LOCK_ENV, read_csv, ROOT, season_files,
+                  sport_lock, SportBusy)
 
 SCRIPTS = Path(__file__).resolve().parent
 STEPS = ["test", "scrape", "retry", "redo-current", "geocode", "fix-hometowns", "frozen", "build",
@@ -124,8 +126,21 @@ def current_page_schools(sport) -> dict[int, list[str]]:
     return {s: sorted(v) for s, v in sorted(out.items())}
 
 
+def schools_in_sport(sport, names: str) -> list[str]:
+    """The schools named in --only ("A,B", any case) that this sport scrapes (core.load_schools: a site to try, so not
+    the colleges listed only to give transfers a level), as config/<sport>/schools.csv writes them."""
+    wanted = {n.strip().lower() for n in names.split(",") if n.strip()}
+    return sorted({r["school"] for r in load_schools(sport.schools_csv) if r["school"].lower() in wanted})
+
+
 def plan_for(sport, args) -> Plan:
     plan = Plan(steps=[s for s in pick_steps(args) if s != "test"])   # the tests run once, in main()
+    only = ",".join(schools_in_sport(sport, args.only)) if args.only else ""
+    if args.only and not only:
+        # Several sports with --only: a sport that has none of the schools named is left alone (Nov 13)
+        plan.steps = []
+        plan.notes["sport"] = "none of the --only schools are in this sport: skipped"
+        return plan
     seasons = args.seasons or sport.default_seasons()
     common = ["--sport", sport.name]
     picks = []
@@ -133,14 +148,14 @@ def plan_for(sport, args) -> Plan:
         picks += ["--retry-given-up"]
     if getattr(args, "give_up_after", None) is not None:
         picks += ["--give-up-after", str(args.give_up_after)]
-    if args.only:
-        picks += ["--only", args.only]
+    if only:
+        picks += ["--only", only]
     if args.division:
         picks += ["--division", args.division]
     scrape = py("scrape_rosters.py", *common, "--seasons", seasons, "--report", *picks)
     have_rosters = bool(season_files(sport.rosters_dir))
 
-    if have_rosters and not args.only and not args.rescrape:
+    if have_rosters and not only and not args.rescrape:
         first = [*scrape, "--retry-failed"]
         plan.notes["scrape"] = "rosters already saved: only what's missing or partial (--rescrape for everything)"
     else:
@@ -155,9 +170,8 @@ def plan_for(sport, args) -> Plan:
     redo = []
     pages = current_page_schools(sport) if sport.spring_season else {}   # a fall sport's main page is right
     for season, schools in pages.items():
-        if args.only:
-            wanted = {s.strip().lower() for s in args.only.split(",")}
-            schools = [s for s in schools if s.lower() in wanted]
+        if only:
+            schools = [s for s in schools if s in only.split(",")]
         if schools:
             redo.append(py("scrape_rosters.py", *common, "--seasons", str(season), "--report", "--render",
                            "--bios", "--only", ",".join(schools), "--workers", str(args.retry_workers),
@@ -246,6 +260,9 @@ def run_sport(name: str, args, results: list[Result]) -> bool:
     """Every step for one sport. False if Ctrl-C was pressed (stop everything)."""
     sport = load_sport(name)
     plan = plan_for(sport, args)
+    if not plan.steps and plan.notes.get("sport"):
+        print(f"\n== {name}: {plan.notes['sport']}")
+        return True
     for step in plan.steps:
         results.append(Result(name, step))
     mine = [r for r in results if r.sport == name]
@@ -365,8 +382,13 @@ def main(argv=None) -> int:
         ap.error(f"no config/<sport>/settings.json for {', '.join(unknown)}; sports set up: {', '.join(have)}")
     if len(set(sports)) != len(sports):
         ap.error("a sport is listed twice")
-    if args.only and len(sports) > 1:
-        ap.error("--only names schools of one sport: give one sport with it")
+    if args.only:
+        # With several sports, each scrapes the schools it has; a name no sport has is most likely a typo
+        found = {s.lower() for name in sports for s in schools_in_sport(load_sport(name), args.only)}
+        missing = [n.strip() for n in args.only.split(",") if n.strip() and n.strip().lower() not in found]
+        if missing:
+            ap.error(f"--only: not in the schools of {', '.join(sports)}: {', '.join(missing)} "
+                     "(the name as config/<sport>/schools.csv writes it)")
 
     results: list[Result] = []
     try:

@@ -1,2386 +1,2386 @@
-Abbey Kerth
-Ao Gao
-Catherine Simko
-Claudia Abad
-Daisy Carter
-Ellie Karl
-Julia Reyes
-Katie Sverchek
-Kayla Casas
-Lena Mihailovic
-Maud Koopman
-Mia Rycraw
-P.J. Allin
-Rosie Huck
-Sophia Burgess
-Stephanie Contreras
-Taylor Barrett
-Taylor Bertrand
-Alkistis Benekou
-Aria Hueso
-Bente Rogge
-Cassidy Degraff
-Amira Van Buren
-Belen Ehinger
-Chelsea Karimazondo
-Kate Cassidy
-Layla Waters
-Meghan Beaudet
-Blaire McDowell
-Borbala Kekesi
-Bridget Johnston
-Lieke Rogge
-Mia Viss
-Alexis Coakley
-Alison Cameron
-Emma Fraser
-Itzahiana Baca
-Lara Kiss
-Olivia Traxler
-Savannah Hampton
-Abby Begg
-Alba Olivé Martí
-Emily Van Zonneveld
-Luca Petovary
-Tarah Schaffer
-Bianca Becerra
-Emily Bennett
-Marie Rudasics
-Molly Ostrowski
-Stevilyn Griffin
-Vanda Baksa
-Alexa Knutson
-Amaya Leiby
-Juliette Dhalluin
-Sophie Shorter-Robinson
-Tina Doherty
-Zoe Frangieh
-Alison Kokorowski
-Ashley Ferguson
-Erika Staine
-Gabby Gaetano
-Genesis Jasper
-Jasmijn Dikmans
-Kat Featherstone
-Millie Quin
-Sanne Keijzer
-Ani Pamp
-Ashley Byron
-Hannah McClaskey
-Itziar Almeda
-Karly Frangieh
-Keri Glad
-Kinga Hnatyszyn
-Layla Smith
-Leila Meraz
-Margot Chammas
-Molly Glad
-Camelia Bouloukbachi
-Dominika Kardos
-Iris Vreeling
-Jelena Butic
-Laura Kardos
-Lulu Gaetano
-Maci Magee
-Miya Tirosh
-Nioka Thomas
-Sydney Krushen
-Abbey Ellis
-Alyssa Fricker
-Annie Opal Dickson
-Charlotte Newport
-Jasmin Aponte
-Jillian Hagmann
-Lanie DaSilva
-Lauren Dickinson
-Lizzie Pelzman
-Maggie Caliendo
-Ocean Akau
-Olivia Hillhouse
-Sophie Arceneaux
-Valerie Zlotnikova
-Victoria Guest
-Caitlin Morse
-Carli Udovich
-Casey Barragan
-Jersey Merrick
-Olivia Parry
-Summer Chalmers
-Abigail Gatlin
-Alayna Ickert
-Anita Rodgers
-Annelie McGhee
-Hailey Sherman
-Mary King
-Natalie Abril
-Susan Palmentera-Reid
-Waiahuli Akau
-Anais Jones
-Cindy King
-Emma Blezien
-Jorja Neumann
-Kiera Luhrs
-Aneeka Sumanatilleke
-Becca Foster
-Braelyn Hill
-Eleni Nicoloudes
-Elly Jo Fay
-Jillian Hemming
-Maya Biela
-Simone Cairns
-Sofia Boccalatte
-Xiomara Trejo
-Alba Espinar
-Alex Paxton
-Amanda Hicks
-Amy Harris
-Annalise Batcheller
-Arianne Yeo
-Ashley Taylor
-Britt Harris
-Carinna Prince
-Erica Marquez
-Jocelyn Stevens
-Jordan Hummingbird
-Katie Margot
-Koral LaStella
-Mar Pastor Alvarez
-Maryann Slama
-Megan Myers
-Robyn Fernandez
-Ryllie Haynes
-Tricia Rogers
-Amanda Previch
-Marissa Joerke
-Mireia Tutusaus Alcaraz
+Abbey Kerth	12
+Ao Gao	11
+Catherine Simko	14
+Claudia Abad	7
+Daisy Carter	4
+Ellie Karl	1
+Julia Reyes	18, 3
+Katie Sverchek	3
+Kayla Casas	6
+Lena Mihailovic	9
+Maud Koopman	8, 11
+Mia Rycraw	1
+P.J. Allin	2
+Rosie Huck	5, 7
+Sophia Burgess	1
+Stephanie Contreras	10
+Taylor Barrett	1
+Taylor Bertrand	15
+Alkistis Benekou	8
+Aria Hueso	19
+Bente Rogge	12
+Cassidy Degraff	16
+Amira Van Buren	4
+Belen Ehinger	1, 1A
+Chelsea Karimazondo	1, 1B
+Kate Cassidy	15, 6
+Layla Waters	5
+Meghan Beaudet	10
+Blaire McDowell	13, 2
+Borbala Kekesi	9
+Bridget Johnston	1
+Lieke Rogge	6
+Mia Viss	1
+Alexis Coakley	1
+Alison Cameron	13
+Emma Fraser	8
+Itzahiana Baca	1
+Lara Kiss	5
+Olivia Traxler	14, 3
+Savannah Hampton	3
+Abby Begg	11
+Alba Olivé Martí	15
+Emily Van Zonneveld	7
+Luca Petovary	3, 4
+Tarah Schaffer	16, 6
+Bianca Becerra	10
+Emily Bennett	17
+Marie Rudasics	1A, 1
+Molly Ostrowski	1B, 16
+Stevilyn Griffin	12
+Vanda Baksa	6
+Alexa Knutson	1
+Amaya Leiby	14
+Juliette Dhalluin	2
+Sophie Shorter-Robinson	9
+Tina Doherty	12
+Zoe Frangieh	13, 3
+Alison Kokorowski	14
+Ashley Ferguson	20, 4
+Erika Staine	1
+Gabby Gaetano	13
+Genesis Jasper	2
+Jasmijn Dikmans	6
+Kat Featherstone	12, 11
+Millie Quin	8
+Sanne Keijzer	1
+Ani Pamp	21
+Ashley Byron	1B
+Hannah McClaskey	12
+Itziar Almeda	10
+Karly Frangieh	2
+Keri Glad	1C
+Kinga Hnatyszyn	20
+Layla Smith	15
+Leila Meraz	7
+Margot Chammas	5
+Molly Glad	18
+Camelia Bouloukbachi	4
+Dominika Kardos	22
+Iris Vreeling	20
+Jelena Butic	14
+Laura Kardos	3
+Lulu Gaetano	16
+Maci Magee	21
+Miya Tirosh	17
+Nioka Thomas	2
+Sydney Krushen	15
+Abbey Ellis	7
+Alyssa Fricker	10
+Annie Opal Dickson	9
+Charlotte Newport	4
+Jasmin Aponte	11
+Jillian Hagmann	6
+Lanie DaSilva	1
+Lauren Dickinson	12
+Lizzie Pelzman	1A, 1
+Maggie Caliendo	8
+Ocean Akau	5
+Olivia Hillhouse	2
+Sophie Arceneaux	3
+Valerie Zlotnikova	13
+Victoria Guest	14
+Caitlin Morse	17
+Carli Udovich	24
+Casey Barragan	16
+Jersey Merrick	13
+Olivia Parry	18, 11
+Summer Chalmers	10
+Abigail Gatlin	20
+Alayna Ickert	22, 8
+Anita Rodgers	21, 12
+Annelie McGhee	15
+Hailey Sherman	25, 10
+Mary King	23
+Natalie Abril	1A
+Susan Palmentera-Reid	1B, 1A, 1
+Waiahuli Akau	2
+Anais Jones	19, 9
+Cindy King	32
+Emma Blezien	17
+Jorja Neumann	25, 3
+Kiera Luhrs	14
+Aneeka Sumanatilleke	14
+Becca Foster	5
+Braelyn Hill	16
+Eleni Nicoloudes	1B
+Elly Jo Fay	15
+Jillian Hemming	1A
+Maya Biela	7
+Simone Cairns	18
+Sofia Boccalatte	6
+Xiomara Trejo	4
+Alba Espinar	6
+Alex Paxton	5
+Amanda Hicks	3
+Amy Harris	15
+Annalise Batcheller	12
+Arianne Yeo	20
+Ashley Taylor	13
+Britt Harris	8
+Carinna Prince	16
+Erica Marquez	1
+Jocelyn Stevens	17
+Jordan Hummingbird	18
+Katie Margot	1
+Koral LaStella	9
+Mar Pastor Alvarez	10
+Maryann Slama	11
+Megan Myers	2
+Robyn Fernandez	4
+Ryllie Haynes	14
+Tricia Rogers	19
+Amanda Previch	3
+Marissa Joerke	7
+Mireia Tutusaus Alcaraz	11
 RS Kristine Khachikian
-Sarah Adams
-Britni Tisdale
-Gabrielle Martinez
-Hannah Bradley
-Kristine Khachikian
-Olivia Lott
-Shanna Stevenson
-Gabrielle Mantyka
-Lauren Hoyle
-Milena Guzmán Ortiz
+Sarah Adams	6
+Britni Tisdale	9
+Gabrielle Martinez	5
+Hannah Bradley	14
+Kristine Khachikian	15, 1
+Olivia Lott	1A, 1
+Shanna Stevenson	2
+Gabrielle Mantyka	1
+Lauren Hoyle	4
+Milena Guzmán Ortiz	8
 RS Hannah Murray
-Bri Erickson
-Evelyn Sherman
-Hannah Murray
-Katarina Capulong
-Kyra Kahahawai
-Mackenzie Russell
-Mattie Herzog
+Bri Erickson	3
+Evelyn Sherman	17
+Hannah Murray	1, 1B
+Katarina Capulong	15
+Kyra Kahahawai	13, 6
+Mackenzie Russell	7
+Mattie Herzog	12
 RS Katherine Rehberger
-Shyanne Rainey
-Kaelene De Bie
-Maritza Ochoa
-María Boix Pascual
+Shyanne Rainey	10
+Kaelene De Bie	11
+Maritza Ochoa	7
+María Boix Pascual	12
 RS Evelyn Sherman
 RS Gabrielle Mantyka
 RS Kyra Kahahawai
-Skylar Ford
-Alyssa Perez
-Carley Anderson
-Carlota Pereia
-Grace Pugh
-Haley Allbee
-Kate Green-Jones
-Montana George
-Brenna Kenney
-Catherine Ahumada
-Daniela Herrero Miralles
-Delanie Gearing
-Madeline Schultz
-Martina Blazevic
-Melissa Valdez
-Rachel Ahumada
-Alex Airitam
-Alexandra Akritidou
-Ella Sweeney
-Evelyne Prado
-Laia Marsinach Ortega
-Mica Schiavone
-Nicole Perez
-Audrey Dexter
-Emily Engle
-Jaeden Johnson
-Jessie Nelson
-Kohia Rego
-Annabelle Gould
-Avery Reyes
-Bailey Hollick
-Kayla Tweed
-Kori Cunningham
-Madilyn Nim
-Moncerath Maldonado
-Olivia Ocampo
-Sofia Vetuli
-Stacy Stroud
-Alicia Fregoso
-Allison Crawford
-Alyssa Pimienta
-Ava LoBue
-Christina Cervantes
-Damaris Kientz
-Emily Ramirez
-Hanna Jordan
-Karlie Wanmer
-Kourtney Pyle
-Lily Wolfe
-Lizzy Birch
-Makayla Lankford
-Maria Roldan Gonzalez
-Paulina Cemo
-Rachel Spadt
-Samantha Rainey
-Stephanie Offner
-Veralie Naranjo
-Devon Coppes
-Emily Guedel
-Kaycie Bradshaw
-Lauren Westphal
-Maria Higginbotham
-Marija Mijuskovic
-Mattie Herzog
-Mia Mulhall
-Chloe McKay
-Diana Hattar
-Keziah De Bie
-Myah Ibarra
-Reese Woodward
-Salma Orozco
-Stephanie Rodriguez
-Teresa Tikoo
-Alyah Ibarra
-Alyssa Cuevas
-Annabella Rapp
-Clara McKee
-Destiny Moreno
-Gwendolyn Pidd
-Katie Webb
-Marissa Brock
+Skylar Ford	2
+Alyssa Perez	13, 5
+Carley Anderson	20, 4
+Carlota Pereia	18
+Grace Pugh	14
+Haley Allbee	17
+Kate Green-Jones	1A
+Montana George	21
+Brenna Kenney	8
+Catherine Ahumada	3, 13
+Daniela Herrero Miralles	1
+Delanie Gearing	16
+Madeline Schultz	13
+Martina Blazevic	14
+Melissa Valdez	15
+Rachel Ahumada	17, 6, 3
+Alex Airitam	1
+Alexandra Akritidou	10, 6
+Ella Sweeney	9
+Evelyne Prado	22, 2
+Laia Marsinach Ortega	16, 12
+Mica Schiavone	8
+Nicole Perez	17
+Audrey Dexter	18, 5
+Emily Engle	15
+Jaeden Johnson	4
+Jessie Nelson	19
+Kohia Rego	8, 6
+Annabelle Gould	7
+Avery Reyes	1
+Bailey Hollick	15
+Kayla Tweed	1
+Kori Cunningham	13
+Madilyn Nim	1
+Moncerath Maldonado	17
+Olivia Ocampo	20
+Sofia Vetuli	3
+Stacy Stroud	22
+Alicia Fregoso	1
+Allison Crawford	16
+Alyssa Pimienta	17
+Ava LoBue	4
+Christina Cervantes	2
+Damaris Kientz	1
+Emily Ramirez	15
+Hanna Jordan	7
+Karlie Wanmer	3
+Kourtney Pyle	13
+Lily Wolfe	6
+Lizzy Birch	12
+Makayla Lankford	1
+Maria Roldan Gonzalez	5
+Paulina Cemo	10
+Rachel Spadt	8
+Samantha Rainey	1
+Stephanie Offner	11
+Veralie Naranjo	14, 9, 8
+Devon Coppes	20
+Emily Guedel	11
+Kaycie Bradshaw	7
+Lauren Westphal	18
+Maria Higginbotham	22
+Marija Mijuskovic	3
+Mattie Herzog	14
+Mia Mulhall	19, 10
+Chloe McKay	1
+Diana Hattar	22
+Keziah De Bie	24
+Myah Ibarra	17, 9
+Reese Woodward	21
+Salma Orozco	23, 3
+Stephanie Rodriguez	25, 5
+Teresa Tikoo	13
+Alyah Ibarra	14, 13
+Alyssa Cuevas	23
+Annabella Rapp	6
+Clara McKee	1
+Destiny Moreno	15, 12
+Gwendolyn Pidd	21
+Katie Webb	7
+Marissa Brock	16, 2
 RS Marija Mijuskovic
-Savannah Rapp
-Ava Gatewood
-Berlynn Mani
-Ennovi Dominguez
-Fernanda Luna
-Kajsa Brown
-Karly Lepel
-Natalee Winberg
-Sofia Lazzarini Orlandi
-Yalissa Tellez
-Allison Woo
-Anne Warner
-Audrey Flower
-Carmen Rosas
-Catherine Roach
-Elizabeth Bolton
-Ellyn Vitek
-Emily Adams
-Emma Dodd
-Hailey Jacobson
-Hannah Koper
-Imani Herring
-Jessica Heilman
-Jourdan Meltzer
-Korbyn Simpson
-Lucia Adami
-Mai Ly
-Maigrie McDougal
-Marisa Kolokotronis
-Marisol Dakan
-McKenna Miller
-Montana Fowler
-Olivia Katcher
-Olivia Santiago
-Reia Tong
-Sahana Nazeer
-Shannon Crowley
-Tiffany Zhao
-Victoria Pierotti
-Ally Donahue
-Hannah Eliot
-Jamie Smith
-Lauren Burns
-Lexi Atwell
-Sarah Welch
-Alli Schaum
-Carissa Perez
-Han Nguyen
-Ingrid Hernandez
-Julia Armitage
-Kaitlyn Cook
-Lily Keck
-Riley Hughes
-Charlotte Rosenberg
-Dagmara Czajka
-Isabel Riches
-Katie Klein
-Lili Akin
-Marley Presiado
-Moe O'Malley
-Morgan Rooney
-Bryn Gioffredi
-Claire Pisani
-Katie Dvonch
-Lily Weiser
-Linnea Kelly
-Nina Hastings
-Zoe King
-Bella Godlis
-Maya Fleischer
-Shauna Franke
-Sierra Martin
-Sophie Golub
-Alessandra D'Arcy
-Audrey Gallagher
-Brenna Pangelinan
-Claire Poissonnier
-Emily Suong
-Katharine Knowles
-Lucy Gramley
-Malia Honda
-Siena Berry
-Tallulah Clancy
-Alexandra Love
-Ashley Penner
-Claire Eusey
-Ella Palmer
-Hana Homma
-Madeleine Poissonnier
-Marina Demas
-Roxanne Hazuka
-Sabrina Shipley
-Aubrie Anderson
-Cleo Washer
-Ellen Norell
-Gaby Montalvo
-Hanna Tidrenczel
-Malia Chavinson
-Margot Gibbons
-Sarah Decker
-Ava Schoening
-Emmy Hensley
-Julia Sansing
-Samantha Kim
-Skye Andros
-Sofia Holman
-Somto Okafo
-Audrey Long
-Megan Newby
-Sofia Flierl
-Chelsea Scuderi
-Colleen Barron
-Eleanor Marrs
-Eliza Romeyn
-Emily Konishi
-Haley Derrod
-Hannah Sunday
-Julia Ulrich
-Katherine DeRuff
-Kendyl Johnson
-Manuela Herrera
-Marta Considine
-Martine McCarthy
-Regina Younger
-Sarah Mooney
-Shyla Lintz
-Tegan Stanbach
-Arianne Evans
-Gigi Rojahn
-Hayley Pogue
-Katie Jo Nedrow
-Matylda Zaklicki
-Nina Benson
-Savannah Weaver
-Ally Furano
-Kali Hyham
-Marcela Herrera
-Molly Teresi
-Tatym Racz
-Georgia Lewis
-Larissa Hodzic
-Paige Furano
-Rachel Craig
-Abbie Coscia
-Anna Bautista
-Bella Moynihan
-Celia Foster
-Chloe Smith
-Megan LaCroix
-Sam Gove
-Sheila Tomlin
-Bettina Tapiero
-Emma Molaski
-Isabelle Monaghan
-Kirstin Hayduchok
-Olivia Dey
-Ali Jackson
-Annika Lampen
-Boati Motau
-Caroline Oates
-Flora Beleznay
-Izzy Lippolis
-Sidney Finkler
-Aliyah Cohen
-Anna Plante
-Bella Schraa
-Gwen Kallmeyer
-Malli Challa
-Amy Pischke
-Caitlin Stott
-Campbell Collins
-Lehua Bender
-Regan Coon
-Tamara Torkos
-Ashley Hopper
-Ava Bayne
-Hayden Hedstrom
-Olivia Hopper
-Rhys Beutler
-Addison Wedding
-Britta Coultas
-Brooke Temkin
-Caroline Brown
-Damla Mogultay
-Iris Hiskey
-Kenzi Shaw
-Lin Naraoka
-Olivia Garcia
-Rosemary Schmidt
-Amanda Jones
-Avery Karich
-Bailey Likewise
-Bailey Meyer
-Cindy Delic
-Darby Schuett
-Erin Cunefare
-Gina Merry
-Jacie Fukada
-KC Brendel
-Kayla Wagenhofer
-Kristi McGee
-Lauren Shackenfiord
-Logan Young
-Maddie Campbell
-Maggie Kurzeka
-Mardell Ramierez
-Megan Seeman
-Morgan Towner
-Nicole Guerriero
-Nicole Roed
-Sam Wulfestieg
-Tatiana McCuaig
-Carissa Carlos
-Christin Hirn
-Gaby Renteria
-Jayci Burrell
-Mackenzie Thomas
-Madelynn Silvis
-Remy Wilkison
-Taylor Martinez
-Victoria Rose Meek
-Bella Vares
-Claire Justman
-Jay Clerou
-Mardell Ramirez
-Miara Pipe
-Nikki Roed
-Bri Bulkeley
-Jamie Sanders
-Jessica Diaz
-Kaitlin Gardhouse
-Kaitlin Garrett
-Kaitlin Moreno
-Lexi Rond
-Rachel Ray
-Susanna Zdolsek
-Taylor Campbell
-Bethany Metcalfe
-Elyse Koe
-Hayley Smith
-Isabella Garcia
-Kemi Dijkstra
-Kim Reidel
-Maddie Stuart
-Taryn Sato
-Abby Lanier
-Aryana Johnson
-Izzy de Souza
-Jacsen Donohue
-Katherine Knight
-Alexa Modry
-Camryn O'Neal
-Jess Diaz
-Madeline Raab
-Tamara Verdiell
-Vianne Will
-Jacqueline Brandon
-Katie Knight
-Lauren Lohmeier
-Leila Egusa
-Megan Findlay
-Paige Woodside
-Reyna Clark
-Tori Portillo
-Emma Rich-Tran
-Gianna Garcia
-Hilda Arellano
-Hudson Geier
-Malia Mabe
-Miranda Miller
-Sophie Raquel
-Waileia Lee
-Chloe Gardhouse
-Claire Daland
-Clarisa Robles
-Emily Atchison
-Natalie Favazzo
-Shayle Barrus
-Aleaha Gonzalez
-Franki Court
-Gabby Gillott
-Jocelyn Cruz
-Kelsee Espitia
-Olivia Hurley
-Americul Mendoza
-Brittney Pino
-Delaney Wilder
-Emily Midgley
-Gabrielle Zaretskiy
-Haden Skye Bates
-Hannah Wilson
+Savannah Rapp	18
+Ava Gatewood	16
+Berlynn Mani	15
+Ennovi Dominguez	7
+Fernanda Luna	1
+Kajsa Brown	8
+Karly Lepel	22
+Natalee Winberg	1
+Sofia Lazzarini Orlandi	14
+Yalissa Tellez	24
+Allison Woo	18
+Anne Warner	10, 27
+Audrey Flower	15
+Carmen Rosas	5
+Catherine Roach	24
+Elizabeth Bolton	13
+Ellyn Vitek	23
+Emily Adams	1
+Emma Dodd	3
+Hailey Jacobson	26, 24
+Hannah Koper	4
+Imani Herring	1
+Jessica Heilman	7
+Jourdan Meltzer	16
+Korbyn Simpson	20, 25
+Lucia Adami	14
+Mai Ly	11
+Maigrie McDougal	9
+Marisa Kolokotronis	6
+Marisol Dakan	1
+McKenna Miller	17
+Montana Fowler	19
+Olivia Katcher	25, 22
+Olivia Santiago	2
+Reia Tong	21
+Sahana Nazeer	1
+Shannon Crowley	8
+Tiffany Zhao	22, 21
+Victoria Pierotti	12
+Ally Donahue	11
+Hannah Eliot	3
+Jamie Smith	12
+Lauren Burns	1
+Lexi Atwell	13
+Sarah Welch	10, 16, 20
+Alli Schaum	8
+Carissa Perez	14
+Han Nguyen	20
+Ingrid Hernandez	23
+Julia Armitage	19
+Kaitlyn Cook	2
+Lily Keck	10
+Riley Hughes	4
+Charlotte Rosenberg	24
+Dagmara Czajka	6
+Isabel Riches	11
+Katie Klein	7
+Lili Akin	16
+Marley Presiado	1
+Moe O'Malley	23
+Morgan Rooney	22, 17
+Bryn Gioffredi	15, 13
+Claire Pisani	18, 9
+Katie Dvonch	9
+Lily Weiser	3
+Linnea Kelly	5
+Nina Hastings	24, 12, 8
+Zoe King	11
+Bella Godlis	19, 15
+Maya Fleischer	22, 2
+Shauna Franke	1
+Sierra Martin	20, 14
+Sophie Golub	15, 4
+Alessandra D'Arcy	21, 15, 12
+Audrey Gallagher	1
+Brenna Pangelinan	12
+Claire Poissonnier	5
+Emily Suong	24, 8
+Katharine Knowles	17, 7
+Lucy Gramley	22, 6
+Malia Honda	25, 10
+Siena Berry	20
+Tallulah Clancy	16, 9
+Alexandra Love	21, 15
+Ashley Penner	23
+Claire Eusey	19
+Ella Palmer	22, 10
+Hana Homma	26, 11, 4
+Madeleine Poissonnier	24, 2
+Marina Demas	27
+Roxanne Hazuka	1
+Sabrina Shipley	25, 6
+Aubrie Anderson	17, 8
+Cleo Washer	16, 3, 7
+Ellen Norell	22, 14, 5
+Gaby Montalvo	19, 18, 9
+Hanna Tidrenczel	13
+Malia Chavinson	24
+Margot Gibbons	23
+Sarah Decker	1
+Ava Schoening	16, 12
+Emmy Hensley	17, 3
+Julia Sansing	25
+Samantha Kim	21
+Skye Andros	19, 20
+Sofia Holman	22
+Somto Okafo	1
+Audrey Long	16
+Megan Newby	14
+Sofia Flierl	11
+Chelsea Scuderi	9
+Colleen Barron	11
+Eleanor Marrs	16
+Eliza Romeyn	8
+Emily Konishi	10
+Haley Derrod	1
+Hannah Sunday	12
+Julia Ulrich	2
+Katherine DeRuff	13
+Kendyl Johnson	7
+Manuela Herrera	1
+Marta Considine	17
+Martine McCarthy	14
+Regina Younger	19, 13
+Sarah Mooney	5
+Shyla Lintz	4
+Tegan Stanbach	3
+Arianne Evans	6
+Gigi Rojahn	21
+Hayley Pogue	1
+Katie Jo Nedrow	12
+Matylda Zaklicki	15
+Nina Benson	16
+Savannah Weaver	18
+Ally Furano	6
+Kali Hyham	22
+Marcela Herrera	2
+Molly Teresi	3
+Tatym Racz	7
+Georgia Lewis	1
+Larissa Hodzic	5
+Paige Furano	4
+Rachel Craig	11
+Abbie Coscia	3
+Anna Bautista	8
+Bella Moynihan	9
+Celia Foster	15
+Chloe Smith	7
+Megan LaCroix	11, 15
+Sam Gove	13
+Sheila Tomlin	10
+Bettina Tapiero	12
+Emma Molaski	21
+Isabelle Monaghan	20
+Kirstin Hayduchok	18
+Olivia Dey	14
+Ali Jackson	3
+Annika Lampen	1
+Boati Motau	8, 4
+Caroline Oates	6
+Flora Beleznay	2
+Izzy Lippolis	17
+Sidney Finkler	22
+Aliyah Cohen	3
+Anna Plante	10
+Bella Schraa	6
+Gwen Kallmeyer	5
+Malli Challa	8
+Amy Pischke	19
+Caitlin Stott	7
+Campbell Collins	2
+Lehua Bender	13
+Regan Coon	11
+Tamara Torkos	1
+Ashley Hopper	15
+Ava Bayne	14
+Hayden Hedstrom	18
+Olivia Hopper	3
+Rhys Beutler	9
+Addison Wedding	4
+Britta Coultas	16
+Brooke Temkin	23
+Caroline Brown	12
+Damla Mogultay	21
+Iris Hiskey	20
+Kenzi Shaw	25
+Lin Naraoka	22
+Olivia Garcia	19
+Rosemary Schmidt	17
+Amanda Jones	12
+Avery Karich	24, 14
+Bailey Likewise	16
+Bailey Meyer	1
+Cindy Delic	11
+Darby Schuett	19
+Erin Cunefare	18
+Gina Merry	1
+Jacie Fukada	21
+KC Brendel	6
+Kayla Wagenhofer	14
+Kristi McGee	23, 4
+Lauren Shackenfiord	2
+Logan Young	5
+Maddie Campbell	13
+Maggie Kurzeka	4
+Mardell Ramierez	8
+Megan Seeman	10
+Morgan Towner	20
+Nicole Guerriero	22, 2
+Nicole Roed	7
+Sam Wulfestieg	3
+Tatiana McCuaig	15
+Carissa Carlos	16
+Christin Hirn	12
+Gaby Renteria	1
+Jayci Burrell	19
+Mackenzie Thomas	9
+Madelynn Silvis	21, 20
+Remy Wilkison	17
+Taylor Martinez	20, 13
+Victoria Rose Meek	15, 5
+Bella Vares	6
+Claire Justman	15
+Jay Clerou	11, 19, 8
+Mardell Ramirez	8
+Miara Pipe	1
+Nikki Roed	7
+Bri Bulkeley	16, 4
+Jamie Sanders	11
+Jessica Diaz	13
+Kaitlin Gardhouse	3
+Kaitlin Garrett	18
+Kaitlin Moreno	1
+Lexi Rond	4, 7, 20
+Rachel Ray	17, 19
+Susanna Zdolsek	6
+Taylor Campbell	20
+Bethany Metcalfe	16, 10
+Elyse Koe	6
+Hayley Smith	14
+Isabella Garcia	17
+Kemi Dijkstra	10, 5
+Kim Reidel	2
+Maddie Stuart	15
+Taryn Sato	1A, 11, 18
+Abby Lanier	16
+Aryana Johnson	12
+Izzy de Souza	1
+Jacsen Donohue	2
+Katherine Knight	4
+Alexa Modry	9
+Camryn O'Neal	1
+Jess Diaz	13
+Madeline Raab	8
+Tamara Verdiell	7
+Vianne Will	1
+Jacqueline Brandon	22, 2
+Katie Knight	4
+Lauren Lohmeier	11
+Leila Egusa	14, 5
+Megan Findlay	12
+Paige Woodside	13
+Reyna Clark	7
+Tori Portillo	20
+Emma Rich-Tran	13
+Gianna Garcia	19, 6
+Hilda Arellano	6
+Hudson Geier	8
+Malia Mabe	18
+Miranda Miller	3
+Sophie Raquel	1B, 1A
+Waileia Lee	9
+Chloe Gardhouse	14
+Claire Daland	5
+Clarisa Robles	16
+Emily Atchison	15
+Natalie Favazzo	22
+Shayle Barrus	1B
+Aleaha Gonzalez	10
+Franki Court	21
+Gabby Gillott	6
+Jocelyn Cruz	13
+Kelsee Espitia	4
+Olivia Hurley	5
+Americul Mendoza	17
+Brittney Pino	13
+Delaney Wilder	16
+Emily Midgley	19
+Gabrielle Zaretskiy	4
+Haden Skye Bates	1
+Hannah Wilson	12
 Jacqueline Naito
-Kieran Scout Bates
-Kylie Corwin
-Madelyn Halva
-Mia Solorzano
-Mikka Von Scherr
+Kieran Scout Bates	11
+Kylie Corwin	8
+Madelyn Halva	2
+Mia Solorzano	9
+Mikka Von Scherr	14
 Minami Creamer
-Stephanie Hidalgo
-Vicharadani Minott
-Annabelle Sherman
-Destiny Hernandez
-Eden Tal
-Faith Cuevas
-Grace Summers
-Lacey Hall
-Neida Torres
-Shyanne Rainey
-Sophia Martinez
-Sydney Brouwer
-Taylor Mason
-Abby Lockman
-Alexandra Ortiz
-Ava Lisitza
-Delaney Latham
-Elise Bliss
-Emme Doube-MacLeod
-Hannah Reekstin
-Ileina Hatori
-Isabella Schulze
-Jade Lonzo
-Kendal Santos
-Mia Hatch
-Sienna Bertsch
-Taylor Hendricks
-Tess Henke
-Chandler Burrell
-Isabella Walker
-Kenzie Searle
-Lotte Boxsem
-Renske Boxsem
-Sofia Moschetti
-Adrianna Craft
-Amanda Kitchen
-Cami Kellogg
-Dinah Aiad
-Jen Goforth
-Kat Lloyd
-Katrina Conen
-Kylie Wheelock
-Macy Buhl
-Madi Palmer
-Maegan Murphy
-Maggie Albers
-Marisa Lovos
-Morgan Tucker
-Morgen Fain
-Olivia Woolery
+Stephanie Hidalgo	21
+Vicharadani Minott	22
+Annabelle Sherman	1A, 1
+Destiny Hernandez	3
+Eden Tal	10
+Faith Cuevas	5
+Grace Summers	23
+Lacey Hall	18
+Neida Torres	24, 7
+Shyanne Rainey	7
+Sophia Martinez	20
+Sydney Brouwer	15
+Taylor Mason	6
+Abby Lockman	15
+Alexandra Ortiz	1A, 1
+Ava Lisitza	17
+Delaney Latham	5
+Elise Bliss	2
+Emme Doube-MacLeod	13
+Hannah Reekstin	26, 17
+Ileina Hatori	25
+Isabella Schulze	20
+Jade Lonzo	11
+Kendal Santos	8
+Mia Hatch	16, 6
+Sienna Bertsch	1B
+Taylor Hendricks	24
+Tess Henke	19
+Chandler Burrell	12
+Isabella Walker	1B
+Kenzie Searle	10
+Lotte Boxsem	19
+Renske Boxsem	1A
+Sofia Moschetti	23
+Adrianna Craft	20
+Amanda Kitchen	7
+Cami Kellogg	5
+Dinah Aiad	6, 5
+Jen Goforth	18
+Kat Lloyd	1
+Katrina Conen	3
+Kylie Wheelock	13
+Macy Buhl	1A
+Madi Palmer	16
+Maegan Murphy	4
+Maggie Albers	15
+Marisa Lovos	12
+Morgan Tucker	10, 15
+Morgen Fain	11, 1
+Olivia Woolery	14, 21
 RS Olivia Boisen
-Tatiana Veloso
-Angela Steele
-Celeste Bustos
-Hailey Hubbard
-Hailey Meyers
-Hayden Barron
-Jessi Boyd-Mankin
-Laurel Doyle
-Lisa Broccolo
-Lucy Gates
-Megan Dahlson
-Olivia Boisen
-Samantha Hernandez
-Sarah Smith
-Gabrielle Dana
-Gwynne McBride
-Madison Nolen
-Nicole Lyckfors
+Tatiana Veloso	8
+Angela Steele	2
+Celeste Bustos	11
+Hailey Hubbard	4
+Hailey Meyers	14, 1b
+Hayden Barron	7
+Jessi Boyd-Mankin	19
+Laurel Doyle	1A
+Lisa Broccolo	10
+Lucy Gates	9, 8
+Megan Dahlson	18
+Olivia Boisen	3
+Samantha Hernandez	6
+Sarah Smith	17, 7
+Gabrielle Dana	5, 10
+Gwynne McBride	4
+Madison Nolen	9
+Nicole Lyckfors	10
 RS Dominique Oteri
 RS Jessi Boyd-Mankin
 RS Madeline Camargo
 RS Morgen Fain
-Reagan Hart
-Shelby Stephens
-Hannah Kharazi
-Kaitlin Rooney
-Kaya Ortega
-Olivia Centis
-Whitney Dore
-Abby Keegan
-Amanda Bennett
-Catalina Gillis
-Cecile Judy
-Daniella Spina
-Ella Denny
-Grace Frias
-Hailey Alexander
-Hope Lovich
-Torie White
-Zoe Grammer
-Abigail Summers
-Allyson Ainsworth
-Asya Cardenas
-Cali Havens
-Christine Koenig
-Emma Silveria
-Grace Hamilton
-Laura Heberle
-Lauren Tang
-Meg Gostanian
-Megan Taylor
-Paige Labayog
-Shelby Fortune
-Zoe Reid
-Autumn Day
-Gabri Vincze
-Grace Mensing
-Kaya Eaton
-Mia Sanders
-Shea Tully
-Ximena Pichon
-Abby Delport
-Annika Harper
-Becca Bijold
-Brenna Kenney
-Gabby Swaim
-Katie Rudis
-Katie Vaupel
-Shelby Pfister
-Stella Martin
-Abby Allan
-Alex Harris
-Ani McKay
-Emma Sosa
-Jerzie Jaurigue-Mora
-Kendra Weaver
-Kira Clark
-Lilly Weires
-Marissa White
-Natalie Mancinelli
-Catt Jenkins
-Izzy Headley
-Jenna Martin
-Nalani Galindo
-Olivia Gutierrez
+Reagan Hart	20, 6
+Shelby Stephens	1
+Hannah Kharazi	11
+Kaitlin Rooney	5
+Kaya Ortega	20
+Olivia Centis	8
+Whitney Dore	16
+Abby Keegan	10
+Amanda Bennett	17, 7
+Catalina Gillis	18, 2
+Cecile Judy	3
+Daniella Spina	15
+Ella Denny	21
+Grace Frias	19
+Hailey Alexander	11, 5
+Hope Lovich	1A
+Torie White	12
+Zoe Grammer	1
+Abigail Summers	14, 2
+Allyson Ainsworth	18, 5
+Asya Cardenas	1a
+Cali Havens	9, 6
+Christine Koenig	4
+Emma Silveria	17
+Grace Hamilton	21
+Laura Heberle	6
+Lauren Tang	13
+Meg Gostanian	19, 4, 6
+Megan Taylor	1
+Paige Labayog	16
+Shelby Fortune	15
+Zoe Reid	12
+Autumn Day	10
+Gabri Vincze	17
+Grace Mensing	1a, 1
+Kaya Eaton	20
+Mia Sanders	1b
+Shea Tully	9
+Ximena Pichon	14, 10
+Abby Delport	3
+Annika Harper	12
+Becca Bijold	11
+Brenna Kenney	8
+Gabby Swaim	18
+Katie Rudis	21
+Katie Vaupel	6
+Shelby Pfister	17
+Stella Martin	4
+Abby Allan	15
+Alex Harris	19, 5
+Ani McKay	1B
+Emma Sosa	16
+Jerzie Jaurigue-Mora	22
+Kendra Weaver	1A
+Kira Clark	7
+Lilly Weires	13
+Marissa White	1
+Natalie Mancinelli	2
+Catt Jenkins	14
+Izzy Headley	13
+Jenna Martin	1b
+Nalani Galindo	6
+Olivia Gutierrez	19
 RS Gabby Swaim
-Riley Becker
-Alexis Elias
-Amy Yule
-Carly Wickman
-Emily Fuller
-Jade Arner
-Katelyn Fairchild
-Lauren Rothermel
-Lindsey Garcia
-Madeleine Sanchez
-Marissa Petras
-McKenzie Pollei
-Miranda Coleman
-Natalie Averell
-Natalie McCann
-Niki Van Vugt
-Paula Abellan Garcia
-Shannon Hovanesian
-Taitum Herrington
-Taryn Kamimoto
-Ashlee Sellung
-Jennalyn Barthels
-Katia Andon-Mateos
-Madasonne Butler
-Marylynn Cuozzo
-Nathalie Brewster
-Vivian Talmage
-Brianna Coury
-Charissa Dorn
-Daci Hughes
-Elyse Koe
-Emily Hernandez
-Emma Franck
-Emma Pfister
-McKenzie Beardsley
-Rachael Fusco
-Sara Dempsey
-Skylar Newhouser
-Yuri Cowie
-Alessia Marquez
-Dafne Garcia
-Kylee Jansen
-Tori Wilson
-Carly Bockstahler
-Helena Sandhagen
-Kaitlyn Moguel
-Lacey Hall
-Meghan Lopez
-Piper McCulloch
-Anna Pal
-Dorottya Telek
-Nicole Thomas
-Tatiana Smeltzer
-Tatum Scarry
-Valeria Martinez
-Alexis Smith
-Jessica Matkovich
-Kate Cornejo
-Kelsey Meyers
-Madison Little
-Nicole Bacoyanis
-Shelby Hovanesian
-Beata Hitterer
-Erica Neri
-Jenna Olson
-Leah Huisar
-Maria Sandoghdar
-Jade Cuevas
-Kiana Kellner
-Kianna Melvin
-Samantha Bright
-Abigel Kiss
-Erika Staine
-Lucie Lapuz
-Mackenzie Wood
-Marin Byars
-Sofia Martinez
-Ashley Strickland
-Claire Summers
-Dakota Bumbaca
-Ella Furuholmen
-Marjorie Krueger
-Mira Dravucz
-Raygan Carroll
-Sophia Cooper
-Brooke Vowell
-Carla Carrega
-Emily Loughlin
-Genevieve Weed
-Grace Morgan
-Hilary Adkins
-Hunter Winslow
-Jasmine Yaghutiel
-Kacey Avalos
-Kathleen Menz
-Kindred Paul
-Lauren Charter
-Lolo Silver
-Madeline Trabucco
-Madison Tagg
-Molly Quinn
-Pippa Saunders
-Rachael Lewin
-Sarah Siepker
-Sierra Smiley
-Sofia Rivas
-Stephanie Mutafyan
-Anna Illes
-Catie Wallace
-Claire McDowell
-Daily Hartmeier
-Dora Antal
-Emma Wright
-Hannah DeRose
-Jackie Sanders
-Kristina Garcia
-Lauren Barrett
-MacKenzie Davey
-Mia Salvini
-Roser Tarrago
-Aubrey Milham
-Brigit Mulder
-Cassidy Ball
-Claire Sonne
-Elli Protopapas
-Georgia Bogle
-Georgia Gilmore
+Riley Becker	8
+Alexis Elias	7
+Amy Yule	3
+Carly Wickman	14
+Emily Fuller	16
+Jade Arner	8, 12
+Katelyn Fairchild	5
+Lauren Rothermel	6, 8
+Lindsey Garcia	9, 11
+Madeleine Sanchez	21
+Marissa Petras	11
+McKenzie Pollei	13
+Miranda Coleman	4
+Natalie Averell	1
+Natalie McCann	10
+Niki Van Vugt	1
+Paula Abellan Garcia	2
+Shannon Hovanesian	15
+Taitum Herrington	18
+Taryn Kamimoto	12
+Ashlee Sellung	9
+Jennalyn Barthels	10, 2
+Katia Andon-Mateos	6
+Madasonne Butler	18
+Marylynn Cuozzo	17, 8
+Nathalie Brewster	1
+Vivian Talmage	20
+Brianna Coury	27, 3
+Charissa Dorn	12
+Daci Hughes	19
+Elyse Koe	17
+Emily Hernandez	24, 10
+Emma Franck	7
+Emma Pfister	1
+McKenzie Beardsley	16
+Rachael Fusco	22, 8
+Sara Dempsey	4, 5
+Skylar Newhouser	13
+Yuri Cowie	23, 15
+Alessia Marquez	21
+Dafne Garcia	4
+Kylee Jansen	22
+Tori Wilson	14
+Carly Bockstahler	8
+Helena Sandhagen	11
+Kaitlyn Moguel	10
+Lacey Hall	12, 7
+Meghan Lopez	1
+Piper McCulloch	1
+Anna Pal	16
+Dorottya Telek	15
+Nicole Thomas	14
+Tatiana Smeltzer	6
+Tatum Scarry	12
+Valeria Martinez	13
+Alexis Smith	9
+Jessica Matkovich	3
+Kate Cornejo	5
+Kelsey Meyers	20
+Madison Little	4
+Nicole Bacoyanis	2
+Shelby Hovanesian	17
+Beata Hitterer	10
+Erica Neri	1
+Jenna Olson	4
+Leah Huisar	22
+Maria Sandoghdar	18
+Jade Cuevas	8
+Kiana Kellner	1
+Kianna Melvin	7
+Samantha Bright	1
+Abigel Kiss	4, 12
+Erika Staine	1
+Lucie Lapuz	10
+Mackenzie Wood	17
+Marin Byars	1
+Sofia Martinez	14, 13
+Ashley Strickland	11
+Claire Summers	20
+Dakota Bumbaca	14
+Ella Furuholmen	6
+Marjorie Krueger	3
+Mira Dravucz	2
+Raygan Carroll	5
+Sophia Cooper	4
+Brooke Vowell	21
+Carla Carrega	6
+Emily Loughlin	7
+Genevieve Weed	8, 2
+Grace Morgan	15, 12, 5, 8
+Hilary Adkins	12
+Hunter Winslow	19
+Jasmine Yaghutiel	20
+Kacey Avalos	3, 11
+Kathleen Menz	1
+Kindred Paul	9
+Lauren Charter	14
+Lolo Silver	1
+Madeline Trabucco	1
+Madison Tagg	1
+Molly Quinn	2
+Pippa Saunders	11
+Rachael Lewin	16
+Sarah Siepker	4
+Sierra Smiley	18
+Sofia Rivas	10
+Stephanie Mutafyan	5
+Anna Illes	8
+Catie Wallace	26, 24, 12
+Claire McDowell	1
+Daily Hartmeier	1
+Dora Antal	3
+Emma Wright	21
+Hannah DeRose	20
+Jackie Sanders	18, 12, 6, 4
+Kristina Garcia	17, 7
+Lauren Barrett	27
+MacKenzie Davey	22
+Mia Salvini	15, 2
+Roser Tarrago	25
+Aubrey Milham	11
+Brigit Mulder	23, 2
+Cassidy Ball	1
+Claire Sonne	18, 3
+Elli Protopapas	15, 5
+Georgia Bogle	25
+Georgia Gilmore	17, 6, 7
 Kelly Doherty
-Kitty Lynn Joustra
-Carla Traplin
-Carson Broad
-Cynthia Mulder
-Grace Raisin
-Alyssa Barnuevo
-Caitlin Mary Parker Allen
-Cam Greer
-Cecily Turner
-Eva Browning
-Helena Batey
-Isabel Williams
-Ruby Swadling
-Shea Salvino
-Sophie Leggett
-Sydney Hammill
-Caroline Christl
-Juliette Zamoyski
-Maddie DeMattia
-Mallory Reynoso
-Mara Loughlin
-Maryn Dempsey
-Megan Musick
-Reagan Whitney
-Alex Higginson
-Avrey Larson
-Claire Rowell
-Emma Singer
-Gracelyn Hurst
-Janna Tauscher
-Jessie Rose
-Rozanne Voorvelt
-Sofia Hamner
-Abbi Magee
-Ashley Cortessis
-Lindsey Harris
-Michelle Croteau
-Millie Quin
-Nieve Courtney
-Elaia Hamilton
-Elena Flynn
-Feline Voordouw
-Julia Bonaguidi
-Julianne Snyder
-Kate Meyer
-Mackenzie Walker
-Talia Fonseca
-Abby Roder
-Emily Ramirez
-Eszter Varró
-Holly Dunn
-Leah Murphy
-Maria Bogachenko
-Rosalie Hassett
-Despoina Drakotou
-Gabby Reichley
-Harper Price
-Lexi Nelson
-Marina Brown
-Reece Helsel
-Abi Auer
-Allie Coleman
-Amy Bideshi
-Annie Eubanks
-Brittany McWaid
-Caroline Howard
-Courtney Menard
-Emily Cardona
-Hannah Evans
-Jessica Castellano
-Jocelyn Schwegler
-Kaitlyn Persky
-Laura Kocsis
-Lina Medeiros
-Lizette Perez
-Madison Gonzales
-Marnie Kavern
-Meghan Rowland
-Paizlee Dreyer
-Pua Wong
-Samantha Banks
-Valerie Spezzaferri
-Chase Kelly
-Grace Ramirez
-Jaclyn Myers
-Katie Quon
-Maddie Meza
-Megan Rocha
-Taralyn De Leeuw
-Amy Branch
-Catie Kaliszewski
-Katie Fugit
-Kira O'Donell
-Krista Krantz
-Kyra Foley
-Madison East
-Megan Henry
-Morgan Baker
-Vicky Martinez
-Victoria Reardon
-Amelia Portin
-Jamie Hutton
-Kinga Wisniewska
-Lahela Rosario
-Maddie Schwegler
-Madison Gerg
-Abby Mammen
-Alyssa Bencomo
-Anielysa Mena
-Aubrey Carter
-Caelan Loroff
-Daly Cheek
-Elisabeth Cruz
-Gabrielle Aguilar
-Madi Crookston
-Melinna Galbraith
-Nicole Rhoads
-Nikkol Webber
-Taylor Frandsen
-Celeste Almendariz
-Dora Lehoczky
-Holly Fedyck
-Jenna Dickstein
-Julia Miller
-Melissa Quon
-Ava Ratajczak
-Avery Wood
-Cayleigh Carter
-Grace Bergquist
-Jadyn Hepler
-Rayne Lopez
-Aubrey Newton
-Brooklyn Young
-Devyn Ruffer
-Emaly Hutton
-Erin Engebretson
-Hailee Morales
-Kayla Demski
-Mary King
-Morgan Gates
-Tyanna Schneider
-Adrianna Wong
-Amber Nielsen
-Amelia Urry
-Anna Kreowski
-Chloe Morgan
-Delilah Moreno
-Emily Lopez
-Julia Almendariz
-Kyra Kahahawai
-Madison Haworth
-Marissa Brock
-Niya Bumbaca
-Reese Beringer
-Savannah Punak
-Aleksandra Antanasijevic
-Annaleese Reed
-Bailey Rosa
-Briana Livingston
-Georgia Eccles
-Jessica Jang
-Kathryn Nungester
-Kyla Cutler
-Morgan Vice
-Bella Raynes
-Charlotte Winters
-Emmie Ramirez
-Ivana Malenkovic
-Kendall Donahue
-Riley Milne
-Alexandra Ilic
-Brittany Percin
-Cameron Earl
-Ciara Ordner
-Devi Ganapathi
-Elise Cutts
-Gemma Takahashi
-Hana Keller
-Katie Johnston
-Mary Boyajian
-Sasha Zemsky
-Soumya Kannan
-Stephanie Wong
-Mackenzie Wooten
-Sam D'Costa
-Sarah Kreider
-Elaine Lowinger
-Gabriella Chan
-Olivia Durrett
-Samantha D'Costa
-Isabella Dula
-Michelle Zhao
-Sophie Devoe
-Sunny Cui
-Yuying Lin
-Zoe Rock
-Amanda Piyapanee
-Olivia Grobowsky
-Polina Verkhovodova
-Sarah Zou
-Emma Gurcan
+Kitty Lynn Joustra	19, 9
+Carla Traplin	19
+Carson Broad	15, 8
+Cynthia Mulder	23
+Grace Raisin	18, 16, 6
+Alyssa Barnuevo	1
+Caitlin Mary Parker Allen	22
+Cam Greer	9
+Cecily Turner	14, 4
+Eva Browning	24
+Helena Batey	11
+Isabel Williams	1
+Ruby Swadling	18, 7
+Shea Salvino	10
+Sophie Leggett	17
+Sydney Hammill	15
+Caroline Christl	16
+Juliette Zamoyski	17
+Maddie DeMattia	19, 9
+Mallory Reynoso	12, 3
+Mara Loughlin	14, 6
+Maryn Dempsey	20, 2
+Megan Musick	24, 8
+Reagan Whitney	22
+Alex Higginson	17
+Avrey Larson	1
+Claire Rowell	26, 5
+Emma Singer	12
+Gracelyn Hurst	28
+Janna Tauscher	27, 14, 11
+Jessie Rose	20
+Rozanne Voorvelt	25, 12
+Sofia Hamner	1
+Abbi Magee	21
+Ashley Cortessis	25, 15
+Lindsey Harris	18
+Michelle Croteau	1
+Millie Quin	19
+Nieve Courtney	16, 4
+Elaia Hamilton	1
+Elena Flynn	10
+Feline Voordouw	16, 6
+Julia Bonaguidi	7, 3
+Julianne Snyder	14, 2
+Kate Meyer	17, 8
+Mackenzie Walker	23, 14
+Talia Fonseca	1
+Abby Roder	16
+Emily Ramirez	24
+Eszter Varró	9
+Holly Dunn	15, 12
+Leah Murphy	23
+Maria Bogachenko	22
+Rosalie Hassett	17, 7
+Despoina Drakotou	11
+Gabby Reichley	10
+Harper Price	24
+Lexi Nelson	1
+Marina Brown	15
+Reece Helsel	19
+Abi Auer	18, 4
+Allie Coleman	11
+Amy Bideshi	17
+Annie Eubanks	7, 8
+Brittany McWaid	22, 12
+Caroline Howard	21
+Courtney Menard	12
+Emily Cardona	19
+Hannah Evans	5
+Jessica Castellano	13
+Jocelyn Schwegler	20
+Kaitlyn Persky	6
+Laura Kocsis	10
+Lina Medeiros	1
+Lizette Perez	16, 3
+Madison Gonzales	3, 9
+Marnie Kavern	4
+Meghan Rowland	1
+Paizlee Dreyer	2
+Pua Wong	15, 5
+Samantha Banks	9
+Valerie Spezzaferri	8
+Chase Kelly	15
+Grace Ramirez	1
+Jaclyn Myers	10
+Katie Quon	16
+Maddie Meza	6
+Megan Rocha	1
+Taralyn De Leeuw	21
+Amy Branch	12, 10
+Catie Kaliszewski	7
+Katie Fugit	2
+Kira O'Donell	14
+Krista Krantz	4
+Kyra Foley	1
+Madison East	8
+Megan Henry	18
+Morgan Baker	19, 11
+Vicky Martinez	13
+Victoria Reardon	1
+Amelia Portin	22
+Jamie Hutton	15, 5
+Kinga Wisniewska	19, 9
+Lahela Rosario	20, 25, 21, 18
+Maddie Schwegler	12, 3
+Madison Gerg	1
+Abby Mammen	24, 10
+Alyssa Bencomo	20
+Anielysa Mena	27, 4
+Aubrey Carter	28
+Caelan Loroff	12
+Daly Cheek	23, 20
+Elisabeth Cruz	19, 7
+Gabrielle Aguilar	22
+Madi Crookston	1
+Melinna Galbraith	26, 6
+Nicole Rhoads	15
+Nikkol Webber	7
+Taylor Frandsen	29, 16, 12
+Celeste Almendariz	29, 19, 4
+Dora Lehoczky	23, 18, 9
+Holly Fedyck	26
+Jenna Dickstein	30, 20, 3
+Julia Miller	1
+Melissa Quon	31, 17, 11
+Ava Ratajczak	1
+Avery Wood	26, 16
+Cayleigh Carter	2
+Grace Bergquist	21, 14, 12
+Jadyn Hepler	7
+Rayne Lopez	24, 9
+Aubrey Newton	17, 10
+Brooklyn Young	24
+Devyn Ruffer	22, 3
+Emaly Hutton	15, 5
+Erin Engebretson	21, 8
+Hailee Morales	24
+Kayla Demski	1
+Mary King	13
+Morgan Gates	23, 6
+Tyanna Schneider	1
+Adrianna Wong	20
+Amber Nielsen	21, 11
+Amelia Urry	1
+Anna Kreowski	19
+Chloe Morgan	23, 14
+Delilah Moreno	17, 15
+Emily Lopez	14, 8
+Julia Almendariz	16, 8
+Kyra Kahahawai	15
+Madison Haworth	18, 12
+Marissa Brock	26
+Niya Bumbaca	25, 2
+Reese Beringer	13
+Savannah Punak	1
+Aleksandra Antanasijevic	1
+Annaleese Reed	28
+Bailey Rosa	26, 16
+Briana Livingston	23, 4
+Georgia Eccles	21, 5
+Jessica Jang	22, 14
+Kathryn Nungester	19
+Kyla Cutler	24, 11
+Morgan Vice	27, 7
+Bella Raynes	20
+Charlotte Winters	1
+Emmie Ramirez	18
+Ivana Malenkovic	21
+Kendall Donahue	1
+Riley Milne	9
+Alexandra Ilic	8
+Brittany Percin	9
+Cameron Earl	7
+Ciara Ordner	14
+Devi Ganapathi	5
+Elise Cutts	1
+Gemma Takahashi	11
+Hana Keller	12, 17
+Katie Johnston	3, 16
+Mary Boyajian	16
+Sasha Zemsky	10
+Soumya Kannan	4
+Stephanie Wong	13/1A
+Mackenzie Wooten	6, 7
+Sam D'Costa	8
+Sarah Kreider	1/2, 1
+Elaine Lowinger	1A
+Gabriella Chan	13
+Olivia Durrett	4, 10
+Samantha D'Costa	8
+Isabella Dula	6
+Michelle Zhao	2
+Sophie Devoe	14, 11
+Sunny Cui	5
+Yuying Lin	3
+Zoe Rock	1
+Amanda Piyapanee	9
+Olivia Grobowsky	16
+Polina Verkhovodova	4
+Sarah Zou	15
+Emma Gurcan	10
 Erin ODonnell
-Riley Tam
-Riya Shrivastava
-Tyler Fox
-Elizabeth Field
-Lana Lubecke
-Sophia Slora
-1A/12 Elizabeth Field
-Ava Barbano
-Madelyn Gilbert
-Mahi Ravi
-Maya Dickson
-Mia Mutadich
-Charlotte Zhang
-Emma Titus
-Maya Keys
-Aarohi Patel
-Cecilia Moxley
-Diya Kumar
-Medha Ravi
-Stephanie Wallen
-Yolotzin Subdias
-Kylin Elliott
-Lily Arjomand
-Maya Edelstein
-Trisha Sabadra
-Allie Boothe
-Amanda Boothe
-Anna Shirer
-Brittany Wallace
-Carly Strass
-Colleen Koepke
-Elyssa Hawkins
-Erin McCook
-Jane Eckles
-Jessica Graziano
-Jocelyne Sanchez
-Laura Larsen
-Mack Ryan
-Maddie Gronset
-Malea Fischer
-Morgan Levy
-Amy Blencowe
-Emma Jeronimus
-Heather Walker
-Lauren Patt
-Madi Anderson
-Maggie Hennigan
-Morgan Fingerson
-Arianna Dakuras
-Mae Van Beest
-Alyssa Schwarz
-Autumn Rajevich-Schwer
-Izzy Bertaud
-Kayli Sayatovic
-Maddi Marsh
-Meghan Fisher
-Sophie Flott
-Abby Smerz
-Mary Gargano-Price
-Megan Cales
-Nell Behr
-Alyssa Sayatovic
-Annika Hoglund
-Gabrielle Pavesich
-McKenna Sutterlin
-Savita Chandarana
-Taylor Woitesek
-Victoria Hodges
-Alexandra Mears
-Dakota Drew
-Dominika Myrda
-Evelyn Kajohn
-Gladys Contreras
-Katlynn LaGrone
-Sarah Lowery
-Sydney Logan
-Abigail Elliott
-Brenna Carstens
-Ella Ethen
-Ella Selman
-Emma Urbon-Newman
-Faith Harris
-Grace Steinberg
-Kaylin Machuca
-Kylie Hemming
-Morgan Donovan
-Morrigan Bushroe-Stumpf
-Piper Dooley
-Yamila Areizaga
-Abigail Karpluk
-Alexandra Venturi
-Emily Steingard
-Rachel Meilinger
-Rylee McGee
-Aubrey Korzyniewski
-Edie Hamilton
-Emily Hughes
-Kiera Crawley
-Kira Jacobsen
-Mak Werner
-Veronica Gut
-Xiomara Trejo
-Kamille Graham
-Malee Todd
-Sydney Barkley
-Alison Quincy
-Allison Galuszka
-Alyssa Welfringer
-Brooke Latner
-Deanna Farley
-Emiko Mizusawa
-Emily Fong
-Grace Schade
-Isabel Kinsolving
-Julia Furtado
-Kate Avery
-Kate Staskus
-Katie Dalgamouni
-Kerry Goodspeed
-Lindsey Campbell
-Mary Welton
+Riley Tam	7
+Riya Shrivastava	5
+Tyler Fox	8
+Elizabeth Field	12
+Lana Lubecke	4
+Sophia Slora	2, 1
+1A/12 Elizabeth Field	3/1A, 1A/12
+Ava Barbano	6
+Madelyn Gilbert	14
+Mahi Ravi	1A, 1
+Maya Dickson	13
+Mia Mutadich	2
+Charlotte Zhang	16, 8
+Emma Titus	9
+Maya Keys	7
+Aarohi Patel	11
+Cecilia Moxley	1A
+Diya Kumar	5
+Medha Ravi	6
+Stephanie Wallen	3
+Yolotzin Subdias	7
+Kylin Elliott	8
+Lily Arjomand	10
+Maya Edelstein	4
+Trisha Sabadra	12
+Allie Boothe	8
+Amanda Boothe	2
+Anna Shirer	1
+Brittany Wallace	21
+Carly Strass	3
+Colleen Koepke	7
+Elyssa Hawkins	4
+Erin McCook	6
+Jane Eckles	13
+Jessica Graziano	14
+Jocelyne Sanchez	12
+Laura Larsen	11
+Mack Ryan	10
+Maddie Gronset	9
+Malea Fischer	5
+Morgan Levy	15
+Amy Blencowe	7
+Emma Jeronimus	1
+Heather Walker	16, 5
+Lauren Patt	2
+Madi Anderson	18
+Maggie Hennigan	6
+Morgan Fingerson	17, 11, 14
+Arianna Dakuras	9
+Mae Van Beest	7
+Alyssa Schwarz	2
+Autumn Rajevich-Schwer	6
+Izzy Bertaud	3
+Kayli Sayatovic	12
+Maddi Marsh	4
+Meghan Fisher	13
+Sophie Flott	8
+Abby Smerz	6
+Mary Gargano-Price	15
+Megan Cales	2
+Nell Behr	11
+Alyssa Sayatovic	2
+Annika Hoglund	10
+Gabrielle Pavesich	14, 1A, 1
+McKenna Sutterlin	1, 20
+Savita Chandarana	6
+Taylor Woitesek	4, 8
+Victoria Hodges	7
+Alexandra Mears	11
+Dakota Drew	21
+Dominika Myrda	19
+Evelyn Kajohn	1
+Gladys Contreras	17
+Katlynn LaGrone	5
+Sarah Lowery	16
+Sydney Logan	18, 3
+Abigail Elliott	10
+Brenna Carstens	9
+Ella Ethen	8
+Ella Selman	1
+Emma Urbon-Newman	20
+Faith Harris	1A, 5
+Grace Steinberg	12, 11, 2
+Kaylin Machuca	15
+Kylie Hemming	13
+Morgan Donovan	18
+Morrigan Bushroe-Stumpf	11
+Piper Dooley	14
+Yamila Areizaga	6
+Abigail Karpluk	10
+Alexandra Venturi	1A
+Emily Steingard	3
+Rachel Meilinger	1A
+Rylee McGee	1A, 1
+Aubrey Korzyniewski	17, 23
+Edie Hamilton	1A, 1
+Emily Hughes	18
+Kiera Crawley	13
+Kira Jacobsen	7, 1
+Mak Werner	12
+Veronica Gut	14
+Xiomara Trejo	8
+Kamille Graham	8
+Malee Todd	3
+Sydney Barkley	4
+Alison Quincy	7
+Allison Galuszka	16
+Alyssa Welfringer	1A, 1
+Brooke Latner	14
+Deanna Farley	4
+Emiko Mizusawa	12
+Emily Fong	3
+Grace Schade	8
+Isabel Kinsolving	15
+Julia Furtado	17, 7
+Kate Avery	13
+Kate Staskus	2
+Katie Dalgamouni	18
+Kerry Goodspeed	1, 1/9
+Lindsey Campbell	5
+Mary Welton	6
 1-B/15 Madeleine Kanzler
-Alissa Caltagirone
-Andi Sandoval
-Argelia Diaz
-Chloe Garcia
-Elaine Peterson
-Hayley March
-Nora Viarnes
-Audrey Hattori
-Chelsea Kegans
-Ellie Peterson
-Emily Whitney
-Joanna Falla
-Joanna Spyrou
-Kylie Beloian
-Nicole Larson
-Paige Gurich
-Talia Florio
-Charlene Ma
-Lauren Dvonch
-Lauren Jufiar
-Mia Chanove
-Roisin Cunningham Smythe
-Abigail Wisdom
-Ally Long
-Camille Chiang
-Chelsea Farinaro
-Diana Khaled Hattar
-Fiona Watkins
-Jillian Diaz
-Julia Bridges
-Maggie O'Callaghan
-Roisin Cunningham Smyth
-Sophie Salstrom
-Terra Gamboa
-Callie Malone
-Ceci Buckingham
-Francesca Snyder
-Georgina Burton
-Kaitlyn Pasillas
-Kasey Markell
-Leighanne Estabrook
-Maddye Ta
-Morgan Kerley
-Nora Mirabal
-Grace Stuart
-Grace Younger
-Jamie Chin
-Karlie O'Loughlin
-Lizzy MacFarlane
-Morgan O'Connell
-Soul Parness
-Abby McGuire
-Alyssa Fricker
-Amelia Bayha
-Annie Lewis
-Demi Ovalle
-Elena Skender
-Gwen Buchanan
-Katherine Hampton
-Natalie Peterson-Hunt
-Nicole Inoue
-Riley Eaves
-Tatiana Gasparre
-Annika Lindberg
-Annika Liou
-Emily Watanapongse
-Kendall Nelson
-Kendall Pappan
-Meg Peters
-Annie Nadolski
-Aveen Cunningham
-Caylie Saiki
-Kate Launius
-Katrina McCay
-Kimie Ginoza
-Lyndsey Johnson
-Nina Bastick
-Ruthie Lax
-Zoey Francis
-Ani Aguilar
-Chloe Gonzalez
-Clara Pettiross
-Jamie Chiem
-Lyric Roddenberry
-Maile Imonen
-Maya McGuane
-Mia Harrison
-Alex Maser
-Christine Hu
-Claire Baxter
-Ellen Perfect
-Emma Choy
-Gayatri Ketvarapu
-Haley Gibbs
-Helen Thomason
-Jessica Gaffney
-Kaitlyn Eng
-Krystal Sung
-Lauren Rosenberger
-Mariah Mastrodimos
-Nicole Orozco
-Roxy Kiessling
-Tess van Hulsen
-Aracelia Aldrete
-Celeste Cerna
-Eliana Smithstein
-Gayatri Ketavarapu
-Leana Yearwood
-Shannon Golden
-Amelia Ayala
-Anna Fry
-Chandlyr Denaro
-Katharine Larsen
-Margo Lusinchi
-Addi Duvall
-Alex Szymczak
-Ayla Huhn
-Emily McElroy
-Jenna Polidoro
-Jessica Salaz
-Maddy Menard
-Ruth Efe
-Veronica Show
-Christina Kulick
-Emma Brezoczky
-Isabel Dhillon
-Jessi Beyer
-Mihika Desouza
-Natalie Clark
-Cassandra Ruedy
-Cooper McKenna
-Courtney Coleman
-Dara Schoolcraft
-Elise Power
-Ka'imi Duncklee
-Maribella Munoz-Jimenez
-Mia Adsen
-Olivia Cairns
-Alicia Krasner
-Alina Hernandez
-Angelina Tsai
-Caitlin Muñoz
-Fiona Murphy
-Grace Clark
-Isabel Del Villar
-Kaitlyn Kong
-Mason Spencer
-Natalie Stearns
-Ellie Raidt
-Elodie Serres
-Helen Randle
-Lily Pashman
-Valerie Wraith
-Xochitl Ortega
-Athena Mor
-Christina Marlow
-Jasmine Tang
-Jordan LaCour
-Sydney Kroonen
-Tatum Dwyer
-Adrienne Medak
-Grace Rich
-Jayden Ching
-Pooja Bucklin
-Anika Peterson
-Corbin Bricks
-Emily Varisco
-Jastine Vazquez
-Katharine Leese
-Kelsey Stumm
-Madelynn Knust
-Madi Sturgis
-Megan Leckich
-Taylor Ganeko
-Alicia Wintermeyer
-Ariana Olmos
-Dailynn Santoro
-Elena Isogawa
-Emily Lawless
-Hanna Jordan
-Jade Jette
-Kasey Tippy
-Kelley Geurts
-Lindsey Heaney
-Madison Egan
-Ramsie Haskell
-Shannon Graham
-Siena Goggia
-Sierra Venegas
-Farrah Martin
-Kiara Espeleta
-Madison Ravelo
-Mauriama Moore
-Morgan Egan
-Billie Nel
-Emily Esteban
-Josie Miller
-Lily Riley
-Valerie Pedersen
-Alayna Regier
-Andie Perreira
-Cecilia Smith
-Emily Tucker
-Janie Hobbs
-Kat Cheren
-Kim Reidel
-Paige Henson
-Ta'iuta Uiagalelei
-Tamsyn Evezard
-Tatiana Cava
-Allie Gaetano
-Kylie Van Leeuwen
-Nicole Tormey
-Whitney Lee
-Allyson Corbett
-Jericho Callender
-Reese Beringer
-Abby Mammen
-Abigail Hendriks
-Jaden Soto
-Julia Schmidt
-Kailah Peery
-Lily Ensley
-Melinna Galbraith
-Samantha Rainey
-Shelby Richardson
-Sofia Dominguez
-Sofia Smith
-Tea Summers
-Tess Henke
-Tessa Tavaglione
-Anna Tyukasz
-Cassady Woolley
-Emeline Smiley
-Grace Noyes
-Hailee Pike
-Hannah Edwards
-Kennedy Brubaker
-Kimorah Wong
-Lucy Aggs
-Mattie Herzog
-Munroe Blem
-Presley Acosta
-Sierrah Ferguson
-Sydney Eisberg
-Alexa De Villiers
-Amber Lewis
-AnnMarie Patterson
-Claire Gluzman
-Madison Emerson
-Marilyn Rodriguez-Garcia de Leon
-Mia Hueston
-Myley Mendiburu
-Sydney Neilon
-Tiffani Hunter
-Abbey Wrobleski
-Annie Speranza
-April Anderson
-Ashley Fitch
-Brianna Harrity
-Emma Stephens
-Kelsey Millward
-Kendra Baity
-Paige Cackovic
-Peri Hummel
-Sabrina Afshinnekoo
-Sam Pierce
-Sarah Sovia
-Shannon Cry
-Sophia Soriano
-Sydney Rentsch
-Elaine Dealy
-Ginny McCool
-Hannah Rogers
-Kaitlin Reagan
-Sarah Nappo
-Ashley Ignatowski
-Brooklynn Hayes
-Ginny McCool
-Stephania Lopez
-Ali Keenan
-Kyla Drewry
-Marissa Moreno
-Jade Mueller-Galbraith
-Katie Hammond
-Lauren Jockimo
-Lien Har
-Maria Sell
-Olivia Fechner-Lewis
-Anahi Dominguez
-Claudia Marmelo
-Dasha Zdvizhkova
-Gicel Zuniga
-Jazmine Silva
-Kendall Foley
-Maiko Okamura
-Meiling Bottan
-Sarah Franco
-Zoe Starzenski
-Ainsley Cornwall
-Anna Taylor
-Brooke Brandenburger
-Emma Luna
-Gigi Sandull
-Melia Lorch
-Mia Januario
-Rina Okuda
-Yiota Tsiali
-1A/14 Grace Isola
-Jada Keen
-Maddie Baybeck
-Carly Schneider
-Catrina Dumas
-Sarah Nagel
-1B/16 Juno Aselton
-Kendall Halfacre
-Alyssa Stevens
-Courtney Hall
-Emily Knowles
-Emily Marr
-Emily Woodruff
-Emma McBride
-Hannah Holly
-Hannah Ysusi
-Julia Ponce
-Kaeli Hanson
-Kaitlin Groothuyzen
-Kaylin Drum
-Melanie Thomas
-Mikayla Scheer
-Nia Apodaca
-Nonie-Ann Grant
-Amber Penney
-Coco Demoulin
-Gabriella Garcia-Roy
+Alissa Caltagirone	14
+Andi Sandoval	11
+Argelia Diaz	13
+Chloe Garcia	10
+Elaine Peterson	16
+Hayley March	1C
+Nora Viarnes	4, 8
+Audrey Hattori	5
+Chelsea Kegans	2
+Ellie Peterson	16
+Emily Whitney	9
+Joanna Falla	1B, 1A
+Joanna Spyrou	10
+Kylie Beloian	3, 16
+Nicole Larson	18, 2, 13
+Paige Gurich	12
+Talia Florio	4
+Charlene Ma	18, 8
+Lauren Dvonch	8
+Lauren Jufiar	4
+Mia Chanove	6
+Roisin Cunningham Smythe	3
+Abigail Wisdom	10
+Ally Long	17, 4
+Camille Chiang	4, 5
+Chelsea Farinaro	1A, 1
+Diana Khaled Hattar	6
+Fiona Watkins	9
+Jillian Diaz	11
+Julia Bridges	18, 17
+Maggie O'Callaghan	16
+Roisin Cunningham Smyth	2
+Sophie Salstrom	1
+Terra Gamboa	7
+Callie Malone	2
+Ceci Buckingham	3, 10
+Francesca Snyder	9
+Georgina Burton	1
+Kaitlyn Pasillas	7, 14, 6
+Kasey Markell	12
+Leighanne Estabrook	16
+Maddye Ta	11, 16
+Morgan Kerley	4
+Nora Mirabal	8
+Grace Stuart	3
+Grace Younger	7
+Jamie Chin	8
+Karlie O'Loughlin	20
+Lizzy MacFarlane	11
+Morgan O'Connell	6
+Soul Parness	1
+Abby McGuire	1, 1B, 1A
+Alyssa Fricker	4
+Amelia Bayha	13
+Annie Lewis	11, 22
+Demi Ovalle	20, 10
+Elena Skender	1, 1C
+Gwen Buchanan	22
+Katherine Hampton	1
+Natalie Peterson-Hunt	18, 20
+Nicole Inoue	9, 16, 12
+Riley Eaves	3
+Tatiana Gasparre	15, 21
+Annika Lindberg	19
+Annika Liou	15, 3
+Emily Watanapongse	23
+Kendall Nelson	2, 20
+Kendall Pappan	7
+Meg Peters	9
+Annie Nadolski	12, 8
+Aveen Cunningham	6
+Caylie Saiki	18
+Kate Launius	11
+Katrina McCay	1B
+Kimie Ginoza	14
+Lyndsey Johnson	24, 13
+Nina Bastick	17
+Ruthie Lax	5
+Zoey Francis	1
+Ani Aguilar	25
+Chloe Gonzalez	21
+Clara Pettiross	24
+Jamie Chiem	1A
+Lyric Roddenberry	16
+Maile Imonen	10
+Maya McGuane	22
+Mia Harrison	4
+Alex Maser	1
+Christine Hu	4, 2
+Claire Baxter	3
+Ellen Perfect	8
+Emma Choy	6
+Gayatri Ketvarapu	17
+Haley Gibbs	9
+Helen Thomason	14
+Jessica Gaffney	16
+Kaitlyn Eng	13
+Krystal Sung	5
+Lauren Rosenberger	11
+Mariah Mastrodimos	1
+Nicole Orozco	15
+Roxy Kiessling	12
+Tess van Hulsen	10
+Aracelia Aldrete	18, 4
+Celeste Cerna	11
+Eliana Smithstein	15
+Gayatri Ketavarapu	17
+Leana Yearwood	19
+Shannon Golden	7
+Amelia Ayala	15
+Anna Fry	18
+Chandlyr Denaro	1, 14
+Katharine Larsen	17, 5
+Margo Lusinchi	7
+Addi Duvall	2
+Alex Szymczak	3
+Ayla Huhn	10
+Emily McElroy	12
+Jenna Polidoro	19
+Jessica Salaz	1
+Maddy Menard	8
+Ruth Efe	1
+Veronica Show	1
+Christina Kulick	9, 4
+Emma Brezoczky	16
+Isabel Dhillon	13, 10
+Jessi Beyer	7
+Mihika Desouza	21
+Natalie Clark	6
+Cassandra Ruedy	14, 12
+Cooper McKenna	17
+Courtney Coleman	15
+Dara Schoolcraft	9
+Elise Power	2, 10
+Ka'imi Duncklee	11
+Maribella Munoz-Jimenez	1
+Mia Adsen	10, 14, 4
+Olivia Cairns	5, 3
+Alicia Krasner	18
+Alina Hernandez	5, 25
+Angelina Tsai	1
+Caitlin Muñoz	13, 24
+Fiona Murphy	6
+Grace Clark	8
+Isabel Del Villar	16, 15
+Kaitlyn Kong	19
+Mason Spencer	1
+Natalie Stearns	1
+Ellie Raidt	22
+Elodie Serres	20
+Helen Randle	1
+Lily Pashman	21, 5, 25
+Valerie Wraith	19, 4
+Xochitl Ortega	23
+Athena Mor	12
+Christina Marlow	20
+Jasmine Tang	7, 11
+Jordan LaCour	3
+Sydney Kroonen	21
+Tatum Dwyer	15
+Adrienne Medak	7
+Grace Rich	14
+Jayden Ching	22
+Pooja Bucklin	2
+Anika Peterson	14
+Corbin Bricks	9
+Emily Varisco	2
+Jastine Vazquez	10
+Katharine Leese	4
+Kelsey Stumm	11
+Madelynn Knust	1
+Madi Sturgis	13, 20
+Megan Leckich	6
+Taylor Ganeko	3
+Alicia Wintermeyer	18, 2
+Ariana Olmos	1a, 1
+Dailynn Santoro	15
+Elena Isogawa	12
+Emily Lawless	11, 2
+Hanna Jordan	7
+Jade Jette	8
+Kasey Tippy	13
+Kelley Geurts	2
+Lindsey Heaney	17
+Madison Egan	3
+Ramsie Haskell	5
+Shannon Graham	14
+Siena Goggia	1b, 1A
+Sierra Venegas	6
+Farrah Martin	19, 3
+Kiara Espeleta	1B, 1
+Madison Ravelo	11
+Mauriama Moore	10
+Morgan Egan	21
+Billie Nel	10
+Emily Esteban	1A
+Josie Miller	4
+Lily Riley	9
+Valerie Pedersen	13
+Alayna Regier	6
+Andie Perreira	9
+Cecilia Smith	14
+Emily Tucker	17
+Janie Hobbs	7
+Kat Cheren	2
+Kim Reidel	8
+Paige Henson	12
+Ta'iuta Uiagalelei	5, 6
+Tamsyn Evezard	16, 8
+Tatiana Cava	1B, 1A, 1
+Allie Gaetano	3
+Kylie Van Leeuwen	19, 1A
+Nicole Tormey	15
+Whitney Lee	18
+Allyson Corbett	10
+Jericho Callender	20
+Reese Beringer	22
+Abby Mammen	2
+Abigail Hendriks	4
+Jaden Soto	1B, 1
+Julia Schmidt	7
+Kailah Peery	17
+Lily Ensley	13
+Melinna Galbraith	6
+Samantha Rainey	1A
+Shelby Richardson	18
+Sofia Dominguez	5, 6
+Sofia Smith	15, 5
+Tea Summers	1C
+Tess Henke	16
+Tessa Tavaglione	11
+Anna Tyukasz	4
+Cassady Woolley	21
+Emeline Smiley	11
+Grace Noyes	1A
+Hailee Pike	16
+Hannah Edwards	2
+Kennedy Brubaker	20, 10
+Kimorah Wong	12
+Lucy Aggs	13, 6
+Mattie Herzog	14
+Munroe Blem	3
+Presley Acosta	9
+Sierrah Ferguson	8
+Sydney Eisberg	7
+Alexa De Villiers	13
+Amber Lewis	15
+AnnMarie Patterson	22
+Claire Gluzman	20
+Madison Emerson	23
+Marilyn Rodriguez-Garcia de Leon	1A
+Mia Hueston	14
+Myley Mendiburu	19
+Sydney Neilon	18
+Tiffani Hunter	1B
+Abbey Wrobleski	18
+Annie Speranza	17/1B
+April Anderson	14
+Ashley Fitch	4
+Brianna Harrity	16
+Emma Stephens	5
+Kelsey Millward	9
+Kendra Baity	3
+Paige Cackovic	8
+Peri Hummel	13
+Sabrina Afshinnekoo	10, 1
+Sam Pierce	6
+Sarah Sovia	1
+Shannon Cry	2
+Sophia Soriano	11
+Sydney Rentsch	15
+Elaine Dealy	12
+Ginny McCool	6
+Hannah Rogers	9
+Kaitlin Reagan	7
+Sarah Nappo	5
+Ashley Ignatowski	3, 2
+Brooklynn Hayes	10
+Ginny McCool	6
+Stephania Lopez	15, 5
+Ali Keenan	3
+Kyla Drewry	8
+Marissa Moreno	4
+Jade Mueller-Galbraith	3
+Katie Hammond	8
+Lauren Jockimo	13
+Lien Har	11, 7
+Maria Sell	12
+Olivia Fechner-Lewis	1
+Anahi Dominguez	8
+Claudia Marmelo	13
+Dasha Zdvizhkova	6
+Gicel Zuniga	16
+Jazmine Silva	14
+Kendall Foley	11
+Maiko Okamura	5
+Meiling Bottan	10
+Sarah Franco	3
+Zoe Starzenski	2
+Ainsley Cornwall	2
+Anna Taylor	13
+Brooke Brandenburger	6
+Emma Luna	9
+Gigi Sandull	4
+Melia Lorch	19
+Mia Januario	14
+Rina Okuda	5
+Yiota Tsiali	1/17
+1A/14 Grace Isola	1A/14
+Jada Keen	7
+Maddie Baybeck	1/15
+Carly Schneider	8
+Catrina Dumas	4
+Sarah Nagel	3
+1B/16 Juno Aselton	1B/16
+Kendall Halfacre	10
+Alyssa Stevens	4
+Courtney Hall	1
+Emily Knowles	6
+Emily Marr	5
+Emily Woodruff	9, 5
+Emma McBride	8
+Hannah Holly	10
+Hannah Ysusi	13
+Julia Ponce	2
+Kaeli Hanson	11
+Kaitlin Groothuyzen	3
+Kaylin Drum	1, 1/1A
+Melanie Thomas	1
+Mikayla Scheer	7
+Nia Apodaca	16
+Nonie-Ann Grant	12
+Amber Penney	9
+Coco Demoulin	5
+Gabriella Garcia-Roy	4
 RS Emily Woodruff
 RS Maddie Lopez
-Sam Witt
-Savannah Mangrum
-Andria Martin
-Camryn Berra
-Gracie Bishop
-Hannah Gish
-Jenna Collins
-Katie Kisling
-Lily Dinis
-Madeline Frey
-Madison Jacques
-Amanda Briscoe
-Amy Zaninovich
-Bridgette Garcia
-Dani Chastain
-Hannah Weaver
-Katie van Zonneveld
-Megan Kroeker
-Willow Brown
-Zaylynn Mangrum
-Alexandria Jasso
-Bailee Poole
-Rosemary Chapman
-Tatum Benson
-Abby Delport
-Bella Alcazar
-Emily Lopez-Ibarra
-Hannah Walker
-Jet Salazar-Lopez
+Sam Witt	15
+Savannah Mangrum	7
+Andria Martin	17
+Camryn Berra	1, 1A, 1C
+Gracie Bishop	1
+Hannah Gish	9
+Jenna Collins	3
+Katie Kisling	21
+Lily Dinis	13
+Madeline Frey	1
+Madison Jacques	11
+Amanda Briscoe	22, 8
+Amy Zaninovich	2
+Bridgette Garcia	16
+Dani Chastain	19, 3
+Hannah Weaver	14
+Katie van Zonneveld	18
+Megan Kroeker	20
+Willow Brown	10, 12
+Zaylynn Mangrum	6
+Alexandria Jasso	10
+Bailee Poole	1B
+Rosemary Chapman	5
+Tatum Benson	7
+Abby Delport	24A, 24
+Bella Alcazar	23
+Emily Lopez-Ibarra	7, 15, 8
+Hannah Walker	24B, 16
+Jet Salazar-Lopez	1A, 1B
 RS Tatum Benson
-Sam Dieterle
-Yvonne Orser
-Courtney Belliotti
-Katie Bloom
-Natalie Kisling
-Alli Hepner
-Belicia Machicote
-Emma Cook
-Katie Whittingham
-Kristina Dupont
-Lauren McGowan
-Maddie Murad
-Natalie Noble
-Randi Johnson
-Regan Azevedo
-Summer Fulton
-Mackenzie Sepeda
-Maggie Cook
-Sierra Coyne
-Autumn Johnson
-Dakota Lambert
-Evalena Filippi
-Frances Benson
-Jordyn Aspeitia
-Olivia Saldate
-Rhyan Atkin
-Abigail Hughes
-Davin Collazo
-Delaney Margullis
-Kennedy Green
+Sam Dieterle	4
+Yvonne Orser	15, 18
+Courtney Belliotti	6
+Katie Bloom	9
+Natalie Kisling	12
+Alli Hepner	11
+Belicia Machicote	1b
+Emma Cook	19, 4
+Katie Whittingham	1
+Kristina Dupont	3
+Lauren McGowan	22
+Maddie Murad	9
+Natalie Noble	18
+Randi Johnson	2
+Regan Azevedo	14
+Summer Fulton	13, 3
+Mackenzie Sepeda	17
+Maggie Cook	2, 12
+Sierra Coyne	10
+Autumn Johnson	6
+Dakota Lambert	8
+Evalena Filippi	1A, 1
+Frances Benson	2
+Jordyn Aspeitia	16
+Olivia Saldate	18
+Rhyan Atkin	20
+Abigail Hughes	7
+Davin Collazo	21
+Delaney Margullis	9
+Kennedy Green	5
 Milliani Arellano
-Sofia DeRollo
-Trinity Aceves
-Callie Woodruff
-Claire Schade
-Devynn Stein
-Elsie Judy
-Emily Nicholson
-Gabrielle Wiltse
-Hannah Duggins
-Isabella Magno
-Jillian Gross
-Jillian Wulf
-Maci Layne
-Mackenzie Richards
-Maddie Loggins
-Madelynn Garcia
-Megan Greenwood
-Natalie Espinoza
-Rebekah Groteguth
-Sydney Coachman
-Trystyn Vuori
-Daphne Guevremont
-Emily Diacono
-Paula Nieto Jasny
-Sienna Jagielski
-Yesenia Preciado
-Cynthia Rosa
-Erin McBride
-Grace O'Callaghan
-Isabella Sonkoly
-Kaitlin Howarth
-Kate Watley
+Sofia DeRollo	16
+Trinity Aceves	11
+Callie Woodruff	4
+Claire Schade	17
+Devynn Stein	18
+Elsie Judy	6
+Emily Nicholson	2
+Gabrielle Wiltse	9
+Hannah Duggins	1
+Isabella Magno	7
+Jillian Gross	19
+Jillian Wulf	15
+Maci Layne	14
+Mackenzie Richards	1
+Maddie Loggins	3
+Madelynn Garcia	1
+Megan Greenwood	10
+Natalie Espinoza	12
+Rebekah Groteguth	16
+Sydney Coachman	8
+Trystyn Vuori	13
+Daphne Guevremont	5
+Emily Diacono	11
+Paula Nieto Jasny	1
+Sienna Jagielski	12
+Yesenia Preciado	18
+Cynthia Rosa	9, 3
+Erin McBride	14
+Grace O'Callaghan	21
+Isabella Sonkoly	7
+Kaitlin Howarth	15, 10
+Kate Watley	1
 Sarah Parson
-Apryl Gonzalez
-Bailey Hansen
-Betsy Wooler
-Hope Stokes
-Jillian Schultz
-Kelsey McKenney
-Kylie Stablein
-Mackenzie Matheny
-Mia Barr
-Riley Christen
-Tori Gacutan
-Abigayle Armstrong
+Apryl Gonzalez	6
+Bailey Hansen	25
+Betsy Wooler	26
+Hope Stokes	1
+Jillian Schultz	22, 9
+Kelsey McKenney	24, 15
+Kylie Stablein	23
+Mackenzie Matheny	1
+Mia Barr	20
+Riley Christen	1
+Tori Gacutan	13
+Abigayle Armstrong	1
 Brianna Zapata
-Brooke Ochoa
-Casey Barragan
-Elisa Grim
-Ella Simone
-Fanni Muzsnay
-Savannah Fitzgerald
-Shelby Vidmar
+Brooke Ochoa	4
+Casey Barragan	13
+Elisa Grim	17, 7
+Ella Simone	23, 6
+Fanni Muzsnay	8
+Savannah Fitzgerald	3
+Shelby Vidmar	16
 Sierra Cavano
-Alice Johnson
-Aryanah Tellez
-Ashley Williams
-Hailey Andress
-Kelly Villanueva
+Alice Johnson	8, 10
+Aryanah Tellez	12
+Ashley Williams	14
+Hailey Andress	2
+Kelly Villanueva	1
 Logan Wimbish
-Megan Cranley
-Susanna Martinez
-Abbey Simshauser
-Annabelle Hernandez
-Caitlyn Mossman
-Hannah Tully-Giles
-Ida Tully-Giles
-Isabella Landeros
-Islay Martin-Hill
-Kira Anderson
-Maria Bittle
-Robyn Greenslade
-Sidney Strickland
-Alana Lillie
-Alexandra Schow
-Marit van der Kolk
-Marley Garwick
-Sami Passwater
-Tu'ua Cravens
-Charley Stephens
-Charli Muñoz
-Georgia Daly
-Katelyn Mobley
-Katya Aleshina
-Noa Markovsky
-Riaan Bryant
-Abby Quinn
-Alison Cooney
-Ashley Mann
-Christine Uht
-Colleen Bolmanski
-Emily Rodriguez
-Francesca Williamson
-Grace Villano
-Isabelle Vieira
-Jessica Hydock
-Katie Batten
-Kayla Villano
-Kristi Howe
-Liz Barr
-Lizzie Rodriguez
-Makayla Williams
-Mariah Hudson
-Rachel Bednarek
-Samantha McGregor
-Shanen Lazenby
-Amanda Puthoff
-Campbell Ruh
-Lauren Rinderle
-Naomi Peltier
-Sydney Fountain
-Julia Kreidinger
-Kelly Fehr
-Libby Tirak
-Lilija Taraska
-Maggie Fortin
-Nicole Wiemken
-Silvija Taraska
-Anna Jefferys
-Jezebel Garcia
-Kate Baker
-Kaylee Hatfield
-Mary Trese Squeglia
-Sydney Klakeg
-Beatrice Popescu
-Lauren Westphal
-Maddie Clark
-Madeline Slater
-Patricia Rinderle
-Sam Young
-Claire Rogillio
-Ellie Velasco
-Gabby Garritson
-Hanna Kownacki
-Jade Strickland
-Josie Frisina
-Molly Sebunia
-Rachel Kreidinger
-Sydney McGarry
-Kerstyn Farley
-Molly Fehr
-Selena Martinez
-Ana Carrera
-Delaney Chrysle
-Emma O'Gorman
-Jillian Heinrich
-Brigid Carmody
-Carissa Jones
-Claudia Orte Blanch
-Izabella Trunzo
-Abbey Murphy
-Emily Feenstra
-Maria Martinez
-Phoebe Puacz
-Abby Jank
-Abby Spicher
-Ashley Henderson
-Ashley Parks
-Brynna Bartlett
-Carolyn Ebel
-Grace Klimek
-Heidi Schmidt
-Jillian Breckenridge
-Maggie Blume
-Mary Frank
-Megan Crutcher
-Rachel Blasdell
-Sonni Kiefer
-Elizabeth Andrews
-Katrina Rish
-Leona Bently
+Megan Cranley	11
+Susanna Martinez	13
+Abbey Simshauser	5
+Annabelle Hernandez	17
+Caitlyn Mossman	9
+Hannah Tully-Giles	23, 25
+Ida Tully-Giles	1
+Isabella Landeros	16, 24
+Islay Martin-Hill	1
+Kira Anderson	21
+Maria Bittle	25
+Robyn Greenslade	24
+Sidney Strickland	15
+Alana Lillie	1
+Alexandra Schow	8
+Marit van der Kolk	3
+Marley Garwick	16
+Sami Passwater	22
+Tu'ua Cravens	18
+Charley Stephens	6
+Charli Muñoz	4
+Georgia Daly	7
+Katelyn Mobley	1
+Katya Aleshina	17
+Noa Markovsky	19
+Riaan Bryant	5
+Abby Quinn	14
+Alison Cooney	18
+Ashley Mann	19
+Christine Uht	10
+Colleen Bolmanski	8
+Emily Rodriguez	1
+Francesca Williamson	21
+Grace Villano	9
+Isabelle Vieira	1A, 1
+Jessica Hydock	15
+Katie Batten	3
+Kayla Villano	2
+Kristi Howe	7
+Liz Barr	13
+Lizzie Rodriguez	11
+Makayla Williams	20
+Mariah Hudson	17
+Rachel Bednarek	5
+Samantha McGregor	22
+Shanen Lazenby	12
+Amanda Puthoff	6
+Campbell Ruh	3
+Lauren Rinderle	5
+Naomi Peltier	17
+Sydney Fountain	8
+Julia Kreidinger	4
+Kelly Fehr	10
+Libby Tirak	7, 9
+Lilija Taraska	13
+Maggie Fortin	12
+Nicole Wiemken	18
+Silvija Taraska	2
+Anna Jefferys	7
+Jezebel Garcia	15
+Kate Baker	11
+Kaylee Hatfield	16
+Mary Trese Squeglia	14
+Sydney Klakeg	1
+Beatrice Popescu	19, 10
+Lauren Westphal	10, 17
+Maddie Clark	22, 19
+Madeline Slater	20, 15
+Patricia Rinderle	23
+Sam Young	21, 20
+Claire Rogillio	22
+Ellie Velasco	8
+Gabby Garritson	5
+Hanna Kownacki	13
+Jade Strickland	2
+Josie Frisina	24
+Molly Sebunia	1A, 1
+Rachel Kreidinger	3
+Sydney McGarry	6, 10
+Kerstyn Farley	5
+Molly Fehr	12
+Selena Martinez	4
+Ana Carrera	6
+Delaney Chrysle	13, 3
+Emma O'Gorman	9, 4
+Jillian Heinrich	1A, 10
+Brigid Carmody	20, 2
+Carissa Jones	11
+Claudia Orte Blanch	9
+Izabella Trunzo	1A, 1
+Abbey Murphy	16
+Emily Feenstra	8
+Maria Martinez	19
+Phoebe Puacz	7
+Abby Jank	17
+Abby Spicher	4
+Ashley Henderson	15
+Ashley Parks	7
+Brynna Bartlett	10
+Carolyn Ebel	12
+Grace Klimek	2
+Heidi Schmidt	6
+Jillian Breckenridge	8, 18
+Maggie Blume	3, 7
+Mary Frank	1
+Megan Crutcher	5, 17
+Rachel Blasdell	9, 1
+Sonni Kiefer	11/1a, 11
+Elizabeth Andrews	5
+Katrina Rish	3
+Leona Bently	15
 1A/12/12 Carolyn Ebel
-Haley Jennings
-Heather Russell
-Tessa Leatherwood
-Alexa Dunn
-Alliefair Scalise
-Elaine Miller
-Kyra Johnson
-Sophia Melanson
-Emily Bauer
-Michelle Danley
-Reese Trauger
-Tia Kannel
-1A/17 Elaine Miller
-Clarie Lochstet
-Emory Shepson
-Kamryn Kerr
-Katie Goodwill
-Mikayla Zablocki
-Riley McCullough
-Sam Logue
-1A/10 Lea Steen
-Candace Scalise
-Kassidy Schlemmer
-Kiley Sill
-Carolyn Marks
-Lea Steen
-Shastyn Tihansky
-Emma Strahorn
-Frances Baksa
-Zoe Luttrell
-Amelia Hervey
-Emily Addison
-Olivia Rehm
-Carla Abellan
-Chloe Barr
-Claire Nixon
-Danika Kotylak
-Erika Pauley
-Femke Aan
-Hannah Thompson
-Irene Gonzalez
-Julia Barton
-Julie Hedden
-Nikki-Marie Bell
-Sarah Logan
-Taylor Molde
-Xanthe Plescia
-Ymane Hage
-Ashley Ramirez
-Gabi Mantellato
-Kayla Chang
-Maartje Keuning
-Magdalena Mathis
-Paula Chillida Esforzado
+Haley Jennings	8
+Heather Russell	14
+Tessa Leatherwood	7
+Alexa Dunn	1
+Alliefair Scalise	2
+Elaine Miller	17
+Kyra Johnson	9
+Sophia Melanson	13
+Emily Bauer	11
+Michelle Danley	10
+Reese Trauger	12
+Tia Kannel	4, 4/1B, 1, 1/4
+1A/17 Elaine Miller	1A/17
+Clarie Lochstet	15
+Emory Shepson	7
+Kamryn Kerr	2
+Katie Goodwill	8
+Mikayla Zablocki	16, 9
+Riley McCullough	5
+Sam Logue	11
+1A/10 Lea Steen	1A/10
+Candace Scalise	16
+Kassidy Schlemmer	18
+Kiley Sill	6
+Carolyn Marks	7
+Lea Steen	1/10
+Shastyn Tihansky	17
+Emma Strahorn	14
+Frances Baksa	18
+Zoe Luttrell	8
+Amelia Hervey	3
+Emily Addison	5
+Olivia Rehm	7
+Carla Abellan	24
+Chloe Barr	21
+Claire Nixon	6
+Danika Kotylak	5
+Erika Pauley	9, 4
+Femke Aan	4, 22
+Hannah Thompson	12, 20
+Irene Gonzalez	6, 23, 14
+Julia Barton	2
+Julie Hedden	1
+Nikki-Marie Bell	10
+Sarah Logan	1
+Taylor Molde	14
+Xanthe Plescia	7
+Ymane Hage	1
+Ashley Ramirez	9
+Gabi Mantellato	12
+Kayla Chang	1
+Maartje Keuning	11, 5
+Magdalena Mathis	15
+Paula Chillida Esforzado	17
 RS Lalelei Mata'afa
-Samantha Malouff
-Samantha Shaw
-Ann Inoue
-Carmen Baringo
-Chloe Schilling
-Elyse Lemay-Lavoie
-Lalelei Mata'afa
-Libby Gault
-Mhairi Nurthen
-Molly DiLalla
-Payton Bosque
-Alba Bonamusa Boix
-Bernadette Doyle
-Bridget Layburn
-Crystal Valtierra
-Emma van Rossum
-Maddy Vincent
-Madeline Pease
-Maxine Schaap
-Olivia Kistler
+Samantha Malouff	7
+Samantha Shaw	8
+Ann Inoue	12, 5
+Carmen Baringo	11, 8
+Chloe Schilling	1
+Elyse Lemay-Lavoie	2
+Lalelei Mata'afa	10
+Libby Gault	17, 15
+Mhairi Nurthen	18
+Molly DiLalla	1
+Payton Bosque	16
+Alba Bonamusa Boix	6
+Bernadette Doyle	9, 3
+Bridget Layburn	1
+Crystal Valtierra	1
+Emma van Rossum	3
+Maddy Vincent	13
+Madeline Pease	1
+Maxine Schaap	11
+Olivia Kistler	20
 RS Rebecca Buenrostro-Gallimore
-Ava Perkins
-Danielle Brown
-Lara Luka
-Lucia Gomez de la Puente
-Rayne Lopez
-Rebecca Buenrostro-Gallimore
-Sophie Milliken
-Szonja Kuna
-Amelia Meckelborg
-Annabelle Ackert
-Lot Stertefeld
-Morgan Rios
-Alia Burlock
-Camille Radosavljevic
-Charlotte Edler
-Christina Mullane
-Emilia Schorr
-Jordan Wedderburn
-Katherine Snyder
-Kelly Meckelborg
-Morgan McDowall
-Paula Prats Rodriguez
-Bia Mantellato Dias
-Cila David
-Madison Greger
-Raha Peiravani
-Roni Perlman
-Tara Logan
-Agatha Weston
-Allegra Childs
-Ashley Greger
-Daisy Logtens
-Emma Gurasich
-Esmee Roijen
-Evelyn Miller
-Stevilyn Griffin
-Ema Vernoux
-Gabrielle Doyle
-Nalani Yim
-Silvanne Slot
-Tea Brandon
-Ariadna Temprano Xambó
-Asimina Klapsianou
-Karly Frangieh
-Lola Annear
-Madison Corrigan
-Olivia Slavens
-Sienna Walker
-Bronwyn Smith
-Candyce Schroeder
-Emily Lowe
-Jennifer Beadle
-Jordan Elwood
-Karrie Kozokar
-Kate Pipkin
-Kaybree Albright
-Kelly Matthews
-MacKenzie Bonk
-Mackenzie Rosenthal
-Mary Campbell
-Sarah Myers
-Sarah Young
-Davis Simmons
-Emily Powell
-Gillian Gatecliff
-Jessica Gaudreault
-Joelle Nacouzi
-Kendall Doten
-Megan Abarta
-Mollie Williams
-Riley Beemer
-Carlie Crumbaugh
-Jennifer Hanling
-Jessica Rodriguez
-Juli Hilovsky
-Hannah Falls-Hand
-Izzy Mandema
-Lauren Etnyre
-Mary Askew
-Molly McGuire
-Sarah Greeven
-Tina Doherty
-Berta Pascual
-Katherine Hawkins
-Lanna Debow
-Lauren Gaudry
-Rebecca Schofield
-Robyn Greenslade
-Taryn Zweifel
-Taylor Wessel
-Zoe Crouch
-Ashlynn Sauerwein
-Haley Hunter
-Kallie White
-Kiki Mein
-Lexi Marissink
-Sophie Wazzan
-Claire Witting
-Grace Hathaway
-Olivia Stark
-Portia Sasser
-Sarah Lolli
-Skylar Kidd
-Sophia Sollie
-Alex Scafidi
-Alexis Parness
-Grace Klingler
-Jasmine Higgs
-Louisa Downes
-Megan Holcomb
-Nicole Tyner
-Savannah Batchelor
-Audrey Cox
-Gwyneth Le
-Helga Terol Salvi
-Nancy Baylor-Sefchick
-Natalie McCarroll
-Olivia Harris
-Keira Blitzer
-Mady Nollan
-Maggie Frye
-Morgan Schink
-Summer Stelck
-Wendy Heffelfinger
-Audrina Kang
-Jane Girard
-Kaitlin Elias
-Kylie Williams
-Macie Drum
-Nikki Frazier
-Sammy Frazier
-Alexandra Guerra
-Alyssa Gayapa
-Andrea Guerra
-Brittany Toro
-Britten Vilander
-Dana Andrea
-Darby Nevins
-Devika Joshi
-Hannah Schultz
-Jordin Hale
-Karli Normand
-Kayla Allen
-Megan Hofer
-Meghan Mahoney
-Rebecca Koshy
-Rebecca Mathews
-Sara Bortz
-Taylor Silva
-Hallie Garfield
-Regan Warmoth
-Aubree Fuher
-Carli Tovar
-Danielle Hernandez
-Erika Wimmer
-Jordan van Reeken
-Kate Schmitt
-Laura Rockett
-Brianna Erickson
-Cristina Chiappini
-Jillian Schultz
-Karsyn Stewart
-Maeve Ellen Wydan
-Malia Naugle
-Taylor Hensley
-Mia Tovar
-Zoe Metzger
-Amelia Gonzalez
-Elizabeth Lovat
-Jori Aventurado
-Kaya Hart
-Lilly Morris
-Molly Banks
-Sydney Brightenburg
-Addison Collins
-Mary Jane Bailey
-Nikki Salerno
-Remy Ickes
-Emily Geld
-Gabrielle Brozovic
-Isabella Adams
-Jenna Handali
-Lea Preston
-Lola Trujillo
-Miranda Miller
-Sadie Sallas
-Bella Morquecho
-Kaitlyn Williams
-Lily Graham
-Maleah Penman
-Zasha Soler
-Alyson DePalma
-Anna O'Malley
-Bailey Desmond
-Blaize Penso
-Ella Dean
-Ella Ferguson
-Grace Goldhammer
-Mikayla Arthur
-Olivia Weissman
-Vanessa McNabb
-Fiona Rowe
-MJ Metzdorf
-Nicole Morrison
-Sarah Snider
-Ale Aranguren
-Amelia Bascom
-Diba Peiravani
-Elena Camarena
-Faith Ocheskey
-Hannah Perry
-Jeannet Garcia
-Jenna Anderson
-Jessica Dean
-Julia Zebak
-Kate Fischer
-Kate Hinrichs
-Paola Dominguez-Castro
-Rachel Loomis
-Rebecca Jean Ansell
-Taylor Thurlow
-Xonhane Medina
-Amelia Sanchez
-Emma Sardo
-Jayda Myers
-Samantha Boothe
-Ashlee Dobell
-Avery Thompson
-Chloe Liddle
-Elena Grigoriou
-Esther Ruano Prieto
-Grace Hansen
-Greta Tadday
-Julia Allen
-Kim Klahr
-Maci Rippo
-Nevaeh Houck
-Olivia Booth
-Olivia Bright
-Olivia Cosgrove-Lewandowski
-Stella Young
-Victoria Feliciano
-Alyssa Pelanca
-Ann Cho
-Catherine Bowen
-Elyssa Loughlin
-Jenny Fermaintt
-Kacie Cios
-Katelynn Kubo
-Paige Neary
-Racquel Jimenez
-Samantha Gaines
-Stephanie Morales
-Giselle Monsalve
-Jillian DeLisle
-Karle Linden
-Madison Martinez
-Victoria Ashby
-Arianna Cammarano-McKenna
-Charley Stricker
-Emily Rogers
-Kendra Schlitzer
-Lizzie Nadolski
-Madelyn Koerper
-Mary-Trese Squeglia
-Sabrina Hoffmeister
-Sarah DeFusco
-Caitlin Valentine
-Casey Malone
-Emma Gurasich
-Kamea Kim
-Noelle Brown
-Shanna Zuanich
-Sofia Curtis
-Sophie Appler
-Adrienn Horvath
-Ali Wagner
-Hannah Woren
-Jaycee Morris
-Mia Mattingly
-Francesca Co'
-Kalista Hyham
-Sophia Boettner
-Tatum Lomax
-Allie Hollo
-Claire Durham
-Ella Tice
-Grace Smith
-Lucy Willis
-Paige Mitchell
-Whitney Wood
-Amanda Fadil
-Carlotta Zandali
-Katelyn Cuthbert
-Lily Kirby
-Martina Bonet Saez
-Sofia Kolovou
-Andi Moriarity
-Lauren Ellis
-Samantha Richardson
-Sara Quirante Taali
-Avery Rabago
-Claire McCulloch
-Kíra Braun
-Michaela Burroughs
-Nadya Azzopardi
-Piper Brostrom
-Samara Eschleman
-Summer Mo
-Ardelle Aquino
-Cambria Serrano
-Candice Vorbeck
-Catie Tuning
-Emily Randall
-Gabriela Biedebach
-Guarina Garcia
-Heather Barba
-Jasmine Bustamante
-Kendra New
-Lauren Lancaster
-Lauren Quintero
-Lora Marquez-Salgado
-Megan Little
-Salena Zapata
-Samantha Murillo
-Stephanie Rosero
-Teresa Zuniga
-Victoria Mezack
-Zoe Kratzer
-Delaney Moller
-Hayley Cates
-Jordan Ehara
-Rya Minow
-Samantha Farias Murillo
-Amber Ventura Espinoza
-Emily Mena
-Jassmine Kezman
-Kate Bradley
-Rachel Fox
-Shelby Garcia
-Susana Curiel
-Yuri Ujifusa
-Alicia Thompson
-Ashley Garcia
-Christine Castrellon
-Elisa Novo
-Emilie Eastman
-Ilene Guerrero
-Kelly Riedel
-Mercy Gonzales
-Sage Nowell
-Sara Winsky
-Taylor Puno
-Angelica Espinoza
-Annette Aladefa
-Kayla Garcia
-Kristina Mariani
-Lauren Holcomb
-Loreny Valdez
-Melanie Gazazian
-Nancy Trinh
-Nanea Mattson
-Sam Sanchez
-Sona Aghasaryan
-Sumi Rudisky
-Alyssa Ono
-Bianca Sanchez
-Porsche Double
-Abby Nunez
-Arantza Aguilar
-Dani D'Andrea
-Kate Carlyle
-Sumiko Rudisky
-Tamara Holstrom
-Alexis Ramirez
-Amelia Wolfe
-Brianna Zapata
-Halo Espinoza
-Katrina Hitchcock
-Maddie Grove
-Olivia Taylor
-Renee Lopez
-Sophie Santana
-Aliyah Martinez
-Brooklyn Young
-Dottie Barrera
-Kelly Jackson
-Kelya Cortes-Reyes
-Maya Garcia-Hale
-Reiley Burton
-Taylor Stute
-Gigi Gomez
-Katalina Martin
-Kelly Long
-Madison Coss
-Maya De Guzman
-Miranda Graham
-Payge Miller
-Ally Ratto
-Anika Nichols
-Ellie Dees
-Kaitalin Smith
-Megan Sallenbach
-Reyn Jensen
+Ava Perkins	11
+Danielle Brown	1
+Lara Luka	2, 7
+Lucia Gomez de la Puente	25, 14, 21
+Rayne Lopez	23
+Rebecca Buenrostro-Gallimore	12
+Sophie Milliken	22
+Szonja Kuna	4
+Amelia Meckelborg	13
+Annabelle Ackert	4
+Lot Stertefeld	9
+Morgan Rios	16, 17
+Alia Burlock	14, 7
+Camille Radosavljevic	22, 12
+Charlotte Edler	1
+Christina Mullane	18, 4
+Emilia Schorr	16, 13
+Jordan Wedderburn	11, 10
+Katherine Snyder	24
+Kelly Meckelborg	13
+Morgan McDowall	12
+Paula Prats Rodriguez	8
+Bia Mantellato Dias	14
+Cila David	8
+Madison Greger	1, 1C
+Raha Peiravani	11
+Roni Perlman	5
+Tara Logan	18, 2
+Agatha Weston	25
+Allegra Childs	17
+Ashley Greger	15
+Daisy Logtens	1A, 1
+Emma Gurasich	1
+Esmee Roijen	8
+Evelyn Miller	1B, 1A
+Stevilyn Griffin	4
+Ema Vernoux	9
+Gabrielle Doyle	17, 3
+Nalani Yim	1B
+Silvanne Slot	6
+Tea Brandon	21
+Ariadna Temprano Xambó	15
+Asimina Klapsianou	4
+Karly Frangieh	6
+Lola Annear	14
+Madison Corrigan	10
+Olivia Slavens	22
+Sienna Walker	16
+Bronwyn Smith	20
+Candyce Schroeder	11
+Emily Lowe	12
+Jennifer Beadle	6
+Jordan Elwood	9
+Karrie Kozokar	18
+Kate Pipkin	3
+Kaybree Albright	16
+Kelly Matthews	10
+MacKenzie Bonk	1
+Mackenzie Rosenthal	8
+Mary Campbell	1
+Sarah Myers	19, 9
+Sarah Young	22
+Davis Simmons	1
+Emily Powell	7
+Gillian Gatecliff	4, 19
+Jessica Gaudreault	1
+Joelle Nacouzi	11
+Kendall Doten	3
+Megan Abarta	14
+Mollie Williams	5, 4
+Riley Beemer	17
+Carlie Crumbaugh	5
+Jennifer Hanling	13
+Jessica Rodriguez	12
+Juli Hilovsky	2
+Hannah Falls-Hand	9
+Izzy Mandema	8
+Lauren Etnyre	10
+Mary Askew	1
+Molly McGuire	15
+Sarah Greeven	1
+Tina Doherty	12
+Berta Pascual	6
+Katherine Hawkins	22, 7
+Lanna Debow	17, 6
+Lauren Gaudry	16, 2
+Rebecca Schofield	18
+Robyn Greenslade	3
+Taryn Zweifel	21
+Taylor Wessel	20
+Zoe Crouch	4
+Ashlynn Sauerwein	23
+Haley Hunter	1
+Kallie White	16
+Kiki Mein	13
+Lexi Marissink	14
+Sophie Wazzan	15
+Claire Witting	11, 12
+Grace Hathaway	24, 8
+Olivia Stark	17, 3
+Portia Sasser	14, 11
+Sarah Lolli	19, 7
+Skylar Kidd	22, 10
+Sophia Sollie	2
+Alex Scafidi	14
+Alexis Parness	22
+Grace Klingler	24
+Jasmine Higgs	1
+Louisa Downes	25
+Megan Holcomb	9
+Nicole Tyner	23
+Savannah Batchelor	21, 22
+Audrey Cox	1
+Gwyneth Le	18
+Helga Terol Salvi	6
+Nancy Baylor-Sefchick	21
+Natalie McCarroll	5
+Olivia Harris	17
+Keira Blitzer	4
+Mady Nollan	16
+Maggie Frye	1
+Morgan Schink	9, 8
+Summer Stelck	15
+Wendy Heffelfinger	14
+Audrina Kang	2
+Jane Girard	20
+Kaitlin Elias	10
+Kylie Williams	11
+Macie Drum	9
+Nikki Frazier	3
+Sammy Frazier	12
+Alexandra Guerra	2
+Alyssa Gayapa	25, 18
+Andrea Guerra	1
+Brittany Toro	6
+Britten Vilander	1
+Dana Andrea	13
+Darby Nevins	21
+Devika Joshi	15
+Hannah Schultz	17
+Jordin Hale	1
+Karli Normand	10
+Kayla Allen	16
+Megan Hofer	14
+Meghan Mahoney	11
+Rebecca Koshy	5
+Rebecca Mathews	9
+Sara Bortz	12
+Taylor Silva	3
+Hallie Garfield	1
+Regan Warmoth	24
+Aubree Fuher	6
+Carli Tovar	13
+Danielle Hernandez	12
+Erika Wimmer	5
+Jordan van Reeken	2
+Kate Schmitt	3
+Laura Rockett	7
+Brianna Erickson	4
+Cristina Chiappini	1A, 1
+Jillian Schultz	17
+Karsyn Stewart	9
+Maeve Ellen Wydan	14
+Malia Naugle	8
+Taylor Hensley	15
+Mia Tovar	4
+Zoe Metzger	1
+Amelia Gonzalez	17, 7
+Elizabeth Lovat	15
+Jori Aventurado	19, 5
+Kaya Hart	24
+Lilly Morris	16, 1
+Molly Banks	10, 3
+Sydney Brightenburg	11
+Addison Collins	10
+Mary Jane Bailey	1A
+Nikki Salerno	18
+Remy Ickes	13
+Emily Geld	21, 11
+Gabrielle Brozovic	1A
+Isabella Adams	14, 9
+Jenna Handali	22
+Lea Preston	19
+Lola Trujillo	18
+Miranda Miller	12
+Sadie Sallas	20
+Bella Morquecho	23
+Kaitlyn Williams	16, 8
+Lily Graham	6
+Maleah Penman	2
+Zasha Soler	1
+Alyson DePalma	17
+Anna O'Malley	14
+Bailey Desmond	22
+Blaize Penso	21, 13
+Ella Dean	1A
+Ella Ferguson	5
+Grace Goldhammer	3
+Mikayla Arthur	12
+Olivia Weissman	9
+Vanessa McNabb	23
+Fiona Rowe	7
+MJ Metzdorf	1
+Nicole Morrison	6
+Sarah Snider	11
+Ale Aranguren	6
+Amelia Bascom	12
+Diba Peiravani	3
+Elena Camarena	14
+Faith Ocheskey	9, 1B
+Hannah Perry	15
+Jeannet Garcia	7
+Jenna Anderson	4
+Jessica Dean	5
+Julia Zebak	1
+Kate Fischer	13
+Kate Hinrichs	8
+Paola Dominguez-Castro	2
+Rachel Loomis	11
+Rebecca Jean Ansell	1A
+Taylor Thurlow	10
+Xonhane Medina	16
+Amelia Sanchez	15
+Emma Sardo	18
+Jayda Myers	12
+Samantha Boothe	9
+Ashlee Dobell	8
+Avery Thompson	18
+Chloe Liddle	11
+Elena Grigoriou	5
+Esther Ruano Prieto	12
+Grace Hansen	15
+Greta Tadday	7
+Julia Allen	21
+Kim Klahr	2
+Maci Rippo	1
+Nevaeh Houck	17
+Olivia Booth	4
+Olivia Bright	19
+Olivia Cosgrove-Lewandowski	10
+Stella Young	1A
+Victoria Feliciano	6
+Alyssa Pelanca	16
+Ann Cho	4, 14
+Catherine Bowen	1
+Elyssa Loughlin	6
+Jenny Fermaintt	7/1A, 1
+Kacie Cios	10
+Katelynn Kubo	5
+Paige Neary	2
+Racquel Jimenez	11
+Samantha Gaines	12
+Stephanie Morales	3
+Giselle Monsalve	1, 1B
+Jillian DeLisle	15
+Karle Linden	6
+Madison Martinez	9
+Victoria Ashby	17
+Arianna Cammarano-McKenna	7
+Charley Stricker	18
+Emily Rogers	1A
+Kendra Schlitzer	2
+Lizzie Nadolski	19, 21
+Madelyn Koerper	16
+Mary-Trese Squeglia	14
+Sabrina Hoffmeister	13
+Sarah DeFusco	8
+Caitlin Valentine	1C, 1A
+Casey Malone	20
+Emma Gurasich	1B, 1
+Kamea Kim	19
+Noelle Brown	17
+Shanna Zuanich	7
+Sofia Curtis	14, 10
+Sophie Appler	10, 13
+Adrienn Horvath	4
+Ali Wagner	11
+Hannah Woren	12
+Jaycee Morris	5
+Mia Mattingly	3
+Francesca Co'	17, 3
+Kalista Hyham	22
+Sophia Boettner	15
+Tatum Lomax	4, 5
+Allie Hollo	4
+Claire Durham	18
+Ella Tice	11
+Grace Smith	6
+Lucy Willis	9
+Paige Mitchell	24
+Whitney Wood	2
+Amanda Fadil	7
+Carlotta Zandali	10
+Katelyn Cuthbert	1A, 1C
+Lily Kirby	1
+Martina Bonet Saez	17
+Sofia Kolovou	8
+Andi Moriarity	14
+Lauren Ellis	12
+Samantha Richardson	16
+Sara Quirante Taali	9, 3
+Avery Rabago	1A
+Claire McCulloch	8
+Kíra Braun	9
+Michaela Burroughs	1B
+Nadya Azzopardi	5
+Piper Brostrom	10
+Samara Eschleman	22
+Summer Mo	15
+Ardelle Aquino	20
+Cambria Serrano	1
+Candice Vorbeck	2, 12
+Catie Tuning	8
+Emily Randall	11
+Gabriela Biedebach	21
+Guarina Garcia	6, 9, 8
+Heather Barba	16, 12
+Jasmine Bustamante	13, 3
+Kendra New	4
+Lauren Lancaster	18
+Lauren Quintero	12, 10
+Lora Marquez-Salgado	7
+Megan Little	10, 8
+Salena Zapata	15
+Samantha Murillo	1
+Stephanie Rosero	14, 13
+Teresa Zuniga	17
+Victoria Mezack	19, 20
+Zoe Kratzer	5, 4
+Delaney Moller	1
+Hayley Cates	5
+Jordan Ehara	1, 2, 3
+Rya Minow	11
+Samantha Farias Murillo	7
+Amber Ventura Espinoza	12
+Emily Mena	17
+Jassmine Kezman	9
+Kate Bradley	6, 5
+Rachel Fox	4
+Shelby Garcia	1
+Susana Curiel	11
+Yuri Ujifusa	10, 13
+Alicia Thompson	4
+Ashley Garcia	2
+Christine Castrellon	7
+Elisa Novo	1
+Emilie Eastman	6
+Ilene Guerrero	15
+Kelly Riedel	19
+Mercy Gonzales	10
+Sage Nowell	22
+Sara Winsky	14
+Taylor Puno	12
+Angelica Espinoza	10
+Annette Aladefa	17
+Kayla Garcia	16
+Kristina Mariani	20
+Lauren Holcomb	13, 3
+Loreny Valdez	1
+Melanie Gazazian	18
+Nancy Trinh	5
+Nanea Mattson	8
+Sam Sanchez	21
+Sona Aghasaryan	14, 6
+Sumi Rudisky	11
+Alyssa Ono	3, 23
+Bianca Sanchez	7
+Porsche Double	12
+Abby Nunez	13, 3
+Arantza Aguilar	16, 12
+Dani D'Andrea	15
+Kate Carlyle	1
+Sumiko Rudisky	11
+Tamara Holstrom	14, 4
+Alexis Ramirez	11
+Amelia Wolfe	14
+Brianna Zapata	2
+Halo Espinoza	10
+Katrina Hitchcock	1A, 1
+Maddie Grove	15
+Olivia Taylor	6, 12
+Renee Lopez	7
+Sophie Santana	13
+Aliyah Martinez	1
+Brooklyn Young	14
+Dottie Barrera	3
+Kelly Jackson	1, 1A
+Kelya Cortes-Reyes	8
+Maya Garcia-Hale	10
+Reiley Burton	4
+Taylor Stute	5
+Gigi Gomez	11
+Katalina Martin	1B
+Kelly Long	13
+Madison Coss	17
+Maya De Guzman	9
+Miranda Graham	1
+Payge Miller	19
+Ally Ratto	6
+Anika Nichols	18
+Ellie Dees	2
+Kaitalin Smith	8
+Megan Sallenbach	10
+Reyn Jensen	13
 Aidan Dick
-Alba Dominguez
-Alexandra Massier
-Alexis Butler
-Amy Peterson
+Alba Dominguez	1
+Alexandra Massier	12
+Alexis Butler	1
+Amy Peterson	1
 Angelika Sinay
-Annabel Harman
-Bridget Reynolds
+Annabel Harman	4
+Bridget Reynolds	17
 Daniela Lucidi
-Daniela Screnci
-Emily Garczynski
-Emily Matheson
-Jackie Stanger
-Jessica Brooks
+Daniela Screnci	10
+Emily Garczynski	19
+Emily Matheson	3
+Jackie Stanger	21
+Jessica Brooks	7
 Jessica Diaz
-Karley Kraft
-Kate Yasko
-Kayla Robert
-Keely Hamilton
-Lacey Sedor
-Leigh Auth
-Luiza Moraes
-Marina Ranj
-Mimi Harris
+Karley Kraft	15
+Kate Yasko	22, 6
+Kayla Robert	6
+Keely Hamilton	19, 22
+Lacey Sedor	11
+Leigh Auth	2
+Luiza Moraes	14
+Marina Ranj	23
+Mimi Harris	1
 Rachel Gruetzmacher
 Sam McElreath
-Savannah Vukelich
-Shelby Rascon
-Taylor Julson
-Tori Morrissey
-Virginia Smith
-Warner Rich
-Allison Travetto
-Cara Vejsicky
-Christina Kotsia
-Eirini Patras
-Maria Eleni Mimidi
-Paige Bennett
-Raney Remme
-Sarah Hamman
-Zoe Linford
-Aleah Watkins
-Ariana Honka
-Elena Correa
-Erin Gordon
-Isabel Riley
-Jennifer Beach
-Julia Silvestri
-Katelyn Johnson
-Maddie McCaw
-Olivia Grim
-Victoria Vega
-Camille Gallardo-Russell
-Carter Hawkins
-Darby Huff
-Gabriella Matafora-Adams
-Jillian Hamilton
-Kate Green-Jones
-Katie Dill
-Kendall Wilson
-Lauren Hadding
-Melany Marquez
-Orsi Hertzka
-Pamela Solano
-Sarah Kasper
-Sophie Garcia
-Aliki Patra
-Anne de Kleer
-Jamie Oberman
-Kaylyn Pierce
-Lena Kotanchyan
-Rachel Gledhill
-Sarah Barker
-Sierra May
-Alex Harris
-Amanda Price
-Becca Hale
-Emmie Muschek
-Inbar Geva
-Kaitlyn Ortiz
-Mariah Walker
-Marilia Mimides
-Mia Puentes
-Nadja Novakovic
-Rachael Kowalchick
-Rachel Spadt
-Sara Walsh
-Chelsea Oliver
-Celina Moreno
-Elisa Portillo
-Ellie Mix
-Elyana Goren
-Ema Nathan
-Emily Hanrahan
-Emma Seehafer
-Grace Cuozzo
-Hailey Multz
+Savannah Vukelich	20
+Shelby Rascon	16
+Taylor Julson	9
+Tori Morrissey	8
+Virginia Smith	5
+Warner Rich	1
+Allison Travetto	23
+Cara Vejsicky	20
+Christina Kotsia	9
+Eirini Patras	1
+Maria Eleni Mimidi	2
+Paige Bennett	3
+Raney Remme	7
+Sarah Hamman	18
+Zoe Linford	22
+Aleah Watkins	12
+Ariana Honka	24
+Elena Correa	1
+Erin Gordon	23
+Isabel Riley	9
+Jennifer Beach	18
+Julia Silvestri	11
+Katelyn Johnson	14
+Maddie McCaw	15
+Olivia Grim	10
+Victoria Vega	21
+Camille Gallardo-Russell	11
+Carter Hawkins	1
+Darby Huff	16
+Gabriella Matafora-Adams	19, 8
+Jillian Hamilton	17
+Kate Green-Jones	1
+Katie Dill	13, 6
+Kendall Wilson	25
+Lauren Hadding	1
+Melany Marquez	1
+Orsi Hertzka	7, 4
+Pamela Solano	16, 13
+Sarah Kasper	20
+Sophie Garcia	18
+Aliki Patra	12
+Anne de Kleer	18, 8
+Jamie Oberman	15, 5, 2
+Kaylyn Pierce	1
+Lena Kotanchyan	7
+Rachel Gledhill	19
+Sarah Barker	5
+Sierra May	17
+Alex Harris	15
+Amanda Price	11
+Becca Hale	21
+Emmie Muschek	22, 3
+Inbar Geva	1
+Kaitlyn Ortiz	14
+Mariah Walker	10
+Marilia Mimides	2
+Mia Puentes	16
+Nadja Novakovic	24
+Rachael Kowalchick	9
+Rachel Spadt	3
+Sara Walsh	20
+Chelsea Oliver	1
+Celina Moreno	16
+Elisa Portillo	5
+Ellie Mix	14
+Elyana Goren	15, 10
+Ema Nathan	1
+Emily Hanrahan	25
+Emma Seehafer	19, 9
+Grace Cuozzo	20, 6
+Hailey Multz	22, 3
 Kathryn McCullough
-Lara Luka
-Martina Cardona
-Rachel Westphal
-Sarah Portas
-Charley Edler
-Charlotte Echlin
-Chiara Amoroso
-Ellie Goren
-Emma Vertiz
-Kayla Melville
-Kristina Sampson
-Martina Cardona
-Olivia Dam
-Sarah Portas
-Ashlee Dobell
-Brooklyn Plomp
-Daniela Quinzada
-Gaby Patenaude
-Jaeden Baker
-Jermonie Billingsly
+Lara Luka	7
+Martina Cardona	4
+Rachel Westphal	23
+Sarah Portas	13
+Charley Edler	1
+Charlotte Echlin	1
+Chiara Amoroso	18, 8
+Ellie Goren	15
+Emma Vertiz	17, 7
+Kayla Melville	1
+Kristina Sampson	16
+Martina Cardona	4
+Olivia Dam	22, 15
+Sarah Portas	13
+Ashlee Dobell	13
+Brooklyn Plomp	22
+Daniela Quinzada	14
+Gaby Patenaude	16
+Jaeden Baker	13
+Jermonie Billingsly	21, 2
 Julia Allen
 Poppy Philipps
-Rita Gurri
-Zelma Koka
-Addy Rodwell
-Angeliki Arroyo
+Rita Gurri	18, 4
+Zelma Koka	12
+Addy Rodwell	1
+Angeliki Arroyo	17
 Coryn Cavecche
-Emelia Rasner
-Lucy Miszewski
-Morgan Payne
-Polina Synytsia
-Ronny Gazit
-Andrea Oca
-Annika Armstrong
-Arianna Oegger
-Ashtynn Nelson
-Brianna Quade
-Bridgette Alvarez
-Caitlin Schafer
-Eleanor Lee
-Emily Byrne
-Erin Byrne
-Hana Vilanova
-Ivana Castro
-Jacqueline Verdugo
-Katie Hungerford
-Kiana Etrata
-Kiana Harpstrite
-Kingsley Hill
-Lauren Owens
-Marissa Bryant-Manago
-Morgan Molloy
-Morgan Stewart
-Reagan Denny
-Sage Pfeiffer
-Sky Flores
-Claire Wright
-Dana Acquah-Asare
-Julie Zanobini
-Megan Mardesich
-Melyssa Moore
-Serena Zafiris
-Abbey Grosse
-Alena Sanchez
-Daniela Hernandez
-Havana Campo
-Ryan-Marie Ickes
-Ali Kuennen
-Elizabeth Bradley
-Isabella Barajas
-Marialena Seletopoulou
-Megan Plank
-Mei Vilanova
-Mollie Williams
+Emelia Rasner	15
+Lucy Miszewski	11
+Morgan Payne	21
+Polina Synytsia	1
+Ronny Gazit	20
+Andrea Oca	22, 12
+Annika Armstrong	18
+Arianna Oegger	15, 5
+Ashtynn Nelson	5
+Brianna Quade	23, 10, 3
+Bridgette Alvarez	6
+Caitlin Schafer	14, 4
+Eleanor Lee	12
+Emily Byrne	2
+Erin Byrne	4
+Hana Vilanova	24
+Ivana Castro	10
+Jacqueline Verdugo	1, 1B
+Katie Hungerford	16, 2
+Kiana Etrata	17
+Kiana Harpstrite	8, 14
+Kingsley Hill	11
+Lauren Owens	3, 9
+Marissa Bryant-Manago	13
+Morgan Molloy	21, 8
+Morgan Stewart	7
+Reagan Denny	20, 6
+Sage Pfeiffer	9
+Sky Flores	1, 1A
+Claire Wright	1
+Dana Acquah-Asare	19
+Julie Zanobini	21, 12
+Megan Mardesich	7
+Melyssa Moore	16, 4
+Serena Zafiris	11
+Abbey Grosse	7
+Alena Sanchez	19, 5
+Daniela Hernandez	3
+Havana Campo	17
+Ryan-Marie Ickes	15, 13
+Ali Kuennen	1B
+Elizabeth Bradley	1A, 1, 24
+Isabella Barajas	18
+Marialena Seletopoulou	19, 11
+Megan Plank	9
+Mei Vilanova	22
+Mollie Williams	23, 4
 RS Amanda Reeder
 RS Annika Armstrong
-Alexandra Akritidou
-Carolina Newton
-Ella Krauss
-Kelsey Snelgar
-Madison Davis
-Risse Sanchez
-Tara DeBrabander
-Yanah Gerber
+Alexandra Akritidou	10, 6
+Carolina Newton	14
+Ella Krauss	8
+Kelsey Snelgar	6, 9
+Madison Davis	1A, 20, 1
+Risse Sanchez	2
+Tara DeBrabander	1B, 9, 7
+Yanah Gerber	3
 RS Alexandra Akritidou
 RS Ella Krauss
 RS Isabella Barajas
@@ -2389,2278 +2389,2278 @@ RS Marialena Seletopoulou
 RS Mei Vilanova
 RS Mollie Williams
 RS Yanah Gerber
-Taylor Enright
-Anna Tarantino
-Iris Gallagher
-Isabella Obando
-Maddy Gault
-Megan Slater
-Mia Solorzano
-Mikayla Lopez
-Ruth Arino Ruiz
-Sophie Kadifa
-Talia Herbermann
-Julia Erwin
-Katherine Wastila
-Lily Larson
-London Boyd
-Rylee Harrington
-Sophia DeMattia
-Tessa Matson
-Carla Rivera
-Carolina Magano
-Dunara Senadheera
-Inbar Geva
-Kawehi Kauahi
-Lior Ben David
-Noa Sasover
-Seren Uzkan
-Skye Nankervis
-Tatum Roistacher
-Alyssa Barnuevo
-Athena Ayers
-Cianne Benjamin
-Karissa Elliott
-Sydney Chapman
-Brooke Tora Gil
-Chelsea Isaac
-Cila David
-Emison Styris
-Gabby MacAfee
-Madison Searle
-Payton Schrier
-Ruby Meier
-Brooke Finney
-Elizabeth Harte
-Emma Swanson
-Hannah Gray
-Liz Kelleher
-Lucille Moran
-Natalie Hoffman
-Yamila Blake-Lazu
-Zexin Nai
-Cara Mullery
-Courtney Overland
-Jenny Granston
-Naomi Strait
-Oriana Galasso
-Abby Hinds
-Marie Crane
-Zoe Schopick
-Adeline Steward-Nolan
-Annika Krueger
-Honor Kalala
-Riley Waters
-Alex Westrick
-Eleanor Michaud
-Malia Borg
-Sydney Hollingsworth
-Gabriela Weiner
-Laurel O'Hare
-Brooke Geel
-Elizabeth Matlin
-Kendall Coney
-Luna Johnston
-Olivia Dimka
-Sian Lewandowski
-Alana Nadolski
-Celia D'Agostino
-Jayden Kratt
-Jess Palmer-Sammons
-Kendall Strauss
-Lorelei Bell
-Hannah Fasi
-Molly Lemmon
-Pooja Bucklin
-Anna Gaisser
-Ayla Reynolds
-Mak Kratz
-Myles Kratz
-Alice Lemmon
-Katie Martin
-Reese Winegar
-Amanda Amorosa
-Ariana Singer
-Brooke Else
-Caoimhe Whitebloom
-Courtney Fisher
-Diana Carballo
-Ellie Hoffman
-Grace Doerfler
-Hope Vickers
-Jessica Hermosillo
-Jocelyn McQuade
-Katherine Tijerina
-Nastassia McGlothlin
-Shannon Taliaferro
-Skyler Henry
-Susan Cantoni
-Anais Mathes
-Bree Marmion
-Carolyn Gauvin
-Carsen Horvatich
-Justine Castro
-Lexi Puhl
-Lily Aguirre-Murray
-Aminadi Anorve
-Isabella Vucurevic
-Katelin Harris
-Lauren Smith
-Megan Clarke
-Gabi Gervasi
-Jocelyn Castro
-Kathryn McCullough
-Marina Hyham
-Myriam Lizotte
-Sawyer Alter
-Emilie Gerhard
-Emily Hilliard
-Fallon Burnworth
-India Alter
-Jenn Murphy
-Katie Gill
-Shinae Carrington
-Viktoria Orlova
-Kaylee Brard
-Lauren Gauvin
-Lauren Kwan
-Mackenzie Greco
-Shannon Connolly
-Alessia Gressi
-Claudia Lee
-Ella Baumgarten
-Madeline Schultz
-Rachel Dean
-Victoria Padilla
-Inés Sánchez
-Lela McCarroll
-Liana Hunt
-Makaelee Hansberger
-Paige Naegle
-Zoë Seaboch
-Alyssa Mullane
-Callaghan Browne
-Emily Scheerer
-Grace Markus
-Kendell de Beer
-Samantha Bentley
-Alyssa Valente
-Angelena Peterson
-Elaia Berecibar
-Margherita Pantani
-Olufunke Gando
-Viktoria Kiss
-Anita Radaelli
-Claudia Micheli
-Jolanta Szentpali
-Kinley Niles
-Madilyn Ekstrom
-Megan Tiedemann
-Sophia Huacuja
-Brianna Mullalley
-Catie Young
-Gabby Madewell
-Grace Coplin
-Jillian Hoffman
-Kate Eckert
-Kim Fay
-Sabrina Sherrin
-Tiana Wilson
-Valerie Sorondo
-Victoria Jones
-Alaina Johnson
-Brianna Breason
-Crystal Armstrong
-Emily Westlove
-Hannah Sallenback
-Samantha McGowan
-Abby Kishimoto
-Abigail Burton
-Carley Manuel
-Danielle Borelli
-Erin Haff
-Hannah Baker
-Isabella Strimling
-Kaitlyn Moguel
-Katie Monjay
-Lili Castillo
-Maddy Bolton
-Mikayla Davis
-Alivia Garcia
-Delaney Hall
-Katelyn Rodrigue
-Lindy Justice
-Nicky Rafalo
-Shoshana Scanlon
-Cassie Charles
-Courtney Smith
-Jasmin Guzman
-Kaitlyn Kasper
-Rio Tomlinson
-Samantha Reich
-Hailey Price
-Jaleh Moaddeli
+Taylor Enright	16, 15
+Anna Tarantino	16, 6
+Iris Gallagher	23, 14
+Isabella Obando	20
+Maddy Gault	17
+Megan Slater	13
+Mia Solorzano	19
+Mikayla Lopez	10
+Ruth Arino Ruiz	12, 11
+Sophie Kadifa	21, 5
+Talia Herbermann	1B, 1A
+Julia Erwin	27, 7
+Katherine Wastila	23
+Lily Larson	24, 20
+London Boyd	19, 9
+Rylee Harrington	13, 22
+Sophia DeMattia	25, 21
+Tessa Matson	26, 13
+Carla Rivera	17, 4
+Carolina Magano	12, 7
+Dunara Senadheera	24
+Inbar Geva	1A
+Kawehi Kauahi	16, 8
+Lior Ben David	8
+Noa Sasover	14, 10
+Seren Uzkan	18
+Skye Nankervis	4
+Tatum Roistacher	1C, 1B, 1
+Alyssa Barnuevo	1
+Athena Ayers	18
+Cianne Benjamin	19
+Karissa Elliott	2
+Sydney Chapman	12
+Brooke Tora Gil	17
+Chelsea Isaac	2
+Cila David	5
+Emison Styris	16
+Gabby MacAfee	1B
+Madison Searle	1A
+Payton Schrier	15
+Ruby Meier	13
+Brooke Finney	3
+Elizabeth Harte	13
+Emma Swanson	1
+Hannah Gray	12
+Liz Kelleher	2
+Lucille Moran	6
+Natalie Hoffman	11
+Yamila Blake-Lazu	4
+Zexin Nai	9
+Cara Mullery	8
+Courtney Overland	1
+Jenny Granston	5
+Naomi Strait	9
+Oriana Galasso	7
+Abby Hinds	14
+Marie Crane	10
+Zoe Schopick	5
+Adeline Steward-Nolan	15, 15/1A
+Annika Krueger	2
+Honor Kalala	1A, 1
+Riley Waters	12, 11
+Alex Westrick	16
+Eleanor Michaud	3
+Malia Borg	13
+Sydney Hollingsworth	4, 7
+Gabriela Weiner	5
+Laurel O'Hare	1
+Brooke Geel	15
+Elizabeth Matlin	6
+Kendall Coney	4
+Luna Johnston	1/16
+Olivia Dimka	9
+Sian Lewandowski	8
+Alana Nadolski	17, 7
+Celia D'Agostino	14
+Jayden Kratt	1A, 1
+Jess Palmer-Sammons	12
+Kendall Strauss	18
+Lorelei Bell	2
+Hannah Fasi	3
+Molly Lemmon	11, 5
+Pooja Bucklin	16
+Anna Gaisser	17
+Ayla Reynolds	10
+Mak Kratz	14
+Myles Kratz	1A
+Alice Lemmon	8
+Katie Martin	11
+Reese Winegar	4
+Amanda Amorosa	5
+Ariana Singer	9
+Brooke Else	15
+Caoimhe Whitebloom	16, 4
+Courtney Fisher	17
+Diana Carballo	11
+Ellie Hoffman	6
+Grace Doerfler	2
+Hope Vickers	1
+Jessica Hermosillo	1
+Jocelyn McQuade	8
+Katherine Tijerina	3, 13
+Nastassia McGlothlin	13
+Shannon Taliaferro	18, 19
+Skyler Henry	1
+Susan Cantoni	10
+Anais Mathes	6
+Bree Marmion	12
+Carolyn Gauvin	18
+Carsen Horvatich	1
+Justine Castro	7
+Lexi Puhl	15, 13
+Lily Aguirre-Murray	14
+Aminadi Anorve	8, 4
+Isabella Vucurevic	21
+Katelin Harris	14
+Lauren Smith	5
+Megan Clarke	3
+Gabi Gervasi	16, 10
+Jocelyn Castro	8
+Kathryn McCullough	23
+Marina Hyham	1, 1a
+Myriam Lizotte	11
+Sawyer Alter	22, 2
+Emilie Gerhard	15
+Emily Hilliard	1b, 1a
+Fallon Burnworth	9
+India Alter	8
+Jenn Murphy	20
+Katie Gill	3
+Shinae Carrington	21
+Viktoria Orlova	16
+Kaylee Brard	24
+Lauren Gauvin	22
+Lauren Kwan	17, 6
+Mackenzie Greco	6
+Shannon Connolly	18
+Alessia Gressi	12
+Claudia Lee	5
+Ella Baumgarten	7
+Madeline Schultz	13
+Rachel Dean	4, 10
+Victoria Padilla	14, 15
+Inés Sánchez	1
+Lela McCarroll	22
+Liana Hunt	4
+Makaelee Hansberger	11
+Paige Naegle	2
+Zoë Seaboch	1
+Alyssa Mullane	9
+Callaghan Browne	20, 10
+Emily Scheerer	8
+Grace Markus	3
+Kendell de Beer	16
+Samantha Bentley	18
+Alyssa Valente	24, 15
+Angelena Peterson	12, 5
+Elaia Berecibar	13, 3
+Margherita Pantani	14
+Olufunke Gando	1
+Viktoria Kiss	6
+Anita Radaelli	4
+Claudia Micheli	24
+Jolanta Szentpali	7
+Kinley Niles	12
+Madilyn Ekstrom	20
+Megan Tiedemann	21
+Sophia Huacuja	19
+Brianna Mullalley	4
+Catie Young	16
+Gabby Madewell	1
+Grace Coplin	13
+Jillian Hoffman	5
+Kate Eckert	7
+Kim Fay	1A, 1
+Sabrina Sherrin	12
+Tiana Wilson	6, 7
+Valerie Sorondo	10
+Victoria Jones	3
+Alaina Johnson	18
+Brianna Breason	2
+Crystal Armstrong	1B
+Emily Westlove	6
+Hannah Sallenback	9
+Samantha McGowan	8
+Abby Kishimoto	3
+Abigail Burton	19, 9, 5
+Carley Manuel	12
+Danielle Borelli	14
+Erin Haff	20
+Hannah Baker	21
+Isabella Strimling	1B, 1
+Kaitlyn Moguel	10
+Katie Monjay	1A
+Lili Castillo	11
+Maddy Bolton	17
+Mikayla Davis	5
+Alivia Garcia	10
+Delaney Hall	22
+Katelyn Rodrigue	9, 7
+Lindy Justice	13
+Nicky Rafalo	15
+Shoshana Scanlon	2
+Cassie Charles	4
+Courtney Smith	19, 9
+Jasmin Guzman	8
+Kaitlyn Kasper	1B, 1A
+Rio Tomlinson	1A, 1
+Samantha Reich	13
+Hailey Price	3
+Jaleh Moaddeli	10
 Kristen Hemmila
-Sofia Dominguez
-Sydney Kane
-Wandile Banda
-Allie Diller
-Dylan Murphy
-Jazmine Sandoval
-Jenna Wolf
-Joey Rebelo
-Madi Love
-Megan Morris
-Abby Smith
-Emma Dore
-Hailey Munoz
-Mikayla Brown
-Ryenne Ayers
-Sarah Velazco
-Shanelle Márquez
-Abigail Smith
-Adrienne Densham
-Bella Morquecho
-Elizabeth Zurawski
-Kaitlyn Goins
-Kieryn Blayone
-Leo Fowler
-Maisie Mattocks
-Payton Dowler
-Victoria Goncalves
-Charlie Monroe
-Daisy Wetherholt
-Delaney Judkins
-Emma Cramer
-Madeline McGovern
-Morgan Clark
-Aleeyse Utech
-Amanda Wolterink
-Anagabriella Guerra
-Annie Blackman
-Becky Insalaco
-Carly Romano
-Cristal Maldonado
-Emma Svantesson
-Erin Glass
-Jena Clinch
-Jesse Sworden
-Katie Appell
-Kennedy Watson
-Mackenzie Ryburn
-Meagan Marques
-Nicki Borella
-Sarah Hershey
-Stephanie Jodloman
-Jennifer Moshinsky
-Kensey Clinch
-Madison Maes
-Mason Feldstein
-Rachel Byrnes
-Chloe Kunst
-Isabella Morris
-Maddie Nye
-Rachel Morris
-Sarah O'Keefe
-Skyler Fontaine
-Alexa Anderberg
-Lindsey Mizrahi
+Sofia Dominguez	6
+Sydney Kane	1B, 1
+Wandile Banda	4
+Allie Diller	16
+Dylan Murphy	12, 6
+Jazmine Sandoval	18, 5
+Jenna Wolf	21
+Joey Rebelo	11
+Madi Love	4
+Megan Morris	3, 7, 25
+Abby Smith	10
+Emma Dore	2
+Hailey Munoz	12
+Mikayla Brown	15
+Ryenne Ayers	9
+Sarah Velazco	3
+Shanelle Márquez	4
+Abigail Smith	10
+Adrienne Densham	19
+Bella Morquecho	22
+Elizabeth Zurawski	1A
+Kaitlyn Goins	14
+Kieryn Blayone	17
+Leo Fowler	23
+Maisie Mattocks	20, 7
+Payton Dowler	18
+Victoria Goncalves	13
+Charlie Monroe	20
+Daisy Wetherholt	1B
+Delaney Judkins	1C
+Emma Cramer	21
+Madeline McGovern	26
+Morgan Clark	8
+Aleeyse Utech	2
+Amanda Wolterink	18
+Anagabriella Guerra	8
+Annie Blackman	9
+Becky Insalaco	13
+Carly Romano	19
+Cristal Maldonado	11
+Emma Svantesson	17
+Erin Glass	15
+Jena Clinch	3
+Jesse Sworden	1
+Katie Appell	7
+Kennedy Watson	12
+Mackenzie Ryburn	5
+Meagan Marques	10
+Nicki Borella	4
+Sarah Hershey	6
+Stephanie Jodloman	14
+Jennifer Moshinsky	1A, 10
+Kensey Clinch	2
+Madison Maes	1
+Mason Feldstein	12
+Rachel Byrnes	8
+Chloe Kunst	9
+Isabella Morris	20
+Maddie Nye	7
+Rachel Morris	2
+Sarah O'Keefe	1A, 1
+Skyler Fontaine	3
+Alexa Anderberg	11
+Lindsey Mizrahi	17
 Madelyn Ward
-Michaela Hershey
-Sara Marin
-Ava Gebhardt
-Cassie Anderson
-Hanna Good
-Hannah Engquist
-Madison Hoefakker
-Emma Ruttinger
-Rachel Vlietstra
-Sakura Gavin
-Allie Dombkowski
-Brean Jordan
-Fiona Saunders
-Grace Brzyski
-Marley Ramon
-Phoebe Saunders
-Alexa Corrao
-Bri Allstun
-Britney Francis
-Eva Henneman
-Gina Adiutori
-Krista Domaracki
-Kylee Cannon
-Molly Langridge
-Natalie Favazzo
-Panna Mozbauer
-Freya Green
-Marley Hanlon
-Grace Tirak
-Maryn King
-McKenzie Diplacido
+Michaela Hershey	3, 5
+Sara Marin	4, 3
+Ava Gebhardt	18
+Cassie Anderson	16
+Hanna Good	4
+Hannah Engquist	13, 7
+Madison Hoefakker	1A
+Emma Ruttinger	12
+Rachel Vlietstra	10, 2
+Sakura Gavin	14
+Allie Dombkowski	10, 6, 21
+Brean Jordan	5
+Fiona Saunders	1A
+Grace Brzyski	9
+Marley Ramon	1
+Phoebe Saunders	17
+Alexa Corrao	20
+Bri Allstun	11
+Britney Francis	16
+Eva Henneman	8
+Gina Adiutori	1a, 10
+Krista Domaracki	13
+Kylee Cannon	15
+Molly Langridge	10, 3
+Natalie Favazzo	22
+Panna Mozbauer	1b, 1A
+Freya Green	16, 6
+Marley Hanlon	4
+Grace Tirak	15
+Maryn King	22
+McKenzie Diplacido	15
 Mikaela Hernandez
-Olivia George
-Victoria Mastrangelo
-Adriana Boltes Moragues
-Bailey Dunn
-Gianna Boscacci
-Joey Roedl
-Kate Martin
-Mercedes Feliciano Fernandez
-Ali Thomason
-Allison Skaggs
-Amy Ridge
-Anna Edgington
-Caroline Anderson
-Christina O'Beck
-Danielle Johnson
-Delaney Cleveland
-Emily Browning
-Emily Sejna
-Heidi Moreland
-Jamie Nolan
-Julia Campbell
-Julia Sellers
-Kaitlyn Cozens
-Katherine Moore
-Kelly Martin
-Kim Johnson
-Kimberly Graziano
-Laura Jimenez
-Sami Pratt
-Sydney Groot
-Alex Corbett
-Arija Walsh
-Cameron Cordial
-Heidi Ritner
-Maddy Steere
-Rachel Sodokoff
-Skyler Pyle
-Brittany Prentice
-Emily Ritner
-Kathy Rogers
-Maddie O'Reilly
-Maddy Johnston
-Sara Campbell
-Sofie Pontré
-Abby Andrews
-Ava Morrant
-Erin Neustrom
-Isabelle Rocco
-Kayla Barone
-Rylee Brower
-Sidney Vranesh
-Sophie Jackson
-Abby May
-Alex Brown
-Anne Rankin
-Carter Britt
-Ella Abbott
-Grace Harbaugh
-Jess Henningsen
-Sophie Tovani
-Alison Lock
-Elise Walker
-Emily Byrne
-Kasey Umlauf
-Kata Utassy
-Libby Alsemgeest
-Lola Ciruli
-Sammi Monroe
-Ashley O'Neill
-Fiona Young
-Brooke Ingram
-Grace Walsh
-Issy Jackson
-Lulu Hirschfield
-Madie Ambrose
-Riley Chapple
-Claire Eusey
-Emilia Mladjan
-Emma Gustafsson
-Jillian Schlom
-Jordan Schneider
-Kaia Levenfeld
-Katie Delaney
-Maddy Scarth
-Sophia Panossian
-Abby Schulz
-Ari Karampetsou
-Harriet Dickens
-Maiken Pardon
-Sophia Bunnell
-Bailee Swindells
-Mariam Ndiaye
-Maya Mladjan
-Ryland Smith
-Sydney Brandvold
-Tyler Jackson
-Ana Luisa Cotta
-Emily Van Kerckhove
-Lauryn Thomas
-Lily Pullen
-Mackenzie Zenk
-Madison Szczublewski
-Mara Davis
-Rebekka Williams
-Riley Thompson
-Beatrice Vieira
-Hannah Keyser
-Hannah Sayre
-Lola Fuhs
-Naomi Sanders
-Rebecca Valentine
-Robyn Currie
-Samantha Bright
-Serena Thurman
-Sibley Kuder
-Toria Peterson
-Anna Kegel
-Annefleur ten Bloemendal
-Emily Hatcher
-Heather Lock
-Natalie Marquiss
-Pip Piper
-Shelby Diaz
-Anita Radaelli
-Breanna Wood
-Emily Myers
-Kailee Viers
-Olivia Fernie
-Taylor Wilson
-Becca Engquist
-Leilani Horan
-Maria Boix Pascual
-Rylie Johnson
-Abby Benavidez
-Claire Gebhardt
-Daniella Cervantes
-Jenna Bigelow
-Kiele Davidson
-Laila Holloway
-Lotte Schreurs
-Lucia Redaelli
-Amanda Akiyama
-Anna De Groot
-Carly Zurcher
-Claudia Oppermann
-Hi'ipoi Lee
-Kyla Houck
-Laura Chun
-Lizzy Kosin
-Mirei Yasuda
-Nina Wheeler
-Sabrina Palmer
-Zulema Iboa-Garcia
-Abby Appel
-Lori Berberian
-Monica Chernoff
-Cassidy Evans
-Chandler Luebbers
-Chelsea Evans
-Hannah Pearson
-Mika O'Shea
-SaraJoy Salib
-Abigail Lavold
-Allison Smith
-Anne Werum
-Ella Maisano
-Emily Kapins
-Michela Imperiale
-Nanki Sandhu
-Jenny Desch
-Kayla Lin
-Olivia Montgomery
-Abigail Anderson
-Aiko Leong
-Alexandra Moye
-Elizabeth Dunning
-Jillian Miller
-Koko Butcher
-Lily Collins Carson
-Marisa Lipari
-Norah Ruvalcaba
-Averylin Cummins
-Cate Sloat
-Claire Aiko Leong
-Claire Bricknell
-Ella Dunning
-Ruby Vogel
-Samantha Edgington
-Schuyler Simon-Thomas
-Sophia Green
-Emma Wilderman
-Isabella Wilde
-Rebekah Harkins
-Tori Carlson
-Ariani Ray
-Emma (Ferg) Merrill
-Estella Gray
-Hannah Lee
-Lucy Worden
-Mia Colabianchi
-Rachel Khavinson
-Charlee Spence
-Gwyneth Peterson-Hall
-Jillian Carlson
-Mia Bananis
-Sophie Cross
-Talia Thomas
-Victoria Duncan
-Aelish Guinn
-Alexis Hollinrake
-Brinnley Barthels
-Catie Mahnke
-Elise Whittall
-Ellen Tiedemann
-Gracie Smith
-Hannah Rapp
-Karolina Hlavata
-Kyra Christmas
-Lauren Holden
-Megan Torre
-Meghan Nee
-Mia Harris
-Morgan Hurley
+Olivia George	12
+Victoria Mastrangelo	2
+Adriana Boltes Moragues	16
+Bailey Dunn	5
+Gianna Boscacci	1
+Joey Roedl	17
+Kate Martin	14
+Mercedes Feliciano Fernandez	7
+Ali Thomason	22
+Allison Skaggs	10
+Amy Ridge	14
+Anna Edgington	19
+Caroline Anderson	6
+Christina O'Beck	15, 2
+Danielle Johnson	11
+Delaney Cleveland	21, 7
+Emily Browning	1
+Emily Sejna	3
+Heidi Moreland	5
+Jamie Nolan	2
+Julia Campbell	1
+Julia Sellers	17, 12
+Kaitlyn Cozens	9
+Katherine Moore	1
+Kelly Martin	8
+Kim Johnson	20, 10
+Kimberly Graziano	4
+Laura Jimenez	13
+Sami Pratt	18
+Sydney Groot	12
+Alex Corbett	17
+Arija Walsh	21
+Cameron Cordial	1
+Heidi Ritner	1
+Maddy Steere	3
+Rachel Sodokoff	14
+Skyler Pyle	15
+Brittany Prentice	5
+Emily Ritner	9
+Kathy Rogers	8
+Maddie O'Reilly	20
+Maddy Johnston	4
+Sara Campbell	1
+Sofie Pontré	11
+Abby Andrews	18
+Ava Morrant	13
+Erin Neustrom	17, 7
+Isabelle Rocco	21
+Kayla Barone	2
+Rylee Brower	16
+Sidney Vranesh	6
+Sophie Jackson	1
+Abby May	3
+Alex Brown	1
+Anne Rankin	5
+Carter Britt	10
+Ella Abbott	12
+Grace Harbaugh	22, 4
+Jess Henningsen	16, 8
+Sophie Tovani	17, 12
+Alison Lock	18
+Elise Walker	15
+Emily Byrne	4
+Kasey Umlauf	24, 14, 13
+Kata Utassy	23, 5
+Libby Alsemgeest	10
+Lola Ciruli	19, 9
+Sammi Monroe	6
+Ashley O'Neill	16, 3
+Fiona Young	24, 11
+Brooke Ingram	16, 12
+Grace Walsh	1
+Issy Jackson	2
+Lulu Hirschfield	21
+Madie Ambrose	1
+Riley Chapple	22
+Claire Eusey	23
+Emilia Mladjan	17, 5
+Emma Gustafsson	14
+Jillian Schlom	7
+Jordan Schneider	24, 6
+Kaia Levenfeld	4
+Katie Delaney	1
+Maddy Scarth	16, 9
+Sophia Panossian	19
+Abby Schulz	15, 8
+Ari Karampetsou	11
+Harriet Dickens	10
+Maiken Pardon	5
+Sophia Bunnell	1
+Bailee Swindells	3
+Mariam Ndiaye	15
+Maya Mladjan	13
+Ryland Smith	18
+Sydney Brandvold	7
+Tyler Jackson	1
+Ana Luisa Cotta	6
+Emily Van Kerckhove	14
+Lauryn Thomas	7
+Lily Pullen	13
+Mackenzie Zenk	5
+Madison Szczublewski	4, 13
+Mara Davis	9
+Rebekka Williams	1
+Riley Thompson	16
+Beatrice Vieira	2
+Hannah Keyser	1, 1b
+Hannah Sayre	20
+Lola Fuhs	3
+Naomi Sanders	11
+Rebecca Valentine	8
+Robyn Currie	5
+Samantha Bright	1, 1a
+Serena Thurman	15
+Sibley Kuder	1
+Toria Peterson	12
+Anna Kegel	11, 4
+Annefleur ten Bloemendal	7
+Emily Hatcher	13, 10
+Heather Lock	10
+Natalie Marquiss	17, 6
+Pip Piper	1
+Shelby Diaz	22
+Anita Radaelli	15
+Breanna Wood	23, 18, 12
+Emily Myers	17
+Kailee Viers	7
+Olivia Fernie	1a, 1
+Taylor Wilson	21
+Becca Engquist	1a
+Leilani Horan	11
+Maria Boix Pascual	12
+Rylie Johnson	14
+Abby Benavidez	8
+Claire Gebhardt	15
+Daniella Cervantes	1A
+Jenna Bigelow	2
+Kiele Davidson	13
+Laila Holloway	9
+Lotte Schreurs	3
+Lucia Redaelli	5
+Amanda Akiyama	7
+Anna De Groot	1
+Carly Zurcher	6
+Claudia Oppermann	2
+Hi'ipoi Lee	4
+Kyla Houck	11
+Laura Chun	3
+Lizzy Kosin	17
+Mirei Yasuda	12
+Nina Wheeler	9
+Sabrina Palmer	13
+Zulema Iboa-Garcia	14
+Abby Appel	3
+Lori Berberian	8
+Monica Chernoff	9
+Cassidy Evans	5
+Chandler Luebbers	3
+Chelsea Evans	12
+Hannah Pearson	11
+Mika O'Shea	1
+SaraJoy Salib	21
+Abigail Lavold	14
+Allison Smith	1A, 1
+Anne Werum	4
+Ella Maisano	1b
+Emily Kapins	7
+Michela Imperiale	11
+Nanki Sandhu	13
+Jenny Desch	2
+Kayla Lin	10
+Olivia Montgomery	12
+Abigail Anderson	18
+Aiko Leong	17
+Alexandra Moye	1A, 1
+Elizabeth Dunning	9
+Jillian Miller	5
+Koko Butcher	8
+Lily Collins Carson	2
+Marisa Lipari	6
+Norah Ruvalcaba	3
+Averylin Cummins	13
+Cate Sloat	15
+Claire Aiko Leong	17
+Claire Bricknell	14
+Ella Dunning	9
+Ruby Vogel	11
+Samantha Edgington	4
+Schuyler Simon-Thomas	19, 9
+Sophia Green	7
+Emma Wilderman	7
+Isabella Wilde	12
+Rebekah Harkins	2
+Tori Carlson	10
+Ariani Ray	16
+Emma (Ferg) Merrill	22, 4
+Estella Gray	5
+Hannah Lee	2
+Lucy Worden	13
+Mia Colabianchi	6
+Rachel Khavinson	17
+Charlee Spence	1
+Gwyneth Peterson-Hall	14
+Jillian Carlson	10
+Mia Bananis	1A
+Sophie Cross	3
+Talia Thomas	18
+Victoria Duncan	21
+Aelish Guinn	4
+Alexis Hollinrake	1
+Brinnley Barthels	3
+Catie Mahnke	16
+Elise Whittall	17
+Ellen Tiedemann	6
+Gracie Smith	7
+Hannah Rapp	11
+Karolina Hlavata	12
+Kyra Christmas	8
+Lauren Holden	14
+Megan Torre	9
+Meghan Nee	1
+Mia Harris	1
+Morgan Hurley	13
 RS Samantha Pfaff
-Rachel Krieger
-Viktoria Szmodics
-Cameron Williams
-Jennifer Guise
-Kennedy Watson
-Mariana Duarte
-Samantha Pfaff
-Truly Dorland
-Viktoria Tamas
-Brooke Contreras
-Kamryn Lucero
-Sarah DeFusco
-Savannah Fitzgerald
-Zoee Sanchez
-Ana Martinez do Amaral
-Brianna Utas
-Clara Vulpisi
-Emma Myall
-Julia Leonardini
-Lucy Davis
-MerryDannelle Wilson
-Mia Garcia
-Toula Falvey
-Aristiana Modica
-Natalie Hosmer
-Annikah Lillie
-Daniela Schumacher
-Emanuella Nathan
-Helen McGrath
-Isabelle Knittle
-June Akpata
-Megan Acosta
-Sofia Leonardini
-Addison McGowan
-Ashley Morris
-Erin Kaprelian
-Hila Futorian
-Ilyana Zlobinsky
-Lucia Sarimsakci
-Szamira Koppány
-Alicia Petkov
-Dora Alaksza
-Natalie Johnston
-Noemi Alaksza
-Amaya Leiby
-Anna Crum
-Ariel Cordova
-Ella Cowan
-Hailey Williams
-Lily Van Putten
-Maja Lizy Dulic
-Millie Jacobson
-Natasha Dykman
+Rachel Krieger	22
+Viktoria Szmodics	10
+Cameron Williams	9
+Jennifer Guise	17
+Kennedy Watson	13
+Mariana Duarte	5
+Samantha Pfaff	1
+Truly Dorland	2
+Viktoria Tamas	7
+Brooke Contreras	16
+Kamryn Lucero	6
+Sarah DeFusco	14
+Savannah Fitzgerald	15
+Zoee Sanchez	18, 14
+Ana Martinez do Amaral	11, 10
+Brianna Utas	18, 11, 6
+Clara Vulpisi	1
+Emma Myall	21, 8
+Julia Leonardini	19
+Lucy Davis	12
+MerryDannelle Wilson	22, 13
+Mia Garcia	4, 3
+Toula Falvey	13, 3
+Aristiana Modica	18, 7
+Natalie Hosmer	20
+Annikah Lillie	9
+Daniela Schumacher	24
+Emanuella Nathan	1B
+Helen McGrath	1C, 1B
+Isabelle Knittle	1A, 1B
+June Akpata	17, 11
+Megan Acosta	1D, 1C, 1A
+Sofia Leonardini	19, 2
+Addison McGowan	16, 2
+Ashley Morris	17, 12
+Erin Kaprelian	18
+Hila Futorian	14, 13, 6
+Ilyana Zlobinsky	15, 10
+Lucia Sarimsakci	24
+Szamira Koppány	23
+Alicia Petkov	5, 3, 2
+Dora Alaksza	4
+Natalie Johnston	5, 14
+Noemi Alaksza	8
+Amaya Leiby	17, 7
+Anna Crum	16, 11
+Ariel Cordova	19, 9
+Ella Cowan	22
+Hailey Williams	7
+Lily Van Putten	20, 12, 23
+Maja Lizy Dulic	1
+Millie Jacobson	18
+Natasha Dykman	13, 21
 RS Alicia Petkov
-Sierra Cavano
-Tèa Fitzgerald
-Avery Gallucci
-Kyra Lurito
-Laurel Cooper
-Lillian Ecklund
-Olivia Turney
-Penny Cowan
+Sierra Cavano	14, 5
+Tèa Fitzgerald	15
+Avery Gallucci	16
+Kyra Lurito	20
+Laurel Cooper	1A
+Lillian Ecklund	1B
+Olivia Turney	17, 14
+Penny Cowan	13, 3
 RS Noemi Alaksza
-Chloe Morgan
-Eleni Ikonomou
-Laia Marsinach Ortega
-Lauren Davis
-Lauryn Lucero
-Maria Ikonomou
+Chloe Morgan	6
+Eleni Ikonomou	10
+Laia Marsinach Ortega	17
+Lauren Davis	21
+Lauryn Lucero	5
+Maria Ikonomou	16
 RS Dora Alaksza
 RS Giselle Orson
 RS Paige Elder
-Sophie Pethers
-Ahsha Earwood
-Anna Yu
-Bella Villa
-Chessa Burke
-Christina Williamson
-Crystal Huang
-Erica Halaszynski
-Esma Dollaku
-Hope Grant
-Janelle Lewis
-Jocelyn Castro
-Kahea Kahaulelio
-Kyla Pickell
-Maddie Kauahi
-Morgan McCracken
-Morgan Stockham
-Natalie Hill
-Nohea Kahaulelio
-Samantha Martinez
-Sasha Newton
-Colleen Woo
-Haley Crabtree
-Isabel Natalia Wiesenthal
-Natasha Rosenthal
-Allison Sullivan Wu
-Jessie Nesbit
-Katherine Cullen
-Lucie Abele
-Nadia Paquin
-Aurora Sheridan
-Isabella Phillips
-Madison Lewis
-Paulina Correa
+Sophie Pethers	24
+Ahsha Earwood	1
+Anna Yu	2
+Bella Villa	16, 6
+Chessa Burke	10
+Christina Williamson	8
+Crystal Huang	15, 14
+Erica Halaszynski	12
+Esma Dollaku	20, 10
+Hope Grant	6
+Janelle Lewis	14, 8
+Jocelyn Castro	3
+Kahea Kahaulelio	7
+Kyla Pickell	13
+Maddie Kauahi	18
+Morgan McCracken	11
+Morgan Stockham	1A, 1
+Natalie Hill	5
+Nohea Kahaulelio	9
+Samantha Martinez	4
+Sasha Newton	17
+Colleen Woo	17
+Haley Crabtree	1A, 1
+Isabel Natalia Wiesenthal	15, 3
+Natasha Rosenthal	18
+Allison Sullivan Wu	12, 5
+Jessie Nesbit	17, 11
+Katherine Cullen	11, 4
+Lucie Abele	15, 8
+Nadia Paquin	16, 6
+Aurora Sheridan	2
+Isabella Phillips	9
+Madison Lewis	7
+Paulina Correa	12, 16
 Adigail Wiesenthal
-Alessandra Wong
+Alessandra Wong	20
 Christina Marchese
-Emilia Zientara
-May Lin
-Namlhun Jachung
-Nelia Perry
-Abigail Wiesenthal
-Alexandra Szczerba
-Ellie Montoro
-Jessy Nesbit
-Kaylee Stigar
-Kit Bennett
-Lulu Gaither
-Nikki Rubottom
-Zosia Amberger
-Ayva Magna
-Bella McGowan
-Brienz Lang
-Gabby Lewis
-Lauren Smith
-Lauren Valentin
-Mia Amberger
-Sydney Bianchi
-Ava Bennett
-Harper Casey-Housand
-Lisbon Zeigler
-Natalie Sullivan Wu
-Paityn Richardson
-Sara Archer
-Thea Pine
-Ava Gurney
-Chloe Mei Espinosa
-Diana Khaled Hattar
-Ella Debenham
-Emma Jackson
-Josephine Panner
-Layla Szymczak
-Natalie Ascorra
-Sophia Berger
-Sydney Bowns
-Celia Young
-Isabella Dova
-Isabelle Nicole
-Kailoa Kerber
-Katie Hugar
-Rasma Rotsart
-Sienna Bertsch
-Vivienne Wood
-Charlotte Valentine
-Chelsea Johnson
-Eliza Britt
-Emily Smith
-Haley Wan
-Hannah Lapkin
-Helena van Brande
-Lindsey Kelleher
-Margarita Orlova
-Morgan Hallock
-Pippa Temple
-Sydney Cheong
-Sydney Saxe
-Abbey Blake
-Amy Castellano
-Ashleigh Johnson
-Kasey Bersh
-Maddy Damato
-Natalie Grayson
-Tatum Turetzky
-Kailie McGeoy
-Maddie Pendolino
-Marissa Webb
-Paige Thompson
-Sarah Lawson
-Alana Evans
-Annie Robinson
-Isabel Zaller
-Jamie Kim
-Laura Larkin
-Nicole Kresich
-Sophie Kader
-CiCi Stewart
-Genevieve Fraipont
-Maisie McPherson
-Mindy Pang
-Bella Moscoe
-Dallas Brodersen
-Delainey Whelan
-Kaila Carroll
-Meera Burghardt
-Alexa Kourepenos
-Grace Houlahan
-Jovana Sekulic
-Kate Mallery
-Kayla Yelensky
-Rachael Carver
-Alyssa Woolley
-Ava Houlahan
-Celine Ho
-Lindsey Lucas
-Shanna Davidson
-Sophie Johnson
-Ally Lurie
-CJ Weigel
-Charlotte Riches
-Olivia Krotts
-Emese Batizi
-Hadley Harbilas
-Kendall Wyer
-Margaret Brandin
-Abby Folk
-Didi Evans
-Katie McCullough
-Sophie Bollyky Purcell
-Vivian Golub
-AC Lopez
-Alana Flaherty
-Alea Weber
-Allison Totzke
-Annie Kinney
-Breanna O'Dea
-Caitlyn Freeman
-Carmen Gardner
-Chum Alvarez-Zakson
-Erin Tait
-Jordan Greene
-Katelyn Jenkins
-Kelly Grosswendt
-Kolby Kahahawai
-MaryKate Hunter
-Maurisa Major
-Michelle Na
-Rachel Haney
-Rachel Nelson
-Sabrina Scoggin
-Sami Walker
-Stefanie Goldbach
-Taylor Christie
-Wendy McAleer
-Courtney Gray
-Olivia Allen
-Samantha Lopez
-Alina Waldo
-August Key
-Jena Suzuki
-Kalli Vellis
-Katelynn Holloman
-Kayla Takakura
-Kelly Klish
-Marie Sandstrom
-Sarah Draves
-Ally Feeley
-Holly Kvanvig
-Hunter Olivier
-Nicolette Ramirez
-Alyssa Baratelle
-Alyssa Lougee
-Erin Ross
-Katrina Nielsen
-Keegan Reeder
-Tori Zielinski
-Courtney Sawin
-Emily Feliciano
-Hailey Guerrero
-Kaitlynn Pierceall
-Sofia Portello
-Alexandria Feeley
-Anika Lundbaek
-Breanna Bailey
-Christine Chua
-Danielle Cary
-Emma Parker
-Hannah Long
-Rachel Lamb
-Sydney Sereg
-Ainsley Killian
-Gianna Ratto
-Olly Vadkerti
-Sarah Sinclair
-Abby Springer
-Alyssa Sorrell
-Evelyn Teeter
-Katelyn Dwelley
-Lucia Notaro
-Marlie Potocki
-1A/2 Aubree Nabors
-Daisy Rojo
-Jamie Masters
-Kaile Itow
-Kennedy Mobley
-Nora Jackson
-Teagan May
-Aubree Nabors
-Aubrey Stevenson
-Brooklyn Green
-Elena Sanchez Alcaraz
-Emberly De La Vega
-Katie Raber
-Kiera Federline
-Natalie Abril
-Sam Gould
-Sofia Mather
-Annefleur ten Bloemendal
-Beatrice Popescu
-Camryn Cotter
-Chloe Woodbine
-Erika Cates
-Erin Zappia
-Margherita Garibbo
-Maryanna Antoniou
-Philippa Piper
-Tanya Lopez
-Courtney O'Shaughnessy
-Elizabeth Elliott
-Camila Sanchez Gomez
-Faith Hinkley
-Heather Lock
-Jojo DeSalvo
-Kimbrel Kunz
-Lola Gill
-Morgan Riordan
-Sierra Maze
-Taeghen Hack
-Abigail Hopkins
-Alexa Corrao
-Alexis Kilgroe
-Cameron Rowan
-Emma Halle
-Hally Loper
-JoJo DeSalvo
-Madisyn Nye
-Melia Orozco
-Shemiyah Ross
-Tzar Wood
-Victoria Madrigal
-Claudia Cziernawski
-Courtney Repinz
-Emma Donnelly
-Faith Stewart
-Iris Oudshoorn
-Keri Brooks
-Lorelai Weaver
-Mackenzie Hamilton
-Rylee Snow
-Emily Low
-Ivani Kamidoi
-Kara Wicht
-Avery Sturdevant
-Delaney Woodward
-Emily Rosa
-Kristen Hemmila
-Leila Maynard
-Lucy Bramwell
-Milica Zelic
-Morgan Fenner
-Madeline Nelson
-Matipa Karimazondo
-Sheridan Hamilton
-Tilly Hale
-Alyssa Diacono
-Amanda Macdonald
-Angela Russo
-Brigette Kimbrough
-Caroline Israels
-Courtney Jarvis
-Elizabeth Bilz
-Emily Lowell
-Hannah Carrillo
-Ioli Benekou
-Kathleen McDonnell
-Katrina King
-Katy Schneider
-Makena Magro
-Malia Magro
-Marina Bazan
-Maura Cantoni
-Mikayla Vessey
-Montana Jackson
-Nika Sedghi
-Nikole Ferrari
-Paola Vizcarra
-Rachel Mitchell
-Sarah Crist
-Tayla Walsh
-Taylor Gums
-Casia Morrison
-Delaney Parks
-Isabelle Hastings
-Jane Ferguson
-Kaela Codo
-Kate McDonnell
-Lizzy Bilz
-Maddy Parenteau
-Paige Miller
-Rachel Thompson
-Shelby Kraft
-Tatyanna Barr
-Ariana Koch
-Dani D'Andrea
-Emily Bennett
-Haley Hagerty
-Isabella Solis
-Karli Canale
-Lindsy Peterson
-Lucia Carballo
-Maddie Higginson
-Mary Myers
-Mia Harris
-Taylor York
-Catalina Gillis
-Delaney Binette
-Jessica Leckich
-Katie Verdugo
-Madison Weiglein
-Samantha Loughlin
-Spencer Samuel
-Sydney Hurst
-Zoe Morgan
-Dayna Bond
-Grace Halliday
-Jordan Duggan
-Jordann Heimback
-Katherine Garcia
-Katie Ratcliff
-Nicole Iturraran
-Rory Nuuhiwa
-Taylor Hensley
-Adrina Daniel
-Caroline Wilkins
-Faith Cerussi
-Gwen Gardner
-Kendall Houck
-Kori Bento
-Laurene Padilla
-Paige Goemer
-Raquel de Pinho
-Amanda Chambers
-Brooke Lee
-Danni Croteau
-Kelly Villanueva
-Klara Goldstein
-Natalie Swank
-Rose Kanemy
-Sofia Righetti
-Sydney Spence
-Amanda Legaspi
-Claudia Valdes
-Ella Wiegand
-Hannah Bell
-Mandy Lagerlof
-Molly Blosser
-Shannon Murphy
-Sydney Gish
-Tiaare Ahovelo
-Ava Ratajczak
-Daphne Wilder
-Elena Pena
-Holliss Munchoff
-Lucy Bullock
-Makena Macedo
-Mary Comiskey
-Mimi Stoupas
-Sammi Byers
-Aiyana Mendoza
-Delanney Ewing
-Gabrielle Muehring
-Julianne Stark
-Luna Sarmiento
-Megan Holcomb
-Sierra Johnson
-Anay Smith
-Avery Sullivan
-Ioanna Petiki
-Kyla Pranajaya
-Mackenzie Dollander
-Marie Fehring
-Natalia Barrot
-Poppy Phillips
-Alicia Magliocco
-Bailey Sprague
-Brittany Krappe
-Cara Robinson
-Carla Vilanova
-Catarina Villanueva
-Donia Momen
-Giuliana Tragitt
-Jessica Harris
-Kelli Leabo
-Klaudia Paradi
-McKenna Yates
-Michelle Taikeff
-Molly Kaster
-Morgan Jones
-Rae Lekness
-Sara Northam
-Shannon Spence
-Sheila Jensen
-Sierra Painter
-Tayler Peters
-Tessa Draper
-Vanessa Elgohary
-Caroline Kerwin
-Jacqui Maisey
-Jennifer Liu
-Jordan Milich-Misikini
-Katelynn Thompson
-Kathryn Elgin
-Abigail Lee
-Anna Maria Luther
-Chloe Casey
-Clarissa Wandinger
-Emma Hank
-Hannah Henry
-Isabella Schmidt
-Jaime Pitcher
-Lili Urvari
-Mala Godinez
-Matilda Moore
-Natalie Hosmer
-Olga Descalzi
-Riley Agerbeek
-Sophia Reyes
-Sophie Spivack
-Tyanna Supreme
-Bailey Stubblefield
-Lior Ben David
-Zsofia Botka
-Elaina Davey
-Ryann Lucchesi
-Brooklyn Behenna
-Cila David
-Kielle Leggo
-Lauren Woolley
-Lucy Miszewski
-Maiken Pardon
-Reiley Burton
-Renee Fleming
-Belene Rodriguez
-Catie Kelly
-Genevieve Larkin
-Ivanna Anderson-Villela
-Kylee Jansen
-Rudra Hariharan
-Sinia Plotz
-Tatianna Raffin
-Darcy Spark
-Emma Ruzic
-Grace Smith
-Jennine Osorio
-Mackenzy Clark
-Paxtyn Reihs
-Rose Jensen
-Vanessa McNabb
-Zsofia Hadju
-Bridget Cranley
-Isabella Adams
-Jessica Ross
-Luciana Grooms
-Megan Ledgerwood
-Nynke Willemsen
-Rachel Williams
-Sally Gonzalez Aguilar
-Sarah Woren
-Tasaria Kilpatrick
-Amelia Lukie
-Larke Eslinger
-Makayla McGuire
-Marte Skibba
-Sienna Cimoli
-Sydney Poore
-Taylor Fisher
-Annie Eldredge
-Blair Akerland
-Cathy Cantoni
-Elizabeth Anderson
-Elle Surber
-Ellise Floreani
-Erin Sheridan
-Francesca Puccinelli
-Hannah Buck
-Kathryn Burke
-Keri Clifford
-Lauren Paxton
-Liliana King-Adas
-Mara Dominguez
-Paige Kohut
-Susan Providenza
-Sydni Estrella
-Catherine Bick
-Emma Allegrucci
-Hailey Eberle
-Katie Francis
-Lydia Dadd
-Maddie Macdonald
-Madison Gomes
-Maggie Ireland
-Maggie Oys
-Nicole Blaney
-Alexa Grau
-Gabi Sicat
-Julia Mozilo
-Kelly Frumkin
-Kendra Bean
-Lauren Dillon
-Maddie Perna
-Maddy Gomes
-Mia Battilega
-Sally Ferguson
-Annika Disney
-Anuhea Ledesma
-Grace Kavanagh
-Lauren Baglietto
-Lauren Voss
-Abby Fleming
-Halley Seed
-Harper Daniels
-Jamie Robinson
-Malena Nguyen
-Natalie Brauser
-Adelina Hernandez
-Chloe Morrison
-Elle Fredrickson
-Liyara Senadheera
-Maddie Clough
-Alyssa Jacobsen
-Francesca Moynihan
-Georgia Lewis
-Hannah Hoeptner
-Kate Rodman
-Libby Slater
-Nina Damjanac
-Sophia Harvey
-Zoe Sloat
-Avary Torres
-Megan Chambliss
-Mila Erceg
-Stephanie Nelson
-Sydney Maccabe
-Airi Seib
-Annika Burks
-Calla Troxel
-Evelyn McLaughlin
-Haley Tassell
-Malaya Wright
-Mia Barkett
-Chloe Rizof
-Fritzi Warneke
-Khloe Tarbet
-Lia Lakis
-London Menard
-Makenna Genco
-Mikayla Crowe
-Ava Wells
-Hailey Romano
-Julia Ernsting
-Reese Artura
-Carly Jackson-Clark
-Clare Bryar
-Daniella Fuertes
-Emmah Boquette
-Fiona Dretzka
-Kennedy Joseph
-Madison Obata
-Nichol Feldtz
-Rachel Goldstein
-Samantha Voelker
-Sara Lopez
-Sarah Abbott
-Taylor Young
-Terez Touhey
-Diana Fernandez
-Kayla Engleman
-Rachel Brown
-Anna Borton
-Kristen Burger
-Lauren Howe
-Sophia Torres
-Bianca Prinsloo
-Georgia Vargas
-Anna Mossakowski
-Danni Croteau
-Grace Boeve
-Lily Graham
-Maggie Verduijn
-Sydney Jones
-Bianca Reinisch
-Caroline Behr
-Emelene Burek
-Emma Hernandez
-Kaley Bigley
-Mackenzie Peters
-Sydney Arnold
-Ashley Chand
-Cece White
-Emma Nosenchuck
-Maria Mossakowski
-Nayeli Cisneros
-Audrey Lacey
-Bianca Kennerley
-Catherine Morin
-Clarisa Robles
-Finn Magill
-Mackenzie Russell
-Parker Thomas
-Samantha Varrie
-Stella Chopskie
-Arwen Castillo
-Ava Pawlik
-Catherine Williamson
-GayLynn Kirn
-Lucia Fernandez Caballero
-Maggie Frye
-Olivia Smith
-Quincy Frommelt
-Rebecca Currie
-Sarah Tenney
-Allyson Ricciardi
-Ava Vesey
-Julia Hough
-Savana Slaughter
-Annika Hayduchok
-Georgia Ellison
-Jade Arnold
-Jalia Kacsh
-Keygan Monahan
-Sawyer Weakland
-Sienna Hoff
-Anna Yelizarova
-Cassidy Papa
-Cassidy Wiley
-Dani Jackovich
-Gabby Stone
-Gurpreet Sohi
-Jamie Neushul
-Jordan Raney
-Julia Hermann
-Kat Klass
-Katie Dudley
-Lauren Norheim
-Mackenzie Wiley
-Madison Berggren
-Maggie Steffens
-Natalie Chun
-Rachel Johnson
-Shannon Cleary
-Sophia Monaghan
-Sophia Stefan
-Emalia Eichelberger
-Hannah Shabb
-Kayla Constandse
-Lauren Bywater
-Makenzie Fischer
-Anna Rajaratnam
-Aria Fischer
-Bella Baldridge
-Kit Sturm
-Sarah Klass
-Sophie Maguy
-Chloe Harbilas
-Lauren Indart
-Madison Stamen
-Ryann Neushul
-Sophia Zamoyski
-Thea Walsh
-Emily Blackwell
-Floranne Carroll
-Hannah Constandse
-Katie Lyons
-Lexi Rowell
-Sophie Wallace
-Celeste Wijnbelt
-Christina Hicks
-Jewel Roemer
-Maya Avital
-Megan Peterson
-Sam Sternfels
-Skyler Jones
-Talie Wilmans
-Alissa Pascual
-Bella Bachler
-Eleanor Facey
-Ella Woodhead
-Jackie King
-Jenna Flynn
-Kai Blankenship
-Kate Morgan
-Maggie Hawkins
-Serena Browne
-Shaye Story
-Sophia Sanders
-Avery Montiel
-Christine Carpenter
-Kamryn Barone
-Quinn Healy
-Reagan McEachen
-AliMarie DePrez
-Amber Nowaczek
-Claire Minton
-Izzy Scott
-Juliette Dhalluin
-Makenna Stretz
-Sydney Lowell
-Addison Parrish
-Cici De Luca
-Lucy Haaland-Ford
-Natalia Szczerba
-Reagan Weir
-Sienna Green
+Emilia Zientara	13
+May Lin	1
+Namlhun Jachung	10
+Nelia Perry	9
+Abigail Wiesenthal	3
+Alexandra Szczerba	21, 8
+Ellie Montoro	15
+Jessy Nesbit	11
+Kaylee Stigar	16, 4
+Kit Bennett	18, 6
+Lulu Gaither	19
+Nikki Rubottom	22, 11
+Zosia Amberger	1A, 1
+Ayva Magna	5
+Bella McGowan	14
+Brienz Lang	13, 8
+Gabby Lewis	9
+Lauren Smith	15
+Lauren Valentin	20
+Mia Amberger	12, 2
+Sydney Bianchi	2
+Ava Bennett	21
+Harper Casey-Housand	13
+Lisbon Zeigler	17, 7
+Natalie Sullivan Wu	18, 3
+Paityn Richardson	22, 11
+Sara Archer	16
+Thea Pine	1A
+Ava Gurney	18
+Chloe Mei Espinosa	21
+Diana Khaled Hattar	10
+Ella Debenham	1B, 1
+Emma Jackson	27, 24
+Josephine Panner	1C
+Layla Szymczak	15, 10
+Natalie Ascorra	25, 15
+Sophia Berger	17
+Sydney Bowns	26, 12
+Celia Young	22
+Isabella Dova	1A
+Isabelle Nicole	23
+Kailoa Kerber	4
+Katie Hugar	6
+Rasma Rotsart	19
+Sienna Bertsch	1C
+Vivienne Wood	1B
+Charlotte Valentine	11
+Chelsea Johnson	2
+Eliza Britt	6, 10
+Emily Smith	5
+Haley Wan	3
+Hannah Lapkin	8
+Helena van Brande	1
+Lindsey Kelleher	18
+Margarita Orlova	7, 9
+Morgan Hallock	9
+Pippa Temple	10
+Sydney Cheong	4
+Sydney Saxe	14
+Abbey Blake	13
+Amy Castellano	12
+Ashleigh Johnson	1
+Kasey Bersh	1
+Maddy Damato	7, 11
+Natalie Grayson	6, 8
+Tatum Turetzky	5
+Kailie McGeoy	9, 7
+Maddie Pendolino	15, 3
+Marissa Webb	1
+Paige Thompson	7
+Sarah Lawson	6
+Alana Evans	5
+Annie Robinson	15, 10
+Isabel Zaller	1
+Jamie Kim	16
+Laura Larkin	2
+Nicole Kresich	4
+Sophie Kader	14
+CiCi Stewart	11, 6
+Genevieve Fraipont	8, 7
+Maisie McPherson	14
+Mindy Pang	13, 12
+Bella Moscoe	15
+Dallas Brodersen	18
+Delainey Whelan	13, 3
+Kaila Carroll	9
+Meera Burghardt	17, 11
+Alexa Kourepenos	1
+Grace Houlahan	13, 7
+Jovana Sekulic	8
+Kate Mallery	19, 4
+Kayla Yelensky	20
+Rachael Carver	17, 5
+Alyssa Woolley	21, 10
+Ava Houlahan	14
+Celine Ho	18
+Lindsey Lucas	1
+Shanna Davidson	16, 2
+Sophie Johnson	19, 12
+Ally Lurie	13, 12, 9
+CJ Weigel	1
+Charlotte Riches	16, 8, 4
+Olivia Krotts	3, 6
+Emese Batizi	10, 5
+Hadley Harbilas	11, 7
+Kendall Wyer	13
+Margaret Brandin	3
+Abby Folk	11
+Didi Evans	10
+Katie McCullough	8
+Sophie Bollyky Purcell	1
+Vivian Golub	12
+AC Lopez	1
+Alana Flaherty	14
+Alea Weber	9
+Allison Totzke	1
+Annie Kinney	2
+Breanna O'Dea	19, 2
+Caitlyn Freeman	3
+Carmen Gardner	1, 3
+Chum Alvarez-Zakson	4
+Erin Tait	5
+Jordan Greene	10
+Katelyn Jenkins	1, 4
+Kelly Grosswendt	1
+Kolby Kahahawai	15
+MaryKate Hunter	18
+Maurisa Major	16
+Michelle Na	8
+Rachel Haney	11
+Rachel Nelson	6
+Sabrina Scoggin	17
+Sami Walker	12
+Stefanie Goldbach	13, 7
+Taylor Christie	7
+Wendy McAleer	20
+Courtney Gray	19, 9
+Olivia Allen	11
+Samantha Lopez	5
+Alina Waldo	14
+August Key	5
+Jena Suzuki	16
+Kalli Vellis	18
+Katelynn Holloman	10
+Kayla Takakura	17
+Kelly Klish	13, 8
+Marie Sandstrom	19
+Sarah Draves	6
+Ally Feeley	11
+Holly Kvanvig	7
+Hunter Olivier	5
+Nicolette Ramirez	8, 12
+Alyssa Baratelle	2
+Alyssa Lougee	4
+Erin Ross	1
+Katrina Nielsen	3
+Keegan Reeder	13
+Tori Zielinski	1
+Courtney Sawin	12, 13
+Emily Feliciano	15, 5
+Hailey Guerrero	16, 4
+Kaitlynn Pierceall	9
+Sofia Portello	12
+Alexandria Feeley	11
+Anika Lundbaek	16
+Breanna Bailey	6
+Christine Chua	17
+Danielle Cary	8
+Emma Parker	24
+Hannah Long	10
+Rachel Lamb	2
+Sydney Sereg	22
+Ainsley Killian	4, 7
+Gianna Ratto	19, 9
+Olly Vadkerti	1A
+Sarah Sinclair	5
+Abby Springer	8
+Alyssa Sorrell	15
+Evelyn Teeter	1
+Katelyn Dwelley	3
+Lucia Notaro	10
+Marlie Potocki	14
+1A/2 Aubree Nabors	1A/2
+Daisy Rojo	1
+Jamie Masters	8
+Kaile Itow	5
+Kennedy Mobley	4
+Nora Jackson	22
+Teagan May	6
+Aubree Nabors	2
+Aubrey Stevenson	28
+Brooklyn Green	12
+Elena Sanchez Alcaraz	1B
+Emberly De La Vega	20
+Katie Raber	13
+Kiera Federline	8
+Natalie Abril	1A
+Sam Gould	1C
+Sofia Mather	1
+Annefleur ten Bloemendal	2
+Beatrice Popescu	10
+Camryn Cotter	14
+Chloe Woodbine	7
+Erika Cates	13
+Erin Zappia	11
+Margherita Garibbo	5
+Maryanna Antoniou	6
+Philippa Piper	1
+Tanya Lopez	3
+Courtney O'Shaughnessy	3
+Elizabeth Elliott	4
+Camila Sanchez Gomez	12/1A, 1C
+Faith Hinkley	13
+Heather Lock	6
+Jojo DeSalvo	18
+Kimbrel Kunz	1B
+Lola Gill	9
+Morgan Riordan	17
+Sierra Maze	10
+Taeghen Hack	8
+Abigail Hopkins	19
+Alexa Corrao	20
+Alexis Kilgroe	13/1A, 13
+Cameron Rowan	21
+Emma Halle	4
+Hally Loper	1B
+JoJo DeSalvo	18
+Madisyn Nye	12
+Melia Orozco	23, 7
+Shemiyah Ross	24, 12
+Tzar Wood	16
+Victoria Madrigal	15
+Claudia Cziernawski	16
+Courtney Repinz	5
+Emma Donnelly	22, 10
+Faith Stewart	11
+Iris Oudshoorn	6
+Keri Brooks	15
+Lorelai Weaver	1
+Mackenzie Hamilton	9
+Rylee Snow	2
+Emily Low	1A
+Ivani Kamidoi	12
+Kara Wicht	2
+Avery Sturdevant	14
+Delaney Woodward	8
+Emily Rosa	4
+Kristen Hemmila	13, 13/1A
+Leila Maynard	12
+Lucy Bramwell	3
+Milica Zelic	20
+Morgan Fenner	1B
+Madeline Nelson	17
+Matipa Karimazondo	11
+Sheridan Hamilton	7
+Tilly Hale	4
+Alyssa Diacono	17
+Amanda Macdonald	23
+Angela Russo	18
+Brigette Kimbrough	19
+Caroline Israels	4
+Courtney Jarvis	2
+Elizabeth Bilz	16
+Emily Lowell	1
+Hannah Carrillo	12, 10
+Ioli Benekou	7
+Kathleen McDonnell	1
+Katrina King	15
+Katy Schneider	11
+Makena Magro	5
+Malia Magro	14
+Marina Bazan	21
+Maura Cantoni	1
+Mikayla Vessey	9
+Montana Jackson	1
+Nika Sedghi	10
+Nikole Ferrari	6
+Paola Vizcarra	20
+Rachel Mitchell	1
+Sarah Crist	13
+Tayla Walsh	3
+Taylor Gums	8
+Casia Morrison	8
+Delaney Parks	12
+Isabelle Hastings	21, 6
+Jane Ferguson	99
+Kaela Codo	99
+Kate McDonnell	1
+Lizzy Bilz	16
+Maddy Parenteau	3, 5
+Paige Miller	1
+Rachel Thompson	23
+Shelby Kraft	6, 7
+Tatyanna Barr	99, 17
+Ariana Koch	24
+Dani D'Andrea	22, 12
+Emily Bennett	13, 2
+Haley Hagerty	19
+Isabella Solis	21
+Karli Canale	4, 14
+Lindsy Peterson	11
+Lucia Carballo	3
+Maddie Higginson	18, 4
+Mary Myers	9
+Mia Harris	1
+Taylor York	23
+Catalina Gillis	18
+Delaney Binette	13, 2
+Jessica Leckich	20, 7
+Katie Verdugo	1
+Madison Weiglein	22
+Samantha Loughlin	21, 6
+Spencer Samuel	17, 5
+Sydney Hurst	16, 9
+Zoe Morgan	1
+Dayna Bond	22
+Grace Halliday	1
+Jordan Duggan	23
+Jordann Heimback	1
+Katherine Garcia	24
+Katie Ratcliff	18, 8
+Nicole Iturraran	10
+Rory Nuuhiwa	16
+Taylor Hensley	15
+Adrina Daniel	22, 11
+Caroline Wilkins	21
+Faith Cerussi	20, 2
+Gwen Gardner	1
+Kendall Houck	17, 4
+Kori Bento	18
+Laurene Padilla	15
+Paige Goemer	24
+Raquel de Pinho	1
+Amanda Chambers	13, 3
+Brooke Lee	19, 5, 6
+Danni Croteau	12
+Kelly Villanueva	1
+Klara Goldstein	10
+Natalie Swank	18
+Rose Kanemy	16, 7
+Sofia Righetti	23, 9, 2
+Sydney Spence	17
+Amanda Legaspi	15
+Claudia Valdes	11
+Ella Wiegand	19
+Hannah Bell	18, 9
+Mandy Lagerlof	1
+Molly Blosser	1
+Shannon Murphy	14, 8, 3
+Sydney Gish	13, 5
+Tiaare Ahovelo	1
+Ava Ratajczak	1
+Daphne Wilder	19
+Elena Pena	20
+Holliss Munchoff	15
+Lucy Bullock	13, 4, 2
+Makena Macedo	14, 12
+Mary Comiskey	18
+Mimi Stoupas	16, 7
+Sammi Byers	17, 14
+Aiyana Mendoza	17, 10
+Delanney Ewing	18
+Gabrielle Muehring	15
+Julianne Stark	19, 8
+Luna Sarmiento	10
+Megan Holcomb	13
+Sierra Johnson	20
+Anay Smith	16
+Avery Sullivan	18
+Ioanna Petiki	15
+Kyla Pranajaya	1
+Mackenzie Dollander	19
+Marie Fehring	1
+Natalia Barrot	17
+Poppy Phillips	6
+Alicia Magliocco	1
+Bailey Sprague	19, 9
+Brittany Krappe	12
+Cara Robinson	8
+Carla Vilanova	5
+Catarina Villanueva	17, 14
+Donia Momen	7
+Giuliana Tragitt	10, 3
+Jessica Harris	1
+Kelli Leabo	4
+Klaudia Paradi	6, 4
+McKenna Yates	2
+Michelle Taikeff	21
+Molly Kaster	18, 10
+Morgan Jones	15, 12
+Rae Lekness	3
+Sara Northam	1
+Shannon Spence	1
+Sheila Jensen	9, 16
+Sierra Painter	11
+Tayler Peters	1
+Tessa Draper	14, 13
+Vanessa Elgohary	16, 6
+Caroline Kerwin	15, 12
+Jacqui Maisey	18, 8
+Jennifer Liu	17
+Jordan Milich-Misikini	19
+Katelynn Thompson	1
+Kathryn Elgin	20, 2
+Abigail Lee	10
+Anna Maria Luther	1
+Chloe Casey	15
+Clarissa Wandinger	3
+Emma Hank	16, 8
+Hannah Henry	1
+Isabella Schmidt	4
+Jaime Pitcher	17
+Lili Urvari	9
+Mala Godinez	18
+Matilda Moore	13
+Natalie Hosmer	5
+Olga Descalzi	19, 9
+Riley Agerbeek	7
+Sophia Reyes	1
+Sophie Spivack	20
+Tyanna Supreme	6, 2
+Bailey Stubblefield	14, 21
+Lior Ben David	18
+Zsofia Botka	5
+Elaina Davey	1
+Ryann Lucchesi	14
+Brooklyn Behenna	16
+Cila David	6
+Kielle Leggo	11
+Lauren Woolley	13
+Lucy Miszewski	12
+Maiken Pardon	5
+Reiley Burton	2
+Renee Fleming	15
+Belene Rodriguez	17
+Catie Kelly	8
+Genevieve Larkin	6
+Ivanna Anderson-Villela	7
+Kylee Jansen	10
+Rudra Hariharan	1
+Sinia Plotz	4
+Tatianna Raffin	1
+Darcy Spark	2
+Emma Ruzic	3
+Grace Smith	1
+Jennine Osorio	9
+Mackenzy Clark	11
+Paxtyn Reihs	13
+Rose Jensen	22
+Vanessa McNabb	10
+Zsofia Hadju	1
+Bridget Cranley	16, 12
+Isabella Adams	13
+Jessica Ross	14
+Luciana Grooms	18
+Megan Ledgerwood	4
+Nynke Willemsen	5
+Rachel Williams	10
+Sally Gonzalez Aguilar	21
+Sarah Woren	7
+Tasaria Kilpatrick	20
+Amelia Lukie	24
+Larke Eslinger	1
+Makayla McGuire	15
+Marte Skibba	17
+Sienna Cimoli	18
+Sydney Poore	1
+Taylor Fisher	19
+Annie Eldredge	14, 4
+Blair Akerland	13
+Cathy Cantoni	8
+Elizabeth Anderson	3
+Elle Surber	11
+Ellise Floreani	4, 11
+Erin Sheridan	6
+Francesca Puccinelli	1
+Hannah Buck	2
+Kathryn Burke	10
+Keri Clifford	7
+Lauren Paxton	12
+Liliana King-Adas	5
+Mara Dominguez	9
+Paige Kohut	18
+Susan Providenza	16
+Sydni Estrella	1
+Catherine Bick	15
+Emma Allegrucci	3
+Hailey Eberle	23
+Katie Francis	6
+Lydia Dadd	1
+Maddie Macdonald	24, 16
+Madison Gomes	17
+Maggie Ireland	18
+Maggie Oys	22
+Nicole Blaney	14
+Alexa Grau	1A, 1
+Gabi Sicat	25
+Julia Mozilo	20
+Kelly Frumkin	17
+Kendra Bean	24
+Lauren Dillon	8
+Maddie Perna	21
+Maddy Gomes	7
+Mia Battilega	5
+Sally Ferguson	10
+Annika Disney	9
+Anuhea Ledesma	13
+Grace Kavanagh	1
+Lauren Baglietto	11, 2
+Lauren Voss	14, 18
+Abby Fleming	4
+Halley Seed	16, 11, 3
+Harper Daniels	21
+Jamie Robinson	11, 6
+Malena Nguyen	12, 7
+Natalie Brauser	10, 5
+Adelina Hernandez	16
+Chloe Morrison	15
+Elle Fredrickson	14, 4
+Liyara Senadheera	1, 1A
+Maddie Clough	12
+Alyssa Jacobsen	11
+Francesca Moynihan	19, 10
+Georgia Lewis	1C, 1A
+Hannah Hoeptner	1D
+Kate Rodman	8
+Libby Slater	6
+Nina Damjanac	7
+Sophia Harvey	22
+Zoe Sloat	23
+Avary Torres	13
+Megan Chambliss	14, 4
+Mila Erceg	24
+Stephanie Nelson	9
+Sydney Maccabe	16
+Airi Seib	17, 9
+Annika Burks	2
+Calla Troxel	23, 7
+Evelyn McLaughlin	3
+Haley Tassell	1A, 1
+Malaya Wright	18
+Mia Barkett	5, 15
+Chloe Rizof	19
+Fritzi Warneke	1A
+Khloe Tarbet	14
+Lia Lakis	21
+London Menard	18, 11
+Makenna Genco	20, 5
+Mikayla Crowe	12
+Ava Wells	10
+Hailey Romano	8
+Julia Ernsting	17
+Reese Artura	18
+Carly Jackson-Clark	1B
+Clare Bryar	8
+Daniella Fuertes	12
+Emmah Boquette	7
+Fiona Dretzka	2, 1A
+Kennedy Joseph	1A, 1
+Madison Obata	5
+Nichol Feldtz	6, 14, 1A
+Rachel Goldstein	4
+Samantha Voelker	10
+Sara Lopez	9, 7
+Sarah Abbott	1, 2
+Taylor Young	3
+Terez Touhey	13
+Diana Fernandez	3
+Kayla Engleman	7
+Rachel Brown	10
+Anna Borton	2
+Kristen Burger	5
+Lauren Howe	10
+Sophia Torres	6, 13
+Bianca Prinsloo	10
+Georgia Vargas	8, 7
+Anna Mossakowski	1
+Danni Croteau	12
+Grace Boeve	4
+Lily Graham	8
+Maggie Verduijn	11
+Sydney Jones	1A, 6
+Bianca Reinisch	6
+Caroline Behr	1B, 1A, 1
+Emelene Burek	20
+Emma Hernandez	9
+Kaley Bigley	3
+Mackenzie Peters	1C
+Sydney Arnold	19
+Ashley Chand	3
+Cece White	9, 15
+Emma Nosenchuck	5
+Maria Mossakowski	14
+Nayeli Cisneros	12
+Audrey Lacey	12, 10
+Bianca Kennerley	3
+Catherine Morin	7
+Clarisa Robles	16
+Finn Magill	13
+Mackenzie Russell	2, 7
+Parker Thomas	5
+Samantha Varrie	11
+Stella Chopskie	14, 4, 7
+Arwen Castillo	18
+Ava Pawlik	12
+Catherine Williamson	6, 8
+GayLynn Kirn	23, 6
+Lucia Fernandez Caballero	2
+Maggie Frye	1A
+Olivia Smith	8, 19
+Quincy Frommelt	20, 9
+Rebecca Currie	22, 4
+Sarah Tenney	17
+Allyson Ricciardi	14
+Ava Vesey	18
+Julia Hough	1A
+Savana Slaughter	1
+Annika Hayduchok	23
+Georgia Ellison	15
+Jade Arnold	6
+Jalia Kacsh	22
+Keygan Monahan	20
+Sawyer Weakland	16
+Sienna Hoff	21
+Anna Yelizarova	11
+Cassidy Papa	14
+Cassidy Wiley	17, 5, 8
+Dani Jackovich	2
+Gabby Stone	1B, 1
+Gurpreet Sohi	5
+Jamie Neushul	8
+Jordan Raney	7
+Julia Hermann	1, 1A
+Kat Klass	10
+Katie Dudley	4
+Lauren Norheim	3
+Mackenzie Wiley	20, 3
+Madison Berggren	13
+Maggie Steffens	9
+Natalie Chun	6
+Rachel Johnson	16
+Shannon Cleary	12
+Sophia Monaghan	15
+Sophia Stefan	18
+Emalia Eichelberger	1B, 1A, 1
+Hannah Shabb	16, 6
+Kayla Constandse	20, 2
+Lauren Bywater	17, 5, 10
+Makenzie Fischer	11
+Anna Rajaratnam	19
+Aria Fischer	9
+Bella Baldridge	15
+Kit Sturm	1B, 1A
+Sarah Klass	14, 12
+Sophie Maguy	16
+Chloe Harbilas	14, 8
+Lauren Indart	16, 3
+Madison Stamen	7
+Ryann Neushul	20
+Sophia Zamoyski	4
+Thea Walsh	1B
+Emily Blackwell	1C
+Floranne Carroll	14, 4
+Hannah Constandse	16, 10
+Katie Lyons	5
+Lexi Rowell	4, 2
+Sophie Wallace	13
+Celeste Wijnbelt	15
+Christina Hicks	16, 3
+Jewel Roemer	17, 7
+Maya Avital	1D, 1
+Megan Peterson	14
+Sam Sternfels	22, 12
+Skyler Jones	18
+Talie Wilmans	21, 11
+Alissa Pascual	6, 3
+Bella Bachler	17
+Eleanor Facey	8, 9, 13
+Ella Woodhead	19
+Jackie King	1A, 1
+Jenna Flynn	16
+Kai Blankenship	22
+Kate Morgan	25
+Maggie Hawkins	21, 5
+Serena Browne	24
+Shaye Story	14
+Sophia Sanders	23, 4
+Avery Montiel	8
+Christine Carpenter	1B, 1A
+Kamryn Barone	10
+Quinn Healy	22, 11
+Reagan McEachen	17, 6
+AliMarie DePrez	18
+Amber Nowaczek	9
+Claire Minton	15, 3
+Izzy Scott	1B
+Juliette Dhalluin	2
+Makenna Stretz	17, 7
+Sydney Lowell	12
+Addison Parrish	13
+Cici De Luca	4
+Lucy Haaland-Ford	20
+Natalia Szczerba	21
+Reagan Weir	14
+Sienna Green	15
 Allyson Hansen
-Annie Kutt
+Annie Kutt	3
 Ariel Arcidiacono
 Avery Dotterer
 Bryn Lutz
-Carla Tocchini
-Cassidy Smithson
+Carla Tocchini	13
+Cassidy Smithson	8
 Courtney Weddle
 Daniela Hernandez
 Emily Perry
-Greta Kohlmoos
+Greta Kohlmoos	14
 Hailey Wright
 Haley Cameron
 Hannah Harvey
-Heather Johnson
-Jill Bushman
+Heather Johnson	5
+Jill Bushman	6
 Katy Heatherton
 Lauren Emge
-Marcela Portales
-McKenna Hauss
+Marcela Portales	9, 13
+McKenna Hauss	4
 Olivia Husted
-Paige Virgil
+Paige Virgil	10
 Quinn Galli
-Sammy Preston
-Abbey Pfefferlen
-Ariana Momen
-Audrey Taylor
-Caitlin Golding
-Chloe Robinson
-Devin Holcomb
-Emily Byrne
-Kathleen Schafle
-McKenna Martin
-Meredith Arnett
-Ally Clague
-Alyssa Lengtat
-Clare McKeon
-Cleopatra Constantin
-Emily Aikema
-Julia Hartmann
-Grace Gulsvig
-Hailey Williams
-Jordan Werkmeister
-Lauren Hooyer
-Morgan Polterock
-Noëlle Wijnbelt
-Rebecca Reynolds
-Sophia Noble
-Leslie Haynes
-Makenna Ferguson
-Nellie McAdams
-Ryan Sund
-Sam Vitt
-Anna Cable
-Ashley Salem
-Grace Pelkey
-Mary Rhodes
-Tess Fundter
-Gianna Nocetti
-Katelyn Bettencourt
-Kelly Hungerford
-Maddie Sumner
-Sam Yoo
-Ally Smith
-Eva Stein
-Katie O'Laughlin
-Liberty Massman
-Lucy Holland
-Madison Sparre
-Sarah Ellis-Keeler
-Abby Humphrey
-Alison Giusti
-Ashley Wallin
-Bridget Miller
-Chelsea Johnson
-Lillie Vehling
-Sadie Henry
-Sofia Bozzo
-Caroline Oates
-Georgia Daly
-Harper Gilbert
-Katy Westphal
-Margo Tempel
-Nina Albers
-Sarah Shaw
-Taylor Gair
-Addison Engelbert
+Sammy Preston	2
+Abbey Pfefferlen	11
+Ariana Momen	17, 10
+Audrey Taylor	19, 9
+Caitlin Golding	1
+Chloe Robinson	12, 6
+Devin Holcomb	15, 2, 3
+Emily Byrne	20, 5
+Kathleen Schafle	7
+McKenna Martin	18, 14, 4, 8
+Meredith Arnett	16, 12
+Ally Clague	21
+Alyssa Lengtat	25, 16, 10
+Clare McKeon	23
+Cleopatra Constantin	1, 1C, 1A
+Emily Aikema	22, 6
+Julia Hartmann	24, 15, 11
+Grace Gulsvig	24, 17, 12
+Hailey Williams	18, 5, 8
+Jordan Werkmeister	20, 12, 4
+Lauren Hooyer	1A
+Morgan Polterock	19, 13
+Noëlle Wijnbelt	17, 2
+Rebecca Reynolds	25, 14, 9
+Sophia Noble	1B, 1A, 1
+Leslie Haynes	25, 20
+Makenna Ferguson	20, 15, 7
+Nellie McAdams	1C, 1B, 1A, 1
+Ryan Sund	24, 22
+Sam Vitt	19, 14
+Anna Cable	1C, 1B
+Ashley Salem	16, 6
+Grace Pelkey	23
+Mary Rhodes	24
+Tess Fundter	19, 12
+Gianna Nocetti	9
+Katelyn Bettencourt	15
+Kelly Hungerford	5
+Maddie Sumner	3
+Sam Yoo	18, 4
+Ally Smith	16, 10
+Eva Stein	1C, 1B, 1, 1A
+Katie O'Laughlin	14, 8
+Liberty Massman	18
+Lucy Holland	1B, 1A, 1
+Madison Sparre	11
+Sarah Ellis-Keeler	20, 2
+Abby Humphrey	17, 12
+Alison Giusti	13
+Ashley Wallin	15
+Bridget Miller	7
+Chelsea Johnson	19
+Lillie Vehling	21
+Sadie Henry	14
+Sofia Bozzo	16, 6
+Caroline Oates	20
+Georgia Daly	16
+Harper Gilbert	1, 1B
+Katy Westphal	17, 3
+Margo Tempel	24
+Nina Albers	22, 4
+Sarah Shaw	1, 1D
+Taylor Gair	23
+Addison Engelbert	8
 Alyssa Nguyen
-Audrey Quilala
-HanaLora Abel
-Megan Garner
-Sydney Rubin
-Allie Loomis
-Annika Nelson
-Cambria Shockley
-Corinna Toledo
-Destene Albers
-Emily Carlson
+Audrey Quilala	16
+HanaLora Abel	5
+Megan Garner	1C
+Sydney Rubin	17
+Allie Loomis	5
+Annika Nelson	1
+Cambria Shockley	14
+Corinna Toledo	7
+Destene Albers	8
+Emily Carlson	9
 Emma Peterson
-Gabby Pierandozzi
-Hanna Lancaster
-Jenna Phreaner
-Jolene Viramontes
-Julie Swieca
-Keana Eldridge
-Kelli Baumgardner
-Kelsey Thornton
-Mackenzie Milham
-Mary Brooks
-McKenna Mitchell
-Natalie Seidemann
-Raegan Castillo
-Riley Shaw
-Tess de Lange
-Cara Borkovec
-Delayne Lynton
-Marissa Echelberger
-Alyssa Schulte
-Avalon Gook
-Calysa Toledo
-Christina Reyes
-Danielle Ayala
-Isabel Rack
-Kayleigh Schultz
-Megan Falcon
-Morgan Jones
-Sarah Nichols
-Tara Prentice
-Toni Shackelford
-Ariana Bockstahler
-Jessica Lynch
-Piper Smith
-Rylee Williams
-Airian Grisham
-Camila Rosas
-Elena Flynn
-Jensine Bugelli
-Kili Skibby
-Maeve Murphy
-Mica Schiavone
-Portia Schiavone
-Sydney Milham
-Brooke Banta
-Faith Tedesco
-Jessica Newell
-Jordan Frost
-Kira Hoffman
-Michaela Strickland
-Sabina Shackelford
-Alexandra Mould
-Chloe Spievak
-Gabby Norris
-Gracie Helberg
-Kennedy East
-Libby Alexander
-Madi O'Hara
-Nioka Thomas
-Avy Newton
-Charley Birdsall
+Gabby Pierandozzi	22
+Hanna Lancaster	10
+Jenna Phreaner	1
+Jolene Viramontes	21
+Julie Swieca	11
+Keana Eldridge	12
+Kelli Baumgardner	6
+Kelsey Thornton	4
+Mackenzie Milham	3
+Mary Brooks	2
+McKenna Mitchell	15
+Natalie Seidemann	16
+Raegan Castillo	20, 10
+Riley Shaw	1
+Tess de Lange	19
+Cara Borkovec	9
+Delayne Lynton	13
+Marissa Echelberger	17
+Alyssa Schulte	1
+Avalon Gook	18
+Calysa Toledo	4
+Christina Reyes	22
+Danielle Ayala	14
+Isabel Rack	15
+Kayleigh Schultz	8
+Megan Falcon	20
+Morgan Jones	1
+Sarah Nichols	3, 2
+Tara Prentice	23
+Toni Shackelford	6
+Ariana Bockstahler	16, 4
+Jessica Lynch	12
+Piper Smith	7
+Rylee Williams	5
+Airian Grisham	19, 20, 4
+Camila Rosas	1
+Elena Flynn	10
+Jensine Bugelli	11, 7
+Kili Skibby	3
+Maeve Murphy	9
+Mica Schiavone	24
+Portia Schiavone	1
+Sydney Milham	25
+Brooke Banta	21
+Faith Tedesco	1
+Jessica Newell	26
+Jordan Frost	1
+Kira Hoffman	13
+Michaela Strickland	8, 11
+Sabina Shackelford	17, 14, 6
+Alexandra Mould	19
+Chloe Spievak	25
+Gabby Norris	17
+Gracie Helberg	16, 14, 9
+Kennedy East	13, 5, 11
+Libby Alexander	18, 8
+Madi O'Hara	27, 13
+Nioka Thomas	22, 2, 12
+Avy Newton	16, 2, 7
+Charley Birdsall	15
 Delaney Kuepper
-Erin Tharp
-Madeline Kasper
-Olivia Giolas
-Annabelle Mundelius
-Brooke Hourigan
-Lauren Hett
-Maja Layden
-Mary Hassett
-Rachel Kirchner
-Sara Naulty
-Vivian Bailey
-Bella Calderon
-Deirdre Murphy
-Ella Walker
-Gabbie Graniello
-Mayezie Loggins
-Peyton Pierson
-Pippa Heaver
-Annie Peak
-Anya Frey
-CJ Sirls
-Chloe Patist
-Hollis Munchoff
-Jess Reagan
-Marisol Cowles
-Michelle Urkov
-Sydney Hagan
-Arianna Martinez
-Carlin Rodelo
-Carly Kissinger
-Hope Stokes
-Jacqueline Azevedo
-Juliana Torres
-Kaitlyn Kimmel
-Miranda Cruz
-Myranda Martinez
-Paula Villalta Valle
-Vanessa Raygoza
-Veronica Vazquez
-Viviana Luna
-Aislyn Sorsky
-Claudette Asenjo
-Karla Hernandez
-Liberty Hamilton
-Melanie Torres
-Piper Ferris
-Alyssa Estrada
-Amelie Ramirez
-Breyenne Pierce
-Grace Tademy
-Kamarin Holm
-Kiryn Wicker
-Madeline Guo
-Yaritza Elizondo
-Abigail Conner
-Abigail Shapiro
-Anna Potter
-Ava Faria
-Madison Marion
-Makayla Hemphill
-Makenzie Royal
-Sophia Milton
-Tori Valdez
-Alexis Wieseler
-Averi Westerman
+Erin Tharp	1
+Madeline Kasper	22, 6
+Olivia Giolas	20
+Annabelle Mundelius	24
+Brooke Hourigan	10
+Lauren Hett	14, 4
+Maja Layden	18, 3
+Mary Hassett	20, 10
+Rachel Kirchner	1
+Sara Naulty	16, 5
+Vivian Bailey	21, 16
+Bella Calderon	2, 8
+Deirdre Murphy	21
+Ella Walker	1
+Gabbie Graniello	17, 12
+Mayezie Loggins	1
+Peyton Pierson	22, 11
+Pippa Heaver	14, 2
+Annie Peak	1
+Anya Frey	18
+CJ Sirls	1
+Chloe Patist	9
+Hollis Munchoff	7
+Jess Reagan	14
+Marisol Cowles	22
+Michelle Urkov	20
+Sydney Hagan	17
+Arianna Martinez	2, 3
+Carlin Rodelo	1
+Carly Kissinger	16
+Hope Stokes	7
+Jacqueline Azevedo	3, 11
+Juliana Torres	11, 10
+Kaitlyn Kimmel	8, 21
+Miranda Cruz	5
+Myranda Martinez	17
+Paula Villalta Valle	18, 14
+Vanessa Raygoza	4
+Veronica Vazquez	13
+Viviana Luna	12
+Aislyn Sorsky	5
+Claudette Asenjo	8
+Karla Hernandez	9
+Liberty Hamilton	3
+Melanie Torres	4
+Piper Ferris	6
+Alyssa Estrada	16
+Amelie Ramirez	1
+Breyenne Pierce	7
+Grace Tademy	2
+Kamarin Holm	1A
+Kiryn Wicker	14
+Madeline Guo	9
+Yaritza Elizondo	15
+Abigail Conner	13
+Abigail Shapiro	1C
+Anna Potter	11
+Ava Faria	9
+Madison Marion	18
+Makayla Hemphill	17
+Makenzie Royal	1B
+Sophia Milton	12
+Tori Valdez	4
+Alexis Wieseler	7
+Averi Westerman	22
 Bridgette Harper
-Carly Innis
-Chanel Schilling
-Colleen Ratcliff
-Connie Wu
-Courtney Miller
-Emma Sasson
-Emma Scholz
-Halley Atkinson
-Hanna Schneider
-Julia Kirkland
-Kayla Fedler
-Krista Schneider
-Lani Tittle
-Laurel Kistler
-Lauren Boyer
-Lauren Finwall
-Maddy Wieseler
-Nikki Doumas
-Rachel Emami
-Riley Heiduk
-Shelby Stender
-Jessee Ransone
-Reilly Gallagher
-Tori Rainone
-Bennett Bugelli
-Ciara Franke
-Grace Pevehouse
-Jessica Kimberling
-Robyn Carter
-Sydney Boland
-Taylor Onstott
-Tera Richardson
-Chloe Pena
-Georgia Ransone
-Lizzie Hansen
-Lyndsey Hightower
-Maddie Bockman
-Thea Neushul
-Alex Garas
-Carson Rampelberg
-Grayson Mix
-Holly Maine
-Karis Couch
-Kayla Peacock
-Madison Solares
-Taylor Lacour
-Annika Arroyo
-Hannah Kawar
-Katie Ward
-Lexi Stahl
-Olivia Seargeant
-Abby Moll
-Caroline Courtois
-Courtney Okumura
-Kendall Thomas
-Kenzie Larson
-Lauren Bellavia
-Lucia Doak
-Madisongrace Guerra
-Maggie Bria
-Sasha Frey
-Sila Fedler
-Tania Frank
-Allie Bartholomew
-Bria Zwaschka
-Caroline Christl
-Cascade Stensland
-Maja Layden
-Natalie DiMeo
-Sofia Munatones
-Sydney Munatones
-Abigail Schechter
-Emily Cloherty
-Kyla Bruhn
-Maddie McMahon
-Olivia Obando
-Paedrin Gillett
-Zoe Grover
-Ally Bone
-Evelyn Burns
-Holly Roberts
-Makana Fake
-Alex Anghera
-Alexa Kraaijvanger
-Anna Fazioli
-Berkley Sinner
-Caitlin Stayt
-Kendra Ammon
-Kenya Cassidy
-Nola Palestrant
-Annie Mortimer
-Ashley Riley
+Carly Innis	21, 12
+Chanel Schilling	24, 3
+Colleen Ratcliff	6, 3
+Connie Wu	10
+Courtney Miller	1
+Emma Sasson	14
+Emma Scholz	1
+Halley Atkinson	12, 21, 14
+Hanna Schneider	11
+Julia Kirkland	3
+Kayla Fedler	13
+Krista Schneider	23, 7
+Lani Tittle	9
+Laurel Kistler	2
+Lauren Boyer	17
+Lauren Finwall	5
+Maddy Wieseler	8
+Nikki Doumas	1
+Rachel Emami	18
+Riley Heiduk	4
+Shelby Stender	20, 2
+Jessee Ransone	6, 15
+Reilly Gallagher	1
+Tori Rainone	1
+Bennett Bugelli	1
+Ciara Franke	10
+Grace Pevehouse	16
+Jessica Kimberling	19
+Robyn Carter	5
+Sydney Boland	11
+Taylor Onstott	18, 8
+Tera Richardson	9
+Chloe Pena	19, 12, 9
+Georgia Ransone	23, 3, 5
+Lizzie Hansen	20, 6
+Lyndsey Hightower	6
+Maddie Bockman	22
+Thea Neushul	17
+Alex Garas	13
+Carson Rampelberg	14
+Grayson Mix	18
+Holly Maine	4
+Karis Couch	19
+Kayla Peacock	7
+Madison Solares	20
+Taylor Lacour	23, 3
+Annika Arroyo	17
+Hannah Kawar	21
+Katie Ward	1, 1A
+Lexi Stahl	1
+Olivia Seargeant	2
+Abby Moll	16
+Caroline Courtois	25, 8
+Courtney Okumura	12, 7
+Kendall Thomas	15
+Kenzie Larson	6
+Lauren Bellavia	5
+Lucia Doak	11
+Madisongrace Guerra	1, 1C
+Maggie Bria	22
+Sasha Frey	23, 3
+Sila Fedler	24, 9
+Tania Frank	13
+Allie Bartholomew	24
+Bria Zwaschka	1B, 1A, 1
+Caroline Christl	4
+Cascade Stensland	22
+Maja Layden	25
+Natalie DiMeo	10
+Sofia Munatones	23
+Sydney Munatones	19
+Abigail Schechter	20
+Emily Cloherty	13, 3
+Kyla Bruhn	8
+Maddie McMahon	12, 15
+Olivia Obando	14, 4
+Paedrin Gillett	1C, 1B, 1A
+Zoe Grover	10
+Ally Bone	21, 16
+Evelyn Burns	2
+Holly Roberts	5
+Makana Fake	1C, 1B
+Alex Anghera	9
+Alexa Kraaijvanger	7
+Anna Fazioli	14
+Berkley Sinner	25
+Caitlin Stayt	11
+Kendra Ammon	12
+Kenya Cassidy	6
+Nola Palestrant	1C
+Annie Mortimer	14
+Ashley Riley	10
 Avery Martin
-Brenna Thomas
-Bryn Hudson
-Camila Schafer
-Devon Gasparini
-Elizabeth Hendrix
-Jenna Solberg
-Kristen Denney
-Lauren Martin
-Mackenzie Brokaw
-Madison Delgado
-Miranda Schrader
+Brenna Thomas	2
+Bryn Hudson	8
+Camila Schafer	7
+Devon Gasparini	1
+Elizabeth Hendrix	12
+Jenna Solberg	17
+Kristen Denney	13
+Lauren Martin	4
+Mackenzie Brokaw	1
+Madison Delgado	18
+Miranda Schrader	6
 Nikki de Roos
-Samantha Murphy
-Sarah Kreiser
-Shannon Moran
-Sophie Trabucco
-Taylor Shore
-Abbey Grosse
-Kate Coski
-Kate Pipkin
-Kelsey Fennell
-Kenzi Snyder
-Natalie Selin
-Nicole Espinoza
-Samantha Rosenberg
-Sarah Snyder
-Amelia Meckelborg
-Becca Buck
-Emily Martin
-Mollie Simmons
-Natalie Dickes
-Sami Stebbins
-Amanda Legaspi
-Caitlyn Snyder
-Dani Kauahi
-Dara Bleiberg
-Drew Halvorson
-Jordan Castillo
-Julia Santos
-Kelly Murphy
-Sarah Owens
-Scout Brown
-Alex Mora
-Claire Kelly
-Courtney Heydorff
-Danielle Kauahi
-Evie Laptin
-Hazel Johnson
-Lindsey Potter
-Lucy Jackman
-Morgan Lewis
-Reese Oliver
-Bianca Borunda
-Brooke Westphal
-Camilla Mackay
-Emily Cantu
-Lauren Schmidt
-Leigh Lyter
-Madison Button
-Madison Wayman
-Mary Beth Heffelfinger
-Natalie Tiu
-Nina Munson
-Paris Paz
-Raylynn Lipsky
-Savannah Burns
-Aidan Flynn
-Annie Kuester
-Cami Mras
-Casey Coppock
-Emily Ferguson
-Imani Clemons
-Juju Amaral
-Ken Corlett
-Mackenzie Murphy
-Mackie Whitehead
-Mel Damato
-Taylor McEvilly
-Delaney Palmer
-Haley Spence
-Lauren Reilly
-Madison Walker
-Mia Bernhoit
-Ava Donleavy
-Christina Mullane
-Isabel Valaika
-Jojo Scheer
-Kelsey Matthies
-Leilani Spies
-Logan Tiska
-Molly Souza
-Natalia Stanard
-Athena Wigo
-Bella Mady
-Brynn Tully
-Hadley Hall
-Kayla Matthies
-Keira Wall
-Lainey Weintre
-Loretta Hovey
-Morgan Hoffman
-Zoe Gabriel
-Addison Lane
-Eliza Harlow
-Emmerson Ferriera
-Gigi Rimlinger
-Lydia Soderberg
-Marta Maninetti
-Mia Sullivan
-Miranda Salinger
-Phoebe DeMoss
-Siena Jumani
-Zoe Ann Watson
-Alex Musselman
-Alexa Tielmann
-Alexis Angermund
-Allison Wieseler
-Ashley Zwirner
-Aubrie Monahan
-Carlee Kapana
-Charlotte Pratt
-Devin Grab
-Elissia Schilling
-Grace Reego
-India Forster
-Kelsey Blacker
-Kelsey O'Brien
-Lizette Rozeboom
-Louise Hazell
-Mackenzie Barr
-Nicole Reynolds
-Rachel Whitelegge
-Sarah Sheldon
-Alys Williams
-Bridgett Storm
-Bronte Halligan
-Brooke Maxson
-Donya Dehnad
-Emily Skelly
-Haley Evans
-Hannah Storum
-Jenna Hurst
-Kodi Hill
-Maddie Musselman
-Rachel Fattal
-Tara Prentice
-Hannah Zari
-Jahmea Bent
-Lexi Liebowitz
-Myna Simmons
-Roxy Wheaton
-Ava Johnson
-Bella Baia
-Bella Wentzel
-Faith Dunn
-Georgia Phillips
-Katrina Drake
-Parker Hoffman
-Skylar Savar
-Val Ayala
-Abbi Hill
-Alex Peros
-Brooke Banta
-Brooke Doten
-Brooke Gruneisen
-Fiona Kuesis
-Hannah Palmer
-Kate McCarthy
-Layne Anzaldo
-Quinn Winter
-Rachel Spadt
-Anneliese Miller
-Cassidy Miller
-Claire Kronen
-Izzy Gazzaniga
-Malia Allen
-Morgan Van Alphen
-Sarah Fellner
-Sydney Chiang
-Emma Lineback
-Grace Myers
-Molly Renner
-Nicole Struss
-Anna Pearson
-Carly McMurray
-Genoa Rossi
-Izzy Rosensitto
-Lily Gess
-MJ Bailey
-Mary Jane Bailey
-Sienna Green
-Taylor Smith
-Alexsa Gimenez
-Becca Melanson
-Camille Greenlee
-Dania Innis
-Elektra Urbatsch
-Helene MacBeth
-Joey Niz
-Lauren Steele
-Natasha Kieckhafer
-Olivia Ouellette
-Panni Szegedi
-Ana Pieper
-Aubrey Graham
-Bia Mantellato
-Jenna Human
-Jojo Walters
-Kenya Cassidy
-Maile Turner
-Ryan Chalupnik
-Tali Stryker
-Alison Sagara
-Ally Larsen
-Fanni Muzsnay
-Jailynn Robinson
-Janna Tauscher
-Katherine O'Dea
-Presley Jones
-Sienna Steiner
-Zoë Frangieh
-Alegra Hueso
-Amanda Longan
-Annika Jensen
-Avery Peterson
-Brianna Daboub
-Brigitta Games
-Brooke Presten
-Caitlin Stuewe
-Cassidy Feltenberger
-Courtney Fahey
-Dagmar Gudmundsson
-Ellie D'Ambra
-Emma Cornwell
-Hayley McKelvey
-Ioanna Haralabidis
-Kaitlin Leimbach
-Lauren Esrig
-Mackenzie Flath
-Melanie Slater
-Melissa Bergesen
-Natalie Lavinsky
-Nicola Gonzales
-Nicola Welch
-Nikki Stansfield
-Stephania Haralabidis
-Sydney Blubaugh
-Victória Chamorro
-Alaina Cousineau
-Denise Mammolito
-Elise Stein
-Holly Parker
-Kaylee Brownsberger
-Kelsey McIntosh
-Maud Megens
-Sawyer Belville
-Kari Jensen
-Molly Leimbach
-Nadia Pavlovich
-Nina Ceklic
-Paige Hauschild
-Randi Reinhardt
-Sabrina Garabet
-Tamar Kazanjian
-Verica Bakoc
-Alejandra Aznar
-Bayley Weber
-Claire Haas
-Erin Tharp
-Grace Tehaney
-Julia Rozolis-Hill
-Mireia Guiral
-Sophia Lucas
-Sophie Traversi
-Tilly Kearns
-Alex Fellner
-Avrey Larson
-Brooklyn Aguilera
-Carolyne Stern
-Christina Crum
-Téa Poljak
-Abigail Hendrix
-Hannah Meyer
-Julia Janov
-Taylor Vangrin
-Adeline Jackson
-CeCe Paine
-Emma Lawson
-Honnie Vandeweghe-O'Shea
-Isabel Zimmerman
-Laine Hourigan
-Molly Glad
-Sally McCarthy
-Sofia Stein
-Tori Gacutan
-Alex Bonaguidi
-Caitlin Cohen
-Deming Wyer
-Fanni Muzsnay
-Hannah Carver
-Jada Ward
-Jelena Sarac
-Maggie Johnson
-Morgan Netherton
-Anna Reed
-Ava Stryker
-Lauren Schneider
-Madison Haaland-Ford
-Meghan McAninch
-Rachel Gazzaniga
-Alma Yaacobi
-Ava Knepper
-Emily Ausmus
-Sinia Plotz
-Sofia Umeda
-Ashley Kwan
-EJ Hourigan
-Kara Carver
-Kate Sloman
-Natalia Blazevic
-Payton Netherton
-Ally Van Valen
-Bailey Huddleston
-Caroline Wojtas
-Catie Berry
-Cecilya Lundy
-Emily Cait Farsakian
-Haley Scott
-Joyce Zabala
-Madison Curran
-Natalie Rivas
-Rebecca Serrano
-Sarah Dolitsky
-Shelby Barkley
-Sophia DelBondio
-Emma Noble
-Emma Perez
-Isabel French
-Amber Hamil
-Andrea Potgieter
-McKenna Imset
-Zoe Salafatinos
-Bridget Hughes
-Genevieve Petrassi
-Kiara Anguiano
-Maddie Berry
-Makenna Moore
-Catherine Ahumada
-Gia Donatelli
-Paris Alvarado
-Sydney Shettleroe
-Caragh Osborne
-Ellie Pickford
-Katelynn Riley
-Katie Lloyd
-Rachel Ahumada
-Courtney Novotny
-Julia Ward
-Rachel Greathouse
-Sadie Smith
-Sydney Smith
-Maddie Day
-Meagan Riding
-Sarah Fitzsimmons
-Ysabel Casillas
-Haley Minnich
-Hollie Sauceda
-Kathryn Myler
-Makynna Smith
-Olivia Mitchell
-Taylor Hammond
-Gabriella Falcon
-Maria Fitzsimmons
-Noa Ziv
-Dominique Clark
-Jenna Gavenman
-Julie Conrath
-Kate Stenmoen
-Katie French
-Katie Latimer
-Katy Gauvin
-Kennedy Gallagher
-Lizzie Louwers
-Lizzie Newman
-Maria Breen
-Mary Riley
-Naomi Ng
-Olivia Perry
-Robyn Bastian
-Sara Abele
-Sarina Shibata
-Shannon Paparella
-Sheila Gerrity
-Katie Gonzales
-Paris Huffman
-Caitlin O'Leary
-Camille Oswald
-Charlotte Curran
-Cory Riley
-Emma Stein
-Johnie Fain
-Kate Murray
-Kylee Giblin
-Malia Gacutan
-Miranda Sinsheimer
-Rachel Jennings
-Ailish Skinner
-Amanda Rice
-Gaby Palmisano
-Isabel Herbst
-Kaysie Stuba
-Sophia Scoboria
-Allie Hansen
-Emily Morrissey
-Joia McKinney
-Lauren Picard
-Maddy Johnson
-Abigail Shelby
-Hanna Cloeter
-Jane Montague
-Kimora Farry
+Samantha Murphy	21
+Sarah Kreiser	3
+Shannon Moran	12
+Sophie Trabucco	11
+Taylor Shore	5
+Abbey Grosse	7
+Kate Coski	13
+Kate Pipkin	9
+Kelsey Fennell	1
+Kenzi Snyder	1
+Natalie Selin	10
+Nicole Espinoza	15
+Samantha Rosenberg	4
+Sarah Snyder	8
+Amelia Meckelborg	4
+Becca Buck	1
+Emily Martin	18
+Mollie Simmons	7
+Natalie Dickes	1
+Sami Stebbins	17
+Amanda Legaspi	14, 5
+Caitlyn Snyder	6
+Dani Kauahi	16
+Dara Bleiberg	11
+Drew Halvorson	10, 8
+Jordan Castillo	15, 2
+Julia Santos	19
+Kelly Murphy	5
+Sarah Owens	2, 9
+Scout Brown	20
+Alex Mora	16
+Claire Kelly	11
+Courtney Heydorff	17
+Danielle Kauahi	3
+Evie Laptin	18
+Hazel Johnson	19
+Lindsey Potter	20
+Lucy Jackman	1
+Morgan Lewis	15
+Reese Oliver	12
+Bianca Borunda	22, 11
+Brooke Westphal	21
+Camilla Mackay	19, 2
+Emily Cantu	10
+Lauren Schmidt	1
+Leigh Lyter	4
+Madison Button	1
+Madison Wayman	25
+Mary Beth Heffelfinger	24, 5
+Natalie Tiu	27
+Nina Munson	23, 7
+Paris Paz	13
+Raylynn Lipsky	26
+Savannah Burns	14
+Aidan Flynn	17
+Annie Kuester	23
+Cami Mras	18
+Casey Coppock	1
+Emily Ferguson	21
+Imani Clemons	15
+Juju Amaral	3
+Ken Corlett	16
+Mackenzie Murphy	25
+Mackie Whitehead	19, 12
+Mel Damato	14
+Taylor McEvilly	1
+Delaney Palmer	20
+Haley Spence	16
+Lauren Reilly	14
+Madison Walker	1
+Mia Bernhoit	13
+Ava Donleavy	1
+Christina Mullane	12
+Isabel Valaika	9
+Jojo Scheer	6
+Kelsey Matthies	7
+Leilani Spies	1
+Logan Tiska	1
+Molly Souza	11
+Natalia Stanard	20
+Athena Wigo	19
+Bella Mady	2
+Brynn Tully	14
+Hadley Hall	10
+Kayla Matthies	5
+Keira Wall	1
+Lainey Weintre	8
+Loretta Hovey	13, 3
+Morgan Hoffman	16
+Zoe Gabriel	4
+Addison Lane	13
+Eliza Harlow	12
+Emmerson Ferriera	17
+Gigi Rimlinger	21
+Lydia Soderberg	1A
+Marta Maninetti	2
+Mia Sullivan	20
+Miranda Salinger	6
+Phoebe DeMoss	15
+Siena Jumani	1B
+Zoe Ann Watson	5
+Alex Musselman	1
+Alexa Tielmann	21
+Alexis Angermund	15
+Allison Wieseler	17, 10
+Ashley Zwirner	6
+Aubrie Monahan	23
+Carlee Kapana	1
+Charlotte Pratt	19
+Devin Grab	8
+Elissia Schilling	7
+Grace Reego	16, 6
+India Forster	9
+Kelsey Blacker	4, 9
+Kelsey O'Brien	11
+Lizette Rozeboom	3, 19
+Louise Hazell	2, 13
+Mackenzie Barr	10
+Nicole Reynolds	12
+Rachel Whitelegge	14, 4
+Sarah Sheldon	5
+Alys Williams	2
+Bridgett Storm	26
+Bronte Halligan	25
+Brooke Maxson	24, 20
+Donya Dehnad	1
+Emily Skelly	22
+Haley Evans	16, 13
+Hannah Storum	1, 1A
+Jenna Hurst	18, 11
+Kodi Hill	3
+Maddie Musselman	7
+Rachel Fattal	4
+Tara Prentice	20
+Hannah Zari	14
+Jahmea Bent	1B, 1A, 1
+Lexi Liebowitz	24
+Myna Simmons	17
+Roxy Wheaton	21
+Ava Johnson	13
+Bella Baia	8, 9
+Bella Wentzel	18, 8
+Faith Dunn	23
+Georgia Phillips	1B, 1A, 1
+Katrina Drake	19
+Parker Hoffman	16
+Skylar Savar	15, 23
+Val Ayala	11
+Abbi Hill	4
+Alex Peros	10
+Brooke Banta	12
+Brooke Doten	6
+Brooke Gruneisen	15
+Fiona Kuesis	3
+Hannah Palmer	5
+Kate McCarthy	14
+Layne Anzaldo	2
+Quinn Winter	1B, 1, 1A
+Rachel Spadt	18
+Anneliese Miller	15
+Cassidy Miller	22
+Claire Kronen	18, 20
+Izzy Gazzaniga	12
+Malia Allen	16
+Morgan Van Alphen	7
+Sarah Fellner	25
+Sydney Chiang	1, 1B, 1A
+Emma Lineback	17, 10
+Grace Myers	21
+Molly Renner	18, 12
+Nicole Struss	24
+Anna Pearson	20
+Carly McMurray	8, 4
+Genoa Rossi	23, 19
+Izzy Rosensitto	1
+Lily Gess	9, 13
+MJ Bailey	1C, 1, 1B
+Mary Jane Bailey	1
+Sienna Green	14
+Taylor Smith	7
+Alexsa Gimenez	22
+Becca Melanson	9
+Camille Greenlee	21, 6
+Dania Innis	8
+Elektra Urbatsch	2
+Helene MacBeth	18
+Joey Niz	1
+Lauren Steele	1
+Natasha Kieckhafer	11
+Olivia Ouellette	17, 3
+Panni Szegedi	25
+Ana Pieper	25
+Aubrey Graham	26
+Bia Mantellato	5, 14
+Jenna Human	17
+Jojo Walters	15
+Kenya Cassidy	23
+Maile Turner	16
+Ryan Chalupnik	18
+Tali Stryker	21
+Alison Sagara	12
+Ally Larsen	16
+Fanni Muzsnay	6
+Jailynn Robinson	23
+Janna Tauscher	11
+Katherine O'Dea	5
+Presley Jones	24
+Sienna Steiner	1
+Zoë Frangieh	33
+Alegra Hueso	1
+Amanda Longan	1
+Annika Jensen	14, 2
+Avery Peterson	15
+Brianna Daboub	11
+Brigitta Games	13
+Brooke Presten	6, 4
+Caitlin Stuewe	25
+Cassidy Feltenberger	16, 20
+Courtney Fahey	14, 7
+Dagmar Gudmundsson	12, 17
+Ellie D'Ambra	16
+Emma Cornwell	1
+Hayley McKelvey	4, 9
+Ioanna Haralabidis	3
+Kaitlin Leimbach	26
+Lauren Esrig	23
+Mackenzie Flath	8
+Melanie Slater	1
+Melissa Bergesen	2
+Natalie Lavinsky	20
+Nicola Gonzales	1
+Nicola Welch	21
+Nikki Stansfield	5
+Stephania Haralabidis	10
+Sydney Blubaugh	5
+Victória Chamorro	1
+Alaina Cousineau	21
+Denise Mammolito	8
+Elise Stein	14
+Holly Parker	1
+Kaylee Brownsberger	18
+Kelsey McIntosh	12
+Maud Megens	6, 2
+Sawyer Belville	16
+Kari Jensen	13
+Molly Leimbach	19
+Nadia Pavlovich	10
+Nina Ceklic	15
+Paige Hauschild	5
+Randi Reinhardt	16
+Sabrina Garabet	3, 9, 25
+Tamar Kazanjian	20
+Verica Bakoc	17, 7
+Alejandra Aznar	10, 12
+Bayley Weber	6
+Claire Haas	23, 14, 2
+Erin Tharp	1
+Grace Tehaney	3
+Julia Rozolis-Hill	22
+Mireia Guiral	4
+Sophia Lucas	19
+Sophie Traversi	24
+Tilly Kearns	11
+Alex Fellner	20
+Avrey Larson	1
+Brooklyn Aguilera	21, 10
+Carolyne Stern	1
+Christina Crum	25, 15
+Téa Poljak	17, 7
+Abigail Hendrix	25, 13
+Hannah Meyer	24, 9
+Julia Janov	18, 8
+Taylor Vangrin	23
+Adeline Jackson	23
+CeCe Paine	22
+Emma Lawson	14, 3
+Honnie Vandeweghe-O'Shea	21, 2
+Isabel Zimmerman	16, 7
+Laine Hourigan	1
+Molly Glad	18
+Sally McCarthy	24, 20
+Sofia Stein	1
+Tori Gacutan	17
+Alex Bonaguidi	19
+Caitlin Cohen	27, 17, 7
+Deming Wyer	26
+Fanni Muzsnay	23
+Hannah Carver	28, 16
+Jada Ward	1
+Jelena Sarac	29, 15
+Maggie Johnson	25, 6
+Morgan Netherton	20, 4
+Anna Reed	1
+Ava Stryker	5
+Lauren Schneider	1
+Madison Haaland-Ford	21, 2
+Meghan McAninch	20, 10
+Rachel Gazzaniga	14
+Alma Yaacobi	8
+Ava Knepper	12
+Emily Ausmus	9
+Sinia Plotz	22, 3
+Sofia Umeda	13
+Ashley Kwan	11
+EJ Hourigan	25
+Kara Carver	18
+Kate Sloman	20
+Natalia Blazevic	21
+Payton Netherton	22
+Ally Van Valen	15
+Bailey Huddleston	9
+Caroline Wojtas	8
+Catie Berry	1A, 1
+Cecilya Lundy	3
+Emily Cait Farsakian	1
+Haley Scott	11
+Joyce Zabala	13
+Madison Curran	4, 13
+Natalie Rivas	12
+Rebecca Serrano	14, 15
+Sarah Dolitsky	10, 20
+Shelby Barkley	2
+Sophia DelBondio	5
+Emma Noble	6
+Emma Perez	7
+Isabel French	1A, 1
+Amber Hamil	18
+Andrea Potgieter	10
+McKenna Imset	9
+Zoe Salafatinos	4
+Bridget Hughes	1
+Genevieve Petrassi	3
+Kiara Anguiano	2
+Maddie Berry	11
+Makenna Moore	5
+Catherine Ahumada	13
+Gia Donatelli	8
+Paris Alvarado	12
+Sydney Shettleroe	10
+Caragh Osborne	6
+Ellie Pickford	7
+Katelynn Riley	14
+Katie Lloyd	1A
+Rachel Ahumada	17
+Courtney Novotny	4
+Julia Ward	17
+Rachel Greathouse	7
+Sadie Smith	11
+Sydney Smith	3
+Maddie Day	1
+Meagan Riding	5
+Sarah Fitzsimmons	2
+Ysabel Casillas	1A
+Haley Minnich	6
+Hollie Sauceda	10
+Kathryn Myler	9
+Makynna Smith	8
+Olivia Mitchell	12
+Taylor Hammond	1B
+Gabriella Falcon	14
+Maria Fitzsimmons	13
+Noa Ziv	4
+Dominique Clark	8
+Jenna Gavenman	17
+Julie Conrath	1
+Kate Stenmoen	13
+Katie French	12
+Katie Latimer	6
+Katy Gauvin	3
+Kennedy Gallagher	10
+Lizzie Louwers	4
+Lizzie Newman	16
+Maria Breen	5
+Mary Riley	9
+Naomi Ng	15
+Olivia Perry	1
+Robyn Bastian	11
+Sara Abele	14, 18
+Sarina Shibata	2
+Shannon Paparella	4, 2
+Sheila Gerrity	7
+Katie Gonzales	14
+Paris Huffman	10
+Caitlin O'Leary	20, 9
+Camille Oswald	15
+Charlotte Curran	6
+Cory Riley	1
+Emma Stein	11
+Johnie Fain	19
+Kate Murray	7
+Kylee Giblin	14, 3
+Malia Gacutan	16, 8
+Miranda Sinsheimer	9
+Rachel Jennings	1
+Ailish Skinner	12
+Amanda Rice	18
+Gaby Palmisano	1
+Isabel Herbst	17, 10
+Kaysie Stuba	14
+Sophia Scoboria	4
+Allie Hansen	2
+Emily Morrissey	15
+Joia McKinney	13
+Lauren Picard	12
+Maddy Johnson	4
+Abigail Shelby	1
+Hanna Cloeter	3
+Jane Montague	8
+Kimora Farry	9
 Lillie Jones
-Maegan Simon
-Stella Byles
-Sydney Bianchi
-Tee Parris
-Adrienne Grimes
-Amelia Baca
-Emily McKenzie
-Emma Grabenstetter
-Moriah Owens
-Sarah Shaw
-Anna Painter
-Coco Jones
-Ella Mattocks
-Gracin Kerry
-Isabel Foley
-Sara Withers
-Emmie Mallory
-Lauren Short
-Sofia Corbett
-Tiane (Tee) Parris
-Tippy Maguire
-Abby Moffatt
-Catharine McCann
-Charlotte Summe
-Kat Melián
-Layla Canales
-Rachel Stephens
-Riley Hull
-Annika Wise
-Reia Kimi
-Rosie Woodman
-Tessa Pettit
-Ally Hopkins
-Brittney Patterson
-Kirsten Yatsko
-Laura Travers
-Lexie Gartner
-Liz Klock
-Macel Reising
-Madison Nervig
-Rachel Clauss
-Sarah Latzo
-Tess O'Neill
-Amanda Borwegen
-Paige Adams
-Aliya Abdelhak
-Chloe Magyari
-Danelle Torrence
-Kiera MacWhinnie
-Marissa Whitby
-Megan Arseneau
-Cecelia Weiss
-Emma Rearson
-Samantha Worobetz
-Jillian Curtis
-Kate McKiernan
-Kimber Randolph
-Megan DePrez
-Ryley McClellan
-Allie Dombkowski
-Alyssa Broach
-Arianna Luciano
-Kaitlyn Ewing
-Alliey Cunningham
-Anastacia Didovich
-Felicia Filippini
-Laura Anthony
-Marcella Gallardo-Russell
-Mekkiye Ergun
-Sydney Neumann
-Vanessa Gonzalez
-1A/13 Sky Wald
-1B/19 Emily Bringazi
-Emma Halle
-Hallie Ratcliff
-Rylee Mitchell
-Sabrina Estrada
-Sky Wald
-Angelmarie Asanas
-Autumn Woollcott
-Emmie Ratcliff
-Chloe Majorprice
-Lani Weaver
-Mackenzie Caron
-Madison Mansell
-Riley Gutierrez
-Sophie Talamonti
-1A/18 Amelia Brown
-Allie Taylor
-Ava Biancheri
-Issabel Babikova
-Izabella Agraz
-Josephine Basco
-Marina Greenwood
-Piper Rakip
-Savannah Sedlock
-Sophia Romo
-1A/19 Fiona Swift
-Amelia Brown
-Becca McKee
-Charlotte Monty
-Isobelle Jennings
-Mackenzie Kirby
-Paige Warda
-Ryanna Ritting
-Scout Lowrie
-1A/20 Anduena Kraja
-Avary Guge
-Claudia Gagné
-Fiona Swift
-Toni Munguia
-Anaissa Paul
-Anastacia Gonzalez
-Angelica Hernandez
-Arlin De La Mora
-Caitlin Bronzan
-Celeste Moreira
-Cynthia Castillo
-Hannah Ellett
-Isabella Gorrocino
-Jasmine Villalpando
-Jenel Rivera
-Jenna Cohen
-Jennifer Preciado
-Kaitlin Vera
-Katia Montoya
-Kayanna Heffner
-Kendyl Riley
-Leimana Hassett
-Lindsay Shoaff
-Zyania Morales
-Ana Alumbaugh
-Hannah Rodriguez
-Marina Daroca Bazan
-Amelia Gregorio
-Bianca Vera
-Emma-Louise Romero
-Jacqueline Au
-Lauren Mauge
-Noa Cravens
-Veronica Ramirez
-Amanda Hernandez
-Emma Romero
-Keylee Leong
-Lauren Tapia
-Roni Ramez
-Sawyer Bellville
-Tahlia Pou
-Taylor Kleinert
-Teresa Marchetti
-Ally Burke
-Grace Arnsparger
-Kaitlin Howard
-Natasha Velez
-Alex Lopez
-Alexys Puche
-Allyson Patrikian
-Amelia Bennett
-Bryanna Santis
-Charlotte Umstead
-Emily Flores
-Gaby Spoonhower
-Haley Kivett
-Jenna Marsh
-Karissa Qualley
-Madeline Olivas
-Chloe Gardhouse
-Jaycee Morris
-Margarita Moreno
-Alexandra Haluska
-Anna Dyckerhoff
-Candace Tezak
-Aubrie Kirkby Tatro
-Giana Diaz
-Kayla Arias
-Mya Rodriguez
-Paula Fernandez
-Annie Marcucci
-Arianna Worcester
-Brooke Shiohama
-Hayley Bradshaw
-Jayz Tomisa
-Kristin Lambert
-Madison Mathewson
-Madison Scorgie
-Shirley Ramirez
-Victoria Ortegon
+Maegan Simon	7
+Stella Byles	4
+Sydney Bianchi	5
+Tee Parris	6
+Adrienne Grimes	11
+Amelia Baca	19
+Emily McKenzie	16
+Emma Grabenstetter	20
+Moriah Owens	1
+Sarah Shaw	1
+Anna Painter	7
+Coco Jones	5
+Ella Mattocks	14
+Gracin Kerry	1
+Isabel Foley	8
+Sara Withers	6
+Emmie Mallory	12
+Lauren Short	10
+Sofia Corbett	1
+Tiane (Tee) Parris	3
+Tippy Maguire	2
+Abby Moffatt	15
+Catharine McCann	3
+Charlotte Summe	9
+Kat Melián	18
+Layla Canales	4
+Rachel Stephens	1A
+Riley Hull	13
+Annika Wise	11
+Reia Kimi	1B
+Rosie Woodman	17
+Tessa Pettit	16
+Ally Hopkins	1, 1/13
+Brittney Patterson	17
+Kirsten Yatsko	8, 3
+Laura Travers	15
+Lexie Gartner	10, 16
+Liz Klock	22
+Macel Reising	11
+Madison Nervig	9
+Rachel Clauss	5
+Sarah Latzo	2
+Tess O'Neill	16
+Amanda Borwegen	4, 7
+Paige Adams	20, 2
+Aliya Abdelhak	20
+Chloe Magyari	5
+Danelle Torrence	3
+Kiera MacWhinnie	12
+Marissa Whitby	4
+Megan Arseneau	1
+Cecelia Weiss	1
+Emma Rearson	10
+Samantha Worobetz	9
+Jillian Curtis	18
+Kate McKiernan	7
+Kimber Randolph	3
+Megan DePrez	8
+Ryley McClellan	11
+Allie Dombkowski	5
+Alyssa Broach	2
+Arianna Luciano	13
+Kaitlyn Ewing	9
+Alliey Cunningham	1C, 1, 1A
+Anastacia Didovich	10
+Felicia Filippini	1B
+Laura Anthony	4
+Marcella Gallardo-Russell	6
+Mekkiye Ergun	5, 8, 5/8
+Sydney Neumann	15
+Vanessa Gonzalez	9
+1A/13 Sky Wald	1A/13
+1B/19 Emily Bringazi	1B/19
+Emma Halle	6
+Hallie Ratcliff	14
+Rylee Mitchell	3
+Sabrina Estrada	17
+Sky Wald	1/13
+Angelmarie Asanas	7
+Autumn Woollcott	18
+Emmie Ratcliff	11
+Chloe Majorprice	9
+Lani Weaver	1
+Mackenzie Caron	12
+Madison Mansell	5
+Riley Gutierrez	4
+Sophie Talamonti	10
+1A/18 Amelia Brown	1A/18
+Allie Taylor	21
+Ava Biancheri	5
+Issabel Babikova	7
+Izabella Agraz	2
+Josephine Basco	3
+Marina Greenwood	14
+Piper Rakip	13
+Savannah Sedlock	4
+Sophia Romo	8
+1A/19 Fiona Swift	1A/19
+Amelia Brown	1/18
+Becca McKee	6
+Charlotte Monty	10
+Isobelle Jennings	9
+Mackenzie Kirby	4
+Paige Warda	12
+Ryanna Ritting	5
+Scout Lowrie	15
+1A/20 Anduena Kraja	1A/20
+Avary Guge	13
+Claudia Gagné	11
+Fiona Swift	19/1B
+Toni Munguia	2
+Anaissa Paul	17, 8
+Anastacia Gonzalez	18
+Angelica Hernandez	11
+Arlin De La Mora	7
+Caitlin Bronzan	1
+Celeste Moreira	12
+Cynthia Castillo	5
+Hannah Ellett	15
+Isabella Gorrocino	4
+Jasmine Villalpando	9
+Jenel Rivera	13
+Jenna Cohen	14
+Jennifer Preciado	10
+Kaitlin Vera	6
+Katia Montoya	1
+Kayanna Heffner	8, 14
+Kendyl Riley	3
+Leimana Hassett	16
+Lindsay Shoaff	19
+Zyania Morales	2
+Ana Alumbaugh	11, 2, 21, 12
+Hannah Rodriguez	10
+Marina Daroca Bazan	5
+Amelia Gregorio	7
+Bianca Vera	12, 6
+Emma-Louise Romero	9
+Jacqueline Au	4
+Lauren Mauge	1, 1B
+Noa Cravens	1
+Veronica Ramirez	11
+Amanda Hernandez	8
+Emma Romero	9
+Keylee Leong	16
+Lauren Tapia	1
+Roni Ramez	2
+Sawyer Bellville	11, 10
+Tahlia Pou	1A
+Taylor Kleinert	10
+Teresa Marchetti	3
+Ally Burke	13
+Grace Arnsparger	15
+Kaitlin Howard	5
+Natasha Velez	14
+Alex Lopez	7
+Alexys Puche	1A, 1
+Allyson Patrikian	10
+Amelia Bennett	11
+Bryanna Santis	6
+Charlotte Umstead	5, 8
+Emily Flores	16
+Gaby Spoonhower	17, 15
+Haley Kivett	2
+Jenna Marsh	9
+Karissa Qualley	18
+Madeline Olivas	24, 18
+Chloe Gardhouse	7
+Jaycee Morris	12
+Margarita Moreno	5
+Alexandra Haluska	11, 9
+Anna Dyckerhoff	14
+Candace Tezak	1
+Aubrie Kirkby Tatro	1A, 1
+Giana Diaz	7, 5
+Kayla Arias	18
+Mya Rodriguez	22
+Paula Fernandez	10
+Annie Marcucci	1A
+Arianna Worcester	1B
+Brooke Shiohama	2
+Hayley Bradshaw	14
+Jayz Tomisa	6
+Kristin Lambert	15
+Madison Mathewson	17
+Madison Scorgie	4
+Shirley Ramirez	21
+Victoria Ortegon	20

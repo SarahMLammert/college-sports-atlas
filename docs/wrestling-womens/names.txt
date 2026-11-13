@@ -77,7 +77,7 @@ Tygan Nelson
 Alexandrea Moseley
 Angela Goldwire
 Angelica Iobe
-Deven Cushard
+Deven Cushard	25
 Hannah Workman
 Lacey Jung-Michonski
 Mackenzie Tayerle
@@ -620,65 +620,6 @@ Najeyah Wallace
 Naomi Foote
 Sam Hinman
 Sava'nah Norte
-Carlos Pinel
-Elizabeth Feger
-Jamon Copeland
-Michael McCormick
-Michael Middendorf
-Elena Barnes
-Emily Rapacz
-Gracie Lopez
-Maddie Samuelson
-Marcelina Powalka
-Natalia Cassata
-Paxton Hoop
-Abigail Seiler
-Anna Repasi
-Ashley McCormick
-Brooke Pierron
-Deanna Stirtzinger
-Emily Durr
-Emma Davis
-Genevieve Riley
-Kylie Tittinger
-Miriam Padgett
-Talia Samuels
-Betsy Laville
-Camryn Olive
-Hayley Wonka
-Libby Welsh
-Lydia Buckley
-Mary Goetz
-Mary Kate Lee
-Meghan Precord
-Rachel Dalton
-Zelie Kessler
-Annie Dhabliwala
-Hannah Shaffrey
-Kalie Romig
-Katelyn Sherman
-Kingsley Avery
-Lauren Gillingham
-Madelyn Haut
-Madison McDonald
-Marinna Shadley
-Reina Thomas
-Sarah Miller
-Tamica Mora
-Alexandra Mazurczak
-Caitlyn O'Brien
-Delaney Weisbruch
-Lara Teodoro
-Lexy Smith
-Mackenzie Tourville
-Madeline Rublee
-Maria Teixeira
-Vitoria Barandas
-Lily Witkoski
-Maria Kuhlman
-Sadie Mosher
-Theresa Long
-Victoria Johnson
 Avonlea Bergthold
 Emily Garrido Calva
 Jessica Miller
@@ -952,45 +893,6 @@ Lily Pauley
 Ma'Kayla Bonner
 Maya Bennett
 Samantha Arocha
-A'Lasya DeHorney
-Asia Rivera
-Bailey Harris
-Claudia Monroe
-Hannah Britton
-Jada Burr
-Miguel Myers
-Sydney Mathis
-Totiana Kay
-Amanda Tofel
-Esmeralda Gallardo
-Isabella Perez
-Jamone' Peters
-Jirmya Peters
-Mallory Hugghins
-Prettee Reese
-Rajah Coleman
-Rian Breaux
-Viviana Trevino
-Aliyah Ramirez
-Cyani Stewart
-David Hinze
-Kenya Shaw
-Landon Flanagan
-Lexi Hogan
-Rayya James
-Shatyah Gathings
-Ayliah Ramirez
-Bra'Niyah McClure
-Brooklynn Drake
-D'Lynn Robbins
-Kryshell Chaney
-Madison Hernandez
-Madison Johnson
-Mariah Atkins
-Meircedes Valdez
-Ragen Verett
-Trinity Barnes
-Zoi Calvin
 Caitlynn Ash
 Charniece McClarence
 Cierra Young
@@ -2046,7 +1948,7 @@ Alexandria Bissell
 Ashden Welty
 Cayley Maynard
 DeShawneigh Iron Cloud
-Hallie Stone
+Hallie Stone	25
 Isabella Manning
 Isabelle Camarillo
 Jayden Lange
@@ -2483,48 +2385,48 @@ Sierra Gonzales
 Veronica Arroyo
 Alyssa Sanchez
 Anna Rodriguez
-Delia Gulzow
-Jocelyn Velasco
+Delia Gulzow	124
+Jocelyn Velasco	145
 Kadence Beck
 Kendall Martin
-Lexie Garza
+Lexie Garza	131
 Sitlaly Macias
-Taylor Schaffner
+Taylor Schaffner	131
 Trinity Tafoya
-Brooklyn Jones
+Brooklyn Jones	124
 Chloe Overgaag
-Gloria Diaz
+Gloria Diaz	117
 Katelynn Leonard
-Kiona Michel
+Kiona Michel	207
 Kirsten Delazerda
 Laura Meyers
-Makenna Duran
-Nia Avelino
-Telsarina Walter
+Makenna Duran	131
+Nia Avelino	110
+Telsarina Walter	110
 Valeria Echevarria
 Adelina Valencia
-Gillian O'Neal
-Hannah Hernandez
+Gillian O'Neal	124
+Hannah Hernandez	138
 Isabella Coronado
 Jessailah Thammavongsa
 Lizzy Hodges
-Mackayla Bonham
-Mallory Lusco
+Mackayla Bonham	138
+Mallory Lusco	207
 Paige Allen
 Savannah Roblin
-Veil Foreman
-Audry Winkles
-Danica Torres
-Desirae Juarez
+Veil Foreman	145
+Audry Winkles	117
+Danica Torres	110
+Desirae Juarez	138
 Dora Galindo
-Hazel Finnegan
-Kamiah Gaerlan
-Kaycee Potts
-Kyler Scott
-Madison Armstrong
-Matty Figueroa
-Melanie Mendoza
-Olivia Engel
+Hazel Finnegan	207
+Kamiah Gaerlan	117
+Kaycee Potts	131
+Kyler Scott	131
+Madison Armstrong	180
+Matty Figueroa	110
+Melanie Mendoza	103
+Olivia Engel	131
 Braylin Jones
 Heidi Gordon
 Zoey Sample
@@ -2746,67 +2648,67 @@ Trynadii Rocha
 Alejandra Perez
 Angelica Angeles
 Gia Ablonsky
-Gianna Anaya
+Gianna Anaya	138
 Heaven Byrd
 Nyla Anderson
 Tiyahna Askew
 Annika Lindberg
 Byrd Heaven
 Destiny Whitehead
-Evelyne Vazquez
+Evelyne Vazquez	117
 Megan Parrish
 Roxy Lewis
-Samantha Larios
+Samantha Larios	131
 Skyla Armstrong
-Aalijah Pineda
-Alyssa Arana
+Aalijah Pineda	145
+Alyssa Arana	180
 Andrea Espinoza
-Betty Cherry
+Betty Cherry	124
 Cartarina Valasquez-Perez
-Dinayah Vazquez
+Dinayah Vazquez	117
 Dorothy Gerrell
 Esther Levendusky
 Haleigh Workman
-Haley Zinninger
-Hope Eastes
+Haley Zinninger	110
+Hope Eastes	103
 Kylie Ayala
 Lauren Ellis
-Shanna Archuleta
-Isabella Hoffman
+Shanna Archuleta	180
+Isabella Hoffman	124, 131
 Jaden Lee
-Jewelysa Funakoshi
-Jocelyn Yepez
-Kalayah Edwards
-Karissa Turnwall
-Lynnlie Rountree
-Makayla Correa
+Jewelysa Funakoshi	131
+Jocelyn Yepez	160
+Kalayah Edwards	124
+Karissa Turnwall	117
+Lynnlie Rountree	103
+Makayla Correa	131
 Shelsy Renous
-Sofia Vergara
-Alexea Lawson
-Druzzla Johnson
-Gemma Templeman
-Gianna Dibenedetto
-Jamie Hearl
-Kendra Heroch
-Alexandra Ford
-Alexandriyah Kekoanui
-Evelyn Holmes-Smith
-Janida Garcia
-Rebekah Jean-Baptiste
-Ria Lugo
-Sam Patton
-Vera Spencer
-Vida Beckel
-Alexandra Iglesias
-Ava Catledge
-Ayana Contreras
-Cadence Grulla
-Clarion Fager
-Evey Hill
-Gaby Luper
-Karoline Ortiz
-Shaylin Potter
-Taylor Williams
+Sofia Vergara	145
+Alexea Lawson	124, 117
+Druzzla Johnson	207
+Gemma Templeman	207, 180
+Gianna Dibenedetto	138, 145
+Jamie Hearl	110
+Kendra Heroch	145
+Alexandra Ford	145
+Alexandriyah Kekoanui	160
+Evelyn Holmes-Smith	131
+Janida Garcia	131
+Rebekah Jean-Baptiste	103
+Ria Lugo	180
+Sam Patton	138
+Vera Spencer	117
+Vida Beckel	160
+Alexandra Iglesias	117
+Ava Catledge	180
+Ayana Contreras	110
+Cadence Grulla	103
+Clarion Fager	160
+Evey Hill	117
+Gaby Luper	110
+Karoline Ortiz	131
+Shaylin Potter	160
+Taylor Williams	145
 Amelyiah Martinez
 Ava Svistunov
 Avery Colgate
@@ -2907,20 +2809,20 @@ Julia Urban
 KarleeRose Lowell
 Karley Perrini
 Liliana Zaku-Ramos
-Talisha Lewis
-Theresa Zeppetelli
+Talisha Lewis	11
+Theresa Zeppetelli	12
 Valerie Iglesias
 Ziyona Jackson
 Alberta Lasayo
 Brittney Moran
 Cerenity Whiting
-Christina Borgmann
+Christina Borgmann	11
 Destiny Rivera
 Elinor Underwood
-Emily Doolittle
+Emily Doolittle	18
 Gianna Bonaccorso
 Kaylyn Juarez
-Lina Rodriguez
+Lina Rodriguez	17
 Linda Barrera
 Silvana Salas
 Aitana Lozano
@@ -4478,13 +4380,13 @@ Michelle Bamdas
 Trinity Costa
 Dymanique Jones
 Freya Lauritsen
-Haylee Fessler
-Hailey Schumaker
-Lauren Hill
-Mary Henry
-Michelle Pastuizaca
-Skylar Benninger
-Zada Johnson
+Haylee Fessler	145
+Hailey Schumaker	207
+Lauren Hill	138
+Mary Henry	124
+Michelle Pastuizaca	180
+Skylar Benninger	117
+Zada Johnson	131
 Anelia Bennick
 Cambrie Herb
 Cassdy Merkel
@@ -6133,13 +6035,6 @@ Sophia Bir
 Vittoria Wiley
 WynterGale Oxendine
 Zoe-Shalom Ahue Bolosan
-Grace Davison
-KayLee Kopp
-Kaylee Fritz
-Mesa King
-Shainy Mack
-Tahja Hunt
-Victoria Pehlke
 Bella Hoffman
 Brittney Zenteno
 Chloe Carver
@@ -6428,22 +6323,15 @@ Genesis Rodriguez
 Jessica Sanchez
 Jolene Joseph
 Lauryn Jacques
-Karen Ramirez
+Karen Ramirez	145
 Nicole Bifulco
 Samantha DiMilia
 Simone Ruiz
-Katherine Berrezueta
-Caitlin Reilly
-Faith Juwana
-Giselle Bonilla
-Mora Peterson
-Allison Denney
-Rylie Harwood
-Renita Harris
-Maria Luiza Barreis
-Jack Scott
-Madison Garcia
-Saremi Flores
+Katherine Berrezueta	138
+Caitlin Reilly	110
+Faith Juwana	103
+Giselle Bonilla	138
+Mora Peterson	117
 Alexa Calidinio
 Aliyah Hodge
 Ariel Nina Goble

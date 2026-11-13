@@ -1852,58 +1852,12 @@ Josh Gaeng
 Kelton Little
 Nick Maroon
 Tobio Scienzo
-Adam Paga
-Andres Figueroa
-Caleb Metzen
-Erik Minter
-Gabriel Hogan
-Greg Lawrence
-Hernando Valencia-Parra
-Jonathan Effertz
-Joseph Swehla
-Michael McGrath
-Sebastian Woods-Mariano
-Christopher Hermann
-David Harley
-Eric Klekas
-Jeff Henkel
-John Preyer
-Joseph Guernsey
-Kristian Marks
-Michael O'Donnell
-Shane O'Brien
-Shawn Thompson
-Andrew Giddens
-Brandon Dean
-Daniel Caylor
-Gabriel DeCasas
-Matt Chattin
-Matthew Lesniewski
-Nicholas Hofmeister
-Romello Bates
-Sam Pilkington
-Savohn Hunt
-Thomas Mullally
-Travis Makauskas
-Will Tate
-Andrija Vujakovic
-Chayse Culpepper
-Clayton Uecker
-David Giles
-David Zuleta
-Jose Gonzalez
-Kaveon Dux
-Kensley Jean Baptiste
-Marcus Montalvo
-Mason Dinesen
-Michael Klekas
-Michael Long
-Rico Soto
 AJ Cherubini
 Aidan Brocco
 Derek Calahan
 Eric Cherubini
 Fred Waterman
+Gabriel DeCasas
 Joey Farrell
 Michael Lis-Planells
 Raymond Kern
@@ -1975,17 +1929,17 @@ Brian Osborne
 Chase Myers
 Lukas Newton
 Nicolas Santoso
-Austen Christiansen
-CJ Lee
-Kaimakani Ruiz
-Patrick Fishburn
+Austen Christiansen	0
+CJ Lee	0
+Kaimakani Ruiz	0
+Patrick Fishburn	0
 Spencer Dunaway
-Tommy Higham
-Zach Pritchard
-Chad Hardy
+Tommy Higham	0
+Zach Pritchard	0
+Chad Hardy	0
 Kelton Hirsch
-Peter Kuest
-Rhett Rasmussen
+Peter Kuest	0
+Rhett Rasmussen	0
 Andrew Chin
 Austin Banz
 Brock Stanger
@@ -3770,11 +3724,6 @@ Grady Hayes
 Reed Foehl
 Favian Busnawi
 Rylan McGinn
-Alumni Healthcare Heroes
-Athletic Hall of Honor
-Go U Bears Photography
-National Champions
-Polar Bear Olympians
 Ben Secor
 Jack Roberts
 Liam Jachetta
@@ -20664,7 +20613,6 @@ Judah Sternhagen
 Paul Otto
 Ryan Pufahl
 Sebastian Smith
-Marney Gellner
 Alex Wilson
 Ben Wilson
 Cody Brunner
@@ -22750,38 +22698,38 @@ Collin Jones
 Narit Teeranontamongkol
 Nicklaus Ledbetter
 Trace Novak
-Alec Palen
-Euan Walker
-Hayden Buckley
-Jacob Fair
-Linus Lilliedahl
-Luigi Botta
-Matt Echelmeier
-Preston Fleenor
-Will Echelmeier
-Wilson Sundvold
-Rory Franssen
-Trevor Ullestad
-Jack Parker
-Jamie Stewart
-Ricky Sanders
-Ross Steelman
-Tommy Boone
-Viktor Einarsson
-YuTa Tsai
-Dawson Meek
-Michael Terblanche
-Charlie Crockett
-Dagbjartur Sigurbrandsson
-Jack Lundin
-Alfons Bondesson
-Antonio Safa
-DJ Springer
-Adam Miller
-Brock Snyder
-Peyton Purvis
-Trevor Mierl
-Virgilio Paz
+Alec Palen	42
+Euan Walker	61
+Hayden Buckley	13
+Jacob Fair	24
+Linus Lilliedahl	59
+Luigi Botta	10
+Matt Echelmeier	7
+Preston Fleenor	12
+Will Echelmeier	33
+Wilson Sundvold	9
+Rory Franssen	66
+Trevor Ullestad	22
+Jack Parker	97
+Jamie Stewart	46
+Ricky Sanders	20
+Ross Steelman	19
+Tommy Boone	18
+Viktor Einarsson	16
+YuTa Tsai	54
+Dawson Meek	24
+Michael Terblanche	14
+Charlie Crockett	6
+Dagbjartur Sigurbrandsson	10
+Jack Lundin	27
+Alfons Bondesson	22
+Antonio Safa	96
+DJ Springer	15
+Adam Miller	18
+Brock Snyder	5
+Peyton Purvis	17
+Trevor Mierl	12
+Virgilio Paz	25
 Bubba Chapman
 Jakob Hansen
 Jules Lauer
@@ -31422,102 +31370,102 @@ Parker Sawatzky
 Rasmus Tamker
 Jacob Parker
 Noah Duncan
-AJ Barnett
-Adam Domitrovich
-Adrian Luna
-Aiden Pirrin
-Alexander Quintero
-Andrew Francis
-Andrew Kump
-Andrew Ramirez
-Anthony Piscitelli
-Antione Richardson
-Ben Harvey
-Benito Moran
-Brandon Broddle
-Brandon Keller
-Brennan Juhl
-Brian Sione
-Bryan Barnhart
-Cash Barden
-Chris Fields
-Cody Wenzel
-Dakota Clowdis
-Derrick Flake
-Devan Loveall
-Domenic De Fiore
-Domenic Di Poalo
-Dominic Zimmerman
-Don Berger
-Drew Cortez
-Dustin Young
-Dwain Taylor
-Easton Ridley
-Eric Pichardo
-Forrest Simpson
-Frank Romano
-Fredrick Crawley
-Gabriel Madrid
-Garrett Booth
-Gunner Hughes
-Isai Fernandez
-Isaiah Ross
-Jake Tumberger
-Jamal Salaam
-Jameel Salaam
-James O'Bryan
-James Scrivener
-Jared Paulakovich
-Jeremiah McKneely
-Jon Cereceres
-Jordan Cons
-Jordan Riek
-Joseph Brandon
-Joseph Rodriguez
-Josh Smith
-Joshua Green
-Juan Stewart
-Justin Kearney
-Kenan McDonald
-Kenny Nez
-Kent Ingram
-Kimball Roca
-KyRandall Smith
-Kyle Dougherty
-Layne Powell
-Luke Slupski
-Manny Guerrero
-Matt Nila
-Maximilan Richert
-Michael Brown
-Nicholas Holmes
-Nick Chaney
-Noah Gamboa
-Patrick Davis
-Paul Lednicky
-Peyton Hampton
-Phillip Woolsey
-Reece Fontana
-Rhyler Estenbaum
-Ricardo Rivera
-Seth Bowman
-Shane Kerschner
-Taylor Gilbert
-Taylor Petty
-Tiller Gaston
-Tommy Burton
-Trevor Grinstead
-Trey Perkins
-Tyler Kline
-Vincent Prud'homme
-Wade Smith
-Will Gauger
-William Affognon
-Wyatt Whitham
-Yaw Osei-Baffour
-Zac Douglas
-Zach Hilliard
-Zachary Atkins
+AJ Barnett	9
+Adam Domitrovich	58
+Adrian Luna	71
+Aiden Pirrin	6
+Alexander Quintero	64
+Andrew Francis	86
+Andrew Kump	91
+Andrew Ramirez	78
+Anthony Piscitelli	15
+Antione Richardson	79
+Ben Harvey	28
+Benito Moran	98
+Brandon Broddle	35
+Brandon Keller	18
+Brennan Juhl	54
+Brian Sione	57
+Bryan Barnhart	10
+Cash Barden	51
+Chris Fields	7
+Cody Wenzel	4
+Dakota Clowdis	66
+Derrick Flake	81
+Devan Loveall	39
+Domenic De Fiore	89
+Domenic Di Poalo	60
+Dominic Zimmerman	12
+Don Berger	82
+Drew Cortez	3
+Dustin Young	97
+Dwain Taylor	25
+Easton Ridley	24
+Eric Pichardo	41
+Forrest Simpson	17
+Frank Romano	99
+Fredrick Crawley	36
+Gabriel Madrid	32
+Garrett Booth	62
+Gunner Hughes	29
+Isai Fernandez	5
+Isaiah Ross	2
+Jake Tumberger	44
+Jamal Salaam	19
+Jameel Salaam	83
+James O'Bryan	96
+James Scrivener	72
+Jared Paulakovich	26
+Jeremiah McKneely	42
+Jon Cereceres	55
+Jordan Cons	13
+Jordan Riek	21
+Joseph Brandon	85
+Joseph Rodriguez	34
+Josh Smith	8
+Joshua Green	30
+Juan Stewart	11
+Justin Kearney	20
+Kenan McDonald	48
+Kenny Nez	31
+Kent Ingram	27
+Kimball Roca	67
+KyRandall Smith	1
+Kyle Dougherty	80
+Layne Powell	47
+Luke Slupski	59
+Manny Guerrero	23
+Matt Nila	56
+Maximilan Richert	16
+Michael Brown	84
+Nicholas Holmes	37
+Nick Chaney	95
+Noah Gamboa	68
+Patrick Davis	65
+Paul Lednicky	50
+Peyton Hampton	52
+Phillip Woolsey	88
+Reece Fontana	49
+Rhyler Estenbaum	46
+Ricardo Rivera	76
+Seth Bowman	45
+Shane Kerschner	77
+Taylor Gilbert	38
+Taylor Petty	9
+Tiller Gaston	22
+Tommy Burton	90
+Trevor Grinstead	61
+Trey Perkins	73
+Tyler Kline	87
+Vincent Prud'homme	75
+Wade Smith	92
+Will Gauger	53
+William Affognon	94
+Wyatt Whitham	43
+Yaw Osei-Baffour	33
+Zac Douglas	74
+Zach Hilliard	14
+Zachary Atkins	40
 Ash Hakim
 Blake Hathcoat
 Connor Blick
@@ -33093,7 +33041,7 @@ Keenan Huskey
 Matt NeSmith
 Ryan Stachler
 Scott Stevens
-Sean Kelly
+Sean Kelly	13
 Will Miles
 Will Starke
 Caleb Proveaux

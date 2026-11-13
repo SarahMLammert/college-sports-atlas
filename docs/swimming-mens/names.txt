@@ -1826,10 +1826,6 @@ Lixiao Zhang
 Michael Langmeyer
 Robel Hagos
 Xavier Andrade
-Brady Sweeney
-Charley Krygowski
-Jack Currie
-Louby Sukkar
 Andrew Keenan
 Andrew Nunnemacher
 Charles Lenihan
@@ -1848,235 +1844,69 @@ Kenny Guan
 Alexander Morales
 Gabriel Paiva
 Xavier Tula
-Alec Morris
-Alexandria Merritt
-Allyx Purcell
-Aly Tetzloff
-Annie Lazor
-Arthur Mendes
-Ashley Neidigh
-Ashton Ellzey
-Bailey Nero
-Beatriz Travalon
-Breanna Roman
-Brooke Malone
-Bryan Lee
-Carly Scheper
-Caroline Baddock
-Christian Selby
-Christopher Simmons
-Daniel McGee
-Emily Munn
-Erin Falconer
-Genny Pittman
-Grady Ottomeyer
-Grant Schenk
-Haley Black
-Hugo Morris
-Jacob Molacek
-Jessica Hodgson
-Jillian Vitarius
-Joe Patching
-Jordan Jones
-Joshua Booth
-Justin Checchin
-Justin Youtsey
-Katie Money
-Kristen Murslack
-Kyle Darmody
-Liam McCloskey
-Luis Martinez
-Madeline Cox
-Madison Martin
-Matheus Uslar
-McFoster Ballard
-Michael Duderstadt
-Miranda Telmanik
-Morgan Mullins
-Natasha Lloyd
-Oda Gjerde
-Pete Turnham
-Peter Holoda
-Russell Noletto
-Sam Stewart
-Sarah Reynolds
-Scott Lazeroff
-Shannon McKernan
-Taylor Copeland
-Tommy Brewer
-William McKinney
-Zach Apple
-Ziv Kalontarov
-Zoe Thatcher
-Alison Maillard
-Annie Boone
-Brody Heck
-Bryar Long
-Camille Porter
-Caroline Schirmer
-Colin Bone
-David Crossland
-Foster Ballard
-Jaqueline Hippi
-Jessica Merritt
-Julie Meynen
-Julien Pinon
-Lauren Dunn
-Maddie Cox
-Owen Upchurch
-Petter Fredriksson
-Robyn Clevenger
-Santiago Grassi
-Sierra Jett
-Stetson Lamb
-Abi Wilder
-Cade Overbeek
-Carly Cummings
-Christian Ginieczki
-Elizabeth Lancaster
-Erin Norton
-Hugo Gonzalez
-Jaden Bellina
-Jane Johnson
-Jewels Harris
-Josh Dannhauser
-Logan Andrews
-Margaret Carey
-McAuley Parker
-Sarah Margaret Cimino
-Sonnele Oeztuerk
-Spencer Rowe
-Thomas Heinzel
-Zach Richards
-Aryan Makhija
-Brogan Davis
-Brooks Merkle
-Christian Sztolcman
-Claire Fisch
-Conner Pruitt
-Emily Hetzer
-Matthew Yish
-Regan Weakley
-Ruthie Jerger
-Thomas Pedroso
-Valerie Tarazi
-AJ Kutsch
-Abbey Webb
-Aidan Stoffle
-Annie O'Dare
-Ashlynn Sullivan
-Averee Preble
-Claudia Thamm
-Cole Bruns
-Davis Edwards
-Devan Sweeney
-Ella Miller
-Grady Wheeler
-Gretchen Wensuc
-Hanna Newby
-Hannah Mattson
-Jack Armstrong
-Lleyton Smith
-Nik Eberly
-Seth Maschmeier
-Shayna Fetes
-Skip Donald
-Ty Babinec
-Zoe Gawronska
-Abby Gibbons
-Alejandro Flores
-Brynn Curtis
-Colby Hurt
-David Vargas
-Elliott Jones
-Elysse Pardus
-Emma Steckiel
-Evan McInerny
-Hannah Ownbey
-Hunter Kebler
-Jadan Nabor
-Kendall Minter
-Kensley Merritt
-Logan Tirheimer
-Maggie Gholston
-Maia Goldstein
-Megan Ewoldt
-Meghan Lee
-Michael Bonson
-Mikkel Gadgaard
-Payton Marvin
-Peter Makin
-Reid Mikuta
-Ryan Husband
-Sam Oliver
-Ty Wingfield
-Abigail Farrar
-Adriel Sanes
-Anastasia Makarova
+Aidan Clements
+Aidan Siers
+Alex Just
 Andrew Simmons
-Ava Talorico
-Avery Bargeron
-Ellie Waldrep
-Fletcher Hayes
-Grant Davis
-Henry Bethel
-Jacques Rathle
-Jenna Smith
-Josh Cobia
-Lewis Treggiden
-Lexie Mulvihill
-Lucy O'Neill
-Mason Mathias
-Mykenzie Leehy
-Nate Stoffle
-Rebekah Hamilton
-Rusty Jerger
-Trevor McGovern
-Whit Andrus
-Ainsley Jones
-Caden Fritz
-Cameron Dukat
-Carly Sebring
-Casey Cullen
-Collin Klingman
-Daisy Platts
-Danny Schmidt
-Drew Jordan
-Jon Vanzandt
-Kalle Makinen
-Kyla Maloney
-Kyleigh Kidd
-Lilly Byrne
-Lucas Thomas
-Micaela Sierra
-Mihalis Deliyiannis
-Morgan Gore
-Polina Nevmovenko
-Rosalie Kleyboldt
-Sohib Khaled
-Tate Cutler
-Walker Creedon
-Alexey Glivinsky
-Arsen Kozhakhmetov
-Ben Wilson
+Andy Commins
+Avery Henke
+Benjamin Chateigner
 Bradford Johnson
-Daniel Krichevsky
+Britton Spann
+Collin Klingman
+Danny Schmidt
+David Hatt
+Drew Jordan
 Ethan Swart
-Gabriel Machuco
+Grant Davis
+Harrison Ranier
+Henry Bethel
+Isaac Lee
+Jack Ailshire
+Jacques Rathle
+James Allison
+Jon Vanzandt
+Josh Noll
+Kalle Makinen
+Keaton Rice
+Landon Lloyd
+Liam Heary
+Logan Tirheimer
+Lucas Thomas
+Mason Mathias
+Michael Bonson
+Nate Stoffle
+Nolan Chennault
+River Paulk
+Rokas Jazdauskas
+Rusty Jerger
+Ryan Husband
+Sam Empey
+Sohib Khaled
+Talan Blackmon
+Tate Cutler
+Travis Keith
+Warner Russ
+Whit Andrus
+Abdalla Nasr
+Ben Wilson
+Daniel Krichevsky
 Ivan Tarasov
-Kaua Carvalho
 Luke Bedsole
+Luke Waldrep
 Mack Schumann
 Maston Ballew
+Tsvetomir Ereminov
+Uros Zivanovic
+Alexey Glivinsky
+Arsen Kozhakhmetov
+Gabriel Machuco
+Kaua Carvalho
 Matthew Hamilton
 Mike Rice
 Nicolas Gama
 Peder Saur Hubred
 Sebestyen Papp
-Talan Blackmon
-Tsvetomir Ereminov
-Uros Zivanovic
-Warner Russ
 Adam Bernardi
 Anthony Santangelo
 Brandon Marcy
@@ -2315,62 +2145,6 @@ Matthew Leeworthy
 Owen Altermatt
 Theodore Rogers
 Will Thomas
-Carlos Pinel
-Elizabeth Feger
-Jamon Copeland
-Michael McCormick
-Michael Middendorf
-Chosen Levarity
-Francesco Barbieri
-Jack Poirier
-Jaylen White
-Jonathan Effertz
-Adam Paga
-Andres Figueroa
-Caleb Metzen
-Erik Minter
-Gabriel Hogan
-Greg Lawrence
-Hernando Valencia-Parra
-Joseph Swehla
-Michael McGrath
-Sebastian Woods-Mariano
-Christopher Hermann
-David Harley
-Eric Klekas
-Jeff Henkel
-John Preyer
-Joseph Guernsey
-Kristian Marks
-Michael O'Donnell
-Shane O'Brien
-Shawn Thompson
-Andrew Giddens
-Brandon Dean
-Daniel Caylor
-Gabriel DeCasas
-Matt Chattin
-Matthew Lesniewski
-Nicholas Hofmeister
-Romello Bates
-Sam Pilkington
-Savohn Hunt
-Thomas Mullally
-Travis Makauskas
-Will Tate
-Andrija Vujakovic
-Chayse Culpepper
-Clayton Uecker
-David Giles
-David Zuleta
-Jose Gonzalez
-Kaveon Dux
-Kensley Jean Baptiste
-Marcus Montalvo
-Mason Dinesen
-Michael Klekas
-Michael Long
-Rico Soto
 Alexander Clancy
 David Curley
 Francesco Salvi
@@ -2393,6 +2167,7 @@ Justin Blaine
 Matthew Stanley
 Patrick Bellucci
 Ryan Pritchard
+Sam Pilkington
 Seth Sproule
 Alec Whistler
 Eduardo Martiniano
@@ -2416,60 +2191,60 @@ John Paul Greene
 Paul Beery
 Peter Steger
 Trei Durstine
-Brayden Murphy
-Cameron Lindsay
-Chad Sorensen
-Connor Anderson
+Brayden Murphy	0
+Cameron Lindsay	0
+Chad Sorensen	0
+Connor Anderson	0
 Connor Stirling
-Dallin Johnson
-David Harlan
-Harrison Strange
-Jake Taylor
-Jordan Tuckfield
-Kent Fellows
-Kevin Dreesen
-Luis Ventura
-Matt Denkers
-McKay Palmer
-Nathan Henderson
-Nathan Rogers
-Payton Sorenson
-Preston Jenkins
-Rainer Ng
-Ryan Sorensen
-Scott Sorensen
-Seth Russell
-Shawn Western
-Stephen Richards
-Trayton Speth
-William Watts
-Darrin Lam
-Eric Muir
+Dallin Johnson	0
+David Harlan	0
+Harrison Strange	0
+Jake Taylor	0
+Jordan Tuckfield	0
+Kent Fellows	0
+Kevin Dreesen	0
+Luis Ventura	0
+Matt Denkers	0
+McKay Palmer	0
+Nathan Henderson	0
+Nathan Rogers	0
+Payton Sorenson	0
+Preston Jenkins	0
+Rainer Ng	0
+Ryan Sorensen	0
+Scott Sorensen	0
+Seth Russell	0
+Shawn Western	0
+Stephen Richards	0
+Trayton Speth	0
+William Watts	0
+Darrin Lam	0
+Eric Muir	0
 Ethan Kramer
 Jacob Rees
-Jarod O'Brien
-Jarren Brinton
-Michael Mortenson
-Nathan Wallace
-Regie Topham
-Roger Woods
-Ryan Evans
+Jarod O'Brien	0
+Jarren Brinton	0
+Michael Mortenson	0
+Nathan Wallace	0
+Regie Topham	0
+Roger Woods	0
+Ryan Evans	0
 Brad Prolo
 Brigham Harrison
-Bryce Farabee
+Bryce Farabee	0
 Carter Flint
 Christopher Pierce
-Evan Berger
-James Sorensen
-John Morris
+Evan Berger	0
+James Sorensen	0
+John Morris	0
 Joshua Skabelund
 Kimble Mahler
 Kunmi Ogunfeibo
-Levi Jensen
+Levi Jensen	0
 Luke Lyons
-Matt Abernethy
+Matt Abernethy	0
 Morgan Cooper
-Nathan Gonzales
+Nathan Gonzales	0
 Sherif Aboumandour
 Jared Shaw
 Jaron Nelson
@@ -2993,54 +2768,6 @@ Oliver Vanderploeg
 Owen O'Reilly
 Praagya Khand
 Reece Sherf
-Anastasiia Samokhvalova
-Ashlee Klinefelter
-Ashleigh Pink
-Carla Davila
-Carly Logan
-Charlie Francis
-Charlotte Armstrong
-Felipe Alvarez
-Frank II Gonzalez
-Grace Pritchard
-Ignasi Forcano
-Lauren Grinberg
-Luana Bulara
-Marlon Buck
-Martin Gutierrez
-Michelle Etchebaster-Martins
-Mirko Ronchi
-Noah Stern
-Rose Hemans
-Sabrina Andolpho
-Sarolta Adonyi
-T.J. Smith
-Tara Marinkovic
-Taylor Checkley
-Viktoria Velika
-Wonjun Choi
-Adren Roberts
-Alex Campbell
-Amani D'Ambrosio
-Ambar Ramirez
-Ana Gascon
-Anais Fournier
-Angela Leweurs
-Cassandra Lee
-David Rieme
-Drew Dempsey
-Hugo Aguilar Puertes
-James Montgomery
-Jarrett May
-Jeyhlen Thomas
-Joe Stella
-Maci Barnhart
-Makayla Whalen
-Matthew Huembes
-Matthew Menendez
-Mia Applegate
-Quinn McLeod
-Taylor Thompson
 Alan Perri
 Brooks Blackert
 Christopher Paige Jr.
@@ -5247,8 +4974,8 @@ David Retta
 Emilio Espinoza
 Jack Acampora
 Jack Hartwell
-Jack Kirby
-Jake Venckus
+Jack Kirby	4
+Jake Venckus	1
 Jonah Hobbs
 Lucas Reddell
 Mats Albins
@@ -5284,13 +5011,13 @@ Nick Kenny
 Parker Jory
 Ryan Sorgie
 Sean Marchewski
-Stephen Blaauw
+Stephen Blaauw	18
 Andrew Meneses
 Brenden Fuggles
-Justin Krause
+Justin Krause	17
 Mark Raybukh
 Miles Gaitan
-Nathan March
+Nathan March	13, 17
 Umberto Garcia
 Vincent Hemingway
 Winston Hewes
@@ -19050,50 +18777,118 @@ Daryan Maynard
 Evan Sevast
 Gabriel Vasconcelos Alvarenga
 Jakub Krawczyk
+Alarii Levreault-Lopez
+Alex Carson
+Alex Linge
+Andrew Suchla
+Austin Drummond
+Brandon Goldman
+Braydon Bergeron
+Colin Finnegan
+Damen Pheiffer
+Devin McCaffrey
+Garrett House
+Harrison Jones
+Harry Ackland
+Jake Markham
+Joao Mescolote
+Logan Rysemus
+Matt Klotz
+Matt McClellan
+Matthew Phillip
+Mitchell Petras
+Ryan Cade
+Silas Dejean
+Thomas Smith
+Tyler Harper
+Will Arthur
+Juan Celaya-Hernandez
+Karl Luht
+Lewis Clough
+Sven Saemundsson
+Braden Nyboer
+Brian McGroarty
+Cameron Karkoska
+Dakota Hurbis
+Jackson Lucas
+Jeffrey Snoddy
+Luca Pfyffer
+Trent Schachter
+Jack Jannasch
+Keagan Finley
+Michael Petro
+Miguel Velasquez
+Thomas Roark
+Ben Hooper
+Brooks Curry
+David Boylan
+David Wahlen
+Isak Vikstrom
+Julian Norman
+Manny Vazquez Bas
+Tommy Spradley
+Emil Hassling
+James Henderson
+Joel Thompson
+Mason Nyboer
+Michael Foley
+Mitch Mason
+Parker Bragg
+Spencer Adrian
 Aaron Parrott
 Adrian Abadia
 Brendan Hausdorf
-Brooks Curry
-David Boylan
-Emil Hassling
 Ezra Dickerson
 Gavin Rogers
 Griffin Curtis
-Isak Vikstrom
-Jack Jannasch
-James Henderson
-Joel Thompson
-Juan Celaya-Hernandez
-Julian Norman
 Kevin Glenn
 Luke Prior
 Mark Eberhard
-Michael Petro
-Mitch Mason
 Nick Toepfer
 Ryan Warmbier
-Spencer Adrian
-Tommy Spradley
 Zayne Danielewicz
-Andreas Da Silva
-Caleb Ellis
-Collin Quickstad
-Diggory Dillingham
-Elias Noe
-Guilherme Camossato
-Jack Cameron
-Jackson Congdon
+Andrew Garon
+Carson Paul
+Cash Woolsey
+Kilian Bishop
+Mark Ford
+Michal Daszkiewicz
+Noah Cumby
+Pavel Alovatki
+Pawel Uryniuk
+Reese Voelkel
+Stuart Higdon
+Trey Ike
+Jacob Pishko
 Jere Hribar
 Jovan Lekic
 Karlo Percinic
 Levi Thome
-Luke Stibrich
-Matias Santiso
+Mason Williams
+Max Eckerman
+Silas Beth
+Simon Casey
+Thomas Dowling
+Truman Breithaupt
+Collin Quickstad
 Nikola Simic
+Ryder Gentry
+Stepan Goncharov
+Volodymyr Lisovets
+Albert Bouley
+Caleb Ellis
+Diggory Dillingham
+Guilherme Camossato
+Jon Avdiu
+Luke Stibrich
 Simon Meubry
 Travis Keith
+Andreas Da Silva
+Elias Noe
+Jack Cameron
+Jackson Congdon
+Matias Santiso
 Tyson Marrs
-Volodymyr Lisovets
 Zach Dale
 Aleksandar Nikolic
 Alexandar Holland
@@ -25120,7 +24915,6 @@ Max Lutz
 Max Shaffer
 Preston Dollins
 Taco Steiner
-Paul Balon
 Zsombi Sipaki
 Ashton Miguel Juarez
 Benjamin Macgregor
@@ -27558,7 +27352,7 @@ Casey Sawyer
 Devin Wofford
 Erik Clemensen
 Kenton Quan
-Luis Araya
+Luis Araya	6
 Neil Franka
 Raju Kolluru
 Ryan Mcvicar
@@ -39362,238 +39156,68 @@ Liam Mac Colla
 Micah Davis
 Nathan Carr
 Seth Collet
-Adam Stacklin
-Adam Thomas
-Adriana Grabski
-Alyssa Bodin
-Ashley Buchter
-Ashlynn Peters
-Auriane de Premilhat
-Ben Schiesl
-Brandon Fiala
-Brent Benedict
-Caroline Buscaglia
-Chris Grimmett-Norris
-Christopher Outlaw
-Christopher Wang
-Danielle Griggs
-Drake Becksted
-Eduardo Castro-Silva
-Fiona Donnelly
-Gabrielle Bishop
-Harrison Pierce
-Holly Harper
-Ian Ho
-Jack Gigliotti
-Jessica Arnold
-Jessica Hespeler
-Justin Edwards
-Katie Gillespie
-Kelly Henry
-Klaudia Nazieblo
-Laura Schwartz
-Lauren Buckworth
-Leah Piemonte
-Leah Rogers
-Logan Stevens
-Logan Williams
-Lucas Bureau
-M.J. Ulrich
-Mackenzie Stewart
-Madison Rylee
-Maggie Gruber
-Mauro Castro-Silva
-Michael Craddock
-Michal Szuba
-Nathan Pawlowicz
-Nicholas Olson
-Norbert Szabo
-Oscar Ike
-Robert Owen
-Savannah Padgett
-Sean Workman
-Sydney Pesetti
-Weronika Paluszek
-Zach Switzer
-Aaron Boyd
-Baillie Cameron
-Caroline de Jager
-Chloe Hicks
-Colin Murphy
-Cooper Pitts
-David Herbert
-Eleanor Matheson
-Erin Scott
-Grace Kowal
-Hannah Wilding
-Hassler Carroll
-Jake Lamparella
-Jenna Beattie
-Jessica Beattie
-Kayla Purcell
-Margarita Ryan
-Miranda Eberle
-Nicholas Schwegel
-Reka Gyorgy
-Simon Shi
-Thomas Shinholser
-Abigail Andrusin
-Alex Hines
-Alex McMurry
-Collin Fiala
-Connor Doyle
-Emily Meilus
-Gershwin Greene
-Heather Sigmon
-Joelle Vereb
-Lane Stone
-Lasse Pittioni
-Molly Sheffield
-Nicole Pape
-Regan Westwood
-Sam Tornqvist
-Thomas Hallock
-Abby Larson
-Alex Slayton
-Alex Wright
-Anna Landon
-Annalee Johnson
-Antani Ivanov
-Ben Hicks
-Blake Manoff
-Brennen Doss
-Brooke Leftwich
-Dylan Eichberg
-Ethan Apisa
-Filippo Dal Maso
-Henry Claesson
-Izzi Mroz
-Jennifer Hauser
-Julia Bruneau
-Justin Rich
-Keith Myburgh
-Lara Siebrecht
-Lauren Meeker
-Loulou Vos
-Maya Atkins
-Noah Zawadzki
-Teagan Moravek
 AJ Pouch
-Ashley Worden
-Brooke Travis
-Charlie Burt
-Cobi Lopez Miro
-Erin Quinn
-Forest Webb
-Grace Cutrell
-Hannah Jirsa
-Hunter Cassady
-Jaedin Clark
-Jenna Thompson
-Joseph Perreault
-Julia Smith
-Karisa Franz
-Morgan Miller
-Noah Desman
-Rainey Vause
-Rose Pouch
-Ryan Vipavetz
-Sarah Shackelford
-Shelby Raber
-Sophia Ryan
-Taj Cole
-Will Koeppen
 Abraham Apfel
-Alexander Neff
-Carles Coll Marti
-Caroline Bentz
-Chase Travis
-Collin Myburgh
-Emily Vasquez
-Emma Atkinson
-Khalil Fonder
-Kierstin Godfrey
-Kimi Raheem
-Lauren Barakey
-Megan Judge
-Nadia Gonzalez de Oliveira
-Youssef Ramadan
-Alex Eastmond
-Alexa Williams
-Allison Henry
-Anna Summers
-Ben Eckerson
-Charlotte Rigg
-Daniel Valmassei
-Emma Inch
-Gabriel Yuk
-Hayden Jay
-Jacob Ryan
-Janika Perezous
-Joseph Hong
-Lilly Fitzpatrick
-Luan Grobbelaar
-Luana Alonso
-Luis Dominguez
-Maddy Grafmiller
-Mario Molla Yanes
-Miah Fisher
-Nico Garcia Saiz
-Nikolas Lee-Bishop
 Aiken Do
-Ava Gilroy
-Brooke Zettel
-Camille Weiss
-Carl Bloebaum
-Carla Hurtado Sirera
-Carmen Weiler Sastre
-Caroline Foltz
-Emily Claesson
-Ethan Maloney
-Fanni Gyurinovics
-Grace Austin
-Isabel Marstellar
-Izzy Mora Castillo
-Jacob Fisher
-Landon Gentry
-Lee Naber
-Madelyn Moore
-Mitchell Stroud
-Peyton Guziec
-Stephanie Sifferman
-Sydney DeBaecke
-Tanish George Mathew
-William Hayon
+Alexander Neff
 Alexander Zoldan
 Brendan Whitfield
+Carl Bloebaum
+Carles Coll Marti
+Cobi Lopez Miro
+Collin Myburgh
 Daniil Pancerevas
+Ethan Maloney
+Forest Webb
+Gabriel Yuk
+Hayden Jay
+Jacob Fisher
+Jacob Ryan
+Joseph Hong
+Landon Gentry
+Lee Naber
+Luis Dominguez
+Mario Molla Yanes
+Mitchell Stroud
+Nico Garcia Saiz
 Rocky Ramsland
 Sean Binning
+Tanish George Mathew
 Vedaant Madhavan
+William Hayon
+Youssef Ramadan
 Zac Ouzilou
 Zachary Shaddy
+Danny Bishop
+Eli Martin
+H.T. Tragle
+Hayden Sunman
+JC Gordon
+Jakub Poliačik
+Kyle Algrim
+Laith Sabbah
+Levente Balogh
+Nathan Cox
+Pablo Silva
+Andy Roose
+Benedek Toth
+Clem Camacho
+Connor Johnson
+Diego Aranda
+Hayden Annan
+Jack Mainville
+Javier Nuñez
+Lucas Humling
+Oscar Bilbao
+Tristan Dorville
 Aidan Paro
 Alex Grocholski
 Alex Parent
 Aly Hassan
-Andy Roose
-Benedek Toth
-Connor Johnson
-Diego Aranda
 Doruk Yoğurtcuoğlu
-Eli Martin
-Hayden Annan
-Jack Mainville
-Jakub Poliačik
-Javier Nuñez
-Levente Balogh
-Lucas Humling
 Luke Rawlings
 Matthew Wolfle
-Nathan Cox
 Olivier Urbaniak
-Oscar Bilbao
-Tristan Dorville
 Alex Gallant
 Alex Powers
 Andrew Bauer
@@ -40936,72 +40560,72 @@ Mitch Stahara
 Sam Angelo
 Scott Morosetti
 Tyler Sheets
-Aaron Dunlany
+Aaron Dunlany	12
 Alex Bowes
 Christian Bove
 Connor Carbonneau
 Jeremy Wiening
 John Morton
 Kameron Short
-Matt Kwalick
+Matt Kwalick	52
 Matthew Bogen
-Thomas Somora
-Blaine Sorrick
+Thomas Somora	37
+Blaine Sorrick	14
 Carlos Barrett
-Connor May
+Connor May	18
 Eric Shannon
-Roody D'Agaro
+Roody D'Agaro	9
 Zack Thomas
-Charles Gordon
-Constantine Kallaur
-Jacob Musselman
-Kevin MacMurdo
+Charles Gordon	16
+Constantine Kallaur	20
+Jacob Musselman	30
+Kevin MacMurdo	28
 Nicholas Pirollo
-Patrick Holton
-Trevor McCabe
+Patrick Holton	11
+Trevor McCabe	25
 Zayne Trebour
-Austin Shaw
-Brock Lindsey
-Jake Trzcinski
-Kenny Muth
-Mark Lanterman
-Stephen Adametz
-Jacob Medvitz
-Paul Kallaur
-Sean Perrone
-Connor Fritz
-Cory Webster
+Austin Shaw	17
+Brock Lindsey	26
+Jake Trzcinski	36
+Kenny Muth	59
+Mark Lanterman	41
+Stephen Adametz	34
+Jacob Medvitz	60
+Paul Kallaur	43
+Sean Perrone	24
+Connor Fritz	30
+Cory Webster	47
 Dawson Yocum
-Jack Mickle
-Mason Peck
-Michael Phillips
-Patrick Benedict
-Samuel Duda
-Steel Boyer
+Jack Mickle	58
+Mason Peck	6
+Michael Phillips	5
+Patrick Benedict	13
+Samuel Duda	14
+Steel Boyer	12
 Zach Burghgraef
-Braden Bosco
-Ron Whitehouse
+Braden Bosco	18
+Ron Whitehouse	21
 William Wivagg
-Colton Super
-Hayne Webster
-Avery Bumbach
-Ethan Schohn
-Jack Katigbak
-Ethan Bishop
-Gino Piraino
-Joseph Galbraith
+Colton Super	26
+Hayne Webster	34
+Avery Bumbach	4
+Ethan Schohn	71
+Jack Katigbak	23, 22
+Ethan Bishop	83
+Gino Piraino	67
+Joseph Galbraith	25
 William Nebiolo
-Bayley Johnson
-Christopher Geitner
-David Atamian
-Gavin McBurney
-Gunnar Probst
-Jakob Vranick
-Landyn Rankin
-Max Chatham
-Nathan Goff
-Quin Manly
-Tyler Snow
+Bayley Johnson	17
+Christopher Geitner	5
+David Atamian	11
+Gavin McBurney	1
+Gunnar Probst	3
+Jakob Vranick	0
+Landyn Rankin	10
+Max Chatham	6
+Nathan Goff	23
+Quin Manly	15
+Tyler Snow	24
 Addison Coen
 Ben Mendez
 Chris Dingfield

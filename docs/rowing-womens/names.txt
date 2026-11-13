@@ -507,80 +507,6 @@ Esmeralda Maquez
 Lilly Petullo
 Maddie Cunniffe
 Sofia Corcier
-Anastasiia Samokhvalova
-Ashlee Klinefelter
-Ashleigh Pink
-Carla Davila
-Carly Logan
-Charlie Francis
-Charlotte Armstrong
-Felipe Alvarez
-Frank II Gonzalez
-Grace Pritchard
-Ignasi Forcano
-Lauren Grinberg
-Luana Bulara
-Marlon Buck
-Martin Gutierrez
-Michelle Etchebaster-Martins
-Mirko Ronchi
-Noah Stern
-Rose Hemans
-Sabrina Andolpho
-Sarolta Adonyi
-T.J. Smith
-Tara Marinkovic
-Taylor Checkley
-Viktoria Velika
-Wonjun Choi
-Adren Roberts
-Alex Campbell
-Amani D'Ambrosio
-Ambar Ramirez
-Ana Gascon
-Anais Fournier
-Angela Leweurs
-Cassandra Lee
-David Rieme
-Drew Dempsey
-Hugo Aguilar Puertes
-James Montgomery
-Jarrett May
-Jeyhlen Thomas
-Joe Stella
-Maci Barnhart
-Makayla Whalen
-Matthew Huembes
-Matthew Menendez
-Mia Applegate
-Quinn McLeod
-Taylor Thompson
-Audrey Jennings
-Britney Mapang
-Daniela Ballesteros
-Diana Suprun
-Dominic Murgo III
-Felipe Gomez Lopez
-Harper Bunn
-Hayley Boyle
-Jadyn Rogers
-Jesus Rodriguez
-Johnny Papadakos
-Jonathan Ruiz
-Juan Wulff
-Juanita Cabrera
-Luca Ganio-Mego
-Mariana Bertrán
-Milosz Mencel
-Nadia Lewis
-Paige Leary
-Paige White
-Sam Wesner
-Sean Shelly
-Taylor Fowler
-Tomy Jaunet
-Vee'lesk Avin
-Vincent Van Hemert
 Abigail Bierman
 Alison Simmons
 Amelia Wilhelm
@@ -11002,7 +10928,7 @@ Alex Ware
 Alexa Aguilar
 Alexandra Gunner
 Alison Whitty
-Alyssa Basdavanos
+Alyssa Basdavanos	17
 Anna Hosack
 Ariannie Peña-Aleman
 Bridget Boland
@@ -14085,7 +14011,7 @@ Elizabeth Guindon
 Emma Spinelli
 Katherine Pflugrath
 Maddison Ortman
-Sasha Grigoreva
+Sasha Grigoreva	7
 Sofia Bespalova
 Victoria Orama
 Afton Stahl
@@ -18562,7 +18488,7 @@ Belle Battistoni
 Caia Costello
 Elly MacKay
 Julia Braz
-Kieran Wallace
+Kieran Wallace	0
 Kylie Oakes
 Maddy Seybold
 Mary Fetter

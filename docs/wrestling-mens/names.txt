@@ -2817,64 +2817,6 @@ Ryan Murphy
 Savohn Hunt
 Trenton Phillips O'Neil
 Victoria Holmes
-Chosen Levarity
-Francesco Barbieri
-Jack Poirier
-Jaylen White
-Jonathan Effertz
-Adam Paga
-Andres Figueroa
-Caleb Metzen
-Erik Minter
-Gabriel Hogan
-Greg Lawrence
-Hernando Valencia-Parra
-Joseph Swehla
-Michael McGrath
-Sebastian Woods-Mariano
-Christopher Hermann
-David Harley
-Eric Klekas
-Jeff Henkel
-John Preyer
-Joseph Guernsey
-Kristian Marks
-Michael O'Donnell
-Shane O'Brien
-Shawn Thompson
-Andrew Giddens
-Brandon Dean
-Daniel Caylor
-Gabriel DeCasas
-Matt Chattin
-Matthew Lesniewski
-Nicholas Hofmeister
-Romello Bates
-Sam Pilkington
-Thomas Mullally
-Travis Makauskas
-Will Tate
-Andrija Vujakovic
-Chayse Culpepper
-Clayton Uecker
-David Giles
-David Zuleta
-Jose Gonzalez
-Kaveon Dux
-Kensley Jean Baptiste
-Marcus Montalvo
-Mason Dinesen
-Michael Klekas
-Michael Long
-Rico Soto
-Bryan Stiemke
-Conor Sullivan
-Gustavo Cruz
-Jack Watkins
-Jeff Lindenmoyer
-Jelani Bonner
-Joshua Jenkins
-Leo Behrend
 Brandon Woody
 Caleb Harmon
 Chris Phelps
@@ -3955,45 +3897,6 @@ Rashad Nelson
 Remington Hiser
 Rylyn Owens
 Stephen Cox
-A'Lasya DeHorney
-Asia Rivera
-Bailey Harris
-Claudia Monroe
-Hannah Britton
-Jada Burr
-Miguel Myers
-Sydney Mathis
-Totiana Kay
-Amanda Tofel
-Esmeralda Gallardo
-Isabella Perez
-Jamone' Peters
-Jirmya Peters
-Mallory Hugghins
-Prettee Reese
-Rajah Coleman
-Rian Breaux
-Viviana Trevino
-Aliyah Ramirez
-Cyani Stewart
-David Hinze
-Kenya Shaw
-Landon Flanagan
-Lexi Hogan
-Rayya James
-Shatyah Gathings
-Ayliah Ramirez
-Bra'Niyah McClure
-Brooklynn Drake
-D'Lynn Robbins
-Kryshell Chaney
-Madison Hernandez
-Madison Johnson
-Mariah Atkins
-Meircedes Valdez
-Ragen Verett
-Trinity Barnes
-Zoi Calvin
 Andy Schutz
 Bo Spiller
 Brendon Colbert
@@ -6375,7 +6278,7 @@ Ryan Anderson
 AJ Puerto
 Cody Cruts
 Justin Gerkhardt
-Xavier Pena
+Xavier Pena	4, 16
 Aaron Llanas
 Adrian Pietri
 Angelo Piazza
@@ -6387,8 +6290,8 @@ Nicholas Wickkiser
 TJ Pawlicki
 Vinnie Sciacca
 Dalton Deevey
-Danny Haws
-Jack Thode
+Danny Haws	4, 14
+Jack Thode	20
 Mark Venson Jr.
 Miguel Lopez
 Aaron Briscoe
@@ -6429,139 +6332,139 @@ Pablo Rodriquez
 Pete Rego
 William Chrysler
 Xavier Cruz
-A.J. McBroom
-A.J. Pestano
-Aaron Anderson
-Alex Dean
-Austin Laabs
-C.J. Pestano
-Cam Timok
-Chase Petty
-Chris Murino
-Cory McCleary
-Devin Dilley
-Eddie Ginnan
-Elden Esterly
-Francisco Ruiz Jr.
-Gabriel Cobb
-Jahleel Vester
-Jaime Miranda
-Jake Challen
-Jamie Day
-Jay Pike
-Jeremy Scheuermann
-Jeremy Vester
-Jordan Challen
-Lane Rumelhart
-Matt Seabold
-Mike O'Connor
-Mitchell Knock
-Preston Adams
-Ryan Vandall
-Steven Tuggle
-Tanner Hocker
-Tristan Clark
-Zach Moss
-Andrew McCracken
-Ben Callison
-Christian Messick
-Christian Warner
-Collin Groleau
-Corbin Folsom
-Daniel Radcliffe
-Duncan Lee
-Holden Miller
-Jake Suggett
-Joey McIntyre
-John Ghibellini
-John Polk
-Kendall Foster
-Matthew Pool
-Nathan Fritz
-Tanner Zimmerman
-Zach Tomac
-Carlos Posas
-Chance Benadum
-Colin Baldwin
-Ethan Johnson
-Gavin Babcock
-Griffen McBride
-Hunter Ruth
-Issac Figueroa
-Jackson Gissel
-Jordan Sheldahl
-Matt Masatani
-Mike Escobedo
-Noah Gregorovic
-Wayne Sommerlot
-Antonio Lomeli
-Chase Bellon
-Chase Poston
-Connor Sexton
-Cooper Stigsell
-Eric Santana
-Rob Areyano
-Samuel Zook
-Winton Neal
-Carlos Ramos
-Christian Wilson
-George Galaz
-Jaise Gulling
-James Bias
-Jordan Bendorf
-Josh Simon
-Julian Rodriguez
-Kyle Hefley
-Levi Condy
-Luke Condy
-Maximus Pearce
-Miles Hansmeier
-Peyton Hammerich
-Ryne Mohrfeld
-Shandon Akeo
-Brock Beck
-Cody Arbogast
-Colin Suyko
-Dawson Husted
-Drew Kelso
-Duncan Delzell
-Gage Linahon
-Garrett Heater
-Gavin Davis
-Jackson Bresson
-Jasper Luckritz
-Leo Blawou
-Levi Olsen
-Luis Ramos
-Miles Berg
-Sam Wolff
-San Thang
-Spencer Daves
-Stevie Maddox
-Taylor Lazarus-Jaureguy
-Zach Jeanneret
-Anthony Bestell
-Austin Roos
-Brodie Toth
-Cael Cox
-Colby Tool
-Gabe Thomas
-Jason Hermann
-Landon Kirby
-Rheiner Stahlbaum
-Austin Totty
-Cory Hoyle
-David Vukobratovich
-Elijah Belzer
-Hayden Hearne
-Justin Dallas
-Kale Downey
-Kevin Hogan
-Michael Esquivel, Jr.
-Nathan Rosas
-Pierre Baldwin
-Sam West
-Trent Harper
+A.J. McBroom	184
+A.J. Pestano	125
+Aaron Anderson	133
+Alex Dean	285
+Austin Laabs	184
+C.J. Pestano	125
+Cam Timok	133
+Chase Petty	133, 141, 149
+Chris Murino	285
+Cory McCleary	174, 165
+Devin Dilley	141, 149
+Eddie Ginnan	165
+Elden Esterly	157
+Francisco Ruiz Jr.	285
+Gabriel Cobb	149
+Jahleel Vester	141
+Jaime Miranda	285
+Jake Challen	141
+Jamie Day	165
+Jay Pike	285
+Jeremy Scheuermann	165, 174
+Jeremy Vester	157, 165
+Jordan Challen	149
+Lane Rumelhart	165, 174, 184
+Matt Seabold	197
+Mike O'Connor	157
+Mitchell Knock	157
+Preston Adams	141
+Ryan Vandall	165
+Steven Tuggle	197, 285
+Tanner Hocker	149
+Tristan Clark	141
+Zach Moss	174
+Andrew McCracken	157, 165, 174
+Ben Callison	165
+Christian Messick	197
+Christian Warner	174
+Collin Groleau	157, 165
+Corbin Folsom	197
+Daniel Radcliffe	141
+Duncan Lee	197, 285
+Holden Miller	285
+Jake Suggett	285
+Joey McIntyre	174, 197
+John Ghibellini	184
+John Polk	174
+Kendall Foster	133, 149
+Matthew Pool	141, 149
+Nathan Fritz	174, 184
+Tanner Zimmerman	174, 184
+Zach Tomac	174
+Carlos Posas	125
+Chance Benadum	165
+Colin Baldwin	149, 157
+Ethan Johnson	184, 174
+Gavin Babcock	184, 197
+Griffen McBride	174, 197, 174/184
+Hunter Ruth	285, 197
+Issac Figueroa	133
+Jackson Gissel	157, 165
+Jordan Sheldahl	174
+Matt Masatani	133, 125, 141
+Mike Escobedo	184, 197
+Noah Gregorovic	149, 157
+Wayne Sommerlot	184
+Antonio Lomeli	125
+Chase Bellon	184/197
+Chase Poston	125
+Connor Sexton	125, 133
+Cooper Stigsell	184
+Eric Santana	133, 125/133, 141
+Rob Areyano	141, 149
+Samuel Zook	285
+Winton Neal	149, 157
+Carlos Ramos	141/149, 149
+Christian Wilson	157/165, 165, 174
+George Galaz	133
+Jaise Gulling	285
+James Bias	184/197
+Jordan Bendorf	141, 149
+Josh Simon	125/133
+Julian Rodriguez	141
+Kyle Hefley	157/165, 174
+Levi Condy	165
+Luke Condy	157
+Maximus Pearce	133
+Miles Hansmeier	149/157
+Peyton Hammerich	174, 184, 197
+Ryne Mohrfeld	141, 149
+Shandon Akeo	133
+Brock Beck	141, 133
+Cody Arbogast	197
+Colin Suyko	133, 141
+Dawson Husted	133
+Drew Kelso	133
+Duncan Delzell	141, 149
+Gage Linahon	285, 197
+Garrett Heater	149
+Gavin Davis	165
+Jackson Bresson	125, 125/133, 133
+Jasper Luckritz	197
+Leo Blawou	141/149, 141
+Levi Olsen	157
+Luis Ramos	141
+Miles Berg	197, 285
+Sam Wolff	125
+San Thang	165
+Spencer Daves	149, 157
+Stevie Maddox	197
+Taylor Lazarus-Jaureguy	197
+Zach Jeanneret	157
+Anthony Bestell	125, 133
+Austin Roos	184, 174
+Brodie Toth	174, 197
+Cael Cox	133, 141
+Colby Tool	157, 165
+Gabe Thomas	141
+Jason Hermann	157, 165
+Landon Kirby	174, 165
+Rheiner Stahlbaum	125
+Austin Totty	184
+Cory Hoyle	125
+David Vukobratovich	125
+Elijah Belzer	157
+Hayden Hearne	285
+Justin Dallas	197
+Kale Downey	157
+Kevin Hogan	149
+Michael Esquivel, Jr.	285
+Nathan Rosas	197
+Pierre Baldwin	141
+Sam West	165
+Trent Harper	141
 David Stewart
 Donovan Card
 Ian Sharples
@@ -7685,56 +7588,56 @@ Daniel Fredericks
 James Simon
 Kenny Marra
 Truman Noble
-Carl DiGiorgio
-Danny Gibson
-Jacob Woodburn
-Jason Guglietta
-Kevin Pandorf
-Mike Edwards
-Nathan Fitt
-Nikko Beato
-Owen Woolcott
-Thomas Rhodes
-Tristen Carbonell
-Alex Marshall
-Caden Stout
-Daniel Williams
+Carl DiGiorgio	285
+Danny Gibson	165
+Jacob Woodburn	157
+Jason Guglietta	133
+Kevin Pandorf	285
+Mike Edwards	149
+Nathan Fitt	149
+Nikko Beato	125
+Owen Woolcott	141
+Thomas Rhodes	165
+Tristen Carbonell	285
+Alex Marshall	165
+Caden Stout	174
+Daniel Williams	149
 Elaina Koenig
-Gabriel Monroe
-Jackson Bauer
-Joey Miranda
-Jordan Habben
-Landon Kearns
-Nicholas Marck
-Robert Rerras
-Tye Barker
-Vivi Christopoulos
-Alex Hoffman
-Brendan Raley
+Gabriel Monroe	184
+Jackson Bauer	125
+Joey Miranda	157
+Jordan Habben	149
+Landon Kearns	165
+Nicholas Marck	149
+Robert Rerras	141
+Tye Barker	157
+Vivi Christopoulos	141
+Alex Hoffman	174
+Brendan Raley	197
 CJ Adair
-Cael Finn
-Cole Ramirez
-Dom Moyer
-Jake Bennett
+Cael Finn	157
+Cole Ramirez	165
+Dom Moyer	141
+Jake Bennett	133
 Jake Chambers
-Kane Sistrunk
-Kyle Csikari
-Nicholas Sanders
-Ryan Boyer
-Abraham Al-Khalili
-Aidan Barry
-Ben Young
-Brock Connatser
-Chase Mayes
-Christian Belford
-Jun Beato
-Kekoa Madayag
-Kevin Ruland
-Lincoln Bibla
-Marvin Armistead
-Mason Gourley
-Nathan Sayers
-Ray Gulmatico
+Kane Sistrunk	149
+Kyle Csikari	157
+Nicholas Sanders	149
+Ryan Boyer	174
+Abraham Al-Khalili	285
+Aidan Barry	184
+Ben Young	285
+Brock Connatser	133
+Chase Mayes	184
+Christian Belford	141
+Jun Beato	125
+Kekoa Madayag	125
+Kevin Ruland	157
+Lincoln Bibla	285
+Marvin Armistead	141
+Mason Gourley	174
+Nathan Sayers	133
+Ray Gulmatico	157
 Auston Kosanovic
 Brendan Dunleavy
 Brice Jones
@@ -8097,78 +8000,6 @@ Peter Simkins
 Robert Orlando
 Robert Ranger
 William Tripp
-Amya Rhoan
-Aryka Flennoy
-Ashley Elvira
-Brinley Reed
-Danielle Pulley
-Haneen Osman
-Hannah Chambers
-Hannah Giesbrecht
-Haylie Grant
-Kaitlyn Oliver
-Katie Growe
-Kristen Malone
-Lacey Locke
-Lainey Reay
-Megan Lohman
-Megan Osterhout
-Michele Jones
-Pedro Galvan
-Sosana Carpenter
-Alastair Derry
-Alexis Muir
-Bailey Clifford
-Beth Anderson
-Eva Boyd
-Jazzy Ackerson
-Keagan Utter
-Lexy Swanson
-Rachel Morgan
-Virginia Clark
-Alejandra Castaneda
-Autumn Necessary
-Kate Cowman
-Keidon Reynolds
-Kristin Carlin
-Lacey Locke
-Lily Archuleta
-Maddie McIntosh
-Merrisa Schwartz
-Miranda Armbruster
-Regan Moore
-Rylin Friedli
-Sarah Hill
-Tiffani Hiett
-Blake Murray
-BreeAhna McMaster
-Carlie Sanders
-Carrie Vinci
-Charlotte Bowman
-Krysantha Soward
-Kylah Anderson
-Nikolas Scott
-Reese Kinney
-Tora Russell
-Christina Guzman
-Emily Patterson
-Jonathan Gale
-Jordan Payne
-Karla Salazar
-Maisie Neilson
-Nadia Rahimatpure
-Naylissa Bradford
-Paige Nihart
-Samantha LePiane
-Tenlee Scott
-Amanda Hutchins
-Anabelle Milton
-Charlotte Wilson-Bowman
-Emily Cross
-Olivia Szombathy
-Rylee Salvesen
-Sydney Carey
-Taylor Phelps
 Adam Visconti
 Brett Kasprzyk
 Bruno Nicoletti
@@ -11227,7 +11058,7 @@ Justin Gardner
 Trevor Martin
 Braden Carson
 Chase Butner
-Cole Cross
+Cole Cross	149
 Coy Butner
 Darrian Hoobery
 Devin Gotchall
@@ -11241,56 +11072,56 @@ Braden Moore
 Cody Glenn
 Hunter Kemper
 JR Scott
-Jackson Eylar
+Jackson Eylar	133
 Jason Crisostomo
 Jason Gomez
-John Rudebaugh
+John Rudebaugh	165
 Josh Collins
 Justin Sawai
 Kaden Haugen
 Kobe Olson
 Stone Robledo
 Trace Evans
-Wesley Murch
-Wylee Lindeen
+Wesley Murch	149
+Wylee Lindeen	174
 Craig Williams
 Devin Pierce
 Eric Karas
 Fortino Silva
-Gabe Vasa
-Kai Carson
-Kylan Guerra
+Gabe Vasa	184
+Kai Carson	133
+Kylan Guerra	174
 Mason Wolcott
-Matix Cooklin
-Nico Rodriguez
+Matix Cooklin	141
+Nico Rodriguez	285
 Quentin Hornbeak
 Ruben Hernandez
-Russell Noah
+Russell Noah	184
 Terran Manson
 Trevan Hokland
-Brode Colwell
-Carlos Valdez
-Daniel Guerrero
-Deklin Graham
-Eric Larwin
-Hayden Martin
-Koda King
-Alijah Rhoades
-Andrew Flores
-Eli Noah
-Ethan Holstein
-Felipe Rodriguez IV
-Ilan Shank
-Jesse Easley
-Lochlan McCormeck
-Marcus Aleman
-Mason Russell
-Roman Gumm
-Ryan Amoureux
-Teagan Navarro
-Wade Williams
-William Desanti
-Wyatt Gutierrez
+Brode Colwell	141
+Carlos Valdez	157
+Daniel Guerrero	149
+Deklin Graham	184
+Eric Larwin	157
+Hayden Martin	285
+Koda King	165
+Alijah Rhoades	157
+Andrew Flores	133
+Eli Noah	184
+Ethan Holstein	157
+Felipe Rodriguez IV	197
+Ilan Shank	125
+Jesse Easley	174
+Lochlan McCormeck	133
+Marcus Aleman	125
+Mason Russell	141
+Roman Gumm	149
+Ryan Amoureux	141
+Teagan Navarro	125
+Wade Williams	149
+William Desanti	285
+Wyatt Gutierrez	125
 Aaron Paddock
 Andrew Shomers
 Anthony Rivera
@@ -11964,7 +11795,6 @@ Sammy Mendez
 Ulises Rosas
 Aiden Cohen
 Damian Chavez
-LAUNCHING 26-27 SCHOOL YEAR
 Aaron Galegor
 Billy Gordy
 Brent Newcomer
@@ -12062,7 +11892,7 @@ Allen Stone
 Brice Noggle
 Brooks Dyer
 Eli Holton
-Ja'mon Goodwine
+Ja'mon Goodwine	285
 Jackoby Cottrell
 Jaxon Hoetzel
 Jonathan Oldknow
@@ -12075,7 +11905,7 @@ Tyler Snowden
 Andrew Hernandez
 Ben Foskey
 Bryce Flint
-Charles Hayes
+Charles Hayes	141
 Christian Trimble
 Dywon Hamilton
 Ethan Sloop
@@ -12091,73 +11921,73 @@ Anthony Sartori
 Beau Flint
 Carson Bailey
 Clayton Frost
-Cooper Bachman
+Cooper Bachman	174
 D'Angelo Pruitt
 Dylan Lyerly
-Gage Shetley
+Gage Shetley	165
 Gavin Harper
 Grady Tisdale
 Harvey Ridings
 Micha Clemson-Butler
 Owen Moss
-Tony Olea
+Tony Olea	197
 Wilder Davis
-Alex McMiller
-Bernard Manga
-Brice Barton
-Cason Turner
-Christian Gordon
+Alex McMiller	125
+Bernard Manga	197
+Brice Barton	141
+Cason Turner	184
+Christian Gordon	149
 Davin Lundquist
-Dylan Hiller
-Gavin Mastrangelo
-Isaiah Castro
+Dylan Hiller	157
+Gavin Mastrangelo	133
+Isaiah Castro	157
 Lucas DeSilva
-Michael McCarthy
-Michael Turner
+Michael McCarthy	174
+Michael Turner	184, 174
 Ronnie Theilacker
 Seth Huskins
-Zander McLane
-Austin Marshall
-Braydon Mitchell
-Briar Whaley
-Chase Bisel
-Dylan Gonzalez
-Isiah Davis
-Jacob King
-Jameer McCrae
-Kobe Pablo
-Qusai Marini
-Simon Flores
-Tom Hudson
-Blake Jones
-Brady Simms
-Davin Lundquist
-Frank Moore
-Isaac Piatek
-Jay Chancey
-Jett Johnson
-Jordan Escarra
-Jordan Sexton
-Jose Flores
-Josue Mendoza
-Logan Williamson
-Nate Stratton
-Xander Ledford
-Zamareon Addie
-Barrett Clayton
-Barrett Whaley
-Clay Turner
-David Longino
-Garrett Krous
-Hunter Collins
-Jack Mathieu
-Jamus Wingate
-Jatavious Ward
-John Brewer
-Ronald Kilgore
-Sammy John Bisong
-Sebastian Melendez
-Titus Williams
+Zander McLane	285
+Austin Marshall	141
+Braydon Mitchell	125
+Briar Whaley	156, 165
+Chase Bisel	174, 184
+Dylan Gonzalez	125
+Isiah Davis	133, 141
+Jacob King	285
+Jameer McCrae	133
+Kobe Pablo	285
+Qusai Marini	149, 157
+Simon Flores	197
+Tom Hudson	197
+Blake Jones	125
+Brady Simms	174
+Davin Lundquist	149
+Frank Moore	285
+Isaac Piatek	149
+Jay Chancey	165
+Jett Johnson	285
+Jordan Escarra	133
+Jordan Sexton	141
+Jose Flores	197
+Josue Mendoza	184
+Logan Williamson	165
+Nate Stratton	184
+Xander Ledford	125
+Zamareon Addie	184
+Barrett Clayton	133
+Barrett Whaley	184
+Clay Turner	285
+David Longino	133
+Garrett Krous	165
+Hunter Collins	157
+Jack Mathieu	165
+Jamus Wingate	165
+Jatavious Ward	197
+John Brewer	141
+Ronald Kilgore	125
+Sammy John Bisong	165
+Sebastian Melendez	149
+Titus Williams	133
 Anthony Morris
 Austin McBee
 Blaze Hughes
@@ -12382,8 +12212,8 @@ Owen Collins
 Roan Tustin
 Rocko Buffone
 Shawn Young
-Brian Melamud
-Eddie Terreri
+Brian Melamud	7
+Eddie Terreri	14
 Jeremy Quezada
 Justin Perry
 Mike Poniros
@@ -13976,42 +13806,42 @@ Nolan Carroll
 Patrick McDonald
 Ryan Solomon
 Shock Ingram
-Alec Fulwider
+Alec Fulwider	141
 Ben Kee
-Camden Barr
-Christian Ramsey
-Cole Houser
+Camden Barr	133, 149
+Christian Ramsey	184
+Cole Houser	174, 184
 Gavin Shamblin
 Jacob Puckett
-Jesse Kargol
-Joel Criuckshanks
-Kevin Meloni
-Luke Martin
+Jesse Kargol	141
+Joel Criuckshanks	174
+Kevin Meloni	125
+Luke Martin	197, 184
 Tyshawn White
-Brady Layman
-Devin Easton
-Devin Gauldin
-Ethan Hardy
-Gavin Quiocho
+Brady Layman	125
+Devin Easton	125
+Devin Gauldin	197
+Ethan Hardy	141, 149
+Gavin Quiocho	149, 133
 HWT Gavin Shamblin
-Hunter Delong
-Hunter Jones
-Jordan Williams
-Parker Henderson
-Tristan Pugh
-Aidian Wilson
-Brady Ross
-Cameron Fentress
-Devan Gauldin
-Gaetano DeLeonardis
+Hunter Delong	184, 174
+Hunter Jones	165
+Jordan Williams	197
+Parker Henderson	125
+Tristan Pugh	157, 149
+Aidian Wilson	125
+Brady Ross	184
+Cameron Fentress	133
+Devan Gauldin	197
+Gaetano DeLeonardis	165
 HWT Charlie Tamburin
 HWT Jared Campbell
-Hunter Ross
-Jadon Stephens
+Hunter Ross	133
+Jadon Stephens	174
 Jake Long
-Jesiah Winters
+Jesiah Winters	133
 Justin Paletti
-Zachary Holstion
+Zachary Holstion	157
 Cade Linn
 Colton Drousias
 Dakota Mascho
@@ -17284,21 +17114,6 @@ Jordan Fincher
 Nico Kapusta
 Tommy Reed
 Tyler Adams
-Anyanne Leishman
-Breanna Jones
-Brittany Murphy
-Emily Hancock
-Eyan Pope
-Grace Martinez
-Jade Gibson
-Kaitlyn Pelletier
-Katherine Willey
-Keeley Ham
-Molly Burden
-Ruth Ballenger
-Shaenna Wimsatt
-Skyler Stewart
-Tyler Jacobs
 Adam Bender
 Andrew Parker
 Andy Santana
@@ -17616,7 +17431,7 @@ Eddie Merrill
 Fjoralb Cekici
 Giacomo Dinacola
 Hilton Martin
-Howard Kilpatrick
+Howard Kilpatrick	165
 Jacob Vaxmonsky
 Jake Daniel
 James Wright
@@ -17624,115 +17439,115 @@ Josh Nagel
 Keegan Williamson
 Keith Wanamaker
 Kevin Kelly
-Matt Sparks
-Nick Price
+Matt Sparks	149
+Nick Price	174
 Owen Watkins
 Ralph Bernardo
 Rene Sousa
 Ryan Carden
 Ryan Longenberger
 Sean Floto
-Tony Immediato
+Tony Immediato	141
 Tyler Robinson
 William Burger
 Zach Smith
 Alex Maya-Romero
 Chris Coakley
-Dakota Quick
-Anthony Harmon-Miller
-Darren Marte
+Dakota Quick	125, 125/133
+Anthony Harmon-Miller	174
+Darren Marte	165, 157
 Jake Taylor
 Kyle Osterhoudt
 Leo Teti-Cassidy
-Isaac Mensah
-JJ Hooper
-Javier Gonzales
-Kade Kravits
-Mark Regan
-Nick Palazzolo
-Bill Grace
-Colby Spencer
-Dave White
-Gus Petruske IV
-Issac Santiago
-James Maloy
-Joe Davis
-Liam Farrell
-Robert Zelinski
-Alex Tyson
-Cameron Leslie
-Derrick Atwood
-Derrick Rotger
-Matthew Still
-Mike Canapp
-Alex Martinez
-Bret Murphy
-Jackson Marcantonio
-Jason Sine
-Kyle Miller
-Nick Germano
-Noah Clawson
-Richard Fronheiser
-Shawn Burke
-Abubakar Saka
-Alex Ballantyne
-Cole Anderson
-Connor Wrobleski
-Frankie Theroux
-Hugh Bittenbender
-Jake Feese
-Johnny Rivera
-Nick Valenzano
-Patrick Horvath
-Shane Kibler
-Aiden Shaughnessy
-Brian Hopkins
-Elias Hernandez
-Elijah Rivera
-Jacob Hachtmann
-Josh Brown
-Kaleb Paulin
-MJ Turi
-Nick Costello
-Quinn O'Callaghan
-Shane Meenaghan
-Taylor Burton
-Xavian Ramos
-Angel Avalos
-Eddie Klein
-Isaiah Camacho
-Jacob Torres
-Jake Bobersky
-Joe Dasti
-Jordan Bentley
-Khalil Blagmon
-Ryan Tran
-Christian Borges
-Conor Knight
-Freddy Steigerwalt
-Gavin Gonch
-Jacob Lance
-Jeffrey Spofford
-Kennedy Thomas
-Kevon Griffin
-Khalil Holley
-Luke Palladino
-Mason Mordan
-Michael Zaunczkowski
-Reilley Kirkutis
-Sam Moffett
-Sean Hazlett
-Sid O'Donnell
-Brayden Abrams
-Brock Rudy
-Daniel Maranan
-Gene Ardo
-Jacob Torres
-Mateo Sanchez
-Pat Foreman
-Piero Papili
-Quinton Richardson Wright
-Scottie Ford
+Isaac Mensah	184, 174, 285
+JJ Hooper	197
+Javier Gonzales	141, 149
+Kade Kravits	149, 165, 174
+Mark Regan	184
+Nick Palazzolo	157, 165/174
+Bill Grace	184/197, 184, 197
+Colby Spencer	149, 157
+Dave White	197, 285
+Gus Petruske IV	125, 133
+Issac Santiago	197
+James Maloy	141
+Joe Davis	184, 174
+Liam Farrell	125
+Robert Zelinski	133, 149
+Alex Tyson	125
+Cameron Leslie	141/149, 157, 149
+Derrick Atwood	285
+Derrick Rotger	165
+Matthew Still	157, 165
+Mike Canapp	285
+Alex Martinez	184, 174
+Bret Murphy	149, 157
+Jackson Marcantonio	157
+Jason Sine	197
+Kyle Miller	125
+Nick Germano	133, 141
+Noah Clawson	141
+Richard Fronheiser	197, 184
+Shawn Burke	184
+Abubakar Saka	205
+Alex Ballantyne	165
+Cole Anderson	133
+Connor Wrobleski	174, 184, 197
+Frankie Theroux	165, 174, 184
+Hugh Bittenbender	150, 141
+Jake Feese	215, 285
+Johnny Rivera	285
+Nick Valenzano	285
+Patrick Horvath	125
+Shane Kibler	149
+Aiden Shaughnessy	133
+Brian Hopkins	149
+Elias Hernandez	165
+Elijah Rivera	197
+Jacob Hachtmann	197
+Josh Brown	225, 197, 184
+Kaleb Paulin	184
+MJ Turi	149, 157
+Nick Costello	175, 165
+Quinn O'Callaghan	125
+Shane Meenaghan	125
+Taylor Burton	165
+Xavian Ramos	165
+Angel Avalos	133, 141
+Eddie Klein	141
+Isaiah Camacho	157
+Jacob Torres	141
+Jake Bobersky	184
+Joe Dasti	165
+Jordan Bentley	165
+Khalil Blagmon	285
+Ryan Tran	285
+Christian Borges	133
+Conor Knight	165
+Freddy Steigerwalt	125, 133
+Gavin Gonch	165
+Jacob Lance	285, 197
+Jeffrey Spofford	125
+Kennedy Thomas	157
+Kevon Griffin	133, 141
+Khalil Holley	285
+Luke Palladino	197
+Mason Mordan	157
+Michael Zaunczkowski	174
+Reilley Kirkutis	197
+Sam Moffett	285
+Sean Hazlett	165, 157
+Sid O'Donnell	125, 133
+Brayden Abrams	125
+Brock Rudy	149
+Daniel Maranan	133
+Gene Ardo	174
+Jacob Torres	141
+Mateo Sanchez	165
+Pat Foreman	133
+Piero Papili	149
+Quinton Richardson Wright	285
+Scottie Ford	165
 Anthony Petril
 Austin Petril
 Brandan Clark
@@ -17899,39 +17714,39 @@ Christopher Lovallo
 James Lawson
 Kevin Bowne
 Kody Evans
-Felix Mendez
+Felix Mendez	149
 Jayden Riley
 Matthieu Raulerson
-Braulio Hurtado
-Daqwan Pritchett
-Dylan Hogan
-Evan Raposo
-Kordell Waiters
-Rei Yonamine
-Shannon Core
-Simeon Hunte
-Walter Jones, III
-Anthony D'Angelis
-Carlos Cruz
-Edward Lauritsen
+Braulio Hurtado	133
+Daqwan Pritchett	285
+Dylan Hogan	165
+Evan Raposo	149, 157
+Kordell Waiters	141
+Rei Yonamine	149
+Shannon Core	285
+Simeon Hunte	184, 197
+Walter Jones, III	174
+Anthony D'Angelis	141
+Carlos Cruz	133
+Edward Lauritsen	125
 Freya Lauritsen
-John Koroma
-Shannon Clark
-Adan Salazar
-Connor Ondek
-John Almonte
-Matt Gashi-Brito
+John Koroma	174
+Shannon Clark	285
+Adan Salazar	197
+Connor Ondek	157
+John Almonte	157
+Matt Gashi-Brito	149
 HWT Brodie Daugherty
-Jeremiah Diaz
-Luke Evans
-Malik Nelson
-Richard Leslie
-Spencer Crawley
+Jeremiah Diaz	197
+Luke Evans	157
+Malik Nelson	174
+Richard Leslie	165
+Spencer Crawley	125
 Angel Olavarria
 Cael Harmon
 Damian Melendez
 Davion Cooper
-Erick Reyes
+Erick Reyes	184
 Gha'Mari Clayton
 HWT Nick Christie
 Isaiah Adams
@@ -23553,15 +23368,6 @@ Hoyt Hyass
 Ja'Marcus Smith
 Quentin Hill
 Wiley Hegwer
-Brett Bartholomew
-Colter Miller
-Cooper Pavkov
-Jonathan Kirkley
-Reese Artz
-Rocco Beccari
-Tanner Harrell
-Tanner Haverfield
-Will Hyatt
 Aiden Knight
 Anthony Maldonado
 Anthony Martinez
@@ -23766,21 +23572,56 @@ Landon Morrison
 Levi Early
 Nick Fischer
 Tafari Parker
+Anastasia Kostromin
+Arzhang Valadlchani
+Daniel Labastida
+Devin Top
+Enrique Anaya
+Houtan Mikaili
+Jesse Barbosa
+Josh Koning
+Justin Feldman
+Marcos Martinez
+Richard Vaillancourt
+Robert Flores
+Robert Knight
+Samuel Rodriguez
+Sergio Camacho
+William Dorosk
+Zachary Ortiz
+Aaron Noofi
+Albert Del Toro
+Andy Rodriguez
+Elijah Clark
+Erick Colin
+Isaac Aragon
+Jesus Mondragon
+Mina Morkos
+Ryan Lucero
+Zachary Urtiz
+Zaul Diaz
+Aaron Noori
+Alejandro Martinez
+Andres Pongo
+Anthony Galvez
+Behnam Hodhodiabkenar
+Donaven Medina
+Erik Colin
+Jacob Hansen
+Luke Hansen
+Max Quiroz
 Albert Mechamac
 Andrew Lemus
-Andy Rodriguez
 Borys Peresadko
 Eduardo Roano
 Elaine Huynh
 Gerry Fulgentes
-Isaac Aragon
 Isaiah Trevino
 Jesse Zapata
 John Moore
 Joseph Fernandez
 Juan Raygoza
 Luc Le Vassevr
-Luke Hansen
 Mikayla Conley
 Nathan Sbriglio
 Zach Jensen
@@ -24097,12 +23938,12 @@ Patrick Sledge
 Phil Napolitano
 Steve Grzbyck
 Taishi Okamoto
-Antonio McCloud
+Antonio McCloud	184
 Blake Hohler
 Blake Machesky
-Cameron Sauerwein
+Cameron Sauerwein	197
 Chase Haehnle
-Chucky Lipps
+Chucky Lipps	165
 Donnie Wilson
 Dylan Moran
 Dylan Waugh
@@ -24116,62 +23957,62 @@ Zach Holub
 Zakariya Camara
 Amar Thomas
 Austin Belcher
-Brody Gray
+Brody Gray	149/157
 Charles Lipps
 Chris Walter
-Cornell Beachem
+Cornell Beachem	174
 Desmond Harrell
 Diontae Rone
-Dylan Deck
-Eric Fomekong
-Ethan Huffman
+Dylan Deck	157
+Eric Fomekong	149/157
+Ethan Huffman	157/165
 Jabari Thomas
-Jefferson Bishop
+Jefferson Bishop	174
 Jon Rumph
 Phillip Hutchins
 Robert Brown
 Sam Bohanan
-Tariq Hornbuckle
+Tariq Hornbuckle	133
 Trenton Randall
 Tyler Stevens
-Zak Hughey
-Bradley Smith
+Zak Hughey	285
+Bradley Smith	285
 Colton Quantz
-Desmond Diggs
+Desmond Diggs	141
 Izumi Harney
-Jake Cotsonas
-Javier Urbans
-Jesse Younce
-Jorden Zigo
+Jake Cotsonas	125, 133
+Javier Urbans	165
+Jesse Younce	165
+Jorden Zigo	125, 133
 Nathaniel Armstrong
 Quinton Baird
-Rowan Tolbert
+Rowan Tolbert	285
 Zac Schmidt
-Austin Watson
-Charles Carson
-Collin Maynard
-Gary Powell
-Jack Tucker
-Judah Thomas
-Kaleb Gelter
-Michael Addis
-Nathaniel "Cookie" Armstrong
-Noah Harvel
-Patrick Sterrett
-Vernell Hawkins
-Alex Hobbs
-Angel Soriano
-Brandon Mitchell
-Donavan Page
-Ethan Imm
-Hunter Mcnay
-Jacob Case
-Kameron Freeman
-Matthew Reed
-Nathan Hammann
-Noah Johnson
-Robert Green
-Skyler Cowgill
+Austin Watson	174/184
+Charles Carson	174
+Collin Maynard	197/285
+Gary Powell	197/285, 285
+Jack Tucker	285
+Judah Thomas	165
+Kaleb Gelter	184, 197
+Michael Addis	285
+Nathaniel "Cookie" Armstrong	197
+Noah Harvel	133
+Patrick Sterrett	165
+Vernell Hawkins	149/157
+Alex Hobbs	184
+Angel Soriano	149
+Brandon Mitchell	125
+Donavan Page	285
+Ethan Imm	157
+Hunter Mcnay	285
+Jacob Case	149
+Kameron Freeman	157
+Matthew Reed	285
+Nathan Hammann	125
+Noah Johnson	174
+Robert Green	157
+Skyler Cowgill	165
 Addison Breeding
 Alex Francis
 Andrew Magness
@@ -25409,13 +25250,13 @@ Joseph Mattei
 Marc Kleyman
 Milan Parobek
 Ali Khawaja
-Dominick Albertelli
+Dominick Albertelli	285
 Joseph Ramirez
 Kenaje Demosthene
-Noah Foster
+Noah Foster	184
 Sabih Noman
-Santiago Palaez
-Shane Dobbins
+Santiago Palaez	141
+Shane Dobbins	133
 Thomas Rutherford
 Andrew Roman
 Anthony Velasquez
@@ -26057,8 +25898,6 @@ Kaden Kowalek
 Mason Villwok
 Naasir Edmonds
 Wyatt Boley
-Paul Balon
-Timothy Phung
 Andrew Fowler
 Avery Santiago
 Carlos Garcia
@@ -27614,7 +27453,7 @@ Kolton Roth
 Nathan Rodriguez
 Robert Coyle III
 Tanner Wiese
-Cole Huss
+Cole Huss	3
 Creighton Baughman
 Dane Christopherson
 George Bolling
@@ -27624,7 +27463,7 @@ Josh Trumble
 Landen Fischer
 Marcus Placide
 Tyson Stoebner
-Wyatt Turnquist
+Wyatt Turnquist	8, 4
 Ali'i Loyola
 Brenden Salfrank
 Caleb Lazure
@@ -27637,7 +27476,7 @@ Treyton Cacek
 Ty Althoff
 Christopher Williams
 Kelby Hawkins
-Nathan Schauer
+Nathan Schauer	13
 Teagan Block
 Tyler Voorhees
 Tyson Lien
@@ -27655,7 +27494,7 @@ Ryan Hirschkorn
 Sam Kruger
 Spencer Roth
 Trevor Reinke
-Braydon Mogle
+Braydon Mogle	14
 Clay Gates
 Jason Henschel Jr.
 Kaden Broer
@@ -27663,7 +27502,7 @@ Noah Hutmacher
 Seth Brossard
 Tanner Meyers
 Travis Smith
-Brady Westall
+Brady Westall	13
 Cole Holien
 Damen Pape
 Gavin Johnson
@@ -27684,7 +27523,7 @@ Joseph Andrade
 Krayle Stormer
 Landon Lavey
 Mason Schrempp
-Rudy Lopez
+Rudy Lopez	11
 Zach Morse
 Aiden Graner
 Alex Oedekoven
@@ -31622,7 +31461,7 @@ Jordan Reich
 Judd Ziegler
 Kevin Moylan
 Michael Markulec
-Mike D'Angelo
+Mike D'Angelo	149
 Nick Maselli
 Noah Ajram
 Pat D'Arcy
@@ -33678,23 +33517,6 @@ Jeremy Welch
 Lane Vogel
 Samuel Alvarez
 Zach Dawson
-Aaron Smetanka
-Brian Niemiec
-Bryan Butler
-D.P. Harris
-Dom Nania
-Jeff Zidek
-Jimmy Petruska
-Josh Gurekovich
-Jym Walters
-Kate McCauley
-Kevin Wanichko
-Matt Davis
-Mick Janosko
-Nicole Karr
-Samantha Firestone
-Sue Hozak
-Zach Wilfong
 Alex Abono
 Brandon Vu
 Calvin Nicholls
@@ -34621,51 +34443,51 @@ Michael Duggan
 Nate Caracciolo
 Noah Gruber
 Tanner Shaffer
-Avery Fielder
-Brayden Gibson
-Eli Kimball
-Ethan Ross
-Isaiah Scott
-Jack Ponder
-Marty Gonzalez
-Nahzir Turner
+Avery Fielder	133
+Brayden Gibson	141
+Eli Kimball	285
+Ethan Ross	149
+Isaiah Scott	197
+Jack Ponder	157
+Marty Gonzalez	165
+Nahzir Turner	184
 Nathaniel Horsley
-Riley Davis
-Rylee Kines
-Albert Butler
-Antonio Ashmeade
-Armond Jones
-Cayden McBryde
-Christian Jones
-Cole Warren
-Damari Kenan
-Eli Rider
-Ethan Davis
-Gavin Bloom
-Grey Williams
-James Slatton
-Jason Clark
-Jason Jenkins
-Jonathan Fogus
-Malachi Macedonio
-Maurice Bell
-Max Meredith
-Rocco Silveria-Marshall
-Sean Goldsby
-Treveon McGee
-Braylon McKissic
-Erasmo Garcia
-Fredrick Williams
-Gregory Chandler
-James Palmer
-Ryan Nelson
-William DeSanto
-Wyatt Hunton
+Riley Davis	184
+Rylee Kines	149, 165
+Albert Butler	285
+Antonio Ashmeade	285
+Armond Jones	197
+Cayden McBryde	165
+Christian Jones	285
+Cole Warren	125
+Damari Kenan	197
+Eli Rider	174
+Ethan Davis	174
+Gavin Bloom	141
+Grey Williams	149
+James Slatton	197
+Jason Clark	165
+Jason Jenkins	133
+Jonathan Fogus	157
+Malachi Macedonio	125
+Maurice Bell	141
+Max Meredith	133, 125
+Rocco Silveria-Marshall	157
+Sean Goldsby	157
+Treveon McGee	149
+Braylon McKissic	197
+Erasmo Garcia	285
+Fredrick Williams	157
+Gregory Chandler	197
+James Palmer	149
+Ryan Nelson	184
+William DeSanto	141
+Wyatt Hunton	133
 Andrew Broadland
 Drew Engberson
 Gilbert Martinez
 Jesus Quintana
-Joey Cisneros
+Joey Cisneros	125
 Jon Good
 Joseph Herrera
 Landon McBride
@@ -36154,7 +35976,7 @@ Ben Emrich
 Gage Wevley
 Hayden Voxland
 Hunter Pfantz
-Jacob Dykes
+Jacob Dykes	10
 Jordon Peterson
 Justin Sampson
 Kevin Bostwick
@@ -36172,7 +35994,7 @@ Jacob Backlund
 Lucas Hodges
 Sean Howk
 Tyler Soltau
-Caden Steffen
+Caden Steffen	3
 Caleb Pesta
 Cedric Williams
 Jace Paplow
@@ -36754,44 +36576,44 @@ Caio DeAlmeida
 Caleb Casas
 Christopher Grunewald
 Cole Griffith
-Daniel Garlin
+Daniel Garlin	174
 David Alvarez
 Diesteffano Baptista
 Drake Campbell
 Edens Valmy
-Esteban Hoyos
+Esteban Hoyos	197
 Gannon Janssen
-Gianni Guerriero
+Gianni Guerriero	157
 Jaxxson Padron
-Jessiah Garcia-Contreras
+Jessiah Garcia-Contreras	285
 Jesus Perez
 Johnathon Vil
 Jonathan Evans
 Jorden Douglass
-Kade Clute
+Kade Clute	157
 Kevin Augustin
 Malik Cook-Bey
 Maximo Fernandez
 Micke Olesco
 Myles Janes
 Nick Luna
-Nickolas Foster
+Nickolas Foster	133
 Omar Davis
 Osniel Carnesolta
 Rivaldo Valmy
 Tyler Khawly-Orta
 Vinny Sessa
-Aiden Yates
-Christian Cobo
-Christian Espinoza
-DJ Perez
-David Pierson
+Aiden Yates	174
+Christian Cobo	157
+Christian Espinoza	157
+DJ Perez	125
+David Pierson	149
 Diego Trelles
 Henry Cuesta
 James Blanchard
 Jeshua Castillo
 Joe Louis
-Kahlil Tucker
+Kahlil Tucker	141
 Livan Curbelo
 MG Brent Becerra
 MG David Martinez
@@ -36802,62 +36624,62 @@ MG Jonathan Evans
 MG Kevin Augustin
 MG Nick Luna
 MG Osniel Carnesolta
-Michael Abidin
-Noah Horst
+Michael Abidin	197
+Noah Horst	165
 Noel Fuentes
-Omar Corrales
+Omar Corrales	141
 Ryan Prophete
 Sebastian Sandino
 Steven Krantz
 Yamari Royes
 Alexander Exalant
 Astwood Selicourt
-Camilo Gil
+Camilo Gil	184
 Carlos Masis
-Conner Hueck
+Conner Hueck	133
 Cyrus Williams
-Diogo Ramos-Padilha
+Diogo Ramos-Padilha	174
 Haniel Suris
-JJ Contreras
-Jairo Caceres
+JJ Contreras	174
+Jairo Caceres	285
 Jason Moss
-Jaylan Claudio
-Jerry Molina
+Jaylan Claudio	141
+Jerry Molina	141
 Jesus Carcamo
 Jordan Barrett
 Kalvin Guzam
-Lane Wishart
+Lane Wishart	149
 Lucas Moreno
 Matt Koontz
 Nestor Nunez
-Nick Dukes
+Nick Dukes	157
 Pat Downey
 Sam Martinez
-Sennai Heyliger
-Shamar Barthelus
-Stephen Moreno
+Sennai Heyliger	174
+Shamar Barthelus	174
+Stephen Moreno	125
 TJ Daugherty
 Thomas McCane
-Thomas Williams
+Thomas Williams	149
 Tristian Gay
-Ahman Foster
-Alexander Poore
-Anthony Bernieri
-Clarens Alcena
+Ahman Foster	149
+Alexander Poore	165
+Anthony Bernieri	174
+Clarens Alcena	157
 Eneury Garcia
-Gabriel Hererro
-Grady Bryant
-Henry Petit
-Jeremiah Diggs
-Jevian Ross
+Gabriel Hererro	133
+Grady Bryant	125
+Henry Petit	125
+Jeremiah Diggs	285
+Jevian Ross	184
 Jonathan Fraga
 Joshua Mercado
-Keegan Seaver
+Keegan Seaver	149
 Pierre-Martin Francois
-Rafeal Aguilera
+Rafeal Aguilera	285
 Richie Rizzuto
-Samuel Guerrier
-Wetzel Hill
+Samuel Guerrier	157
+Wetzel Hill	174
 Andres Sanchez
 Angel Obano
 Curtis Carlisle Jr.
@@ -39680,8 +39502,8 @@ Simeone Holmes
 AJ Dempsey
 Caden Hagler
 Cooper Flynn
-Eddie Ventresca
-Harrison Smith
+Eddie Ventresca	125
+Harrison Smith	174
 Jackson Spires
 James Brown III
 Kylan Montgomery
@@ -39689,44 +39511,44 @@ Nathan Traxler
 Preston Walls
 Trey Kibe
 Ty Finn
-Caleb Henson
+Caleb Henson	149
 Drew Nicholson
 Thomas Stewart, Jr.
-Tom Crook
+Tom Crook	141
 Zachary Johns
-Chris Bacchioni
+Chris Bacchioni	149
 Donovan Chavis
 Hunter Mason
-Jack Bastarrika
-Jimmy Mullen
+Jack Bastarrika	149
+Jimmy Mullen	285
 Logan Frazier
-Luke Robie
-Mac Church
+Luke Robie	157
+Mac Church	165
 Rafael Hipolito, Jr.
-Sonny Sasso
+Sonny Sasso	197
 Connor McGonagle
-Dillon Campbell
-Durben Carpenter
-Frank DiBella
-Franky Medina
+Dillon Campbell	133
+Durben Carpenter	125
+Frank DiBella	157
+Franky Medina	133
 Gage Wright
-Glean Gonzalez
-Gunnar Garelli
+Glean Gonzalez	197
+Gunnar Garelli	184
 Lennox Wolak
-Matt Henrich
-Parker Ferrell
+Matt Henrich	165
+Parker Ferrell	285
 Tyler Stewart
-Aaron Seidel
-Ben Weader
-Collin Gaj
-Drew Gorman
-Ethen Miller
-Jaden Bullock
+Aaron Seidel	133
+Ben Weader	165
+Collin Gaj	157
+Drew Gorman	141
+Ethen Miller	157
+Jaden Bullock	184
 Mitchell Faglioni
-Noah Nininger
-Ryan Burton
-Ryan Messick
-Sergio Desiante
+Noah Nininger	149
+Ryan Burton	174
+Ryan Messick	125
+Sergio Desiante	174
 Alex Rozas
 Blake Jacobson
 Bo Bassett

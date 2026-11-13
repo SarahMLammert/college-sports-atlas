@@ -982,7 +982,7 @@ Ava Jackson
 Gracyn Vidovic
 Zoe Mort
 Zoey Merritt
-Allison Juneau
+Allison Juneau	8
 Ally Fillebrown
 Alyssa Ruggieri
 Casey Gurlitz
@@ -1291,55 +1291,6 @@ Sarah Notaro
 Taylor Robinson
 Valerie Bertuccelli
 Victoria Kelly
-Elena Barnes
-Emily Rapacz
-Gracie Lopez
-Maddie Samuelson
-Marcelina Powalka
-Natalia Cassata
-Paxton Hoop
-Abigail Seiler
-Anna Repasi
-Ashley McCormick
-Brooke Pierron
-Deanna Stirtzinger
-Emily Durr
-Emma Davis
-Genevieve Riley
-Kylie Tittinger
-Miriam Padgett
-Talia Samuels
-Betsy Laville
-Camryn Olive
-Hayley Wonka
-Libby Welsh
-Lydia Buckley
-Mary Goetz
-Mary Kate Lee
-Meghan Precord
-Rachel Dalton
-Zelie Kessler
-Annie Dhabliwala
-Hannah Shaffrey
-Kalie Romig
-Katelyn Sherman
-Kingsley Avery
-Lauren Gillingham
-Madelyn Haut
-Madison McDonald
-Marinna Shadley
-Reina Thomas
-Sarah Miller
-Tamica Mora
-Alexandra Mazurczak
-Caitlyn O'Brien
-Delaney Weisbruch
-Lara Teodoro
-Lexy Smith
-Mackenzie Tourville
-Madeline Rublee
-Maria Teixeira
-Vitoria Barandas
 Alexandra Quinonez
 Alexandria Henderson
 Delaney Southers
@@ -1373,17 +1324,17 @@ Manuela Pacheco Gonzalez
 Sigrid Lycksaeter
 Meredith Pegram
 Lucy Congema
-Alexandra White
-Anna Kennedy
-Annie Yang
-Brooklyn Hocker
-Carly Oldroyd
-Kendra Dalton
-Lauren Atkinson
-Lea Garner
-Mallory Muehlbauer
-Rose Huang
-Aiko Leong
+Alexandra White	0
+Anna Kennedy	0
+Annie Yang	0
+Brooklyn Hocker	0
+Carly Oldroyd	0
+Kendra Dalton	0
+Lauren Atkinson	0
+Lea Garner	0
+Mallory Muehlbauer	0
+Rose Huang	0
+Aiko Leong	0
 Gracie Richens
 Maddie White
 Naomi Soifua
@@ -1579,20 +1530,20 @@ Alice Götbring
 Eve Marie Sapin
 Sabrina Andolpho
 Anastasia Cordero
-Alice Meziat
-Anais Fournier
+Alice Meziat	23
+Anais Fournier	19
 Camila Marquez
-Giuliana Gomez
+Giuliana Gomez	9
 Maria Cowan
-Nina Klug
-Sydney Grimes
-Daniela Ballesteros
-Leonie Sinnhuber
-Tereza Zavrelova
-Candela Clemente
-Emilia Ullström
-Filippa Folcker
-Imogen Rafferty
+Nina Klug	33
+Sydney Grimes	22
+Daniela Ballesteros	10
+Leonie Sinnhuber	77
+Tereza Zavrelova	36
+Candela Clemente	10
+Emilia Ullström	7
+Filippa Folcker	8
+Imogen Rafferty	28
 Cindi Cooper
 Jenna Barnett
 Lexi Milbrandt
@@ -2449,11 +2400,6 @@ Ruilin Yang
 Sunshine Eaton
 Abbie Kaestle
 Crystal Chong
-Alumni Healthcare Heroes
-Athletic Hall of Honor
-Go U Bears Photography
-National Champions
-Polar Bear Olympians
 Abby Flanagan
 Alexandra Camargo
 Alyssa McPoyle
@@ -4656,76 +4602,6 @@ Natalie Mullins
 Shaunel Fillmore
 Annika Thomas
 Katie Growe
-Amya Rhoan
-Aryka Flennoy
-Ashley Elvira
-Brinley Reed
-Danielle Pulley
-Haneen Osman
-Hannah Chambers
-Haylie Grant
-Kaitlyn Oliver
-Kristen Malone
-Lacey Locke
-Lainey Reay
-Megan Lohman
-Megan Osterhout
-Michele Jones
-Pedro Galvan
-Sosana Carpenter
-Alastair Derry
-Alexis Muir
-Bailey Clifford
-Beth Anderson
-Eva Boyd
-Jazzy Ackerson
-Keagan Utter
-Lexy Swanson
-Rachel Morgan
-Virginia Clark
-Alejandra Castaneda
-Autumn Necessary
-Kate Cowman
-Keidon Reynolds
-Kristin Carlin
-Lacey Locke
-Lily Archuleta
-Maddie McIntosh
-Merrisa Schwartz
-Miranda Armbruster
-Regan Moore
-Rylin Friedli
-Sarah Hill
-Tiffani Hiett
-Blake Murray
-BreeAhna McMaster
-Carlie Sanders
-Carrie Vinci
-Charlotte Bowman
-Krysantha Soward
-Kylah Anderson
-Nikolas Scott
-Reese Kinney
-Tora Russell
-Christina Guzman
-Emily Patterson
-Jonathan Gale
-Jordan Payne
-Karla Salazar
-Maisie Neilson
-Nadia Rahimatpure
-Naylissa Bradford
-Paige Nihart
-Samantha LePiane
-Tenlee Scott
-Amanda Hutchins
-Anabelle Milton
-Charlotte Wilson-Bowman
-Emily Cross
-Olivia Szombathy
-Rylee Salvesen
-Sydney Carey
-Taylor Phelps
 Kaylee Jones
 McKinnon Stockdale
 Reece Garey
@@ -6219,17 +6095,17 @@ Cassie Sengul
 Isabella Borte
 Josephine Nguyen
 Kacey Winters
-Baylee Rayl
-Brianna Benardin
+Baylee Rayl	7
+Brianna Benardin	4
 Jenna Moore
-Katelyn McMahon
-Lauren Plunkett
-Lyndsey Standage
-Annaliesia Salazar
-Izzy Marten
-Mariana Larson
-Olivia Ramsey
-Serena Berrey
+Katelyn McMahon	24
+Lauren Plunkett	708
+Lyndsey Standage	2
+Annaliesia Salazar	9
+Izzy Marten	10
+Mariana Larson	3
+Olivia Ramsey	6
+Serena Berrey	11
 Ellie Cobb
 Samantha Hightower
 Ellie Holloway
@@ -9158,25 +9034,9 @@ Sofia Benavides-Herberth
 Eva Lye
 Makayla Grubb
 Peyton Costabile
-Adam Weaver
-Thomas Evans
-Trevor Stark
 Madison Esmond
 Rachel Kumiega
 Victoria Battaglia
-Amy Smith, Ph.D.
-Colleen Kumiega
-Dan Roland, M.B.A.
-Herb Kauderer Ph.D.
-Jason Becker
-Jenelle Lukasik
-Jessica Hoffman, Ph.D.
-John D'Amico
-Jonas Patricko
-Kristen Connolly, Ph.D.
-Laura Dannebohm, J.D
-Martin Floss, Ph.D.
-Megan Witzleben, Ph.D.
 Alexa Griswold
 Brogan Petree
 Deanna Forbush
@@ -12750,7 +12610,6 @@ Samantha Miller
 Emily Born
 Emily Hacker
 Olivia Footh
-Marney Gellner
 Alli Hulst
 Anna Graveline
 Bernadette Barringer
@@ -19294,34 +19153,34 @@ Abby Roll
 Hailey Blancas
 Carrie Doss
 Payten Baca
-Arcilia Gonzalez
-Ashley Wilcox
-Bailey Hightower
-Carlee Brinkman
-Chloe Clay
-Claire Wilhoite
-Courtney Callahan
-Courtney Moore
-Cristina Albarran
-Ellen Farris
-Erica Hornbuckle
-Gabriela Rodriguez
-Jessica Wolff
-Jordan Estrella
-Justine Brown
-Kara Stephens
-Kendall Lillie
-Madison Stebbins
-Mary Satkowski
-Megan Wilcox
-Micaela Towry
-Morgan Johnson
-Sarah Ahart
-Emily Soetaert
-Jenna Hinckley
-Molly Devine
-Repeka Ploetz
-Sammy Basler
+Arcilia Gonzalez	3
+Ashley Wilcox	10
+Bailey Hightower	20
+Carlee Brinkman	15
+Chloe Clay	12
+Claire Wilhoite	9
+Courtney Callahan	22
+Courtney Moore	2
+Cristina Albarran	18
+Ellen Farris	17
+Erica Hornbuckle	11
+Gabriela Rodriguez	8
+Jessica Wolff	00
+Jordan Estrella	6
+Justine Brown	5
+Kara Stephens	23
+Kendall Lillie	7
+Madison Stebbins	1
+Mary Satkowski	4, 17
+Megan Wilcox	13, 25
+Micaela Towry	19
+Morgan Johnson	14
+Sarah Ahart	21
+Emily Soetaert	9
+Jenna Hinckley	24
+Molly Devine	13
+Repeka Ploetz	16
+Sammy Basler	20
 Hannah Finley
 Hunter Kehoe
 Maggie Sexton
@@ -19419,23 +19278,6 @@ Caroline Konieczny
 Lindsey Kocjancic
 Rachel Thatcher
 Sophia Dobransky
-Aaron Smetanka
-Brian Niemiec
-Bryan Butler
-D.P. Harris
-Dom Nania
-Jeff Zidek
-Jimmy Petruska
-Josh Gurekovich
-Jym Walters
-Kate McCauley
-Kevin Wanichko
-Matt Davis
-Mick Janosko
-Nicole Karr
-Samantha Firestone
-Sue Hozak
-Zach Wilfong
 Charlotte Jordan
 Kharisma Zylka
 Lauren Paullet

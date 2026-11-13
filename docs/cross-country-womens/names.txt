@@ -3236,65 +3236,6 @@ Laure Marie Kidukula
 Allison Smith
 Bentlei Stallings
 Tiesha Turner
-Carlos Pinel
-Elizabeth Feger
-Jamon Copeland
-Michael McCormick
-Michael Middendorf
-Elena Barnes
-Emily Rapacz
-Gracie Lopez
-Maddie Samuelson
-Marcelina Powalka
-Natalia Cassata
-Paxton Hoop
-Abigail Seiler
-Anna Repasi
-Ashley McCormick
-Brooke Pierron
-Deanna Stirtzinger
-Emily Durr
-Emma Davis
-Genevieve Riley
-Kylie Tittinger
-Miriam Padgett
-Talia Samuels
-Betsy Laville
-Camryn Olive
-Hayley Wonka
-Libby Welsh
-Lydia Buckley
-Mary Goetz
-Mary Kate Lee
-Meghan Precord
-Rachel Dalton
-Zelie Kessler
-Annie Dhabliwala
-Hannah Shaffrey
-Kalie Romig
-Katelyn Sherman
-Kingsley Avery
-Lauren Gillingham
-Madelyn Haut
-Madison McDonald
-Marinna Shadley
-Reina Thomas
-Sarah Miller
-Tamica Mora
-Alexandra Mazurczak
-Caitlyn O'Brien
-Delaney Weisbruch
-Lara Teodoro
-Lexy Smith
-Mackenzie Tourville
-Madeline Rublee
-Maria Teixeira
-Vitoria Barandas
-Lily Witkoski
-Maria Kuhlman
-Sadie Mosher
-Theresa Long
-Victoria Johnson
 Abigail King
 Elizabeth Kueng
 Emily Kester
@@ -3388,35 +3329,35 @@ Lola Esparza
 Nora de Walle
 Rebekah Cueva
 Ryan Reed
-Aimee Bryson
-Alice Jensen
+Aimee Bryson	0
+Alice Jensen	0
 Anna Camp-Bennett
 Ashleigh Warner
-Ashley Elliott
+Ashley Elliott	0
 Britney Lund
 Courtney Wayment
 Emma Gee
 Erica Birk-Jarvis
 Haley Johnston
-Heidi Fuhriman
-Isabella James
-Jessica Hilton
+Heidi Fuhriman	0
+Isabella James	0
+Jessica Hilton	0
 Josey Hedquist
-Kamryn Hart
-Kelsey Braithwaite
+Kamryn Hart	0
+Kelsey Braithwaite	0
 Kristi Rush-Briggs
 Laura Bluth
-Lauren Baxter
-Maddy Roach
+Lauren Baxter	0
+Maddy Roach	0
 Madelyn Dickson
 McKenna Neyman
-Natalie Shields-Connolly
-Niki Barrow
+Natalie Shields-Connolly	0
+Niki Barrow	0
 Olivia Hoj
 Rachel Stewart-Woods
-Shea Martinez-Collinsworth
+Shea Martinez-Collinsworth	0
 Sidney Unga
-Yesenia Silva
+Yesenia Silva	0
 Alena Ellsworth
 Ally Geisler
 Alyssa Steed
@@ -6186,11 +6127,6 @@ Hajna Nagy
 Leah Kratochvil
 Leila Trummel
 Maggie Hanson
-Alumni Healthcare Heroes
-Athletic Hall of Honor
-Go U Bears Photography
-National Champions
-Polar Bear Olympians
 Abby Mueller
 Adele Metres
 Angela McKenzie
@@ -8632,7 +8568,6 @@ ToniAnn Convertino
 Monica Val
 Suzanne Hamzah
 Viviana Zeballos
-Coop Cougar
 Ana Gonzalez Martin
 Dagnelly Sarmiento
 Eliana McNamee
@@ -20980,7 +20915,6 @@ Tamera Mason
 Hunter Walker
 Shalet Mitei
 Sharon Kibiwott
-Veronica Wiggins
 A'Jani Williams
 Chloe Shaw
 Destini Pickens
@@ -21562,14 +21496,14 @@ Malia Salcido
 Mattie Sheehan
 Ruby Brucker-Polk
 Tessa Vasquez
-Amber White
-Ayauna Ellis
-Bria Stearns
-Jasmine Davis
-Justice Stegall
-Keila Outen
-Kendra Jolly
-Mahogany Joiner
+Amber White	5
+Ayauna Ellis	8
+Bria Stearns	4
+Jasmine Davis	2
+Justice Stegall	7
+Keila Outen	6
+Kendra Jolly	3
+Mahogany Joiner	1
 Aja Manning
 Aniya Clay
 April Rogers
@@ -31937,27 +31871,27 @@ Faye Brooks
 Hannah Hall
 Kayla Kerkofsky
 Nazareth Godinez
-Cinneya Hicks
-Desiray Sturgeon
-Gilandria Williams
-Jaylen Jones
-Kyana Johnson
-Niya Royal
-Rengenna Mason
-Tia Barlow
-Alisha Fortenberry
-Anissia May
-Antrice McCoy
-Cinnaeya Hicks
-Destiny Irving
-Diamond Love
-Fraeyja Kone
-Kristy Armwood
-Shania Hall
-Troi Sparks
-Brianna Grant
-Destiny Creesy
-Lalia Hampton
+Cinneya Hicks	2
+Desiray Sturgeon	7
+Gilandria Williams	8
+Jaylen Jones	4, 10
+Kyana Johnson	3
+Niya Royal	6
+Rengenna Mason	5
+Tia Barlow	1
+Alisha Fortenberry	9
+Anissia May	4
+Antrice McCoy	1
+Cinnaeya Hicks	11, 3
+Destiny Irving	7
+Diamond Love	8
+Fraeyja Kone	3
+Kristy Armwood	5
+Shania Hall	6
+Troi Sparks	2
+Brianna Grant	1
+Destiny Creesy	5
+Lalia Hampton	4
 Dyniah Davis
 Erica Tate
 Erika LeFlore
@@ -43116,10 +43050,6 @@ Iliana Schweitzer
 JayAnna Rabon
 Julianna Ondrisko
 Monica Nieto
-Oliva Fenstermaker
-Allison Denney
-Rylie Harwood
-Renita Harris
 Abby Retberg
 Arianna Childs
 Genevieve Michal
@@ -43130,6 +43060,7 @@ Cassidy Casey
 Jayden Ponsford
 Kayla Gentry
 Mya Nemechek
+Oliva Fenstermaker
 Alex Staddon
 Allison Granata
 Anderson Negley
@@ -56407,7 +56338,7 @@ Emma Bellomy
 Frances Staulcup
 Gia Petrini
 Johnny Eggert
-Lyla Taylor
+Lyla Taylor	5
 Rio Tabion
 Sydney Brantley
 Alyssa Foote
@@ -57605,12 +57536,12 @@ Hadley Smith
 Olive Erickson
 Sascha Wadhams
 Violeta Rechea
-Ashlea Larson
-Jenna Fife
-Karla McCoy
-Lara Sorensen
-Margaret Lund
-Zanna Perry
+Ashlea Larson	5
+Jenna Fife	4
+Karla McCoy	2
+Lara Sorensen	1
+Margaret Lund	6
+Zanna Perry	3
 Adora Powers
 Ambree Jones
 Amy Rogers
@@ -65349,7 +65280,7 @@ Sel Stuart
 Vanessa Bolen
 Alexandra Del Re
 Brenna Mullaney
-Cydni Turner
+Cydni Turner	32
 Jadae Barrett
 Mackenzie Czurak
 Mariana Rodriguez

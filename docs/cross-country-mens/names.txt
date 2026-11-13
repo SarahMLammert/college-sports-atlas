@@ -3533,35 +3533,35 @@ Isaac Crisostomo
 Micah Neumann
 Alex Hedquist
 Andrew Brewer
-Austin Brower
-Brad Nye
+Austin Brower	0
+Brad Nye	0
 Brady Earley
 Brayden McLelland
 Cade Perry
-Chase Horrocks
+Chase Horrocks	0
 Clayson Shumway
 Clayton Young
 Connor Ross
 Dallin Farnsworth
-Dallin Taylor
+Dallin Taylor	0
 Danny Carney
 David Graham
-Erik Harris
+Erik Harris	0
 Garrett Marsing
 Jacob Heslington
 Jonathan Harper
 Kramer Morton
 Marcus Dickson
-Mitchell Briggs
-Nicolas Montanez
+Mitchell Briggs	0
+Nicolas Montanez	0
 Porter Reddish
 Rory Linkletter
-Sam Sorensen
+Sam Sorensen	0
 Spencer Hanson
-Steve Morrin
+Steve Morrin	0
 Talem Franco
-Trevor Fuhriman
-Tyler Crofts
+Trevor Fuhriman	0
+Tyler Crofts	0
 Abraham Alvarado
 Casey Clinger
 Chase Heiner
@@ -6354,11 +6354,6 @@ Jose Melo
 Lucas DiCerbo
 Ryan Supple
 Ted Fuell
-Alumni Healthcare Heroes
-Athletic Hall of Honor
-Go U Bears Photography
-National Champions
-Polar Bear Olympians
 Adam Nelson
 Addison Davis
 Ben Bockmann
@@ -7989,7 +7984,7 @@ Timmy Kahovec
 Tyler Tvelia
 Zachery Sergey
 Aaron Rider
-Connor Neufeld-Griffin
+Connor Neufeld-Griffin	25
 Jack Martin
 Nikita Khromets
 Zachary Sergey
@@ -8617,7 +8612,6 @@ Matthew Guadalupe
 Maxwell Stith
 Sagar Pangeni
 Ty-Saiah Moss
-Coop Cougar
 Abbas Wafa
 Alex Geddes
 Alfredo Oidor
@@ -15082,49 +15076,49 @@ James Busch
 Ketner Mizee
 Zachary Conwell
 Zachary McCammon
-Aaron Buechley
-Austin Miller
-Chris Nobles
-Davion Burdette
-Drew Knox
-Jacob Moore
-Zach Allton
-Benett Bos
-Carter Knox
-Isaac Semerikov
-John Bennett
-Lucas Roth
-Malu Ing
-Rylan Bailey
-Stephen Parmenter
-Tyron Vanderhoof
-Ayden Johnson
-Brady Moore Rasmussen
-Brodin Tuning
-DeMarco Reed
-Ivan Primbs-Devine
-Jaime Medina-Jurado
-Jaylen McClain
-Noah Nguyen
-Pierre Boorman
-RayQuan Valentin
-Adrien Barba
-Dave McCallum
-Jake Higgins
-Kadin Pruett
-Micah King
-Nathan Mokan
-Reece Lemkau
-Silas McCrum
-Benjamin Hemelstrand
-Cannon Anderson
-Christopher Martin
-Elias McKinnis
-Isaac Duke
-Jaydon Hall
-Joshua Davis
-Matthew Luke
-Oto Motoshio
+Aaron Buechley	1, 35
+Austin Miller	11, 1
+Chris Nobles	10
+Davion Burdette	3
+Drew Knox	21
+Jacob Moore	4
+Zach Allton	5
+Benett Bos	33
+Carter Knox	31
+Isaac Semerikov	2
+John Bennett	24, 5
+Lucas Roth	20
+Malu Ing	4, 2
+Rylan Bailey	11, 1
+Stephen Parmenter	21
+Tyron Vanderhoof	13
+Ayden Johnson	15
+Brady Moore Rasmussen	21, 33
+Brodin Tuning	24, 0
+DeMarco Reed	4, 3
+Ivan Primbs-Devine	12
+Jaime Medina-Jurado	33
+Jaylen McClain	41
+Noah Nguyen	31
+Pierre Boorman	32
+RayQuan Valentin	11
+Adrien Barba	23
+Dave McCallum	24
+Jake Higgins	4
+Kadin Pruett	10, 12
+Micah King	15
+Nathan Mokan	12
+Reece Lemkau	2
+Silas McCrum	21
+Benjamin Hemelstrand	10
+Cannon Anderson	3
+Christopher Martin	15
+Elias McKinnis	13
+Isaac Duke	35
+Jaydon Hall	5
+Joshua Davis	33
+Matthew Luke	31
+Oto Motoshio	2
 Bennet Mason
 Bodie Strom
 Braydon Lee
@@ -21922,11 +21916,11 @@ Nico Anderson
 Noah Thompson
 Rylan Graham
 Walt Petersen
-Anton Hurst
-Ashton Roper
-Dexter Curtis
-Quinton Fredrick
-Walter Chambers
+Anton Hurst	1
+Ashton Roper	2
+Dexter Curtis	6
+Quinton Fredrick	3
+Walter Chambers	5
 Damien Watkins
 De'Kwan Barnes
 John Davis
@@ -42914,19 +42908,6 @@ Nathaniel Bailey II
 Nicholas Ramirez
 Ryan Budhu
 Tomas Gonzalez
-Anne Marie Lim
-Chairali Rane
-Christopher Jackson
-Hunter Blair
-Jalaysia Stevenson
-Katrina David
-Katrina Macaro
-Lindsey Riggs
-Megan Rottkamp
-Omar Valdivia
-Rachel Lee
-Sabrina LaSalle
-Shikha Shah
 Andrew Shenoda
 Brian McGlew
 David Essel
@@ -59298,25 +59279,25 @@ Mayson Harward
 Niles Hendrix
 Noah Grounsell
 Ryan Hunter
-Andre Roman
-Anthony Oliver
-Greg Lomas
-Jaylen Taulton
-Michael Prieto
-Miguel Grijalva
-Zachary Harris
-Chris Heard
-Jaylen Bentley
-Keiron Morning
-Lamar Lee-Kane Jr
-Louis Jones
-Malik Jackson
-Rudy Abrams
-Will Rehfeld
-Garfield Bloodman III
-Jonathan Bloodman
-Rene Vargas
-Skyler Clark
+Andre Roman	4
+Anthony Oliver	21
+Greg Lomas	1
+Jaylen Taulton	2, 1, 4
+Michael Prieto	3
+Miguel Grijalva	11
+Zachary Harris	10
+Chris Heard	4
+Jaylen Bentley	11
+Keiron Morning	23
+Lamar Lee-Kane Jr	2
+Louis Jones	3
+Malik Jackson	0
+Rudy Abrams	21
+Will Rehfeld	10
+Garfield Bloodman III	34
+Jonathan Bloodman	3
+Rene Vargas	21
+Skyler Clark	5
 Tyler Watkins
 Freddy Andrianasoco
 J.P. Perez
@@ -59324,22 +59305,22 @@ Jacob Donahoe
 Jaylon Bentley
 Jonathan Robinson
 Luke Zapf
-Matthew Gonzalez Jr.
+Matthew Gonzalez Jr.	23
 Miguel Saaverdra
 Reily Flinn
 Ricky Espinoza
-Triston Johnson
-Aidan Moreno
-Brandon Montanez
-Colton McGinnis
-Dominic Rivas
-Earving Wilson
-Evan Sullivan
-Malkai Ittai
-Rey Vargas
-Scipio Mitchem
-Tim Davila
-Zeke Dominguez
+Triston Johnson	1
+Aidan Moreno	20
+Brandon Montanez	12
+Colton McGinnis	0
+Dominic Rivas	2
+Earving Wilson	5
+Evan Sullivan	13
+Malkai Ittai	3
+Rey Vargas	11
+Scipio Mitchem	10
+Tim Davila	24
+Zeke Dominguez	4
 Armando Hernandez
 Cael Denetdeel
 Emanuel Esparza
@@ -59366,28 +59347,28 @@ Jovoni Torres
 Aiden Nelms
 Alexander Naranjo
 Blake Walden
-Atreyu Rose
-Brayden Chavez
-Carlos Robinson
-Carter Gonzales
-Giovanni Ervin
-Grant Hickey
-Hayden Bruhn
-Jacob Lujan
-Jalen Vaughn
-Jaydon Levenshown
-Jordan White
-Kamdyn McCarty
-Korben Pitre
-Malik Wesley
-Nate Morgan
-Noah Washington
-Orlando Ortega
-Steven McCaskill
-Tommy Watley
-Vernon Onick III
-Will Harlin
-Zephaniah Guerro
+Atreyu Rose	10
+Brayden Chavez	0
+Carlos Robinson	21
+Carter Gonzales	2
+Giovanni Ervin	34
+Grant Hickey	00
+Hayden Bruhn	23
+Jacob Lujan	12
+Jalen Vaughn	24
+Jaydon Levenshown	30
+Jordan White	5
+Kamdyn McCarty	15
+Korben Pitre	25
+Malik Wesley	20
+Nate Morgan	3
+Noah Washington	22
+Orlando Ortega	11
+Steven McCaskill	4
+Tommy Watley	32
+Vernon Onick III	1
+Will Harlin	13
+Zephaniah Guerro	33
 Austin Haynes
 Brandon Colner
 Colby Sutton

@@ -1873,24 +1873,24 @@ Kimberly Tran
 Mariana Reveles Arreola
 Melis Mert
 Tia Kaukenas
-Brittanie Eraso
-Demi Perkinson
-Erica Chichoni
-Mayci Jones
-Natella Nabieva
-Nicolette Poulsen
-Sarah Clifford
-Savannah Ware-Avina
-Taylah Beckman
-Toby Miclat
-Alana Bourgeois
-Kate Truman
-Polina Malykh
-Samantha Smith
+Brittanie Eraso	0
+Demi Perkinson	0
+Erica Chichoni	0
+Mayci Jones	0
+Natella Nabieva	0
+Nicolette Poulsen	0
+Sarah Clifford	0
+Savannah Ware-Avina	0
+Taylah Beckman	0
+Toby Miclat	0
+Alana Bourgeois	0
+Kate Truman	0
+Polina Malykh	0
+Samantha Smith	0
 Anastasia Abramyan
 Eliza Hafen
 Hermehr Kaur
-Katie Fitt
+Katie Fitt	0
 Madeline Wanlass
 Alina Menshykova
 Hailey Krey
@@ -1902,7 +1902,7 @@ Leah Heimuli
 Elizabeth Tullis
 Kara Wheatley
 Kensie Cricchio
-Mackenzie Turley
+Mackenzie Turley	0
 Qianxin Kong
 Xenia de Luna
 Avery Pope
@@ -16308,20 +16308,20 @@ Eduarda Ferreira
 Lindsey Wiggins
 Manasi Ramadani
 Giuliana Gibson
-Kayleigh Hahn
+Kayleigh Hahn	4
 Kylee Ramsey
 Maria Rey
 Marissa Peterson
 Polina Radchenko
-Raquel Acco
-Catalina Santander
-Chiara Gerbino
-Roberta Armani
-Shea Connelly
-Emily Ineson
-Hannah Panchal
-Maranda Adair
-Mille Elsborg
+Raquel Acco	1
+Catalina Santander	8
+Chiara Gerbino	7
+Roberta Armani	3
+Shea Connelly	6
+Emily Ineson	5
+Hannah Panchal	10
+Maranda Adair	2
+Mille Elsborg	9
 Becca Latty
 Fe Batoon
 Micaela Pallete
@@ -20777,7 +20777,6 @@ Carol Reis
 Hannah York
 Mariam Bayatyan
 Vaishnavi Venkatesh
-Test Player
 Ainhoa Ordonez
 Ali Zakariasen
 Annika Rojas
@@ -21624,10 +21623,6 @@ Doga Akyurek
 Petra Janigova
 Silvia-Maria Costache
 Kariman Buqai
-Allison Denney
-Rylie Harwood
-Renita Harris
-Maria Luiza Barreis
 Alexandra Sibrikova
 Camila Cardona-Carballosa
 Emilia Schulte
@@ -21695,8 +21690,8 @@ Maddie Chavez
 Natasha Munday
 Yue Lin "Polly" Chen
 Alisia Manolescu
-Myu Kageyama
-Sara Kuuttila-Webbert
+Myu Kageyama	0
+Sara Kuuttila-Webbert	1
 Allison Romero
 Hsuan Huang
 Satoho Toriumi
@@ -27568,19 +27563,19 @@ Jen Foreman
 Kaija Scott
 Kathryne Mathis
 Natalia Rodriguez
-Waverly Federico
-Megan Perez
+Waverly Federico	6
+Megan Perez	8
 Melanie Williams
-Shelby Turpin
-Alaina Weltz
-Anna Kovalova
-Brianna Vasquez
-Jennifer Perez
-Kristina Vuksanovic
-Ana Kunic
-Iryna Rusyn
-Julia Piatek
-Karolina Glowinska
+Shelby Turpin	7
+Alaina Weltz	3
+Anna Kovalova	2
+Brianna Vasquez	4, 6
+Jennifer Perez	5
+Kristina Vuksanovic	1
+Ana Kunic	2
+Iryna Rusyn	5
+Julia Piatek	3
+Karolina Glowinska	4
 Shivani Kaligotla
 Rose Godard
 Airi Ohashi
@@ -36703,7 +36698,7 @@ Julia Viesi
 Rebeka Svabikova
 Tilda Larsson
 Alexia Rycroft
-April Stewart
+April Stewart	3
 Daria Veretennikova
 Gloria Kaufman
 Hannah Bradford

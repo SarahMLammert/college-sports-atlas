@@ -442,32 +442,6 @@ Gjorgji Popovski
 Kareem Bowe
 Santiago Rocca
 Lucas Dini
-Alyshia Moore
-Amber Wilson
-Ashley Michael
-Brian Dorsey
-Courtneanna Beverly
-Destiney Swartz
-Faith Wells
-Iyana Jackson
-J'La Jones
-Jacenta Davis
-Jacrisciah Thornton
-Jada Jones
-Jordan Davis
-Kaelin Travis
-Kaili Walton
-Kameron Hilliard
-Karlie Johnson
-Khristianna Culbert
-Kirraney Gordon
-Kyla Proby
-LaDerious Johnson
-Lena Unga
-Mar'Quise Covan
-Morgan Gill
-Tanisha Ramsey
-Ty'Rah Ray
 Dakota Fernandez
 David Pata
 Isaac Santitto
@@ -1633,28 +1607,28 @@ Leo Weishaupt
 Mathys Pinoit
 Michael Marci
 Viktor Van Craenenbroeck
-Aidan Carrazedo
-Andrey Goryachkov
-Jacob Sullivan
-Jeremy Bourgeois
-John Pearce
-Juan Canales
-Keaton Cullimore
-Scott Bohne
-Shane Monroe
-Derek Vincent
-Garret Vincent
-Matthew Pearce
-Sam Tullis
+Aidan Carrazedo	0
+Andrey Goryachkov	0
+Jacob Sullivan	0
+Jeremy Bourgeois	0
+John Pearce	0
+Juan Canales	0
+Keaton Cullimore	0
+Scott Bohne	0
+Shane Monroe	0
+Derek Vincent	0
+Garret Vincent	0
+Matthew Pearce	0
+Sam Tullis	0
 Artsiom Ausiyevich
 Ben Gajardo
-David Ball
+David Ball	0
 Jacob Tullis
 Jeffrey Hsu
-Jose Meliàn
+Jose Meliàn	0
 Rishab Sardana
 Sean Hill
-Victor Brown
+Victor Brown	0
 Brocton Andrus
 Kobe Tran
 Mateo Vereau
@@ -6189,7 +6163,7 @@ Martin Kaynakschiev
 Mitch Russell
 Muhammad Adeeb
 Nathan Hurst
-Daniel Agboto
+Daniel Agboto	93
 Jake Anderson
 Josh Glavanovitz
 Jovaughn Williams
@@ -6218,78 +6192,6 @@ Alex Cook
 Guillermo Pacheco
 Nicholas Williams
 Zachary Gilbert
-Amya Rhoan
-Aryka Flennoy
-Ashley Elvira
-Brinley Reed
-Danielle Pulley
-Haneen Osman
-Hannah Chambers
-Hannah Giesbrecht
-Haylie Grant
-Kaitlyn Oliver
-Katie Growe
-Kristen Malone
-Lacey Locke
-Lainey Reay
-Megan Lohman
-Megan Osterhout
-Michele Jones
-Pedro Galvan
-Sosana Carpenter
-Alastair Derry
-Alexis Muir
-Bailey Clifford
-Beth Anderson
-Eva Boyd
-Jazzy Ackerson
-Keagan Utter
-Lexy Swanson
-Rachel Morgan
-Virginia Clark
-Alejandra Castaneda
-Autumn Necessary
-Kate Cowman
-Keidon Reynolds
-Kristin Carlin
-Lacey Locke
-Lily Archuleta
-Maddie McIntosh
-Merrisa Schwartz
-Miranda Armbruster
-Regan Moore
-Rylin Friedli
-Sarah Hill
-Tiffani Hiett
-Blake Murray
-BreeAhna McMaster
-Carlie Sanders
-Carrie Vinci
-Charlotte Bowman
-Krysantha Soward
-Kylah Anderson
-Nikolas Scott
-Reese Kinney
-Tora Russell
-Christina Guzman
-Emily Patterson
-Jonathan Gale
-Jordan Payne
-Karla Salazar
-Maisie Neilson
-Nadia Rahimatpure
-Naylissa Bradford
-Paige Nihart
-Samantha LePiane
-Tenlee Scott
-Amanda Hutchins
-Anabelle Milton
-Charlotte Wilson-Bowman
-Emily Cross
-Olivia Szombathy
-Rylee Salvesen
-Sydney Carey
-Taylor Phelps
 Christopher Rosales
 Frank Cadena
 Gilbert Gutierrez
@@ -18252,17 +18154,17 @@ Nick Williams
 Drew Keene
 Jarreau Campbell
 Kazuki Matsuno
-Reed Crocker
-Graydon Lair
-Luke Baylis
-Josh Portnoy
-Max Sheldon
-Aristotelis Thanos
-David Saye
-Ozan Baris
-Ronald Hohmann
-Sebastien Collard
-Taym Alazmeh
+Reed Crocker	13
+Graydon Lair	8
+Luke Baylis	2
+Josh Portnoy	7
+Max Sheldon	17
+Aristotelis Thanos	10
+David Saye	3
+Ozan Baris	72
+Ronald Hohmann	1
+Sebastien Collard	23
+Taym Alazmeh	11
 Danial Rakhmatullayev
 Matthew Forbes
 Mitchell Sheldon
@@ -19484,7 +19386,6 @@ Elisey Kalashnikov
 Marcos Castares
 Sebastian Posito
 Hugo Rodriguez
-Test Player
 Abiel Cervantes
 Aldo Salazar
 Ben Smith
@@ -20327,13 +20228,13 @@ Ibrahim Snoussi
 Nicolas Recoura
 Sebastiano Cressi
 Yanis Mimaud
-Paul Balon
 Carlos Quinones
 Guy Dalzell
 Hugo Fidler
 Konstantin Kukaras
 Matteo Barcia
 Patrick Janikian
+Paul Balon
 Pedro Lemos
 Sebastian Chacon Munoz
 Timothy Phung
@@ -20354,11 +20255,11 @@ Casey Recci
 Facundo Bermejo
 Karlo Divkovic
 Nicolas Prieto
-Alex Maggs
+Alex Maggs	1
 Jake Trondson
-Rafael Abdulsalam
-Raul Dobai
-Sergio Molina
+Rafael Abdulsalam	0
+Raul Dobai	0
+Sergio Molina	0
 Aram Noroozian
 Arda Azkara
 Daniil Kakhniuk
@@ -25948,28 +25849,28 @@ Blaise Bukovac
 Julian Watson
 Timothy Jakubek
 Alex Werries
-Antonio Shaw
+Antonio Shaw	9, 8
 Brett Robbins
 Christian Manalang
 Clinton Gregory
 Curtis Forster
-Eugene Bour
-Landon Schultz-Zwahr
+Eugene Bour	13, 9
+Landon Schultz-Zwahr	8
 Nicholas Milush
 Will Cross
 Kevin Musasia
 Nicolas Martinez
-Quin Fields
+Quin Fields	10
 Stephen Roderick
-Andres Cortes
-Andres Padilla
-Carlos Padilla
-Gregor Lainer
-Ivan Arevalo
-Patryk Garwacki
-Andrzej Urjasz
-Bartosz Losiak
-Ilia Peredero
+Andres Cortes	6, 7
+Andres Padilla	2
+Carlos Padilla	1
+Gregor Lainer	3, 1
+Ivan Arevalo	5
+Patryk Garwacki	4, 2
+Andrzej Urjasz	4
+Bartosz Losiak	3
+Ilia Peredero	6
 Anas Haddou
 Bas de Waal
 Emanuel Nicodemo Mallya
@@ -30059,17 +29960,17 @@ Wojciech Szczesny
 Luka Jankovic
 Marko Galic
 Pawit Sornlaksup
-Matias Olivero
-Charlie Snow
-Cole Cozens
-Hanamichi Carvajal
-Poonthong Komolpisut
-Eli Wiblin
-Joshua Mackey
-Lucas Britez
-AJ Sidoti
-Alejandro Gonzalez
-Pannawat Suttisomboon
+Matias Olivero	9
+Charlie Snow	5
+Cole Cozens	10
+Hanamichi Carvajal	16
+Poonthong Komolpisut	11
+Eli Wiblin	6
+Joshua Mackey	3
+Lucas Britez	7
+AJ Sidoti	6
+Alejandro Gonzalez	29
+Pannawat Suttisomboon	8
 Alex Arnett
 Brandon Stofleth
 Chris Samaan
@@ -33246,13 +33147,13 @@ Brendan Barr
 Killian Sinclair
 Sebastian Buxman
 Chia-Chieh (Jack) Lin
-Connor Kruger
-Elyes Marouani
-Jordan Coutinho
-Matteo Savio
-Tristan Sarap
-William Zulch
-Ken Dinh
+Connor Kruger	7
+Elyes Marouani	24
+Jordan Coutinho	6
+Matteo Savio	21
+Tristan Sarap	108
+William Zulch	9
+Ken Dinh	5
 Franco Quijano
 Liam Day
 Theo Mottier

@@ -1424,6 +1424,14 @@ def test_pipeline_first_pass_only_fills_gaps_once_rosters_exist(tiny):
     assert {"--retry-failed", "--render", "--bios", "--refresh", "--report"} <= set(retry)
 
 
+def test_pipeline_only_takes_the_schools_each_sport_has(tiny):
+    # Nov 13: --only with several sports; each scrapes the named schools it has, one with none is skipped
+    p = plan(tiny, "only=alpha,Omega")
+    assert p.commands["scrape"][0][p.commands["scrape"][0].index("--only") + 1] == "Alpha"
+    p = plan(tiny, "only=Omega")
+    assert p.steps == [] and "skipped" in p.notes["sport"]
+
+
 def test_redo_current_picks_main_page_seasons(tiny):
     with open(tiny.rosters_dir / "scrape_report_2026.csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=sr.REPORT_FIELDS, extrasaction="ignore")
