@@ -2137,6 +2137,9 @@ Webster Thomas,Webster,,,Webster,review,unknown state/country 'Thomas',1
 "Uralsk, KZ.",Uralsk,,,Uralsk,review,unknown state/country 'KZ.',1
 "Willemstad, Netherlands Antilles",Willemstad,,,Willemstad,review,unknown state/country 'Netherlands Antilles',1
 "Jockessin, Del.",Jockessin,DE,USA,"Jockessin, DE, USA",review,"spelling? 'Jockessin' -> Hockessin (starts differently: often another place, not a typo)",1
+Lake Matthews,Lake,,,Lake,review,unknown state/country 'Matthews',1
+"""Sherman Oaks","""Sherman",,,"""Sherman",review,"town name in several states: AL, CA, FL",1
+Jarupa Valley,Jarupa,,,Jarupa,review,unknown state/country 'Valley',1
 ,,,,,unfixable,blank hometown,36363
 Hometown/ Previous School,,,,,unfixable,column header scraped as data,1429
 Hometown,,,,,unfixable,column header scraped as data,524
@@ -12404,6 +12407,8 @@ Southington CT,Southington,CT,USA,"Southington, CT, USA",fixed,,2
 "Loyalhana, PA",Loyalhanna,PA,USA,"Loyalhanna, PA, USA",fixed,spelling 'Loyalhana' -> Loyalhanna,2
 "Brewster, Wis.",Brewster,WI,USA,"Brewster, WI, USA",fixed,state 'Wis.' -> WI,2
 "Bloomfields Hills, Mich.",Bloomfield Hills,MI,USA,"Bloomfield Hills, MI, USA",fixed,spelling 'Bloomfields Hills' -> Bloomfield Hills,2
+"""Gothunburg","""Gothunburg",,,"""Gothunburg",fixed,,2
+"""Alta Loma",Alta Loma,CA,USA,"Alta Loma, CA, USA",fixed,state from the only US town with this name,1
 "Carrollton, Illionis",Carrollton,IL,USA,"Carrollton, IL, USA",fixed,town and state read from the text,1
 Cambria Heights,Cambria Heights,NY,USA,"Cambria Heights, NY, USA",fixed,state from the only US town with this name,1
 "Shreveport, Louisana",Shreveport,LA,USA,"Shreveport, LA, USA",fixed,town and state read from the text,1
@@ -28652,3 +28657,11 @@ Schaumburg Ill.,Schaumburg,IL,USA,"Schaumburg, IL, USA",fixed,state 'Ill.' -> IL
 Trialago,Trialago,,,Trialago,fixed,,1
 "Bluff, Va.",Bluff,VA,USA,"Bluff, VA, USA",fixed,state 'Va.' -> VA,1
 "Cairns, Queensland, Austrailia","Cairns, Queensland",,Australia,"Cairns, Queensland, Australia",fixed,state 'Austrailia' -> Australia,1
+Temucula,Temucula,,,Temucula,fixed,,1
+"""Panzer","""Panzer",,,"""Panzer",fixed,,1
+"""Pasedena","""Pasedena",,,"""Pasedena",fixed,,1
+Covian,Covian,,,Covian,fixed,,1
+Discus,Discus,,,Discus,fixed,,1
+Orcatt,Orcatt,,,Orcatt,fixed,,1
+Javeline,Javeline,,,Javeline,fixed,,1
+Wanut,Wanut,,,Wanut,fixed,,1

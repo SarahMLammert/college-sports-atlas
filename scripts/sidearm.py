@@ -697,8 +697,13 @@ _PART_FIELDS = [
 ]
 
 
+def _header_text(text: str) -> str:
+    """A column header, lower case, with "H.S." written "hs" (Mt. SAC softball: "H.S. City/High School")."""
+    return re.sub(r"\bh\.\s*s\.?", "hs", clean(text).lower())
+
+
 def _part_field(text: str) -> str | None:
-    t = clean(text).lower()
+    t = _header_text(text)
     for pattern, field in _PART_FIELDS:
         if re.search(pattern, t):
             return field
@@ -813,7 +818,7 @@ _HEADER_FIELDS = [
 
 def _header_field(text: str) -> str | tuple[str, ...] | None:
     """The field a column header names; a tuple of fields for a header that joins several (_combined_fields)."""
-    t = clean(text).lower()
+    t = _header_text(text)
     combined = _combined_fields(t)
     if combined:
         return combined
@@ -1433,11 +1438,16 @@ def keep_own_sex(players: list[dict], html: str, soup: BeautifulSoup, rules: Rul
     if not rules.sex:
         return players
     marks = sex_by_name(html, soup)
-    found = {marks[k] for k in (_name_key(p["name"]) for p in players) if k in marks}
+    keys = [_name_key(p["name"]) for p in players]
+    found = {marks[k] for k in keys if k in marks}
     if len(found) == 2:
         return [p for p in players if marks.get(_name_key(p["name"])) == rules.sex]
-    if found:
-        return players if rules.sex in found else []
+    if found and rules.sex not in found:
+        return []
+    if found and sum(1 for k in keys if k in marks) >= 0.5 * len(players):
+        return players
+    # No marks, or marks on only a few athletes (9 of North Texas's 27, 1 of Wooster's 51: the rest were the other
+    # team, Nov 16), which say nothing about the rest: the address decides
     codes = {(m.group(1) or m.group(2) or "").lower() for m in _CODE_IN_URL.finditer(url or "")}
     return [] if codes & rules.combined_codes else players
 

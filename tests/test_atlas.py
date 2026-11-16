@@ -1005,6 +1005,9 @@ def test_combined_headers_split_in_the_sites_order():
     # Mt. SAC: "HS City State/High School" was read as a high school column, so the table was skipped
     p = _table("HS City State/High School", "HS City State/High School: Walnut, CA / Walnut")[0]
     assert (p["hometown"], p["high_school"]) == ("Walnut, CA", "Walnut")
+    # Mt. SAC softball writes it "H.S. City/High School" (Nov 16: every season was skipped)
+    p = _table("H.S. City/High School", "H.S. City/High School: La Puente / Bishop Amat")[0]
+    assert (p["hometown"], p["high_school"]) == ("La Puente", "Bishop Amat")
     # Butler CC: an empty last part
     p = _table("Hometown/High School/Previous College", "Reading, KS / Osage City High School /")[0]
     assert (p["hometown"], p["high_school"], p["previous_school"]) == ("Reading, KS", "Osage City High School", "")
@@ -1101,9 +1104,14 @@ def test_headings_above_the_lists_say_who_is_on_which_team():
     names = lambda html, sex: [p["name"] for p in sidearm.keep_own_sex(rows(), html, BeautifulSoup(html, "lxml"), rules(sex), url)]
     assert names(both, "w") == ["Ann Lee", "Bea Roy"]
     assert names(both, "m") == ["Cal Fox", "Dan Poe"]
-    one_team = "<h2>2023 Men's Cross Country Roster</h2><a href='/roster/cal'>Cal Fox</a>"
-    assert names(one_team, "w") == []                    # a men-only page at the shared address
-    assert "Cal Fox" in names(one_team, "m")
+    one_team = "<h2>2023 Men's Cross Country Roster</h2><a href='/roster/cal'>Cal Fox</a><a href='/roster/dan'>Dan Poe</a>"
+    two = lambda html, sex: [p["name"] for p in sidearm.keep_own_sex(
+        [{"name": "Cal Fox"}, {"name": "Dan Poe"}], html, BeautifulSoup(html, "lxml"), rules(sex), url)]
+    assert two(one_team, "w") == []                      # a men-only page at the shared address
+    assert two(one_team, "m") == ["Cal Fox", "Dan Poe"]
+    # Nov 16 (North Texas: 9 of 27 marked): marks on only a few athletes say nothing about the rest, so at an
+    # address that usually shows both teams the page is refused
+    assert names(one_team, "m") == []
 
 
 def test_a_certificate_error_skips_that_hosts_other_addresses(monkeypatch):

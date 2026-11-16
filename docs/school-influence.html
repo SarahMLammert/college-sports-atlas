@@ -187,7 +187,8 @@
   const sportWords = data.sport.replace(/^(.*) \((.*)\)$/, "$2 $1");
   $("sportName").textContent = sportWords;
   document.title = `College ${sportWords} School Influence Map`;
-  const P = data.players, N = data.N, S = data.schools.length, names = data.nameList;
+  const P = data.players, N = data.N, S = data.schools.length, names = data.nameList, jerseys = data.jerseyList;
+  const jersey = (k) => jerseys[k] ? " · #" + jerseys[k].replace(/, /g, ", #") : "";   // "7, 12" -> " · #7, #12"
   const { schoolPalette, swatch } = GP.makePalette(data);
   const lab = data.seasonLabel, span = data.seasonSpan;
   const schoolName = (i) => data.schools[i][0];
@@ -572,7 +573,7 @@
 
   // ---------- everyone connected ----------
   const stopWhat = (x) => {
-    if (x.kind === "play") return x.named ? "Played (named on a later roster)" : `Played · ${esc(data.posName(data.pos[P.p[x.k]]))}`;
+    if (x.kind === "play") return x.named ? "Played (named on a later roster)" : `Played · ${esc(data.posName(data.pos[P.p[x.k]]))}${esc(jersey(x.k))}`;
     return esc(titleOf(x.best));
   };
   function hereText(r) {

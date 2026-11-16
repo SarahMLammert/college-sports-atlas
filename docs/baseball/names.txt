@@ -21959,53 +21959,6 @@ Josh Gibbs	8
 Nolan Bethel	34
 Thorpe Musci	18
 Trenton Lyons	11
-Adrianna Howard
-Alani Ogelsby
-Andrew Pellom
-Angel Salazar
-Angelle Cave
-Anthony Skull
-Ashton Briant
-Benjamin Furman
-Briana Clarke
-Cameron Bell
-Cameron Keskonis
-Daniel Smith
-Darius Drakes
-Evan Moreau
-Gavin Smith
-Hannah Knippenberg
-Jaden Cooper
-Jaida Allen
-Jason Skrzypek
-Jaxon Churchwell
-Johnny Doughtry
-Josh Evans
-Kennedy Davis
-Kyle Brown
-Lauren Hoffman
-Lola O'Leary
-Louis Mclendon
-Maddie Crews
-Maria Martin
-Marie Arnold
-Marion Clark
-Matteen Zibanejadrad
-Michael Janyska
-Nicole Schsholm Ortiz
-Phoenix Addae
-Robert Rhodes
-Samantha McCrery
-Summer Allbrooks
-Teagan Utschig
-Thomas Mitchell
-Travis Pruitt
-Trey Fowler
-Tucker Bailey
-Tyler Larrison
-Will Odum
-Wisdom Harris
-Zach Brown
 Aaron Tadian	29
 Alec Alvarez	2
 Alex Miklos	12
@@ -137423,28 +137376,6 @@ Xavier Baez
 Zach Anderson	29
 Zach Maskill	14
 Zach Moore	24
-Arash Yaqubi
-Ashtin Ingram
-Ashton Stalling
-Haylie Holloway
-Hosea Franklin
-Hunter Ramirez
-Imar Tomlinson
-Jameaka Mannings
-Kizan David
-Maria Villamil
-Mark Boland
-Qwynn Marquez
-Remon Rabie
-Saikati Gikonyo
-TeAndre Skinner
-Ayreona Carter
-Caden Anderson
-Caleb Wright
-Dawan Lomax
-Dedrick Harris II
-Nyah Singh
-Tyvin Garrison
 Aiden Boeckmann	3
 Andy Srebroski IV	25, 2
 Blythe Blakey	10

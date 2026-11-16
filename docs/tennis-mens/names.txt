@@ -13747,21 +13747,6 @@ Lewie Woody
 Matheus Lima
 Michail Klinkov
 Sandro Hilberger
-Brian Beyrer
-Bryan Davis
-Chris Lattarulo
-E.J. Ferraro
-Jonathan Stanko
-Joseph Scribani
-Matt Glovaski
-Nicholas Cruz
-Pat McWalters
-Rick Cole Jr.
-Sam De Rosa
-Sean Burke
-Steven Jurnak
-Steven Kultzow
-Tyler Cardinal
 Bryan McDonnieal
 Caleb Simmons
 Cameron Shumpert
@@ -15618,21 +15603,6 @@ Juan Rodriguez
 Shariff Keita
 Taishawn Brownlee
 Viola Avdyli
-Caroline Lopez
-Elizabeth Nlemchukwu
-Fernanda Navarrete
-Hashir Rizvi
-Ian Lanter
-Kosmas Fertitta Boutis
-Ruth Jimenez
-Aleski Lebron
-Amya Sanchez
-Andres Gil
-Angel Lee
-Gabriela Vargas
-Jacob Cooper
-Mamie Kolley
-Mohammad Noori
 Alex Ayguavives
 Alex Crespo Sanchez
 Camden Tucker

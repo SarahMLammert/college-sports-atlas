@@ -12970,26 +12970,20 @@ Will Wilson	5, 4
 Felix Massey	10, 20
 Humza Obaid	1
 Xinyang Jiang	6
-Aaron Ashery	1, 12
+Aaron Ashery	1
 Desmond Luck	9, 9/9
 Josiah Corson	13
 Kaito Henry	8/08
-Lance De Leoz	4/04, 3/04, 3
+Lance De Leoz	4/04, 3
 Michael Yang	12, 18
 Nick Dyson	7
-Claire O'Rourke	7
-Davis Mathis	13, 8
-Gabrielle Hegedus	4, 13
-Jane Joncha	9, 2
-Juan Paris	10
-Kaille Ferguson	23
-Mia Rector	15
-Nate Davis	21, 4
-Skyler Kawecki-Muonio	1
-Tabitha Hardin-Zollo	17
-Talia Kedem	11
 Claire Mitchell	21
+Davis Mathis	8
+Gabrielle Hegedus	13
+Jane Joncha	2
+Juan Paris	10
 Lukas Gates	5
+Nate Davis	4
 Nicholas Fajardo	7, 11
 Ralph Calle-Schulz	1, 1/1
 Aidan Roney	8
