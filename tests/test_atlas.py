@@ -737,6 +737,16 @@ def test_clean_name_strips_numbers_and_captain_marks():
         assert clean_name(keep) == keep, keep
 
 
+def test_clean_name_strips_redshirt_marks():
+    from scrape_rosters import clean_name
+    for raw in ("RS Mason Thomas", "rs Mason Thomas", "Rs Mason Thomas", "RS. Mason Thomas", "R Mason Thomas",
+                "MR Mason Thomas", "Redshirt Mason Thomas", "Mason Thomas (RS)", "Mason Thomas (R)",
+                "Mason Thomas - RS", "C RS 89 Mason Thomas"):
+        assert clean_name(raw) == "Mason Thomas", raw
+    for keep in ("R.J. Williams", "R. Kelly Trajean", "R J Smith", "RS Smith", "R Kelly", "Rshawn Davis", "Ross Ryan"):
+        assert clean_name(keep) == keep, keep
+
+
 # ---------------------------------------------------------------------------- previous school vs. high school
 
 def test_looks_like_college():

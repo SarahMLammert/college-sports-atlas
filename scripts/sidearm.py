@@ -1258,6 +1258,10 @@ def _undouble(name: str) -> str:
 # "89 ", "#7 ", "13d ", "16/33 ", "12/DB ", "1-O ", "10030 " in front of a name
 _LEADING_JERSEY = re.compile(r"^#?\d+(?:[a-z]|[/-]\w{0,3})?\s+(?=\D)", re.I)
 _CAPTAIN = re.compile(r"\(\s*c\s*\)|©|\(\s*captain\s*\)|\s+-\s*captain\b|\*+", re.I)
+# A redshirt marker in front of a name ("RS Jessi Boyd-Mankin", "rs", "R", "MR" for medical redshirt, "Redshirt")
+# or after it ("Barry Stewart (RS)", "Morgan Dennis (R)", "Cole Chudy - RS")
+_LEADING_REDSHIRT = re.compile(r"^(?:(?i:rs|r-s|r/s|r\.s\.|mrs|redshirt|medical redshirt)[.:\-]?|R|MR)\s+")  # "R. Kelly" is an initial
+_TRAILING_REDSHIRT = re.compile(r"\s*(?:\((?i:rs|r|mrs|redshirt)\)|\s-\s*RS)$")
 
 
 def clean_name(name: str) -> str:
@@ -1265,6 +1269,7 @@ def clean_name(name: str) -> str:
     '89 Mason Thomas', '#89 Mason Thomas', 'Mason Thomas 89'  -> 'Mason Thomas'
     '13d Drew Melaragno', '16/33 Drew Melaragno', '12/DB Drew Melaragno', '1-O Drew Melaragno' -> 'Drew Melaragno'
     'C Mason Thomas', 'C 89 Mason Thomas', 'Mason Thomas (C)', 'Mason Thomas*' -> 'Mason Thomas'
+    'RS Mason Thomas', 'R Mason Thomas', 'MR Mason Thomas', 'Mason Thomas (RS)', 'Mason Thomas - RS' -> 'Mason Thomas'
     'Dami Adekunjo Dami Adekunjo' -> 'Dami Adekunjo'
     A real initial is kept: 'C.J. Stroud', 'CJ Stroud' and 'C J Stroud' are left alone."""
     n = clean(_CAPTAIN.sub(" ", name or ""))
@@ -1276,6 +1281,11 @@ def clean_name(name: str) -> str:
         # a lone leading "C" is a captain marker when a full name (2+ words, not initials) follows
         if len(words) >= 3 and words[0] in ("C", "C:", "C.") and len(words[1].strip(".")) > 1:
             n = " ".join(words[1:])
+        # a redshirt marker, also only when a full name follows ("R J Smith" and "R.J. Smith" stay)
+        rest = _LEADING_REDSHIRT.sub("", n)
+        if rest != n and len(rest.split()) >= 2 and len(rest.split()[0].strip(".")) > 1:
+            n = rest
+        n = _TRAILING_REDSHIRT.sub("", n)
         if n == before:
             break
     return _undouble(n.strip(" -,"))

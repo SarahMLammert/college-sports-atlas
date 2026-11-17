@@ -1329,8 +1329,8 @@ Jonathan Amaral	7
 Lesharo Clark	1
 Matt Epperson	15
 Patrick Hilton	5
-RS Adrian Potts
-RS Chaz Franqui
+Adrian Potts
+Chaz Franqui
 Ricardo Yanez	14
 Thomas Haywald	9
 Andre Fourie	11
@@ -2632,7 +2632,7 @@ Jonathan Predney	14
 Joseph Pillon	5
 Josiah Bergt	19, 2
 Nicholas Bauer	23
-RS Alec Krilis
+Alec Krilis
 Ryan Anselmo	4
 Ryan Murphy	3
 Spencer Lane	26
@@ -2652,7 +2652,7 @@ Logan Glave	15
 Noah Lassandro	29
 Owen Chun	12, 9
 Parker Maki	17, 14
-RS Jordan Hoppe
+Jordan Hoppe
 Zachary Wissing	3
 Andrew Dalmada	2
 Bailey Mundy	17
@@ -5163,10 +5163,10 @@ Alfonzo Mesa-Ramos	11
 Chris Cons	1
 Connor To	16
 Jeremiah Marrero	2, 3
-RS Brian Rivera
-RS Charles Belvin
-RS Kenneth Schwartz
-RS Tyler Peck
+Brian Rivera
+Charles Belvin
+Kenneth Schwartz
+Tyler Peck
 Reid Harrison	18
 To'o To'o	17, 13
 Alfonzo Meza-Ramos	11
@@ -5233,9 +5233,9 @@ Benjamin Antonio	9
 Ethan Davis	24
 Hugo Gonzalez Gutierrez	7
 Jah'mi Jeter	3, 2
-RS Alen Petraev
-RS Carson Bashford
-RS Matthew McCarthy
+Alen Petraev
+Carson Bashford
+Matthew McCarthy
 Travis Donahue	4
 Alen Petraev	10
 Axel Ledford	15
@@ -5539,10 +5539,10 @@ Preston Bright	12
 Aidan Bolton	3
 Clayton Wheatley	17
 Jacob Carrico	24, 9
-RS Daryl McClain
-RS Kai Williams
-RS Logan Gamero
-RS Preston Bright
+Daryl McClain
+Kai Williams
+Logan Gamero
+Preston Bright
 Ryan Griffel	26
 Alex Rosenow	12
 Ben Rosenow	24
@@ -5558,7 +5558,7 @@ Austin Runyard	26
 Devon Harris	13, 8
 Imraan Aung	15
 Kaden Baltimore	5
-RS Nathan Hayes
+Nathan Hayes
 Ron Young Jr.	6
 AJ Piner	28
 Alex Whalen	19
@@ -5712,7 +5712,7 @@ Jan Lopuch	21
 Logan Marks	12
 Markiyan Uruskyy	23
 Owen Henning	13
-RS Merc Ubag
+Merc Ubag
 Riley Green	2
 Sydney Mathias	15
 Taylor Marks	1
@@ -5725,9 +5725,9 @@ Jacob Knudsen	15
 Jonas Müller	14
 Mark Berdik	20
 Nathan Stone	5
-RS Jacob Delrosario
-RS Levi Markus
-RS Logan Edwards
+Jacob Delrosario
+Levi Markus
+Logan Edwards
 Rayphe Froese	25
 Riley Petesch	23
 Alexander Santana	7
@@ -10598,7 +10598,7 @@ Jimmy Flores	19
 Jose Calle	3
 Kayden Kirby	10
 Kennard Issac, Jr.	8, 17
-Macort Pickup	25, 27, 33
+Macort Pickup	25, 33
 Michal Bak	18
 Alex Galvan	11
 Daniel Campbell	6
@@ -10609,44 +10609,31 @@ Max Baumann	3
 Nazmi Bayoglu	13
 Norberto Dominquez	23, 15
 Tim Schutzbach	19
-Billy Bottcher	24
-Bishop Talamera	10
-Damitrae Ellis	4
-Horia Filpisan	9, 30
-Jorge Rivera-Lopez	5
-Kalena Launiu	12
-Leo Betin	2
-Madison Castillo	18
-Marko Zolnjan	17
-Marton Zarka	1
-Maxime Cornu	8
-Petar Lazic	23
-Quentin Le Dortz	6
-Andrew Ely	14
-Darrin Tanoura	27
-Gael Velazco	10
-Gkerman Antamian	19
-Jaedon Hodge	9
-Joao Rocha	3
-Kaya Harris	22
-Markos Lanitis	28
-Mozaic Mulipola	1
-Nicholas Durant
-Tashimo Scatcliffe
 Alexander Stinson
+Andrew Ely	14
 Brandon Leonce
 Brave Lemau
 Chase Simpson
+Damitrae Ellis	4
 Elias Mondaca
+Horia Filpisan	30
+Jaedon Hodge	9
 Jerome Camacho
 Kevin Mason
 Kingston Anthony
 Ladarius Godbolt
 Lucian Bader
+Madison Castillo	18
 Mahailo Radovic
+Marko Zolnjan	17
+Markos Lanitis	28
 Mason Galvan
+Maxime Cornu	8
 Micah Joynes
 Naim Chouaoui
+Nicholas Durant
+Petar Lazic	23
+Tashimo Scatcliffe
 Ashtonn Florentin	8
 Beckett Shewey	18
 Ben Bray	1
@@ -12971,35 +12958,30 @@ Felix Massey	10, 20
 Humza Obaid	1
 Xinyang Jiang	6
 Aaron Ashery	1
-Desmond Luck	9, 9/9
+Desmond Luck	9
 Josiah Corson	13
 Kaito Henry	8/08
 Lance De Leoz	4/04, 3
-Michael Yang	12, 18
+Michael Yang	12
 Nick Dyson	7
-Claire Mitchell	21
-Davis Mathis	8
-Gabrielle Hegedus	13
-Jane Joncha	2
-Juan Paris	10
-Lukas Gates	5
-Nate Davis	4
-Nicholas Fajardo	7, 11
-Ralph Calle-Schulz	1, 1/1
 Aidan Roney	8
 Daniel Begg	17
 Derek Hickman	27, 10
 Desmond Luck	9/9
 Drew Kendall	12
 Juan Paris	7
+Lukas Gates	5
 Morris Monaco Collins	2
+Nicholas Fajardo	11
 Peter Miles
+Ralph Calle-Schulz	1/1, 1
 Zev Landsberg Lewis	14
 Chase Bolden	7
 Jackson Perhaes	9
 Jason Ryan Ciron	15
 Jozef Kandrac	3, 11
 Kian Silva	16
+Nate Davis	4
 Nikos Diaz	18
 Simon Espejo	2
 Alex Xie	10
@@ -13149,7 +13131,7 @@ Ethan Rodriguez	16
 Hudson Clark	22
 Luke Konjoyan	12
 Mark Bondoc	17
-RS Jeremy Schneider
+Jeremy Schneider
 Alma Ray	11
 Avery Najarian	9
 Clayton Fontano	15
@@ -14290,8 +14272,8 @@ Tshu Xiong	16, 1
 Tyler Cobian	1, 8
 Kyle Stephan	10
 Matthew Pelfini	11
-RS Jacob Vieira
-RS Manuel Lozano
+Jacob Vieira
+Manuel Lozano
 Tristan Fong	7
 Emmanuel Egun	15
 Jacob Semon	5, 14
@@ -15218,8 +15200,8 @@ Christian Quezada	17
 Christopher Rivera	11
 Daniel Hermida	10, 15
 Kenneth Alicea	6
-RS Chris Ludwig
-RS Gabe Segarra
+Chris Ludwig
+Gabe Segarra
 Sabian Cardona Martinez	9
 Austin Strickler	18
 Daniel Suarez	10
@@ -15230,9 +15212,9 @@ Kai Desauguste	11, 1
 Kevin McCarthy	4, 11
 Luiz Gustavo Silva	6, 4
 Peyten Young	3
-RS Bury Inelus
-RS Cesar Remedios
-RS Eduardo Ramos
+Bury Inelus
+Cesar Remedios
+Eduardo Ramos
 Andrea Di Paola	21
 Anthony Gonzales	27
 Bury Inelus	16
@@ -15246,9 +15228,9 @@ Kajus Mazuronis	28
 Kornel Szabo	22, 13
 Lachlan Diamond	26, 10
 Piero Eletto	23
-RS Asa Sewell
-RS Daniel Munoz
-RS Michael Conway
+Asa Sewell
+Daniel Munoz
+Michael Conway
 Samuel Pearish	7, 9
 Tinaishe Ndavazocheva	1
 Victor Siqueira	2, 1
@@ -15633,21 +15615,15 @@ Tyler Gronendyke	9
 Will Fisher	13
 Aaron Hoke	4
 Allen Bull	7
-Asim Riaz	8
-Carrie Whitman	3
-Evan Hoke	5
-Hanna Quarry	2
-Jeremy Waldman	9
-Jessie Thrush	1
-Michael Martin	10
-Zachary Zerr	12
 Chance Wheeler	1
 Dan Perry	9, 3
 Elijah Lowe	13
+Evan Hoke	5
 Ian Firestone	3, 4
 Nick Baxter	14
 Omar Abarca	15
 Zachary McMaster	11, 13
+Zachary Zerr	12
 Carlos Jimenez	8
 Emelio Jones	11
 Luis Cevallos	6
