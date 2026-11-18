@@ -11921,7 +11921,6 @@ Amber Park	22
 Brenna Knoll	20
 Kenzie Warren	43
 Makenna Pitchford	13
-RS Payton Cardoza
 Christine Steffes	3
 Jordyn Harrison	5
 Mackenzie Kelbert	4
@@ -11930,10 +11929,10 @@ Anna Glynn	15
 Avery Eichler	7
 Avery Garant	12
 Elizabeth Robinson	42
+Gabby Flowers
 Lauren Schwarz	11
 Lily Thalhammer	78
 Marisa Scola	19
-RS Gabby Flowers
 Tylor Baker	30
 Erica Buckley	38
 Grace DeRidder	13
@@ -27905,7 +27904,6 @@ Aria Gettel	18
 Arianna Rivera	8
 Courtney Hoeland	11
 Madison Vliek	17
-RS Alisha Birchmeier
 Riley Fritsche	24
 Taylor Vitori	7
 Hannah Dickson	33
@@ -32488,9 +32486,11 @@ Caitlin Sabadish	23
 Caity Hamilton	9
 Caley Breese	29
 Candace Corkin	21
+Casey Gover	9
 Claire Wigler	6
 Emerald Barron	33
 Gina Fader	16
+Hailey Dobbins	8
 Hannah Knight	77
 Kaitlyn Stockstad	20
 Kali Cook-Grisewood	26
@@ -32499,13 +32499,11 @@ Kendall Holycross	2, 18
 Kristen McGovern	4
 Kriston Guerra	13
 Maddy Biggar	11
+Micheala Ciciarelli	7
+Mikayla Henry
 Mikayla Sindel	5
 Natalie Brust	32
 Nicholle Galletti	28
-RS Casey Gover
-RS Hailey Dobbins
-RS Micheala Ciciarelli
-RS Mikayla Henry
 Riann Daziel	1
 Sadie Michael	17
 Saffron Snethen	25
@@ -32515,9 +32513,7 @@ Skye Bradley	10
 Zoey Guignardi	99
 Amanda Berger	12
 Bree Richards	22
-Casey Gover	9
 Claire Murray	11
-Hailey Dobbins	8
 Izzy Hanson	6
 Jackie Kaderabek	24
 Kali Cook-Grisewood	26
@@ -32528,7 +32524,6 @@ Kristin Sternkopf	19
 Lexi Gast	1
 Madeline Wnuk	15
 Maren DiNenna	14
-Micheala Ciciarelli	7
 Nola Wesche	2
 Siena Miller	99
 Chaija Olsson	11
@@ -36825,6 +36820,7 @@ Jada Sargeant	31
 Karri Bellamy	14
 Megan Evangelista	24
 Paige Lafurney	13
+Arriana Smith
 Cass Barrett	22
 Daphne Harrison	16
 Holly Sleeth	13, 4
@@ -36835,8 +36831,7 @@ Madison Bullard	12
 Marguerite Cuddy	15
 Marissa Curtis	23
 Megan Dano	11
-RS Arriana Smith
-RS Miah Chatman
+Miah Chatman	18
 Samantha Dixon	17
 Shania Terrell	21
 Tiahna Downing	9
@@ -36848,7 +36843,6 @@ Kenai Cameron	6/31
 Madison Davis	16
 Madison Fox	30
 Madison Green	13
-Miah Chatman	18
 Natalie Clere	17
 Tatyana Papineau	8
 Trysten Burns	21
@@ -57674,8 +57668,8 @@ Emma Brennan	26
 Erika Williams	16
 Gwenyth Gibbons	3
 Maddy Meyers	33
-RS Savannah Vance
 Sarah Beckwith	17
+Savannah Vance
 Callen Sweigart	5
 Ella Hancock	1
 Emily Flynt	6
@@ -57691,9 +57685,8 @@ Suzanne Moore	24
 Abbie Gallagher	00
 Ally Cattoni	11
 Ashlyn Fraley	8
+Giavanna Perrone
 Morgan Lewis	32
-RS Giavanna Perrone
-RS Sarah Mele
 Riley Harris	16, 14
 Summer Briata	31
 Chapman James	22

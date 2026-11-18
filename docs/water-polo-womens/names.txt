@@ -151,35 +151,30 @@ Robyn Fernandez	4
 Ryllie Haynes	14
 Tricia Rogers	19
 Amanda Previch	3
+Kristine Khachikian	15, 1
 Marissa Joerke	7
 Mireia Tutusaus Alcaraz	11
-RS Kristine Khachikian
 Sarah Adams	6
 Britni Tisdale	9
 Gabrielle Martinez	5
 Hannah Bradley	14
-Kristine Khachikian	15, 1
 Olivia Lott	1A, 1
 Shanna Stevenson	2
 Gabrielle Mantyka	1
+Hannah Murray	1, 1B
 Lauren Hoyle	4
 Milena Guzmán Ortiz	8
-RS Hannah Murray
 Bri Erickson	3
 Evelyn Sherman	17
-Hannah Murray	1, 1B
 Katarina Capulong	15
+Katherine Rehberger
 Kyra Kahahawai	13, 6
 Mackenzie Russell	7
 Mattie Herzog	12
-RS Katherine Rehberger
 Shyanne Rainey	10
 Kaelene De Bie	11
 Maritza Ochoa	7
 María Boix Pascual	12
-RS Evelyn Sherman
-RS Gabrielle Mantyka
-RS Kyra Kahahawai
 Skylar Ford	2
 Alyssa Perez	13, 5
 Carley Anderson	20, 4
@@ -261,7 +256,6 @@ Destiny Moreno	15, 12
 Gwendolyn Pidd	21
 Katie Webb	7
 Marissa Brock	16, 2
-RS Marija Mijuskovic
 Savannah Rapp	18
 Ava Gatewood	16
 Berlynn Mani	15
@@ -609,8 +603,8 @@ Maggie Albers	15
 Marisa Lovos	12
 Morgan Tucker	10, 15
 Morgen Fain	11, 1
+Olivia Boisen	3
 Olivia Woolery	14, 21
-RS Olivia Boisen
 Tatiana Veloso	8
 Angela Steele	2
 Celeste Bustos	11
@@ -622,17 +616,14 @@ Laurel Doyle	1A
 Lisa Broccolo	10
 Lucy Gates	9, 8
 Megan Dahlson	18
-Olivia Boisen	3
 Samantha Hernandez	6
 Sarah Smith	17, 7
+Dominique Oteri
 Gabrielle Dana	5, 10
 Gwynne McBride	4
+Madeline Camargo
 Madison Nolen	9
 Nicole Lyckfors	10
-RS Dominique Oteri
-RS Jessi Boyd-Mankin
-RS Madeline Camargo
-RS Morgen Fain
 Reagan Hart	20, 6
 Shelby Stephens	1
 Hannah Kharazi	11
@@ -696,7 +687,6 @@ Izzy Headley	13
 Jenna Martin	1b
 Nalani Galindo	6
 Olivia Gutierrez	19
-RS Gabby Swaim
 Riley Becker	8
 Alexis Elias	7
 Amy Yule	3
@@ -1484,8 +1474,7 @@ Nonie-Ann Grant	12
 Amber Penney	9
 Coco Demoulin	5
 Gabriella Garcia-Roy	4
-RS Emily Woodruff
-RS Maddie Lopez
+Maddie Lopez
 Sam Witt	15
 Savannah Mangrum	7
 Andria Martin	17
@@ -1515,7 +1504,6 @@ Bella Alcazar	23
 Emily Lopez-Ibarra	7, 15, 8
 Hannah Walker	24B, 16
 Jet Salazar-Lopez	1A, 1B
-RS Tatum Benson
 Sam Dieterle	4
 Yvonne Orser	15, 18
 Courtney Belliotti	6
@@ -1770,17 +1758,16 @@ Ymane Hage	1
 Ashley Ramirez	9
 Gabi Mantellato	12
 Kayla Chang	1
+Lalelei Mata'afa	10
 Maartje Keuning	11, 5
 Magdalena Mathis	15
 Paula Chillida Esforzado	17
-RS Lalelei Mata'afa
 Samantha Malouff	7
 Samantha Shaw	8
 Ann Inoue	12, 5
 Carmen Baringo	11, 8
 Chloe Schilling	1
 Elyse Lemay-Lavoie	2
-Lalelei Mata'afa	10
 Libby Gault	17, 15
 Mhairi Nurthen	18
 Molly DiLalla	1
@@ -1794,13 +1781,12 @@ Maddy Vincent	13
 Madeline Pease	1
 Maxine Schaap	11
 Olivia Kistler	20
-RS Rebecca Buenrostro-Gallimore
+Rebecca Buenrostro-Gallimore	12
 Ava Perkins	11
 Danielle Brown	1
 Lara Luka	2, 7
 Lucia Gomez de la Puente	25, 14, 21
 Rayne Lopez	23
-Rebecca Buenrostro-Gallimore	12
 Sophie Milliken	22
 Szonja Kuna	4
 Amelia Meckelborg	13
@@ -2365,14 +2351,13 @@ Daniela Hernandez	3
 Havana Campo	17
 Ryan-Marie Ickes	15, 13
 Ali Kuennen	1B
+Amanda Reeder
 Elizabeth Bradley	1A, 1
 Isabella Barajas	18
 Marialena Seletopoulou	19, 11
 Megan Plank	9
 Mei Vilanova	22
 Mollie Williams	23, 4
-RS Amanda Reeder
-RS Annika Armstrong
 Alexandra Akritidou	10, 6
 Carolina Newton	14
 Ella Krauss	8
@@ -2913,14 +2898,13 @@ Megan Torre	9
 Meghan Nee	1
 Mia Harris	1
 Morgan Hurley	13
-RS Samantha Pfaff
 Rachel Krieger	22
+Samantha Pfaff	1
 Viktoria Szmodics	10
 Cameron Williams	9
 Jennifer Guise	17
 Kennedy Watson	13
 Mariana Duarte	5
-Samantha Pfaff	1
 Truly Dorland	2
 Viktoria Tamas	7
 Brooke Contreras	16
@@ -2967,7 +2951,6 @@ Lily Van Putten	20, 12, 23
 Maja Lizy Dulic	1
 Millie Jacobson	18
 Natasha Dykman	13, 21
-RS Alicia Petkov
 Sierra Cavano	14, 5
 Tèa Fitzgerald	15
 Avery Gallucci	16
@@ -2976,16 +2959,14 @@ Laurel Cooper	1A
 Lillian Ecklund	1B
 Olivia Turney	17, 14
 Penny Cowan	13, 3
-RS Noemi Alaksza
 Chloe Morgan	6
 Eleni Ikonomou	10
+Giselle Orson
 Laia Marsinach Ortega	17
 Lauren Davis	21
 Lauryn Lucero	5
 Maria Ikonomou	16
-RS Dora Alaksza
-RS Giselle Orson
-RS Paige Elder
+Paige Elder
 Sophie Pethers	24
 Ahsha Earwood	1
 Anna Yu	2

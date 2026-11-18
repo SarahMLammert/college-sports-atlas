@@ -1037,6 +1037,7 @@ Pete Ryan	19
 Tor Martin	4
 Alex Ramirez	3, 14
 Andrew Parese	1
+Blake Grove
 Chasen Gaunt	14
 Cristiano Tomassetti	15
 Cullen Mooers	1A
@@ -1045,12 +1046,11 @@ Jake Snyder	8
 Jeff Rubino	10
 Jeff Wheeler	7, 4, 12
 John Roberts	5, 13
+Joshua Mundell	2
 Matthew Lange	12
 Messan Moore	17, 10
 Michael Marr	11, 8
 Nick Walker	6
-RS Blake Grove
-RS Joshua Mundell
 Spencer Hosch	13
 Trenton Pressley	2, 12
 Vincent Giacalone	4
@@ -1062,7 +1062,6 @@ Daniel Castagnola	14, 5
 Daniel Devine	18
 Doug Kazmier	21
 Gibson Gerace	19
-Joshua Mundell	2
 Patrik Zsiros	9
 Alberto Cortes	16
 Alberto Gonzalez	8
@@ -1322,17 +1321,14 @@ Cal Bruening	16, 7, 3
 Jonathan Bagley	14
 Jorel Sabado	15
 Lazar Raca	8, 9
-RS Jacob Fairchild
-RS Taylor Heckathorn
 Richard Szepesi	10
 Uros Pelemis	6
+Cameron Olson	7
 Cody Wickman	20, 2
 Drew Parsley	15, 5
 Michael Hicks	1
 Michael Mason	17
 Miguel Diaz	16
-RS Cameron Olson
-Cameron Olson	7
 Clay Maroney	1
 Conner Schink	1
 Curtis Vidinoff	5
@@ -2002,26 +1998,24 @@ Tyler Harvey	7
 Brodie Sladek	20, 22
 Bruno Salonikios	15, 9
 Dimitriy Kobets	21
+Gavin Grosz
+Jay Mills
 Jeff Muller	1B
 Kade Margain	19, 10, 8
 Kai Scarlet	6
 Milan Sarkadi	16, 13
-RS Gavin Grosz
-RS Jay Mills
-RS Patrick Powers
-RS Ryan Lichlyter
-RS Tom Aldridge
+Patrick Powers	20, 9
+Ryan Lichlyter
 Stelios Dalmaras	1
+Tom Aldridge	22
 Andrew Vernon	15
 Can Caglar	1A, 1C
 Denzel Tate	16, 6
 Dom Haggard	13
 Dylan Zorn	19
 Finn Friedland	1B, 1A, 1
-Patrick Powers	20, 9
 Richie Rimlinger	15, 16, 3
 Santiago Jimenez Donovan	17
-Tom Aldridge	22
 Weston Lorenzo	1C, 1A
 Abel Romero Corbalan	11, 24, 12
 Chassen Corlett	12
@@ -2643,30 +2637,23 @@ Michail Melnik	1, 1C
 Sebastian Di Giampolo	20, 19
 Tyler Breen	13
 Djordje Stanic	11, 6
-Jeremie Cote	8, 4
-Lewis Gale	1B, 1, 1A
-Matthew Hosmer	10
-RS Gianluca Caltagirone
-RS John Dickerson
-RS Liam Egan
-RS Noah Scholar
-RS Noah Schor
-RS Quinlan Plukas
-RS Steven Casas
-Rene Peralta	21, 9
-Calvin Behm	13
-Cooper Gaderson	21, 5
 Gianluca Caltagirone	20
+Jeremie Cote	8, 4
 John Dickerson	22
+Lewis Gale	1B, 1, 1A
 Liam Egan	15
+Matthew Hosmer	10
 Noah Scholar
 Noah Schor	2
-Peter Poirier
 Quinlan Plukas
+Rene Peralta	21, 9
+Steven Casas	5
+Calvin Behm	13
+Cooper Gaderson	21, 5
+Peter Poirier
 Reuel D'Souza	12
 Robert Bettencourt
 Ryan Reardon
-Steven Casas	5
 William Ennis
 Daniel Viscia	14, 11
 Declan McJilton	18, 14, 2
@@ -2712,7 +2699,6 @@ Gergely Kiss	1
 Landon Mauge	23
 Lukas Peters	17
 Petar Popovic	5
-RS Nathan Rasmussen
 Saul Biddle	15
 Tamas Otto Voros	9
 Andrew Sawin	1B
@@ -3589,54 +3575,41 @@ Matthew Whipple	9
 Michael Plastino	24, 11
 Patrick Burke	2
 Spencer Towill	19, 7
-Nir Gross	10
-RS Dillon Mannion
-RS Duncan Creed
-RS Levi Murtaugh
-RS Stefan Venne
+Dillon Mannion
 Duncan Creed	13, 1
-Lee Hildinger	1, 1A
 Levi Murtaugh	23, 6, 12, 10
-Logan Anderson	22, 2
-RS Aaron Voggenthaler
-RS Aaron Wilson
-RS Max Stryker
-RS Paul Gouchon
-Seif Elmankabadi	12
+Nir Gross	10
 Stefan Venne	14
 Aaron Voggenthaler	3, 9
 Aaron Wilson	1B, 1A, 1
+Lee Hildinger	1, 1A
+Logan Anderson	22, 2
+Max Stryker	21, 3
+Paul Gouchon
+Seif Elmankabadi	12
 Aleix Aznar Beltran	18, 8
 Connor Norton	15
 Dylan Mann	23
 Holden Neach	19
 JT Kujawa	20, 5
-Max Stryker	21, 3
 Vanya Soshnikov	16
 Will Nomura	17, 4
-Ben Fleming	6
-Hal Goulter	20
-RS Adam Ting
-RS Andrew Hitchcock
-RS Colin Nicholls
-RS Johnny Kujawa
-RS Josh Davis
-RS Sam Monette
-RS Tyler Mrkaich
+Adam Ting	12
 Andrew Hitchcock	11, 3
-Brody Crouch	12, 6, 4
+Ben Fleming	6
 Colin Nicholls	7
-Frank Laptin	1A, 1
+Hal Goulter	20
 Johnny Kujawa	18, 11
 Josh Davis	22
-Leo Giessmann	14
-Matt Morgan	15, 18
 Sam Monette	1B
 Tyler Mrkaich	17
+Brody Crouch	12, 6, 4
+Frank Laptin	1A, 1
+Leo Giessmann	14
+Matt Morgan	15, 18
 Waylon Fox	24
 Will Stryker	21, 2
 William Fosselman	20
-Adam Ting	12
 Andrew Bonelli	14, 8
 Baxter Chelsom	1A, 1
 Thomas Kiesling	9
@@ -3895,16 +3868,15 @@ Rhys Bugelli	15, 5
 Trevor Moore	13, 23, 8
 Bennett Axline	16, 12
 Braden Clark	23
+Emiliano Castro	2
 Franco Scalamandre	25, 14
 Jakob Tallman	19
 Luca Rago	22, 11
-RS Emiliano Castro
 Reef Lippa	21, 10
 Alex Hegeman	1C, 1
 Ante Buzov	4
 Augi Macchi	3, 9
 Eamon Hennessey	8, 3
-Emiliano Castro	2
 Felipe Ferreira	11, 6
 Finn Bugelli	19, 14, 5
 Jaime Bhattacharyya	16, 9, 3
@@ -3914,25 +3886,20 @@ Mason Presley	25, 24
 Nolan Roberts	17, 18, 14
 Parker George	1B
 Christian Hammonds	17, 4
+Cole Harman	16
 Grant Kurtz	23, 15, 9
 Lachlan Rossi	20, 18, 12
+Liam Amburgey	19
 Mark Laurlund	15, 8
-RS Cole Harman
-RS Jaime Bhattacharyya
-RS Liam Amburgey
-RS Razvan Alistar
-Cole Harman	16
+Razvan Alistar	23
+Caleb Harrison	17
 Davidka Skov	25, 11
 Dusan Djordjevic	20
 Jackson Boettner	21
 Kyson Becker	22
-Liam Amburgey	19
-RS Caleb Harrison
-Razvan Alistar	23
 Winston Loh	1A
 Boston Frost	1A
 Bryan Shapirshteyn	16
-Caleb Harrison	17
 Chase Martsolf	7
 Jack Elder	1B
 Jack Wright	6
@@ -3995,16 +3962,16 @@ Ryan Brosnan	3
 Sam Nangle	7
 Sean Rosenberg	16
 Tommy Hawkins	20, 12, 5
+Anton Petrik
+Benjamin Barrett
 Colton Gregory	19, 6
 Danny Roland	1
+James Oriskovich	15, 14, 7
+John Erbstoesser	19
+Jonathan Matarangas	23, 12
 Logan Sutter	22, 4
 Mason Chambliss	23, 9
-RS Anton Petrik
-RS Benjamin Barrett
-RS James Oriskovich
-RS John Erbstoesser
-RS Jonathan Matarangas
-RS Trevor Ricci
+Trevor Ricci
 Chris McCarron
 Dash McFarland	14, 2, 5
 Gavin Pierce	26
@@ -4018,42 +3985,32 @@ Ryan Wahl
 Shane Hoover	21, 8
 Wyatt Clark	29
 Adam Gyenis	13, 10
-Casey Conrad	18
-James Oriskovich	15, 14, 7
-John Erbstoesser	19
-Jonathan Matarangas	23, 12
-Kian Sadeghi Garmaroudi	30
-RS Brock Zamanian
-RS Hayes Beamon
-RS Jordan Hayes
-RS Leif Lacy
-RS Leo Ohanessian
-RS Levi Lentin
-RS Marko Maramica
-RS Ryan Matarangas
-RS Will Coons
-RS Zach Green
-Sawyer Rhodes	2
-Billy Rankin	24, 11
 Brock Zamanian	21, 2, 7
+Casey Conrad	18
+Hayes Beamon	22, 12, 3
+Jordan Hayes
+Kian Sadeghi Garmaroudi	30
+Leif Lacy	1/1B, 1A, 1
+Leo Ohanessian
+Levi Lentin	1/1A, 1
+Marko Maramica	18
+Ryan Matarangas	13
+Sawyer Rhodes	2
+Will Coons	15, 3, 2
+Zach Green
+Billy Rankin	24, 11
 Charles Kingsmill	26
 Eric Quiggle	17
 Greg Hilderbrand	27
 Griffin Pieretti	23, 7
-Hayes Beamon	22, 12, 3
 Kyle Rosenblatt	25, 17, 6
-Leif Lacy	1/1B, 1A, 1
 Leo Ohannessian	19, 15
-Levi Lentin	1/1A, 1
 Luke Redoutey	20, 4, 15
-Marko Maramica	18
 Nathan Darby	21
-Ryan Matarangas	13
 Ryan McManigal	18, 4
 Sam McKenzie	16, 14, 6, 8
 Sean O'Brien	13, 18, 9, 6
 Ty Case	23
-Will Coons	15, 3, 2
 Wyatt Pieretti	1B, 1
 Zac Green	24, 16
 Dom Brown	28, 5

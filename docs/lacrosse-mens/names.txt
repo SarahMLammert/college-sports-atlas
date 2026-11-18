@@ -19229,15 +19229,14 @@ Vincent Aprigliano	32
 Chris Nowicki	10
 Damian Carrigan	27, 51
 Declan Oliva	18
+Eliel Marte
 Jaiden Harris	00
 Leomarvin Abreu	4
 Nate Sopchak	5
-Rs Eliel Marte
-Rs Sultan Seddik
-Rs Vincent Aprigliano
 Ruairi O'Connor	30
 Shane Abrams	12
 Sincere McDougal	11
+Sultan Seddik	13
 Aaron Sibal	23
 Brian Rosko	22
 Chris Solis	7
@@ -19245,7 +19244,6 @@ Ian Fleurant	0
 Joshua Silva	11
 Mark Gilles	88
 Stanley Labady II	15
-Sultan Seddik	13
 Zach Garlinger	6
 Amir Karl-Otto
 Casey Collins
@@ -23046,6 +23044,7 @@ Adam Smith	19
 Aidan Wheeler	42
 Andy Stump	22
 Austin Johnston	14
+Austin Stuebner	10
 Brandon Johnston	15
 Chandler Schmidt	27, 28
 Chase Oberlin	6
@@ -23060,11 +23059,10 @@ Kevin Clapp	99
 Kyle Thomas	12
 Luigi Ascenzi	8
 Nick Esser	20
-RS Austin Stuebner
-RS Owen Consoletti
+Owen Consoletti
 Stephen Hill	11
 Zach Magaw	88
-Austin Stuebner	10
+Alex Edens
 Brett Wilson	18
 Caleb Hippensteel	12
 Chris Stallings	13
@@ -23076,7 +23074,6 @@ Jeff Otenasek	45
 Maxmillian Miller	77
 Moriah Yousefi	17
 Nicholas Perrot	88
-RS Alex Edens
 Reece Wiseman	2
 Shaun Vines	42, 8
 Shawn Cardwell	9, 6
@@ -26598,8 +26595,6 @@ Emmett Coleman	14
 Joe Solin	7
 Justin Hindman	8
 Payton Kelm	15
-RS Jaxon Koehl
-RS Joey Provost
 Sam Anderson	3
 Tom Piotrowski	13
 Caleb Casper-Turner	2
@@ -26635,8 +26630,6 @@ Josh Bramley	42
 Kyle Costlow	11
 Kyle TwoBulls	51
 Nehemiah Loving-Lewis	19
-RS Khanan Bodley
-RS Sam Anderson
 Robert Tippmann
 Sebastien Guillaume	5
 Aran Heath	0
@@ -44338,6 +44331,7 @@ Joe Rosaschi	46, 16
 Jordan Goddard	10
 Josh Yelvington	22
 Justin Hussey	16
+Kevin Mauro
 Kroydon Arnold	32
 Kyle Killen	7
 Larson Sundown	6
@@ -44345,11 +44339,10 @@ LeRoy Halftown	38
 Luke Fairman	15
 Mark Pollock	28
 Matthew Bennett	18
+Michael Meneilly
 Nathaniel Martin	39
 Nick Koelmel	1
 Nick Sturick	34, 3
-RS Kevin Mauro
-RS Michael Meneilly
 Sakohawi Kirby	44
 Samuel Watts	4
 Seth Ferguson	43
@@ -44397,6 +44390,7 @@ Zach Lorenz	29, 1
 Zach Pierce	12
 Austin Gibbons	83
 Braeden Elmer	3, 2
+Brian Rowe
 Brook Rideau	22
 Cain Tagliagambe	36
 Cameron Hartman	88
@@ -44411,6 +44405,7 @@ Jake Corcoran	2
 Jake Rosenthal	0
 Jalen Paul	13
 Jerry Staats	33
+Jimmy Kelley	25
 Joe Krambeer	6
 Kyle Worsley	31, 13
 Luke Rogers	24
@@ -44419,9 +44414,6 @@ Mike Carpenter	40
 Nate Sturick	32
 Nick Henrie	15
 Nick Meyers	18
-RS Brian Rowe
-RS Jimmy Kelley
-RS Pete Maxwell
 Riley Ford	5
 Robbie Pollock	38
 Samuel Esterle	41, 21
@@ -44434,9 +44426,9 @@ Chris Ryan	11
 Cody Ellis	26
 Eli Dandenault	17
 Gavin Kesserling	44
+Griffin Sasso
 Harman Benipal	48
 Jarek Rawl	19
-Jimmy Kelley	25
 Jordan Long	49, 4
 Julio Rodriquez-Ramirez	24
 Karl Flinter	42
@@ -44445,22 +44437,21 @@ Liam Welling	32, 33
 Martin Avila	47
 Matthew Begley	30
 Michael Brandow	7
+Myles Jacobs
+Najee Wilson	42
 Nicholas Martino	29
 Noah Coiro	8
 Oshenadekha Mitchell	20
 Owen Hill	4
 Paxton Travis	23, 6
 Percy Booth	88
+Peter Olson	50
 Phil Barilla	83
-RS Griffin Sasso
-RS Myles Jacobs
-RS Najee Wilson
-RS Peter Olson
-RS Stavros Avramidis
-RS Tyler Stiefel
 Raienteres "Tesi" Oakes	77
 Sam Hixon-Milks	33
+Stavros Avramidis	2
 Taxiarchos "Mike" Avramidis	36
+Tyler Stiefel	10
 Zach Higgins	3
 Zachery Powell	37
 Zak VanValkenburgh	9
@@ -44475,6 +44466,7 @@ Daniel Free	13
 Daniel Fuller	77
 Daniel Maloy	5
 Deacon Hill	40
+Dylan Nakai
 Gavin Hill	20
 Hunter Barnard	18
 Ian Owens	12
@@ -44496,19 +44488,13 @@ Matt Bender	49
 Matt Lopez	48
 Matt Stucchi	45
 Mike Avramidis	21
-Najee Wilson	42
 Nathan Walker	14
 Nick Karnes	83
-Peter Olson	50
+Ohsenadekha Mitchell
 Quinn Dobrzelewski	9
-RS Dylan Nakai
-RS Martin Avila
-RS Ohsenadekha Mitchell
-RS Thomas Brancato
 Rowisonkies Barnes	43
 Ryan Smith	55
-Stavros Avramidis	2
-Tyler Stiefel	10
+Thomas Brancato
 Zach Powell	37
 Zach Taylor	22
 Anahalihs Doxtator	45
@@ -46146,12 +46132,12 @@ Matt Scriven	13
 Matt Stocks	17
 Michael Werny	16
 Mike Turner	45
-RS Brandon Duncan
 Tucker Hill	24
 Aiden Keenan	77
 Ayden Cox	41
 Ben Ramsey	37, 97, 1
 Caleb Connell	20
+Chase Dadabo	90
 Colby Moorefield	50
 Colin Thornton	91
 Dallas Whitney	29
@@ -46162,16 +46148,14 @@ Louis Imbriani	54
 Mason Tardiff	71
 Matt Sharpe	35
 Mehki Moore	31
+Michael Gonzales
 Michael Roberson	9
 Nathan Summerell	51
 Nick Pekins	25
-RS Chase Dadabo
-RS Michael Gonzales
 Tim Wolf	38
 Tyler Ajemian	34
 Zach Skidmore	7
 Brandon Luft	30, 12
-Chase Dadabo	90
 Connor McGarry	33
 Dylan Bryson	23
 J.P. Galloway	0
@@ -52791,6 +52775,7 @@ Mark Lang	22
 Matt Rexford	36
 Matt Scharr	55
 Matt Weller	5
+Max Bonnetti
 Mike Annatone	38
 Mike McDonough	54
 Mitch Wilson	50
@@ -52802,7 +52787,6 @@ Nick Kuzma	28
 Parker Hall	28, 14
 Peter Bashar	21
 Preston Pena	35
-RS Max Bonnetti
 Rob Cavanaugh	3
 Thomas Tatarian	2, 32
 Tommy Vassallo	6
@@ -54769,11 +54753,11 @@ Jack Brewster	31
 Jaylen Owens	1, 4
 Noah O'Harrow	22, 8
 Patrick Donohue	0
-RS Watson Hawthorne
 Sebastian Amerson	24
 Seth Jenkins	2
 Tripp Morris	4
 Tyler Snipes
+Watson Hawthorne	0
 Braden Atkins	14
 Chase Micah Little	21
 Connor Smith	24
@@ -54791,7 +54775,6 @@ Landyn Murphy	10
 Micah Rogers	66
 Reily Johnson	3
 Thomas Harris	27
-Watson Hawthorne	0
 Aaron Lewis	31
 Brian Kelly	7
 Brian Prunty	6
@@ -68704,6 +68687,7 @@ Alex Ashley	21
 Alex Schneider	45
 Austin Greaves	10
 Benji Lapinski	7
+Bevan Pate	20
 Bruce Silk	2
 Chandler Bradley	8
 Chris Remshik	12
@@ -68716,6 +68700,7 @@ Garrett Blake	30
 Ian Hurley	24
 Jake Dunlop	39, 9
 Jayden Campbell	5
+Jeff Rivait
 Joe Appolonia	0
 Julian Infanti	42, 4
 Kerry Ostrowski	23
@@ -68726,8 +68711,6 @@ Matt Spadafora	4
 Matty Ledon	34
 Michael Gernatt	16
 Mitch McDole	41
-RS Bevan Pate
-RS Jeff Rivait
 Ryan Pickowitz	11
 Sean Dever	31
 Tanner Shepardson	20
@@ -68736,14 +68719,12 @@ Tyler Buehler	33
 Zac Barrett	37
 Zach Hemans	14
 Zach Stephenson	44
-Bevan Pate	20
 Colin Fitzpatrick	12
 Daniel Zimny	40
 Duncan Jackson	11
 Harrison Wiggins	5
 Matt McCawley	27
 Noah Skinner	1
-RS Connor Leies
 Rob Whitaker	24
 Sam Gasta	21
 Sean Siemen	15
@@ -68752,39 +68733,38 @@ Alex Venturino	14
 Billy Magill	1
 Hayes Johnson	7
 Jackson Kohler	41
+Jackson West
 Jacob Smith	26
 Jimmy Martelli	15
 Kale Lundell	10
 Nolan Moon	21
 Parker Lamarque	22, 9
-RS Jackson West
-RS Zach Jayne
 Ryan Peters	17
 Simms Greer	37, 31
 Tyler Oglesby	19
+Zach Jayne
 Zane Hodges	13
+Aidan Sechrist
 Beau Henson	12
 Blake Salmon	8
 Bobby Kidd III	13
 Cody Bielec	42
+Conner Snipes	10
 Cristian Bryant	37
 Dylan Ertter	25
 Dylan Mertz	44
 Eric Lemire	22
+James Grohovac
 Jimmy Johnston	7
 Joseph Sivley	50
 Kade Lundell	26
 Makenzie Rannals	29
 Patrick Phelan	91
-RS Aidan Sechrist
-RS Conner Snipes
-RS Jackson Kohler
-RS James Grohovac
-RS Thomas Semple
 Ryley Zopfi	34
 Sean Turner	3
 Shane Lumsden	77
 Steve Hunt	16
+Thomas Semple	93
 Todd Idalski	27
 Worth Peek	6
 Andrew Grohovac	36
@@ -68798,7 +68778,6 @@ Lucas Infanti	23
 Max Fenno	24
 Nathan Salaris	10
 Owen DeBole	11
-Thomas Semple	93
 Wyatt Peek	2, 0
 Zane Zacharias	33
 Alex Buchanan	8
@@ -68806,8 +68785,9 @@ Avery Bradshaw	27
 Ben Soenen	5
 Cade Vice	24
 Caleb Camus	17
+Cole Crawford
 Colin Korry	11
-Conner Snipes	10
+David Traywick	12
 Dylan Wilbur	33
 Gunnar Fagerstrom	9, 44
 Hunter Stagg	1, 2
@@ -68817,16 +68797,13 @@ Kieran Isbister	15
 Lukus Olson	13
 Malcolm Henke	2
 Nic Baker	6
-RS Cole Crawford
-RS David Traywick
-RS Nick Cordero
-RS Reed Saxon
+Nick Cordero
+Reed Saxon
 Tanner Redmon	3
 Tommy Chriszt	19
 Christian White	38
 Colburn Connelly	46
 Dane Dompier	30
-David Traywick	12
 Dylan Young	25
 Evan Anderson	14
 Gage Duncan	37

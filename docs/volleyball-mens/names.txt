@@ -1315,11 +1315,13 @@ Sam Delaveau
 Sebastian Rodriguez
 Sione Veamatahau
 Yeheshua Ruiz
+Adrian Potts
 Aireon Leary	4
 Andre Cardamone	10
 Brian Clemons	13
 Chad Hamby	30
 Chase Craycraft	11
+Chaz Franqui	16, 7, 11
 Chris Dixon	8
 Connor Holland	6
 Daniel Griffin	3
@@ -1329,13 +1331,10 @@ Jonathan Amaral	7
 Lesharo Clark	1
 Matt Epperson	15
 Patrick Hilton	5
-Adrian Potts
-Chaz Franqui
 Ricardo Yanez	14
 Thomas Haywald	9
 Andre Fourie	11
 Carleek Owens	2, 5
-Chaz Franqui	16, 7, 11
 Lee Norris	7
 Alberto Chiaparini	13, 9
 Lucas Ledur	3
@@ -2617,6 +2616,7 @@ Drew Nelson	5
 Jian Bacerdo	9
 Josh Valentine	3
 Matthew Gutierrez	17
+Alec Krilis	1/1, 11/1
 Andrew Hammer	20
 Brian Failinger	27, 17
 Bryce Gordon	6
@@ -2632,13 +2632,11 @@ Jonathan Predney	14
 Joseph Pillon	5
 Josiah Bergt	19, 2
 Nicholas Bauer	23
-Alec Krilis
 Ryan Anselmo	4
 Ryan Murphy	3
 Spencer Lane	26
 Taylor Falduti	18
 Timothy Moses	1
-Alec Krilis	1/1, 11/1
 Ben Vanderluit	8
 Jack Flynn	15
 Raymond Barsemian	11, 1
@@ -2648,11 +2646,11 @@ Alec Doran	20
 Darcy Taig	19
 Ethan Morgan	5
 Jonathan Carlson	22
+Jordan Hoppe	23, 17
 Logan Glave	15
 Noah Lassandro	29
 Owen Chun	12, 9
 Parker Maki	17, 14
-Jordan Hoppe
 Zachary Wissing	3
 Andrew Dalmada	2
 Bailey Mundy	17
@@ -2660,7 +2658,6 @@ Blake Omartian	8
 Christian Nowtash	12
 Erik Boisvert	18
 Jack Wirth	5
-Jordan Hoppe	23, 17
 Keegan Carey	21
 Kyle Merchen	35
 Luke Hetherington	20
@@ -5163,18 +5160,14 @@ Alfonzo Mesa-Ramos	11
 Chris Cons	1
 Connor To	16
 Jeremiah Marrero	2, 3
-Brian Rivera
-Charles Belvin
-Kenneth Schwartz
-Tyler Peck
 Reid Harrison	18
 To'o To'o	17, 13
+Tyler Peck	4
 Alfonzo Meza-Ramos	11
 David Escobedo	1
 Jake Grant	6
 Joshua Nehls	14
 Ryan Kain	20
-Tyler Peck	4
 Alfonso Meza Ramos	6, 2
 Bradyn Hipa	11
 Brandon Holderback Lee	9
@@ -5227,20 +5220,18 @@ Quentin Roberts	4
 Riley Conley	20
 Sam D'Ambrosio	3, 5
 Steve Tong	27
+Alen Petraev	10
 Alessandro Spendolini	8
 Alistair Namsinh	22, 5
 Benjamin Antonio	9
+Carson Bashford	20
 Ethan Davis	24
 Hugo Gonzalez Gutierrez	7
 Jah'mi Jeter	3, 2
-Alen Petraev
-Carson Bashford
 Matthew McCarthy
 Travis Donahue	4
-Alen Petraev	10
 Axel Ledford	15
 Cam Taylor	14
-Carson Bashford	20
 Eduardo Castellanos	99
 Elijah Green	23
 Indy Ledford	13
@@ -5538,18 +5529,16 @@ Peter Demoulin	33
 Preston Bright	12
 Aidan Bolton	3
 Clayton Wheatley	17
-Jacob Carrico	24, 9
 Daryl McClain
+Jacob Carrico	24, 9
 Kai Williams
-Logan Gamero
-Preston Bright
+Logan Gamero	25
 Ryan Griffel	26
 Alex Rosenow	12
 Ben Rosenow	24
 Bo O'Leary	31, 11
 Caden Hostetter	18
 Dylan Poore	2
-Logan Gamero	25
 Nolan Bosley	3
 Albert Garbacik	23, 7
 Arezzio Rietti	16
@@ -5711,8 +5700,8 @@ Jake Jensen	19
 Jan Lopuch	21
 Logan Marks	12
 Markiyan Uruskyy	23
-Owen Henning	13
 Merc Ubag
+Owen Henning	13
 Riley Green	2
 Sydney Mathias	15
 Taylor Marks	1
@@ -5723,11 +5712,10 @@ Gabriel Crawford	16
 JT Conway	24
 Jacob Knudsen	15
 Jonas Müller	14
-Mark Berdik	20
-Nathan Stone	5
-Jacob Delrosario
 Levi Markus
 Logan Edwards
+Mark Berdik	20
+Nathan Stone	5
 Rayphe Froese	25
 Riley Petesch	23
 Alexander Santana	7
@@ -13131,7 +13119,6 @@ Ethan Rodriguez	16
 Hudson Clark	22
 Luke Konjoyan	12
 Mark Bondoc	17
-Jeremy Schneider
 Alma Ray	11
 Avery Najarian	9
 Clayton Fontano	15
@@ -14270,10 +14257,10 @@ Samuel Hala'ufia	5
 Sean Paddie	12
 Tshu Xiong	16, 1
 Tyler Cobian	1, 8
-Kyle Stephan	10
-Matthew Pelfini	11
 Jacob Vieira
+Kyle Stephan	10
 Manuel Lozano
+Matthew Pelfini	11
 Tristan Fong	7
 Emmanuel Egun	15
 Jacob Semon	5, 14
@@ -15200,11 +15187,12 @@ Christian Quezada	17
 Christopher Rivera	11
 Daniel Hermida	10, 15
 Kenneth Alicea	6
-Chris Ludwig
-Gabe Segarra
 Sabian Cardona Martinez	9
 Austin Strickler	18
+Bury Inelus	16
+Cesar Remedios	19, 7
 Daniel Suarez	10
+Eduardo Ramos
 Gunter Perea Quevedo	17, 23
 Jack Sukeena
 Julian Wagner	13
@@ -15212,31 +15200,25 @@ Kai Desauguste	11, 1
 Kevin McCarthy	4, 11
 Luiz Gustavo Silva	6, 4
 Peyten Young	3
-Bury Inelus
-Cesar Remedios
-Eduardo Ramos
 Andrea Di Paola	21
 Anthony Gonzales	27
-Bury Inelus	16
-Cesar Remedios	19, 7
+Asa Sewell	16
 Christian Cruz	30, 24
 Christopher Padilla	12, 14
 Daniel Bedoya	24, 19
+Daniel Munoz
 Jackson Arnold	20
 Jose Cuevas	25
 Kajus Mazuronis	28
 Kornel Szabo	22, 13
 Lachlan Diamond	26, 10
-Piero Eletto	23
-Asa Sewell
-Daniel Munoz
 Michael Conway
+Piero Eletto	23
 Samuel Pearish	7, 9
 Tinaishe Ndavazocheva	1
 Victor Siqueira	2, 1
 Wesley Blazek	8
 Alejandro Alvarez
-Asa Sewell	16
 Ayden Keeter	6, 3
 Carson Barnes	12, 2
 Daniel Diaz	38
